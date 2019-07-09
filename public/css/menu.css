@@ -3,7 +3,8 @@
 	margin:0;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
-	box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
 }
  
 header {
@@ -11,7 +12,7 @@ header {
 }
  
 header .menuHorizontal {
-	background:#023859;
+	background:#80d1d3;
 	width:100%;
   margin:0px auto;
   position: fixed;
@@ -27,7 +28,7 @@ header .menuHorizontal ul li {
 }
  
 header .menuHorizontal ul li:hover {
-	background:#E6344A;
+	background:#f6c249;
 }
  
 header .menuHorizontal ul li a {
@@ -47,7 +48,7 @@ header .menuHorizontal ul li:hover .children {
  
 header .menuHorizontal ul li .children {
 	display: none;
-	background:#011826;
+	background:#80d1d3;
 	position: absolute;
 	width: 150%;
 	z-index:1000;
@@ -90,9 +91,8 @@ header .menuHorizontal ul li .caret {
   }
   
   .menu a {
-    color: #5408FF;
+    color: #ffffff;
     text-decoration: none;
-    text-transform: uppercase;
     display: block;
     width: 100%;
     padding-left: 3em;
@@ -112,11 +112,10 @@ header .menuHorizontal ul li .caret {
     margin-bottom: 3px;
     --webkit-transition: all .5s;
     -o-transition: all .5s;
-    transition: all .5s;
   }
   
   .menu li:hover {
-    box-shadow: 15em 0 rgba(84,8,255,.2) inset;
+    box-shadow: 15em 0 rgba(250,248,221,.2) inset;
   
   }
   
@@ -150,7 +149,7 @@ header .menuHorizontal ul li .caret {
   /*posicion responsive menu*/
   
   .menuIzquierdo {
-    background: #11111C;
+    background: #f6c249;
     position: fixed;
     left: -18em;
     top: 58px;
