@@ -4,8 +4,8 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-//Archivo del rutano
-//const contacto_route = require('./routes/contacto');
+//Archivo de las rutas
+const generoRoute = require('./routes/genero');
 
 const app = express();
 app.use(cors());
@@ -41,4 +41,4 @@ function handleError(res, reason, message, code) {
 }
 
 /*Rutas */
-//app.use('/api', contacto_route);
+app.use('/api', generoRoute);
