@@ -1,0 +1,163 @@
+* {
+	padding:0;
+	margin:0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+ 
+header {
+	width: 100%;
+}
+ 
+header .menuHorizontal {
+	background:#023859;
+	width:100%;
+  margin:0px auto;
+  position: fixed;
+}
+ 
+header .menuHorizontal ul {
+	list-style:none;
+}
+ 
+header .menuHorizontal ul li {
+	display:inline-block;
+	position: relative;
+}
+ 
+header .menuHorizontal ul li:hover {
+	background:#E6344A;
+}
+ 
+header .menuHorizontal ul li a {
+	color:#fff;
+	display:block;
+	text-decoration:none;
+	padding: 20px;
+}
+ 
+header .menuHorizontal ul li a i {
+	margin-right:10px;
+}
+ 
+header .menuHorizontal ul li:hover .children {
+	display:block;
+}
+ 
+header .menuHorizontal ul li .children {
+	display: none;
+	background:#011826;
+	position: absolute;
+	width: 150%;
+	z-index:1000;
+}
+ 
+header .menuHorizontal ul li .children li {
+	display:block;
+	overflow: hidden;
+	border-bottom: 1px solid rgba(255,255,255,.5);
+}
+ 
+header .menuHorizontal ul li .children li a {
+	display: block;
+}
+ 
+header .menuHorizontal ul li .children li a i {
+	float: right;
+	position: relative;
+	top:3px;
+	margin-right:0;
+	margin-left:10px;
+}
+ 
+header .menuHorizontal ul li .caret {
+	position: relative;
+	top:3px;
+	margin-left:10px;
+	margin-right:0px;
+}
+
+.menu {
+    list-style: none;
+    max-height: 90vh;
+    line-height: 46px;
+    padding-left: 0;
+    margin: 0.1em auto;
+    width: 15em;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  
+  .menu a {
+    color: #5408FF;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: block;
+    width: 100%;
+    padding-left: 3em;
+    }
+  
+  .menu a:hover {
+    margin-left: 1em;
+    --webkit-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s;
+  }
+  
+  .menu li {
+    /*outline:  1px solid green;*/
+    box-shadow: 3px 0  rgba(255,255,255,.2) inset;
+    padding-left: .8em;
+    margin-bottom: 3px;
+    --webkit-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s;
+  }
+  
+  .menu li:hover {
+    box-shadow: 15em 0 rgba(84,8,255,.2) inset;
+  
+  }
+  
+  .menu li a:hover {
+    color: white;
+  
+  }
+  
+  .menu li:nth-child(2) a {
+    background-position: 0 -46px;
+  }
+  
+  .menu li:nth-child(3) a {
+    background-position: 0 -92px;
+  }
+  
+  .menu li:nth-child(4) a {
+    background-position: 0 -138px;
+  }
+  
+  .menu li:nth-child(5) a {
+    background-position: 0 -184px;
+  }
+  
+  .menu li:last-child a {
+    background-position: 0 -230px;
+  }
+  /*fin menu*/
+  
+  
+  /*posicion responsive menu*/
+  
+  .menuIzquierdo {
+    background: #11111C;
+    position: fixed;
+    left: -18em;
+    top: 58px;
+    height: 90%;
+    transition: all 0.5s;
+    }
+  
+  .menuIzquierdo.mostrar {
+    left: 0;
+  }
