@@ -160,10 +160,11 @@ header .menuHorizontal ul li .caret {
   /*posicion responsive menu*/
   
   .menuIzquierdo {
+    z-index: 10000;
     background: #f6c249;
     position: fixed;
     left: -18em;
-    top: 71px;
+    top: 67px;
     height: 90%;
     transition: all 0.5s;
     }
@@ -180,5 +181,5 @@ header .menuHorizontal ul li .caret {
 .menuHorizontal img{
   width: 5em;
   display: block;
-  height: 3.5em;
+  height: 3.3em;
 }

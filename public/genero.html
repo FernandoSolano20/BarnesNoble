@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Barnes & Noble</title>
+    <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/listarElementos.css">
     <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
@@ -17,7 +19,8 @@
     <header>
         <nav class="menuHorizontal">
             <ul class="list-menu">
-                <li><a href="#" data-menu="mostrar-nav-izq"><i data-menu="mostrar-nav-izq" class="fas fa-bars"></i></a></li>
+                <li><a href="#" data-menu="mostrar-nav-izq"><i data-menu="mostrar-nav-izq" class="fas fa-bars"></i></a>
+                </li>
                 <li><a href="#"><i class="far fa-home"></i>Inicio</a></li>
                 <li><a href="#"><i class="far fa-id-badge"></i>Registarse</a></li>
                 <li><a href="#"><i class="far fa-id-badge"></i>Registarse</a></li>
@@ -35,29 +38,58 @@
         </nav>
 
         <nav class="menuIzquierdo">
-                <ul class="menu">
-                    <li><a href="#">Nosotros</a></li>
-                    <li><a href="#">La carta</a></li>
-                    <li><a href="#">Reservas</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">La barra</a></li>
-                    <li><a href="#">Contacto</a></li>
-                    <li><a href="#">Nosotros</a></li>
-                    <li><a href="#">La carta</a></li>
-                    <li><a href="#">Reservas</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">La barra</a></li>
-                    <li><a href="#">Contacto</a></li>
-                    <li><a href="#">Reservas</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">La barra</a></li>
-                    <li><a href="#">Contacto</a></li>
-                </ul>
-            </nav>
+            <ul class="menu">
+                <li><a href="#">Nosotros</a></li>
+                <li><a href="#">La carta</a></li>
+                <li><a href="#">Reservas</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">La barra</a></li>
+                <li><a href="#">Contacto</a></li>
+                <li><a href="#">Nosotros</a></li>
+                <li><a href="#">La carta</a></li>
+                <li><a href="#">Reservas</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">La barra</a></li>
+                <li><a href="#">Contacto</a></li>
+                <li><a href="#">Reservas</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">La barra</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </nav>
     </header>
     <main>
-        <div>
-            
+        <div class="busqueda">
+            <input type="text" name="q" placeholder="Buscar...." autocomplete="off" autocorrect="off">
+            <button type="submit"><i class="fa fa-search"></i><span>search</span></button>
+        </div>
+        <div class="contenedor-tabla">
+            <table class="tabla">
+                <thead>
+                    <tr>
+                        <th>Género</th>
+                        <th>Descripción</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                        <th>Activar/Desactivar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Hola</td>
+                        <td>Como esta bien y usted y me encuentro muy bien y alegre el dia de hoy fjbasdjkfbjksdbfhjsd
+                            ckdsbfjkd vjkwbfs cdsjfbd </td>
+                        <td><i class="far fa-edit"></i></td>
+                        <td><i class="fal fa-trash-alt"></i></td>
+                        <td>
+                            <div class="switch-wrap">
+                                <input class="switch" id="switchToggle" type="checkbox"><label
+                                    for="switchToggle">&nbsp;</label>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </main>
     <script src="js/index.js"></script>
