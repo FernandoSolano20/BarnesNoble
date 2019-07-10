@@ -9,7 +9,7 @@
  
 header {
   width: 100%;
-  height: 59.2px;
+  height: 71.2px;
 }
  
 header .menuHorizontal {
@@ -28,7 +28,16 @@ header .menuHorizontal ul li {
 	display:inline-block;
 	position: relative;
 }
+
+header .menuHorizontal ul li:last-child {
+  float: right;
+  margin: 7px 40px;
+}
  
+header .menuHorizontal ul li:last-child:hover {
+  background-color: transparent;
+}
+
 header .menuHorizontal ul li:hover {
 	background:#f6c249;
 }
@@ -36,8 +45,8 @@ header .menuHorizontal ul li:hover {
 header .menuHorizontal ul li a {
 	color:#fff;
 	display:block;
-	text-decoration:none;
-	padding: 20px;
+  text-decoration:none;
+  padding: 26px;
 }
  
 header .menuHorizontal ul li a i {
@@ -154,7 +163,7 @@ header .menuHorizontal ul li .caret {
     background: #f6c249;
     position: fixed;
     left: -18em;
-    top: 58px;
+    top: 71px;
     height: 90%;
     transition: all 0.5s;
     }
@@ -169,5 +178,7 @@ header .menuHorizontal ul li .caret {
   }
 
 .menuHorizontal img{
-  width: 2em;
+  width: 5em;
+  display: block;
+  height: 3.5em;
 }
