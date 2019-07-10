@@ -8,7 +8,8 @@
 }
  
 header {
-	width: 100%;
+  width: 100%;
+  height: 59.2px;
 }
  
 header .menuHorizontal {
@@ -16,6 +17,7 @@ header .menuHorizontal {
 	width:100%;
   margin:0px auto;
   position: fixed;
+  z-index: 10000;
 }
  
 header .menuHorizontal ul {
@@ -159,4 +161,9 @@ header .menuHorizontal ul li .caret {
   
   .menuIzquierdo.mostrar {
     left: 0;
+    z-index: 10000;
+  }
+
+  main{
+    position: relative;
   }
