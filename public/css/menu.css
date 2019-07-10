@@ -160,3 +160,7 @@ header .menuHorizontal ul li .caret {
   .menuIzquierdo.mostrar {
     left: 0;
   }
+
+.menuHorizontal img{
+  width: 2em;
+}
