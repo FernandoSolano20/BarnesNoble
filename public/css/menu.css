@@ -29,12 +29,12 @@ header .menuHorizontal ul li {
 	position: relative;
 }
 
-header .menuHorizontal ul li:last-child {
+header .menuHorizontal .list-menu .link-imagen {
   float: right;
   margin: 7px 40px;
 }
  
-header .menuHorizontal ul li:last-child:hover {
+header .menuHorizontal .list-menu .link-imagen {
   background-color: transparent;
 }
 
