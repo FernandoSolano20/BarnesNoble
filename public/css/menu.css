@@ -167,3 +167,7 @@ header .menuHorizontal ul li .caret {
   main{
     position: relative;
   }
+
+.menuHorizontal img{
+  width: 2em;
+}
