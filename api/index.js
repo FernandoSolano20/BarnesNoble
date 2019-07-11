@@ -5,8 +5,8 @@ const body_parser = require("body-parser");
 const cors = require('cors');
 const mongoose = require('mongoose');
 
-//Se declaran todos los accesos de los archivos routes.
-//const contacto_route = require('./routes/contacto');
+//Archivo de routes aqui
+const generoRoute = require('./routes/genero');
 
 
 const app = express();
@@ -44,5 +44,5 @@ function handleError(res, reason, message, code) {
     res.status(code || 500).json({ "error": message });
 }
 
-// Conexion a todas la rutas.
-//app.use('/api', contacto_route);
+// Rutas.
+app.use('/api/genero', generoRoute);
