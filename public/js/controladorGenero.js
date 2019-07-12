@@ -39,18 +39,22 @@ var crearTabla = async () => {
     }
 };
 
-document.getElementById('confirm').addEventListener('click', generoFunciones);
-
 var generoFunciones = async() => {
     var accion = document.getElementById("modal").getAttribute('data-action');
+    var idGenero = document.getElementById('cuerpo-modal').getAttribute('data-genero');
     if (accion === 'editar') {
-        console.log(await editarGenero());
+        var genero = {
+            nombre: document.getElementById('nombre-genero').value,
+            descripcion: document.getElementById('descripcion-genero').value,
+            estado: Number(document.getElementById("5d27f2e9d5c08e1a741b5d6a").checked)
+        }
+        console.log(await editarGenero(genero,idGenero));
     } else if (accion === 'borrar') {
-        console.log(await eliminarGenero());
-    } else if (accion === 'estado') {
+        console.log(await eliminarGenero(idGenero));
+    } /*else if (accion === 'estado') {
         console.log(await estadoGenero());
-    }
+    }*/
 }
 
 crearTabla();
-
+document.getElementById('confirm').addEventListener('click', generoFunciones);

@@ -57,7 +57,7 @@ function crearFomrulario(cuerpoModal,genero) {
   var inputDescripcion = document.createElement('textarea');
   inputDescripcion.setAttribute('type', 'text');
   inputDescripcion.setAttribute('placeholder', 'Descripción género');
-  inputNombre.setAttribute('id', 'descripcion-genero');
+  inputDescripcion.setAttribute('id', 'descripcion-genero');
   inputDescripcion.setAttribute('name', 'descripcion');
   inputDescripcion.innerText = genero.descripcion;
   form.appendChild(inputDescripcion);

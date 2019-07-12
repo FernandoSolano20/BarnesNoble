@@ -47,5 +47,25 @@ router.get('/listarGeneros', function(req, res){
     });
 });
 
+router.put('/editar/:id', function(req, res){
+    Genero.findByIdAndUpdate(req.params.id, { $set: req.body }, function (err, genero) {
+        if (err) return res.status(500).send(err);
+        const response = {
+            message: "Genero actualizado",
+            genero: genero
+        };
+        return res.status(200).json({response});
+    });
+});
+
+router.delete('/eliminar/:id', function(req, res){
+    Genero.findByIdAndRemove(req.params.id, function (err) {
+        if (err) return res.status(500).send(err);
+        const response = {
+            message: "Genero elimnado",
+        };
+        return res.status(200).json({response});
+    });
+});
 
 module.exports = router;
