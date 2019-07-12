@@ -2,7 +2,7 @@ var crearTabla = async () => {
     var tbody = document.querySelector('#tabla-genero tbody');
     var listaGeneros = [];
     listaGeneros = await obtenerGenero();
-    
+
     tbody.innerHTML = '';
 
     for (let i = 0; i < listaGeneros.length; i++) {
@@ -39,15 +39,17 @@ var crearTabla = async () => {
     }
 };
 
-document.getElementById('confirm').addEventListener('click',generoFunciones);
+document.getElementById('confirm').addEventListener('click', generoFunciones);
 
-var generoFunciones = () => {
+var generoFunciones = async() => {
     var accion = document.getElementById("modal").getAttribute('data-action');
-    //if()
-}
-
-var crearGenero = () => {
-
+    if (accion === 'editar') {
+        console.log(await editarGenero());
+    } else if (accion === 'borrar') {
+        console.log(await eliminarGenero());
+    } else if (accion === 'estado') {
+        console.log(await estadoGenero());
+    }
 }
 
 crearTabla();

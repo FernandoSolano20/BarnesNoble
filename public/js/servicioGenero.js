@@ -9,14 +9,13 @@ var obtenerGenero = async () => {
     return result.listaGeneros;
 }
 
-var obtenerGenero = async (genero) => {
-    var response = await fetch('http://localhost:4000/api/genero/registrarGenero', {
-        method: "POST",
+var editarGenero = async() => {
+    var response = await fetch('http://localhost:4000/api/genero/editar', {
+        method: "PUT",
         headers: {
             'Content-Type': 'application/json;charset=UTF-8',
-        },
-        body:genero
+        }
     });
     var result = await response.json();
-    return result.msj;
+    return result.listaGeneros;
 }
