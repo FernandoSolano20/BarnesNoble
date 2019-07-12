@@ -1,16 +1,19 @@
 'use strict'
 
-const express = require('express'),
-    router = express.Router(),//permite crear la ruta
+const express = require('express');
+    router = express.Router();//permite crear la ruta
     Usuario = require('../models/usuarios.model');
 
 //Definir la ruta para registar contactos
 //empizan con / por estandar
 //- en el medio por standar
-router.post('/registrarUsarios', function (req, res) {
+router.post('/registrarUsuarios', function (req, res) {
     /*req lo que recibo y response lo que respondo */
     let body = req.body;
 
+
+ console.log(body);
+ 
     let nuevoUsuario =  new Usuario({
         /*Datos Generales*/
         nombre : body.nombre,
@@ -22,7 +25,7 @@ router.post('/registrarUsarios', function (req, res) {
         sexo : body.genero,
         correo : body.correo,
         cedula : body.cedula,
-        contrasenna : body.contrasenna,
+        pass : body.contrasenna,
         telefono : body.telefono,
 
         /*Direccion*/

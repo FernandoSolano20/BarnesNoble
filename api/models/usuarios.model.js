@@ -15,7 +15,7 @@ img: { type: String, required: true},
 sexo : {type: String, required: true, unique : false},
 correo : {type: String, required: true, unique: true},
 cedula : {type: Number, required : true, unique : true},
-contrasenna : {type: String, required: true, unique: false},
+pass : {type: String, required: true, unique: false},
 telefono : {type: Number, required: true, unique: false},
 
 
@@ -42,4 +42,4 @@ nombreComercial : {type: String, required : false, unique : false}
 
 });
 
-module.exports = mongoose.model('Usuario', usuarios_schema);
+module.exports = mongoose.model('Usuarios', usuarios_schema); 
