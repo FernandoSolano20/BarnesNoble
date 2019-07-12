@@ -16,14 +16,18 @@ tbody.onclick = function (event) {
     };
     cuerpoModal.setAttribute("data-genero",genero.id);
     if (accion === 'editar') {
+      modal.setAttribute('data-action', 'editar');
       tituloModal.innerText = 'Editar género ' + genero.nombre;
       textoModal.innerText = '¿Está seguro que quiere editar este género?';
+      
       crearFomrulario(cuerpoModal,genero);
     } else if (accion === 'borrar') {
+      modal.setAttribute('data-action', 'borrar');
       tituloModal.innerText = 'Elimnar género ' + genero.nombre;
       textoModal.innerText = '¿Está seguro que quiere elimnar este género?';
     } else if (accion === 'estado') {
-      var checkBoxEstado = document.querySelector("#switchToggle");
+      modal.setAttribute('data-action', 'estado');
+      var checkBoxEstado = document.getElementById(genero.id);
       if (!checkBoxEstado.checked) {
         tituloModal.innerText = 'Desactivar género ' + genero.nombre;
         textoModal.innerText = '¿Está seguro que quiere desactivar este género?';
@@ -45,6 +49,7 @@ function crearFomrulario(cuerpoModal,genero) {
   var inputNombre = document.createElement('input');
   inputNombre.setAttribute('type', 'text');
   inputNombre.setAttribute('placeholder', 'Nombre género');
+  inputNombre.setAttribute('id', 'nombre-genero');
   inputNombre.setAttribute('name', 'nombre');
   inputNombre.setAttribute('value', genero.nombre);
   form.appendChild(inputNombre);
@@ -52,20 +57,17 @@ function crearFomrulario(cuerpoModal,genero) {
   var inputDescripcion = document.createElement('textarea');
   inputDescripcion.setAttribute('type', 'text');
   inputDescripcion.setAttribute('placeholder', 'Descripción género');
+  inputNombre.setAttribute('id', 'descripcion-genero');
   inputDescripcion.setAttribute('name', 'descripcion');
   inputDescripcion.innerText = genero.descripcion;
   form.appendChild(inputDescripcion);
 }
 
-// close.onclick = function() {
-//   modal.style.display = "none";
-// }
-
 window.onclick = function (event) {
   if (event.target == modal || event.target.getAttribute('data-close') === 'closeModal') {
-    if(event.target.id !== "confirm"){
+    if(event.target.id !== "confirm" && modal.getAttribute('data-action') === 'estado'){
       var generoId = document.querySelector('#cuerpo-modal').getAttribute('data-genero');
-      var inputChecked = document.querySelector('[data-id="'+generoId+'"] input[type="checkbox"]');
+      var inputChecked = document.getElementById(generoId);
       inputChecked.checked = !inputChecked.checked;
     }
     modal.style.display = "none";

@@ -1,12 +1,22 @@
-let crearGenero = (genero) => {
-    var response = fetch('http://localhost:4000/api/genero/registrarGenero', {
-        method: "POST",
-        body: JSON.stringify(genero),
+var obtenerGenero = async () => {
+    var response = await fetch('http://localhost:4000/api/genero/listarGeneros', {
+        method: "GET",
         headers: {
-            'Content-Type': 'application/json;charset=UTF-8'
+            'Content-Type': 'application/json;charset=UTF-8',
         }
-    }).then(
-        response => response.json())
-        .catch(error => console.error('Error:', error))
-        .then(response => console.log('Success:', response));
+    });
+    var result = await response.json();
+    return result.listaGeneros;
+}
+
+var obtenerGenero = async (genero) => {
+    var response = await fetch('http://localhost:4000/api/genero/registrarGenero', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body:genero
+    });
+    var result = await response.json();
+    return result.msj;
 }

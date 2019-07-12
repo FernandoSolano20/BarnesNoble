@@ -8,7 +8,8 @@ router.post('/registrarGenero', function(req, res){
     let body = req.body;
     let nuevoGenero =  new Genero({
         nombre: body.nombre,
-        descripcion: body.descripcion
+        descripcion: body.descripcion,
+        estado: body.estado
     });
 
     nuevoGenero.save(
