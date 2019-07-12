@@ -8,6 +8,8 @@ const mongoose = require('mongoose');
 //Se declaran todos los accesos de los archivos routes.
 //const contacto_route = require('./routes/contacto');
 
+const usuario_route = require('./routes/usuarios');
+
 
 const app = express();
 app.use(cors());
@@ -45,4 +47,4 @@ function handleError(res, reason, message, code) {
 }
 
 // Conexion a todas la rutas.
-//app.use('/api', contacto_route);
+app.use('/api', usuario_route);
