@@ -23,15 +23,8 @@
                 <li><a href="#" data-menu="mostrar-nav-izq"><i data-menu="mostrar-nav-izq" class="fas fa-bars"></i></a>
                 </li>
                 <li><a href="#"><i class="far fa-home"></i>Inicio</a></li>
-                <li><a href="#"><i class="far fa-id-badge"></i>Registarse</a></li>
-                <li><a href="#"><i class="far fa-id-badge"></i>Registarse</a></li>
                 <li class="submenu">
-                    <a href="#"><i class="far fa-sign-in-alt"></i>Iniciar sesión<i class="fal fa-angle-down"></i></a>
-                    <ul class="children">
-                        <li><a href="#">SubElemento #1 <i class="fas fa-address-book"></i></a></li>
-                        <li><a href="#">SubElemento #2 <i class="fas fa-address-book"></i></a></li>
-                        <li><a href="#">SubElemento #3 <i class="fas fa-address-book"></i></a></li>
-                    </ul>
+                    <a href="#"><i class="far fa-sign-out-alt"></i>Cerrar Sesión</a>
                 </li>
                 <li><a href="#"><i class="fal fa-address-book"></i>Contacto</a></li>
                 <li class="link-imagen"><img src="img/logo_barnes-and-noble.png" alt="Logo de Barnes&Noble"></li>
@@ -40,29 +33,27 @@
 
         <nav class="menuIzquierdo">
             <ul class="menu">
-                <li><a href="#">Nosotros</a></li>
-                <li><a href="#">La carta</a></li>
-                <li><a href="#">Reservas</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">La barra</a></li>
-                <li><a href="#">Contacto</a></li>
-                <li><a href="#">Nosotros</a></li>
-                <li><a href="#">La carta</a></li>
-                <li><a href="#">Reservas</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">La barra</a></li>
-                <li><a href="#">Contacto</a></li>
-                <li><a href="#">Reservas</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">La barra</a></li>
-                <li><a href="#">Contacto</a></li>
+                <li><a href="#">Mi perfil</a></li>
+                <li><a href="genero.html">Géneros</a></li>
+                <li><a href="#">Categorías</a></li>
+                <li><a href="#">Reportes</a></li>
+                <li><a href="#">Bitácora</a></li>
+                <li><a href="#">Usuarios</a></li>
+                <li><a href="#">Librerías</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <div class="busqueda">
-            <input type="text" name="q" placeholder="Buscar...." autocomplete="off" autocorrect="off">
-            <button type="submit"><i class="fa fa-search"></i><span>search</span></button>
+        <div class="subcontenedor">
+            <div class="busqueda">
+                <input type="text" id="input-filtro" name="buscar" placeholder="Buscar...." autocomplete="off"
+                    autocorrect="off">
+                <button type="button" class="buscar"><i class="fa fa-search"></i><span>search</span></button>
+            </div>
+            <div class="crear-genero">
+                <button type="button" class="material-blue" data-action="crear" id="crear-elemento"><i
+                        class="far fa-plus-circle"></i>Crear</button>
+            </div>
         </div>
         <div class="contenedor-tabla">
             <table class="tabla" id="tabla-genero">
@@ -88,7 +79,7 @@
                 </div>
                 <div class="alert-btn-wrapper">
                     <button class="alert-btn" id="cancel" data-close="closeModal">Cancelar</button>
-                    <button class="alert-btn primary" id="confirm" data-close="closeModal">Confirmar</button>
+                    <button class="alert-btn primary" id="confirm">Confirmar</button>
                 </div>
             </div>
         </div>
@@ -120,11 +111,11 @@
             <h3> ⓒ 2019 Valhalla</h3>
         </div>
     </footer>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="js/servicioGenero.js"></script>
-    <script src="js/controladorGenero.js"></script>
     <script src="js/menu.js"></script>
-    <script src="js/modal.js"></script>
+    <script src="js/genero/servicioGenero.js"></script>
+    <script src="js/genero/controladorGenero.js"></script>
+    <script src="js/genero/modalGenero.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </body>
 
 </html>
