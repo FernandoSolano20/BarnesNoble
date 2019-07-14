@@ -5,8 +5,10 @@ const body_parser = require("body-parser");
 const cors = require('cors');
 const mongoose = require('mongoose');
 
-//Se declaran todos los accesos de los archivos routes.
-//const contacto_route = require('./routes/contacto');
+//Archivo de routes aqui
+const generoRoute = require('./routes/genero');
+const categoriaRoute = require('./routes/categoria');
+const usuario_route = require('./routes/usuarios');
 
 const usuario_route = require('./routes/usuarios');
 
@@ -26,7 +28,7 @@ app.use(function(req, res, next) {
 });
 
 let db;
-
+mongoose.set('useFindAndModify', false);
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true }, function(err, database) {
     if (err) {
         console.log(err);
@@ -46,5 +48,9 @@ function handleError(res, reason, message, code) {
     res.status(code || 500).json({ "error": message });
 }
 
+
 // Conexion a todas la rutas.
+// Rutas.
+app.use('/api/genero', generoRoute);
+app.use('/api/categoria', categoriaRoute);
 app.use('/api', usuario_route);

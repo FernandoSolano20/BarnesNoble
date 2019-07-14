@@ -2,118 +2,118 @@
 
 const express = require('express'),
     router = express.Router(),
-    Genero = require('../models/genero.model');
+    Categoria = require('../models/categoria.model');
 
-router.post('/registrarGenero', function (req, res) {
+router.post('/registrarCategoria', function (req, res) {
     let body = req.body;
-    let nuevoGenero = new Genero({
+    let nuevaCategoria = new Categoria({
         nombre: body.nombre,
         descripcion: body.descripcion,
         estado: body.estado
     });
 
-    nuevoGenero.save(
-        function (err, genero) {
+    nuevaCategoria.save(
+        function (err, categoria) {
             if (err) {
                 return res.status(400).json({
                     success: false,
-                    message: 'El género no se pudo guardar',
+                    message: 'La categoría no se pudo guardar',
                     err
                 });
             } else {
                 return res.json({
                     success: true,
-                    genero: genero,
-                    message: 'El género se guardó con éxito'
+                    categoria: categoria,
+                    message: 'La categoría se guardó con éxito'
                 })
             }
         }
     );
 });
 
-router.get('/listarGeneros', function (req, res) {
-    Genero.find(function (err, generosBD) {
+router.get('/listarCategorias', function (req, res) {
+    Categoria.find(function (err, categorias) {
         if (err) {
             return res.status(400).json({
                 success: false,
-                msj: 'No se pueden listar los géneros',
+                msj: 'No se pueden listar las categorías',
                 err
             });
         } else {
             return res.json({
                 success: true,
-                listaGeneros: generosBD
+                listaCategorias: categorias
             })
         }
     });
 });
 
 router.put('/editar/:id', function (req, res) {
-    Genero.findByIdAndUpdate(req.params.id, { $set: req.body }, function (err) {
+    Categoria.findByIdAndUpdate(req.params.id, { $set: req.body }, function (err) {
         if (err) {
             return res.status(400).json({
                 success: false,
-                message: 'El género no se pudo editar',
+                message: 'La categoría no se pudo editar',
                 err
             });
         }
-        Genero.findById(req.params.id, (err, genero) => {
+        Categoria.findById(req.params.id, (err, categoria) => {
             return res.status(200).json({
                 success: true,
-                message: "Genero editado",
-                genero: genero
+                message: "Categoría editada",
+                categoria: categoria
             })
         });
     });
 });
 
 router.delete('/eliminar/:id', function (req, res) {
-    Genero.findByIdAndRemove(req.params.id, function (err) {
+    Categoria.findByIdAndRemove(req.params.id, function (err) {
         if (err) {
             return res.status(400).json({
                 success: false,
-                message: 'El género no se pudo eliminar',
+                message: 'La categoría no se pudo eliminar',
                 err
             });
         }
         return res.status(200).json({
             success: true,
-            message: "Genero elimnado"
+            message: "Categoría elimnada"
         });
     });
 });
 
 router.patch('/modificarEstado/:id', function (req, res) {
-    Genero.findById(req.params.id, (err, genero) => {
+    Categoria.findById(req.params.id, (err, categoria) => {
         if (err) {
             return res.status(400).json({
                 success: false,
-                message: 'No se pudo cambiar el estado del género',
+                message: 'No se pudo cambiar el estado de la categoría',
                 err
             });
         }
 
-        genero.set(req.body);
+        categoria.set(req.body);
 
-        genero.save((err, generosBD) => {
+        categoria.save((err, categoriaDB) => {
             if (err)
                 return res.status(400).json({
                     success: false,
-                    message: 'No se pudo cambiar el estado del género',
+                    message: 'No se pudo cambiar el estado de la categoría',
                     err
                 });
             let response;
             if (req.body.estado) {
                 response = {
                     success: true,
-                    message: "Genero activado",
-                    genero: generosBD
+                    message: "Categoría activada",
+                    categoria: categoriaDB
                 };
             } else {
                 response = {
                     success: true,
-                    message: "Genero desactivado",
-                    genero: generosBD
+                    message: "Categoría desactivada",
+                    categoria: categoriaDB
                 };
             }
             return res.status(200).json({ response });

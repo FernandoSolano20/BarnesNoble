@@ -7,7 +7,7 @@ let mostarMenuIzquierdo = (event) => {
         }else{
             nav.className = nav.className + ' mostrar';
         }
-    }else if(!element.offsetParent || !element.offsetParent.classList[0] == 'menuIzquierdo'){
+    }else if(!element.offsetParent || !(element.offsetParent.classList[0] == 'menuIzquierdo')){
         nav.className = nav.className.replace(' mostrar','');
     }
 }
