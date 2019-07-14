@@ -32,8 +32,12 @@
     vertical-align: middle;
 }
 
+.contenedor-tabla .tabla thead th, .contenedor-tabla .tabla tbody td:nth-child(2) {
+    text-align: justify;
+}
+
 .contenedor-tabla .tabla tbody td i {
-    font-size: 40px;
+    font-size: 25px;
 }
 
 .switch {

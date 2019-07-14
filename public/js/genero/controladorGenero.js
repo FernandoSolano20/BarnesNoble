@@ -17,6 +17,7 @@ var crearTabla = async (event) => {
             agregarFilaGenero(listaGeneros[i]);
         }
     }
+    filaNoDatos();
 };
 
 var generoFunciones = async (event) => {
@@ -36,6 +37,10 @@ var generoFunciones = async (event) => {
                 sweetAlertSuccess(nuevoGenero.message);
                 removerForm();
                 agregarListaGenero(nuevoGenero.genero);
+                var noData = document.getElementById("no-data");
+                if(noData){
+                    noData.remove();
+                }
             }
             else {
                 sweetAlertError(nuevoGenero.message);
@@ -79,6 +84,7 @@ var generoFunciones = async (event) => {
                 sweetAlertSuccess(result.message);
                 removerForm();
                 removerListaGenero(idGenero);
+                filaNoDatos();
             }
             else {
                 sweetAlertError(result.message);
@@ -132,6 +138,17 @@ var agregarFilaGenero = function (genero) {
     estadoLabel.setAttribute('data-action', 'estado');
     estadoLabel.setAttribute('for', genero._id);
     estadoCelda.appendChild(estadoLabel);
+}
+
+var filaNoDatos = function () {
+    var tbody = document.querySelector('#tabla-genero tbody');
+    if (listaGeneros.length === 0 || tbody.childElementCount === 0) {
+        let fila = tbody.insertRow();
+        fila.setAttribute('id', 'no-data');
+        var celda = fila.insertCell()
+        celda.innerHTML = 'No se encontró datos';
+        celda.setAttribute('colspan', '6');
+    }
 }
 
 var validarCampos = function (genero) {
@@ -188,7 +205,7 @@ var removerListaGenero = function (idGenero) {
     }
 }
 
-var agregarListaGenero = function (genero){
+var agregarListaGenero = function (genero) {
     listaGeneros.push(genero);
 }
 
