@@ -10,7 +10,6 @@ const generoRoute = require('./routes/genero');
 const categoriaRoute = require('./routes/categoria');
 const usuario_route = require('./routes/usuarios');
 
-const usuario_route = require('./routes/usuarios');
 
 
 const app = express();
