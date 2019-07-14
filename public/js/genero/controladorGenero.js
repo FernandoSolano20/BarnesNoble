@@ -5,7 +5,7 @@ const inputFiltro = document.getElementById('input-filtro');
 let listaGeneros = [];
 
 var crearTabla = async (event) => {
-    var tbody = document.querySelector('#tabla-genero tbody');
+    var tbody = document.querySelector('#tabla-elementos tbody');
     if (!event) {
         listaGeneros = await obtenerGenero();
     }
@@ -107,7 +107,7 @@ var generoFunciones = async (event) => {
 }
 
 var agregarFilaGenero = function (genero) {
-    var tbody = document.querySelector('#tabla-genero tbody');
+    var tbody = document.querySelector('#tabla-elementos tbody');
     let fila = tbody.insertRow();
     fila.setAttribute('data-id', genero._id);
     fila.insertCell().innerHTML = genero.nombre;
@@ -141,7 +141,7 @@ var agregarFilaGenero = function (genero) {
 }
 
 var filaNoDatos = function () {
-    var tbody = document.querySelector('#tabla-genero tbody');
+    var tbody = document.querySelector('#tabla-elementos tbody');
     if (listaGeneros.length === 0 || tbody.childElementCount === 0) {
         let fila = tbody.insertRow();
         fila.setAttribute('id', 'no-data');

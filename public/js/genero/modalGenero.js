@@ -1,5 +1,5 @@
 var modal = document.getElementById("modal");
-var tbody = document.querySelector("#tabla-genero tbody");
+var tbody = document.querySelector("#tabla-elementos tbody");
 
 function eventosGenero(event) {
   var elemento = event.target;

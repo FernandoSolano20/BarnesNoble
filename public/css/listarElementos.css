@@ -129,11 +129,11 @@
     display: none;
 }
 
-.crear-genero {
+.crear-contenedor {
     margin: 0px auto;
 }
 
-.crear-genero .material-blue {
+.crear-contenedor .material-blue {
     height: 50px;
     padding: 0 50px;
     font-size: 18px;
@@ -154,13 +154,13 @@
     box-sizing: border-box;
 }
 
-.crear-genero .material-blue:hover{
+.crear-contenedor .material-blue:hover{
     background-color: #1976d2;
     box-shadow: 0px 5px 3px 0px rgba(50, 50, 50, 0.3);
     cursor: pointer;
 }
 
-.crear-genero .material-blue i {
+.crear-contenedor .material-blue i {
     margin-right: 15px;
 }
 

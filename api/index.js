@@ -7,6 +7,8 @@ const mongoose = require('mongoose');
 
 //Archivo de routes aqui
 const generoRoute = require('./routes/genero');
+const categoriaRoute = require('./routes/categoria');
+const usuario_route = require('./routes/usuarios');
 
 
 const app = express();
@@ -46,3 +48,5 @@ function handleError(res, reason, message, code) {
 
 // Rutas.
 app.use('/api/genero', generoRoute);
+app.use('/api/categoria', categoriaRoute);
+app.use('/api', usuario_route);
