@@ -32,7 +32,7 @@
     vertical-align: middle;
 }
 
-.contenedor-tabla .tabla thead th, .contenedor-tabla .tabla tbody td:nth-child(2) {
+.contenedor-tabla .tabla tbody td:nth-child(2) {
     text-align: justify;
 }
 
