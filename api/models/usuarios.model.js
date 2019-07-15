@@ -17,6 +17,7 @@ correo : {type: String, required: true, unique: true},
 cedula : {type: Number, required : true, unique : true},
 pass : {type: String, required: true, unique: false},
 telefono : {type: Number, required: true, unique: false},
+tipoUsuario: {type: String, required: true, unique: false},
 
 
 /*Direccion*/
@@ -29,7 +30,7 @@ sennas : {type: String, required : true, unique : false},
 
 /*Datos Extra-Lector*/
 
-alias : {type: String, required : false, unique : true},
+alias : {type: String, required : false, unique : false},
 autor : {type: String, required : false, unique : false},
 genero : {type: String, required : false, unique : false},
 libro : {type: String, required : false, unique : false},

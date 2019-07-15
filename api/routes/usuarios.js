@@ -10,9 +10,6 @@ const express = require('express'),
 router.post('/registrarUsuarios', function (req, res) {
     /*req lo que recibo y response lo que respondo */
     let body = req.body;
-
-
- console.log(body);
  
     let nuevoUsuario =  new Usuario({
 
@@ -24,11 +21,12 @@ router.post('/registrarUsuarios', function (req, res) {
         apellido2 : body.apellido2,
         nacimiento : body.nacimiento,
         img: body.img,
-        sexo : body.genero,
+        sexo : body.sexo,
         correo : body.correo,
         cedula : body.cedula,
         pass : body.pass,
         telefono : body.telefono,
+        tipoUsuario: body.tipoUsuario,
 
         // /Direccion/
 
@@ -89,6 +87,31 @@ router.post('/registrarUsuarios', function (req, res) {
     //         })
     //     }
     // );
+
+router.post('/login', function(req,res){
+    Usuario.findOne({correo: req.body.correo}).then(
+        function(usuario){
+            if(usuario){
+                if(usuario.pass === req.body.pass){
+                    res.json({
+                        success: true,
+                        usuario : usuario
+                    });
+                }
+                else{
+                    res.json({
+                        success: false
+                    });
+                }
+            }else{
+                res.json({
+                    success: false,
+                    message: 'El usuario no existe'
+                });
+            }
+        }
+    );
+});
 
 module.exports = router;
 

@@ -1,12 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Barnes & Noble</title>
+    <script src="js/login/validarSesionLogin.js"></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/formulario.css">
+    <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
+
 </head>
+
 <body>
-    
+    <img src="img/loginImage.jpg" alt="Libreria Imagen" id="imagen-login">
+    <header>
+        <nav class="menuHorizontal">
+            <ul class="list-menu">
+                <li><a href="/"><i class="far fa-home"></i>Inicio</a></li>
+                <li class="submenu">
+                    <a href="inicioSesion.html"><i class="far fa-sign-out-alt"></i>Iniciar sesión</a>
+                </li>
+                <li><a href="contacto.html"><i class="fal fa-address-book"></i>Contacto</a></li>
+                <li class="link-imagen"><img src="img/logo_barnes-and-noble.png" alt="Logo de Barnes&Noble"></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <form class="formulario">
+            <div class="title-form">
+                <img src="img/logo_barnes-and-noble.png" alt="Logo Barnes & Noble">
+            </div>
+            <div class="contenedor-input">
+                <label for="email">Correo electrónico</label>
+                <input id="email" name="email" type="email" autocomplete="off" autocorrect="off">
+            </div>
+            <div class="contenedor-input">
+                <label for="password">Contraseña</label>
+                <input id="password" name="password" type="password" autocomplete="off" autocorrect="off">
+            </div>
+            <div class="contenedor-input">
+                <button type="button" id="login">Enviar</button>
+            </div>
+        </form>
+    </main>
+    <footer>
+        <div class="blockFooter">
+            <div class="logos">
+                <a href="#"><img src="img/barnes_and_noble_logo_png_94486.png" alt="Logo de Barnes&Noble"></a>
+                <a href="#"><img src="img/barnes_and_noble_logo_png_94486.png" alt="Logo Fundacion Book for kids"></a>
+            </div>
+            <div class="menuFooter">
+                <nav>
+                    <ul>
+                        <li> <a href="#">Inicio</a> </li>
+                        <li> <a href="#">Buscar</a> </li>
+                        <li> <a href="#">Los más vendidos</a> </li>
+                        <li> <a href="#">Los mejor calificados</a> </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="redesSociales">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-pinterest"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="copyrights">
+            <h3> ⓒ 2019 Valhalla</h3>
+        </div>
+    </footer>
+    <script src="js/login/servicioLogin.js"></script>
+    <script src="js/login/controladorLogin.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </body>
+
 </html>

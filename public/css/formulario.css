@@ -1,0 +1,74 @@
+#imagen-login {
+	width: 100%;
+	min-height: 95vh;
+	height: 77%;
+	position: absolute;
+	opacity: 0.7;
+}
+
+.formulario {
+	background: #fff;
+	padding: 2em 3em 2em;
+	max-width: 435px;
+	margin: 30px auto 0;
+	box-shadow: 0 0 1em #222;
+	border-radius: 5px;
+}
+
+.formulario .title-form {
+	position: relative;
+}
+
+.formulario .title-form img {
+	width: 100%;
+	height: 125px;
+}
+
+.contenedor-input {
+	margin: 0 0 3em 0;
+	position: relative;
+}
+
+.formulario .contenedor-input label {
+	display: block;
+	font-size: 1.2em;
+	margin: 0 0 .5em;
+	color: #333;
+	font-weight: bold;
+}
+
+.formulario .contenedor-input input {
+	display: block;
+	box-sizing: border-box;
+	width: 100%;
+	outline: none
+}
+
+.formulario .contenedor-input input[type="email"], .formulario .contenedor-input input[type="password"] {
+	background: #ffffff82;
+	border: 1px solid #e5e5e5;
+	font-size: 1.1em;
+	padding: .8em .5em;
+	border-radius: 5px;
+}
+
+.formulario .contenedor-input input[type="email"]:focus, .formulario .contenedor-input input[type="password"]:focus {
+	background: #fff
+}
+
+.formulario .contenedor-input button {
+	width: 100%;
+	background: #2F558E;
+	box-shadow: 0 3px 0 0 #1D3C6A;
+	border-radius: 5px;
+	border: none;
+	color: #fff;
+	cursor: pointer;
+	display: block;
+	font-size: 1.2em;
+	line-height: 1.6em;
+	margin: 2em 0 0;
+	outline: none;
+	padding: .8em 0;
+	text-shadow: 0 1px #68B25B;
+}
