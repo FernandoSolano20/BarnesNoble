@@ -5,97 +5,140 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/registroUsuario.css">
+    <title>Barnes & Noble</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/registroFormulario.css">
     <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
 
-    <title>Document</title>
 </head>
 
 <body>
     <header>
-    <nav class="menuHorizontal">
-        <ul class="list-menu">
-            <li><a href="#" data-menu="mostrar-nav-izq"><i data-menu="mostrar-nav-izq" class="fas fa-bars"></i></a>
-            </li>
-            <li><a href="/"><i class="far fa-home"></i>Inicio</a></li>
-            <li id="logout">
-                <a href=""><i class="far fa-sign-out-alt"></i>Cerrar Sesión</a>
-            </li>
-            <li><a href="contacto.html"><i class="fal fa-address-book"></i>Contacto</a></li>
-            <li class="link-imagen"><img src="img/logo_barnes-and-noble.png" alt="Logo de Barnes&Noble"></li>
-        </ul>
-    </nav>
+        <nav class="menuHorizontal">
+            <ul class="list-menu">
+                <li><a href="/"><i class="far fa-home"></i>Inicio</a></li>
+                <li id="logout">
+                    <a href=""><i class="far fa-sign-out-alt"></i>Cerrar Sesión</a>
+                </li>
+                <li><a href="contacto.html"><i class="fal fa-address-book"></i>Contacto</a></li>
+                <li class="link-imagen"><img src="img/logo_barnes-and-noble.png" alt="Logo de Barnes&Noble"></li>
+            </ul>
+        </nav>
     </header>
-    
 
-    <form action="">
-
-<!-- Registro General -->
-        <div>
-            <h3>Datos Personales</h3>
-            <label for="#">Primer Nombre:</label> <input type="text" name="nombre" id="input_nombre">
-            <label for="nombre2">Segundo Nombre:</label> <input type="text" name="nombre2" id="input_nombre2">
-            <label for="apellido">Primer Apellido:</label> <input type="text" name="apellido" id="input_apellido1">
-            <label for="apellido2">Segundo Apellido:</label> <input type="text" name="apellido2" id="input_apellido2">
-            <label for="nacimiento">Fecha de Nacimiento:</label> <input type="date" name="nacimiento"
-                id="input_nacimiento">
-            <label for="img">Imagen de Perfil</label> <input type="file" src="" alt="Imagen de perfil" id="input_img">
-            <label for="sexo">Sexo:</label>
-            <label for="masculino">Masculino</label> <input type="radio" name="masculino" id="input_masculino">
-            <label for="femenino">Fememnino</label> <input type="radio" name="input_femenino" id="input_fememnino">
-            <label for="preferencia">Otro</label> <input type="radio" name="input_otro" id="otro">
-            <label for="correo">Correo:</label> <input type="email" name="input_email" id="input_email">
-            <label for="cedula">Cédula:</label> <input type="text" name="cedula" id="input_cedula">
-            <label for="password">Contraseña:</label> <input type="password" name="pass" id="input_pass">
-            <label for="telefono">Teléfono:</label> <input type="tel" name="telefo" id="input_telefono">
+    <main>
+        <div class="form-registro">
+            <div class="column">
+                <div class="input-group radio">
+                    <input type="radio" name="id" id="cedula-input" value="Cédula" checked>
+                    <label for="cedula-input" class="label-radio">Cédula</label>
+                    <input type="radio" name="id" id="pasaporte-input" value="Pasaporte">
+                    <label for="pasaporte-input" class="label-radio">Pasaporte</label>
+                    <input type="radio" name="id" id="residente-input" value="Residente">
+                    <label for="residente-input" class="label-radio">Residente</label>
+                </div>
+                <div class="input-group">
+                    <label class="label" for="ID" id="labelID">Cédula:</label>
+                    <input type="number" id="ID" name="cedula">
+                </div>
+                <div class="input-group">
+                    <label class="label" for="nombre-input">Primer Nombre:</label>
+                    <input type="text" id="nombre-input" name="primer nombre">
+                </div>
+                <div class="input-group">
+                    <label class="label" for="segundo-nombre-input">Segundo Nombre:</label>
+                    <input type="text" id="segundo-nombre-input" name="segundo nombre">
+                </div>
+                <div class="input-group">
+                    <label class="label" for="primer-apellido-input">Primer Apellido:</label>
+                    <input type="text" id="primer-apellido-input" name="primer apellido">
+                </div>
+                <div class="input-group">
+                    <label class="label" for="segundo-apellido-input">Segundo Apellido:</label>
+                    <input type="text" id="segundo-apellido-input" name="segundo apellido">
+                </div>
+                <div class="input-group">
+                    <label class="label" for="correo-input">Correo electrónico:</label>
+                    <input type="email" id="correo-input" name="correo electrónico">
+                </div>
+                <div class="input-group">
+                    <label class="label" for="pass-input">Contraseña:</label>
+                    <input type="password" id="pass-input" name="contraseña">
+                </div>
+                <div class="input-group">
+                    <label class="label" for="pass2-input">Repetir contraseña:</label>
+                    <input type="password" id="pass2-input" name="repetir contraseña">
+                </div>
+                <div class="input-group">
+                    <label class="label" for="telefono-input">Teléfono:</label>
+                    <input type="number" id="telefono-input" name="telefono">
+                </div>
+                <div class="input-group">
+                    <label class="label" for="nacimiento-input">Fecha de nacimiento:</label>
+                    <input type="date" id="nacimineto-input" name="fecha de nacimiento">
+                </div>
+                <div class="input-group">
+                    <label class="labelFile">
+                        <i class="fal fa-file-image"></i>
+                        <span class="title">Add File</span>
+                        <input type="file" / id="img">
+                    </label>
+                </div>
+            </div>
+            <div class="column">
+                <div class="input-group radio">
+                    <input type="radio" name="sexo" id="hombre" value="Hombre">
+                    <label for="hombre" class="label-radio">Hombre</label>
+                    <input type="radio" name="sexo" id="mujer" value="Mujer">
+                    <label for="mujer" class="label-radio">Mujer</label>
+                    <input type="radio" name="sexo" id="otro" value="Otro">
+                    <label for="otro" class="label-radio">Otro</label>
+                </div>
+                <div class="input-group">
+                    <label class="label" for="alias-input">Alias:</label>
+                    <input type="text" id="alias-input" name="alias">
+                </div>
+                <div class="input-group box">
+                    <select name="Provincia" id="provincias"></select>
+                </div>
+                <div class="input-group box">
+                    <select name="canton" id="cantones"></select>
+                </div>
+                <div class="input-group box">
+                    <select name="distrito" id="distritos"></select>
+                </div>
+                <div class="input-group">
+                    <label class="label" for="sennas-input">Señas:</label>
+                    <input type="text" id="sennas-input" name="señas">
+                </div>
+                <div class="input-group box">
+                    <label for="autor">Autor Favorito</label>
+                    <select name="autor" id="autor"></select>
+                </div>
+                <div class="input-group box">
+                    <label for="genero">Género favorito</label>
+                    <select name="genero" id="genero"></select>
+                </div>
+                <div class="input-group box">
+                    <label for="categoria">Categoría favorita</label>
+                    <select name="categoria" id="categoria"></select>
+                </div>
+                <div class="input-group box">
+                    <label for="libro">Libro favorita</label>
+                    <select name="libro" id="libro"></select>
+                </div>
+            </div>
+            
         </div>
-        <!-- Usuario -->
-        <div>
-            <h3>Registrarase como</h3>
-            <label for="lector">Lector</label>
-            <input type="radio" name="lector" id="input_lector">
-            <label for="libreria">Librería</label>
-            <input type="radio" name="libreriar" id="input_libreria">
+    </main>
+
+    <div id="mapa">
+
         </div>
-        <!-- Datos lector -->
-        <div>
-            <h3>Datos de Lector</h3>
-            <label for="alias">Alias:</label> <input type="text" name="alias" id="input_alias">
-            <label for="autor">Autor Favorito:</label> <select name="autor" id="input_autor"></select>
-            <label for="genero">Género Favorito:</label> <select name="genero" id="input_genero"></select>
-            <label for="libro">Libro Favorito:</label> <input type="text" name="libro" id="input_libro">
-        </div>?
-        <!-- Datos de Libreria -->
-        <div>
-            <h3>Datos Librería</h3>  
-            <label for="nombreFantacia">Nombre de Fantasia:</label> <input type="text" name="fantasia"
-            id="input_nomFantasia">
-            <label for="nombreComercial">Nombre Comercial:</label> <input type="text" name="fantasia"
-            id="input_nomComercial">
-        </div>     
-        <!-- Localizacion -->
-        <div>
-
-            <!-- provincias -->
-           <label for="provincias">Provincia</label> 
-           <select name="Provincia" id="provincias"></select>
-            <!-- canton -->
-            <label for="canton">Cantón</label> 
-            <select name="canton" id="cantones"></select>
-            <!-- distrito -->
-            <label for="distrito">Distrito</label> 
-            <select name="distrito" id="distritos"></select>
-
-
-            <h3>Localización</h3>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8084888.411115605!2d-89.2955645740925!3d8.332635455330097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f92e56221acc925%3A0x6254f72535819a2b!2sCosta+Rica!5e0!3m2!1ses!2scr!4v1562956719179!5m2!1ses!2scr" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-        </div>
-        <button type="button" id="boton_registrar">Registrarse</button>
-    </form>
-
-
-<footer>
+    <footer>
         <div class="blockFooter">
             <div class="logos">
                 <a href="#"><img src="img/barnes_and_noble_logo_png_94486.png" alt="Logo de Barnes&Noble"></a>
@@ -122,11 +165,20 @@
             <h3> ⓒ 2019 Valhalla</h3>
         </div>
     </footer>
-
+    <script src="js/usuarios/servicioUsuario.js"></script>
+    <script src="js/usuarios/controladorDireccion.js"></script>
+    <script src="js/usuarios/controlador-ususarios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCV-syDkzHFkmIacXUcpF5leTULBRliPKI&callback=initMap" async defer></script>
+    <script>
+            var map;
+            function initMap() {
+              map = new google.maps.Map(document.getElementById('mapa'), {
+                center: {lat: -34.397, lng: 150.644},
+                zoom: 8
+              });
+            }
+          </script>
 </body>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-<script src="js/usuarios/servicioUsuario.js"></script>
-<script src="js/usuarios/controladorDireccion.js"></script>
-<script src="js/usuarios/controlador-ususarios.js"></script>
 </html>

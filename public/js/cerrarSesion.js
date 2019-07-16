@@ -4,4 +4,3 @@ var logoutUsuario = function(){
 }
 
 document.getElementById('logout').addEventListener('click', logoutUsuario);
-
