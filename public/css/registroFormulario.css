@@ -15,12 +15,15 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
 }
 
 .form-registro .column {
-    width: 65%;
-    margin: 32px auto;
+    width: 68%;
+    margin: 5% 16%;
+    position: relative;
+    left: 10%;
 }
 
 .form-registro .column .input-group {
     margin-bottom: 15px;
+    position: relative;
 }
 
 .form-registro .column .input-group input {
@@ -153,7 +156,7 @@ input[type=file] {
     font-family: FontAwesome;
     position: absolute;
     top: 0;
-    right: 56px;
+    right: 70px;
     width: 14%;
     height: 100%;
     text-align: center;
@@ -171,4 +174,53 @@ input[type=file] {
 
 .box select option {
     padding: 30px;
+}
+
+.left, .right {
+    border-radius: 5px;
+    display: block;
+    font-size: 1.3em;
+    text-align: center;
+    position: absolute;
+    background: #2F558E;
+    padding: 7px 10px;
+    color: #fff;
+}
+
+.left {
+    right: 102%;
+    top: 0px;
+    font-size: 14px;
+    width: 160px;
+}
+
+.left:after, .right:after {
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    top: 50%;
+    pointer-events: none;
+    border-color: rgba(136, 183, 213, 0);
+    border-width: 8px;
+    margin-top: -8px;
+}
+
+.right:after {
+    right: 100%;
+    border-right-color: #2F558E;
+}
+
+.left:after {
+    left: 100%;
+    border-left-color: #2F558E;
+}
+
+.alert-hidden {
+    display: none;
+}
+
+.input-error {
+    border-bottom: 2px solid red;
 }

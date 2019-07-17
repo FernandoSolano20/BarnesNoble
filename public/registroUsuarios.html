@@ -30,7 +30,7 @@
     </header>
 
     <main>
-        <div class="form-registro">
+        <form class="form-registro" name="formulario_registro">
             <div class="column">
                 <div class="input-group radio">
                     <input type="radio" name="id" id="cedula-input" value="Cédula" checked>
@@ -41,30 +41,37 @@
                     <label for="residente-input" class="label-radio">Residente</label>
                 </div>
                 <div class="input-group">
+                    <span class="left alert-hidden" id="alert-id">La identificación debe tener 9 dígitos.</span>
                     <label class="label" for="ID" id="labelID">Cédula:</label>
                     <input type="number" id="ID" name="cedula">
                 </div>
                 <div class="input-group">
+                    <span class="left alert-hidden" id="alert-nombre1">Digite solo letras.</span>
                     <label class="label" for="nombre-input">Primer Nombre:</label>
                     <input type="text" id="nombre-input" name="primer nombre">
                 </div>
                 <div class="input-group">
+                    <span class="left alert-hidden" id="alert-nombre2">Digite solo letras.</span>
                     <label class="label" for="segundo-nombre-input">Segundo Nombre:</label>
                     <input type="text" id="segundo-nombre-input" name="segundo nombre">
                 </div>
                 <div class="input-group">
+                    <span class="left alert-hidden" id="alert-apellido1">Digite solo letras.</span>
                     <label class="label" for="primer-apellido-input">Primer Apellido:</label>
                     <input type="text" id="primer-apellido-input" name="primer apellido">
                 </div>
                 <div class="input-group">
+                    <span class="left alert-hidden" id="alert-apellido2">Digite solo letras.</span>
                     <label class="label" for="segundo-apellido-input">Segundo Apellido:</label>
                     <input type="text" id="segundo-apellido-input" name="segundo apellido">
                 </div>
                 <div class="input-group">
+                    <span class="left alert-hidden" id="alert-correo">El correo no cumple con el formato.</span>
                     <label class="label" for="correo-input">Correo electrónico:</label>
                     <input type="email" id="correo-input" name="correo electrónico">
                 </div>
                 <div class="input-group">
+                    <span class="left alert-hidden" id="alert-pass">Las contraseñas no coinciden.</span>
                     <label class="label" for="pass-input">Contraseña:</label>
                     <input type="password" id="pass-input" name="contraseña">
                 </div>
@@ -73,14 +80,17 @@
                     <input type="password" id="pass2-input" name="repetir contraseña">
                 </div>
                 <div class="input-group">
+                    <span class="left alert-hidden" id="alert-telefono">La teléfono debe tener 8 dígitos.</span>
                     <label class="label" for="telefono-input">Teléfono:</label>
                     <input type="number" id="telefono-input" name="telefono">
                 </div>
                 <div class="input-group">
+                    <span class="left alert-hidden" id="alert-date">Debe ser menor al día de hoy.</span>
                     <label class="label" for="nacimiento-input">Fecha de nacimiento:</label>
-                    <input type="date" id="nacimineto-input" name="fecha de nacimiento">
+                    <input type="date" id="nacimiento-input" name="fecha de nacimiento">
                 </div>
                 <div class="input-group">
+                    <span class="left alert-hidden" id="alert-img">Debe ser un archivo png o jpg.</span>
                     <label class="labelFile">
                         <i class="fal fa-file-image"></i>
                         <span class="title">Add File</span>
@@ -90,6 +100,7 @@
             </div>
             <div class="column">
                 <div class="input-group radio">
+                    <span class="left alert-hidden" id="alert-sexo">Seleccione una opción.</span>
                     <input type="radio" name="sexo" id="hombre" value="Hombre">
                     <label for="hombre" class="label-radio">Hombre</label>
                     <input type="radio" name="sexo" id="mujer" value="Mujer">
@@ -102,13 +113,22 @@
                     <input type="text" id="alias-input" name="alias">
                 </div>
                 <div class="input-group box">
-                    <select name="Provincia" id="provincias"></select>
+                    <span class="left alert-hidden" id="alert-provincia">Seleccione una opción.</span>
+                    <select name="Provincia" id="provincias">
+                        <option value="">--Seleccione una provincia--</option>
+                    </select>
                 </div>
                 <div class="input-group box">
-                    <select name="canton" id="cantones"></select>
+                    <span class="left alert-hidden" id="alert-canton">Seleccione una opción.</span>
+                    <select name="canton" id="cantones">
+                        <option value="">--Seleccione un cantón--</option>
+                    </select>
                 </div>
                 <div class="input-group box">
-                    <select name="distrito" id="distritos"></select>
+                    <span class="left alert-hidden" id="alert-distrito">Seleccione una opción.</span>
+                    <select name="distrito" id="distritos">
+                        <option value="">--Seleccione un distrito--</option>
+                    </select>
                 </div>
                 <div class="input-group">
                     <label class="label" for="sennas-input">Señas:</label>
@@ -131,13 +151,13 @@
                     <select name="libro" id="libro"></select>
                 </div>
             </div>
-            
-        </div>
+
+        </form>
     </main>
 
     <div id="mapa">
 
-        </div>
+    </div>
     <footer>
         <div class="blockFooter">
             <div class="logos">
@@ -165,20 +185,21 @@
             <h3> ⓒ 2019 Valhalla</h3>
         </div>
     </footer>
-    <script src="js/usuarios/servicioUsuario.js"></script>
-    <script src="js/usuarios/controladorDireccion.js"></script>
-    <script src="js/usuarios/controlador-ususarios.js"></script>
+    <script src="js/direccion/servicioDireccion.js"></script>
+    <script src="js/direccion/controladorDireccion.js"></script>
+    <script src="js/usuarios/controladorUsuarios.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCV-syDkzHFkmIacXUcpF5leTULBRliPKI&callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCV-syDkzHFkmIacXUcpF5leTULBRliPKI&callback=initMap"
+        async defer></script>
     <script>
-            var map;
-            function initMap() {
-              map = new google.maps.Map(document.getElementById('mapa'), {
-                center: {lat: -34.397, lng: 150.644},
+        var map;
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('mapa'), {
+                center: { lat: -34.397, lng: 150.644 },
                 zoom: 8
-              });
-            }
-          </script>
+            });
+        }
+    </script>
 </body>
 
 </html>
