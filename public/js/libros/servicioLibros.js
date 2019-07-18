@@ -1,0 +1,24 @@
+//ARCHIVO DE SERVICIO DE LIBROS, MARCO ARAGON
+'use strict';
+let registrarLibros = (ptitulo, pedicion, peditorial, pannoEdicion, pisbl, pcaratula, pcontraportada, pprecio, pidGenero, pidCategoria, pidAutor) => {
+    axios({
+        method: 'post',
+        url: 'http://localhost:4000/api/libros/registrarLibro',
+        responseType: 'json',
+        data: {
+            titulo: ptitulo,
+            edicion: pedicion,
+            editorial: peditorial,
+            annoEdicion: pannoEdicion,
+            isbl: pisbl,
+            caratula: pcaratula,
+            contraportada: pcontraportada,
+            precio: pprecio,
+            idGenero: pidGenero,
+            idCategoria: pidCategoria,
+            idAutor: pidAutor
+
+        
+        }
+    });
+};
