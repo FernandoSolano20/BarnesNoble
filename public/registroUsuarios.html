@@ -43,7 +43,7 @@
                 <div class="input-group">
                     <span class="left alert-hidden" id="alert-id">La identificación debe tener 9 dígitos.</span>
                     <label class="label" for="ID" id="labelID">Cédula:</label>
-                    <input type="number" id="ID" name="cedula">
+                    <input type="text" id="ID" name="cedula">
                 </div>
                 <div class="input-group">
                     <span class="left alert-hidden" id="alert-nombre1">Digite solo letras.</span>
@@ -109,6 +109,7 @@
                     <label for="otro" class="label-radio">Otro</label>
                 </div>
                 <div class="input-group">
+                    <span class="left alert-hidden" id="alert-alias">No debe estar vacio.</span>
                     <label class="label" for="alias-input">Alias:</label>
                     <input type="text" id="alias-input" name="alias">
                 </div>
@@ -135,6 +136,7 @@
                     <input type="text" id="sennas-input" name="señas">
                 </div>
                 <div class="input-group box">
+                    <span class="left alert-hidden" id="alert-favorito">Seleccione una opción.</span>
                     <label for="autor">Autor Favorito</label>
                     <select name="autor" id="autor"></select>
                 </div>
@@ -151,11 +153,11 @@
                     <select name="libro" id="libro"></select>
                 </div>
             </div>
-
         </form>
+        <div>
+            <div id="map" style="height: 258px;"></div>
+        </div>
     </main>
-
-    <div id="mapa">
 
     </div>
     <footer>
@@ -188,18 +190,18 @@
     <script src="js/direccion/servicioDireccion.js"></script>
     <script src="js/direccion/controladorDireccion.js"></script>
     <script src="js/usuarios/controladorUsuarios.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCV-syDkzHFkmIacXUcpF5leTULBRliPKI&callback=initMap"
-        async defer></script>
     <script>
         var map;
         function initMap() {
-            map = new google.maps.Map(document.getElementById('mapa'), {
-                center: { lat: -34.397, lng: 150.644 },
-                zoom: 8
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 9.9281, lng: -84.0907 },
+                zoom: 13
             });
         }
     </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKXA3_YJlVwwt1lx60eO0ljRVUKQO3fNY&callback=initMap"
+        async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </body>
 
 </html>

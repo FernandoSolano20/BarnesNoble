@@ -90,8 +90,12 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
     background: #b4b4b4;
 }
 
-.form-registro .column .radio input[type="radio"]+.label-radio:empty:before {
-    margin-right: 0;
+.form-registro .column .radio .label-radio.error-radio {
+    color: red;
+}
+
+.form-registro .column .radio input[type="radio"]:checked+.label-radio.error-radio:before {
+    background: red;
 }
 
 input[type=file] {
@@ -222,5 +226,10 @@ input[type=file] {
 }
 
 .input-error {
-    border-bottom: 2px solid red;
+    border-bottom: 2px solid red !important;
+}
+
+.select-error {
+    border: 3px solid #bb1a1a !important;
+    background-color: #af05078c !important;
 }
