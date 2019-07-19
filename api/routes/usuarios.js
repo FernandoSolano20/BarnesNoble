@@ -100,7 +100,7 @@ router.get('/listarUsuarios', function (req, res) {
         } else {
             return res.json({
                 success: true,
-                listaUsuarioss: usuarios
+                listaUsuarios: usuarios
             })
         }
     });
