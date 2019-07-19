@@ -46,7 +46,7 @@ header .menuHorizontal .list-menu .link-imagen {
 }
 
 header .menuHorizontal ul li:hover {
-  background: #f2a5a0ce;
+  background: #1a3b4d;
 }
 
 header .menuHorizontal ul li a {
@@ -138,7 +138,7 @@ header .menuHorizontal ul li .caret {
 }
 
 .menu li a:hover {
-  color: #f2a5a0ce;
+  color: #1a3b4d;
 }
 
 .menu li:nth-child(2) a {
@@ -234,7 +234,7 @@ footer {
 }
 
 .redesSociales i:hover {
-  background: #f2a5a0ce;
+  background: #1a3b4d;
   padding: 10px;
   border-radius: 50%;
 }

@@ -113,6 +113,26 @@ router.post('/login', function(req,res){
     );
 });
 
+
+// Listar usuarios
+
+router.get('/listar-usuarios', function(req, res) {
+    Usuario.find(function(err, ususariosBD) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                msj: 'No se pueden listar los usuarios',
+                err
+            });
+        } else {
+            return res.json({
+                success: true,
+                lista_usuarios: ususariosBD
+            });
+        }
+    })
+});
+
 module.exports = router;
 
 //localhosta:3000/api/registrarUsuario/
