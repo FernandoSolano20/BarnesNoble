@@ -1,15 +1,21 @@
-// Controlador Provincia 
+const sectionProvincia = document.getElementById('provincias');
+const sectionCantones = document.getElementById('cantones');
+const sectionDistritos = document.getElementById('distritos');
+var listaObtenerProvincias = [];
+var listaObtenerCantones = [];
+var listaObtenerDistritos = [];
 
 var crearSectionProvincias = async () => {
 
     listaObtenerProvincias = await obtenerProvincias();
 
     var sectionProvincias = document.getElementById('provincias');
+    sectionProvincias.innerHTML = '';
 
     var optionElemento = document.createElement('option');
-        optionElemento.setAttribute('value', '0');
-        optionElemento.innerHTML = '--Seleccione una provincia--';
-        sectionProvincias.appendChild(optionElemento);
+    optionElemento.setAttribute('value', '');
+    optionElemento.innerHTML = '--Seleccione una provincia--';
+    sectionProvincias.appendChild(optionElemento);
 
     for (elementos in listaObtenerProvincias) {
         var optionElemento = document.createElement('option');
@@ -19,24 +25,23 @@ var crearSectionProvincias = async () => {
     }
 };
 
-crearSectionProvincias();
-
-// Fin Controlador Provincia
-
-// Controlador Cantones
-
 var crearSectionCantones = async () => {
 
     var provincia = sectionProvincia.value;
     sectionCantones.innerHTML = '';
-    
+    sectionDistritos.innerHTML = '';
+
     listaObtenerCantones = await obtenerCantones(provincia);
 
     var optionElemento = document.createElement('option');
-        optionElemento.setAttribute('value', '0');
-        optionElemento.innerHTML = '--Seleccione un canton--';
-        sectionCantones.appendChild(optionElemento);
-  
+    optionElemento.setAttribute('value', '');
+    optionElemento.innerHTML = '--Seleccione un canton--';
+    sectionCantones.appendChild(optionElemento);
+
+    optionElemento = document.createElement('option');
+    optionElemento.innerHTML = '--Seleccione un distrito--';
+    sectionDistritos.appendChild(optionElemento);
+
     for (elementos in listaObtenerCantones) {
         var optionElemento = document.createElement('option');
         optionElemento.setAttribute('value', elementos);
@@ -44,12 +49,6 @@ var crearSectionCantones = async () => {
         sectionCantones.appendChild(optionElemento);
     }
 };
-
-sectionProvincia.addEventListener('change', crearSectionCantones);
-
-// Fin Controlador Cantones
-
-// Controlador Distrito
 
 var crearSectionDistritos = async () => {
 
@@ -59,9 +58,9 @@ var crearSectionDistritos = async () => {
     listaObtenerDistrito = await obtenerDistritos(provincia, canton);
 
     var optionElemento = document.createElement('option');
-        optionElemento.setAttribute('value', '0');
-        optionElemento.innerHTML = '--Seleccione un distrito--';
-        sectionDistritos.appendChild(optionElemento);
+    optionElemento.setAttribute('value', '');
+    optionElemento.innerHTML = '--Seleccione un distrito--';
+    sectionDistritos.appendChild(optionElemento);
 
     for (elementos in listaObtenerDistrito) {
         var optionElemento = document.createElement('option');
@@ -71,4 +70,6 @@ var crearSectionDistritos = async () => {
     }
 };
 
+crearSectionProvincias();
+sectionProvincia.addEventListener('change', crearSectionCantones);
 sectionCantones.addEventListener('change', crearSectionDistritos);
