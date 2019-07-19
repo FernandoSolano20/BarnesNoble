@@ -4,81 +4,117 @@ const express = require('express'),
     router = express.Router(),//permite crear la ruta
     Usuario = require('../models/usuarios.model');
 
-router.post('/registrarUsuarios', function (req, res) {
+router.post('/registrarUsuario', function (req, res) {
     let body = req.body;
- 
-    let nuevoUsuario =  new Usuario({
+console.log(body);
+    let nuevoUsuario = new Usuario({
 
         // /Datos Generales/
-        id : body.id,
-        nombre : body.nombre,
-        segundoNombre : body.segundoNombre,
-        primerApellido : body.primerApellido,
-        segundoApellido : body.segundoApellido,
-        correo : body.correo,
-        pass : body.pass,
+        id: body.id,
+        nombre: body.nombre,
+        segundoNombre: body.segundoNombre,
+        primerApellido: body.primerApellido,
+        segundoApellido: body.segundoApellido,
+        correo: body.correo,
+        pass: body.pass,
         img: body.img,
-        sexo : body.sexo,
-        telefono : body.telefono,
+        sexo: body.sexo,
+        telefono: body.telefono,
         tipoUsuario: body.tipoUsuario,
-        nacimiento : body.nacimiento,
-        sennas : body.sennas,
-        alias : body.alias,
+        nacimiento: body.nacimiento,
+        sennas: body.sennas,
+        alias: body.alias,
 
-        localizacionLatitud : body.localizacionLatitud,
-        localizacionLongitud : body.localizacionLongitud,
+        localizacionLatitud: body.localizacionLatitud,
+        localizacionLongitud: body.localizacionLongitud,
         estado: body.estado,
 
         // /Direccion/
         idProvincia: body.idProvincia,
-        idCanton : body.idCanton,
+        idCanton: body.idCanton,
         idDistrito: body.idDistrito,
-        
+
         // /Datos Extra-Lector/
-        idAutor : body.idAutor,
-        idGenero : body.idGenero,
-        idLibro : body.idLibro,
-        idCategoria : body.idCategoria,
+        idAutor: body.idAutor,
+        idGenero: body.idGenero,
+        idLibro: body.idLibro,
+        idCategoria: body.idCategoria,
 
         // /Datos Extra-Libreria/
         idLibreria: body.idCategoria
-    
+
     });
 
-    nuevoUsuario.save(
-        function(err, usuarioDB){
-            if(err){
-                return res.status(400).json({
-                    success: false,
-                    msj: 'El usuario no se pudo guardar',
-                    err
-                });
-            }else{
+    Usuario.findOne({ id: req.body.id }).then(
+        function (usuario) {
+            if (usuario) {
                 return res.json({
-                    success: true,
-                    msj: 'El usuario se guardó con éxito'
-                })
+                    success: false,
+                    message: 'La identificación ya se encuentra en el sistema'
+                });
             }
+            else{
+                Usuario.findOne({ correo: req.body.correo }).then(
+                    function (usuario) {
+                        if (usuario) {
+                            return res.json({
+                                success: false,
+                                message: 'El correo ya se encuentra en el sistema'
+                            });
+                        }
+                        else{
+                            Usuario.findOne({ telefono: req.body.telefono }).then(
+                                function (usuario) {
+                                    if (usuario) {
+                                        return res.json({
+                                            success: false,
+                                            message: 'El teléfono ya se encuentra en el sistema'
+                                        });
+                                    }
+                                    else{
+                                        nuevoUsuario.save(
+                                            function (err, usuarioDB) {
+                                                if (err) {
+                                                    return res.status(400).json({
+                                                        success: false,
+                                                        message: 'El usuario no se pudo guardar',
+                                                        err
+                                                    });
+                                                } else {
+                                                    return res.json({
+                                                        success: true,
+                                                        message: 'El usuario se guardó con éxito'
+                                                    })
+                                                }
+                                            }
+                                        );
+                                    } 
+                                }
+                            );
+                        } 
+                    }
+                );
+            } 
         }
     );
 });
 
-router.post('/login', function(req,res){
-    Usuario.findOne({correo: req.body.correo}).then(
-        function(usuario){
-            if(usuario){
-                if(usuario.pass === req.body.pass){
+router.post('/login', function (req, res) {
+    Usuario.findOne({ correo: req.body.correo }).then(
+        function (usuario) {
+            if (usuario) {
+                if (usuario.pass === req.body.pass) {
                     res.json({
                         success: true,
-                        usuario : usuario
+                        usuario: usuario
                     });
                 }
-                else{
+                else {
                     res.json({
                         success: false
                     });
                 }
-            }else{
+            } else {
                 res.json({
                     success: false,
                     message: 'El usuario no existe'

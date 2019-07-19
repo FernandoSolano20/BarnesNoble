@@ -132,31 +132,29 @@
                     </select>
                 </div>
                 <div class="input-group">
+                    <span class="left alert-hidden" id="alert-sennas">Campo requerido.</span>
                     <label class="label" for="sennas-input">Señas:</label>
                     <input type="text" id="sennas-input" name="señas">
                 </div>
                 <div class="input-group box">
                     <span class="left alert-hidden" id="alert-favorito">Seleccione una opción.</span>
-                    <label for="autor">Autor Favorito</label>
                     <select name="autor" id="autor"></select>
                 </div>
                 <div class="input-group box">
-                    <label for="genero">Género favorito</label>
                     <select name="genero" id="genero"></select>
                 </div>
                 <div class="input-group box">
-                    <label for="categoria">Categoría favorita</label>
                     <select name="categoria" id="categoria"></select>
                 </div>
                 <div class="input-group box">
-                    <label for="libro">Libro favorita</label>
                     <select name="libro" id="libro"></select>
                 </div>
             </div>
         </form>
         <div>
-            <div id="map" style="height: 258px;"></div>
+        <div id="map"></div>
         </div>
+        <button type="button" id="registrar">Registrar</button>
     </main>
 
     </div>
@@ -187,9 +185,6 @@
             <h3> ⓒ 2019 Valhalla</h3>
         </div>
     </footer>
-    <script src="js/direccion/servicioDireccion.js"></script>
-    <script src="js/direccion/controladorDireccion.js"></script>
-    <script src="js/usuarios/controladorUsuarios.js"></script>
     <script>
         var map;
         function initMap() {
@@ -199,6 +194,14 @@
             });
         }
     </script>
+    <script src="js/usuarios/servicioUsuario.js"></script>
+    <script src="js/categoria/servicioCategoria.js"></script>
+    <script src="js/genero/servicioGenero.js"></script>
+    <script src="js/direccion/servicioDireccion.js"></script>
+    <script src="js/direccion/controladorDireccion.js"></script>
+    <script src="js/selects/controladorSelectsGenero.js"></script>
+    <script src="js/selects/controladorSelectsCategoria.js"></script>
+    <script src="js/usuarios/controladorUsuarios.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKXA3_YJlVwwt1lx60eO0ljRVUKQO3fNY&callback=initMap"
         async defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>

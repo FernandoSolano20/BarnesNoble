@@ -45,48 +45,71 @@ var cantonAlert = document.getElementById('alert-canton');
 var distritoAlert = document.getElementById('alert-distrito');
 
 var sennasInput = document.getElementById('sennas-input');
-var autorInput = document.getElementById('autor');
-var generoInput = document.getElementById('genero');
-var categoriaInput = document.getElementById('categoria');
-var libroInput = document.getElementById('libro');
+var sennasAlert = document.getElementById('alert-sennas');
 var favAlert = document.getElementById('alert-favorito');
 
-var obtenerDatosUsuarios = function () {
-    var usuario = {
-        id: idInput.value,
-        nombre: nombreInput1.value,
-        segundoNombre: nombreInput2.value,
-        primerApellido: apellidoInput1.value,
-        segundoApellido: apellidoInput2.value,
-        correo: correoInput.value,
-        pass: passInput1.value,
-        img: imgInput.value,
-        sexo: sexoInput.value,
-        telefono: telefonoInput.value,
-        tipoUsuario: 'Lector',
-        nacimiento: nacimientoInput.value,
-        sennas: sennasInput.value,
-        alias: aliasInput.value,
-        localizacionLatitud: '5',
-        localizacionLongitud: '5',
-        estado: true,
-        idProvincia: sectionProvincia.value,
-        idCanton: sectionCantones.value,
-        idDistrito: sectionDistritos.value,
-        idAutor: autorInput.value,
-        idGenero: generoInput.value,
-        idLibro: libroInput.value,
-        idCategoria: categoriaInput.value,
-        idLibreria: ''
+var obtenerDatosUsuarios = async function () {
+    var error = validarId() | validarNombre1() | validarNombre2() | validarApellido1() | validarApellido2() | validarCorreo() | validarPass() | validarTelefono() | validarFecha() | validarFoto() | validarSexo() | validarAlias() | validarProvincia() | validarCanton() | validarDistrito() | validarSennas() | validarFavoritos();
+    if (!error) {
+        var sexoValue;
+        for(var i = 0; i < sexoInput.length; i++){
+            if(sexoInput[i].checked){
+                sexoValue = sexoInput[i].value;
+                break;
+            }
+        }
+        var nacimiento = new Date(nacimientoInput.value);
+        nacimiento = nacimiento.getFullYear() + '-' + Number(nacimiento.getUTCMonth() + 1) + '-' + nacimiento.getUTCDate()
+        var usuario = {
+            id: idInput.value,
+            nombre: nombreInput1.value,
+            segundoNombre: nombreInput2.value,
+            primerApellido: apellidoInput1.value,
+            segundoApellido: apellidoInput2.value,
+            correo: correoInput.value,
+            pass: passInput1.value,
+            img: imgInput.value,
+            sexo: sexoValue,
+            telefono: telefonoInput.value,
+            tipoUsuario: 'Lector',
+            nacimiento: nacimiento,
+            sennas: sennasInput.value,
+            alias: aliasInput.value,
+            localizacionLatitud: '5',
+            localizacionLongitud: '5',
+            estado: 1,
+            idProvincia: sectionProvincia.value,
+            idCanton: sectionCantones.value,
+            idDistrito: sectionDistritos.value,
+            idAutor: autorSelect.value,
+            idGenero: generoSelect.value,
+            idLibro: libroSelect.value,
+            idCategoria: categoriaSelect.value,
+            idLibreria: ''
+        }
+        var nuevoUsuario = await crearUsuario(usuario);
+        if (nuevoUsuario.success) {
+            Swal.fire({
+                type: 'success',
+                title: nuevoUsuario.message
+            });
+        }
+        else {
+            Swal.fire({
+                type: 'error',
+                title: nuevoUsuario.message
+            });
+        }
     }
-
-    var error = validarUsuario(usuario);
+    else {
+        Swal.fire({
+            type: 'warning',
+            title: 'No se ha enviado su mensaje exitosamente',
+            text: 'Revise los campos resaltados e intételo de nuevo'
+        });
+    }
 }
 
-var validarUsuario = function (usuario) {
-    var error = false;
-
-}
 
 var validarId = function () {
     var elementNumber = {
@@ -127,7 +150,7 @@ var validarNombre2 = function () {
         alert: nombreAlert2,
         input: nombreInput2
     }
-    if(elementText.value != '')
+    if (elementText.value != '')
         return !(validarTexto(elementText));
     return false;
 }
@@ -147,7 +170,7 @@ var validarApellido2 = function () {
         alert: apellidoAlert2,
         input: apellidoInput2
     }
-    if(elementText.value != '')
+    if (elementText.value != '')
         return !(validarTexto(elementText));
     return false;
 }
@@ -200,12 +223,14 @@ var validarPass = function () {
         elementPass1.input.className = elementPass1.input.className + " input-error";
         elementPass2.input.className = elementPass2.input.className.replace("input-error", "");
         elementPass2.input.className = elementPass2.input.className + " input-error";
+        return true;
     }
     else {
         elementPass1.alert.className = elementPass1.alert.className.replace("alert-hidden", "");
         elementPass1.input.className = elementPass1.input.className.replace("input-error", "");
         elementPass1.alert.className = elementPass1.alert.className + " alert-hidden";
         elementPass2.input.className = elementPass2.input.className.replace("input-error", "");
+        return false;
     }
 }
 
@@ -218,7 +243,7 @@ var validarTelefono = function () {
     if (!validarNumeros(elementNumber)) {
         return true;
     }
-    else if (elementNumber.value != 8) {
+    else if (elementNumber.value.length != 8) {
         telefonoAlert.innerText = "Debe tener 8 dígitos."
         telefonoAlert.className = telefonoAlert.className.replace("alert-hidden", "");
         telefonoInput.className = telefonoInput.className.replace("input-error", "");
@@ -269,15 +294,15 @@ var validarFoto = function () {
         alert: imgAlert,
         input: imgInput
     }
-    var fileName = input.value,
+    var fileName = elementPicture.value,
         idxDot = fileName.lastIndexOf(".") + 1,
         extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
 
     if (!noVacio(elementPicture)) {
         return true;
     }
-    else if (!["jpg", "jpeg", "png"].includes(extFile)) {
-        imgAlert.innerText = "Seleccione una fecha menor a la actual."
+    else if (!(["jpg", "jpeg", "png"].includes(extFile))) {
+        imgAlert.innerText = "Seleccione un archivo de tipo imagen."
         imgAlert.className = imgAlert.className.replace("alert-hidden", "");
         imgInput.className = imgInput.className.replace("input-error", "");
         imgInput.className = imgInput.className + " input-error";
@@ -302,8 +327,7 @@ var validarSexo = function () {
     else {
         sexoAlert.className = sexoAlert.className.replace("alert-hidden", "");
         sexoAlert.className = sexoAlert.className + " alert-hidden";
-        for(var i =0; i < sexoInput.length; i++)
-            sexoInput[i].className = sexoInput[i].className.replace("error-radio", "");
+        sexoInput[0].parentElement.className = sexoInput[0].parentElement.className.replace("error-radio", "");
         return false;
     }
 }
@@ -312,7 +336,7 @@ var validarAlias = function () {
     var elementText = {
         value: aliasInput.value,
         alert: aliasAlert,
-        input: alias
+        input: aliasInput
     }
     return !(noVacio(elementText));
 }
@@ -338,7 +362,7 @@ var validarCanton = function () {
 var validarDistrito = function () {
     var elementSelect = {
         value: sectionDistritos.value,
-        alert: cantonAlert,
+        alert: distritoAlert,
         input: sectionDistritos
     }
     return !(validarSelect(elementSelect));
@@ -347,20 +371,33 @@ var validarDistrito = function () {
 var validarSennas = function () {
     var elementText = {
         value: sennasInput.value,
-        alert: sexoAlert,
+        alert: sennasAlert,
         input: sennasInput
     }
     return !(noVacio(elementText));
 }
 
 var validarFavoritos = function () {
-    if(autorInput.value !== '' || generoInput.value !== '' || categoriaInput.value !== '' || libroInput !== ''){
+    if (autorSelect.value === '' && generoSelect.value === '' && categoriaSelect.value === '' && libroSelect.value === '') {
         favAlert.className = favAlert.className.replace("alert-hidden", "");
+        autorSelect.className = autorSelect.className.replace("select-error", "");
+        autorSelect.className = autorSelect.className + " select-error";
+        generoSelect.className = generoSelect.className.replace("select-error", "");
+        generoSelect.className = generoSelect.className + " select-error";
+        categoriaSelect.className = categoriaSelect.className.replace("select-error", "");
+        categoriaSelect.className = categoriaSelect.className + " select-error";
+        libroSelect.className = libroSelect.className.replace("select-error", "");
+        libroSelect.className = libroSelect.className + " select-error";
         return true;
     }
-    else{
+    else {
+        autorSelect.className = autorSelect.className.replace("select-error", "");
+        generoSelect.className = generoSelect.className.replace("select-error", "");
+        categoriaSelect.className = categoriaSelect.className.replace("select-error", "");
+        libroSelect.className = libroSelect.className.replace("select-error", "");
         favAlert.className = favAlert.className.replace("alert-hidden", "");
         favAlert.className = favAlert.className + " alert-hidden";
+        return false;
     }
 }
 
@@ -368,7 +405,7 @@ var validarNumeros = function (elementos) {
     if (!noVacio(elementos)) {
         return false;
     }
-    else if(isNaN(elementos.value)){
+    else if (isNaN(elementos.value)) {
         elementos.alert.innerText = "Solo debe tener números."
         elementos.alert.className = elementos.alert.className.replace("alert-hidden", "");
         elementos.input.className = elementos.input.className.replace("input-error", "");
@@ -412,13 +449,14 @@ var noVacio = function (elementos) {
 var validarRadio = function (elementos) {
     for (var i = 0; i < elementos.input.length; i++) {
         if (elementos.input[i].checked) {
+            elementos.alert.className = elementos.alert.className.replace("alert-hidden", "");
+            elementos.alert.className = elementos.alert.className + " alert-hidden";
             return true;
         }
     }
-    elementos.alert.innerText = "Seleccione una opción."
+    elementos.alert.innerText = "Campo requerido."
     elementos.alert.className = elementos.alert.className.replace("alert-hidden", "");
-    elementos.input.className = elementos.input.className.replace("error-radio", "");
-    elementos.input.className = elementos.input.className + " error-radio";
+    elementos.input[0].parentElement.className = elementos.input[0].parentElement.className + " error-radio";
     return false;
 }
 
@@ -434,24 +472,29 @@ var validarSelect = function (elementos) {
         elementos.alert.className = elementos.alert.className.replace("alert-hidden", "");
         elementos.input.className = elementos.input.className.replace("select-error", "");
         elementos.alert.className = elementos.alert.className + " alert-hidden";
-        return false;
+        return true;
     }
 }
 
-idInput.addEventListener('blur',validarId);
-nombreInput1.addEventListener('blur',validarNombre1);
-nombreInput2.addEventListener('blur',validarNombre2);
-apellidoInput1.addEventListener('blur',validarApellido1);
-apellidoInput2.addEventListener('blur',validarApellido2);
-correoInput.addEventListener('blur',validarCorreo);
-passInput2.addEventListener('blur',validarPass);
-telefonoInput.addEventListener('blur',validarTelefono);
-nacimientoInput.addEventListener('blur',validarFecha);
-imgInput.addEventListener('change',validarFoto);
-for(var i =0; i < sexoInput.length; i++)
-    sexoInput[i].addEventListener('change',validarSexo);
-aliasInput.addEventListener('blur',validarSexo);
-sectionProvincia.addEventListener('blur',validarProvincia);
-sectionCantones.addEventListener('blur',validarCanton);
-sectionDistritos.addEventListener('blur',validarDistrito);
-sennasInput.addEventListener('blur',validarSennas);
+idInput.addEventListener('blur', validarId);
+nombreInput1.addEventListener('blur', validarNombre1);
+nombreInput2.addEventListener('blur', validarNombre2);
+apellidoInput1.addEventListener('blur', validarApellido1);
+apellidoInput2.addEventListener('blur', validarApellido2);
+correoInput.addEventListener('blur', validarCorreo);
+passInput2.addEventListener('blur', validarPass);
+telefonoInput.addEventListener('blur', validarTelefono);
+nacimientoInput.addEventListener('blur', validarFecha);
+imgInput.addEventListener('change', validarFoto);
+aliasInput.addEventListener('blur', validarAlias);
+sectionProvincia.addEventListener('change', validarProvincia);
+sectionCantones.addEventListener('change', validarCanton);
+sectionDistritos.addEventListener('change', validarDistrito);
+sennasInput.addEventListener('blur', validarSennas);
+for (var i = 0; i < sexoInput.length; i++)
+    sexoInput[i].addEventListener('change', validarSexo);
+autorSelect.addEventListener('change', validarFavoritos);
+generoSelect.addEventListener('change', validarFavoritos);
+categoriaSelect.addEventListener('change', validarFavoritos);
+libroSelect.addEventListener('change', validarFavoritos);
+document.getElementById('registrar').addEventListener('click', obtenerDatosUsuarios);

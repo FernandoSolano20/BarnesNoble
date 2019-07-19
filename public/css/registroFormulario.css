@@ -90,14 +90,6 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
     background: #b4b4b4;
 }
 
-.form-registro .column .radio .label-radio.error-radio {
-    color: red;
-}
-
-.form-registro .column .radio input[type="radio"]:checked+.label-radio.error-radio:before {
-    background: red;
-}
-
 input[type=file] {
     outline: 0;
     opacity: 0;
@@ -225,6 +217,10 @@ input[type=file] {
     display: none;
 }
 
+.error-radio{
+    color: red;
+}
+
 .input-error {
     border-bottom: 2px solid red !important;
 }
@@ -232,4 +228,12 @@ input[type=file] {
 .select-error {
     border: 3px solid #bb1a1a !important;
     background-color: #af05078c !important;
+}
+
+#map{
+    height: 430px;
+    position: relative;
+    overflow: hidden;
+    width: 50%;
+    margin: 20px auto;
 }
