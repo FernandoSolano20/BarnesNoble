@@ -9,6 +9,7 @@ const mongoose = require('mongoose');
 const generoRoute = require('./routes/genero');
 const categoriaRoute = require('./routes/categoria');
 const usuario_route = require('./routes/usuarios');
+const sucursalRoute = require('./routes/sucursal');
 
 
 
@@ -53,3 +54,4 @@ function handleError(res, reason, message, code) {
 app.use('/api/genero', generoRoute);
 app.use('/api/categoria', categoriaRoute);
 app.use('/api', usuario_route);
+app.use('/api/sucursal', sucursalRoute);
