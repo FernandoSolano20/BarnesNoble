@@ -4,9 +4,14 @@ const express = require('express'),
     router = express.Router(),
     Libros = require('../models/libros.model');
 
+    router.param('_id', function(req, res, next, _id){
+    req.body._id= _id;
+
+    })
+
 //Definición de la ruta para registrar libros
 
-router.post('/registarLibro', function (req, res) {
+router.post('/registrarLibro', function (req, res) {
     let body = req.body;
     let nuevoLibro = new Libros({
         titulo: body.titulo,
@@ -15,7 +20,7 @@ router.post('/registarLibro', function (req, res) {
         annoEdicion: body.annoEdicion,
         isbl: body.isbl,
         caratula: body.caratula,
-        contraporta: body.caratula,
+        contraportada: body.contraportada,
         precio: body.precio,
         idGenero: body.idGenero,
         idCategoria: body.idCategoria,
@@ -28,7 +33,7 @@ router.post('/registarLibro', function (req, res) {
             if (err) {
                 return res.status(400).json({
                     success: false,
-                    msj: 'Se NO registró el libro correctamente',
+                    msj: 'No registró el libro correctamente',
                     err
                 });
 
@@ -41,5 +46,42 @@ router.post('/registarLibro', function (req, res) {
         }
     );
 });
+
+router.get('/listarLibros', function(req, res){
+    Libros.find(function(err,LibrosBD){
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                msj: 'No se pueden listar los libros',
+                err
+            });
+        }else{
+            return res.json({
+                success: true,
+                listaLibros: LibrosBD
+            });
+        }
+    })
+});
+
+router.get('/buscarLibroID/:_id', function(req, res){
+    Libros.findById(req.body._id, function(err,LibrosBD){
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                msj: 'No se encontro ningún contacto con ese _id',
+                err
+            });
+        }else{
+            return res.json({
+                success: true,
+                Libro: LibrosBD
+            });
+        }
+    })
+});
+
+
+
 
 module.exports = router;

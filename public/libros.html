@@ -46,7 +46,7 @@
     <main>
         <div class="subcontenedor">
             <div class="busqueda">
-                <input type="text" id="input-filtro" name="buscar" placeholder="Buscar...." autocomplete="off"
+                <input type="text" id="txtFiltro" name="buscar" placeholder="Buscar...." autocomplete="off"
                     autocorrect="off">
                 <button type="button" class="buscar"><i class="fa fa-search"></i><span>search</span></button>
             </div>
@@ -56,7 +56,7 @@
             </div>
         </div>
         <div class="contenedor-tabla">
-            <table class="tabla" id="tabla-elementos">
+            <table class="tabla" id="tablaElementos">
                 <thead>
                     <tr>
                         <th>Carátula</th>
@@ -72,7 +72,6 @@
                         <th>Contraportada</th>
                         <th>Precio</th>
                         
-
                     </tr>
                 </thead>
                 <tbody>
@@ -121,10 +120,12 @@
         </div>
     </footer>
     <script src="js/menu.js"></script>
-    <script src="js/categoria/servicioCategoria.js"></script>
-    <script src="js/categoria/controladorCategoria.js"></script>
-    <script src="js/categoria/modalCategoria.js"></script>
+    <!-- <script src="js/categoria/servicioCategoria.js"></script>
+    <script src="js/categoria/controladorCategoria.js"></script> -->
+    <!-- <script src="js/categoria/modalCategoria.js"></script> -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/libros/servicioLibros.js"></script>
+    <script src="js/libros/controladorLibros.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </body>
 

@@ -18,7 +18,23 @@ let registrarLibros = (ptitulo, pedicion, peditorial, pannoEdicion, pisbl, pcara
             idCategoria: pidCategoria,
             idAutor: pidAutor
 
-        
+
         }
     });
+};
+
+let obtenerLibros = async () => {
+    try {
+        const response = axios({
+            method: 'get',
+            url: 'http://localhost:4000/api/libros/listarLibros',
+            responseType: 'json'
+        });
+
+        const result = await response;
+        return result.data.listaLibros;
+
+    } catch (error) {
+        console.log(error);
+    }
 };

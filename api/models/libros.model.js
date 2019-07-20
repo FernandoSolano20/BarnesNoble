@@ -11,9 +11,9 @@ let librosSchema = new mongoose.Schema({
     caratula: {type: String, required: true, unique: false},
     contraportada: {type: String, required: true, unique: false},
     precio: {type: String, required: true, unique: false},
-    idGenero: {type: String, required: true, unique: false},
-    idCategoria: {type: String, required: true, unique: false},
-    idAutor: {type: String, required: true, unique: false}
+    idGenero: {type: String, required: false, unique: false},
+    idCategoria: {type: String, required: false, unique: false},
+    idAutor: {type: String, required: false, unique: false}
 });
 
 
