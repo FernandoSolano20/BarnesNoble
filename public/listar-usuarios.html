@@ -5,17 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Barnes & Noble</title>
-    <script src="js/validarSesionPlatafomra.js"></script>
     <link rel="stylesheet" href="css/reset.css">
-    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/menu.css">
-    <link rel="stylesheet" href="css/listarElementos.css">
-    <link rel="stylesheet" href="css/searchBar.css">
+    <link rel="stylesheet" href="css/listarUsuario.css">
     <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/searchBar.css">
     <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
-
+    <title>usuarios</title>
 </head>
 
 <body>
@@ -38,33 +35,44 @@
                 <li><a href="#">Mi perfil</a></li>
                 <li><a href="genero.html">Géneros</a></li>
                 <li><a href="categoria.html">Categorías</a></li>
-                <li><a href="#">Reportes</a></li>
-                <li><a href="#">Bitácora</a></li>
-                <li><a href="#">Usuarios</a></li>
-                <li><a href="#">Librerías</a></li>
+                <li><a href="#">Autores</a></li>
+                <li><a href="#">Libros</a></li>
+                <li><a href="#">Librerias</a></li>
+                <li><a href="#">Sucursales</a></li>
+                <li><a href="#">Intercambios</a></li>
+                <li><a href="#">Clubes de lectura</a></li>
             </ul>
         </nav>
     </header>
-    <main>
-        <div class="subcontenedor">
+
+    <div class="subcontenedor">
             <div class="busqueda">
                 <input type="text" id="input-filtro" name="buscar" placeholder="Buscar...." autocomplete="off"
                     autocorrect="off">
                 <button type="button" class="buscar"><i class="fa fa-search"></i><span>search</span></button>
             </div>
+
             <div class="crear-contenedor">
-                <button type="button" class="material-blue" data-action="crear" id="crear-elemento"><i
-                        class="far fa-plus-circle"></i>Crear</button>
+                    <button type="button" class="material-blue" data-action="crear" id="crear-elemento"><i
+                            class="far fa-plus-circle"></i> <a href="registroUsuarios.html"></a>Crear</button>
+                </div>
             </div>
-        </div>
-        <div class="contenedor-tabla">
+    </div>
+
+    <div class="contenedor-tabla">
             <table class="tabla" id="tabla-elementos">
                 <thead>
                     <tr>
-                        <th>Categoría</th>
-                        <th>Descripción</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
+                        <th>Nombre</th>
+                        <th>Segundo Nombre</th>
+                        <th>Apellido</th>
+                        <th>Segundo Apellido</th>
+                        <th>Alias</th>
+                        <th>Teléfono</th>
+                        <th>Correo</th>
+                        <th>Fecha de Nacimiento</th>
+                        <th>Sexo</th>
+                        <th>Cédula</th>
                         <th>Activar/Desactivar</th>
                     </tr>
                 </thead>
@@ -84,9 +92,10 @@
                     <button class="alert-btn primary" id="confirm">Confirmar</button>
                 </div>
             </div>
-        </div>
+        </div> 
     </main>
-    <footer>
+
+  <footer>
         <div class="blockFooter">
             <div class="logos">
                 <a href="#"><img src="img/barnes_and_noble_logo_png_94486.png" alt="Logo de Barnes&Noble"></a>
@@ -102,14 +111,12 @@
                 <a href="#"><i class="fab fa-twitter"></i></a>
             </div>
         </div>
-        
+       
     </footer>
-    <script src="js/cerrarSesion.js"></script>
-    <script src="js/menu.js"></script>
-    <script src="js/categoria/servicioCategoria.js"></script>
-    <script src="js/categoria/controladorCategoria.js"></script>
-    <script src="js/categoria/modalCategoria.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </body>
-
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="js/cerrarSesion.js"></script>
+<script src="js/menu.js"></script>
+<script src="js/usuarios/servicioUsuario.js"></script>
+<script src="js/usuarios/controlador-listarUsuarios.js"></script>
 </html>
