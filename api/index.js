@@ -4,15 +4,26 @@ const express = require("express");
 const body_parser = require("body-parser");
 const cors = require('cors');
 const mongoose = require('mongoose');
+const fileupload = require('express-fileupload');
+const cloudinary = require('cloudinary').v2;
 
 //Archivo de routes aqui
 const generoRoute = require('./routes/genero');
 const categoriaRoute = require('./routes/categoria');
 const usuario_route = require('./routes/usuarios');
-
+const imagenRoute = require('./routes/imagenes');
 
 
 const app = express();
+app.use(fileupload({
+    useTempFiles: true
+}));
+
+cloudinary.config({
+    cloud_name: 'barnesnoble',
+    api_key: '665566519125998',
+    api_secret: 'zMZwhD_BAvSbFVggRtVHSW9mX0k'
+});
 app.use(cors());
 app.use(express.static(__dirname + "/public"));
 app.use(body_parser.json());
@@ -53,3 +64,4 @@ function handleError(res, reason, message, code) {
 app.use('/api/genero', generoRoute);
 app.use('/api/categoria', categoriaRoute);
 app.use('/api', usuario_route);
+app.use('/api/imagen', imagenRoute);

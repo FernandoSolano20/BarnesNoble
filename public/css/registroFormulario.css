@@ -217,7 +217,7 @@ input[type=file] {
     display: none;
 }
 
-.error-radio{
+.error-radio {
     color: red;
 }
 
@@ -230,10 +230,41 @@ input[type=file] {
     background-color: #af05078c !important;
 }
 
-#map{
+#map {
     height: 430px;
     position: relative;
     overflow: hidden;
     width: 50%;
     margin: 20px auto;
+}
+
+.container-map {
+    position: relative;
+    display: block;
+}
+
+#floating-panel {
+    position: absolute;
+    top: 10px;
+    left: 25%;
+    z-index: 5;
+    background-color: #fff;
+    padding: 5px;
+    border: 1px solid #999;
+    text-align: center;
+    font-family: 'Roboto', 'sans-serif';
+    line-height: 30px;
+    padding-left: 10px;
+    margin: 55px auto;
+    display: block;
+}
+
+.left-map {
+    right: 78%;
+}
+
+#registrar{
+    display: block;
+    margin: 20px auto;
+    width: 30%;
 }

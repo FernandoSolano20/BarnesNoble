@@ -1,7 +1,3 @@
-var regexText = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+(\s*[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*)*[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/;
-var regexEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-
 var idInput = document.getElementById('ID');
 var idAlert = document.getElementById('alert-id');
 
@@ -19,11 +15,6 @@ var apellidoAlert2 = document.getElementById('alert-apellido2');
 
 var correoInput = document.getElementById('correo-input');
 var correoAlert = document.getElementById('alert-correo');
-
-var passInput1 = document.getElementById('pass-input');
-var passAlert1 = document.getElementById('alert-pass');
-
-var passInput2 = document.getElementById('pass2-input');
 
 var telefonoInput = document.getElementById('telefono-input');
 var telefonoAlert = document.getElementById('alert-telefono');
@@ -47,57 +38,70 @@ var distritoAlert = document.getElementById('alert-distrito');
 var sennasInput = document.getElementById('sennas-input');
 var sennasAlert = document.getElementById('alert-sennas');
 var favAlert = document.getElementById('alert-favorito');
+var mapaAlert = document.getElementById('alert-mapa');
 
 var obtenerDatosUsuarios = async function () {
-    var error = validarId() | validarNombre1() | validarNombre2() | validarApellido1() | validarApellido2() | validarCorreo() | validarPass() | validarTelefono() | validarFecha() | validarFoto() | validarSexo() | validarAlias() | validarProvincia() | validarCanton() | validarDistrito() | validarSennas() | validarFavoritos();
+    var error = validarId() | validarNombre1() | validarNombre2() | validarApellido1() | validarApellido2() | validarCorreo() | validarTelefono() | validarNacimiento() | validarFotoPerfil() | validarSexo() | validarAlias() | validarProvincia() | validarCanton() | validarDistrito() | validarSennas() | validarFavoritos() | validarMapa();
     if (!error) {
-        var sexoValue;
-        for(var i = 0; i < sexoInput.length; i++){
-            if(sexoInput[i].checked){
-                sexoValue = sexoInput[i].value;
-                break;
+
+        document.body.className = "loading";
+        var imgResult = await crearImagen();
+        if (imgResult.success) {
+            var sexoValue;
+            for (var i = 0; i < sexoInput.length; i++) {
+                if (sexoInput[i].checked) {
+                    sexoValue = sexoInput[i].value;
+                    break;
+                }
             }
-        }
-        var nacimiento = new Date(nacimientoInput.value);
-        nacimiento = nacimiento.getFullYear() + '-' + Number(nacimiento.getUTCMonth() + 1) + '-' + nacimiento.getUTCDate()
-        var usuario = {
-            id: idInput.value,
-            nombre: nombreInput1.value,
-            segundoNombre: nombreInput2.value,
-            primerApellido: apellidoInput1.value,
-            segundoApellido: apellidoInput2.value,
-            correo: correoInput.value,
-            pass: passInput1.value,
-            img: imgInput.value,
-            sexo: sexoValue,
-            telefono: telefonoInput.value,
-            tipoUsuario: 'Lector',
-            nacimiento: nacimiento,
-            sennas: sennasInput.value,
-            alias: aliasInput.value,
-            localizacionLatitud: '5',
-            localizacionLongitud: '5',
-            estado: 1,
-            idProvincia: sectionProvincia.value,
-            idCanton: sectionCantones.value,
-            idDistrito: sectionDistritos.value,
-            idAutor: autorSelect.value,
-            idGenero: generoSelect.value,
-            idLibro: libroSelect.value,
-            idCategoria: categoriaSelect.value,
-            idLibreria: ''
-        }
-        var nuevoUsuario = await crearUsuario(usuario);
-        if (nuevoUsuario.success) {
-            Swal.fire({
-                type: 'success',
-                title: nuevoUsuario.message
-            });
+            var nacimiento = new Date(nacimientoInput.value);
+            nacimiento = nacimiento.getFullYear() + '-' + Number(nacimiento.getUTCMonth() + 1) + '-' + nacimiento.getUTCDate()
+            var usuario = {
+                id: idInput.value,
+                nombre: nombreInput1.value,
+                segundoNombre: nombreInput2.value,
+                primerApellido: apellidoInput1.value,
+                segundoApellido: apellidoInput2.value,
+                correo: correoInput.value,
+                pass: '123',
+                img: imgResult.secure_url,
+                sexo: sexoValue,
+                telefono: telefonoInput.value,
+                tipoUsuario: 'Lector',
+                nacimiento: nacimiento,
+                sennas: sennasInput.value,
+                alias: aliasInput.value,
+                localizacionLatitud: markers[0].position.lat(),
+                localizacionLongitud: markers[0].position.lng(),
+                estado: 1,
+                idProvincia: sectionProvincia.value,
+                idCanton: sectionCantones.value,
+                idDistrito: sectionDistritos.value,
+                idAutor: autorSelect.value,
+                idGenero: generoSelect.value,
+                idLibro: libroSelect.value,
+                idCategoria: categoriaSelect.value,
+                idLibreria: ''
+            }
+            var nuevoUsuario = await crearUsuario(usuario);
+            document.body.className = "";
+            if (nuevoUsuario.success) {
+                Swal.fire({
+                    type: 'success',
+                    title: nuevoUsuario.message
+                });
+            }
+            else {
+                Swal.fire({
+                    type: 'error',
+                    title: nuevoUsuario.message
+                });
+            }
         }
         else {
             Swal.fire({
                 type: 'error',
-                title: nuevoUsuario.message
+                title: imgResult.message
             });
         }
     }
@@ -175,65 +179,6 @@ var validarApellido2 = function () {
     return false;
 }
 
-var validarCorreo = function () {
-    var elementText = {
-        value: correoInput.value,
-        alert: correoAlert,
-        input: correoInput
-    }
-
-    if (!noVacio(elementText)) {
-        return true;
-    }
-    else if (!regexEmail.test(elementText.value)) {
-        correoAlert.innerText = "El correo no cumple el formato."
-        correoAlert.className = correoAlert.className.replace("alert-hidden", "");
-        correoInput.className = correoInput.className.replace("input-error", "");
-        correoInput.className = correoInput.className + " input-error";
-        return true;
-    }
-    else {
-        correoAlert.className = correoAlert.className.replace("alert-hidden", "");
-        correoInput.className = correoInput.className.replace("input-error", "");
-        correoAlert.className = correoAlert.className + " alert-hidden";
-        return false;
-    }
-}
-
-var validarPass = function () {
-    var elementPass1 = {
-        value: passInput1.value,
-        alert: passAlert1,
-        input: passInput1
-    }
-
-    var elementPass2 = {
-        value: passInput2.value,
-        alert: passAlert1,
-        input: passInput2
-    }
-
-    if (!noVacio(elementPass1) | !noVacio(elementPass2)) {
-        return true;
-    }
-    else if (elementPass1.value !== elementPass2.value) {
-        elementPass1.alert.innerText = "Las contraseñas no coiciden."
-        elementPass1.alert.className = elementPass1.alert.className.replace("alert-hidden", "");
-        elementPass1.input.className = elementPass1.input.className.replace("input-error", "");
-        elementPass1.input.className = elementPass1.input.className + " input-error";
-        elementPass2.input.className = elementPass2.input.className.replace("input-error", "");
-        elementPass2.input.className = elementPass2.input.className + " input-error";
-        return true;
-    }
-    else {
-        elementPass1.alert.className = elementPass1.alert.className.replace("alert-hidden", "");
-        elementPass1.input.className = elementPass1.input.className.replace("input-error", "");
-        elementPass1.alert.className = elementPass1.alert.className + " alert-hidden";
-        elementPass2.input.className = elementPass2.input.className.replace("input-error", "");
-        return false;
-    }
-}
-
 var validarTelefono = function () {
     var elementNumber = {
         value: telefonoInput.value,
@@ -258,62 +203,22 @@ var validarTelefono = function () {
     }
 }
 
-var validarFecha = function () {
+var validarNacimiento = function () {
     var elementDate = {
         value: nacimientoInput.value,
         alert: nacimientoAlert,
         input: nacimientoInput
     }
-    var nacimento = new Date(elementDate.value);
-    nacimento = new Date(nacimento.getUTCFullYear() + "-" + (nacimento.getUTCMonth() + 1) + "-" + nacimento.getUTCDate());
-    if (nacimento == 'Invalid Date') {
-        elementDate.alert.innerText = "Seleccione una fecha."
-        elementDate.alert.className = elementDate.alert.className.replace("alert-hidden", "");
-        elementDate.input.className = elementDate.input.className.replace("input-error", "");
-        elementDate.input.className = elementDate.input.className + " input-error";
-        return true;
-    }
-    else if (nacimento > new Date()) {
-        elementDate.alert.innerText = "Seleccione una fecha menor a la actual."
-        elementDate.alert.className = elementDate.alert.className.replace("alert-hidden", "");
-        elementDate.input.className = elementDate.input.className.replace("input-error", "");
-        elementDate.input.className = elementDate.input.className + " input-error";
-        return true;
-    }
-    else {
-        elementDate.alert.className = elementDate.alert.className.replace("alert-hidden", "");
-        nacimientoAlert.className = nacimientoAlert.className + " alert-hidden";
-        nacimientoInput.className = nacimientoInput.className.replace("input-error", "");
-        return false;
-    }
+    return !(validarFecha(elementDate) && validarFechaMayorActual(elementDate));
 }
 
-var validarFoto = function () {
+var validarFotoPerfil = function () {
     var elementPicture = {
         value: imgInput.value,
         alert: imgAlert,
         input: imgInput
     }
-    var fileName = elementPicture.value,
-        idxDot = fileName.lastIndexOf(".") + 1,
-        extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
-
-    if (!noVacio(elementPicture)) {
-        return true;
-    }
-    else if (!(["jpg", "jpeg", "png"].includes(extFile))) {
-        imgAlert.innerText = "Seleccione un archivo de tipo imagen."
-        imgAlert.className = imgAlert.className.replace("alert-hidden", "");
-        imgInput.className = imgInput.className.replace("input-error", "");
-        imgInput.className = imgInput.className + " input-error";
-        return true;
-    }
-    else {
-        imgAlert.className = imgAlert.className.replace("alert-hidden", "");
-        imgAlert.className = imgAlert.className + " alert-hidden";
-        imgInput.className = imgInput.className.replace("input-error", "");
-        return false;
-    }
+    return !(noVacio(elementPicture) && validarFotos(elementPicture));
 }
 
 var validarSexo = function () {
@@ -401,91 +306,15 @@ var validarFavoritos = function () {
     }
 }
 
-var validarNumeros = function (elementos) {
-    if (!noVacio(elementos)) {
-        return false;
-    }
-    else if (isNaN(elementos.value)) {
-        elementos.alert.innerText = "Solo debe tener números."
-        elementos.alert.className = elementos.alert.className.replace("alert-hidden", "");
-        elementos.input.className = elementos.input.className.replace("input-error", "");
-        elementos.input.className = elementos.input.className + " input-error";
-        return false;
-    }
-    elementos.alert.className = elementos.alert.className.replace("alert-hidden", "");
-    elementos.alert.className = elementos.alert.className + " alert-hidden";
-    elementos.input.className = elementos.input.className.replace("input-error", "");
-    return true;
-}
-
-var validarTexto = function (elementos) {
-    if (!regexText.test(elementos.value)) {
-        elementos.alert.innerText = "Solo debe tener letras."
-        elementos.alert.className = elementos.alert.className.replace("alert-hidden", "");
-        elementos.input.className = elementos.input.className.replace("input-error", "");
-        elementos.input.className = elementos.input.className + " input-error";
-        return false;
-    }
-    elementos.alert.className = elementos.alert.className.replace("alert-hidden", "");
-    elementos.alert.className = elementos.alert.className + " alert-hidden";
-    elementos.input.className = elementos.input.className.replace("input-error", "");
-    return true;
-}
-
-var noVacio = function (elementos) {
-    if (elementos.value == "") {
-        elementos.alert.innerText = "Rellene el campo."
-        elementos.alert.className = elementos.alert.className.replace("alert-hidden", "");
-        elementos.input.className = elementos.input.className.replace("input-error", "");
-        elementos.input.className = elementos.input.className + " input-error";
-        return false;
-    }
-    elementos.alert.className = elementos.alert.className.replace("alert-hidden", "");
-    elementos.alert.className = elementos.alert.className + " alert-hidden";
-    elementos.input.className = elementos.input.className.replace("input-error", "");
-    return true;
-}
-
-var validarRadio = function (elementos) {
-    for (var i = 0; i < elementos.input.length; i++) {
-        if (elementos.input[i].checked) {
-            elementos.alert.className = elementos.alert.className.replace("alert-hidden", "");
-            elementos.alert.className = elementos.alert.className + " alert-hidden";
-            return true;
-        }
-    }
-    elementos.alert.innerText = "Campo requerido."
-    elementos.alert.className = elementos.alert.className.replace("alert-hidden", "");
-    elementos.input[0].parentElement.className = elementos.input[0].parentElement.className + " error-radio";
-    return false;
-}
-
-var validarSelect = function (elementos) {
-    if (elementos.value == "") {
-        elementos.alert.innerText = "Seleccione una opción."
-        elementos.alert.className = elementos.alert.className.replace("alert-hidden", "");
-        elementos.input.className = elementos.input.className.replace("select-error", "");
-        elementos.input.className = elementos.input.className + " select-error";
-        return false;
-    }
-    else {
-        elementos.alert.className = elementos.alert.className.replace("alert-hidden", "");
-        elementos.input.className = elementos.input.className.replace("select-error", "");
-        elementos.alert.className = elementos.alert.className + " alert-hidden";
-        return true;
-    }
-}
-
 idInput.addEventListener('blur', validarId);
 nombreInput1.addEventListener('blur', validarNombre1);
 nombreInput2.addEventListener('blur', validarNombre2);
 apellidoInput1.addEventListener('blur', validarApellido1);
 apellidoInput2.addEventListener('blur', validarApellido2);
 correoInput.addEventListener('blur', validarCorreo);
-passInput2.addEventListener('blur', validarPass);
 telefonoInput.addEventListener('blur', validarTelefono);
-nacimientoInput.addEventListener('blur', validarFecha);
-imgInput.addEventListener('change', validarFoto);
+nacimientoInput.addEventListener('blur', validarNacimiento);
+imgInput.addEventListener('change', validarFotoPerfil);
 aliasInput.addEventListener('blur', validarAlias);
 sectionProvincia.addEventListener('change', validarProvincia);
 sectionCantones.addEventListener('change', validarCanton);
@@ -498,3 +327,4 @@ generoSelect.addEventListener('change', validarFavoritos);
 categoriaSelect.addEventListener('change', validarFavoritos);
 libroSelect.addEventListener('change', validarFavoritos);
 document.getElementById('registrar').addEventListener('click', obtenerDatosUsuarios);
+document.getElementById('map').addEventListener('click', validarMapa);

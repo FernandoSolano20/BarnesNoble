@@ -6,7 +6,6 @@ const express = require('express'),
 
 router.post('/registrarUsuario', function (req, res) {
     let body = req.body;
-console.log(body);
     let nuevoUsuario = new Usuario({
 
         // /Datos Generales/

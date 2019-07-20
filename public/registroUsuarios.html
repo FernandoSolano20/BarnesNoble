@@ -10,12 +10,14 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/botones.css">
     <link rel="stylesheet" href="css/registroFormulario.css">
     <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
-
+    <link rel="stylesheet" href="css/loadingBar.css">
 </head>
 
 <body>
+    <div class="loading-bar"></div>
     <header>
         <nav class="menuHorizontal">
             <ul class="list-menu">
@@ -69,15 +71,6 @@
                     <span class="left alert-hidden" id="alert-correo">El correo no cumple con el formato.</span>
                     <label class="label" for="correo-input">Correo electrónico:</label>
                     <input type="email" id="correo-input" name="correo electrónico">
-                </div>
-                <div class="input-group">
-                    <span class="left alert-hidden" id="alert-pass">Las contraseñas no coinciden.</span>
-                    <label class="label" for="pass-input">Contraseña:</label>
-                    <input type="password" id="pass-input" name="contraseña">
-                </div>
-                <div class="input-group">
-                    <label class="label" for="pass2-input">Repetir contraseña:</label>
-                    <input type="password" id="pass2-input" name="repetir contraseña">
                 </div>
                 <div class="input-group">
                     <span class="left alert-hidden" id="alert-telefono">La teléfono debe tener 8 dígitos.</span>
@@ -151,10 +144,16 @@
                 </div>
             </div>
         </form>
-        <div>
-        <div id="map"></div>
+        <div class="container-map">
+            <span class="left alert-hidden left-map" id="alert-mapa">Inserte la localización.</span>
+            <div id="floating-panel">
+                <input onclick="deleteMarkers();" type=button value="Delete Markers">
+            </div>
+            <div id="map"></div>
         </div>
-        <button type="button" id="registrar">Registrar</button>
+        <div class="crear-contenedor">
+                <button type="button" class="material-blue" id="registrar"><i class="far fa-clipboard-list"></i>Registrar</button>
+            </div>
     </main>
 
     </div>
@@ -185,15 +184,8 @@
             <h3> ⓒ 2019 Valhalla</h3>
         </div>
     </footer>
-    <script>
-        var map;
-        function initMap() {
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: { lat: 9.9281, lng: -84.0907 },
-                zoom: 13
-            });
-        }
-    </script>
+    <script src="js/maps/maps.js"></script>
+    <script src="js/imagen/servicioImagen.js"></script>
     <script src="js/usuarios/servicioUsuario.js"></script>
     <script src="js/categoria/servicioCategoria.js"></script>
     <script src="js/genero/servicioGenero.js"></script>
@@ -201,6 +193,7 @@
     <script src="js/direccion/controladorDireccion.js"></script>
     <script src="js/selects/controladorSelectsGenero.js"></script>
     <script src="js/selects/controladorSelectsCategoria.js"></script>
+    <script src="js/validaciones/validacionesGenerales.js"></script>
     <script src="js/usuarios/controladorUsuarios.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKXA3_YJlVwwt1lx60eO0ljRVUKQO3fNY&callback=initMap"
         async defer></script>
