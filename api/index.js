@@ -12,6 +12,7 @@ const generoRoute = require('./routes/genero');
 const categoriaRoute = require('./routes/categoria');
 const usuario_route = require('./routes/usuarios');
 const autorRoute = require('./routes/autor');
+const librosRoute = require('./routes/libros');
 const imagenRoute = require('./routes/imagenes');
 
 const app = express();
@@ -66,3 +67,4 @@ app.use('/api/categoria', categoriaRoute);
 app.use('/api', usuario_route);
 app.use('/api/imagen', imagenRoute);
 app.use('/api/autor', autorRoute);
+app.use('/api/libros', librosRoute);
