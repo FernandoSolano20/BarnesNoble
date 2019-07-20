@@ -1,3 +1,4 @@
+var idRadios = document.querySelectorAll('[name="id"]');
 var idInput = document.getElementById('ID');
 var idAlert = document.getElementById('alert-id');
 
@@ -114,6 +115,16 @@ var obtenerDatosUsuarios = async function () {
     }
 }
 
+var cambiarIdentificacion = function () {
+    for (var i = 0; i < idRadios.length; i++) {
+        if (idRadios[i].checked) {
+            document.getElementById('labelID').innerHTML = idRadios[i].value;
+            idInput.name = idRadios[i].value;
+            break;
+        }
+    }
+
+}
 
 var validarId = function () {
     var elementNumber = {
@@ -328,3 +339,5 @@ categoriaSelect.addEventListener('change', validarFavoritos);
 libroSelect.addEventListener('change', validarFavoritos);
 document.getElementById('registrar').addEventListener('click', obtenerDatosUsuarios);
 document.getElementById('map').addEventListener('click', validarMapa);
+for (var i = 0; i < idRadios.length; i++)
+    idRadios[i].addEventListener('change', cambiarIdentificacion);
