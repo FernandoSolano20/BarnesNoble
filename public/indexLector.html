@@ -11,6 +11,7 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/lector.css">
     <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
 
 </head>
@@ -43,7 +44,120 @@
         </nav>
     </header>
     <main>
-        Lector
+        <form class="formRegistro" name="formularioRegistro">
+            <div class="intereses">
+                    <img src="..//public/img/avatarLector.jpg" class="avatar" alt="avatar">
+    
+                <div>
+                        <h3 class="interes">Intereses</h3>
+                        <div class="contenedorInfo">
+                        <label class="label" for="alias">Alias</label>
+                        <input class="inputDatos" type="text" name="alias" id="input_alias">
+                        </div>
+    
+                        <div class="contenedorInteres">
+                        <label class="label" for="autor">Autor Favorito</label> 
+                        <select class="selector" name="autor" id="input_autor">
+                            <option value="">Seleccionar Autor</option>
+                        </select>
+                        </div>
+    
+                        <div class="contenedorInteres">
+                        <label class="label" for="genero">Género Favorito</label>
+                        <select class="selector" name="genero" id="input_genero">
+                            <option value="">Seleccionar Genero</option>
+                        </select>
+                        </div>
+    
+                        <div class="contenedorInteres">
+                        <label class="label" for="libro">Libro Favorito</label>
+                        <input class="inputDatos" type="text" name="libro" id="input_libro">
+                        </div>
+    
+                        <div class="contenedorInteres">
+                        <label class="label" for="sexo">Intercambios</label>
+                        <label class="opcionRadio" for="activar">Activar</label> <input type="radio" name="masculino" id="input_masculino">
+                        <label class="opcionRadio" for="desactivar">Desactivar</label> <input type="radio" name="masculino" id="input_masculino">
+                        </div>
+                </div>
+            </div>
+    
+            <div class="datosLector">
+                
+                <div>
+                    <h3>Datos Personales</h3>
+                    <div class="input-group">
+                        <span class="left alert-hidden" id="alert-nombre1">Digite solo letras.</span>
+                        <label class="label" for="nombre-input">Primer Nombre:</label>
+                        <input type="text" id="nombre-input" name="primer nombre">
+                    </div>
+    
+                    <div class="input-group">
+                        <span class="left alert-hidden" id="alert-nombre2">Digite solo letras.</span>
+                        <label class="label" for="segundo-nombre-input">Segundo Nombre:</label>
+                        <input type="text" id="segundo-nombre-input" name="segundo nombre">
+                    </div>
+                    
+                    <div class="input-group">
+                        <span class="left alert-hidden" id="alert-apellido1">Digite solo letras.</span>
+                        <label class="label" for="primer-apellido-input">Primer Apellido:</label>
+                        <input type="text" id="primer-apellido-input" name="primer apellido">
+                    </div>
+    
+                    <div class="input-group">
+                        <span class="left alert-hidden" id="alert-apellido2">Digite solo letras.</span>
+                        <label class="label" for="segundo-apellido-input">Segundo Apellido:</label>
+                        <input type="text" id="segundo-apellido-input" name="segundo apellido">
+                    </div>
+    
+                    <div class="input-group">
+                        <span class="left alert-hidden" id="alert-correo">El correo no cumple con el formato.</span>
+                        <label class="label" for="correo-input">Correo electrónico:</label>
+                        <input type="email" id="correo-input" name="correo electrónico">
+                    </div>
+                    
+                    <div class="input-group">
+                        <span class="left alert-hidden" id="alert-pass">Las contraseñas no coinciden.</span>
+                        <label class="label" for="pass-input">Contraseña:</label>
+                        <input type="password" id="pass-input" name="contraseña">
+                    </div>
+
+                    <div class="input-group">
+                        <label class="label" for="pass2-input">Repetir contraseña:</label>
+                        <input type="password" id="pass2-input" name="repetir contraseña">
+                    </div>
+    
+                    <div class="input-group">
+                        <span class="left alert-hidden" id="alert-date">Debe ser menor al día de hoy.</span>
+                        <label class="label" for="nacimiento-input">Fecha de nacimiento:</label>
+                        <input type="date" id="nacimiento-input" name="fecha de nacimiento">
+                    </div>
+
+                    <div class="input-group">
+                        <span class="left alert-hidden" id="alert-telefono">La teléfono debe tener 8 dígitos.</span>
+                        <label class="label" for="telefono-input">Teléfono:</label>
+                        <input type="number" id="telefono-input" name="telefono">
+                    </div>
+    
+                    <div class="input-group radio">
+                        <span class="left alert-hidden" id="alert-sexo">Seleccione una opción.</span>
+                        <input type="radio" name="sexo" id="hombre" value="Hombre">
+                        <label for="hombre" class="label-radio">Hombre</label>
+                        <input type="radio" name="sexo" id="mujer" value="Mujer">
+                        <label for="mujer" class="label-radio">Mujer</label>
+                        <input type="radio" name="sexo" id="otro" value="Otro">
+                        <label for="otro" class="label-radio">Otro</label>
+                    </div>
+    
+
+    
+                </div>
+            </div>
+    
+        <div class="direccion">
+    
+        </form>
+        </main>
     </main>
     <footer>
         <div class="blockFooter">

@@ -1,0 +1,75 @@
+body{
+    background-color: #faf8dd;
+}
+
+.contenidoLector{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.avatar{
+    border: 3px solid #315c74;
+    width: 50%;
+    height: 15rem;
+    margin-bottom: 5%;
+}
+
+.label{
+    font-size: 1.3rem;
+    color: #315c74;
+    font-weight: bold;
+}
+
+.intereses{
+    padding-left: 10%;
+}
+
+.selector{
+    background: #315c74;
+    border: 1px solid #315c74;
+    color: #ffffff;
+    width: 45%;
+    margin-left: 5%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.inputDatos{
+    width: 45%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 5%;
+    border: none;
+    border-bottom: 2px solid #315c74;
+    background-color: #faf8dd;
+}
+
+.label2{
+    font-size: 1.3rem;
+    color: #315c74;
+    font-weight: bold; 
+}
+
+.opcionRadio{
+    margin-left: 2%;
+    color: #315c74;
+}
+
+h3{
+    color: #f6c249;
+    font-size: 2rem;
+    font-weight: bold;
+    padding-bottom: 1rem;
+}
+
+.contenedorInteres{
+    padding-bottom: 0.5rem;
+}
+
+.contenedorInfo{
+    padding-bottom: 0.6rem;
+}
+
+.contenidoLector{
+    padding-top: 1%;
+}
