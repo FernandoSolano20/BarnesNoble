@@ -132,22 +132,48 @@ var validarId = function () {
         alert: idAlert,
         input: idInput
     }
-    if (!validarNumeros(elementNumber)) {
-        return true;
+    if (elementNumber.input.name === 'Cédula') {
+        if (!validarNumeros(elementNumber))
+            return true;
+        else if (elementNumber.value.length != 9) {
+            idAlert.innerText = "Debe tener 9 dígitos."
+            idAlert.className = idAlert.className.replace("alert-hidden", "");
+            idInput.className = idInput.className.replace("input-error", "");
+            idInput.className = idInput.className + " input-error";
+            return true;
+        }
     }
-    else if (elementNumber.value.length != 9) {
-        idAlert.innerText = "Debe tener 9 dígitos."
-        idAlert.className = idAlert.className.replace("alert-hidden", "");
-        idInput.className = idInput.className.replace("input-error", "");
-        idInput.className = idInput.className + " input-error";
-        return true;
+    else if (elementNumber.input.name === 'Pasaporte') {
+        if (elementNumber.value.length != 44) {
+            idAlert.innerText = "Debe tener 44 dígitos."
+            idAlert.className = idAlert.className.replace("alert-hidden", "");
+            idInput.className = idInput.className.replace("input-error", "");
+            idInput.className = idInput.className + " input-error";
+            return true;
+        }
+        else if (!regexPassport.test(elementNumber.value)) {
+            idAlert.innerText = "El formato no coincide."
+            idAlert.className = idAlert.className.replace("alert-hidden", "");
+            idInput.className = idInput.className.replace("input-error", "");
+            idInput.className = idInput.className + " input-error";
+            return true;
+        }
     }
-    else {
-        idAlert.className = idAlert.className.replace("alert-hidden", "");
-        idAlert.className = idAlert.className + " alert-hidden";
-        idInput.className = idInput.className.replace("input-error", "");
-        return false;
+    else if (elementNumber.input.name === 'Residente') {
+        if (!validarNumeros(elementNumber))
+            return true;
+        else if (elementNumber.value.length != 12) {
+            idAlert.innerText = "Debe tener 12 dígitos."
+            idAlert.className = idAlert.className.replace("alert-hidden", "");
+            idInput.className = idInput.className.replace("input-error", "");
+            idInput.className = idInput.className + " input-error";
+            return true;
+        }
     }
+    idAlert.className = idAlert.className.replace("alert-hidden", "");
+    idAlert.className = idAlert.className + " alert-hidden";
+    idInput.className = idInput.className.replace("input-error", "");
+    return false;
 }
 
 var validarNombre1 = function () {
