@@ -9,8 +9,8 @@ const mongoose = require('mongoose');
 const generoRoute = require('./routes/genero');
 const categoriaRoute = require('./routes/categoria');
 const usuario_route = require('./routes/usuarios');
-
-
+const autorRoute = require('./routes/autor');
+const librosRoute = require('./routes/libros');
 
 const app = express();
 app.use(cors());
@@ -53,3 +53,5 @@ function handleError(res, reason, message, code) {
 app.use('/api/genero', generoRoute);
 app.use('/api/categoria', categoriaRoute);
 app.use('/api', usuario_route);
+app.use('/api/autor', autorRoute);
+app.use('/api/libros', librosRoute);
