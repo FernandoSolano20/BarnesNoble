@@ -18,7 +18,7 @@ let obtenerUsuarios = async() => {
     }
 };
 
-var crearUsuario = async (usuario) => {
+var crearLector = async (usuario) => {
     var response = await fetch('http://localhost:4000/api/registrarUsuario', {
         method: "POST",
         headers: {

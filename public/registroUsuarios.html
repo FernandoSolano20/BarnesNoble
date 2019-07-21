@@ -147,7 +147,7 @@
         <div class="container-map">
             <span class="left alert-hidden left-map" id="alert-mapa">Inserte la localización.</span>
             <div id="floating-panel">
-                <input onclick="deleteMarkers();" type=button value="Delete Markers">
+                <button onclick="deleteMarkers();" type=button class="material orange">Borrar Marca</button>
             </div>
             <div id="map"></div>
         </div>
@@ -198,7 +198,7 @@
     <script src="js/selects/controladorSelectsAutor.js"></script>
     <script src="js/selects/controladorSelectsLibro.js"></script>
     <script src="js/validaciones/validacionesGenerales.js"></script>
-    <script src="js/usuarios/controladorUsuarios.js"></script>
+    <script src="js/usuarios/lector/controladorLector.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKXA3_YJlVwwt1lx60eO0ljRVUKQO3fNY&callback=initMap"
         async defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>

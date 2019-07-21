@@ -83,12 +83,16 @@ var obtenerDatosUsuarios = async function () {
                 idCategoria: categoriaSelect.value,
                 idLibreria: ''
             }
-            var nuevoUsuario = await crearUsuario(usuario);
+            var nuevoUsuario = await crearLector(usuario);
             document.body.className = "";
             if (nuevoUsuario.success) {
                 Swal.fire({
                     type: 'success',
-                    title: nuevoUsuario.message
+                    title: nuevoUsuario.message,
+                    showCloseButton: true,
+                    focusConfirm: false,
+                    confirmButtonText:
+                        '<a href="http://localhost:3000/inicioSesion.html" class="linkPage">Ok</a>'
                 });
             }
             else {
@@ -122,7 +126,7 @@ var cambiarIdentificacion = function () {
             break;
         }
     }
-
+    validarId();
 }
 
 var validarId = function () {
@@ -143,6 +147,9 @@ var validarId = function () {
         }
     }
     else if (elementNumber.input.name === 'Pasaporte') {
+        if (!noVacio(elementNumber)) {
+            return true;
+        }
         if (elementNumber.value.length != 44) {
             idAlert.innerText = "Debe tener 44 dígitos."
             idAlert.className = idAlert.className.replace("alert-hidden", "");
