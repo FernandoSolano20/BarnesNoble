@@ -90,14 +90,6 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
     background: #b4b4b4;
 }
 
-.form-registro .column .radio .label-radio.error-radio {
-    color: red;
-}
-
-.form-registro .column .radio input[type="radio"]:checked+.label-radio.error-radio:before {
-    background: red;
-}
-
 input[type=file] {
     outline: 0;
     opacity: 0;
@@ -225,6 +217,10 @@ input[type=file] {
     display: none;
 }
 
+.error-radio {
+    color: red;
+}
+
 .input-error {
     border-bottom: 2px solid red !important;
 }
@@ -232,4 +228,41 @@ input[type=file] {
 .select-error {
     border: 3px solid #bb1a1a !important;
     background-color: #af05078c !important;
+}
+
+#map {
+    height: 430px;
+    position: relative;
+    overflow: hidden;
+    width: 50%;
+    margin: 20px auto;
+}
+
+.container-map {
+    position: relative;
+    display: block;
+}
+
+#floating-panel {
+    position: absolute;
+    top: 10px;
+    left: 25%;
+    z-index: 5;
+    padding: 5px;
+    text-align: center;
+    font-family: 'Roboto', 'sans-serif';
+    line-height: 30px;
+    padding-left: 10px;
+    margin: 55px auto;
+    display: block;
+}
+
+.left-map {
+    right: 78%;
+}
+
+#registrar{
+    display: block;
+    margin: 20px auto;
+    width: 30%;
 }

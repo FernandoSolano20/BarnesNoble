@@ -1,7 +1,7 @@
 // Listar Usuarios
 
 let obtenerUsuarios = async() => {
-    //try {
+    try {
         // fetch data from an url endpoint
         const response = await axios({
             method: 'get',
@@ -13,7 +13,19 @@ let obtenerUsuarios = async() => {
 
         return result;
 
-    // } catch (error) {
-    //     console.log(error);
-    // }
+    } catch (error) {
+        console.log(error);
+    }
 };
+
+var crearLector = async (usuario) => {
+    var response = await fetch('http://localhost:4000/api/registrarUsuario', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body:JSON.stringify(usuario)
+    });
+    var result = await response.json();
+    return result;
+}
