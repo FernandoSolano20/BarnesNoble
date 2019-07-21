@@ -67,7 +67,7 @@ h2{
 }
 
 .masVendidos {
-  background-color: #faf8dd;
+  background-color:#80d1d3;
 }
 
 .wrapper {
@@ -111,7 +111,7 @@ h2{
   text-align: center;
 }
 
-.card p{
+.card p, .card form{
   font-size: 12px;
   font-weight: 100;
   padding: 3px;
@@ -131,7 +131,7 @@ h2{
 }
 
 .card {
-  background: rgba(246, 194, 73, 0.384);
+  background:#ffffff;
   min-width: 200px;
   height: 100%;
   margin-right: 1rem;
@@ -169,7 +169,7 @@ h2{
 /* Estilos Mejor Calificados */
 
 .mejorCalificados{
-  background-color: #faf8dd;
+  background-color: #80d1d3;
 }
 
 input[type="radio"] {
@@ -178,7 +178,10 @@ input[type="radio"] {
 
 .fa, .fas {
   font-size: 20px;
-  font-weight: 400!important;
+}
+
+.fas.blanco{
+  font-weight: 400;
 }
 
 .mejorCalificados .card{
@@ -213,13 +216,15 @@ input[type="radio"] {
   float: left;
 }
 
-.menuLP button{
-  background:  #f6c249;
+.btn_usuarios button{
+  background: #f6c249;
   font-size: 12px;
+  margin-left: 100px;
   border-radius: 50px;
   border: none;
-  margin: 8px;
-  width: 60%;
+  margin-top: 12px;
+  padding: 14px;
+  width: 40%;
   box-shadow: 0 0 5px;
 }
 
@@ -261,4 +266,14 @@ input[type="radio"] {
   --webkit-transition: all .5s;
   -o-transition: all .5s;
 }
+
+header .menuHorizontal ul li a {
+  color: #fff;
+    display: block;
+    text-decoration: none;
+    padding-top: 20px;
+    padding-left: 8px;
+}
+
+
 

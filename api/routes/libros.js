@@ -64,6 +64,27 @@ router.get('/listarLibros', function(req, res){
     })
 });
 
+//TODO: ENVIAR A MARCO
+// router.get('/listarLibrosMasVendidos', function(req, res){
+    
+//     let criterioOrden = { vendidos: -1 };
+
+//     Libros.find(function(err,LibrosBD){
+//         if (err) {
+//             return res.status(400).json({
+//                 success: false,
+//                 msj: 'No se pueden listar los libros',
+//                 err
+//             });
+//         }else{
+//             return res.json({
+//                 success: true,
+//                 listaLibros: LibrosBD
+//             });
+//         }
+//     }).limit(25).sort(criterioOrden);
+// });
+
 router.get('/buscarLibroID/:_id', function(req, res){
     Libros.findById(req.body._id, function(err,LibrosBD){
         if (err) {
