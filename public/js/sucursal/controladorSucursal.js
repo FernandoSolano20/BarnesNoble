@@ -47,3 +47,7 @@ let filtrar_tabla = async() => {
 
 mostrar_tabla();
 txt_filtro.addEventListener('keyup', filtrar_tabla);
+
+document.querySelector('#crear-elemento').addEventListener('click',function(){
+    window.location.href= 'http://localhost:3000/registrarSucursal.html';
+})

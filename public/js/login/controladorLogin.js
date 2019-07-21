@@ -36,7 +36,13 @@ var obtenerCredenciales = async (event) => {
         if (response.success) {
             sessionStorage.setItem('conectado', response.success);
             sessionStorage.setItem('tipoUsuario', response.usuario.tipoUsuario);
-            locacion();
+            sessionStorage.setItem('cambiarPass', Number(response.usuario.cambiarPass));
+            sessionStorage.setItem('id', response.usuario._id);
+            if(Number(sessionStorage.cambiarPass)){
+                window.location.href = "http://localhost:3000/cambiarPassword.html";
+            }
+            else
+                locacion();
         }
         else {
             Swal.fire({

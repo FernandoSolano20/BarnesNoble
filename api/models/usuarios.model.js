@@ -30,7 +30,8 @@ let usuarios_schema = new mongoose.Schema({
     idGenero: { type: String, required: false, unique: false },
     idLibro: { type: String, required: false, unique: false },
     idCategoria: { type: String, required: false, unique: false },
-    idLibreria: { type: String, required: false, unique: false }
+    idLibreria: { type: String, required: false, unique: false },
+    cambiarPass: { type: Boolean, required: true, unique: false, default: true }
 });
 
 module.exports = mongoose.model('Usuarios', usuarios_schema); 
