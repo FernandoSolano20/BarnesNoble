@@ -38,7 +38,7 @@ var obtenerCredenciales = async (event) => {
             sessionStorage.setItem('tipoUsuario', response.usuario.tipoUsuario);
             sessionStorage.setItem('cambiarPass', Number(response.usuario.cambiarPass));
             sessionStorage.setItem('id', response.usuario._id);
-            if(Number(sessionStorage.cambiarPass)){
+            if (Number(sessionStorage.cambiarPass)) {
                 window.location.href = "http://localhost:3000/cambiarPassword.html";
             }
             else
@@ -60,16 +60,31 @@ var obtenerCredenciales = async (event) => {
     }
 };
 
-var olvidePass = async function(){
-    const {value: email} = await Swal.fire({
+var olvidePass = async function () {
+    const { value: email } = await Swal.fire({
         title: 'Input email address',
         input: 'email',
         inputPlaceholder: 'Enter your email address'
-      })
-      
-      if (email) {
-        Swal.fire('Entered email: ' + email)
-      }
+    });
+
+    let usuario = {
+        correo: email
+    }
+
+    let user = await forgetPass(usuario);
+
+    if (user.success) {
+        Swal.fire({
+            type: 'success',
+            title: user.message
+        });
+    }
+    else {
+        Swal.fire({
+            type: 'error',
+            title: user.message
+        });
+    }
 }
 
 document.getElementById('login').addEventListener('click', obtenerCredenciales);
