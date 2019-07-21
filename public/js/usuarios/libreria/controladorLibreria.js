@@ -14,12 +14,6 @@ var apellidoAlert1 = document.getElementById('alert-apellido1');
 var apellidoInput2 = document.getElementById('segundo-apellido-input');
 var apellidoAlert2 = document.getElementById('alert-apellido2');
 
-var correoInput = document.getElementById('correo-input');
-var correoAlert = document.getElementById('alert-correo');
-
-var telefonoInput = document.getElementById('telefono-input');
-var telefonoAlert = document.getElementById('alert-telefono');
-
 var nacimientoInput = document.getElementById('nacimiento-input');
 var nacimientoAlert = document.getElementById('alert-date');
 
@@ -29,8 +23,17 @@ var imgAlert = document.getElementById('alert-img');
 var sexoInput = document.querySelectorAll('[name="sexo"]');
 var sexoAlert = document.getElementById('alert-sexo');
 
-var aliasInput = document.getElementById('alias-input');
-var aliasAlert = document.getElementById('alert-alias');
+var nombreComercialInput = document.getElementById('nombre-comercial-input');
+var nombreComercialAlert = document.getElementById('alert-nombre-comercial');
+
+var nombreFantasiaInput = document.getElementById('nombre-fantasia-input');
+var nombreFantasiaAlert = document.getElementById('alert-nombre-fantasia');
+
+var correoInput = document.getElementById('correo-input');
+var correoAlert = document.getElementById('alert-correo');
+
+var telefonoInput = document.getElementById('telefono-input');
+var telefonoAlert = document.getElementById('alert-telefono');
 
 var provinciaAlert = document.getElementById('alert-provincia');
 var cantonAlert = document.getElementById('alert-canton');
@@ -38,11 +41,11 @@ var distritoAlert = document.getElementById('alert-distrito');
 
 var sennasInput = document.getElementById('sennas-input');
 var sennasAlert = document.getElementById('alert-sennas');
-var favAlert = document.getElementById('alert-favorito');
+
 var mapaAlert = document.getElementById('alert-mapa');
 
 var obtenerDatosUsuarios = async function () {
-    var error = validarId() | validarNombre1() | validarNombre2() | validarApellido1() | validarApellido2() | validarCorreo() | validarTelefono() | validarNacimiento() | validarFotoPerfil() | validarSexo() | validarAlias() | validarProvincia() | validarCanton() | validarDistrito() | validarSennas() | validarFavoritos() | validarMapa();
+    var error = validarId() | validarNombre1() | validarNombre2() | validarApellido1() | validarApellido2() | validarNacimiento() | validarFotoPerfil() | validarSexo() | validarNombreComercial() | validarNombreFantasia() | validarCorreo() | validarTelefono() | validarProvincia() | validarCanton() | validarDistrito() | validarSennas() | validarMapa();
     if (!error) {
 
         document.body.className = "loading";
@@ -63,25 +66,21 @@ var obtenerDatosUsuarios = async function () {
                 segundoNombre: nombreInput2.value,
                 primerApellido: apellidoInput1.value,
                 segundoApellido: apellidoInput2.value,
-                correo: correoInput.value,
+                nacimiento: nacimiento,
                 img: imgResult.result.secure_url,
                 sexo: sexoValue,
+                nombreComercial: nombreComercialInput.value,
+                nombreFantasia: nombreFantasiaInput.value,
+                correo: correoInput.value,
                 telefono: telefonoInput.value,
-                tipoUsuario: 'Lector',
-                nacimiento: nacimiento,
+                tipoUsuario: 'Adminitrador librería',
                 sennas: sennasInput.value,
-                alias: aliasInput.value,
                 localizacionLatitud: markers[0].position.lat(),
                 localizacionLongitud: markers[0].position.lng(),
                 estado: 1,
                 idProvincia: sectionProvincia.value,
                 idCanton: sectionCantones.value,
-                idDistrito: sectionDistritos.value,
-                idAutor: autorSelect.value,
-                idGenero: generoSelect.value,
-                idLibro: libroSelect.value,
-                idCategoria: categoriaSelect.value,
-                idLibreria: ''
+                idDistrito: sectionDistritos.value
             }
             var nuevoUsuario = await crearUsuario(usuario);
             document.body.className = "";
@@ -222,30 +221,6 @@ var validarApellido2 = function () {
     return false;
 }
 
-var validarTelefono = function () {
-    var elementNumber = {
-        value: telefonoInput.value,
-        alert: telefonoAlert,
-        input: telefonoInput
-    }
-    if (!validarNumeros(elementNumber)) {
-        return true;
-    }
-    else if (elementNumber.value.length != 8) {
-        telefonoAlert.innerText = "Debe tener 8 dígitos."
-        telefonoAlert.className = telefonoAlert.className.replace("alert-hidden", "");
-        telefonoInput.className = telefonoInput.className.replace("input-error", "");
-        telefonoInput.className = telefonoInput.className + " input-error";
-        return true;
-    }
-    else {
-        telefonoAlert.className = telefonoAlert.className.replace("alert-hidden", "");
-        telefonoAlert.className = telefonoAlert.className + " alert-hidden";
-        telefonoInput.className = telefonoInput.className.replace("input-error", "");
-        return false;
-    }
-}
-
 var validarNacimiento = function () {
     var elementDate = {
         value: nacimientoInput.value,
@@ -280,13 +255,46 @@ var validarSexo = function () {
     }
 }
 
-var validarAlias = function () {
+var validarNombreComercial = function () {
     var elementText = {
-        value: aliasInput.value,
-        alert: aliasAlert,
-        input: aliasInput
+        value: nombreComercialInput.value,
+        alert: nombreComercialAlert,
+        input: nombreComercialInput
     }
-    return !(noVacio(elementText));
+    return !(noVacio(elementText) && validarTexto(elementText));
+}
+
+var validarNombreFantasia = function () {
+    var elementText = {
+        value: nombreFantasiaInput.value,
+        alert: nombreFantasiaAlert,
+        input: nombreFantasiaInput
+    }
+    return !(noVacio(elementText) && validarTexto(elementText));
+}
+
+var validarTelefono = function () {
+    var elementNumber = {
+        value: telefonoInput.value,
+        alert: telefonoAlert,
+        input: telefonoInput
+    }
+    if (!validarNumeros(elementNumber)) {
+        return true;
+    }
+    else if (elementNumber.value.length != 8) {
+        telefonoAlert.innerText = "Debe tener 8 dígitos."
+        telefonoAlert.className = telefonoAlert.className.replace("alert-hidden", "");
+        telefonoInput.className = telefonoInput.className.replace("input-error", "");
+        telefonoInput.className = telefonoInput.className + " input-error";
+        return true;
+    }
+    else {
+        telefonoAlert.className = telefonoAlert.className.replace("alert-hidden", "");
+        telefonoAlert.className = telefonoAlert.className + " alert-hidden";
+        telefonoInput.className = telefonoInput.className.replace("input-error", "");
+        return false;
+    }
 }
 
 var validarProvincia = function () {
@@ -325,50 +333,23 @@ var validarSennas = function () {
     return !(noVacio(elementText));
 }
 
-var validarFavoritos = function () {
-    if (autorSelect.value === '' && generoSelect.value === '' && categoriaSelect.value === '' && libroSelect.value === '') {
-        favAlert.className = favAlert.className.replace("alert-hidden", "");
-        autorSelect.className = autorSelect.className.replace("select-error", "");
-        autorSelect.className = autorSelect.className + " select-error";
-        generoSelect.className = generoSelect.className.replace("select-error", "");
-        generoSelect.className = generoSelect.className + " select-error";
-        categoriaSelect.className = categoriaSelect.className.replace("select-error", "");
-        categoriaSelect.className = categoriaSelect.className + " select-error";
-        libroSelect.className = libroSelect.className.replace("select-error", "");
-        libroSelect.className = libroSelect.className + " select-error";
-        return true;
-    }
-    else {
-        autorSelect.className = autorSelect.className.replace("select-error", "");
-        generoSelect.className = generoSelect.className.replace("select-error", "");
-        categoriaSelect.className = categoriaSelect.className.replace("select-error", "");
-        libroSelect.className = libroSelect.className.replace("select-error", "");
-        favAlert.className = favAlert.className.replace("alert-hidden", "");
-        favAlert.className = favAlert.className + " alert-hidden";
-        return false;
-    }
-}
-
 idInput.addEventListener('blur', validarId);
 nombreInput1.addEventListener('blur', validarNombre1);
 nombreInput2.addEventListener('blur', validarNombre2);
 apellidoInput1.addEventListener('blur', validarApellido1);
 apellidoInput2.addEventListener('blur', validarApellido2);
-correoInput.addEventListener('blur', validarCorreo);
-telefonoInput.addEventListener('blur', validarTelefono);
 nacimientoInput.addEventListener('blur', validarNacimiento);
 imgInput.addEventListener('change', validarFotoPerfil);
-aliasInput.addEventListener('blur', validarAlias);
+for (var i = 0; i < sexoInput.length; i++)
+    sexoInput[i].addEventListener('change', validarSexo);
+nombreComercialInput.addEventListener('blur', validarNombreComercial);
+nombreFantasiaInput.addEventListener('blur', validarNombreFantasia);
+correoInput.addEventListener('blur', validarCorreo);
+telefonoInput.addEventListener('blur', validarTelefono);
 sectionProvincia.addEventListener('change', validarProvincia);
 sectionCantones.addEventListener('change', validarCanton);
 sectionDistritos.addEventListener('change', validarDistrito);
 sennasInput.addEventListener('blur', validarSennas);
-for (var i = 0; i < sexoInput.length; i++)
-    sexoInput[i].addEventListener('change', validarSexo);
-autorSelect.addEventListener('change', validarFavoritos);
-generoSelect.addEventListener('change', validarFavoritos);
-categoriaSelect.addEventListener('change', validarFavoritos);
-libroSelect.addEventListener('change', validarFavoritos);
 document.getElementById('registrar').addEventListener('click', obtenerDatosUsuarios);
 document.getElementById('map').addEventListener('click', validarMapa);
 for (var i = 0; i < idRadios.length; i++)
