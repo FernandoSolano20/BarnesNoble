@@ -139,9 +139,9 @@ var validarId = function () {
             return true;
         else if (elementNumber.value.length != 9) {
             idAlert.innerText = "Debe tener 9 dígitos."
-            idAlert.className = idAlert.className.replace("alert-hidden", "");
-            idInput.className = idInput.className.replace("input-error", "");
-            idInput.className = idInput.className + " input-error";
+            idAlert.className = idAlert.className.replace("alertHidden", "");
+            idInput.className = idInput.className.replace("inputError", "");
+            idInput.className = idInput.className + " inputError";
             return true;
         }
     }
@@ -151,16 +151,16 @@ var validarId = function () {
         }
         if (elementNumber.value.length != 44) {
             idAlert.innerText = "Debe tener 44 dígitos."
-            idAlert.className = idAlert.className.replace("alert-hidden", "");
-            idInput.className = idInput.className.replace("input-error", "");
-            idInput.className = idInput.className + " input-error";
+            idAlert.className = idAlert.className.replace("alertHidden", "");
+            idInput.className = idInput.className.replace("inputError", "");
+            idInput.className = idInput.className + " inputError";
             return true;
         }
         else if (!regexPassport.test(elementNumber.value)) {
             idAlert.innerText = "El formato no coincide."
-            idAlert.className = idAlert.className.replace("alert-hidden", "");
-            idInput.className = idInput.className.replace("input-error", "");
-            idInput.className = idInput.className + " input-error";
+            idAlert.className = idAlert.className.replace("alertHidden", "");
+            idInput.className = idInput.className.replace("inputError", "");
+            idInput.className = idInput.className + " inputError";
             return true;
         }
     }
@@ -169,15 +169,15 @@ var validarId = function () {
             return true;
         else if (elementNumber.value.length != 12) {
             idAlert.innerText = "Debe tener 12 dígitos."
-            idAlert.className = idAlert.className.replace("alert-hidden", "");
-            idInput.className = idInput.className.replace("input-error", "");
-            idInput.className = idInput.className + " input-error";
+            idAlert.className = idAlert.className.replace("alertHidden", "");
+            idInput.className = idInput.className.replace("inputError", "");
+            idInput.className = idInput.className + " inputError";
             return true;
         }
     }
-    idAlert.className = idAlert.className.replace("alert-hidden", "");
-    idAlert.className = idAlert.className + " alert-hidden";
-    idInput.className = idInput.className.replace("input-error", "");
+    idAlert.className = idAlert.className.replace("alertHidden", "");
+    idAlert.className = idAlert.className + " alertHidden";
+    idInput.className = idInput.className.replace("inputError", "");
     return false;
 }
 
@@ -248,9 +248,9 @@ var validarSexo = function () {
         return true;
     }
     else {
-        sexoAlert.className = sexoAlert.className.replace("alert-hidden", "");
-        sexoAlert.className = sexoAlert.className + " alert-hidden";
-        sexoInput[0].parentElement.className = sexoInput[0].parentElement.className.replace("error-radio", "");
+        sexoAlert.className = sexoAlert.className.replace("alertHidden", "");
+        sexoAlert.className = sexoAlert.className + " alertHidden";
+        sexoInput[0].parentElement.className = sexoInput[0].parentElement.className.replace("errorRadio", "");
         return false;
     }
 }
@@ -284,15 +284,15 @@ var validarTelefono = function () {
     }
     else if (elementNumber.value.length != 8) {
         telefonoAlert.innerText = "Debe tener 8 dígitos."
-        telefonoAlert.className = telefonoAlert.className.replace("alert-hidden", "");
-        telefonoInput.className = telefonoInput.className.replace("input-error", "");
-        telefonoInput.className = telefonoInput.className + " input-error";
+        telefonoAlert.className = telefonoAlert.className.replace("alertHidden", "");
+        telefonoInput.className = telefonoInput.className.replace("inputError", "");
+        telefonoInput.className = telefonoInput.className + " inputError";
         return true;
     }
     else {
-        telefonoAlert.className = telefonoAlert.className.replace("alert-hidden", "");
-        telefonoAlert.className = telefonoAlert.className + " alert-hidden";
-        telefonoInput.className = telefonoInput.className.replace("input-error", "");
+        telefonoAlert.className = telefonoAlert.className.replace("alertHidden", "");
+        telefonoAlert.className = telefonoAlert.className + " alertHidden";
+        telefonoInput.className = telefonoInput.className.replace("inputError", "");
         return false;
     }
 }

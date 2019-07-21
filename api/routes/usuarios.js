@@ -90,7 +90,7 @@ router.post('/registrarUsuario', function (req, res) {
                                     }
                                     else {
                                         if (nuevoUsuario.tipoUsuario === "Adminitrador librería") {
-                                            try{
+                                            try {
                                                 let nuevaLibreria = new Libreria({
                                                     nombreComercial: body.nombreComercial,
                                                     nombreFantasia: body.nombreFantasia,
@@ -103,7 +103,7 @@ router.post('/registrarUsuario', function (req, res) {
                                                 createLibreria = await nuevaLibreria.save();
                                                 createUser = true;
                                                 nuevoUsuario.idLibreria = createLibreria._id;
-                                            }catch (err){
+                                            } catch (err) {
                                                 createUser = false;
                                                 return res.status(400).json({
                                                     success: false,
@@ -111,7 +111,7 @@ router.post('/registrarUsuario', function (req, res) {
                                                     err
                                                 });
                                             }
-                                            
+
                                         }
                                         if (createUser) {
                                             nuevoUsuario.save(
@@ -308,6 +308,35 @@ router.patch('/modificarEstado/:id', function (req, res) {
                 };
             }
             return res.status(200).json({ response });
+        });
+    });
+});
+
+router.patch('/modificarPassword/:id', function (req, res) {
+    Usuario.findById(req.params.id, (err, usuario) => {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'No se pudo cambiar la contraseña del usuario',
+                err
+            });
+        }
+        req.body.cambiarPass = 0;
+        usuario.set(req.body);
+
+        usuario.save((err, usuarioDB) => {
+            if (err){
+                return res.status(400).json({
+                    success: false,
+                    message: 'No se pudo cambiar la contraseña del usuario',
+                    err
+                });
+            }
+
+            return res.status(200).json({
+                success: true,
+                message: "Contraseña modificada"
+            });
         });
     });
 });
