@@ -49,7 +49,8 @@ var obtenerDatosUsuarios = async function () {
     if (!error) {
 
         document.body.className = "loading";
-        var imgResult = await crearImagen();
+        var imgValue = document.getElementById('img');
+        var imgResult = await crearImagen(imgValue);
         if (imgResult.success) {
             var sexoValue;
             for (var i = 0; i < sexoInput.length; i++) {
@@ -102,6 +103,7 @@ var obtenerDatosUsuarios = async function () {
             }
         }
         else {
+            document.body.className = "";
             Swal.fire({
                 type: 'error',
                 title: imgResult.message
