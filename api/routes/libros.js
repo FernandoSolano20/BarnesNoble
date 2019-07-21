@@ -22,6 +22,7 @@ router.post('/registrarLibro', function (req, res) {
         caratula: body.caratula,
         contraportada: body.contraportada,
         precio: body.precio,
+        vendidos: body.vendidos,
         idGenero: body.idGenero,
         idCategoria: body.idCategoria,
         idAutor: body.idAutor
