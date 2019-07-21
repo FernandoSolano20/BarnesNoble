@@ -1,10 +1,6 @@
-var autorSelect = document.getElementById('autor');
 var categoriaSelect = document.getElementById('categoria');
-var libroSelect = document.getElementById('libro');
 
-var listaObtenerAutor = [];
 var listaObtenerCategoria = [];
-var listaObtenerLibro = [];
 
 var crearSectionCategorias = async () => {
 
