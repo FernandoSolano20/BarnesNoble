@@ -4,7 +4,8 @@ const express = require('express'),
     router = express.Router(),
     randomString = require("randomstring"),
     nodeMailer = require("nodemailer"),
-    Usuario = require('../models/usuarios.model');
+    Usuario = require('../models/usuarios.model'),
+    Libreria = require('../models/libreria.model');
 
 const transporter = nodeMailer.createTransport({
     service: 'gmail',
@@ -58,12 +59,9 @@ router.post('/registrarUsuario', function (req, res) {
         idGenero: body.idGenero,
         idLibro: body.idLibro,
         idCategoria: body.idCategoria,
-
-        // /Datos Extra-Libreria/
-        idLibreria: body.idCategoria
-
     });
-
+    let createLibreria;
+    let createUser = true;
     Usuario.findOne({ id: req.body.id }).then(
         function (usuario) {
             if (usuario) {
@@ -83,7 +81,7 @@ router.post('/registrarUsuario', function (req, res) {
                         }
                         else {
                             Usuario.findOne({ telefono: req.body.telefono }).then(
-                                function (usuario) {
+                                async (usuario) => {
                                     if (usuario) {
                                         return res.json({
                                             success: false,
@@ -91,77 +89,102 @@ router.post('/registrarUsuario', function (req, res) {
                                         });
                                     }
                                     else {
-                                        nuevoUsuario.save(
-                                            function (err, usuarioDB) {
-                                                if (err) {
-                                                    return res.status(400).json({
-                                                        success: false,
-                                                        message: 'El usuario no se pudo guardar',
-                                                        err
-                                                    });
-                                                } else {
-                                                    let mailOption = {
-                                                        from: 'grupovalhalla2019@gmail.com',
-                                                        to: nuevoUsuario.correo,
-                                                        subject: 'Bienvenido a Barnes & Noble',
-                                                        html: `<html>
-                                                        <head>
-                                                          <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-                                                          <style>
-                                                           .wrapper{
-                                                          background : #81ecec;
-                                                          font-family: 'Roboto', sans-serif;
-                                                        }
-                                                        .container{
-                                                          margin: 0 auto;
-                                                          background: #fff;
-                                                          width: 500px;
-                                                          text-align: center;
-                                                          padding: 10px;
-                                                        }
-                                                        .boton{
-                                                          background: #ff7675;
-                                                          color: #fff;
-                                                          display: block;
-                                                          padding: 15px;
-                                                          text-decoration: none;
-                                                          width: 50%;
-                                                          margin: 0 auto;
-                                                        }
-                                                        </style>
-                                                        </head>
-                                                        <body class="wrapper">
-                                                          <div class="container">
-                                                            <h1>Bienvenido a Barnes & Noble</h1>
-                                                          <h2>Su biblioteca digital</h2>
-                                                          
-                                                          <p>Saludos ${nuevoUsuario.nombre} ${nuevoUsuario.primerApellido} le agradecemos por escoger utilizar los servicios de Barnes & Noble</p>
-                                                          <p>El correo electrónico asociado es: ${nuevoUsuario.correo}</p>
-                                                          <p>Su contraseña temporal es: ${nuevoUsuario.pass}</p>
-                                                          <p>Para ingresar visite el siguiente<p> 
-                                                            <a href="http://localhost:3000/inicioSesion.html" class="boton">Ingresar a Barnes & Noble </a>
-                                                          </div>
-                                                          
-                                                        </body>
-                                                        
-                                                      </html>`
-                                                    };
-                                                    transporter.sendMail(mailOption, function (error, info) {
-                                                        if (error) {
-                                                            console.log(error);
+                                        if (nuevoUsuario.tipoUsuario === "Adminitrador librería") {
+                                            try{
+                                                let nuevaLibreria = new Libreria({
+                                                    nombreComercial: body.nombreComercial,
+                                                    nombreFantasia: body.nombreFantasia,
+                                                    localizacionLatitud: body.localizacionLatitud,
+                                                    localizacionLongitud: body.localizacionLongitud,
+                                                    idProvincia: body.idProvincia,
+                                                    idCanton: body.idCanton,
+                                                    idDistrito: body.idDistrito
+                                                });
+                                                createLibreria = await nuevaLibreria.save();
+                                                createUser = true;
+                                                nuevoUsuario.idLibreria = createLibreria._id;
+                                            }catch (err){
+                                                createUser = false;
+                                                return res.status(400).json({
+                                                    success: false,
+                                                    message: 'La librería no se pudo guardar',
+                                                    err
+                                                });
+                                            }
+                                            
+                                        }
+                                        if (createUser) {
+                                            nuevoUsuario.save(
+                                                function (err, usuarioDB) {
+                                                    if (err) {
+                                                        return res.status(400).json({
+                                                            success: false,
+                                                            message: 'El usuario no se pudo guardar',
+                                                            err
+                                                        });
+                                                    } else {
+                                                        let mailOption = {
+                                                            from: 'grupovalhalla2019@gmail.com',
+                                                            to: nuevoUsuario.correo,
+                                                            subject: 'Bienvenido a Barnes & Noble',
+                                                            html: `<html>
+                                                            <head>
+                                                              <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+                                                              <style>
+                                                               .wrapper{
+                                                              background : #81ecec;
+                                                              font-family: 'Roboto', sans-serif;
+                                                            }
+                                                            .container{
+                                                              margin: 0 auto;
+                                                              background: #fff;
+                                                              width: 500px;
+                                                              text-align: center;
+                                                              padding: 10px;
+                                                            }
+                                                            .boton{
+                                                              background: #ff7675;
+                                                              color: #fff;
+                                                              display: block;
+                                                              padding: 15px;
+                                                              text-decoration: none;
+                                                              width: 50%;
+                                                              margin: 0 auto;
+                                                            }
+                                                            </style>
+                                                            </head>
+                                                            <body class="wrapper">
+                                                              <div class="container">
+                                                                <h1>Bienvenido a Barnes & Noble</h1>
+                                                              <h2>Su biblioteca digital</h2>
+                                                              
+                                                              <p>Saludos ${nuevoUsuario.nombre} ${nuevoUsuario.primerApellido} le agradecemos por escoger utilizar los servicios de Barnes & Noble</p>
+                                                              <p>El correo electrónico asociado es: ${nuevoUsuario.correo}</p>
+                                                              <p>Su contraseña temporal es: ${nuevoUsuario.pass}</p>
+                                                              <p>Para ingresar visite el siguiente<p> 
+                                                                <a href="http://localhost:3000/inicioSesion.html" class="boton">Ingresar a Barnes & Noble </a>
+                                                              </div>
+                                                              
+                                                            </body>
+                                                            
+                                                          </html>`
+                                                        };
+                                                        transporter.sendMail(mailOption, function (error, info) {
+                                                            if (error) {
+                                                                return res.json({
+                                                                    success: true,
+                                                                    message: `Ocurrio un error al envio del correo, su contraseña es ${nuevoUsuario.pass}`
+                                                                })
+                                                            }
                                                             return res.json({
                                                                 success: true,
-                                                                message: `Ocurrio un error al envio del correo, su contraseña es ${nuevoUsuario.pass}`
+                                                                message: 'El usuario se guardó con éxito, revise su correo eléctronico'
                                                             })
-                                                        }
-                                                        return res.json({
-                                                            success: true,
-                                                            message: 'El usuario se guardó con éxito, revise su correo eléctronico'
-                                                        })
-                                                    });
+                                                        });
+                                                    }
                                                 }
-                                            }
-                                        );
+                                            );
+                                        }
                                     }
                                 }
                             );
