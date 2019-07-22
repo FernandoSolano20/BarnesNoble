@@ -1,3 +1,23 @@
+
+let registrarAutor = (pnombre, pnomArtistico, pnacionalidad, pnacimento, pmuerte, plugarNac, presenna, pestado) => {
+    axios({
+        method: 'post',
+        url: 'http://localhost:4000/api/registrarAutor',
+        responseType: 'json',
+        data: {
+            nombre: pnombre,
+            nombreArtistico: pnomArtistico,
+            nacimiento: pnacimento,
+            nacionalidad: pnacionalidad,
+            muerte: pmuerte,
+            lugarNac: plugarNac,
+            resenna: presenna,
+            estado: pestado
+        }
+    });
+};
+
+
 var obtenerAutores = async () => {
     var response = await fetch('http://localhost:4000/api/autor/listarAutores', {
         method: "GET",
