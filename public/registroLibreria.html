@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Barnes & Noble</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/botones.css">
+    <link rel="stylesheet" href="css/registroFormulario.css">
+    <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
+    <link rel="stylesheet" href="css/loadingBar.css">
+</head>
+
+<body>
+    <div class="loading-bar"></div>
+    <header>
+        <nav class="menuHorizontal">
+            <ul class="list-menu">
+                <li><a href="/"><i class="far fa-home"></i>Inicio</a></li>
+                <li id="logout">
+                    <a href=""><i class="far fa-sign-out-alt"></i>Cerrar Sesión</a>
+                </li>
+                <li><a href="contacto.html"><i class="fal fa-address-book"></i>Contacto</a></li>
+                <li class="link-imagen"><img src="img/logo_barnes-and-noble.png" alt="Logo de Barnes&Noble"></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <form class="formRegistro" name="formulario_registro">
+            <div class="column">
+                <div class="inputGroup radio">
+                    <input type="radio" name="id" id="cedula-input" value="Cédula" checked>
+                    <label for="cedula-input" class="labelRadio">Cédula</label>
+                    <input type="radio" name="id" id="pasaporte-input" value="Pasaporte">
+                    <label for="pasaporte-input" class="labelRadio">Pasaporte</label>
+                    <input type="radio" name="id" id="residente-input" value="Residente">
+                    <label for="residente-input" class="labelRadio">Residente</label>
+                </div>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alert-id">La identificación debe tener 9 dígitos.</span>
+                    <label class="label" for="ID" id="labelID">Cédula:</label>
+                    <input type="text" id="ID" name="Cédula">
+                </div>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alert-nombre1">Digite solo letras.</span>
+                    <label class="label" for="nombre-input">Primer Nombre:</label>
+                    <input type="text" id="nombre-input" name="primer nombre">
+                </div>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alert-nombre2">Digite solo letras.</span>
+                    <label class="label" for="segundo-nombre-input">Segundo Nombre:</label>
+                    <input type="text" id="segundo-nombre-input" name="segundo nombre">
+                </div>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alert-apellido1">Digite solo letras.</span>
+                    <label class="label" for="primer-apellido-input">Primer Apellido:</label>
+                    <input type="text" id="primer-apellido-input" name="primer apellido">
+                </div>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alert-apellido2">Digite solo letras.</span>
+                    <label class="label" for="segundo-apellido-input">Segundo Apellido:</label>
+                    <input type="text" id="segundo-apellido-input" name="segundo apellido">
+                </div>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alert-date">Debe ser menor al día de hoy.</span>
+                    <label class="label" for="nacimiento-input">Fecha de nacimiento:</label>
+                    <input type="date" id="nacimiento-input" name="fecha de nacimiento">
+                </div>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alert-img">Debe ser un archivo png o jpg.</span>
+                    <label class="labelFile">
+                        <i class="fal fa-file-image"></i>
+                        <span class="title">Add File</span>
+                        <input type="file" / id="img">
+                    </label>
+                </div>
+            </div>
+            <div class="column">
+                <div class="inputGroup radio">
+                    <span class="left alertHidden" id="alert-sexo">Seleccione una opción.</span>
+                    <input type="radio" name="sexo" id="hombre" value="Hombre">
+                    <label for="hombre" class="labelRadio">Hombre</label>
+                    <input type="radio" name="sexo" id="mujer" value="Mujer">
+                    <label for="mujer" class="labelRadio">Mujer</label>
+                    <input type="radio" name="sexo" id="otro" value="Otro">
+                    <label for="otro" class="labelRadio">Otro</label>
+                </div>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alert-nombre-comercial">Digite solo letras.</span>
+                    <label class="label" for="nombre-comercial-input">Nombre Comercial:</label>
+                    <input type="text" id="nombre-comercial-input" name="nombre comercial">
+                </div>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alert-nombre-fantasia">Digite solo letras.</span>
+                    <label class="label" for="nombre-fantasia-input">Nombre Fantasía:</label>
+                    <input type="text" id="nombre-fantasia-input" name="nombre fantasia">
+                </div>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alert-correo">El correo no cumple con el formato.</span>
+                    <label class="label" for="correo-input">Correo electrónico:</label>
+                    <input type="email" id="correo-input" name="correo electrónico">
+                </div>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alert-telefono">La teléfono debe tener 8 dígitos.</span>
+                    <label class="label" for="telefono-input">Teléfono:</label>
+                    <input type="number" id="telefono-input" name="telefono">
+                </div>
+                <div class="inputGroup box">
+                    <span class="left alertHidden" id="alert-provincia">Seleccione una opción.</span>
+                    <select name="Provincia" id="provincias">
+                        <option value="">--Seleccione una provincia--</option>
+                    </select>
+                </div>
+                <div class="inputGroup box">
+                    <span class="left alertHidden" id="alert-canton">Seleccione una opción.</span>
+                    <select name="canton" id="cantones">
+                        <option value="">--Seleccione un cantón--</option>
+                    </select>
+                </div>
+                <div class="inputGroup box">
+                    <span class="left alertHidden" id="alert-distrito">Seleccione una opción.</span>
+                    <select name="distrito" id="distritos">
+                        <option value="">--Seleccione un distrito--</option>
+                    </select>
+                </div>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alert-sennas">Campo requerido.</span>
+                    <label class="label" for="sennas-input">Señas:</label>
+                    <input type="text" id="sennas-input" name="señas">
+                </div>
+            </div>
+        </form>
+        <div class="containerMap">
+            <span class="left alertHidden leftMap" id="alert-mapa">Inserte la localización.</span>
+            <div id="floatingPanel">
+                <button onclick="deleteMarkers();" type=button class="material orange">Borrar Marca</button>
+            </div>
+            <div id="map"></div>
+        </div>
+        <div class="crear-contenedor">
+                <button type="button" class="material-blue" id="registrar"><i class="far fa-clipboard-list"></i>Registrar</button>
+            </div>
+    </main>
+
+    </div>
+    <footer>
+        <div class="blockFooter">
+            <div class="logos">
+                <a href="#"><img src="img/barnes_and_noble_logo_png_94486.png" alt="Logo de Barnes&Noble"></a>
+                <a href="#"><img src="img/barnes_and_noble_logo_png_94486.png" alt="Logo Fundacion Book for kids"></a>
+            </div>
+            <div class="menuFooter">
+                <nav>
+                    <ul>
+                        <li> <a href="#">Inicio</a> </li>
+                        <li> <a href="#">Buscar</a> </li>
+                        <li> <a href="#">Los más vendidos</a> </li>
+                        <li> <a href="#">Los mejor calificados</a> </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="redesSociales">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-pinterest"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="copyrights">
+            <h3> ⓒ 2019 Valhalla</h3>
+        </div>
+    </footer>
+    <script src="js/maps/maps.js"></script>
+    <script src="js/imagen/servicioImagen.js"></script>
+    <script src="js/usuarios/servicioUsuario.js"></script>
+    <script src="js/direccion/servicioDireccion.js"></script>
+    <script src="js/direccion/controladorDireccion.js"></script>
+    <script src="js/validaciones/validacionesGenerales.js"></script>
+    <script src="js/usuarios/libreria/controladorLibreria.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKXA3_YJlVwwt1lx60eO0ljRVUKQO3fNY&callback=initMap"
+        async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+</body>
+
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Barnes & Noble</title>
+    <script src="js/validarSesionLibreria.js"></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/listarElementos.css">
+    <link rel="stylesheet" href="css/botones.css">
+    <link rel="stylesheet" href="css/searchBar.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
+
+</head>
+
+<body>
+    <header>
+        <nav class="menuHorizontal">
+            <ul class="list-menu">
+                <li><a href="#" data-menu="mostrar-nav-izq"><i data-menu="mostrar-nav-izq" class="fas fa-bars"></i></a>
+                </li>
+                <li><a href="/"><i class="far fa-home"></i>Inicio</a></li>
+                <li id="logout">
+                    <a href=""><i class="far fa-sign-out-alt"></i>Cerrar Sesión</a>
+                </li>
+                <li><a href="contacto.html"><i class="fal fa-address-book"></i>Contacto</a></li>
+                <li class="link-imagen"><img src="img/logo_barnes-and-noble.png" alt="Logo de Barnes&Noble"></li>
+            </ul>
+        </nav>
+
+        <nav class="menuIzquierdo">
+            <ul class="menu">
+                <li><a href="#">Mi perfil</a></li>
+                <li><a href="#"></a>Mis sucursales</a></li>
+                <li><a href="#">Catálogo de libros</a></li>
+                <li><a href="#">Ofertas</a></li>
+                <li><a href="#">Clubes de lectura</a></li>
+                <li><a href="#"></a></li>
+                <li><a href="#">Librerías</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="subcontenedor">
+            <div class="busqueda">
+                <input type="text" id="input-filtro" name="buscar" placeholder="Buscar...." autocomplete="off"
+                    autocorrect="off">
+                <button type="button" class="buscar"><i class="fa fa-search"></i><span>search</span></button>
+            </div>
+            <div class="crear-contenedor">
+                <button type="button" class="material-blue" data-action="crear" id="crear-elemento"><i
+                        class="far fa-plus-circle"></i>Crear</button>
+            </div>
+        </div>
+        <div class="contenedor-tabla">
+            <table class="tabla" id="tabla-elementos">
+                <thead>
+                    <tr>
+                        <th>Género</th>
+                        <th>Descripción</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                        <th>Activar/Desactivar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div id="modal" class="modal alert">
+            <div class="modal-content">
+                <div class="close" data-close="closeModal">&times;</div>
+                <p id="titulo-modal">Título</p>
+                <div class="alert-img-box" id="cuerpo-modal">
+                    <p class="alert-text" id="texto-modal">Hola.</p>
+                </div>
+                <div class="alert-btn-wrapper">
+                    <button class="alert-btn" id="cancel" data-close="closeModal">Cancelar</button>
+                    <button class="alert-btn primary" id="confirm">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="blockFooter">
+            <div class="logos">
+                <a href="#"><img src="img/barnes_and_noble_logo_png_94486.png" alt="Logo de Barnes&Noble"></a>
+                <a href="#"><img src="img/barnes_and_noble_logo_png_94486.png" alt="Logo Fundacion Book for kids"></a>
+            </div>
+            <div class="copyrights">
+                <h3> ⓒ 2019 Valhalla</h3>
+            </div>
+            <div class="redesSociales">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-pinterest"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+       
+    </footer>
+    <script src="js/cerrarSesion.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="js/genero/servicioGenero.js"></script>
+    <script src="js/genero/controladorGenero.js"></script>
+    <script src="js/genero/modalGenero.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+</body>
+
+</html>
