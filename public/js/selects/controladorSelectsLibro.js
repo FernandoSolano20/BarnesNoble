@@ -1,20 +1,20 @@
-var libroSelect = document.getElementById('libro');
+const libroSelect = document.getElementById('libro');
 
-var listaObtenerLibro = [];
+let listaObtenerLibro = [];
 
-var crearSectionLibros = async () => {
+let crearSectionLibros = async () => {
 
     listaObtenerLibro = await obtenerAutoresFetch();
 
     libroSelect.innerHTML = '';
 
-    var optionElemento = document.createElement('option');
+    let optionElemento = document.createElement('option');
     optionElemento.setAttribute('value', '');
     optionElemento.innerHTML = '--Seleccione un libro--';
     libroSelect.appendChild(optionElemento);
 
-    for (var i =0; i < listaObtenerLibro.length; i++) {
-        var optionElemento = document.createElement('option');
+    for (let i =0; i < listaObtenerLibro.length; i++) {
+        let optionElemento = document.createElement('option');
         optionElemento.setAttribute('value', listaObtenerLibro[i]._id);
         optionElemento.innerHTML = listaObtenerLibro[i].titulo;
         libroSelect.appendChild(optionElemento);

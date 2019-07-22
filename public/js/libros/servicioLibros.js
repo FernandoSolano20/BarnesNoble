@@ -39,13 +39,13 @@ let obtenerLibros = async () => {
     }
 };
 
-var obtenerAutoresFetch = async () => {
-    var response = await fetch('http://localhost:4000/api/libros/listarLibros', {
+let obtenerAutoresFetch = async () => {
+    let response = await fetch('http://localhost:4000/api/libros/listarLibros', {
         method: "GET",
         headers: {
             'Content-Type': 'application/json;charset=UTF-8',
         }
     });
-    var result = await response.json();
+    let result = await response.json();
     return result.listaLibros;
 }

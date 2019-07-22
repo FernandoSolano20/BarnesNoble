@@ -2,8 +2,8 @@ const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
 const regexEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-var validarUsuario = function (usuario) {
-    var error = false;
+let validarUsuario = function (usuario) {
+    let error = false;
 
     if (usuario.correo === '' || !regexEmail.test(usuario.correo)) {
         error = true;
@@ -25,14 +25,14 @@ var validarUsuario = function (usuario) {
     return error;
 }
 
-var obtenerCredenciales = async (event) => {
-    var usuario = {
+let obtenerCredenciales = async (event) => {
+    let usuario = {
         correo: emailInput.value,
         pass: passwordInput.value
     }
 
     if (!validarUsuario(usuario)) {
-        var response = await loginUsuario(usuario);
+        let response = await loginUsuario(usuario);
         if (response.success) {
             sessionStorage.setItem('conectado', response.success);
             sessionStorage.setItem('tipoUsuario', response.usuario.tipoUsuario);
@@ -60,7 +60,7 @@ var obtenerCredenciales = async (event) => {
     }
 };
 
-var olvidePass = async function () {
+let olvidePass = async function () {
     const { value: email } = await Swal.fire({
         title: 'Input email address',
         input: 'email',

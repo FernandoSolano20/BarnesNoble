@@ -1,12 +1,12 @@
 
-var crearImagen = async (img) => {
-    var photo = img.files[0];
-    var formData = new FormData();
+let crearImagen = async (img) => {
+    let photo = img.files[0];
+    let formData = new FormData();
     formData.append('photo', photo);
-    var response = await fetch('http://localhost:4000/api/imagen/crear', {
+    let response = await fetch('http://localhost:4000/api/imagen/crear', {
         method: "POST",
         body: formData
     });
-    var result = await response.json();
+    let result = await response.json();
     return result;
 }

@@ -4,8 +4,8 @@ const regexText = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+(\s*[a-zA-ZñÑáéíóú
 const inputFiltro = document.getElementById('input-filtro');
 let listaCategorias = [];
 
-var crearTabla = async (event) => {
-    var tbody = document.querySelector('#tabla-elementos tbody');
+let crearTabla = async (event) => {
+    let tbody = document.querySelector('#tabla-elementos tbody');
     if (!event) {
         listaCategorias = await obtenerCategoria();
     }
@@ -20,24 +20,24 @@ var crearTabla = async (event) => {
     filaNoDatos();
 };
 
-var categoriaFunciones = async (event) => {
+let categoriaFunciones = async (event) => {
     nombreCategoriaInput = document.getElementById('nombre-categoria');
     descripcionCategoriaInput = document.getElementById('descripcion-categoria');
-    var accion = document.getElementById("modal").getAttribute('data-action');
+    let accion = document.getElementById("modal").getAttribute('data-action');
     if (accion === 'crear') {
-        var categoria = {
+        let categoria = {
             nombre: nombreCategoriaInput.value,
             descripcion: descripcionCategoriaInput.value,
             estado: 1
         }
         if (!validarCampos(categoria)) {
-            var nuevoCategoria = await crearCategoria(categoria);
+            let nuevoCategoria = await crearCategoria(categoria);
             if (nuevoCategoria.success) {
                 agregarFilaCategoria(nuevoCategoria.categoria);
                 sweetAlertSuccess(nuevoCategoria.message);
                 removerForm();
                 agregarListaCategoria(nuevoCategoria.categoria);
-                var noData = document.getElementById("no-data");
+                let noData = document.getElementById("no-data");
                 if(noData){
                     noData.remove();
                 }
@@ -51,18 +51,18 @@ var categoriaFunciones = async (event) => {
         }
     }
     else {
-        var idCategoria = document.getElementById('cuerpo-modal').getAttribute('data-categoria');
+        let idCategoria = document.getElementById('cuerpo-modal').getAttribute('data-categoria');
         if (accion === 'editar') {
-            var categoria = {
+            let categoria = {
                 nombre: nombreCategoriaInput.value,
                 descripcion: descripcionCategoriaInput.value,
                 estado: Number(!document.getElementById(idCategoria).checked)
             }
             if (!validarCampos(categoria)) {
-                var nuevoCategoria = await editarCategoria(categoria, idCategoria);
+                let nuevoCategoria = await editarCategoria(categoria, idCategoria);
                 if (nuevoCategoria.success) {
-                    var trElemento = document.querySelector('[data-id="' + nuevoCategoria.categoria._id + '"]');
-                    var tdElementos = trElemento.querySelectorAll('td');
+                    let trElemento = document.querySelector('[data-id="' + nuevoCategoria.categoria._id + '"]');
+                    let tdElementos = trElemento.querySelectorAll('td');
                     tdElementos[0].innerText = nuevoCategoria.categoria.nombre;
                     tdElementos[1].innerText = nuevoCategoria.categoria.descripcion;
                     sweetAlertSuccess(nuevoCategoria.message);
@@ -77,9 +77,9 @@ var categoriaFunciones = async (event) => {
                 sweetAlertWarning();
             }
         } else if (accion === 'borrar') {
-            var trElemento = document.querySelector('[data-id="' + idCategoria + '"]');
+            let trElemento = document.querySelector('[data-id="' + idCategoria + '"]');
             trElemento.remove();
-            var result = await eliminarCategoria(idCategoria);
+            let result = await eliminarCategoria(idCategoria);
             if (result.success) {
                 sweetAlertSuccess(result.message);
                 removerForm();
@@ -90,10 +90,10 @@ var categoriaFunciones = async (event) => {
                 sweetAlertError(result.message);
             }
         } else if (accion === 'estado') {
-            var categoria = {
+            let categoria = {
                 estado: Number(!document.getElementById(idCategoria).checked)
             };
-            var result = await estadoCategoria(categoria, idCategoria);
+            let result = await estadoCategoria(categoria, idCategoria);
             if (result.success) {
                 sweetAlertSuccess(result.message);
                 removerForm(result.success);
@@ -106,53 +106,53 @@ var categoriaFunciones = async (event) => {
     }
 }
 
-var agregarFilaCategoria = function (categoria) {
-    var tbody = document.querySelector('#tabla-elementos tbody');
+let agregarFilaCategoria = function (categoria) {
+    let tbody = document.querySelector('#tabla-elementos tbody');
     let fila = tbody.insertRow();
     fila.setAttribute('data-id', categoria._id);
     fila.insertCell().innerHTML = categoria.nombre;
     fila.insertCell().innerHTML = categoria.descripcion;
 
-    var editarCelda = fila.insertCell();
-    var editar = document.createElement('i');
+    let editarCelda = fila.insertCell();
+    let editar = document.createElement('i');
     editar.setAttribute('class', 'far fa-edit');
     editar.setAttribute('data-action', 'editar');
     editarCelda.appendChild(editar);
 
-    var eliminarCelda = fila.insertCell();
-    var eliminar = document.createElement('i');
+    let eliminarCelda = fila.insertCell();
+    let eliminar = document.createElement('i');
     eliminar.setAttribute('class', 'fal fa-trash-alt');
     eliminar.setAttribute('data-action', 'borrar');
     eliminarCelda.appendChild(eliminar);
 
-    var estadoCelda = fila.insertCell();
+    let estadoCelda = fila.insertCell();
 
-    var estadoInput = document.createElement('input');
+    let estadoInput = document.createElement('input');
     estadoInput.setAttribute('class', 'switch');
     estadoInput.setAttribute('id', categoria._id);
     estadoInput.setAttribute('type', 'checkbox');
     estadoCelda.appendChild(estadoInput);
     estadoInput.checked = !categoria.estado;
 
-    var estadoLabel = document.createElement('label');
+    let estadoLabel = document.createElement('label');
     estadoLabel.setAttribute('data-action', 'estado');
     estadoLabel.setAttribute('for', categoria._id);
     estadoCelda.appendChild(estadoLabel);
 }
 
-var filaNoDatos = function () {
-    var tbody = document.querySelector('#tabla-elementos tbody');
+let filaNoDatos = function () {
+    let tbody = document.querySelector('#tabla-elementos tbody');
     if (listaCategorias.length === 0 || tbody.childElementCount === 0) {
         let fila = tbody.insertRow();
         fila.setAttribute('id', 'no-data');
-        var celda = fila.insertCell()
+        let celda = fila.insertCell()
         celda.innerHTML = 'No se encontró datos';
         celda.setAttribute('colspan', '6');
     }
 }
 
-var validarCampos = function (categoria) {
-    var error = false;
+let validarCampos = function (categoria) {
+    let error = false;
     if (categoria.nombre === "" || !regexText.test(categoria.nombre)) {
         error = true;
         nombreCategoriaInput.className = nombreCategoriaInput.className.replace("error", "");
@@ -174,14 +174,14 @@ var validarCampos = function (categoria) {
     return error;
 }
 
-var sweetAlertSuccess = function (message) {
+let sweetAlertSuccess = function (message) {
     Swal.fire({
         type: 'success',
         title: message
     });
 }
 
-var sweetAlertWarning = function () {
+let sweetAlertWarning = function () {
     Swal.fire({
         type: 'warning',
         title: 'No se ha enviado su mensaje exitosamente',
@@ -189,15 +189,15 @@ var sweetAlertWarning = function () {
     });
 }
 
-var sweetAlertError = function (message) {
+let sweetAlertError = function (message) {
     Swal.fire({
         type: 'error',
         title: message
     });
 }
 
-var removerListaCategoria = function (idCategoria) {
-    for (var i = 0; i < listaCategorias.length; i++) {
+let removerListaCategoria = function (idCategoria) {
+    for (let i = 0; i < listaCategorias.length; i++) {
         if (listaCategorias[i]._id === idCategoria) {
             listaCategorias.splice(i, 1);
             break;
@@ -205,12 +205,12 @@ var removerListaCategoria = function (idCategoria) {
     }
 }
 
-var agregarListaCategoria = function (categoria) {
+let agregarListaCategoria = function (categoria) {
     listaCategorias.push(categoria);
 }
 
-var editarListaCategoria = function (categoria) {
-    for (var i = 0; i < listaCategorias.length; i++) {
+let editarListaCategoria = function (categoria) {
+    for (let i = 0; i < listaCategorias.length; i++) {
         if (listaCategorias[i]._id === categoria._id) {
             listaCategorias[i].nombre = categoria.nombre;
             listaCategorias[i].descripcion = categoria.descripcion;
