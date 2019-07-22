@@ -10,7 +10,11 @@ const generoRoute = require('./routes/genero');
 const categoriaRoute = require('./routes/categoria');
 const usuario_route = require('./routes/usuarios');
 const autorRoute = require('./routes/autor');
-const librosRoute = require('./routes/libros');
+const librosRoute = require('./routes/libros');//marco aragon
+const librosTipoLibroRoute = require('./routes/librosTipoLibro');//marco aragon
+const ofertasRoute = require('./routes/ofertas');//marco aragon
+
+
 
 const app = express();
 app.use(cors());
@@ -54,4 +58,6 @@ app.use('/api/genero', generoRoute);
 app.use('/api/categoria', categoriaRoute);
 app.use('/api', usuario_route);
 app.use('/api/autor', autorRoute);
-app.use('/api/libros', librosRoute);
+app.use('/api/libros', librosRoute);//marco aragon
+app.use('/api/librosTipoLibro', librosTipoLibroRoute);//marco aragon
+app.use('/api/ofertas', ofertasRoute);//marco aragon
