@@ -19,7 +19,7 @@ router.post('/registrarOferta', function (req, res) {
         idGenero: body.idGenero,
         idCategoria: body.idCategoria,
         idLibro: body.idLibro,
-        idAutor: body.idAutor
+        idAutor: body.idAutorT
 
     });
 

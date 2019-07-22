@@ -1,31 +1,27 @@
-// ARCHIVO ROUTE PARA REGISTRAR LIBROSTipoLibro, MARCO ARAGON
 'use strict'
 const express = require('express'),
     router = express.Router(),
-    librosTipoLibro = require('../models/librosTipoLibro.model');
-
+    tipoLibro = require('../models/tipoLibro.model');
     router.param('_id', function(req, res, next, _id){
     req.body._id= _id;
 
     })
 
-//Definición de la ruta para registrar libros
+    //Definición de la ruta para registrar libros
 
-router.post('/registrarLibrosTipoLibro', function (req, res) {
+router.post('/registrarTipoLibro', function (req, res) {
     let body = req.body;
-    let nuevoLibrosTipoLibro = new librosTipoLibro({
-        idLibro: body.idLibro,
-        idTipoLibro: body.idTipoLibro,
-        stock: body.stock
-
+    let nuevatipoLibro = new tipoLibro({
+        tipo: body.tipo,
+       
     });
 
-    nuevoLibrosTipoLibro.save(
-        function (err, librosTipoLibroDB) {
+    nuevatipoLibro.save(
+        function (err, tipoLibroDB) {
             if (err) {
                 return res.status(400).json({
                     success: false,
-                    msj: 'No se registró el tipo de libro correctamente',
+                    msj: 'No registró el tipo de libro correctamente',
                     err
                 });
 
@@ -39,20 +35,21 @@ router.post('/registrarLibrosTipoLibro', function (req, res) {
     );
 });
 
-router.get('/listarLibrosTipoLibro', function(req, res){
-    LibrosTipoLibro.find(function(err,LibrosTipoLibroBD){
+router.get('/listarTipoLibro', function(req, res){
+    tipoLibro.find(function(err,tipoLibroBD){
         if (err) {
             return res.status(400).json({
                 success: false,
-                msj: 'No se pueden listar los tipos de libros',
+                msj: 'No se pueden listar los tipos',
                 err
             });
         }else{
             return res.json({
                 success: true,
-                listaLibrosTipoLibro: LibrosTipoLibroBD
+                listaTipoLibro: tipoLibroBD
             });
         }
     })
 });
+
 module.exports = router;
