@@ -11,8 +11,7 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/menu.css">
-    <link rel="stylesheet" href="css/listarElementos.css">
-    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/registroFormulario.css">
     <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
 
 </head>
@@ -44,45 +43,61 @@
         </nav>
     </header>
     <main>
-        <div class="subcontenedor">
-            <div class="busqueda">
-                <input type="text" id="input-filtro" name="buscar" placeholder="Buscar...." autocomplete="off"
-                    autocorrect="off">
-                <button type="button" class="buscar"><i class="fa fa-search"></i><span>search</span></button>
+        <form class="formRegistro" name="formularioRegistro">
+            <div class="input-group">
+                <span class="left alert-hidden" id="alert-img">Debe ser un archivo png o jpg.</span>
+                <label class="labelFile">
+                    <i class="fal fa-file-image"></i>
+                    <span class="title">Add File</span>
+                    <input type="file" / id="img">
+                </label>
             </div>
-            <div class="crear-contenedor">
-                <button type="button" class="material-blue" data-action="crear" id="crear-elemento"><i
-                        class="far fa-plus-circle"></i>Crear</button>
+            <div class="inputGroup">
+                <span class="left alertHidden" id="alertNombre"></span>
+                <label>Nombre</label>
+                <input id="nombre" value="nombre" class="inputAutor" type="text" autocomplete="off">
             </div>
-        </div>
-        <div class="contenedor-tabla">
-            <table class="tabla" id="tabla-elementos">
-                <thead>
-                    <tr>
-                        <th>Género</th>
-                        <th>Descripción</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
-                        <th>Activar/Desactivar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
-        <div id="modal" class="modal alert">
-            <div class="modal-content">
-                <div class="close" data-close="closeModal">&times;</div>
-                <p id="titulo-modal">Título</p>
-                <div class="alert-img-box" id="cuerpo-modal">
-                    <p class="alert-text" id="texto-modal">Hola.</p>
-                </div>
-                <div class="alert-btn-wrapper">
-                    <button class="alert-btn" id="cancel" data-close="closeModal">Cancelar</button>
-                    <button class="alert-btn primary" id="confirm">Confirmar</button>
-                </div>
+            <div class="inputGroup">
+                <span class="left alertHidden id="alertNomArtistico"></span>
+                <label>Nombre artístico</label>
+                <input id="nomArtistico" class="inputAutor" type="text" autocomplete="off">
             </div>
-        </div>
+            <div class="inputGroup">
+                <span class="left alertHidden" id="alertNacionalidad"></span>
+                <label>Nacionalidad</label>
+                <input id="nacionalidad" class="inputAutor" type="text" autocomplete="off">
+            </div>
+            <div class="inputGroup">
+                <span class="left alertHidden" id="alertaNac">.</span>
+                <label>Fecha Nacimiento</label>
+                <input id="nacimiento" class="inputAutor" type="date" autocomplete="off">
+            </div>
+            <div class="inputGroup">
+                <span class="left alertHidden" id="alertaMuerte">.</span>
+                <label>Fecha Muerte</label>
+                <input id="muerte" class="inputAutor" type="date" autocomplete="off">
+            </div>
+            <div class="inputGroup">
+                <span class="left alertHidden" id="alertaNac"></span>
+                <label>Lugar de Nacimiento</label>
+                <input id="lugarNac" class="inputAutor" type="text" autocomplete="off">
+            </div>
+            <div class="inputGroup">
+                <span class="left alertHidden" id="alertResenna">.</span>
+                <label>Reseña</label>
+                <textarea id="resenna" class="textarea"></textarea>
+            </div>
+            <div class="inputGroup radio">
+                <span class="left alertHidden" id="alertEstado">Estado</span>
+                <input type="radio" name="estado" id="activar" value="Activar">
+                <label for="activar" class="labelRadio">Activar</label>
+                <input type="radio" name="estado" id="desactivar" value="Mujer">
+                <label for="desactivar" class="labelRadio">Desactivar</label>
+            </div>
+            <div class="crearContenedor">
+                <button type="button" class="material-blue" id="registrar"><i class="far fa-clipboard-list"></i>Registrar</button>
+            </div>
+        </form>
     </main>
     <footer>
         <div class="blockFooter">
@@ -90,15 +105,8 @@
                 <a href="#"><img src="img/barnes_and_noble_logo_png_94486.png" alt="Logo de Barnes&Noble"></a>
                 <a href="#"><img src="img/barnes_and_noble_logo_png_94486.png" alt="Logo Fundacion Book for kids"></a>
             </div>
-            <div class="menuFooter">
-                <nav>
-                    <ul>
-                        <li> <a href="#">Inicio</a> </li>
-                        <li> <a href="#">Buscar</a> </li>
-                        <li> <a href="#">Los más vendidos</a> </li>
-                        <li> <a href="#">Los mejor calificados</a> </li>
-                    </ul>
-                </nav>
+            <div class="copyrights">
+                <h3> ⓒ 2019 Valhalla</h3>
             </div>
             <div class="redesSociales">
                 <a href="#"><i class="fab fa-facebook"></i></a>
@@ -107,15 +115,13 @@
                 <a href="#"><i class="fab fa-twitter"></i></a>
             </div>
         </div>
-        <div class="copyrights">
-            <h3> ⓒ 2019 Valhalla</h3>
-        </div>
+       
     </footer>
     <script src="js/cerrarSesion.js"></script>
     <script src="js/menu.js"></script>
-    <script src="js/genero/servicioGenero.js"></script>
-    <script src="js/genero/controladorGenero.js"></script>
-    <script src="js/genero/modalGenero.js"></script>
+    <script src="js/validaciones/validacionesGenerales.js"></script>
+    <script src="js/autor/controladorRegistarAutor.js"></script>
+    <script src="js/autor/servicioAutor.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </body>
 </html>

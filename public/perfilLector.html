@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Barnes & Noble</title>
-    <script src="js/login/validarSesionLogin.js"></script>
+    <script src="js/validarSesionLector.js"></script>
     <link rel="stylesheet" href="css/reset.css">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/menu.css">
-    <link rel="stylesheet" href="css/formulario.css">
+    
     <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
 
 </head>
@@ -20,44 +20,57 @@
     <header>
         <nav class="menuHorizontal">
             <ul class="list-menu">
-                <li><a href="/"><i class="far fa-home"></i>Inicio</a></li>
-                <li class="submenu">
-                    <a href="inicioSesion.html"><i class="far fa-sign-out-alt"></i>Registrarse</a>
-                    <ul class="children">
-						<li><a href="registroUsuarios.html">Lector <span class="fas fa-users"></span></a></li>
-						<li><a href="registroLibreria.html">Librería <span class="fas fa-users"></span></a></li>
-					</ul>
+                <li><a href="#" data-menu="mostrar-nav-izq"><i data-menu="mostrar-nav-izq" class="fas fa-bars"></i></a>
                 </li>
-                <li class="submenu">
-                    <a href="inicioSesion.html"><i class="far fa-sign-out-alt"></i>Iniciar sesión</a>
+                <li><a href="/"><i class="far fa-home"></i>Inicio</a></li>
+                <li id="logout">
+                    <a href=""><i class="far fa-sign-out-alt"></i>Cerrar Sesión</a>
                 </li>
                 <li><a href="contacto.html"><i class="fal fa-address-book"></i>Contacto</a></li>
                 <li class="link-imagen"><img src="img/logo_barnes-and-noble.png" alt="Logo de Barnes&Noble"></li>
             </ul>
         </nav>
+
+        <nav class="menuIzquierdo">
+            <ul class="menu">
+                <li><a href="#">Mi perfil</a></li>
+                <li><a href="genero.html">Géneros</a></li>
+                <li><a href="categoria.html">Categorías</a></li>
+                <li><a href="#">Reportes</a></li>
+                <li><a href="#">Bitácora</a></li>
+                <li><a href="#">Usuarios</a></li>
+                <li><a href="#">Librerías</a></li>
+            </ul>
+        </nav>
     </header>
     <main>
-        <form class="formulario">
-            <div class="title-form">
-                <img src="img/logo_barnes-and-noble.png" alt="Logo Barnes & Noble">
+        <div class="infoLector">
+            <h2 class="tituloPerfil">Mis Datos Personales</h2>
+            <div>
+                <h3 class="nombreDato">Nombre completo</h3>
+                <p class="dato"><span id="nombre1"></span><span id="nombre2"></span><span id="apellido1"></span><span id="apellido2"></span></p>
             </div>
-            <div class="contenedor-input">
-                <label for="email">Correo electrónico</label>
-                <input id="email" name="email" type="email" autocomplete="off" autocorrect="off">
+            <div>
+                <h3 class="nombreDato">Identificación</h3>
+                <p class="dato"><span id="id"></span></p>
             </div>
-            <div class="contenedor-input">
-                <label for="password">Contraseña</label>
-                <input id="password" name="password" type="password" autocomplete="off" autocorrect="off">
+            <div>
+                <h3 class="nombreDato">Correo</h3>
+                <p class="dato"><span id="correo"></span></p>
             </div>
-            <div class="contenedor-input">
-                <button type="button" id="login">Enviar</button>
+            <div>
+                <h3 class="nombreDato">Fecha Nacimiento</h3>
+                <p class="dato"><span id="fecha"></span></p>
             </div>
-            <div class="contenedor-input">
-                <a href="#" id="olvidar">Olvidar contraseña</a>
-                <a href="registroUsuarios.html">Regitrarse como lector</a>
-                <a href="registroLibreria.html">Regitrarse como librería</a>
+            <div>
+                <h3 class="nombreDato">Teléfono</h3>
+                <p class="dato"><span id="telefono"></span></p>
             </div>
-        </form>
+            <div>
+                <h3 class="nombreDato">Sexo</h3>
+                <p class="dato"><span id="sexo"></span></p>
+            </div>
+        </div>
     </main>
     <footer>
         <div class="blockFooter">
@@ -86,9 +99,11 @@
             <h3> ⓒ 2019 Valhalla</h3>
         </div>
     </footer>
-    <script src="js/login/servicioLogin.js"></script>
-    <script src="js/login/controladorLogin.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/lector/controladorPerfilLector.js"></script>
+    <script src="js/lector/servicioPerfilLector.js"></script>
+    <script src="js/cerrarSesion.js"></script>
+    <script src="js/menu.js"></script>
 </body>
 
 </html>
