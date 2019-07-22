@@ -53,13 +53,17 @@ router.post('/registrarUsuario', function (req, res) {
         provincia: body.provincia,
         canton: body.canton,
         distrito: body.distrito,
-
-        // /Datos Extra-Lector/
-        autor: body.autor,
-        genero: body.genero,
-        libro: body.libro,
-        categoria: body.categoria,
     });
+    // /Datos Extra-Lector/
+    
+    if (body.autor)
+        nuevoUsuario.autor = body.autor
+    if (body.genero)
+        nuevoUsuario.genero = body.genero
+    if (body.libro)
+        nuevoUsuario.libro = body.libro
+    if (body.categoria)
+        nuevoUsuario.categoria = body.categoria
     let createLibreria;
     let createUser = true;
     Usuario.findOne({ id: req.body.id }).then(
