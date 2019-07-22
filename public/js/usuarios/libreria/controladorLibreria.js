@@ -1,66 +1,74 @@
-var idRadios = document.querySelectorAll('[name="id"]');
-var idInput = document.getElementById('ID');
-var idAlert = document.getElementById('alert-id');
+const idRadios = document.querySelectorAll('[name="id"]');
+const idInput = document.getElementById('ID');
+const idAlert = document.getElementById('alert-id');
 
-var nombreInput1 = document.getElementById('nombre-input');
-var nombreAlert1 = document.getElementById('alert-nombre1');
+const nombreInput1 = document.getElementById('nombre-input');
+const nombreAlert1 = document.getElementById('alert-nombre1');
 
-var nombreInput2 = document.getElementById('segundo-nombre-input');
-var nombreAlert2 = document.getElementById('alert-nombre2');
+const nombreInput2 = document.getElementById('segundo-nombre-input');
+const nombreAlert2 = document.getElementById('alert-nombre2');
 
-var apellidoInput1 = document.getElementById('primer-apellido-input');
-var apellidoAlert1 = document.getElementById('alert-apellido1');
+const apellidoInput1 = document.getElementById('primer-apellido-input');
+const apellidoAlert1 = document.getElementById('alert-apellido1');
 
-var apellidoInput2 = document.getElementById('segundo-apellido-input');
-var apellidoAlert2 = document.getElementById('alert-apellido2');
+const apellidoInput2 = document.getElementById('segundo-apellido-input');
+const apellidoAlert2 = document.getElementById('alert-apellido2');
 
-var nacimientoInput = document.getElementById('nacimiento-input');
-var nacimientoAlert = document.getElementById('alert-date');
+const nacimientoInput = document.getElementById('nacimiento-input');
+const nacimientoAlert = document.getElementById('alert-date');
 
-var imgInput = document.getElementById('img');
-var imgAlert = document.getElementById('alert-img');
+const imgInput = document.getElementById('img');
+const imgAlert = document.getElementById('alert-img');
 
-var sexoInput = document.querySelectorAll('[name="sexo"]');
-var sexoAlert = document.getElementById('alert-sexo');
+const sexoInput = document.querySelectorAll('[name="sexo"]');
+const sexoAlert = document.getElementById('alert-sexo');
 
-var nombreComercialInput = document.getElementById('nombre-comercial-input');
-var nombreComercialAlert = document.getElementById('alert-nombre-comercial');
+const nombreComercialInput = document.getElementById('nombre-comercial-input');
+const nombreComercialAlert = document.getElementById('alert-nombre-comercial');
 
-var nombreFantasiaInput = document.getElementById('nombre-fantasia-input');
-var nombreFantasiaAlert = document.getElementById('alert-nombre-fantasia');
+const nombreFantasiaInput = document.getElementById('nombre-fantasia-input');
+const nombreFantasiaAlert = document.getElementById('alert-nombre-fantasia');
 
-var correoInput = document.getElementById('correo-input');
-var correoAlert = document.getElementById('alert-correo');
+const correoInput = document.getElementById('correo-input');
+const correoAlert = document.getElementById('alert-correo');
 
-var telefonoInput = document.getElementById('telefono-input');
-var telefonoAlert = document.getElementById('alert-telefono');
+const telefonoInput = document.getElementById('telefono-input');
+const telefonoAlert = document.getElementById('alert-telefono');
 
-var provinciaAlert = document.getElementById('alert-provincia');
-var cantonAlert = document.getElementById('alert-canton');
-var distritoAlert = document.getElementById('alert-distrito');
+const provinciaAlert = document.getElementById('alert-provincia');
+const cantonAlert = document.getElementById('alert-canton');
+const distritoAlert = document.getElementById('alert-distrito');
 
-var sennasInput = document.getElementById('sennas-input');
-var sennasAlert = document.getElementById('alert-sennas');
+const sennasInput = document.getElementById('sennas-input');
+const sennasAlert = document.getElementById('alert-sennas');
 
-var mapaAlert = document.getElementById('alert-mapa');
+const mapaAlert = document.getElementById('alert-mapa');
 
-var obtenerDatosUsuarios = async function () {
-    var error = validarId() | validarNombre1() | validarNombre2() | validarApellido1() | validarApellido2() | validarNacimiento() | validarFotoPerfil() | validarSexo() | validarNombreComercial() | validarNombreFantasia() | validarCorreo() | validarTelefono() | validarProvincia() | validarCanton() | validarDistrito() | validarSennas() | validarMapa();
+let obtenerDatosUsuarios = async function () {
+    let error = validarId() | validarNombre1() | validarNombre2() | validarApellido1() | validarApellido2() | validarNacimiento() | validarFotoPerfil() | validarSexo() | validarNombreComercial() | validarNombreFantasia() | validarCorreo() | validarTelefono() | validarProvincia() | validarCanton() | validarDistrito() | validarSennas() | validarMapa();
     if (!error) {
 
         document.body.className = "loading";
-        var imgResult = await crearImagen();
+        let imgValue = document.getElementById('img');
+        let imgResult = await crearImagen(imgValue);
         if (imgResult.success) {
-            var sexoValue;
-            for (var i = 0; i < sexoInput.length; i++) {
+            let sexoValue;
+            for (let i = 0; i < sexoInput.length; i++) {
                 if (sexoInput[i].checked) {
                     sexoValue = sexoInput[i].value;
                     break;
                 }
             }
-            var nacimiento = new Date(nacimientoInput.value);
+            let nacimiento = new Date(nacimientoInput.value);
             nacimiento = nacimiento.getFullYear() + '-' + Number(nacimiento.getUTCMonth() + 1) + '-' + nacimiento.getUTCDate()
-            var usuario = {
+            let textProvincia, textCanton, textDistrito;
+            textProvincia = sectionProvincia.value;
+            textProvincia = sectionProvincia.querySelector('[value="'+textProvincia+'"]').innerText;
+            textCanton = sectionCantones.value;
+            textCanton = sectionCantones.querySelector('[value="'+textCanton+'"]').innerText;
+            textDistrito = sectionDistritos.value;
+            textDistrito = sectionDistritos.querySelector('[value="'+textDistrito+'"]').innerText;
+            let usuario = {
                 id: idInput.value,
                 nombre: nombreInput1.value,
                 segundoNombre: nombreInput2.value,
@@ -78,11 +86,11 @@ var obtenerDatosUsuarios = async function () {
                 localizacionLatitud: markers[0].position.lat(),
                 localizacionLongitud: markers[0].position.lng(),
                 estado: 1,
-                idProvincia: sectionProvincia.value,
-                idCanton: sectionCantones.value,
-                idDistrito: sectionDistritos.value
+                provincia: textProvincia,
+                canton: textCanton,
+                distrito: textDistrito
             }
-            var nuevoUsuario = await crearUsuario(usuario);
+            let nuevoUsuario = await crearUsuario(usuario);
             document.body.className = "";
             if (nuevoUsuario.success) {
                 Swal.fire({
@@ -102,6 +110,7 @@ var obtenerDatosUsuarios = async function () {
             }
         }
         else {
+            document.body.className = "";
             Swal.fire({
                 type: 'error',
                 title: imgResult.message
@@ -117,8 +126,8 @@ var obtenerDatosUsuarios = async function () {
     }
 }
 
-var cambiarIdentificacion = function () {
-    for (var i = 0; i < idRadios.length; i++) {
+let cambiarIdentificacion = function () {
+    for (let i = 0; i < idRadios.length; i++) {
         if (idRadios[i].checked) {
             document.getElementById('labelID').innerHTML = idRadios[i].value;
             idInput.name = idRadios[i].value;
@@ -128,8 +137,8 @@ var cambiarIdentificacion = function () {
     validarId();
 }
 
-var validarId = function () {
-    var elementNumber = {
+let validarId = function () {
+    let elementNumber = {
         value: idInput.value,
         alert: idAlert,
         input: idInput
@@ -139,9 +148,9 @@ var validarId = function () {
             return true;
         else if (elementNumber.value.length != 9) {
             idAlert.innerText = "Debe tener 9 dígitos."
-            idAlert.className = idAlert.className.replace("alert-hidden", "");
-            idInput.className = idInput.className.replace("input-error", "");
-            idInput.className = idInput.className + " input-error";
+            idAlert.className = idAlert.className.replace("alertHidden", "");
+            idInput.className = idInput.className.replace("inputError", "");
+            idInput.className = idInput.className + " inputError";
             return true;
         }
     }
@@ -151,16 +160,16 @@ var validarId = function () {
         }
         if (elementNumber.value.length != 44) {
             idAlert.innerText = "Debe tener 44 dígitos."
-            idAlert.className = idAlert.className.replace("alert-hidden", "");
-            idInput.className = idInput.className.replace("input-error", "");
-            idInput.className = idInput.className + " input-error";
+            idAlert.className = idAlert.className.replace("alertHidden", "");
+            idInput.className = idInput.className.replace("inputError", "");
+            idInput.className = idInput.className + " inputError";
             return true;
         }
         else if (!regexPassport.test(elementNumber.value)) {
             idAlert.innerText = "El formato no coincide."
-            idAlert.className = idAlert.className.replace("alert-hidden", "");
-            idInput.className = idInput.className.replace("input-error", "");
-            idInput.className = idInput.className + " input-error";
+            idAlert.className = idAlert.className.replace("alertHidden", "");
+            idInput.className = idInput.className.replace("inputError", "");
+            idInput.className = idInput.className + " inputError";
             return true;
         }
     }
@@ -169,20 +178,20 @@ var validarId = function () {
             return true;
         else if (elementNumber.value.length != 12) {
             idAlert.innerText = "Debe tener 12 dígitos."
-            idAlert.className = idAlert.className.replace("alert-hidden", "");
-            idInput.className = idInput.className.replace("input-error", "");
-            idInput.className = idInput.className + " input-error";
+            idAlert.className = idAlert.className.replace("alertHidden", "");
+            idInput.className = idInput.className.replace("inputError", "");
+            idInput.className = idInput.className + " inputError";
             return true;
         }
     }
-    idAlert.className = idAlert.className.replace("alert-hidden", "");
-    idAlert.className = idAlert.className + " alert-hidden";
-    idInput.className = idInput.className.replace("input-error", "");
+    idAlert.className = idAlert.className.replace("alertHidden", "");
+    idAlert.className = idAlert.className + " alertHidden";
+    idInput.className = idInput.className.replace("inputError", "");
     return false;
 }
 
-var validarNombre1 = function () {
-    var elementText = {
+let validarNombre1 = function () {
+    let elementText = {
         value: nombreInput1.value,
         alert: nombreAlert1,
         input: nombreInput1
@@ -190,8 +199,8 @@ var validarNombre1 = function () {
     return !(noVacio(elementText) && validarTexto(elementText));
 }
 
-var validarNombre2 = function () {
-    var elementText = {
+let validarNombre2 = function () {
+    let elementText = {
         value: nombreInput2.value,
         alert: nombreAlert2,
         input: nombreInput2
@@ -201,8 +210,8 @@ var validarNombre2 = function () {
     return false;
 }
 
-var validarApellido1 = function () {
-    var elementText = {
+let validarApellido1 = function () {
+    let elementText = {
         value: apellidoInput1.value,
         alert: apellidoAlert1,
         input: apellidoInput1
@@ -210,8 +219,8 @@ var validarApellido1 = function () {
     return !(noVacio(elementText) && validarTexto(elementText));
 }
 
-var validarApellido2 = function () {
-    var elementText = {
+let validarApellido2 = function () {
+    let elementText = {
         value: apellidoInput2.value,
         alert: apellidoAlert2,
         input: apellidoInput2
@@ -221,8 +230,8 @@ var validarApellido2 = function () {
     return false;
 }
 
-var validarNacimiento = function () {
-    var elementDate = {
+let validarNacimiento = function () {
+    let elementDate = {
         value: nacimientoInput.value,
         alert: nacimientoAlert,
         input: nacimientoInput
@@ -230,8 +239,8 @@ var validarNacimiento = function () {
     return !(validarFecha(elementDate) && validarFechaMayorActual(elementDate));
 }
 
-var validarFotoPerfil = function () {
-    var elementPicture = {
+let validarFotoPerfil = function () {
+    let elementPicture = {
         value: imgInput.value,
         alert: imgAlert,
         input: imgInput
@@ -239,8 +248,8 @@ var validarFotoPerfil = function () {
     return !(noVacio(elementPicture) && validarFotos(elementPicture));
 }
 
-var validarSexo = function () {
-    var elementCheckbox = {
+let validarSexo = function () {
+    let elementCheckbox = {
         alert: sexoAlert,
         input: sexoInput
     }
@@ -248,15 +257,15 @@ var validarSexo = function () {
         return true;
     }
     else {
-        sexoAlert.className = sexoAlert.className.replace("alert-hidden", "");
-        sexoAlert.className = sexoAlert.className + " alert-hidden";
-        sexoInput[0].parentElement.className = sexoInput[0].parentElement.className.replace("error-radio", "");
+        sexoAlert.className = sexoAlert.className.replace("alertHidden", "");
+        sexoAlert.className = sexoAlert.className + " alertHidden";
+        sexoInput[0].parentElement.className = sexoInput[0].parentElement.className.replace("errorRadio", "");
         return false;
     }
 }
 
-var validarNombreComercial = function () {
-    var elementText = {
+let validarNombreComercial = function () {
+    let elementText = {
         value: nombreComercialInput.value,
         alert: nombreComercialAlert,
         input: nombreComercialInput
@@ -264,8 +273,8 @@ var validarNombreComercial = function () {
     return !(noVacio(elementText) && validarTexto(elementText));
 }
 
-var validarNombreFantasia = function () {
-    var elementText = {
+let validarNombreFantasia = function () {
+    let elementText = {
         value: nombreFantasiaInput.value,
         alert: nombreFantasiaAlert,
         input: nombreFantasiaInput
@@ -273,8 +282,8 @@ var validarNombreFantasia = function () {
     return !(noVacio(elementText) && validarTexto(elementText));
 }
 
-var validarTelefono = function () {
-    var elementNumber = {
+let validarTelefono = function () {
+    let elementNumber = {
         value: telefonoInput.value,
         alert: telefonoAlert,
         input: telefonoInput
@@ -284,21 +293,21 @@ var validarTelefono = function () {
     }
     else if (elementNumber.value.length != 8) {
         telefonoAlert.innerText = "Debe tener 8 dígitos."
-        telefonoAlert.className = telefonoAlert.className.replace("alert-hidden", "");
-        telefonoInput.className = telefonoInput.className.replace("input-error", "");
-        telefonoInput.className = telefonoInput.className + " input-error";
+        telefonoAlert.className = telefonoAlert.className.replace("alertHidden", "");
+        telefonoInput.className = telefonoInput.className.replace("inputError", "");
+        telefonoInput.className = telefonoInput.className + " inputError";
         return true;
     }
     else {
-        telefonoAlert.className = telefonoAlert.className.replace("alert-hidden", "");
-        telefonoAlert.className = telefonoAlert.className + " alert-hidden";
-        telefonoInput.className = telefonoInput.className.replace("input-error", "");
+        telefonoAlert.className = telefonoAlert.className.replace("alertHidden", "");
+        telefonoAlert.className = telefonoAlert.className + " alertHidden";
+        telefonoInput.className = telefonoInput.className.replace("inputError", "");
         return false;
     }
 }
 
-var validarProvincia = function () {
-    var elementSelect = {
+let validarProvincia = function () {
+    let elementSelect = {
         value: sectionProvincia.value,
         alert: provinciaAlert,
         input: sectionProvincia
@@ -306,8 +315,8 @@ var validarProvincia = function () {
     return !(validarSelect(elementSelect));
 }
 
-var validarCanton = function () {
-    var elementSelect = {
+let validarCanton = function () {
+    let elementSelect = {
         value: sectionCantones.value,
         alert: cantonAlert,
         input: sectionCantones
@@ -315,8 +324,8 @@ var validarCanton = function () {
     return !(validarSelect(elementSelect));
 }
 
-var validarDistrito = function () {
-    var elementSelect = {
+let validarDistrito = function () {
+    let elementSelect = {
         value: sectionDistritos.value,
         alert: distritoAlert,
         input: sectionDistritos
@@ -324,8 +333,8 @@ var validarDistrito = function () {
     return !(validarSelect(elementSelect));
 }
 
-var validarSennas = function () {
-    var elementText = {
+let validarSennas = function () {
+    let elementText = {
         value: sennasInput.value,
         alert: sennasAlert,
         input: sennasInput
@@ -340,7 +349,7 @@ apellidoInput1.addEventListener('blur', validarApellido1);
 apellidoInput2.addEventListener('blur', validarApellido2);
 nacimientoInput.addEventListener('blur', validarNacimiento);
 imgInput.addEventListener('change', validarFotoPerfil);
-for (var i = 0; i < sexoInput.length; i++)
+for (let i = 0; i < sexoInput.length; i++)
     sexoInput[i].addEventListener('change', validarSexo);
 nombreComercialInput.addEventListener('blur', validarNombreComercial);
 nombreFantasiaInput.addEventListener('blur', validarNombreFantasia);
@@ -352,5 +361,5 @@ sectionDistritos.addEventListener('change', validarDistrito);
 sennasInput.addEventListener('blur', validarSennas);
 document.getElementById('registrar').addEventListener('click', obtenerDatosUsuarios);
 document.getElementById('map').addEventListener('click', validarMapa);
-for (var i = 0; i < idRadios.length; i++)
+for (let i = 0; i < idRadios.length; i++)
     idRadios[i].addEventListener('change', cambiarIdentificacion);

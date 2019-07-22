@@ -7,9 +7,9 @@ let libreriaSchema = new mongoose.Schema({
     nombreFantasia: {type: String, required: true, unique: false },
     localizacionLatitud: { type: String, required: false, unique: false },
     localizacionLongitud: { type: String, required: false, unique: false },
-    idProvincia: { type: String, required: false, unique: false },
-    idCanton: { type: String, required: false, unique: false },
-    idDistrito: { type: String, required: false, unique: false },
+    provincia: { type: String, required: false, unique: false },
+    canton: { type: String, required: false, unique: false },
+    distrito: { type: String, required: false, unique: false },
 });
 
 
