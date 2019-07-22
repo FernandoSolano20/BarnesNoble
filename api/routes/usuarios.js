@@ -50,15 +50,15 @@ router.post('/registrarUsuario', function (req, res) {
         estado: body.estado,
 
         // /Direccion/
-        idProvincia: body.idProvincia,
-        idCanton: body.idCanton,
-        idDistrito: body.idDistrito,
+        provincia: body.provincia,
+        canton: body.canton,
+        distrito: body.distrito,
 
         // /Datos Extra-Lector/
-        idAutor: body.idAutor,
-        idGenero: body.idGenero,
-        idLibro: body.idLibro,
-        idCategoria: body.idCategoria,
+        autor: body.autor,
+        genero: body.genero,
+        libro: body.libro,
+        categoria: body.categoria,
     });
     let createLibreria;
     let createUser = true;
@@ -96,13 +96,13 @@ router.post('/registrarUsuario', function (req, res) {
                                                     nombreFantasia: body.nombreFantasia,
                                                     localizacionLatitud: body.localizacionLatitud,
                                                     localizacionLongitud: body.localizacionLongitud,
-                                                    idProvincia: body.idProvincia,
-                                                    idCanton: body.idCanton,
-                                                    idDistrito: body.idDistrito
+                                                    provincia: body.provincia,
+                                                    canton: body.canton,
+                                                    distrito: body.distrito
                                                 });
                                                 createLibreria = await nuevaLibreria.save();
                                                 createUser = true;
-                                                nuevoUsuario.idLibreria = createLibreria._id;
+                                                nuevoUsuario.libreria = createLibreria._id;
                                             } catch (err) {
                                                 createUser = false;
                                                 return res.status(400).json({

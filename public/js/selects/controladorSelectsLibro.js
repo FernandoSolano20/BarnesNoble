@@ -4,7 +4,7 @@ let listaObtenerLibro = [];
 
 let crearSectionLibros = async () => {
 
-    listaObtenerLibro = await obtenerAutoresFetch();
+    listaObtenerLibro = await obtenerLibrosFetch();
 
     libroSelect.innerHTML = '';
 
