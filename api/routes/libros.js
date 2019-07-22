@@ -2,10 +2,7 @@
 'use strict'
 const express = require('express'),
     router = express.Router(),
-    Libros = require('../models/libros.model'),
-    Genero = require('../models/genero.model'),
-    Categoria = require('../models/categoria.model'),
-    Autor = require('../models/autor.model');
+    Libros = require('../models/libros.model');
 
 router.param('_id', function (req, res, next, _id) {
     req.body._id = _id;
@@ -68,7 +65,8 @@ router.get('/listarLibros', function (req, res) {
 });
 
 router.get('/buscarLibroID/:id', async (req, res) => {
-    const libro = await Libros.findById(req.params.id, function (err, LibroBD) {
+    
+    return await Libros.findById(req.params.id, function (err, LibroBD) {
         if (err) {
             return res.status(400).json({
                 success: false,
@@ -87,10 +85,27 @@ router.get('/buscarLibroID/:id', async (req, res) => {
         .populate('categoria', 'nombre -_id')
         .populate('autor', 'nombre -_id')
         .select('titulo genero categoria autor');
-    return libro;
+    
 });
 
+router.get('/listarMasVendidos', function (req, res) {
+    let criterioOrden = { vendidos: -1 };
 
+    Libros.find().sort(criterioOrden).limit(25).toArray(function(err, masVendidos) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                msj: 'No se pueden listar los libros',
+                err
+            });
+        } else {
+            return res.json({
+                success: true,
+                listaMasVendidos: masVendidos
+            })
+        }
+    });
+});
 
 
 module.exports = router;
