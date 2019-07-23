@@ -66,3 +66,4 @@ router.get('/listarLibrosSucursal', function (req, res) {
         }
     })
 });
+module.exports = router;

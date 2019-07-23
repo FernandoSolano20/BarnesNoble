@@ -9,8 +9,6 @@ router.param('_id', function (req, res, next, _id) {
 
 })
 
-//DefiniciÃ³n de la ruta para registrar libros
-
 router.post('/registrarLibro', function (req, res) {
     let body = req.body;
     let nuevoLibro = new Libros({
@@ -108,3 +106,5 @@ router.get('/listarMasVendidos', function (req, res) {
         }
     }).limit(25).sort(criterioOrden);
 });
+
+module.exports = router;

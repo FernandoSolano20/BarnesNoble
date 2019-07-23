@@ -18,7 +18,7 @@ const librosTipoLibroRoute = require('./routes/librosTipoLibro');//marco aragon
 const imagenRoute = require('./routes/imagenes');
 const ofertasRoute = require('./routes/ofertas');//marco aragon
 const tipoLibroRoute = require('./routes/tipoLibro');//marco aragon
-const clubLecturaRoute = require('./routes/clubLectura')
+const clubLecturaRoute = require('./routes/clubLectura');
 
 const app = express();
 app.use(fileupload({
@@ -77,4 +77,4 @@ app.use('/api/libros', librosRoute);//marco aragon
 app.use('/api/librosTipoLibro', librosTipoLibroRoute);//marco aragon
 app.use('/api/ofertas', ofertasRoute);//marco aragon
 app.use('/api/tipoLibro', tipoLibroRoute);//marco aragon
-app.use('/api/clubLectura', clubLecturaRoute);
+// app.use('/api/clubLectura', clubLecturaRoute);
