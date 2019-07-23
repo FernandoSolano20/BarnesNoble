@@ -99,7 +99,8 @@ let validarFotos = function (elementos) {
         }
         else {
             elementos.alert.className = elementos.alert.className.replace("alertHidden", "");
-            elementos.alert.className = elementos.alert.className + " alertHidden";
+            //elementos.alert.className = elementos.alert.className + " alertHidden";
+            elementos.alert.innerText = "La imagen esta guardada."
             elementos.input.className = elementos.input.className.replace("inputError", "");
             return true;
         }

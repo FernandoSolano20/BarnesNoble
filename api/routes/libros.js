@@ -9,7 +9,7 @@ router.param('_id', function (req, res, next, _id) {
 
 })
 
-//Definición de la ruta para registrar libros
+//DefiniciÃ³n de la ruta para registrar libros
 
 router.post('/registrarLibro', function (req, res) {
     let body = req.body;
@@ -35,14 +35,14 @@ router.post('/registrarLibro', function (req, res) {
             if (err) {
                 return res.status(400).json({
                     success: false,
-                    msj: 'No registró el libro correctamente',
+                    msj: 'No registrÃ³ el libro correctamente',
                     err
                 });
 
             } else {
                 res.json({
                     success: true,
-                    msj: 'Se registró correctamente el libro'
+                    msj: 'Se registrÃ³ correctamente el libro'
                 });
             }
         }
@@ -72,7 +72,7 @@ router.get('/buscarLibroID/:id', async (req, res) => {
         if (err) {
             return res.status(400).json({
                 success: false,
-                msj: 'No se encontro ningún libro',
+                msj: 'No se encontro ningÃºn libro',
                 err
             });
         }
@@ -108,5 +108,3 @@ router.get('/listarMasVendidos', function (req, res) {
         }
     }).limit(25).sort(criterioOrden);
 });
-
-module.exports = router;

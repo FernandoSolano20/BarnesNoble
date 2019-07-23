@@ -3,6 +3,7 @@
 const mongoose = require('mongoose');
 
 let librosSchema = new mongoose.Schema({
+
     titulo: { type: String, required: true, unique: false },
     edicion: { type: String, required: true, unique: false },
     editorial: { type: String, required: true, unique: false },

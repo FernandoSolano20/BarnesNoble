@@ -1,0 +1,51 @@
+
+  /* Estilos Main */
+  .lectorInfo{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    margin: 14px;
+  }
+
+  .lectorInfo img{
+    width:25%;
+    height: 25%;
+    float: right;
+  }
+
+  .infoNombre{
+    margin-top: 51px;
+    font-size: 41px;
+    max-width: 20px;
+    margin-left: 30px;
+  }
+
+  .stcBusqueda{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    text-align: center;
+    margin: 40px;
+  }
+  
+  .subcontenedor .busqueda input[type="text"] {
+    background: transparent;
+    padding: .3em .5em 0 .5em;
+    border: 1px solid #222;
+    width: 100%;
+    flex-grow: 1;
+    color: #888;
+    line-height: 1.8;
+    font-size: 1.1rem;
+    border-radius: 30px;
+    outline: none;
+}
+.subcontenedor{
+  margin: 25px 40px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 25px;
+}
+
+
+

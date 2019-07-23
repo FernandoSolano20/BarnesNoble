@@ -20,10 +20,26 @@ let mostrar_tabla = async() => {
         fila.insertCell().innerHTML = lista_usuarios[i]['alias'];
         fila.insertCell().innerHTML = lista_usuarios[i]['telefono'];
         fila.insertCell().innerHTML = lista_usuarios[i]['correo'];
-        fila.insertCell().innerHTML = lista_usuarios[i]['nacimiento'];
+        fila.insertCell().innerHTML = formatearFecha(lista_usuarios[i]['nacimiento']);
         fila.insertCell().innerHTML = lista_usuarios[i]['sexo'];
-        fila.insertCell().innerHTML = lista_usuarios[i]['id'];   
+        fila.insertCell().innerHTML = lista_usuarios[i]['id']; 
+        
+        let celda_perfil = fila.insertCell();
+        let boton_perfil = document.createElement('button');
+        boton_perfil.type = 'button';
+        boton_perfil.innerText = 'Ver perfil';
+        boton_perfil.dataset._id = lista_usuarios[i]['_id'];
+        
+        celda_perfil.appendChild(boton_perfil);
+
+        boton_perfil.addEventListener('click', function() {
+            //console.log(this.dataset._id);
+            window.location.href = `ver-perfil-contacto.html?_id=${this.dataset._id}`
+
+        });       
     }
+
+
 
 
 };
@@ -45,15 +61,37 @@ let filtrar_tabla = async() => {
             fila.insertCell().innerHTML = lista_usuarios[i]['alias'];
             fila.insertCell().innerHTML = lista_usuarios[i]['telefono'];
             fila.insertCell().innerHTML = lista_usuarios[i]['correo'];
-            fila.insertCell().innerHTML = lista_usuarios[i]['nacimiento'];
+            fila.insertCell().innerHTML = formatearFecha(lista_usuarios[i]['nacimiento']);
             fila.insertCell().innerHTML = lista_usuarios[i]['sexo'];
             fila.insertCell().innerHTML = lista_usuarios[i]['id']; 
+
+        
+            let celda_perfil = fila.insertCell();
+            let boton_perfil = document.createElement('button');
+            boton_perfil.type = 'button';
+            boton_perfil.innerText = 'Ver perfil';
+            boton_perfil.dataset._id = lista_usuarios[i]['_id'];
+            
+            celda_perfil.appendChild(boton_perfil);
+    
+            boton_perfil.addEventListener('click', function() {
+                //console.log(this.dataset._id);
+                window.location.href = `ver-perfil-contacto.html?_id=${this.dataset._id}`
+    
+            });        
         }
 
     }
 
 
 };
+
+var formatearFecha = function (pfecha) {
+
+    var fechaFormateada = new Date(pfecha);
+
+    return fechaFormateada.getDay() + "-" + (fechaFormateada.getMonth() + 1) + "-" + fechaFormateada.getFullYear();
+}
 
 
 mostrar_tabla();

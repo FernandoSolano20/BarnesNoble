@@ -1,3 +1,13 @@
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.title{
+    font-size: 30px;
+}
+
+/* ESTILOS PARA LISTAR Sucursales de sebastian vallejo */
 .contenedor-tabla .tabla {
     margin: 20px auto;
     border: 2px solid #000;
@@ -26,6 +36,8 @@
 .contenedor-tabla .tabla thead th, .contenedor-tabla .tabla tbody td {
     height: 30px;
     padding: 15px;
+    min-width: 150px;
+    max-width: 160px;
     text-align: center;
     vertical-align: middle;
 }
@@ -78,6 +90,55 @@
     box-shadow: 0 3px 3px #000;
 }
 
+.subcontenedor {
+    margin: 25px 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 25px;
+}
+
+.subcontenedor .busqueda {
+    position: relative;
+    width: 50%;
+    margin: 0px auto;
+}
+
+.subcontenedor .busqueda input[type="text"] {
+    background: transparent;
+    padding: .3em .5em 0 .5em;
+    border: 1px solid #222;
+    width: 100%;
+    flex-grow: 1;
+    color: #888;
+    line-height: 1.8;
+    font-size: 1.1rem;
+    border-radius: 30px;
+    outline: none;
+}
+
+.subcontenedor .busqueda .buscar {
+    background: transparent;
+    line-height: 2;
+    color: #555555;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: .3em .5em 0 .8em;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 30px;
+    border-color: transparent;
+}
+
+.subcontenedor .busqueda .buscar:hover {
+    color: #888;
+    text-shadow: 1px 2px 1px #000;
+}
+
+.subcontenedor .busqueda .buscar span {
+    display: none;
+}
+
 .crear-contenedor {
     margin: 0px auto;
 }
@@ -111,9 +172,8 @@
 
 .crear-contenedor .material-blue i {
     margin-right: 15px;
-} td button {
-    width: 70px;
-    background: #cecece;
-    font-size: 16px;
-    box-shadow: 0px 5px 3px 0px rgba(50, 50, 50, 0.3);
+}
+
+.error{
+    border: 2px solid red !important;
 }

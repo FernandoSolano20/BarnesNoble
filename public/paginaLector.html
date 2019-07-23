@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/principalLector.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
+    <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
+    <link rel="stylesheet" href="css/listarLibros.css">
+    <link rel="stylesheet" href="css/principalLector.css">
+    <link rel="stylesheet" href="css/modal.css">
+
+
+    <title>Lector</title>
+</head>
+
+<body>
+    <header>
+        <nav class="menuHorizontal">
+            <ul class="list-menu">
+                <li><a href="#" data-menu="mostrar-nav-izq"><i data-menu="mostrar-nav-izq" class="fas fa-bars"></i></a>
+                </li>
+                <li><a href="/"><i class="far fa-home"></i>Inicio</a></li>
+                <li id="logout">
+                    <a href=""><i class="far fa-sign-out-alt"></i>Cerrar Sesión</a>
+                </li>
+                <li><a href="contacto.html"><i class="fal fa-address-book"></i>Contacto</a></li>
+                <li class="link-imagen"><img src="img/logo_barnes-and-noble.png" alt="Logo de Barnes&Noble"></li>
+            </ul>
+        </nav>
+
+        <nav class="menuIzquierdo">
+            <ul class="menu">
+                <li><a href="#">Mi perfil</a></li>
+                <li><a href="#">Club de lectura</a></li>
+                <li><a href="#">Intercambios</a></li>
+                <li><a href="#">Mas vendidos</a></li>
+                <li><a href="#">Mejor Calificados</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <main>
+        <section>
+            <div class="lectorInfo">
+                <div>
+                    <img src="img/ava1-01.png" alt="">
+                </div>
+                <div class="infoNombre">
+                    <h1 id="nombre_id">Maria</h1>
+                    <h3 id="alias_id">mar09</h3>
+                </div>
+            </div>
+        </section>
+
+        <section class="stcBusqueda">
+
+            <div class="inputGroup box">
+                <label for="libreria">Libreria</label> <select name="libreria" id="libreria"></select>
+            </div>
+
+            <div class="inputGroup box">
+                <label for="sucursal">Sucursal</label> <select name="sucursal" id="sucursal"></select>
+            </div>
+
+            <div class="subcontenedor buscadorLanding">
+                <div class="busqueda">
+                    <input type="text" id="input-filtro" name="buscar" placeholder="Buscar...." autocomplete="off"
+                        autocorrect="off">
+                    <button type="button" class="buscar"><i class="fa fa-search"></i><span>search</span></button>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="contenedor-tabla">
+                <table class="tabla" id="tablaElementos">
+                    <thead>
+                        <tr>
+                            <th>Carátula</th>
+                            <th>Título</th>
+                            <th>Género</th>
+                            <th>Categoría</th>
+                            <th>Autor</th>
+                            <th>Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <footer>
+            <div class="blockFooter">
+                <div class="logos">
+                    <a href="#"><img src="img/barnes_and_noble_logo_png_94486.png" alt="Logo de Barnes&Noble"></a>
+                    <a href="#"><img src="img/B&NKIFDS-01.png" alt="Logo Fundacion Book for kids"></a>
+                </div>
+                <div class="copyrights">
+                    <h3> ⓒ 2019 Valhalla</h3>
+                </div>
+                <div class="redesSociales">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </footer>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="js/menu.js"></script>
+        <script src="js/sucursal/servicioSucursal.js"></script>
+        <script src="js/selects/controladorSelectLibrerias.js"></script>
+        <script src="js/libros/servicioLibros.js"></script>
+        <script src="js/libros/controladorLibros.js"></script>
+        <script src="js/selects/controladorSelectSucursal.js"></script>
+        <script src="js/cerrarSesion.js"></script>
+</body>
+
+</html>

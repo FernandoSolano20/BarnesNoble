@@ -21,9 +21,16 @@
     <header>
         <nav class="menuHorizontal">
             <ul class="list-menu">
-                <li><a href="/"><i class="far fa-home"></i>Inicio</a></li>
-                <li id="logout">
-                    <a href=""><i class="far fa-sign-out-alt"></i>Cerrar Sesión</a>
+                <li><a href="index.html"><i class="far fa-home"></i>Inicio</a></li>
+                <li class="submenu">
+                    <a href="#"><i class="far fa-sign-out-alt"></i>Registrarse</a>
+                    <ul class="children">
+						<li><a href="registroUsuarios.html">Lector <span class="fas fa-users"></span></a></li>
+						<li><a href="registroLibreria.html">Librería <span class="fas fa-users"></span></a></li>
+					</ul>
+                </li>
+                <li class="submenu">
+                    <a href="inicioSesion.html"><i class="far fa-sign-out-alt"></i>Iniciar sesión</a>
                 </li>
                 <li><a href="contacto.html"><i class="fal fa-address-book"></i>Contacto</a></li>
                 <li class="link-imagen"><img src="img/logo_barnes-and-noble.png" alt="Logo de Barnes&Noble"></li>
@@ -32,6 +39,7 @@
     </header>
 
     <main>
+        <h2>Datos del lector</h2>
         <form class="formRegistro" name="formulario_registro">
             <div class="column">
                 <div class="inputGroup radio">
@@ -163,15 +171,8 @@
                 <a href="#"><img src="img/barnes_and_noble_logo_png_94486.png" alt="Logo de Barnes&Noble"></a>
                 <a href="#"><img src="img/barnes_and_noble_logo_png_94486.png" alt="Logo Fundacion Book for kids"></a>
             </div>
-            <div class="menuFooter">
-                <nav>
-                    <ul>
-                        <li> <a href="#">Inicio</a> </li>
-                        <li> <a href="#">Buscar</a> </li>
-                        <li> <a href="#">Los más vendidos</a> </li>
-                        <li> <a href="#">Los mejor calificados</a> </li>
-                    </ul>
-                </nav>
+            <div class="copyrights">
+                <h3> ⓒ 2019 Valhalla</h3>
             </div>
             <div class="redesSociales">
                 <a href="#"><i class="fab fa-facebook"></i></a>
@@ -180,9 +181,7 @@
                 <a href="#"><i class="fab fa-twitter"></i></a>
             </div>
         </div>
-        <div class="copyrights">
-            <h3> ⓒ 2019 Valhalla</h3>
-        </div>
+       
     </footer>
     <script src="js/maps/maps.js"></script>
     <script src="js/imagen/servicioImagen.js"></script>
