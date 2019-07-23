@@ -13,10 +13,10 @@ let crearSectionPaises = async () => {
     optionElemento.innerHTML = '--Seleccione una pais--';
     sectionPaises.appendChild(optionElemento);
 
-    for (elementos in listaObtenerPaises) {
+    for (var i = 0; i < listaObtenerPaises.length; i++) {
         let optionElemento = document.createElement('option');
-        optionElemento.setAttribute('value', elementos);
-        optionElemento.innerHTML = listaObtenerPaises[elementos];
+        optionElemento.setAttribute('value',listaObtenerPaises[i].name);
+        optionElemento.innerHTML = listaObtenerPaises[i].name;
         sectionPaises.appendChild(optionElemento);
     }
 };
