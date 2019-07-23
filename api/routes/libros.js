@@ -67,7 +67,7 @@ router.get('/listarLibros', function (req, res) {
 });
 
 router.get('/buscarLibroID/:id', async (req, res) => {
-    
+
     return await Libros.findById(req.params.id, function (err, LibroBD) {
         if (err) {
             return res.status(400).json({
@@ -87,29 +87,13 @@ router.get('/buscarLibroID/:id', async (req, res) => {
         .populate('categoria', 'nombre -_id')
         .populate('autor', 'nombre -_id')
         .select('titulo edicion editorial annoEdicion genero categoria autor');
-    
+
 });
 
 router.get('/listarMasVendidos', function (req, res) {
     let criterioOrden = { vendidos: -1 };
-    let criterioOrden = { vendidos: -1 };
-    Libros.find(function(err,LibrosBD){
-        if (err) {
-            return res.status(400).json({
-                success: false,
-                msj: 'No se pueden listar los libros',
-                err
-            });
-        }else{
-            return res.json({
-                success: true,
-                listaLibros: LibrosBD
-            });
-        }
-    }).limit(25).sort(criterioOrden);
-});
-
-    Libros.find().sort(criterioOrden).limit(25).toArray(function(err, masVendidos) {
+    
+    Libros.find(function (err, LibrosBD) {
         if (err) {
             return res.status(400).json({
                 success: false,
@@ -119,11 +103,10 @@ router.get('/listarMasVendidos', function (req, res) {
         } else {
             return res.json({
                 success: true,
-                listaMasVendidos: masVendidos
-            })
+                listaLibros: LibrosBD
+            });
         }
-    });
+    }).limit(25).sort(criterioOrden);
 });
-
 
 module.exports = router;
