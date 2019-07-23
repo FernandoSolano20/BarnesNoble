@@ -1,4 +1,4 @@
-var locacion = function (){
+let locacion = function (){
     if (sessionStorage.tipoUsuario === 'Adminitrador plataforma' && !Number(sessionStorage.cambiarPass)) {
         window.location.href = "http://localhost:3000/indexPlataforma.html";
     }

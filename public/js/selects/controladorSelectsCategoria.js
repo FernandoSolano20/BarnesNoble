@@ -1,20 +1,20 @@
-var categoriaSelect = document.getElementById('categoria');
+const categoriaSelect = document.getElementById('categoria');
 
-var listaObtenerCategoria = [];
+let listaObtenerCategoria = [];
 
-var crearSectionCategorias = async () => {
+let crearSectionCategorias = async () => {
 
     listaObtenerCategoria = await obtenerCategoria();
 
     categoriaSelect.innerHTML = '';
 
-    var optionElemento = document.createElement('option');
+    let optionElemento = document.createElement('option');
     optionElemento.setAttribute('value', '');
     optionElemento.innerHTML = '--Seleccione una categoría--';
     categoriaSelect.appendChild(optionElemento);
 
-    for (var i =0; i < listaObtenerCategoria.length; i++) {
-        var optionElemento = document.createElement('option');
+    for (let i =0; i < listaObtenerCategoria.length; i++) {
+        let optionElemento = document.createElement('option');
         optionElemento.setAttribute('value', listaObtenerCategoria[i]._id);
         optionElemento.innerHTML = listaObtenerCategoria[i].nombre;
         categoriaSelect.appendChild(optionElemento);

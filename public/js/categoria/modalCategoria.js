@@ -1,13 +1,13 @@
-var modal = document.getElementById("modal");
-var tbody = document.querySelector("#tabla-elementos tbody");
+let modal = document.getElementById("modal");
+let tbody = document.querySelector("#tabla-elementos tbody");
 
 function eventosCategoria(event) {
-  var elemento = event.target;
-  var accion = elemento.getAttribute('data-action');
+  let elemento = event.target;
+  let accion = elemento.getAttribute('data-action');
   if (accion) {
-    var tituloModal = document.getElementById('titulo-modal');
-    var cuerpoModal = document.getElementById('cuerpo-modal');
-    var textoModal = document.getElementById('texto-modal');
+    let tituloModal = document.getElementById('titulo-modal');
+    let cuerpoModal = document.getElementById('cuerpo-modal');
+    let textoModal = document.getElementById('texto-modal');
 
     if (accion === 'crear') {
       modal.setAttribute('data-action', 'crear');
@@ -16,8 +16,8 @@ function eventosCategoria(event) {
       crearFomrulario(cuerpoModal);
     }
     else {
-      var trCategoria = elemento.parentElement.parentElement;
-      var categoria = {
+      let trCategoria = elemento.parentElement.parentElement;
+      let categoria = {
         id: trCategoria.getAttribute('data-id'),
         nombre: trCategoria.children[0].innerText,
         descripcion: trCategoria.children[1].innerText
@@ -36,14 +36,14 @@ function eventosCategoria(event) {
         textoModal.innerText = '¿Está seguro que quiere elimnar esta categoría?';
       } else if (accion === 'estado') {
         modal.setAttribute('data-action', 'estado');
-        var checkBoxEstado = document.getElementById(categoria.id);
+        let checkBoxEstado = document.getElementById(categoria.id);
         if (!checkBoxEstado.checked) {
-          tituloModal.innerText = 'Desactivar categoría ' + categoria.nombre;
-          textoModal.innerText = '¿Está seguro que quiere desactivar esta categoría?';
+          tituloModal.innerText = 'Desactilet categoría ' + categoria.nombre;
+          textoModal.innerText = '¿Está seguro que quiere desactilet esta categoría?';
         }
         else {
-          tituloModal.innerText = 'Activar categoría ' + categoria.nombre;
-          textoModal.innerText = '¿Está seguro que quiere activar esta categoría?';
+          tituloModal.innerText = 'Actilet categoría ' + categoria.nombre;
+          textoModal.innerText = '¿Está seguro que quiere actilet esta categoría?';
         }
       }
     }
@@ -52,18 +52,18 @@ function eventosCategoria(event) {
 }
 
 function crearFomrulario(cuerpoModal, categoria) {
-  var form = document.createElement('form');
+  let form = document.createElement('form');
   form.setAttribute('id', 'formulario-modal');
   cuerpoModal.appendChild(form);
 
-  var inputNombre = document.createElement('input');
+  let inputNombre = document.createElement('input');
   inputNombre.setAttribute('type', 'text');
   inputNombre.setAttribute('onkeypress', "return soloLetras(event)");
   inputNombre.setAttribute('placeholder', 'Nombre categoría');
   inputNombre.setAttribute('id', 'nombre-categoria');
   inputNombre.setAttribute('name', 'nombre');
 
-  var inputDescripcion = document.createElement('textarea');
+  let inputDescripcion = document.createElement('textarea');
   inputDescripcion.setAttribute('type', 'text');
   inputDescripcion.setAttribute('placeholder', 'Descripción categoría');
   inputDescripcion.setAttribute('id', 'descripcion-categoria');
@@ -78,32 +78,32 @@ function crearFomrulario(cuerpoModal, categoria) {
   form.appendChild(inputDescripcion);
 }
 
-var removerForm = function () {
+let removerForm = function () {
   modal.style.display = "none";
-  var formEditar = document.getElementById("formulario-modal");
+  let formEditar = document.getElementById("formulario-modal");
   if (formEditar) {
     formEditar.remove();
   }
 }
 
-var closeModal = function (event) {
+let closeModal = function (event) {
   if (event.target == modal || event.target.getAttribute('data-close') === 'closeModal') {
     if (event.target.id !== "confirm" && modal.getAttribute('data-action') === 'estado') {
-      var categoriaId = document.querySelector('#cuerpo-modal').getAttribute('data-categoria');
-      var inputChecked = document.getElementById(categoriaId);
+      let categoriaId = document.querySelector('#cuerpo-modal').getAttribute('data-categoria');
+      let inputChecked = document.getElementById(categoriaId);
       inputChecked.checked = !inputChecked.checked;
     }
     removerForm();
   }
 }
-var soloLetras = function (e) {
+let soloLetras = function (e) {
   key = e.keyCode || e.which;
   tecla = String.fromCharCode(key).toLowerCase();
   letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
   especiales = [];
 
   tecla_especial = false;
-  for (var i in especiales) {
+  for (let i in especiales) {
     if (key == especiales[i]) {
       tecla_especial = true;
       break;

@@ -17,11 +17,17 @@
 </head>
 
 <body>
-    <img src="img/loginImage.jpg" alt="Libreria Imagen" id="imagen-login">
     <header>
         <nav class="menuHorizontal">
             <ul class="list-menu">
                 <li><a href="/"><i class="far fa-home"></i>Inicio</a></li>
+                <li class="submenu">
+                    <a href="inicioSesion.html"><i class="far fa-sign-out-alt"></i>Registrarse</a>
+                    <ul class="children">
+						<li><a href="registroUsuarios.html">Lector <span class="fas fa-users"></span></a></li>
+						<li><a href="registroLibreria.html">Librería <span class="fas fa-users"></span></a></li>
+					</ul>
+                </li>
                 <li class="submenu">
                     <a href="inicioSesion.html"><i class="far fa-sign-out-alt"></i>Iniciar sesión</a>
                 </li>
@@ -45,6 +51,11 @@
             </div>
             <div class="contenedor-input">
                 <button type="button" id="login">Enviar</button>
+            </div>
+            <div class="contenedor-input">
+                <a href="#" id="olvidar">Olvidar contraseña</a>
+                <a href="registroUsuarios.html">Regitrarse como lector</a>
+                <a href="registroLibreria.html">Regitrarse como librería</a>
             </div>
         </form>
     </main>
