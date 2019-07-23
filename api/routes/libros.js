@@ -18,10 +18,12 @@ router.post('/registrarLibro', function (req, res) {
         edicion: body.edicion,
         editorial: body.editorial,
         annoEdicion: body.annoEdicion,
-        isbl: body.isbl,
+        isbn_10: body.isbn_10,
+        isbn_13: body.isbn_13,
         caratula: body.caratula,
         contraportada: body.contraportada,
         precio: body.precio,
+        vendidos: body.vendidos,
         genero: body.genero,
         categoria: body.categoria,
         autor: body.autor
@@ -90,6 +92,22 @@ router.get('/buscarLibroID/:id', async (req, res) => {
 
 router.get('/listarMasVendidos', function (req, res) {
     let criterioOrden = { vendidos: -1 };
+    let criterioOrden = { vendidos: -1 };
+    Libros.find(function(err,LibrosBD){
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                msj: 'No se pueden listar los libros',
+                err
+            });
+        }else{
+            return res.json({
+                success: true,
+                listaLibros: LibrosBD
+            });
+        }
+    }).limit(25).sort(criterioOrden);
+});
 
     Libros.find().sort(criterioOrden).limit(25).toArray(function(err, masVendidos) {
         if (err) {
