@@ -30,3 +30,14 @@ let obtenerDistritos = async (provincia, canton) => {
     let result = await response.json();
     return result;
 }
+
+let obtenerPaises = async () => {
+    let response = await fetch('https://restcountries.eu/rest/v2/all',{
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        }
+    });
+    let result = await response.json();
+    return result;
+}
