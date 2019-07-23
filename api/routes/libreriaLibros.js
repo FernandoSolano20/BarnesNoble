@@ -54,3 +54,7 @@ router.get('/listarlibreriaLibros', function (req, res) {
         }
     })
 });
+
+
+
+module.exports = router;

@@ -14,17 +14,6 @@ router.post('/registrarLibroSucursal', function (req, res) {
     let body = req.body;
     let nuevoLibroSucursal = new librosSucursal({
         titulo: body.titulo,
-        edicion: body.edicion,
-        editorial: body.editorial,
-        annoEdicion: body.annoEdicion,
-        isbn_10: body.isbn_10,
-        isbn_13: body.isbn_13,
-        caratula: body.caratula,
-        contraportada: body.contraportada,
-        precio: body.precio,
-        genero: body.genero,
-        categoria: body.categoria,
-        autor: body.autor,
         libro: body.libro,
         sucursales: body.sucursales,
         cantidad: body.cantidad
@@ -66,3 +55,7 @@ router.get('/listarLibrosSucursal', function (req, res) {
         }
     })
 });
+
+
+
+module.exports = router;
