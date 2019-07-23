@@ -1,20 +1,20 @@
-let crearSectionLibreria = async () => {
+let crearSectionSucursal = async () => {
+    let sucursalSelect = document.getElementById("sucursal");
+    listaObtenerSucursal = await obtenerSucursales();
 
-    listaObtenerLibreria = await obtenerLibrerias();
-
-    libreriaSelect.innerHTML = '';
+    sucursalSelect.innerHTML = '';
 
     let optionElemento = document.createElement('option');
     optionElemento.setAttribute('value', '');
-    optionElemento.innerHTML = '--Seleccione una libreria--';
-    libreriaSelect.appendChild(optionElemento);
+    optionElemento.innerHTML = '--Seleccione una sucursal--';
+    sucursalSelect.appendChild(optionElemento);
 
-    for (let i =0; i < listaObtenerLibreria.length; i++) {
+    for (let i =0; i < listaObtenerSucursal.length; i++) {
         let optionElemento = document.createElement('option');
-        optionElemento.setAttribute('value', listaObtenerLibreria[i]._id);
-        optionElemento.innerHTML = listaObtenerLibreria[i].nombre;
-        autorSelect.appendChild(optionElemento);
+        optionElemento.setAttribute('value', listaObtenerSucursal[i]._id);
+        optionElemento.innerHTML = listaObtenerSucursal[i].nombre;
+        sucursalSelect.appendChild(optionElemento);
     }
 };
 
-crearSectionLibreria();
+crearSectionSucursal();
