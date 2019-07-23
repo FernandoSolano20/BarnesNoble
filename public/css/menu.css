@@ -262,3 +262,7 @@ footer {
 .error{
   border: 2px solid red !important;
 }
+
+.fa-users{
+  float: right;
+}
