@@ -50,16 +50,20 @@ router.post('/registrarUsuario', function (req, res) {
         estado: body.estado,
 
         // /Direccion/
-        idProvincia: body.idProvincia,
-        idCanton: body.idCanton,
-        idDistrito: body.idDistrito,
-
-        // /Datos Extra-Lector/
-        idAutor: body.idAutor,
-        idGenero: body.idGenero,
-        idLibro: body.idLibro,
-        idCategoria: body.idCategoria,
+        provincia: body.provincia,
+        canton: body.canton,
+        distrito: body.distrito,
     });
+    // /Datos Extra-Lector/
+    
+    if (body.autor)
+        nuevoUsuario.autor = body.autor
+    if (body.genero)
+        nuevoUsuario.genero = body.genero
+    if (body.libro)
+        nuevoUsuario.libro = body.libro
+    if (body.categoria)
+        nuevoUsuario.categoria = body.categoria
     let createLibreria;
     let createUser = true;
     Usuario.findOne({ id: req.body.id }).then(
@@ -96,13 +100,13 @@ router.post('/registrarUsuario', function (req, res) {
                                                     nombreFantasia: body.nombreFantasia,
                                                     localizacionLatitud: body.localizacionLatitud,
                                                     localizacionLongitud: body.localizacionLongitud,
-                                                    idProvincia: body.idProvincia,
-                                                    idCanton: body.idCanton,
-                                                    idDistrito: body.idDistrito
+                                                    provincia: body.provincia,
+                                                    canton: body.canton,
+                                                    distrito: body.distrito
                                                 });
                                                 createLibreria = await nuevaLibreria.save();
                                                 createUser = true;
-                                                nuevoUsuario.idLibreria = createLibreria._id;
+                                                nuevoUsuario.libreria = createLibreria._id;
                                             } catch (err) {
                                                 createUser = false;
                                                 return res.status(400).json({
@@ -325,7 +329,7 @@ router.patch('/modificarPassword/:id', function (req, res) {
         usuario.set(req.body);
 
         usuario.save((err, usuarioDB) => {
-            if (err){
+            if (err) {
                 return res.status(400).json({
                     success: false,
                     message: 'No se pudo cambiar la contraseña del usuario',
@@ -339,6 +343,100 @@ router.patch('/modificarPassword/:id', function (req, res) {
             });
         });
     });
+});
+
+router.patch('/olvidarPass/:correo', function (req, res) {
+    Usuario.findOne({ correo: req.params.correo }).then(
+        function (usuario) {
+            if (usuario) {
+                let randomPass = randomString.generate({
+                    length: 3,
+                    charset: 'numeric'
+                });
+                randomPass += randomString.generate({
+                    length: 3,
+                    charset: 'alphabetic'
+                });
+                req.body.pass = randomPass;
+                req.body.cambiarPass = 1;
+                usuario.set(req.body);
+                usuario.save((err, usuarioDB) => {
+                    if (err) {
+                        return res.status(400).json({
+                            success: false,
+                            message: 'No se pudo cambiar la contraseña del usuario',
+                            err
+                        });
+                    }
+
+                    let mailOption = {
+                        from: 'grupovalhalla2019@gmail.com',
+                        to: usuarioDB.correo,
+                        subject: 'Bienvenido a Barnes & Noble',
+                        html: `<html>
+                        <head>
+                          <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+                          <style>
+                           .wrapper{
+                          background : #81ecec;
+                          font-family: 'Roboto', sans-serif;
+                        }
+                        .container{
+                          margin: 0 auto;
+                          background: #fff;
+                          width: 500px;
+                          text-align: center;
+                          padding: 10px;
+                        }
+                        .boton{
+                          background: #ff7675;
+                          color: #fff;
+                          display: block;
+                          padding: 15px;
+                          text-decoration: none;
+                          width: 50%;
+                          margin: 0 auto;
+                        }
+                        </style>
+                        </head>
+                        <body class="wrapper">
+                          <div class="container">
+                            <h1>Cambio de contraseña en Barnes & Noble</h1>
+                          <h2>Su biblioteca digital</h2>
+                          
+                          <p>Saludos ${usuarioDB.nombre} ${usuarioDB.primerApellido}</p>
+                          <p>Se ha solicitado el cambio de contraseña de su cuenta</p>
+                          <p>El correo electrónico asociado es: ${usuarioDB.correo}</p>
+                          <p>Su contraseña temporal es: ${randomPass}</p>
+                          <p>Para ingresar visite el siguiente<p> 
+                            <a href="http://localhost:3000/inicioSesion.html" class="boton">Ingresar a Barnes & Noble </a>
+                          </div>
+                          
+                        </body>
+                        
+                      </html>`
+                    };
+                    transporter.sendMail(mailOption, function (error, info) {
+                        if (error) {
+                            return res.json({
+                                success: true,
+                                message: `Ocurrio un error al envio del correo, contacte con el administrador de la plataforma`
+                            })
+                        }
+                        return res.json({
+                            success: true,
+                            message: 'Se ha enviado un correo con la nueva contraseña'
+                        })
+                    });
+                });
+            } else {
+                res.json({
+                    success: false,
+                    message: 'El usuario no existe'
+                });
+            }
+        }
+    );
 });
 
 module.exports = router;

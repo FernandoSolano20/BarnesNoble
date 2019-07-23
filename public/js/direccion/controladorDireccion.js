@@ -1,39 +1,39 @@
 const sectionProvincia = document.getElementById('provincias');
 const sectionCantones = document.getElementById('cantones');
 const sectionDistritos = document.getElementById('distritos');
-var listaObtenerProvincias = [];
-var listaObtenerCantones = [];
-var listaObtenerDistritos = [];
+let listaObtenerProvincias = [];
+let listaObtenerCantones = [];
+let listaObtenerDistritos = [];
 
-var crearSectionProvincias = async () => {
+let crearSectionProvincias = async () => {
 
     listaObtenerProvincias = await obtenerProvincias();
 
-    var sectionProvincias = document.getElementById('provincias');
+    let sectionProvincias = document.getElementById('provincias');
     sectionProvincias.innerHTML = '';
 
-    var optionElemento = document.createElement('option');
+    let optionElemento = document.createElement('option');
     optionElemento.setAttribute('value', '');
     optionElemento.innerHTML = '--Seleccione una provincia--';
     sectionProvincias.appendChild(optionElemento);
 
     for (elementos in listaObtenerProvincias) {
-        var optionElemento = document.createElement('option');
+        let optionElemento = document.createElement('option');
         optionElemento.setAttribute('value', elementos);
         optionElemento.innerHTML = listaObtenerProvincias[elementos];
         sectionProvincias.appendChild(optionElemento);
     }
 };
 
-var crearSectionCantones = async () => {
+let crearSectionCantones = async () => {
 
-    var provincia = sectionProvincia.value;
+    let provincia = sectionProvincia.value;
     sectionCantones.innerHTML = '';
     sectionDistritos.innerHTML = '';
 
     listaObtenerCantones = await obtenerCantones(provincia);
 
-    var optionElemento = document.createElement('option');
+    let optionElemento = document.createElement('option');
     optionElemento.setAttribute('value', '');
     optionElemento.innerHTML = '--Seleccione un canton--';
     sectionCantones.appendChild(optionElemento);
@@ -43,27 +43,27 @@ var crearSectionCantones = async () => {
     sectionDistritos.appendChild(optionElemento);
 
     for (elementos in listaObtenerCantones) {
-        var optionElemento = document.createElement('option');
+        let optionElemento = document.createElement('option');
         optionElemento.setAttribute('value', elementos);
         optionElemento.innerHTML = listaObtenerCantones[elementos];
         sectionCantones.appendChild(optionElemento);
     }
 };
 
-var crearSectionDistritos = async () => {
+let crearSectionDistritos = async () => {
 
-    var provincia = sectionProvincia.value;
-    var canton = sectionCantones.value;
+    let provincia = sectionProvincia.value;
+    let canton = sectionCantones.value;
     sectionDistritos.innerHTML = '';
     listaObtenerDistrito = await obtenerDistritos(provincia, canton);
 
-    var optionElemento = document.createElement('option');
+    let optionElemento = document.createElement('option');
     optionElemento.setAttribute('value', '');
     optionElemento.innerHTML = '--Seleccione un distrito--';
     sectionDistritos.appendChild(optionElemento);
 
     for (elementos in listaObtenerDistrito) {
-        var optionElemento = document.createElement('option');
+        let optionElemento = document.createElement('option');
         optionElemento.setAttribute('value', elementos);
         optionElemento.innerHTML = listaObtenerDistrito[elementos];
         sectionDistritos.appendChild(optionElemento);
