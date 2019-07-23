@@ -4,10 +4,10 @@ const express = require('express'),
     router = express.Router(),
     Libros = require('../models/libros.model');
 
-    router.param('_id', function(req, res, next, _id){
-    req.body._id= _id;
+router.param('_id', function (req, res, next, _id) {
+    req.body._id = _id;
 
-    })
+})
 
 //Definición de la ruta para registrar libros
 
@@ -24,9 +24,9 @@ router.post('/registrarLibro', function (req, res) {
         contraportada: body.contraportada,
         precio: body.precio,
         vendidos: body.vendidos,
-        idGenero: body.idGenero,
-        idCategoria: body.idCategoria,
-        idAutor: body.idAutor
+        genero: body.genero,
+        categoria: body.categoria,
+        autor: body.autor
 
     });
 
@@ -49,15 +49,15 @@ router.post('/registrarLibro', function (req, res) {
     );
 });
 
-router.get('/listarLibros', function(req, res){
-    Libros.find(function(err,LibrosBD){
+router.get('/listarLibros', function (req, res) {
+    Libros.find(function (err, LibrosBD) {
         if (err) {
             return res.status(400).json({
                 success: false,
                 msj: 'No se pueden listar los libros',
                 err
             });
-        }else{
+        } else {
             return res.json({
                 success: true,
                 listaLibros: LibrosBD
@@ -66,25 +66,32 @@ router.get('/listarLibros', function(req, res){
     })
 });
 
-router.get('/buscarLibroID/:_id', function(req, res){
-    Libros.findById(req.body._id, function(err,LibrosBD){
+router.get('/buscarLibroID/:id', async (req, res) => {
+    
+    return await Libros.findById(req.params.id, function (err, LibroBD) {
         if (err) {
             return res.status(400).json({
                 success: false,
-                msj: 'No se encontro ningún contacto con ese _id',
+                msj: 'No se encontro ningún libro',
                 err
             });
-        }else{
+        }
+        else {
             return res.json({
                 success: true,
-                Libro: LibrosBD
+                listaLibros: LibroBD
             });
         }
     })
+        .populate('genero', 'nombre -_id')
+        .populate('categoria', 'nombre -_id')
+        .populate('autor', 'nombre -_id')
+        .select('titulo genero categoria autor');
+    
 });
 
-router.get('/listarLibrosMasVendidos', function(req, res){
-    
+router.get('/listarMasVendidos', function (req, res) {
+    let criterioOrden = { vendidos: -1 };
     let criterioOrden = { vendidos: -1 };
     Libros.find(function(err,LibrosBD){
         if (err) {
@@ -102,6 +109,21 @@ router.get('/listarLibrosMasVendidos', function(req, res){
     }).limit(25).sort(criterioOrden);
 });
 
+    Libros.find().sort(criterioOrden).limit(25).toArray(function(err, masVendidos) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                msj: 'No se pueden listar los libros',
+                err
+            });
+        } else {
+            return res.json({
+                success: true,
+                listaMasVendidos: masVendidos
+            })
+        }
+    });
+});
 
 
 module.exports = router;

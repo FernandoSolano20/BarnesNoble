@@ -61,6 +61,13 @@ let obtenerDatosUsuarios = async function () {
             }
             let nacimiento = new Date(nacimientoInput.value);
             nacimiento = nacimiento.getFullYear() + '-' + Number(nacimiento.getUTCMonth() + 1) + '-' + nacimiento.getUTCDate()
+            let textProvincia, textCanton, textDistrito;
+            textProvincia = sectionProvincia.value;
+            textProvincia = sectionProvincia.querySelector('[value="'+textProvincia+'"]').innerText;
+            textCanton = sectionCantones.value;
+            textCanton = sectionCantones.querySelector('[value="'+textCanton+'"]').innerText;
+            textDistrito = sectionDistritos.value;
+            textDistrito = sectionDistritos.querySelector('[value="'+textDistrito+'"]').innerText;
             let usuario = {
                 id: idInput.value,
                 nombre: nombreInput1.value,
@@ -79,9 +86,9 @@ let obtenerDatosUsuarios = async function () {
                 localizacionLatitud: markers[0].position.lat(),
                 localizacionLongitud: markers[0].position.lng(),
                 estado: 1,
-                idProvincia: sectionProvincia.value,
-                idCanton: sectionCantones.value,
-                idDistrito: sectionDistritos.value
+                provincia: textProvincia,
+                canton: textCanton,
+                distrito: textDistrito
             }
             let nuevoUsuario = await crearUsuario(usuario);
             document.body.className = "";
