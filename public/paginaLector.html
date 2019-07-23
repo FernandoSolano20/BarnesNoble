@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
     <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
     <link rel="stylesheet" href="css/listarLibros.css">
+    <link rel="stylesheet" href="css/principalLector.css">
     <link rel="stylesheet" href="css/modal.css">
 
 
@@ -60,7 +61,7 @@
         <section class="stcBusqueda">
 
             <div class="inputGroup box">
-               <label for="libreria">Libreria</label> <select name="libreria" id="libreria"></select>
+                <label for="libreria">Libreria</label> <select name="libreria" id="libreria"></select>
             </div>
 
             <div class="inputGroup box">
@@ -84,6 +85,9 @@
                             <th>Carátula</th>
                             <th>Título</th>
                             <th>Género</th>
+                            <th>Categoría</th>
+                            <th>Autor</th>
+                            <th>Precio</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -110,13 +114,12 @@
             </div>
         </footer>
 
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="js/menu.js"></script>
-        <script src="js/selectsLibreria/controladorLibreria.js"></script>
-        <script src="js/selectsLibreria/servicioLibreriasySucursal.js"></script>
-        <script src="js/libros/controladorLibros.js"></script>
+        <script src="js/selects/controladorSelectLibrerias.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="js/libros/servicioLibros.js"></script>
-          <script src="js/cerrarSesion.js"></script>
+        <script src="js/libros/controladorLibros.js"></script>
+        <script src="js/cerrarSesion.js"></script>
 </body>
 
 </html>

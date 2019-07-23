@@ -21,9 +21,16 @@
     <header>
         <nav class="menuHorizontal">
             <ul class="list-menu">
-                <li><a href="/"><i class="far fa-home"></i>Inicio</a></li>
-                <li id="logout">
-                    <a href=""><i class="far fa-sign-out-alt"></i>Cerrar Sesión</a>
+                <li><a href="index.html"><i class="far fa-home"></i>Inicio</a></li>
+                <li class="submenu">
+                    <a href="#"><i class="far fa-sign-out-alt"></i>Registrarse</a>
+                    <ul class="children">
+						<li><a href="registroUsuarios.html">Lector <span class="fas fa-users"></span></a></li>
+						<li><a href="registroLibreria.html">Librería <span class="fas fa-users"></span></a></li>
+					</ul>
+                </li>
+                <li class="submenu">
+                    <a href="inicioSesion.html"><i class="far fa-sign-out-alt"></i>Iniciar sesión</a>
                 </li>
                 <li><a href="contacto.html"><i class="fal fa-address-book"></i>Contacto</a></li>
                 <li class="link-imagen"><img src="img/logo_barnes-and-noble.png" alt="Logo de Barnes&Noble"></li>
@@ -32,6 +39,7 @@
     </header>
 
     <main>
+        <h2>Datos del lector</h2>
         <form class="formRegistro" name="formulario_registro">
             <div class="column">
                 <div class="inputGroup radio">
