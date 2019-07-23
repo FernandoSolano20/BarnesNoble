@@ -79,14 +79,14 @@ router.get('/buscarLibroID/:id', async (req, res) => {
         else {
             return res.json({
                 success: true,
-                listaLibros: LibroBD
+                listaLibro: LibroBD
             });
         }
     })
         .populate('genero', 'nombre -_id')
         .populate('categoria', 'nombre -_id')
         .populate('autor', 'nombre -_id')
-        .select('titulo edicion editorial annoEdicion genero categoria autor');
+        .select('titulo edicion editorial annoEdicion isbn_10 isbn_13 caratula contraportada precio vendidos genero categoria autor');
 
 });
 

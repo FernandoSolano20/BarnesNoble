@@ -6,15 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Barnes & Noble</title>
-    <script src="js/validarSesionLibreria.js"></script>
+    <script src="js/validarSesionLector.js"></script>
     <link rel="stylesheet" href="css/reset.css">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/menu.css">
-    <link rel="stylesheet" href="css/listarElementos.css">
-    <link rel="stylesheet" href="css/botones.css">
-    <link rel="stylesheet" href="css/searchBar.css">
-    <link rel="stylesheet" href="css/modal.css">
     <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
 
 </head>
@@ -47,45 +43,18 @@
         </nav>
     </header>
     <main>
-        <div class="subcontenedor">
-            <div class="busqueda">
-                <input type="text" id="input-filtro" name="buscar" placeholder="Buscar...." autocomplete="off"
-                    autocorrect="off">
-                <button type="button" class="buscar"><i class="fa fa-search"></i><span>search</span></button>
-            </div>
-            <div class="crear-contenedor">
-                <button type="button" class="material-blue" data-action="crear" id="crear-elemento"><i
-                        class="far fa-plus-circle"></i>Crear</button>
-            </div>
-        </div>
-        <div class="contenedor-tabla">
-            <table class="tabla" id="tabla-elementos">
-                <thead>
-                    <tr>
-                        <th>Género</th>
-                        <th>Descripción</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
-                        <th>Activar/Desactivar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
-        <div id="modal" class="modal alert">
-            <div class="modal-content">
-                <div class="close" data-close="closeModal">&times;</div>
-                <p id="titulo-modal">Título</p>
-                <div class="alert-img-box" id="cuerpo-modal">
-                    <p class="alert-text" id="texto-modal">Hola.</p>
-                </div>
-                <div class="alert-btn-wrapper">
-                    <button class="alert-btn" id="cancel" data-close="closeModal">Cancelar</button>
-                    <button class="alert-btn primary" id="confirm">Confirmar</button>
-                </div>
-            </div>
-        </div>
+        <p id="titulo"></p>
+        <img src="" id='caratula'>
+        <img src="" id='contraportada'>
+        <p id="autor"></p>
+        <p id="annoEdicion"></p>
+        <p id="categoria"></p>
+        <p id="genero"></p>
+        <p id="edicion"></p>
+        <p id="editorial"></p>
+        <p id="isbn10"></p>
+        <p id="isbn13"></p>
+        <p id="precio"></p>
     </main>
     <footer>
         <div class="blockFooter">
@@ -107,9 +76,8 @@
     </footer>
     <script src="js/cerrarSesion.js"></script>
     <script src="js/menu.js"></script>
-    <script src="js/genero/servicioGenero.js"></script>
-    <script src="js/genero/controladorGenero.js"></script>
-    <script src="js/genero/modalGenero.js"></script>
+    <script src="js/libros/servicioLibros.js"></script>
+    <script src="js/libros/controladorPerfilLibro.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </body>
 
