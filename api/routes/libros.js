@@ -84,7 +84,7 @@ router.get('/buscarLibroID/:id', async (req, res) => {
         .populate('genero', 'nombre -_id')
         .populate('categoria', 'nombre -_id')
         .populate('autor', 'nombre -_id')
-        .select('titulo genero categoria autor');
+        .select('titulo edicion editorial annoEdicion genero categoria autor');
     
 });
 
