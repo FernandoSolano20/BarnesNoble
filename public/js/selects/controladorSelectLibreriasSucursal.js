@@ -19,7 +19,7 @@ let crearSectionLibreria = async () => {
     for (let i =0; i < listaObtenerLibreria.length; i++) {
         let optionElemento = document.createElement('option');
         optionElemento.setAttribute('value', listaObtenerLibreria[i]._id);
-        optionElemento.innerHTML = listaObtenerLibreria[i].nombre;
+        optionElemento.innerHTML = listaObtenerLibreria[i].nombreFantasia;
         libreriaSelect.appendChild(optionElemento);
 
     }

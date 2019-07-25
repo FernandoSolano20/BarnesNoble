@@ -1,18 +1,17 @@
-
 'use strict';
 
-let obtenerLibrerias = async () => {
-    try {
-        const response = axios({
+let obtenerLibrerias  = async () => {
+    try{ 
+        //Fetch data from an url endpoint:
+        const response = await axios({
             method: 'get',
-            url: 'http://localhost:4000/api/',
-            responseType: 'json'
+            url: 'http://localhost:4000/api/listarLibrerias',  
+            responseType: 'json'   
         });
-
         const result = await response;
-        return result.data.listaLibros;
-
-    } catch (error) {
+        return result.data.listaLibrerias;
+    }catch (error){
         console.log(error);
-    }
+    } 
 };
+
