@@ -109,9 +109,8 @@ router.get('/listarMasVendidos', function (req, res) {
 });
 
 
-router.get('/nombre/:id', async (req, res) => {
-    
-    return await Libros.findById({nombre: req.params.nombre}, function (err, LibroBD) {
+router.get('/titulo/:titulo', async (req, res) => {
+    return await Libros.find({ "titulo": { "$regex": req.params.titulo, "$options": "i" } }, function (err, LibroBD) {
         if (err) {
             return res.status(400).json({
                 success: false,
@@ -126,7 +125,7 @@ router.get('/nombre/:id', async (req, res) => {
             });
         }
     })
-        .select('titulo genero categoria autor');
+        .select('titulo');
     
 }); 
 
