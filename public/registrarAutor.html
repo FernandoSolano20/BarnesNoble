@@ -11,8 +11,10 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/botones.css">
     <link rel="stylesheet" href="css/registroFormulario.css">
     <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
+    <link rel="stylesheet" href="css/loadingBar.css">
 
 </head>
 <body>
@@ -43,9 +45,11 @@
         </nav>
     </header>
     <main>
+            
         <form class="formRegistro" name="formularioRegistro">
-            <div class="input-group">
-                <span class="left alert-hidden" id="alert-img">Debe ser un archivo png o jpg.</span>
+            <div class="column">
+            <div class="inputGroup">
+                <span class="left alertHidden" id="alert-img">Debe ser un archivo png o jpg.</span>
                 <label class="labelFile">
                     <i class="fal fa-file-image"></i>
                     <span class="title">Add File</span>
@@ -55,7 +59,7 @@
             <div class="inputGroup">
                 <span class="left alertHidden" id="alertNombre"></span>
                 <label>Nombre</label>
-                <input id="nombre" value="nombre" class="inputAutor" type="text" autocomplete="off">
+                <input id="nombre" class="inputAutor" type="text" autocomplete="off">
             </div>
             <div class="inputGroup">
                 <span class="left alertHidden id="alertNomArtistico"></span>
@@ -77,11 +81,7 @@
                 <label>Fecha Muerte</label>
                 <input id="muerte" class="inputAutor" type="date" autocomplete="off">
             </div>
-            <div class="inputGroup">
-                <span class="left alertHidden" id="alertaNac"></span>
-                <label>Lugar de Nacimiento</label>
-                <input id="lugarNac" class="inputAutor" type="text" autocomplete="off">
-            </div>
+
             <div class="inputGroup">
                 <span class="left alertHidden" id="alertResenna">.</span>
                 <label>Reseña</label>
@@ -94,10 +94,11 @@
                 <input type="radio" name="estado" id="desactivar" value="Mujer">
                 <label for="desactivar" class="labelRadio">Desactivar</label>
             </div>
-            <div class="crearContenedor">
-                <button type="button" class="material-blue" id="registrar"><i class="far fa-clipboard-list"></i>Registrar</button>
-            </div>
+            <div class="crear-contenedor">
+                    <button type="button" class="material-blue" id="registrar"><i class="far fa-clipboard-list"></i>Registrar</button>
+                </div>
         </form>
+            </div>
     </main>
     <footer>
         <div class="blockFooter">
@@ -115,13 +116,17 @@
                 <a href="#"><i class="fab fa-twitter"></i></a>
             </div>
         </div>
-       
+        
     </footer>
     <script src="js/cerrarSesion.js"></script>
     <script src="js/menu.js"></script>
+    <script src="js/direccion/servicioDireccion.js"></script>
+    <script src="js/direccion/controladorDireccion.js"></script>
+    <script src="js/direccion/controladorPaises.js"></script>
     <script src="js/validaciones/validacionesGenerales.js"></script>
     <script src="js/autor/controladorRegistarAutor.js"></script>
     <script src="js/autor/servicioAutor.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    
 </body>
 </html>

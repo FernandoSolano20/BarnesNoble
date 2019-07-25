@@ -1,6 +1,6 @@
 
 
-let registrarAutor = (pnombre, pnomArtistico, pnacionalidad, pnacimento, pmuerte, plugarNac, presenna, pestado) => {
+let registrarAutor = (pnombre, pnomArtistico, pnacionalidad, pnacimento, pmuerte, presenna, pestado) => {
     axios({
         method: 'post',
         url: 'http://localhost:4000/api/registrarAutor',
@@ -11,7 +11,6 @@ let registrarAutor = (pnombre, pnomArtistico, pnacionalidad, pnacimento, pmuerte
             nacimiento: pnacimento,
             nacionalidad: pnacionalidad,
             muerte: pmuerte,
-            lugarNac: plugarNac,
             resenna: presenna,
             estado: pestado
         }
