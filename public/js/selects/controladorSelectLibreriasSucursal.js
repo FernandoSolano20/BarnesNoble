@@ -1,6 +1,5 @@
 const libreriaSelect = document.getElementById('libreria');
-const sucursalSelect = document.getElementById('sucursal');
-let listaObtnerSucursa = [];
+let listaObtenerSucursal = [];
 let listaObtenerLibreria = [];
 
 
@@ -16,7 +15,7 @@ let crearSectionLibreria = async () => {
     optionElemento.innerHTML = '--Seleccione una libreria--';
     libreriaSelect.appendChild(optionElemento);
 
-    for (let i =0; i < listaObtenerLibreria.length; i++) {
+    for (let i = 0; i < listaObtenerLibreria.length; i++) {
         let optionElemento = document.createElement('option');
         optionElemento.setAttribute('value', listaObtenerLibreria[i]._id);
         optionElemento.innerHTML = listaObtenerLibreria[i].nombreFantasia;
@@ -26,23 +25,33 @@ let crearSectionLibreria = async () => {
 };
 
 let crearSectionSucursal = async () => {
-
+    var select = document.getElementById('sucursal');
+    if(select){
+        select.remove();
+    }
     let libreria = libreriaSelect.value;
-    sucursalSelect.innerHTML = '';
+    listaObtenerSucursal = await obtenerSucursalesIdLibreria(libreria);
 
-    listaObtenerSucursal = await obtenerSucursales(libreria);
+    if (listaObtenerSucursal.success) {
+        listaObtenerSucursal = listaObtenerSucursal.listaSucursales;
+        let sucursalContenedor = document.getElementById("contenedorSucursal");
+        var sucursalSelect = document.createElement('select');
+        sucursalSelect.setAttribute('name', 'sucursal');
+        sucursalSelect.setAttribute('id', 'sucursal');
+        sucursalContenedor.appendChild(sucursalSelect);
+        sucursalSelect.innerHTML = '';
 
-
-    let optionElemento = document.createElement('option');
-    optionElemento.setAttribute('value', '');
-    optionElemento.innerHTML = '--Seleccione una sucursal--';
-    sucursalSelect.appendChild(optionElemento);
-
-    for (elementos in listaObtnerSucursa) {
         let optionElemento = document.createElement('option');
-        optionElemento.setAttribute('value', elementos);
-        optionElemento.innerHTML = listaObtnerSucursa[elementos];
+        optionElemento.setAttribute('value', '');
+        optionElemento.innerHTML = '--Seleccione una sucursal--';
         sucursalSelect.appendChild(optionElemento);
+
+        for (var i = 0; i < listaObtenerSucursal.length; i++) {
+            let optionElemento = document.createElement('option');
+            optionElemento.setAttribute('value', listaObtenerSucursal[i]._id);
+            optionElemento.innerHTML = listaObtenerSucursal[i].nombre;
+            sucursalSelect.appendChild(optionElemento);
+        }
     }
 };
 
