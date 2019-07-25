@@ -14,7 +14,6 @@ router.post('/registrarAutor', function (req, res) {
         nombreArtistico: body.nombreArtistico,
         nacionalidad: body.nacionalidad,
         foto: body.foto,
-        lugarNacimiento: body.lugarNacimiento,
         estado: body.estado,
     });
 

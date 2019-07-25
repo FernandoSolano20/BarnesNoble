@@ -19,21 +19,21 @@ const imgAlert = document.getElementById('alert-img');
 
 let validarDatosAutor = async () => {
 
-    let error = validarNombre() | validarNombreArtistico() | validarFechaNacimiento() | validarFechaMuerte() | validarMuerte() | validarNacionalidad() | validarResenna();
+    let error = validarNombre() | validarNombreArtistico() | validarFechaNacimiento() | validarFechaMuerte() | validarNacionalidad() | validarResenna() | validarFotoPerfil();
     if (!error) {
         let imgValue = document.getElementById('img');
         let imgResult = await crearImagen(imgValue);
         let nombre = inputnombre.value;
         let nombreArtistico = inputNomArtistico.value;
         let nacimiento = new Date(inputNacimiento.value);
-            nacimiento = nacimiento.getFullYear() + '-' + Number(nacimiento.getUTCMonth() + 1) + '-' + nacimiento.getUTCDate();
+        nacimiento = nacimiento.getFullYear() + '-' + Number(nacimiento.getUTCMonth() + 1) + '-' + nacimiento.getUTCDate();
         let nacionalidad = inputNacionalidad.value;
         let fechaMuerte = inputMuerte.value;
         let resenna = inputResenna.value;
-        let autor ={
+        let autor = {
             nombre: nombre,
             nombreArtistico: nombreArtistico,
-            fechaNacimiento: nacimento,
+            fechaNacimiento: nacimiento,
             nacionalidad: nacionalidad,
             fechaMuerte: fechaMuerte,
             resenna: resenna,
@@ -42,20 +42,26 @@ let validarDatosAutor = async () => {
         }
 
         let nuevoUsuario = await registrarAutor(autor);
-        if (nuevoUsuario.success){
-        Swal.fire({
-            title: 'Autor Registrado',
-            type: 'success',
-            text: 'Se ha relizado su registro correctamente'
-        })
-    } else {
+        if (nuevoUsuario.success) {
+            Swal.fire({
+                title: nuevoUsuario.message,
+                type: 'success',
+                text: 'Se ha relizado su registro correctamente'
+            })
+        } else {
+            Swal.fire({
+                title: nuevoUsuario.message,
+                type: 'error'
+            })
+        }
+    }
+    else {
         Swal.fire({
             title: 'No se ha realizado el registro',
             type: 'warning',
             text: 'Revise los campos resaltados e inténtelo de nuevo'
         })
     }
-}
 };
 
 
@@ -96,7 +102,7 @@ let validarFechaMuerte = function () {
         alert: alertMuerte,
         input: inputMuerte
     }
-    if (!(validarFecha(validarFechaMuer) && validarMuerte(validarFechaMuer))) {
+    if (!(validarFecha(validarFechaMuer) && validarFechaMayorActual(validarFechaMuer) && validarMuerte(validarFechaMuer))) {
         return true
     }
 }
@@ -111,13 +117,13 @@ function validarMuerte(elementos) {
         elementos.alert.className = elementos.alert.className.replace("alertHidden", "");
         elementos.input.className = elementos.input.className.replace("inputError", "");
         elementos.input.className = elementos.input.className + " inputError";
-        return true;
+        return false;
     }
     else {
         elementos.alert.className = elementos.alert.className.replace("alertHidden", "");
         elementos.alert.className = elementos.alert.className + " alertHidden";
         elementos.input.className = elementos.input.className.replace("inputError", "");
-        return false;
+        return true;
     }
 };
 
@@ -140,10 +146,20 @@ let validarResenna = function () {
     return !(noVacio(validarRes) && validarTexto(validarRes));
 };
 
+let validarFotoPerfil = function () {
+    let elementPicture = {
+        value: imgInput.value,
+        alert: imgAlert,
+        input: imgInput
+    }
+    return !(noVacio(elementPicture) && validarFotos(elementPicture));
+}
+
 inputnombre.addEventListener('blur', validarNombre);
 inputNomArtistico.addEventListener('blur', validarNombreArtistico);
 inputNacimiento.addEventListener('blur', validarFechaNacimiento);
 inputMuerte.addEventListener('blur', validarFechaMuerte);
 inputNacionalidad.addEventListener('blur', validarNacionalidad);
 inputResenna.addEventListener('blur', validarResenna);
+imgInput.addEventListener("change", validarFotoPerfil);
 document.getElementById('registrar').addEventListener('click', validarDatosAutor);

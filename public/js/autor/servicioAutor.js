@@ -1,19 +1,11 @@
-let registrarAutor = (pfoto, pnombre, pnomArtistico, pnacionalidad, pnacimento, pmuerte, presenna, pestado) => {
-    axios({
+let registrarAutor = async (autor) => {
+    let response = await axios({
         method: 'post',
-        url: 'http://localhost:4000/api/registrarAutor',
+        url: 'http://localhost:4000/api/autor/registrarAutor',
         responseType: 'json',
-        data: {
-            nombre: pnombre,
-            nombreArtistico: pnomArtistico,
-            fechaNacimiento: pnacimento,
-            nacionalidad: pnacionalidad,
-            fechaMuerte: pmuerte,
-            resenna: presenna,
-            estado: pestado,
-            foto: pfoto
-        }
+        data: autor
     });
+    return response.data;
 };
 
 
