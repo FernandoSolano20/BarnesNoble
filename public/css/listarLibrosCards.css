@@ -1,9 +1,24 @@
-.crear-contenedor {
-    margin: 0px auto;
+
+
+#listaLibros .card {
+    width: 10%;
+    margin: 30px 1.5%;
+    float: left;
+    border: #fff;
 }
 
-.crear-contenedor .material-blue {
-    height: 50px;
+#listaLibros .card header {
+    background: #315c74;
+    color: #fff;
+}
+
+#listaLibros .card .contenedorImagen img {
+    width: 100%;
+}
+
+
+.card .material-blue {
+    height: 25 px;
     padding: 0 50px;
     font-size: 18px;
     text-decoration: none;
@@ -15,7 +30,7 @@
     -moz-box-shadow: 0px 4px 3px 0px rgba(50, 50, 50, 0.2);
     box-shadow: 0px 4px 3px 0px rgba(50, 50, 50, 0.2);
     display: inline-block;
-    line-height: 50px;
+    line-height: 25px;
     text-align: center;
     overflow: hidden;
     position: relative;
@@ -23,54 +38,68 @@
     box-sizing: border-box;
 }
 
-.crear-contenedor .material-blue:hover{
+.card .material-blue:hover{
     background-color: #1976d2;
     box-shadow: 0px 5px 3px 0px rgba(50, 50, 50, 0.3);
     cursor: pointer;
 }
 
-.crear-contenedor .material-blue i {
+.card .material-blue i {
     margin-right: 15px;
 }
 
-.linkPage {
-    text-decoration: none;
-    color: white;
-    display: inline-block;
-    width: 100%;
-    height: 100%;
-    padding: 0.69em;
-    width: 7em;
-    height: 3em;
+.card {
+    border-radius: 5px;
+    text-align: center;
+    
 }
 
-.material {
-    height: 50px;
-    padding: 0 50px;
-    font-size: 18px;
+
+
+.card header {
+    
+    text-align: center;
+}
+
+.card header h2 {
+    font-size: 20px;
     text-decoration: none;
     color: white;
     border-radius: 1px;
     background-color: #315c74;
     border: none;
-    -webkit-box-shadow: 0px 4px 3px 0px rgba(50, 50, 50, 0.2);
-    -moz-box-shadow: 0px 4px 3px 0px rgba(50, 50, 50, 0.2);
-    box-shadow: 0px 4px 3px 0px rgba(50, 50, 50, 0.2);
     display: inline-block;
-    line-height: 50px;
+    line-height: 25px;
     text-align: center;
     overflow: hidden;
     position: relative;
     font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
     box-sizing: border-box;
+    text-transform: uppercase;
+    
+    
+    position: relative;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
 
-.orange{
-    background-color: #745131;
+.precio{
+    font-weight: bold;
+    margin-top: 5px;
 }
 
-.orange:hover{
-    background-color: #d27c19;
-    box-shadow: 0px 5px 3px 0px rgba(50, 50, 50, 0.3);
-    cursor: pointer;
+.genero{
+    color: #071116;
+    margin-top: 5px;
 }
+
+.categoria{
+    margin-top: 5px;
+}
+
+.botonVerLibro{
+    margin-top: 5px;
+}
+
