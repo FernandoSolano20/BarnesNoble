@@ -11,9 +11,13 @@ const cloudinary = require('cloudinary').v2;
 const generoRoute = require('./routes/genero');
 const categoriaRoute = require('./routes/categoria');
 const usuario_route = require('./routes/usuarios');
+const sucursalRoute = require('./routes/sucursal');
 const autorRoute = require('./routes/autor');
 const librosRoute = require('./routes/libros');
 const imagenRoute = require('./routes/imagenes');
+const clubLecturaRoute = require('./routes/clubLectura');
+const tarjeta_route = require('./routes/tarjeta');
+const libreria_route = require('./routes/libreria');
 
 const app = express();
 app.use(fileupload({
@@ -65,6 +69,10 @@ function handleError(res, reason, message, code) {
 app.use('/api/genero', generoRoute);
 app.use('/api/categoria', categoriaRoute);
 app.use('/api', usuario_route);
+app.use('/api/sucursal', sucursalRoute);
 app.use('/api/imagen', imagenRoute);
 app.use('/api/autor', autorRoute);
 app.use('/api/libros', librosRoute);
+app.use('/api/clubLectura', clubLecturaRoute);
+app.use('/api', tarjeta_route);
+app.use('/api', libreria_route);

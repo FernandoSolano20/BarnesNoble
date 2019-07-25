@@ -50,16 +50,20 @@ router.post('/registrarUsuario', function (req, res) {
         estado: body.estado,
 
         // /Direccion/
-        idProvincia: body.idProvincia,
-        idCanton: body.idCanton,
-        idDistrito: body.idDistrito,
-
-        // /Datos Extra-Lector/
-        idAutor: body.idAutor,
-        idGenero: body.idGenero,
-        idLibro: body.idLibro,
-        idCategoria: body.idCategoria,
+        provincia: body.provincia,
+        canton: body.canton,
+        distrito: body.distrito,
     });
+    // /Datos Extra-Lector/
+    
+    if (body.autor)
+        nuevoUsuario.autor = body.autor
+    if (body.genero)
+        nuevoUsuario.genero = body.genero
+    if (body.libro)
+        nuevoUsuario.libro = body.libro
+    if (body.categoria)
+        nuevoUsuario.categoria = body.categoria
     let createLibreria;
     let createUser = true;
     Usuario.findOne({ id: req.body.id }).then(
@@ -96,13 +100,13 @@ router.post('/registrarUsuario', function (req, res) {
                                                     nombreFantasia: body.nombreFantasia,
                                                     localizacionLatitud: body.localizacionLatitud,
                                                     localizacionLongitud: body.localizacionLongitud,
-                                                    idProvincia: body.idProvincia,
-                                                    idCanton: body.idCanton,
-                                                    idDistrito: body.idDistrito
+                                                    provincia: body.provincia,
+                                                    canton: body.canton,
+                                                    distrito: body.distrito
                                                 });
                                                 createLibreria = await nuevaLibreria.save();
                                                 createUser = true;
-                                                nuevoUsuario.idLibreria = createLibreria._id;
+                                                nuevoUsuario.libreria = createLibreria._id;
                                             } catch (err) {
                                                 createUser = false;
                                                 return res.status(400).json({
