@@ -3,4 +3,4 @@ let logoutUsuario = function(){
     window.location.href = "http://localhost:3000";
 }
 
-document.getElementById('logout').addEventListener('click', logoutUsuario)
+document.getElementById('logout').addEventListener('click', logoutUsuario);
