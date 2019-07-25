@@ -1,0 +1,56 @@
+
+#container {
+    position: relative;
+    width: 98%;
+    background: white;
+}
+
+.elements {
+    list-style: none;
+    padding-bottom: 6px;
+    padding-left: 15px;
+    padding-top: 5px;
+    font-family: arial;
+    font-size: 16px;
+}
+
+.placeholder {
+    position: relative;
+}
+
+.placeholder::after {
+    position: absolute;
+    left: 8px;
+    top: 9px;
+    content: attr(data-placeholder);
+    pointer-events: none;
+    opacity: 0.6;
+    font-family: Arial;
+}
+
+.labelPlaceHolder {
+    position: absolute;
+    left: 18px;
+    top: 24px;
+    pointer-events: none;
+    opacity: 0.6;
+    /* font-family: Arial; */
+    font-size: 1.1rem;
+}
+
+.elementHover {
+    background-color: #eee;
+    margin-left: -5px;
+}
+
+#listResult {
+    padding-left: 5px;
+    margin-top: 1px;
+    box-shadow: -1px 18px 55px -18px rgba(0, 0, 0, 0.75);
+    overflow: auto;
+    max-height: 355px;
+    width: 98%;
+    position: absolute;
+    z-index: 100000;
+    background: white;
+}

@@ -92,22 +92,41 @@ router.get('/buscarLibroID/:id', async (req, res) => {
 
 router.get('/listarMasVendidos', function (req, res) {
     let criterioOrden = { vendidos: -1 };
-
-    Libros.find().sort(criterioOrden).limit(25).toArray(function(err, masVendidos) {
+    Libros.find(function(err,LibrosBD){
         if (err) {
             return res.status(400).json({
                 success: false,
                 msj: 'No se pueden listar los libros',
                 err
             });
-        } else {
+        }else{
             return res.json({
                 success: true,
-                listaMasVendidos: masVendidos
-            })
+                listaLibros: LibrosBD
+            });
         }
-    });
+    }).limit(25).sort(criterioOrden);
 });
 
+
+router.get('/titulo/:titulo', async (req, res) => {
+    return await Libros.find({ "titulo": { "$regex": req.params.titulo, "$options": "i" } }, function (err, LibroBD) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                msj: 'No se encontro ningún libro',
+                err
+            });
+        }
+        else {
+            return res.json({
+                success: true,
+                listaLibro: LibroBD
+            });
+        }
+    })
+        .select('titulo');
+    
+}); 
 
 module.exports = router;

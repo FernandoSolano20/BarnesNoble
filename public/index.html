@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
     <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
     <link rel="stylesheet" href="css/landingPage.css">
-
+    <link rel="stylesheet" href="css/typehead.css">
     <title>Barnes&Nobles</title>
 </head>
 
@@ -36,6 +36,7 @@
                         </ul>
                     </li>
                     <li><a href="contacto.html"><i class="fal fa-address-book"></i>Contacto</a></li>
+
                 </div>
 
                 <div class="btn_usuarios">
@@ -48,9 +49,13 @@
     <section>
         <div class="subcontenedor buscadorLanding">
             <div class="busqueda">
+                <pre class="labelPlaceHolder" id="changePlaceholder"></pre>
                 <input type="text" id="input-filtro" name="buscar" placeholder="Buscar...." autocomplete="off"
                     autocorrect="off">
                 <button type="button" class="buscar"><i class="fa fa-search"></i><span>search</span></button>
+                <div id="container">
+
+                </div>
             </div>
         </div>
     </section>
@@ -60,157 +65,6 @@
             <h2>Los libros mas vendidos</h2>
             <div class="wrapper">
                 <ul id="carrusel1" class="carousel" data-target="carousel">
-                    <!-- <li class="card" data-target="card" 
-                    ><img src="img/descarga.jpeg" alt="">
-                        <h3 id="tituloLibro">Titulo del libro</h3>
-                        <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem
-                            Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un
-                            impresor</p>
-                    </li> 
-                    <li class="card" id="card" data-target="card"><img src="img/descarga.jpeg" alt="">
-                        <h3>Titulo del libro</h3>
-                        <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem
-                            Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un
-                            impresor</p>
-                        </li>
-                    <li class="card" data-target="card"><img src="img/descarga.jpeg" alt="">
-                        <h3>Titulo del libro</h3>
-                        <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem
-                            Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un
-                            impresor</p>
-                    </li>
-                    <li class="card" data-target="card"><img src="img/descarga.jpeg" alt="">
-                        <h3>Titulo del libro</h3>
-                        <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem
-                            Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un
-                            impresor</p>
-                    </li>
-                    <li class="card" data-target="card"><img src="img/descarga.jpeg" alt="">
-                        <h3>Titulo del libro</h3>
-                        <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem
-                            Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un
-                            impresor</p>
-                    </li>
-                    <li class="card" data-target="card"><img src="img/descarga.jpeg" alt="">
-                        <h3>Titulo del libro</h3>
-                        <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem
-                            Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un
-                            impresor</p>
-                    </li>
-                    <li class="card" data-target="card"><img src="img/descarga.jpeg" alt="">
-                        <h3>Titulo del libro</h3>
-                        <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem
-                            Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un
-                            impresor</p>
-                    </li>
-                    <li class="card" data-target="card"><img src="img/descarga.jpeg" alt="">
-                        <h3>Titulo del libro</h3>
-                        <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem
-                            Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un
-                            impresor</p>
-                    </li>
-                    <li class="card" data-target="card"><img src="img/descarga.jpeg" alt="">
-                        <h3>Titulo del libro</h3>
-                        <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem
-                            Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un
-                            impresor</p>
-                    </li>
-                    <li class="card" data-target="card"><img src="img/descarga.jpeg" alt="">
-                        <h3>Titulo del libro</h3>
-                        <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem
-                            Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un
-                            impresor</p>
-                    </li>
-                    <li class="card" data-target="card"><img src="img/descarga.jpeg" alt="">
-                        <h3>Titulo del libro</h3>
-                        <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem
-                            Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un
-                            impresor</p>
-                    </li>
-                    <li class="card" data-target="card"><img src="img/descarga.jpeg" alt="">
-                        <h3>Titulo del libro</h3>
-                        <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem
-                            Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un
-                            impresor</p>
-                    </li>
-                    <li class="card" data-target="card"><img src="img/descarga.jpeg" alt="">
-                        <h3>Titulo del libro</h3>
-                        <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem
-                            Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un
-                            impresor</p>
-                    </li>
-                    <li class="card" data-target="card"><img src="img/descarga.jpeg" alt="">
-                        <h3>Titulo del libro</h3>
-                        <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem
-                            Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un
-                            impresor</p>
-                    </li>
-                    <li class="card" data-target="card"><img src="img/descarga.jpeg" alt="">
-                        <h3>Titulo del libro</h3>
-                        <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem
-                            Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un
-                            impresor</p>
-                    </li>
-                    <li class="card" data-target="card"><img src="img/descarga.jpeg" alt="">
-                        <h3>Titulo del libro</h3>
-                        <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem
-                            Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un
-                            impresor</p>
-                    </li>
-                    <li class="card" data-target="card"><img src="img/descarga.jpeg" alt="">
-                        <h3>Titulo del libro</h3>
-                        <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem
-                            Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un
-                            impresor</p>
-                    </li>
-                    <li class="card" data-target="card"><img src="img/descarga.jpeg" alt="">
-                        <h3>Titulo del libro</h3>
-                        <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem
-                            Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un
-                            impresor</p>
-                    </li>
-                    <li class="card" data-target="card"><img src="img/descarga.jpeg" alt="">
-                        <h3>Titulo del libro</h3>
-                        <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem
-                            Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un
-                            impresor</p>
-                    </li>
-                    <li class="card" data-target="card"><img src="img/descarga.jpeg" alt="">
-                        <h3>Titulo del libro</h3>
-                        <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem
-                            Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un
-                            impresor</p>
-                    </li>
-                    <li class="card" data-target="card"><img src="img/descarga.jpeg" alt="">
-                        <h3>Titulo del libro</h3>
-                        <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem
-                            Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un
-                            impresor</p>
-                    </li>
-                    <li class="card" data-target="card"><img src="img/descarga.jpeg" alt="">
-                        <h3>Titulo del libro</h3>
-                        <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem
-                            Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un
-                            impresor</p>
-                    </li>
-                    <li class="card" data-target="card"><img src="img/descarga.jpeg" alt="">
-                        <h3>Titulo del libro</h3>
-                        <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem
-                            Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un
-                            impresor</p>
-                    </li>
-                    <li class="card" data-target="card"><img src="img/descarga.jpeg" alt="">
-                        <h3>Titulo del libro</h3>
-                        <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem
-                            Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un
-                            impresor</p>
-                    </li>
-                    <li class="card" data-target="card"><img src="img/descarga.jpeg" alt="">
-                        <h3>Titulo del libro</h3>
-                        <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem
-                            Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un
-                            impresor</p>
-                    </li> -->
                 </ul>
                 <div class="button-wrapper">
                     <button data-action="slideLeft"><i class="fas fa-arrow-left"></i></button>
@@ -709,8 +563,7 @@
             </div>
         </div>
     </footer>
-
-
+    <script src="js/typehead/typehead.js"></script>
     <script src="js/landingPage/servicioLandigPage.js"></script>
     <script src="js/landingPage/controladorLandingPage.js"></script>
     <script src="js/landingPage/controladorSlider.js"></script>
