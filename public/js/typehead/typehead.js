@@ -15,11 +15,19 @@ var SearchBox = function () {
                 xmlHttpRequest(url);
             }
             else {
+                searchBookProfile();
                 deleteListOfSuggestion();
                 deleteSuggestionWriter();
             }
         }
     }, 250);
+
+    var searchBookProfile = function () {
+        var elementId = document.querySelector(".elementHover").dataset.id;
+        if (elementId) {
+            window.location.href = "http://localhost:3000/perfilLibro.html?id=" + elementId;
+        }
+    }
 
     var xmlHttpRequest = function (url) {
         var xmlhttp = new XMLHttpRequest();
@@ -122,9 +130,10 @@ var SearchBox = function () {
         ul.firstChild.className += " elementHover";
     }
 
-    var setElementInBox = function () {
+    var setElementInBox = function (event) {
         for (var index = 0; index < event.path.length; index++) {
             if (event.path[index].nodeName === "LI") {
+                window.location.href = "http://localhost:3000/perfilLibro.html?id=" + event.target.dataset.id;
                 document.getElementById("input-filtro").value = event.path[index].textContent;
                 deleteListOfSuggestion();
                 deleteSuggestionWriter();
@@ -178,6 +187,7 @@ var SearchBox = function () {
         var search = document.getElementById("input-filtro");
         search.addEventListener("keydown", selectElement);
         search.addEventListener("keyup", function () { requestApi(event) });
+        document.getElementById('searchButton').addEventListener('click', searchBookProfile);
     }
     return {
         attachEvents: attachEvents
