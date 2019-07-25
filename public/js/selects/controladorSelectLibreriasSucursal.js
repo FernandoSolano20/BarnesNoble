@@ -25,8 +25,11 @@ let crearSectionLibreria = async () => {
 };
 
 let crearSectionSucursal = async () => {
-    var select = document.getElementById('sucursal');
+
+    let labelSucursal = document.getElementById('sucursalLabel')
+    let select = document.getElementById('sucursal');
     if(select){
+        labelSucursal.remove();
         select.remove();
     }
     let libreria = libreriaSelect.value;
@@ -35,10 +38,16 @@ let crearSectionSucursal = async () => {
     if (listaObtenerSucursal.success) {
         listaObtenerSucursal = listaObtenerSucursal.listaSucursales;
         let sucursalContenedor = document.getElementById("contenedorSucursal");
+        let labelSucursalSelect = document.createElement('label');
+        labelSucursalSelect.setAttribute('for', 'sucursal');
+        labelSucursalSelect.setAttribute('id', 'sucursalLabel');
+        labelSucursalSelect.innerText = 'Sucursales:';
+        sucursalContenedor.appendChild(labelSucursalSelect);
         var sucursalSelect = document.createElement('select');
         sucursalSelect.setAttribute('name', 'sucursal');
         sucursalSelect.setAttribute('id', 'sucursal');
         sucursalContenedor.appendChild(sucursalSelect);
+
         sucursalSelect.innerHTML = '';
 
         let optionElemento = document.createElement('option');
