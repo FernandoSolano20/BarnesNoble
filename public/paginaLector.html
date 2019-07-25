@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="/public/js/validarSesionLector.js"></script>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/principalLector.css">
@@ -44,28 +45,26 @@
         </nav>
     </header>
 
-
     <main>
-        <section>
+         <section>
             <div class="lectorInfo">
                 <div>
-                    <img src="img/ava1-01.png" alt="">
+                    <img src="" alt=""  id="avatar_lector">
                 </div>
                 <div class="infoNombre">
-                    <h1 id="nombre_id">Maria</h1>
-                    <h3 id="alias_id">mar09</h3>
-                </div>
-            </div>
-        </section>
-
+                    <h1 class="nombre_lector" id="nombre_lector"></h1>
+                    <h3 id="alias_lector"></h3>
+                    <p class="correo_lector" id="correo_lector"> </p>
+                </div> 
+            </div> 
+        </section> 
+       
         <section class="stcBusqueda">
-
             <div class="inputGroup box">
-                <label for="libreria">Libreria</label> <select name="libreria" id="libreria"></select>
+                <label for="libreria">Libreria: </label> <select name="libreria" id="libreria"></select>
             </div>
-
             <div class="inputGroup box">
-                <label for="sucursal">Sucursal</label> <select name="sucursal" id="sucursal"></select>
+                <label for="libreria">Sucursal: </label> <select name="libreria" id="sucursal"></select>
             </div>
 
             <div class="subcontenedor buscadorLanding">
@@ -77,10 +76,11 @@
             </div>
         </section>
 
-        <section>
+        <section class="sctLibros">
             <div class="contenedor-tabla">
                 <table class="tabla" id="tablaElementos">
-                    <thead>
+                    <tbody>  
+                        <thead>
                         <tr>
                             <th>Carátula</th>
                             <th>Título</th>
@@ -90,12 +90,10 @@
                             <th>Precio</th>
                         </tr>
                     </thead>
-                    <tbody>
                     </tbody>
                 </table>
             </div>
         </section>
-
         <footer>
             <div class="blockFooter">
                 <div class="logos">
@@ -116,11 +114,15 @@
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="js/menu.js"></script>
         <script src="js/sucursal/servicioSucursal.js"></script>
-        <script src="js/selects/controladorSelectLibrerias.js"></script>
         <script src="js/libros/servicioLibros.js"></script>
+        <script src="js/selects/controladorSelectLibreriasSucursal.js"></script>
         <script src="js/libros/controladorLibros.js"></script>
-        <script src="js/selects/controladorSelectSucursal.js"></script>
+        <script src="js/selects/controladorSelectSucursal.js"></script>  
+        <script src="js/libros/controladorLibros.js"></script> 
         <script src="js/cerrarSesion.js"></script>
+        <script src="js/libros/servicioLibros.js"></script>
+        <script src="js/usuarios/servicioUsuario.js"></script>
+        <script src="js/usuarios/lector/controladorIndexLector.js"></script>
 </body>
 
 </html>
