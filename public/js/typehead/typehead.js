@@ -113,6 +113,7 @@ var SearchBox = function () {
             else {
                 var li = document.createElement('li');
                 li.setAttribute('class', 'elements');
+                li.setAttribute('data-id', response.listaLibro[index]._id);
                 li.addEventListener("click", setElementInBox);
                 li.innerHTML = response.listaLibro[index].titulo.replace(regex, valueToSearch.bold());
                 ul.appendChild(li);
@@ -124,7 +125,7 @@ var SearchBox = function () {
     var setElementInBox = function () {
         for (var index = 0; index < event.path.length; index++) {
             if (event.path[index].nodeName === "LI") {
-                document.getElementById("searchBox").value = event.path[index].textContent;
+                document.getElementById("input-filtro").value = event.path[index].textContent;
                 deleteListOfSuggestion();
                 deleteSuggestionWriter();
                 break;
@@ -167,7 +168,7 @@ var SearchBox = function () {
             }
             else if (event.keyCode === 13) {
                 prevValue = "";
-                document.getElementById("searchBox").value = actualLI.textContent;
+                document.getElementById("input-filtro").value = actualLI.textContent;
                 event.preventDefault();
             }
         }
