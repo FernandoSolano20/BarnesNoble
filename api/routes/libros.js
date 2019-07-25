@@ -23,6 +23,7 @@ router.post('/registrarLibro', function (req, res) {
         caratula: body.caratula,
         contraportada: body.contraportada,
         precio: body.precio,
+        vendidos: body.vendidos,
         genero: body.genero,
         categoria: body.categoria,
         autor: body.autor
@@ -48,21 +49,26 @@ router.post('/registrarLibro', function (req, res) {
     );
 });
 
-router.get('/listarLibros', function (req, res) {
-    Libros.find(function (err, LibrosBD) {
+router.get('/listarLibros', async (req, res) => {
+    return await Libros.find(function (err, LibrosBD) {
         if (err) {
             return res.status(400).json({
                 success: false,
-                msj: 'No se pueden listar los libros',
+                msj: 'No se encontro ningún libro',
                 err
             });
-        } else {
+        }
+        else {
             return res.json({
                 success: true,
                 listaLibros: LibrosBD
             });
         }
     })
+        .populate('genero', 'nombre -_id')
+        .populate('categoria', 'nombre -_id')
+        .populate('autor', 'nombre -_id')
+        .select('titulo edicion editorial annoEdicion isbn_10 isbn_13 caratula contraportada precio vendidos genero categoria autor');
 });
 
 router.get('/buscarLibroID/:id', async (req, res) => {
@@ -89,7 +95,6 @@ router.get('/buscarLibroID/:id', async (req, res) => {
     
 });
 
-
 router.get('/listarMasVendidos', function (req, res) {
     let criterioOrden = { vendidos: -1 };
     Libros.find(function(err,LibrosBD){
@@ -107,7 +112,6 @@ router.get('/listarMasVendidos', function (req, res) {
         }
     }).limit(25).sort(criterioOrden);
 });
-
 
 router.get('/titulo/:titulo', async (req, res) => {
     return await Libros.find({ "titulo": { "$regex": req.params.titulo, "$options": "i" } }, function (err, LibroBD) {

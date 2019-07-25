@@ -3,7 +3,6 @@
 const mongoose = require('mongoose');
 
 let librosSchema = new mongoose.Schema({
-
     titulo: { type: String, required: true, unique: false },
     edicion: { type: String, required: true, unique: false },
     editorial: { type: String, required: true, unique: false },
@@ -13,6 +12,7 @@ let librosSchema = new mongoose.Schema({
     caratula: { type: String, required: true, unique: false },
     contraportada: { type: String, required: true, unique: false },
     precio: { type: String, required: true, unique: false },
+    vendidos:{type: Number, required: false, unique: false},
     genero: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Genero',
