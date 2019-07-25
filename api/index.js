@@ -15,7 +15,9 @@ const sucursalRoute = require('./routes/sucursal');
 const autorRoute = require('./routes/autor');
 const librosRoute = require('./routes/libros');
 const imagenRoute = require('./routes/imagenes');
-const clubLecturaRoute = require('./routes/clubLectura')
+const clubLecturaRoute = require('./routes/clubLectura');
+const tarjeta_route = require('./routes/tarjeta');
+const libreria_route = require('./routes/libreria');
 
 const app = express();
 app.use(fileupload({
@@ -72,3 +74,5 @@ app.use('/api/imagen', imagenRoute);
 app.use('/api/autor', autorRoute);
 app.use('/api/libros', librosRoute);
 app.use('/api/clubLectura', clubLecturaRoute);
+app.use('/api', tarjeta_route);
+app.use('/api', libreria_route);
