@@ -9,3 +9,31 @@ border: none;
 border-bottom: 2px solid #80d1d3;
 outline: none;
 }
+
+.btnVerPerfil{
+    height: 50px;
+    padding: 0 50px;
+    font-size: 18px;
+    text-decoration: none;
+    color: white;
+    border-radius: 1px;
+    background-color: #315c74;
+    border: none;
+    -webkit-box-shadow: 0px 4px 3px 0px rgba(50, 50, 50, 0.2);
+    -moz-box-shadow: 0px 4px 3px 0px rgba(50, 50, 50, 0.2);
+    box-shadow: 0px 4px 3px 0px rgba(50, 50, 50, 0.2);
+    display: inline-block;
+    line-height: 50px;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
+    box-sizing: border-box;
+    margin-left: 1.7rem;
+}
+
+.btnVerPerfil:hover{
+    background-color: #d27c19;
+    box-shadow: 0px 5px 3px 0px rgba(50, 50, 50, 0.3);
+    cursor: pointer;
+}

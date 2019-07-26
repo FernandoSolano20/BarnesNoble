@@ -102,11 +102,12 @@ let validarFechaMuerte = function () {
         alert: alertMuerte,
         input: inputMuerte
     }
-    if (!(validarFecha(validarFechaMuer) && validarFechaMayorActual(validarFechaMuer) && validarMuerte(validarFechaMuer))) {
-        return true
+    if (validarFechaMuer.value != '') {
+        if (!(validarFecha(validarFechaMuer) && validarFechaMayorActual(validarFechaMuer) && validarMuerte(validarFechaMuer))) {
+            return true
+        }
     }
 }
-
 function validarMuerte(elementos) {
     let nacimento = inputNacimiento.value;
     nacimento = new Date(nacimento);

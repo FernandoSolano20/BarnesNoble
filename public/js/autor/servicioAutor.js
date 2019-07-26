@@ -20,3 +20,18 @@ let obtenerAutores = async () => {
     let result = await response.json();
     return result.listaAutores;
 }
+
+let obtenerAutorId = async(_id) => {
+    try {
+        
+        const response = await axios({
+            method: 'get',
+            url: `http://localhost:4000/api/buscarLectorId/${_id}`,
+            responseType: 'json'
+        });
+
+        return response.data.usuario;
+    } catch (error) {
+        console.log(error);
+    }
+};
