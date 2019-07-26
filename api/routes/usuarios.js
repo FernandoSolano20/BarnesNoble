@@ -439,4 +439,14 @@ router.patch('/olvidarPass/:correo', function (req, res) {
     );
 });
 
+router.get('/buscarUsuario/:id', function (req, res) {
+    Usuario.findById(req.params.id, (err, usuario) => {
+        return res.status(200).json({
+            success: true,
+            message: "Usuario editado",
+            usuarios: usuario
+        })
+    });
+});
+
 module.exports = router;

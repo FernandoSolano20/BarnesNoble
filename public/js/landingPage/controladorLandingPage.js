@@ -2,6 +2,8 @@
 
 const carrusel1 = document.querySelector('#carrusel1');
 const carrusel2 = document.querySelector('#carrusel2');
+let card;
+
 
 const crearSliderMasVendidos = async (event) => {
 
@@ -14,10 +16,10 @@ const crearSliderMasVendidos = async (event) => {
 
 const agregarLibroCarrusel = function (libro) {
 
-    let card = document.createElement('li');
-        card.classList.add('card');
-        card.setAttribute('data-target', 'card');
-    
+    let cardElement = document.createElement('li');
+        cardElement.classList.add('card');
+        cardElement.setAttribute('data-target', 'card');
+
     let imagen = document.createElement('img');
         //deberia cargar el url de la imagen del objeto libro de la base de datos.
         imagen.setAttribute('src', 'img/descarga.jpeg'); //TODO: cambiar src por el correcto
@@ -28,11 +30,13 @@ const agregarLibroCarrusel = function (libro) {
     let informacion = document.createElement('p');
         informacion.innerHTML = libro.editorial + ', ' + libro.edicion;
     
-    card.appendChild(imagen);
-    card.appendChild(titulo);
-    card.appendChild(informacion);
+    cardElement.appendChild(imagen);
+    cardElement.appendChild(titulo);
+    cardElement.appendChild(informacion);
 
-    carrusel1.appendChild(card);
+    carrusel1.appendChild(cardElement);
+    card = carousel.querySelector("[data-target='card']");
+    movimentoSlider1();
 }
 
 const crearSliderMejorCalificados = async (event) => {

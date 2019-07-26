@@ -34,7 +34,7 @@ let mostrar_tabla = async() => {
 
         boton_perfil.addEventListener('click', function() {
             //console.log(this.dataset._id);
-            window.location.href = `ver-perfil-contacto.html?_id=${this.dataset._id}`
+            window.location.href = `indexLector.html?_id=${this.dataset._id}`
 
         });       
     }
@@ -76,7 +76,7 @@ let filtrar_tabla = async() => {
     
             boton_perfil.addEventListener('click', function() {
                 //console.log(this.dataset._id);
-                window.location.href = `ver-perfil-contacto.html?_id=${this.dataset._id}`
+                window.location.href = `indexLector.html?_id=${this.dataset._id}`
     
             });        
         }

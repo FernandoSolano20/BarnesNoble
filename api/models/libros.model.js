@@ -3,13 +3,12 @@
 const mongoose = require('mongoose');
 
 let librosSchema = new mongoose.Schema({
-
     titulo: { type: String, required: true, unique: false },
     edicion: { type: String, required: true, unique: false },
     editorial: { type: String, required: true, unique: false },
     annoEdicion: { type: String, required: true, unique: false },
-    isbn_10: {type: String, required: true, unique: false},
-    isbn_13: {type: String, required: true, unique: false},
+    isbn_10: { type: String, required: true, unique: true },
+    isbn_13: { type: String, required: true, unique: true },
     caratula: { type: String, required: true, unique: false },
     contraportada: { type: String, required: true, unique: false },
     precio: { type: String, required: true, unique: false },

@@ -4,17 +4,28 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
-    margin: 14px;
+    padding: 37px;
+  }
+  .nombre_lector{
+    font-size: 2rem;
+    font-family: 'Roboto' sans-serif;
+  }
+
+  .correo_lector a{
+    text-decoration: none;
+    font-size: 1rem;
+    font-family: 'Roboto' sans-serif;
+    color: #222;
   }
 
   .lectorInfo img{
     width:25%;
-    height: 25%;
     float: right;
+    border-radius: 50%;
   }
 
   .infoNombre{
-    margin-top: 51px;
+    margin-top: 24px;
     font-size: 41px;
     max-width: 20px;
     margin-left: 30px;
@@ -25,7 +36,13 @@
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto;
     text-align: center;
-    margin: 40px;
+    margin-top: 40px;
+    align-items: center;
+    border-bottom: 1px solid #2222223d;
+    padding-bottom: 30px;
+    -webkit-box-shadow: 0 4px 6px -6px #222;
+    -moz-box-shadow: 0 4px 6px -6px #222;
+    box-shadow: 0 4px 6px -6px #222;
   }
   
   .subcontenedor .busqueda input[type="text"] {
@@ -39,6 +56,7 @@
     font-size: 1.1rem;
     border-radius: 30px;
     outline: none;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
 }
 .subcontenedor{
   margin: 25px 40px;
@@ -47,5 +65,80 @@
   grid-gap: 25px;
 }
 
+.sctLibros{
+  background-color: #315d7412;
+  padding: 50px;
+}
+
+tbody{
+  background-color: #ffff;
+}
+
+label{
+  font-size: 1rem;
+  font-family: 'Roboto' sans-serif;
+  padding: 5px;
+}
 
 
+.box {
+  position: relative;
+}
+
+.box select {
+  background-color: #f6c249;
+  color: white;
+  padding: 6px;
+   width: 260px;;
+  border: none;
+  font-size: 1rem;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  -webkit-appearance: button;
+  appearance: button;
+  outline: none;
+  margin: 20px auto;
+  display: block;
+}
+
+.box::before {
+  content: "\f13a";
+  font-family: FontAwesome;
+  position: absolute;
+  top: 0;
+  right: 70px;
+  width: 14%;
+  height: 100%;
+  text-align: center;
+  font-size: 28px;
+  line-height: 45px;
+  color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+
+.box:hover::before {
+  color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.box select option {
+  padding: 30px;
+}
+
+.left, .right {
+  border-radius: 5px;
+  display: block;
+  font-size: 1.3em;
+  text-align: center;
+  position: absolute;
+  background: #2F558E;
+  padding: 7px 10px;
+  color: #fff;
+}
+
+.left {
+  right: 102%;
+  top: 0px;
+  font-size: 14px;
+  width: 160px;
+}

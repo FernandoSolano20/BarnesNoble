@@ -13,11 +13,12 @@ let mostrarTabla = async() => {
         let fila = tbody.insertRow();
         fila.insertCell().innerHTML = listaLibros[i]['caratula'];
         fila.insertCell().innerHTML = listaLibros[i]['titulo'];
-        fila.insertCell().innerHTML = listaLibros[i]['idGenero'];
-        fila.insertCell().innerHTML = listaLibros[i]['idCategoria'];
-        fila.insertCell().innerHTML = listaLibros[i]['idAutor'];
+        fila.insertCell().innerHTML = listaLibros[i]['Genero'];
+        fila.insertCell().innerHTML = listaLibros[i]['Categoria'];
+        fila.insertCell().innerHTML = listaLibros[i]['Autor'];
         fila.insertCell().innerHTML = listaLibros[i]['precio'];
     }
 };
 
 mostrarTabla();
+
