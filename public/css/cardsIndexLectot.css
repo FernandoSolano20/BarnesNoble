@@ -1,0 +1,6 @@
+#listaLibros {
+    display: inline-block;
+}
+.subcontenedor {
+    grid-template-columns: 1fr !important;
+}
