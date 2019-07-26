@@ -1,0 +1,38 @@
+.perfil {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.infoLibro {
+    margin: 85px;
+    text-align: center;
+}
+
+.column h1 {
+    margin: 30px auto;
+    text-align: center;
+}
+
+.column .info {
+    margin: 35px 10px;
+}
+
+.column .info div {
+    margin: 15px;
+}
+
+.column .info div span {
+    float: left;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.column .info div span i {
+    margin-right: 18px;
+    min-width: 25px;
+}
+
+.column .info div p {
+    font-size: 20px;
+    margin-left: 30%;
+}

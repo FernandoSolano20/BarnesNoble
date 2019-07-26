@@ -1,6 +1,6 @@
 .table-div {
     display: table;
-    margin: 0;
+    margin: 15px auto;
     width: 100%;
     height: 100%;
 }
@@ -27,4 +27,29 @@
     left: 0;
     bottom: 0;
     /*font-size: 30px;*/
+}
+
+.stars-outer {
+    display: inline-block;
+    position: relative;
+    letter-spacing: 3px;
+}
+
+.stars-outer::before {
+    content: "\f5d9 \f5d9 \f5d9 \f5d9 \f5d9";
+}
+
+.stars-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+    letter-spacing: 3px;
+}
+
+.stars-inner::before {
+    content: "\f5d9 \f5d9 \f5d9 \f5d9 \f5d9";
+    color: black;
 }
