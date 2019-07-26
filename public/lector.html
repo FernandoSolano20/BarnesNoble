@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Perfil Lector</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/lector.css">
+    <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="menuHorizontal">
+            <ul class="list-menu">
+                <li><a href="#" data-menu="mostrar-nav-izq"><i data-menu="mostrar-nav-izq" class="fas fa-bars"></i></a>
+                </li>
+                <li><a href="#"><i class="far fa-home"></i>Inicio</a></li>
+                <li class="submenu">
+                    <a href="#"><i class="far fa-sign-out-alt"></i>Cerrar Sesión</a>
+                </li>
+                <li><a href="#"><i class="fal fa-address-book"></i>Contacto</a></li>
+                <li class="link-imagen"><img src="img/logo_barnes-and-noble.png" alt="Logo de Barnes&Noble"></li>
+            </ul>
+        </nav>
+
+        <nav class="menuIzquierdo">
+            <ul class="menu">
+                <li><a href="#">Mi perfil</a></li>
+                <li><a href="genero.html">Géneros</a></li>
+                <li><a href="categoria.html">Categorías</a></li>
+                <li><a href="#">Reportes</a></li>
+                <li><a href="#">Bitácora</a></li>
+                <li><a href="#">Usuarios</a></li>
+                <li><a href="#">Librerías</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+    <div class="contenidoLector">
+        <div class="intereses">
+                <img src="..//public/img/avatarLector.jpg" class="avatar" alt="avatar">
+
+            <div>
+                    <h3 class="interes">Intereses</h3>
+                    <div class="contenedorInfo">
+                    <label class="label" for="alias">Alias</label>
+                    <input class="inputDatos" type="text" name="alias" id="input_alias">
+                    </div>
+
+                    <div class="contenedorInteres">
+                    <label class="label" for="autor">Autor Favorito</label> 
+                    <select class="selector" name="autor" id="input_autor">
+                        <option value="">Seleccionar Autor</option>
+                    </select>
+                    </div>
+
+                    <div class="contenedorInteres">
+                    <label class="label" for="genero">Género Favorito</label>
+                    <select class="selector" name="genero" id="input_genero">
+                        <option value="">Seleccionar Genero</option>
+                    </select>
+                    </div>
+
+                    <div class="contenedorInteres">
+                    <label class="label" for="libro">Libro Favorito</label>
+                    <input class="inputDatos" type="text" name="libro" id="input_libro">
+                    </div>
+
+                    <div class="contenedorInteres">
+                    <label class="label" for="sexo">Intercambios</label>
+                    <label class="opcionRadio" for="activar">Activar</label> <input type="radio" name="masculino" id="input_masculino">
+                    <label class="opcionRadio" for="desactivar">Desactivar</label> <input type="radio" name="masculino" id="input_masculino">
+                    </div>
+            </div>
+        </div>
+
+        <div class="datosLector">
+            
+            <div>
+                <h3>Datos Personales</h3>
+                <div class="contenedorInfo">
+                <label class="label2" for="#">Primer Nombre</label>
+                <input class="inputDatos" type="text" name="nombre" id="input_nombre">
+                </div>
+
+                <div class="contenedorInfo">
+                <label class="label2" for="nombre2">Segundo Nombre</label> 
+                <input class="inputDatos" type="text" name="nombre2" id="input_nombre2">
+                </div>
+                
+                <div class="contenedorInfo">
+                <label class="label2" for="apellido">Primer Apellido</label> 
+                <input class="inputDatos" type="text" name="apellido" id="input_apellido1">
+                </div>
+
+                <div class="contenedorInfo">
+                <label class="label2" for="apellido2">Segundo Apellido</label> 
+                <input class="inputDatos" type="text" name="apellido2" id="input_apellido2">
+                </div>
+
+                <div class="contenedorInfo">
+                <label class="label2" for="correo">Correo</label> 
+                <input class="inputDatos" type="email" name="input_email" id="input_email">
+                </div>
+                
+                <div class="contenedorInfo">
+                <label class="label2" for="cedula">Cédula</label> 
+                <input class="inputDatos" type="number" name="cedula" id="input_cedula">
+                </div>
+
+                <div class="contenedorInfo">
+                <label class="label2" for="nacimiento">Fecha de Nacimiento</label> 
+                <input class="inputDatos" type="date" name="nacimiento" id="input_nacimiento">
+                </div>
+
+                <div class="contenedorInfo">
+                <label class="label2"  for="sexo">Sexo</label>
+                <label class="opcionRadio" for="masculino">Masculino</label> <input type="radio" name="masculino" id="input_masculino">
+                <label class="opcionRadio" for="femenino">Fememnino</label> <input type="radio" name="input_femenino" id="input_fememnino">
+                </div>
+
+                <div class="contenedorInfo">
+                <label class="label2" for="password">Contraseña</label> 
+                <input class="inputDatos" type="password" name="pass" id="input_pass">
+                </div>
+
+                <div class="contenedorInfo">
+                <label class="label2" for="password">Confirmar contraseña</label> 
+                <input class="inputDatos" type="password" name="pass" id="input_pass">
+                </div>
+
+            </div>
+        </div>
+
+    <div class="direccion">
+
+    </div>
+    </main>
+</body>
+</html>
