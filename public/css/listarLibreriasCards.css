@@ -130,7 +130,7 @@ footer {
   background-color: #315c74;
   color: #ffffff;
   padding: 15px 0px;
-  position: relative;
+  /* position: relative; */
   font-size: 16px;
   color: #ffffff;
   bottom: 0px;
@@ -142,6 +142,14 @@ footer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto;
+
+}
+.PerfilblockFooter {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto;
+    position: absolute;
+    background-color: #315c74;
 }
 
 .logos img {
@@ -238,6 +246,12 @@ footer {
   grid-template-columns: 1fr 1fr  ;
   grid-template-rows: auto;
 }
+
+.blockPerfilRows {
+  display: grid;
+  grid-template-columns: 1fr   ;
+  grid-template-rows: 1fr 1fr 1fr;
+}
 #twoColumns  {
   float: left;
   width: 50%;
@@ -282,4 +296,25 @@ footer {
   font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
   font-size: 25px;
 
+}
+
+.threeColumns {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr ;
+  grid-template-rows: 200px ;
+}
+* {box-sizing: border-box;}
+
+.threeColumns {
+  border: 2px solid #f76707;
+  border-radius: 5px;
+  background-color: #fff4e6;
+}
+
+.threeColumns > div {
+  border: 10px solid #ffa94d;
+  border-radius: 5px;
+  background-color: #ffd8a8;
+  padding: 1em;
+  color: #d9480f;
 }
