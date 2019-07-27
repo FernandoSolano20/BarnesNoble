@@ -62,9 +62,9 @@ let obtenerCredenciales = async (event) => {
 
 let olvidePass = async function () {
     const { value: email } = await Swal.fire({
-        title: 'Input email address',
+        title: 'Digite su correo eléctronico',
         input: 'email',
-        inputPlaceholder: 'Enter your email address'
+        inputPlaceholder: 'Correo eléctronico'
     });
 
     let usuario = {
