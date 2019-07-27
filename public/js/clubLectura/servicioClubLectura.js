@@ -1,6 +1,6 @@
 'use strict';
 
-let registrarClubLectura = (pnombre, ptema, ptipoClub, pfechaReunion , phoraReunion, pIdChat, pIdSucursal, pIdCategoria, pIdGenero, pIdUsuario,) => {
+let registrarClubLectura = (pnombre, ptema, ptipoClub, pfechaReunion , phoraReunion, pIdSucursal, pIdCategoria, pIdGenero, pIdUsuario,) => {
     axios({
         method: 'post',
         url: 'http://localhost:4000/api/clubLectura/registrarClubLectura',
@@ -11,12 +11,10 @@ let registrarClubLectura = (pnombre, ptema, ptipoClub, pfechaReunion , phoraReun
             tipoClub: ptipoClub,
             fechaReunion: pfechaReunion,
             horaReunion: phoraReunion,
-            IdSucursal: pIdSucursal,
-            IdCategoria:pIdCategoria,
-            IdGenero:pIdGenero,
-            IdUsuario: pIdUsuario,
-            IdChat: pIdChat
-
+            sucursal: pIdSucursal,
+            categoria:pIdCategoria,
+            genero:pIdGenero,
+            administrador: pIdUsuario
         }
     });
 };

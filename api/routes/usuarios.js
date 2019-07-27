@@ -42,28 +42,27 @@ router.post('/registrarUsuario', function (req, res) {
         telefono: body.telefono,
         tipoUsuario: body.tipoUsuario,
         nacimiento: body.nacimiento,
-        sennas: body.sennas,
-        alias: body.alias,
-
-        localizacionLatitud: body.localizacionLatitud,
-        localizacionLongitud: body.localizacionLongitud,
         estado: body.estado,
 
         // /Direccion/
         provincia: body.provincia,
         canton: body.canton,
         distrito: body.distrito,
+        sennas: body.sennas,
+        localizacionLatitud: body.localizacionLatitud,
+        localizacionLongitud: body.localizacionLongitud,
     });
     // /Datos Extra-Lector/
-    
+    if(body.alias)
+        nuevoUsuario.alias = body.alias;
     if (body.autor)
-        nuevoUsuario.autor = body.autor
+        nuevoUsuario.autor = body.autor;
     if (body.genero)
-        nuevoUsuario.genero = body.genero
+        nuevoUsuario.genero = body.genero;
     if (body.libro)
-        nuevoUsuario.libro = body.libro
+        nuevoUsuario.libro = body.libro;
     if (body.categoria)
-        nuevoUsuario.categoria = body.categoria
+        nuevoUsuario.categoria = body.categoria;
     let createLibreria;
     let createUser = true;
     Usuario.findOne({ id: req.body.id }).then(
