@@ -55,23 +55,41 @@ let mostrarTabla = async () => {
         categoria.classList.add('categoria');
         categoria.innerText = `Categoría: ${listaLibros[i].categoria.nombre}`;
 
-        let pprecio = document.createElement('p');
+        /* let pprecio = document.createElement('p');
         pprecio.classList.add('precio');
-        pprecio.innerText = `Precio: ${formatNumber.new(listaLibros[i].precio, "¢")}`;
+        pprecio.innerText = `Precio: ${formatNumber.new(listaLibros[i].precio, "¢")}`; */
+
+        let contenedorBotones = document.createElement('div');
+        contenedorBotones.classList.add('contenedor');
+        contenedorBotones.classList.add('column');
+
+
 
         let btnPerfil = document.createElement('button');
+        btnPerfil.classList.add('dosColumnas');
         btnPerfil.classList.add('botonVerLibro');
         btnPerfil.classList.add('material-blue');
         btnPerfil.setAttribute('id', 'verPerfil');
         btnPerfil.setAttribute('type', 'button');
         btnPerfil.innerText = 'Ver Perfil';
 
+        let btnAgregarTipo = document.createElement('button');
+        btnAgregarTipo.classList.add('dosColumnas');
+        btnAgregarTipo.classList.add('botonVerLibro');
+        btnAgregarTipo.classList.add('material-blue');
+        btnAgregarTipo.setAttribute('id', 'verPerfil');
+        btnAgregarTipo.setAttribute('type', 'button');
+        btnAgregarTipo.innerText = 'Agregar tipo';
+
         contenedorLibro.appendChild(header);
         contenedorLibro.appendChild(contenedorImagen);
         contenedorLibro.appendChild(genero);
         contenedorLibro.appendChild(categoria);
-        contenedorLibro.appendChild(pprecio);
-        contenedorLibro.appendChild(btnPerfil);
+        //contenedorLibro.appendChild(pprecio);
+        contenedorLibro.appendChild(contenedorBotones);
+        contenedorBotones.appendChild(btnAgregarTipo);
+        contenedorBotones.appendChild(btnPerfil);
+
 
         sctLibros.appendChild(contenedorLibro);
 

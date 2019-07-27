@@ -1,0 +1,124 @@
+.menuLP img{
+    width: 60%;
+    padding: 10px;
+    margin-top: 10px;
+  }
+  
+  .list-menuLP{
+    margin: 0 auto;
+    display: inline;
+  }
+  
+  .list-menuLP{
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: auto;
+  }
+  .linksInternos{
+    float: left;
+  }
+  
+  .btn_usuarios button{
+    background: #f6c249;
+    font-size: 12px;
+    margin-left: 100px;
+    border-radius: 50px;
+    border: none;
+    margin-top: 12px;
+    padding: 14px;
+    width: 40%;
+    box-shadow: 0 0 5px;
+  }
+  
+  .menuLP button a{
+    text-decoration: none;
+    font-family: 'Roboto' sans-serif;
+    color: #ffffff;
+  }
+  
+  .menuLP button:hover{
+    background: #e9ab1bea;
+    --webkit-transition: all .5s;
+    -o-transition: all .5s;
+  }
+  
+  .cta_btn{
+      text-align: center;
+  }
+  .cta_btn button{
+    background:  #f6c249;
+    font-size: 12px;
+    border-radius: 50px;
+    border: none;
+    margin-bottom: 26px;
+    width: 14%;
+    color: #ffffff;
+    box-shadow: 0 0 5px;
+  }
+   .cta_btn button  a{
+    text-decoration: none;
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    color: #ffffff;
+    font-size: 1rem;
+    line-height: 56px;
+  }
+   .cta_btn button:hover {
+    background: #e9ab1bea;
+    --webkit-transition: all .5s;
+    -o-transition: all .5s;
+  }
+  
+  header .menuHorizontal ul li a {
+    color: #fff;
+      display: block;
+      text-decoration: none;
+      padding-top: 20px;
+      padding-left: 8px;
+  }
+
+  .infoLogo{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+  }
+
+  .infoLogo img{
+    width: 30%;
+    margin: 0 auto;
+  }
+
+  .infoLogo p{
+      font-size: 1rem;
+      font-family: 'Roboto' sans-serif;
+  }
+
+  .misionVision{
+    display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+  }
+
+  .valores1{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+  }
+
+  .valores2{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+  }
+
+  .integrantes1{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+  }
+
+  .integrantes2{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+  }

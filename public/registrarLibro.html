@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Barnes & Noble</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/botones.css">
+    <link rel="stylesheet" href="css/registroFormulario.css">
+    <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
+    <link rel="stylesheet" href="css/loadingBar.css">
+</head>
+
+<body>
+    <div class="loading-bar"></div>
+    <header>
+        <nav class="menuHorizontal">
+            <ul class="list-menu">
+                <li><a href="index.html"><i class="far fa-home"></i>Inicio</a></li>
+                <li class="submenu">
+                    <a href="#"><i class="far fa-sign-out-alt"></i>Registrarse</a>
+                    <ul class="children">
+                        <li><a href="registroUsuarios.html">Lector <span class="fas fa-users"></span></a></li>
+                        <li><a href="registroLibreria.html">Librería <span class="fas fa-users"></span></a></li>
+                    </ul>
+                </li>
+                <li class="submenu">
+                    <a href="inicioSesion.html"><i class="far fa-sign-out-alt"></i>Iniciar sesión</a>
+                </li>
+                <li><a href="contacto.html"><i class="fal fa-address-book"></i>Contacto</a></li>
+                <li class="link-imagen"><img src="img/logo_barnes-and-noble.png" alt="Logo de Barnes&Noble"></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Formulario de Registro de Libro</h2>
+        <form class="formRegistro" name="formulario_registro">
+            <div class="column">
+                <div>
+                    <h3>Seleccione el formato de libro</h3>
+                </div>
+                <div class="inputGroup radio">
+                    <input type="radio" name="id" id="cedula-input" value="Cédula" checked>
+                    <label for="cedula-input" class="labelRadio">Físico</label>
+                    <input type="radio" name="id" id="pasaporte-input" value="Pasaporte">
+                    <label for="pasaporte-input" class="labelRadio">Digital</label>
+                    <input type="radio" name="id" id="residente-input" value="Residente">
+                    <label for="residente-input" class="labelRadio">De Bolsillo</label>
+                </div>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alertitulo">La identificación debe tener 9 dígitos.</span>
+                    <label class="label" for="titulo" id="labelID">Título:</label>
+                    <input type="text" id="titulo" name="Cédula">
+                </div>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alertEdicion">El campo no puede estar vacío</span>
+                    <label class="label" for="edicionInput">Año de Edición</label>
+                    <input type="text" id="edicionInput" name="edicion">
+                </div>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alertEditorial">Digite solo letras.</span>
+                    <label class="label" for="editorialInput">Editorial</label>
+                    <input type="text" id="editorialInput" name="editorial">
+                </div>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alertISBN10">Digite solo letras.</span>
+                    <label class="label" for="ISBN10Input">Código ISBN-10:</label>
+                    <input type="text" id="ISBN10Input" name="ISBN10">
+                </div>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alertISBN13">Digite solo letras.</span>
+                    <label class="label" for="ISBN13Input">Código ISBN-13:</label>
+                    <input type="text" id="ISBN13Input" name="ISBN13">
+                </div>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alertPrecio">El correo no cumple con el formato.</span>
+                    <label class="label" for="precioInput">Precio:</label>
+                    <input type="email" id="precioInput" name="precio">
+                </div>
+                
+                <!-- <div class="inputGroup">
+                    <span class="left alertHidden" id="alert-date">Debe ser menor al día de hoy.</span>
+                    <label class="label" for="nacimiento-input">Idioma-Fecha de nacimiento:</label>
+                    <input type="date" id="nacimiento-input" name="fecha de nacimiento">
+                </div> -->
+
+            </div>
+            <div class="column">
+                <div>
+                    <h3>Seleccione Genero y Categoría</h3>
+                </div>
+                <div class="inputGroup box">
+                    <span class="left alertHidden" id="alert-favorito">Seleccione una opción.</span>
+                    <select name="autor" id="autor"></select>
+                </div>
+                <div class="inputGroup box">
+                    <select name="genero" id="genero"></select>
+                </div>
+                <div class="inputGroup box">
+                    <select name="categoria" id="categoria"></select>
+                </div>
+                <div>
+                    <h3>Asigne la foto de portada</h3>
+                </div>
+
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alertImg1">Debe ser un archivo png o jpg.</span>
+                    <label class="labelFile">
+                        <i class="fal fa-file-image"></i>
+                        <span class="title">Agregue imagen</span>
+                        <input type="file" / id="img1">
+                    </label>
+                </div>
+
+                <div>
+                        <h3>Asigne la foto de la contraportada (Opcional)</h3>
+                    </div>
+    
+                    <div class="inputGroup">
+                        <span class="left alertHidden" id="alertImg2">Debe ser un archivo png o jpg.</span>
+                        <label class="labelFile">
+                            <i class="fal fa-file-image"></i>
+                            <span class="title">Agregue imagen</span>
+                            <input type="file" / id="img2">
+                        </label>
+                    </div>
+
+
+            </div>
+        </form>
+
+        <div class="crear-contenedor">
+            <button type="button" class="material-blue" id="registrar"><i
+                    class="far fa-clipboard-list"></i>Registrar</button>
+        </div>
+    </main>
+
+    </div>
+    <footer>
+        <div class="blockFooter">
+            <div class="logos">
+                <a href="#"><img src="img/barnes_and_noble_logo_png_94486.png" alt="Logo de Barnes&Noble"></a>
+                <a href="#"><img src="img/barnes_and_noble_logo_png_94486.png" alt="Logo Fundacion Book for kids"></a>
+            </div>
+            <div class="copyrights">
+                <h3> ⓒ 2019 Valhalla</h3>
+            </div>
+            <div class="redesSociales">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-pinterest"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+
+    </footer>
+    <script src="js/maps/maps.js"></script>
+    <script src="js/imagen/servicioImagen.js"></script>
+    <script src="js/usuarios/servicioUsuario.js"></script>
+    <script src="js/categoria/servicioCategoria.js"></script>
+    <script src="js/autor/servicioAutor.js"></script>
+    <script src="js/libros/servicioLibros.js"></script>
+    <script src="js/genero/servicioGenero.js"></script>
+    <script src="js/direccion/servicioDireccion.js"></script>
+    <script src="js/direccion/controladorDireccion.js"></script>
+    <script src="js/selects/controladorSelectsGenero.js"></script>
+    <script src="js/libros/controladorRegistarLibros.js"></script>
+    <script src="js/selects/controladorSelectsCategoria.js"></script>
+    <script src="js/selects/controladorSelectsAutor.js"></script>
+    <script src="js/selects/controladorSelectsLibro.js"></script>
+    <script src="js/validaciones/validacionesGenerales.js"></script>
+    <script src="js/usuarios/lector/controladorLector.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKXA3_YJlVwwt1lx60eO0ljRVUKQO3fNY&callback=initMap"
+        async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+</body>
+
+</html>
