@@ -18,7 +18,8 @@ router.post('/registrarSucursal', function (req, res) {
         localizacionLatitud: body.localizacionLatitud,
         provincia: body.provincia,
         canton: body.canton,
-        distrito: body.distrito
+        distrito: body.distrito,
+        estado: body.estado
     });
 
     nuevoSucursal.save(

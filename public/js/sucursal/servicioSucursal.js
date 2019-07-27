@@ -14,8 +14,8 @@ let registrarSucursal = (pnombre, ptelefono, pcorreo, plocalizacionLongitud , pl
             libreria: pIdLibreria,
             provincia:pIdProvincia,
             canton:pIdCanton,
-            distrito: pIdDistrito
-
+            distrito: pIdDistrito,
+            estado: 1
         }
     });
 };

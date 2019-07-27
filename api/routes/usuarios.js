@@ -101,7 +101,8 @@ router.post('/registrarUsuario', function (req, res) {
                                                     localizacionLongitud: body.localizacionLongitud,
                                                     provincia: body.provincia,
                                                     canton: body.canton,
-                                                    distrito: body.distrito
+                                                    distrito: body.distrito,
+                                                    estado: 1
                                                 });
                                                 createLibreria = await nuevaLibreria.save();
                                                 createUser = true;

@@ -5,21 +5,24 @@ const express = require('express'),
     Libreria = require('../models/libreria.model');
 
 
-router.get('/listarLibrerias', function (req, res) {
-    Libreria.find(function (err, libreriasDB) {
+router.get('/listarLibrerias', async (req, res) => {
+    return await Libreria.find(function (err, librerias) {
         if (err) {
             return res.status(400).json({
                 success: false,
-                msj: 'No se pueden listar las tarjetas',
+                message: 'No se encontro ninguna librería',
                 err
             });
-        } else {
+        }
+        else {
             return res.json({
                 success: true,
-                listaLibrerias: libreriasDB
-            })
+                listaLibrerias: librerias
+            });
         }
-    });
+    })
+        .populate('sucursales.sucursal', 'nombre')
+        .select('nombreComercial nombreFantasia localizacionLatitud localizacionLongitud provincia canton distrito estado sucursales');
 });
  
 module.exports = router;
