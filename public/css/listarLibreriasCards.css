@@ -130,7 +130,7 @@ footer {
   background-color: #315c74;
   color: #ffffff;
   padding: 15px 0px;
-  position: absolute;
+  position: relative;
   font-size: 16px;
   color: #ffffff;
   bottom: 0px;
@@ -235,8 +235,8 @@ footer {
 /* Css Ver Perfil */
 .blockPerfil {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr ;
-  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr  ;
+  grid-template-rows: auto;
 }
 #twoColumns  {
   float: left;
@@ -263,12 +263,6 @@ footer {
     text-align: center;
   }
 
-  /* #twoColumns img {
-    width: 100%;
-    margin-left: auto;
-   margin-right: auto;
-   vertical-align: middle;
-    } */
 
     #foto img {
       width: 40%;
@@ -281,16 +275,11 @@ footer {
     .foto {
       align-self: center;
     }
-    
-    #map {
-      height: 200px;
-      position: relative;
-      overflow: hidden;
-      width: 50%;
-      margin: 10px auto;
-  }
-  
-  .containerMap {
-      position: relative;
-      display: block;
-  }
+#div-ofertasLibreria h2 {
+  text-align: left;
+  color: #fff;
+  background-color: #315c74;
+  font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
+  font-size: 25px;
+
+}

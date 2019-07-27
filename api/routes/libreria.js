@@ -62,7 +62,7 @@ router.get('/buscarLibreria-nombreComercial/:nombreComercial', function (req, re
         } else {
             return res.json({
                 success: true,
-                listaLibrerias: libreriaDB
+                listaLibreria: libreriaDB
             })
         }
     });
