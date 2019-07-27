@@ -7,10 +7,12 @@ let librosSchema = new mongoose.Schema({
     edicion: { type: String, required: true, unique: false },
     editorial: { type: String, required: true, unique: false },
     annoEdicion: { type: String, required: true, unique: false },
-    isbl: { type: String, required: true, unique: false },
+    isbn_10: { type: String, required: true, unique: true },
+    isbn_13: { type: String, required: true, unique: true },
     caratula: { type: String, required: true, unique: false },
     contraportada: { type: String, required: true, unique: false },
     precio: { type: String, required: true, unique: false },
+    vendidos:{type: Number, required: false, unique: false},
     genero: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Genero',

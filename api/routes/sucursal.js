@@ -15,10 +15,10 @@ router.post('/registrarSucursal', function(req, res) {
         correo: body.correo,
         localizacionLongitud: body.localizacionLongitud,
         localizacionLatitud: body.localizacionLatitud,
-        IdLibreria:body.IdLibreria,
-        IdProvincia:body.IdProvincia,
-        IdCanton:body.IdCanton,
-        IdDistrito:body.IdDistrito
+        libreria:body.libreria,
+        provincia:body.provincia,
+        canton:body.canton,
+        distrito:body.distrito
     });
 
     nuevoSucursal.save(
@@ -41,6 +41,23 @@ router.post('/registrarSucursal', function(req, res) {
 
 router.get('/listarSucursales', function(req, res) {
     Sucursal.find(function(err, sucursalesBD) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                msj: 'No se pueden listar las sucursales',
+                err
+            });
+        } else {
+            return res.json({
+                success: true,
+                listaSucursales: sucursalesBD
+            });
+        }
+    })
+});
+
+router.get('/buscarIdLibreria/:id', function(req, res) {
+    Sucursal.find({libreria: req.params.id},function(err, sucursalesBD) {
         if (err) {
             return res.status(400).json({
                 success: false,

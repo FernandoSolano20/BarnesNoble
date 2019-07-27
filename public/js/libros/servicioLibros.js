@@ -1,6 +1,6 @@
 //ARCHIVO DE SERVICIO DE LIBROS, MARCO ARAGON
 'use strict';
-let registrarLibros = (ptitulo, pedicion, peditorial, pannoEdicion, pisbl, pcaratula, pcontraportada, pprecio, pidGenero, pidCategoria, pidAutor) => {
+let registrarLibros = (ptitulo, pedicion, peditorial, pannoEdicion, pisbn_10, pisbn_13, pcaratula, pcontraportada, pprecio, pvendidos, pidGenero, pidCategoria, pidAutor) => {
     axios({
         method: 'post',
         url: 'http://localhost:4000/api/libros/registrarLibro',
@@ -10,10 +10,12 @@ let registrarLibros = (ptitulo, pedicion, peditorial, pannoEdicion, pisbl, pcara
             edicion: pedicion,
             editorial: peditorial,
             annoEdicion: pannoEdicion,
-            isbl: pisbl,
+            isbn_10: pisbn_10,
+            isbn_13: pisbn_13,
             caratula: pcaratula,
             contraportada: pcontraportada,
             precio: pprecio,
+            vendidos: pvendidos,
             idGenero: pidGenero,
             idCategoria: pidCategoria,
             idAutor: pidAutor
@@ -50,13 +52,13 @@ let obtenerLibrosFetch = async () => {
     return result.listaLibros;
 }
 
-let obtenerLibrosId = async () => {
-    let response = await fetch('http://localhost:4000/api/libros/buscarLibroID', {
+let obtenerLibrosId = async (id) => {
+    let response = await fetch('http://localhost:4000/api/libros/buscarLibroID/' + id, {
         method: "GET",
         headers: {
             'Content-Type': 'application/json;charset=UTF-8',
         }
     });
     let result = await response.json();
-    return result.listaLibros;
+    return result;
 }

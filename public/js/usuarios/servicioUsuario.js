@@ -56,3 +56,18 @@ let obtenerLectorId = async(_id) => {
         console.log(error);
     }
 };
+let obtenerUsuarioPorId = async(id) => {
+    try {
+        // fetch data from an url endpoint
+        const response = await axios({
+            method: 'get',
+            url: `http://localhost:4000/api/buscarUsuario/${id}`,
+            responseType: 'json'
+        });
+
+        return response.data.usuarios;
+    } catch (error) {
+        console.log(error);
+    }
+};
+

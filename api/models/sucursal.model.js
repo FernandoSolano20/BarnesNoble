@@ -10,11 +10,15 @@ let sucursal_schema = new mongoose.Schema({
     telefono: { type: String, required: true, unique: false },
     localizacionLongitud: { type: String, required: true, unique: false },
     localizacionLatitud: { type: String, required: true, unique: false },
-    IdLibreria: { type: String, required: false, unique: false },
-    IdProvincia: { type: String, required: false, unique: false },
-    IdCanton: { type: String, required: false, unique: false },
-    IdDistrito: { type: String, required: false, unique: false }
+    libreria: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Libreria',
+        required: true
+    }, 
+    provincia: { type: String, required: false, unique: false },
+    canton: { type: String, required: false, unique: false },
+    distrito: { type: String, required: false, unique: false }
 
 });
 
-module.exports = mongoose.model('sucursal', sucursal_schema);
+module.exports = mongoose.model('Sucursal', sucursal_schema);
