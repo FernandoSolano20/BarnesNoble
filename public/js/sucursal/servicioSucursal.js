@@ -33,14 +33,3 @@ let obtenerSucursales = async() => {
         console.log(error);
     }
 };
-
-let obtenerSucursalesIdLibreria = async (id) => {
-    let response = await fetch('http://localhost:4000/api/sucursal/buscarIdLibreria/' + id, {
-        method: "GET",
-        headers: {
-            'Content-Type': 'application/json;charset=UTF-8',
-        }
-    });
-    let result = await response.json();
-    return result;
-}

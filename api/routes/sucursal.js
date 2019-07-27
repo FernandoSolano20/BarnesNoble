@@ -72,21 +72,4 @@ router.get('/listarSucursales', function (req, res) {
     })
 });
 
-router.get('/buscarIdLibreria/:id', function (req, res) {
-    Sucursal.find({ libreria: req.params.id }, function (err, sucursalesBD) {
-        if (err) {
-            return res.status(400).json({
-                success: false,
-                msj: 'No se pueden listar las sucursales',
-                err
-            });
-        } else {
-            return res.json({
-                success: true,
-                listaSucursales: sucursalesBD
-            });
-        }
-    })
-});
-
 module.exports = router;
