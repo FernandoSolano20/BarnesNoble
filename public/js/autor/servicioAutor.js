@@ -26,11 +26,11 @@ let obtenerAutorId = async(_id) => {
         
         const response = await axios({
             method: 'get',
-            url: `http://localhost:4000/api/buscarLectorId/${_id}`,
+            url: `http://localhost:4000/api/autor/buscarAutorId/${_id}`,
             responseType: 'json'
         });
 
-        return response.data.usuario;
+        return response.data.autor;
     } catch (error) {
         console.log(error);
     }

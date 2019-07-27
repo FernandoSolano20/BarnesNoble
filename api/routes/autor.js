@@ -53,7 +53,7 @@ router.get('/listarAutores', function (req, res) {
 });
 
 router.get('/buscarAutorId/:_id', function(req, res) {
-    Autor.findById(req.body._id, function(err, autoresBD) {
+    Autor.findById(req.params._id, function(err, autoresBD) {
         if (err) {
             return res.status(400).json({
                 success: false,
