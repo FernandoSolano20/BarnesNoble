@@ -6,17 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Barnes & Noble</title>
-    <script src="js/validarSesionLibreria.js"></script>
+    <script src="js/validarSesionLector.js"></script>
     <link rel="stylesheet" href="css/reset.css">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/menu.css">
-    <link rel="stylesheet" href="css/listarElementos.css">
-    <link rel="stylesheet" href="css/botones.css">
-    <link rel="stylesheet" href="css/searchBar.css">
-    <link rel="stylesheet" href="css/modal.css">
     <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
-
+    <link rel="stylesheet" href="css/perfilLibro.css">
+    <link rel="stylesheet" href="css/perfilSlider.css">
+    <link rel="stylesheet" href="css/voto.css">
+    <link rel="stylesheet" href="css/resennas.css">
+    <link rel="stylesheet" href="css/botones.css">
 </head>
 
 <body>
@@ -47,43 +47,236 @@
         </nav>
     </header>
     <main>
-        <div class="subcontenedor">
-            <div class="busqueda">
-                <input type="text" id="input-filtro" name="buscar" placeholder="Buscar...." autocomplete="off"
-                    autocorrect="off">
-                <button type="button" class="buscar"><i class="fa fa-search"></i><span>search</span></button>
+        <div class="perfil">
+            <div class="column">
+                <h1 id="titulo"></h1>
+                <div class="blog-slider__container">
+                    <div class="blogSlides fade">
+                        <div class="blog-slider__numbertext">1 / 3</div>
+                        <img id="caratula"
+                            src="">
+                        <div class="blog-slider__text">Portada</div>
+                    </div>
+
+                    <div class="blogSlides fade">
+                        <div class="blog-slider__numbertext">2 / 3</div>
+                        <img id="contraportada"
+                            src="">
+                        <div class="blog-slider__text">Contraportada</div>
+                    </div>
+
+                    <div class="blogSlides fade">
+                        <div class="blog-slider__numbertext">3 / 3</div>
+                        <img id="fotoAutor"
+                            src="">
+                        <div class="blog-slider__text">Autor</div>
+                    </div>
+
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+                    <div class="blogSlider__dots" style="text-align:center">
+                        <span class="blogSlider__dots--dot" onclick="currentSlide(1)"></span>
+                        <span class="blogSlider__dots--dot" onclick="currentSlide(2)"></span>
+                        <span class="blogSlider__dots--dot" onclick="currentSlide(3)"></span>
+                    </div>
+                </div>
+                <div class="infoLibro">
+                    <div class="table-div">
+                        <div class="table-cell-div">
+                            <div>
+                                <span class="container">
+                                    <span><i class="far fa-book-alt"></i><i class="otr fas fa-book-alt"></i></span>
+                                    <span><i class="far fa-book-alt"></i><i class="otr fas fa-book-alt"></i></span>
+                                    <span><i class="far fa-book-alt"></i><i class="otr fas fa-book-alt"></i></span>
+                                    <span><i class="far fa-book-alt"></i><i class="otr fas fa-book-alt"></i></span>
+                                    <span><i class="far fa-book-alt"></i><i class="otr fas fa-book-alt"></i></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="crear-contenedor">
+                        <button type="button" class="material-blue"><i class="far fa-plus-circle"></i>Agregar a
+                            carrito</button>
+                    </div>
+                </div>
             </div>
-            <div class="crear-contenedor">
-                <button type="button" class="material-blue" data-action="crear" id="crear-elemento"><i
-                        class="far fa-plus-circle"></i>Crear</button>
+            <div class="column ">
+                <div class="info">
+                    <h2>Información del libro</h2>
+                    <div>
+                        <span><i class="fas fa-newspaper"></i>Edición:</span>
+                        <p id="edicion"></p>
+                    </div>
+                    <div>
+                        <span><i class="fas fa-newspaper"></i>Editorial:</span>
+                        <p id="editorial"></p>
+                    </div>
+                    <div>
+                        <span><i class="far fa-book"></i>ISBN:</span>
+                        <p id="isbn10"></p>
+                    </div>
+                    <div>
+                        <span><i class="far fa-book"></i>ISBN:</span>
+                        <p id="isbn13"></p>
+                    </div>
+                    <div>
+                        <span><i class="far fa-money-bill"></i>Precio:</span>
+                        <p id="precio"></p>
+                    </div>
+                    <div>
+                        <span><i class="far fa-calendar-week"></i>Año de edición:</span>
+                        <p id="annoEdicion"></p>
+                    </div>
+
+                </div>
+                <div class="info">
+                    <h2>Categoría:</h2>
+                    <div>
+                        <span><i class="fal fa-books"></i>Categoría:</span>
+                        <p id="categoria"></p>
+                    </div>
+                </div>
+                <div class="info">
+                    <h2>Género:</h2>
+                    <div>
+                        <span><i class="fal fa-books"></i>Género:</span>
+                        <p id="genero"></p>
+                    </div>
+                </div>
+                <div class="info">
+                    <h2>Información del autor:</h2>
+                    <div>
+                        <span><i class="fas fa-user"></i>Nombre del autor:</span>
+                        <p id="autor"></p>
+                    </div>
+                    <div>
+                        <span><i class="fas fa-user"></i>Nombre artístico:</span>
+                        <p id="nombreArtistico"></p>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="contenedor-tabla">
-            <table class="tabla" id="tabla-elementos">
-                <thead>
-                    <tr>
-                        <th>Género</th>
-                        <th>Descripción</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
-                        <th>Activar/Desactivar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
-        <div id="modal" class="modal alert">
-            <div class="modal-content">
-                <div class="close" data-close="closeModal">&times;</div>
-                <p id="titulo-modal">Título</p>
-                <div class="alert-img-box" id="cuerpo-modal">
-                    <p class="alert-text" id="texto-modal">Hola.</p>
-                </div>
-                <div class="alert-btn-wrapper">
-                    <button class="alert-btn" id="cancel" data-close="closeModal">Cancelar</button>
-                    <button class="alert-btn primary" id="confirm">Confirmar</button>
-                </div>
+
+        <div class="site-container">
+            <h2 class="subtitle">Reseñas del libro</h2>
+            <div id="response-container">
+                <ul>
+                    <li class="article">
+                        <img src="https://res.cloudinary.com/barnesnoble/image/upload/v1563946031/d3ldkxrdj2iggc7rwb4o.png"
+                            alt="" class="fotoUsuario">
+                        <h2>
+                            <a href="https://www.nytimes.com/2019/06/11/arts/music/radiohead-ok-computer-demos.html">
+                                Fernando Solano
+                            </a>
+                        </h2>
+                        <div class="table-div">
+                            <div class="table-cell-div table-cell-resenna">
+                                <div>
+                                    <span class="container">
+                                        <div class="stars-outer far fa-book-alt">
+                                            <div class="stars-inner fas fa-book-alt" style="width: 81%;"></div>
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <p>Libro pesimo no me gusto muy largo y aburrido.
+                        </p>
+                    </li>
+
+                    <li class="article">
+                        <img src="https://res.cloudinary.com/barnesnoble/image/upload/v1563946031/d3ldkxrdj2iggc7rwb4o.png"
+                            alt="" class="fotoUsuario">
+                        <h2>
+                            <a href="https://www.nytimes.com/2019/06/11/arts/music/radiohead-ok-computer-demos.html">
+                                Fernando Solano
+                            </a>
+                        </h2>
+                        <div class="table-div">
+                            <div class="table-cell-div table-cell-resenna">
+                                <div>
+                                    <span class="container">
+                                        <div class="stars-outer far fa-book-alt">
+                                            <div class="stars-inner fas fa-book-alt" style="width: 81%;"></div>
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <p>Libro pesimo no me gusto muy largo y aburrido.
+                        </p>
+                    </li>
+
+                    <li class="article">
+                        <img src="https://res.cloudinary.com/barnesnoble/image/upload/v1563946031/d3ldkxrdj2iggc7rwb4o.png"
+                            alt="" class="fotoUsuario">
+                        <h2>
+                            <a href="https://www.nytimes.com/2019/06/11/arts/music/radiohead-ok-computer-demos.html">
+                                Fernando Solano
+                            </a>
+                        </h2>
+                        <div class="table-div">
+                            <div class="table-cell-div table-cell-resenna">
+                                <div>
+                                    <span class="container">
+                                        <div class="stars-outer far fa-book-alt">
+                                            <div class="stars-inner fas fa-book-alt" style="width: 81%;"></div>
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <p>Libro pesimo no me gusto muy largo y aburrido.
+                        </p>
+                    </li>
+
+                    <li class="article">
+                        <img src="https://res.cloudinary.com/barnesnoble/image/upload/v1563946031/d3ldkxrdj2iggc7rwb4o.png"
+                            alt="" class="fotoUsuario">
+                        <h2>
+                            <a href="https://www.nytimes.com/2019/06/11/arts/music/radiohead-ok-computer-demos.html">
+                                Fernando Solano
+                            </a>
+                        </h2>
+                        <div class="table-div">
+                            <div class="table-cell-div table-cell-resenna">
+                                <div>
+                                    <span class="container">
+                                        <div class="stars-outer far fa-book-alt">
+                                            <div class="stars-inner fas fa-book-alt" style="width: 81%;"></div>
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <p>Libro pesimo no me gusto muy largo y aburrido.
+                        </p>
+                    </li>
+
+                    <li class="article">
+                        <img src="https://res.cloudinary.com/barnesnoble/image/upload/v1563946031/d3ldkxrdj2iggc7rwb4o.png"
+                            alt="" class="fotoUsuario">
+                        <h2>
+                            <a href="https://www.nytimes.com/2019/06/11/arts/music/radiohead-ok-computer-demos.html">
+                                Fernando Solano
+                            </a>
+                        </h2>
+                        <div class="table-div">
+                            <div class="table-cell-div table-cell-resenna">
+                                <div>
+                                    <span class="container">
+                                        <div class="stars-outer far fa-book-alt">
+                                            <div class="stars-inner fas fa-book-alt" style="width: 81%;"></div>
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <p>Libro pesimo no me gusto muy largo y aburrido.
+                        </p>
+                    </li>
+                </ul>
             </div>
         </div>
     </main>
@@ -103,14 +296,14 @@
                 <a href="#"><i class="fab fa-twitter"></i></a>
             </div>
         </div>
-       
+
     </footer>
     <script src="js/cerrarSesion.js"></script>
     <script src="js/menu.js"></script>
-    <script src="js/genero/servicioGenero.js"></script>
-    <script src="js/genero/controladorGenero.js"></script>
-    <script src="js/genero/modalGenero.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="js/perfilSlider/slider.js"></script>
+    <script src="js/voto/animacion.js"></script>
+    <script src="js/libros/servicioLibros.js"></script>
+    <script src="js/libros/controladorPerfilLibro.js"></script>
 </body>
 
 </html>

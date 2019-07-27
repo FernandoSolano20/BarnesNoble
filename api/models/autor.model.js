@@ -10,8 +10,12 @@ let autorSchema = new mongoose.Schema({
     nombreArtistico: {type: String, required: true, unique: false },
     nacionalidad: {type: String, required: true, unique: false },
     foto: {type: String, required: true, unique: false },
-    lugarNacimiento: {type: String, required: true, unique: false },
-    estado: {type: Boolean, required: true, unique: false}
+    estado: {type: Boolean, required: true, unique: false},
+    premios: [{
+        nombre: {type: String, required: false},
+        anno: {type: String, required: false},
+        descripcion: {type: String, required: false} 
+    }]
 });
 
 

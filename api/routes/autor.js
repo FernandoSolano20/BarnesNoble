@@ -14,7 +14,6 @@ router.post('/registrarAutor', function (req, res) {
         nombreArtistico: body.nombreArtistico,
         nacionalidad: body.nacionalidad,
         foto: body.foto,
-        lugarNacimiento: body.lugarNacimiento,
         estado: body.estado,
     });
 
@@ -51,6 +50,23 @@ router.get('/listarAutores', function (req, res) {
             })
         }
     });
+});
+
+router.get('/buscarAutorId/:_id', function(req, res) {
+    Autor.findById(req.params._id, function(err, autoresBD) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                msj: 'No se encontró ningún autor con ese _id',
+                err
+            });
+        } else {
+            return res.json({
+                success: true,
+                autor: autoresBD
+            });
+        }
+    })
 });
 
 module.exports = router;

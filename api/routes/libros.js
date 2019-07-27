@@ -9,8 +9,6 @@ router.param('_id', function (req, res, next, _id) {
 
 })
 
-//Definición de la ruta para registrar libros
-
 router.post('/registrarLibro', function (req, res) {
     let body = req.body;
     let nuevoLibro = new Libros({
@@ -35,14 +33,14 @@ router.post('/registrarLibro', function (req, res) {
             if (err) {
                 return res.status(400).json({
                     success: false,
-                    msj: 'No registró el libro correctamente',
+                    msj: 'No registrÃ³ el libro correctamente',
                     err
                 });
 
             } else {
                 res.json({
                     success: true,
-                    msj: 'Se registró correctamente el libro'
+                    msj: 'Se registrÃ³ correctamente el libro'
                 });
             }
         }
@@ -72,32 +70,37 @@ router.get('/listarLibros', async (req, res) => {
 });
 
 router.get('/buscarLibroID/:id', async (req, res) => {
-    
+
     return await Libros.findById(req.params.id, function (err, LibroBD) {
         if (err) {
             return res.status(400).json({
                 success: false,
-                msj: 'No se encontro ningún libro',
+                msj: 'No se encontro ningÃºn libro',
                 err
             });
         }
         else {
             return res.json({
                 success: true,
-                listaLibros: LibroBD
+                listaLibro: LibroBD
             });
         }
     })
         .populate('genero', 'nombre -_id')
         .populate('categoria', 'nombre -_id')
-        .populate('autor', 'nombre -_id')
-        .select('titulo genero categoria autor');
-    
+        .populate('autor', 'nombre resenna fechaNacimiento fechaMuerte nombreArtistico nacionalidad foto lugarNacimiento -_id')
+        .select('titulo edicion editorial annoEdicion isbn_10 isbn_13 caratula contraportada precio vendidos genero categoria autor');
+
 });
 
 router.get('/listarMasVendidos', function (req, res) {
     let criterioOrden = { vendidos: -1 };
+<<<<<<< HEAD
     Libros.find(function(err,LibrosBD){
+=======
+    
+    Libros.find(function (err, LibrosBD) {
+>>>>>>> de1939adb83ba2acf509665bfa1c57864f530291
         if (err) {
             return res.status(400).json({
                 success: false,

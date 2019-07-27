@@ -52,13 +52,13 @@ let obtenerLibrosFetch = async () => {
     return result.listaLibros;
 }
 
-let obtenerLibrosId = async () => {
-    let response = await fetch('http://localhost:4000/api/libros/buscarLibroID', {
+let obtenerLibrosId = async (id) => {
+    let response = await fetch('http://localhost:4000/api/libros/buscarLibroID/' + id, {
         method: "GET",
         headers: {
             'Content-Type': 'application/json;charset=UTF-8',
         }
     });
     let result = await response.json();
-    return result.listaLibros;
+    return result;
 }

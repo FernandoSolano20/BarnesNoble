@@ -1,3 +1,12 @@
+<<<<<<< HEAD
+=======
+html{
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+
+}
+
+>>>>>>> de1939adb83ba2acf509665bfa1c57864f530291
 .menuLP img{
     width: 60%;
     padding: 10px;
@@ -81,44 +90,161 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: auto;
+<<<<<<< HEAD
+=======
+      padding: 40px;
+    vertical-align: middle;
+>>>>>>> de1939adb83ba2acf509665bfa1c57864f530291
   }
 
   .infoLogo img{
     width: 30%;
     margin: 0 auto;
+<<<<<<< HEAD
   }
 
   .infoLogo p{
       font-size: 1rem;
       font-family: 'Roboto' sans-serif;
+=======
+    
+  }
+
+  .infoLogo p{
+      font-size: 1.6rem;
+      font-family: 'Roboto' sans-serif;
+      font-weight: 600;
+      color: #222;
+      line-height: 40px;
+      vertical-align: middle;
+>>>>>>> de1939adb83ba2acf509665bfa1c57864f530291
   }
 
   .misionVision{
     display: grid;
+<<<<<<< HEAD
       grid-template-columns: 1fr 1fr;
       grid-template-rows: auto;
   }
 
+=======
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    padding: 40px;
+    grid-gap: 100px;
+    text-align: center;
+    background-color: #80d1d3;
+    padding: 40px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px -6px #222;
+    line-height: 20px;
+    color: #ffffff;
+}
+
+.misionVision h3{
+  font-size: 1.5rem;
+  padding: 10px;
+
+}
+  
+>>>>>>> de1939adb83ba2acf509665bfa1c57864f530291
   .valores1{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto;
+<<<<<<< HEAD
+=======
+    grid-gap: 20px;
+    padding: 40px;
+>>>>>>> de1939adb83ba2acf509665bfa1c57864f530291
   }
 
   .valores2{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: auto;
+<<<<<<< HEAD
+=======
+    grid-gap: 20px;
+    padding: 40px;
+>>>>>>> de1939adb83ba2acf509665bfa1c57864f530291
   }
 
   .integrantes1{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto;
+<<<<<<< HEAD
+=======
+    grid-gap: 20px;
+    padding: 40px;
+>>>>>>> de1939adb83ba2acf509665bfa1c57864f530291
   }
 
   .integrantes2{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto;
+<<<<<<< HEAD
   }
+=======
+    grid-gap: 20px;
+    padding: 40px;
+    background-color: #faf8dd;
+    padding-bottom: 40px;
+  }
+
+  .cardValor{
+    border-bottom: 1px solid #222;
+    -webkit-box-shadow: 0 4px 6px -6px #222;
+    -moz-box-shadow: 0 4px 6px -6px #222;
+    box-shadow: 0 4px 6px -6px #222;
+    padding: 10px;
+  }
+
+  .cardValor h3{
+    background-color: #315c74;
+    color: #fff;
+    font-family: Roboto;
+    padding: 10px;
+    text-align: center;
+    line-height: 20pxpx;
+  }
+  .cardValor p{
+    padding: 10px;
+    text-align: center;
+    margin: 0 auto;
+    line-height: 20px;
+  }
+
+  .cardIntegrante img{
+    width: 60%; 
+    padding: 20px;
+    border-radius: 50%;
+    background-color: #f6c249;
+    margin-left: 20%;
+  }
+
+  .cardIntegrante h3{
+    font-size: 1.5rem;
+    text-align: center;
+    line-height: 42px;
+  }
+
+  .cardIntegrante h4{
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  h2{
+    font-family: 'Roboto', sans-serif;
+    font-size: 2rem;
+    color: #f2a5a0;
+    padding: 26px;
+    text-align: center;
+  }
+
+  .integrantes{
+    background-color: #faf8dd;
+  }
+>>>>>>> de1939adb83ba2acf509665bfa1c57864f530291
