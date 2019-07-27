@@ -204,10 +204,93 @@ footer {
 #listaLibrerias .card {
     width: 30%;
     float: left;
+    margin: 30px 1%;
 }
 
 #listaLibrerias .card header{
     background: #315c74;
     color: #fff;
-    
+    text-align: center;
+    height: 30px;
+    padding-top: 10px;
+   
 }
+
+#listaLibrerias .card .contenerdorImagen img {
+  width: 100%;
+   margin-left: auto;
+  margin-right: auto;
+  vertical-align: middle;
+}
+
+#listaLibrerias .card p{
+  background: #77c2eb;
+  color: black;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+ 
+}
+
+/* Css Ver Perfil */
+.blockPerfil {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr ;
+  grid-template-rows: 1fr;
+}
+#twoColumns  {
+  float: left;
+  width: 50%;
+  height: 150px;
+  }
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .libreriaPerfilFoto  img {
+    width: 25%;
+     margin-left: auto;
+    margin-right: auto;
+    vertical-align: middle;
+  }
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+    text-align: center;
+  }
+
+  /* #twoColumns img {
+    width: 100%;
+    margin-left: auto;
+   margin-right: auto;
+   vertical-align: middle;
+    } */
+
+    #foto img {
+      width: 40%;
+      align-self: center;
+      display: flex;
+      margin: 0 auto;
+      padding: 8px;
+    }
+    
+    .foto {
+      align-self: center;
+    }
+    
+    #map {
+      height: 200px;
+      position: relative;
+      overflow: hidden;
+      width: 50%;
+      margin: 10px auto;
+  }
+  
+  .containerMap {
+      position: relative;
+      display: block;
+  }

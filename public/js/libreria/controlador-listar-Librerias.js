@@ -18,6 +18,8 @@ let mostrar_tabla = async() => {
         fila.insertCell().innerHTML = listaLibrerias[i]['provincia'];
         fila.insertCell().innerHTML = listaLibrerias[i]['provincia'];
         fila.insertCell().innerHTML = listaLibrerias[i]['distrito'];
+        // fila.insertCell().innerHTML = listaLibrerias[i]['localizacionLatitud'];
+        // fila.insertCell().innerHTML = listaLibrerias[i]['localizacionLongitud'];
        
     }
 };
@@ -43,11 +45,11 @@ let filtrar_tabla = async() => {
             fila.insertCell().innerHTML = listaLibrerias[i]['provincia'];
             fila.insertCell().innerHTML = listaLibrerias[i]['provincia'];
             fila.insertCell().innerHTML = listaLibrerias[i]['distrito'];
+            // fila.insertCell().innerHTML = listaLibrerias[i]['localizacionLatitud'];
+            // fila.insertCell().innerHTML = listaLibrerias[i]['localizacionLongitud'];
         }
     }
 };
 
 txtFiltro.addEventListener('keyup', filtrar_tabla);
-
-
 
