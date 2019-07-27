@@ -51,7 +51,16 @@ let usuarios_schema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Libreria',
         required: false
-    }
+    },
+    ejemplares: [{
+        libro: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Libro',
+            required: false
+        },
+        cantidad: { type: Number, required: false, unique: false },
+        estadoIntercambio: { type: Boolean, required: false, unique: false, default: true }
+    }]
 });
 
 module.exports = mongoose.model('Usuario', usuarios_schema); 

@@ -15,11 +15,10 @@ router.post('/registrarClubLectura', function(req, res) {
         tipoClub: body.tipoClub,
         fechaReunion: body.fechaReunion,
         horaReunion: body.horaReunion,
-        IdSucursal:body.IdSucursal,
-        IdUsuario:body.IdUsuario,
-        IdCategoria:body.IdCategoria,
-        IdGenero:body.IdGenero,
-        IdChat:body.IdChat
+        sucursal:body.sucursal,
+        administrador:body.administrador,
+        categoria:body.categoria,
+        genero:body.genero
     });
 
     nuevoClubLectura.save(

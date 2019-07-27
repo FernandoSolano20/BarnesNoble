@@ -42,28 +42,27 @@ router.post('/registrarUsuario', function (req, res) {
         telefono: body.telefono,
         tipoUsuario: body.tipoUsuario,
         nacimiento: body.nacimiento,
-        sennas: body.sennas,
-        alias: body.alias,
-
-        localizacionLatitud: body.localizacionLatitud,
-        localizacionLongitud: body.localizacionLongitud,
         estado: body.estado,
 
         // /Direccion/
         provincia: body.provincia,
         canton: body.canton,
         distrito: body.distrito,
+        sennas: body.sennas,
+        localizacionLatitud: body.localizacionLatitud,
+        localizacionLongitud: body.localizacionLongitud,
     });
     // /Datos Extra-Lector/
-    
+    if(body.alias)
+        nuevoUsuario.alias = body.alias;
     if (body.autor)
-        nuevoUsuario.autor = body.autor
+        nuevoUsuario.autor = body.autor;
     if (body.genero)
-        nuevoUsuario.genero = body.genero
+        nuevoUsuario.genero = body.genero;
     if (body.libro)
-        nuevoUsuario.libro = body.libro
+        nuevoUsuario.libro = body.libro;
     if (body.categoria)
-        nuevoUsuario.categoria = body.categoria
+        nuevoUsuario.categoria = body.categoria;
     let createLibreria;
     let createUser = true;
     Usuario.findOne({ id: req.body.id }).then(
@@ -439,14 +438,21 @@ router.patch('/olvidarPass/:correo', function (req, res) {
     );
 });
 
-router.get('/buscarUsuario/:id', function (req, res) {
-    Usuario.findById(req.params.id, (err, usuario) => {
-        return res.status(200).json({
-            success: true,
-            message: "Usuario editado",
-            usuarios: usuario
-        })
-    });
+router.get('/buscarLectorId/:_id', function(req, res) {
+    Usuario.findById(req.body._id, function(err, usuarioBD) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                msj: 'No se encontró ningún contacto con ese _id',
+                err
+            });
+        } else {
+            return res.json({
+                success: true,
+                usuario: usuarioBD
+            });
+        }
+    })
 });
 
 module.exports = router;
