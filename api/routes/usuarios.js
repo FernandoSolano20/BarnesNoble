@@ -438,16 +438,6 @@ router.patch('/olvidarPass/:correo', function (req, res) {
     );
 });
 
-<<<<<<< HEAD
-router.get('/buscarUsuario/:id', function (req, res) {
-    Usuario.findById(req.params.id, (err, usuario) => {
-        return res.status(200).json({
-            success: true,
-            message: "Usuario editado",
-            usuarios: usuario
-        })
-    });
-=======
 router.get('/buscarLectorId/:_id', function(req, res) {
     Usuario.findById(req.body._id, function(err, usuarioBD) {
         if (err) {
@@ -463,7 +453,6 @@ router.get('/buscarLectorId/:_id', function(req, res) {
             });
         }
     })
->>>>>>> de1939adb83ba2acf509665bfa1c57864f530291
 });
 
 module.exports = router;

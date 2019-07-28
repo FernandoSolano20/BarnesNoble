@@ -10,17 +10,6 @@ let sucursal_schema = new mongoose.Schema({
     telefono: { type: String, required: true, unique: false },
     localizacionLongitud: { type: String, required: true, unique: false },
     localizacionLatitud: { type: String, required: true, unique: false },
-<<<<<<< HEAD
-    libreria: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Libreria',
-        required: true
-    }, 
-    provincia: { type: String, required: false, unique: false },
-    canton: { type: String, required: false, unique: false },
-    distrito: { type: String, required: false, unique: false }
-
-=======
     provincia: { type: String, required: false, unique: false },
     canton: { type: String, required: false, unique: false },
     distrito: { type: String, required: false, unique: false },
@@ -42,7 +31,6 @@ let sucursal_schema = new mongoose.Schema({
             required: false
         }
     }]
->>>>>>> de1939adb83ba2acf509665bfa1c57864f530291
 });
 
 module.exports = mongoose.model('Sucursal', sucursal_schema);

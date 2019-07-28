@@ -95,12 +95,7 @@ router.get('/buscarLibroID/:id', async (req, res) => {
 
 router.get('/listarMasVendidos', function (req, res) {
     let criterioOrden = { vendidos: -1 };
-<<<<<<< HEAD
     Libros.find(function(err,LibrosBD){
-=======
-    
-    Libros.find(function (err, LibrosBD) {
->>>>>>> de1939adb83ba2acf509665bfa1c57864f530291
         if (err) {
             return res.status(400).json({
                 success: false,
