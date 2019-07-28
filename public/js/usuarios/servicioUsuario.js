@@ -42,8 +42,6 @@ var cambiarPassword = async(usuario,id) => {
     return result;
 }
 
-<<<<<<< HEAD
-=======
 let obtenerLectorId = async(_id) => {
     try {
         
@@ -54,21 +52,6 @@ let obtenerLectorId = async(_id) => {
         });
 
         return response.data.usuario;
-    } catch (error) {
-        console.log(error);
-    }
-};
->>>>>>> de1939adb83ba2acf509665bfa1c57864f530291
-let obtenerUsuarioPorId = async(id) => {
-    try {
-        // fetch data from an url endpoint
-        const response = await axios({
-            method: 'get',
-            url: `http://localhost:4000/api/buscarUsuario/${id}`,
-            responseType: 'json'
-        });
-
-        return response.data.usuarios;
     } catch (error) {
         console.log(error);
     }

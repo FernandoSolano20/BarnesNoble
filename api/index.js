@@ -14,13 +14,12 @@ const usuario_route = require('./routes/usuarios');
 const sucursalRoute = require('./routes/sucursal');
 const autorRoute = require('./routes/autor');
 const librosRoute = require('./routes/libros');//marco aragon
-const librosTipoLibroRoute = require('./routes/librosTipoLibro');//marco aragon
 const imagenRoute = require('./routes/imagenes');
 const ofertasRoute = require('./routes/ofertas');//marco aragon
 const clubLecturaRoute = require('./routes/clubLectura')
-const tipoLibroRoute = require('./routes/tipoLibro');//marco aragon
 const libreria_route = require('./routes/libreria');
 const tarjeta_route = require('./routes/tarjeta');
+const ejemplarRoute = require('./routes/ejemplar');
 
 
 const app = express();
@@ -77,10 +76,8 @@ app.use('/api/sucursal', sucursalRoute);
 app.use('/api/imagen', imagenRoute);
 app.use('/api/autor', autorRoute);
 app.use('/api/libros', librosRoute);//marco aragon
-app.use('/api/libros', librosRoute);
-app.use('/api/librosTipoLibro', librosTipoLibroRoute);//marco aragon
 app.use('/api/clubLectura', clubLecturaRoute);
 app.use('/api/ofertas', ofertasRoute);//marco aragon
-app.use('/api/tipoLibro', tipoLibroRoute);//marco aragon
 app.use('/api', tarjeta_route);
 app.use('/api', libreria_route);
+app.use('/api/ejemplar', ejemplarRoute);

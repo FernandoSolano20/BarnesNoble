@@ -13,19 +13,11 @@ router.post('/registrarLibro', function (req, res) {
     let body = req.body;
     let nuevoLibro = new Libros({
         titulo: body.titulo,
-        edicion: body.edicion,
-        editorial: body.editorial,
-        annoEdicion: body.annoEdicion,
-        isbn_10: body.isbn_10,
-        isbn_13: body.isbn_13,
         caratula: body.caratula,
         contraportada: body.contraportada,
-        precio: body.precio,
-        vendidos: body.vendidos,
         genero: body.genero,
         categoria: body.categoria,
         autor: body.autor
-
     });
 
     nuevoLibro.save(
@@ -33,14 +25,14 @@ router.post('/registrarLibro', function (req, res) {
             if (err) {
                 return res.status(400).json({
                     success: false,
-                    msj: 'No registrÃ³ el libro correctamente',
+                    message: 'No se registro el libro correctamente',
                     err
                 });
 
             } else {
                 res.json({
                     success: true,
-                    msj: 'Se registrÃ³ correctamente el libro'
+                    message: 'Se registró correctamente el libro'
                 });
             }
         }
@@ -52,7 +44,7 @@ router.get('/listarLibros', async (req, res) => {
         if (err) {
             return res.status(400).json({
                 success: false,
-                msj: 'No se encontro ningún libro',
+                message: 'No se encontro ningún libro',
                 err
             });
         }
@@ -66,7 +58,7 @@ router.get('/listarLibros', async (req, res) => {
         .populate('genero', 'nombre -_id')
         .populate('categoria', 'nombre -_id')
         .populate('autor', 'nombre -_id')
-        .select('titulo edicion editorial annoEdicion isbn_10 isbn_13 caratula contraportada precio vendidos genero categoria autor');
+        .select('titulo caratula contraportada genero categoria autor');
 });
 
 router.get('/buscarLibroID/:id', async (req, res) => {
@@ -75,7 +67,7 @@ router.get('/buscarLibroID/:id', async (req, res) => {
         if (err) {
             return res.status(400).json({
                 success: false,
-                msj: 'No se encontro ningÃºn libro',
+                message: 'No se encontro ningún libro',
                 err
             });
         }
@@ -89,7 +81,7 @@ router.get('/buscarLibroID/:id', async (req, res) => {
         .populate('genero', 'nombre -_id')
         .populate('categoria', 'nombre -_id')
         .populate('autor', 'nombre resenna fechaNacimiento fechaMuerte nombreArtistico nacionalidad foto lugarNacimiento -_id')
-        .select('titulo edicion editorial annoEdicion isbn_10 isbn_13 caratula contraportada precio vendidos genero categoria autor');
+        .select('titulo caratula contraportada genero categoria autor');
 
 });
 
@@ -99,7 +91,7 @@ router.get('/listarMasVendidos', function (req, res) {
         if (err) {
             return res.status(400).json({
                 success: false,
-                msj: 'No se pueden listar los libros',
+                message: 'No se pueden listar los libros',
                 err
             });
         }else{
@@ -116,7 +108,7 @@ router.get('/titulo/:titulo', async (req, res) => {
         if (err) {
             return res.status(400).json({
                 success: false,
-                msj: 'No se encontro ningún libro',
+                message: 'No se encontro ningún libro',
                 err
             });
         }

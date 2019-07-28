@@ -43,49 +43,56 @@
         <h2>Formulario de Registro de Libro</h2>
         <form class="formRegistro" name="formulario_registro">
             <div class="column">
-                <div class="inputGroup">
-                    <span class="left alertHidden" id="alertitulo">La identificación debe tener 9 dígitos.</span>
-                    <label class="label" for="titulo">Título:</label>
-                    <input type="text" id="titulo" name="Título">
+                <div>
+                    <h3>Seleccione tipo de libro</h3>
+                </div>
+                <div class="inputGroup box">
+                    <span class="left alertHidden" id="alertTipoLibro">Seleccione una opción.</span>
+                    <select name="tipoLibro" id="tipoLibro">
+                        <option value="">--Seleccione un tipo de libro--</option>
+                        <option value="Bolsillo">Bolsillo</option>
+                        <option value="Dígital">Dígital</option>
+                        <option value="Tapa dura">Tapa dura</option>
+                        <option value="Tapa suave">Tapa suave</option>
+                    </select>
                 </div>
 
-                <div class="inputGroup" id="fotosLibro">
-                    <div>
-                        <h3>Foto de portada</h3>
-                        <span class="left alertHidden" id="alertImg1">Debe ser un archivo png o jpg.</span>
-                        <label class="labelFile">
-                            <i class="fal fa-file-image"></i>
-                            <span class="title">Agregue imagen</span>
-                            <input type="file" / id="img1">
-                        </label>
-                    </div>
-
-                    <div>
-                        <h3>Foto de la contraportada</h3>
-                        <span class="right alertHidden" id="alertImg2">Debe ser un archivo png o jpg.</span>
-                        <label class="labelFile">
-                            <i class="fal fa-file-image"></i>
-                            <span class="title">Agregue imagen</span>
-                            <input type="file" / id="img2">
-                        </label>
-                    </div>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alertIsbn10">La identificación debe tener 10 dígitos.</span>
+                    <label class="label" for="isbn10">ISBN 10:</label>
+                    <input type="text" id="isbn10" name="ISBN 10">
+                </div>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alertIsbn13">La identificación debe tener 13 dígitos.</span>
+                    <label class="label" for="isbn13">ISBN 13:</label>
+                    <input type="text" id="isbn13" name="ISBN 13">
+                </div>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alertCantidad"></span>
+                    <label class="label" for="cantidad">Cantidad:</label>
+                    <input type="text" id="cantidad" name="Cantidad">
                 </div>
             </div>
             <div class="column">
-                <div>
-                    <h3>Seleccione Genero y Categoría</h3>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alertPrecio"></span>
+                    <label class="label" for="precio">Precio:</label>
+                    <input type="text" id="precio" name="Precio">
                 </div>
-                <div class="inputGroup box">
-                    <span class="left alertHidden" id="alertAutor">Seleccione una opción.</span>
-                    <select name="autor" id="autor"></select>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alertEdicion"></span>
+                    <label class="label" for="edicion">Edición:</label>
+                    <input type="text" id="edicion" name="Edicion">
                 </div>
-                <div class="inputGroup box">
-                    <span class="left alertHidden" id="alertGenero">Seleccione una opción.</span>
-                    <select name="genero" id="genero"></select>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alertEditorial"></span>
+                    <label class="label" for="editorial">Editorial:</label>
+                    <input type="text" id="editorial" name="Editorial">
                 </div>
-                <div class="inputGroup box">
-                    <span class="left alertHidden" id="alertCategoria">Seleccione una opción.</span>
-                    <select name="categoria" id="categoria"></select>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alertAnnoEdicion"></span>
+                    <label class="label" for="annoEdicion">Año de edición:</label>
+                    <input type="text" id="annoEdicion" name="Año de edición">
                 </div>
             </div>
         </form>
@@ -115,16 +122,9 @@
         </div>
 
     </footer>
-    <script src="js/imagen/servicioImagen.js"></script>
-    <script src="js/categoria/servicioCategoria.js"></script>
-    <script src="js/autor/servicioAutor.js"></script>
-    <script src="js/libros/servicioLibros.js"></script>
-    <script src="js/genero/servicioGenero.js"></script>
+    <script src="js/ejemplar/servicioEjemplar.js"></script>
     <script src="js/validaciones/validacionesGenerales.js"></script>
-    <script src="js/selects/controladorSelectsGenero.js"></script>
-    <script src="js/selects/controladorSelectsCategoria.js"></script>
-    <script src="js/selects/controladorSelectsAutor.js"></script>
-    <script src="js/libros/controladorRegistarLibros.js"></script>
+    <script src="js/libros/controladorFormatoLibros.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </body>
 

@@ -1,5 +1,5 @@
 let mostrarUsuarioRegistrado = async() => {
-    let usuarioActual = await obtenerUsuarioPorId(sessionStorage.id);
+    let usuarioActual = await obtenerLectorId(sessionStorage.id);
 
     let avatar = document.getElementById('avatar_lector');
     let nombre = document.getElementById('nombre_lector');

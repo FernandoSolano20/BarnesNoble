@@ -440,7 +440,7 @@ router.patch('/olvidarPass/:correo', function (req, res) {
 });
 
 router.get('/buscarLectorId/:_id', function (req, res) {
-    Usuario.findById(req.body._id, function (err, usuarioBD) {
+    Usuario.findById(req.params._id, function (err, usuarioBD) {
         if (err) {
             return res.status(400).json({
                 success: false,

@@ -73,12 +73,12 @@ let mostrarTabla = async () => {
         btnPerfil.setAttribute('type', 'button');
         btnPerfil.innerText = 'Ver Perfil';
 
-        let btnAgregarTipo = document.createElement('button');
+        let btnAgregarTipo = document.createElement('a');
         btnAgregarTipo.classList.add('dosColumnas');
         btnAgregarTipo.classList.add('botonVerLibro');
         btnAgregarTipo.classList.add('material-blue');
         btnAgregarTipo.setAttribute('id', 'verPerfil');
-        btnAgregarTipo.setAttribute('type', 'button');
+        btnAgregarTipo.href = "http://localhost:3000/formatoLibro.html?id="+listaLibros[i]._id;
         btnAgregarTipo.innerText = 'Agregar tipo';
 
         contenedorLibro.appendChild(header);
