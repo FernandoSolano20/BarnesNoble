@@ -14,10 +14,8 @@
     <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
     <link rel="stylesheet" href="css/perfiles.css">
     <link rel="stylesheet" href="css/perfilSlider.css">
-    <link rel="stylesheet" href="css/voto.css">
-    <link rel="stylesheet" href="css/resennas.css">
-    <link rel="stylesheet" href="css/botones.css">
     <link rel="stylesheet" href="css/mapa.css">
+    <link rel="stylesheet" href="css/cardSucursal.css">
 </head>
 
 <body>
@@ -53,40 +51,28 @@
                 <h1 id="titulo"></h1>
                 <div class="blog-slider__container">
                     <div class="blogSlides fade">
-                        <img id="fotoPerfil" src="img/nouser.jpg">
-                        <div class="blog-slider__text">Foto de perfil</div>
+                        <img id="fotoPerfil" src="img/dibujo sucursal.png">
+                        <div class="blog-slider__text" id="tiendaNombre"></div>
                     </div>
-                </div>
-                <div class="informacion" id="contendorVotoPreferencia">
-                    <!-- <div class="table-div">
-                        <div class="table-cell-div">
-                            <div>
-                                <span class="container">
-                                    <span><i class="far fa-book-alt"></i><i class="otr fas fa-book-alt"></i></span>
-                                    <span><i class="far fa-book-alt"></i><i class="otr fas fa-book-alt"></i></span>
-                                    <span><i class="far fa-book-alt"></i><i class="otr fas fa-book-alt"></i></span>
-                                    <span><i class="far fa-book-alt"></i><i class="otr fas fa-book-alt"></i></span>
-                                    <span><i class="far fa-book-alt"></i><i class="otr fas fa-book-alt"></i></span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="preferencias">
-
-                    </div> -->
                 </div>
             </div>
-            <div class="column " id="informacionUsuario">
+            <div class="column " id="informacionLibreria">
 
             </div>
         </div>
 
+        <div class="contenedorSucursal">
+            <h2>Sucursales</h2>
+            <div class="containerCards" id="sucursales">
+
+            </div>
+        </div>
         <div class="containerMap">
             <div id="map"></div>
         </div>
 
         <div class="site-container" id="reviews">
-            
+
         </div>
     </main>
     <footer>
@@ -110,9 +96,9 @@
     <script src="js/cerrarSesion.js"></script>
     <script src="js/maps/showMap.js"></script>
     <script src="js/menu.js"></script>
-    <script src="js/voto/animacion.js"></script>
+    <script src="js/libreria/servicioLibreria.js"></script>
     <script src="js/usuarios/servicioUsuario.js"></script>
-    <script src="js/perfilUsuario/perfilUsuario.js"></script>
+    <script src="js/perfilLibreria/perfilLibreria.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKXA3_YJlVwwt1lx60eO0ljRVUKQO3fNY&callback=initMap"
         async defer></script>
 </body>

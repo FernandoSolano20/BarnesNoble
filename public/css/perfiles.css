@@ -4,8 +4,12 @@
 }
 
 .informacion {
-    margin: 85px;
+    margin: 65px;
     text-align: center;
+}
+
+#preferencias{
+    text-align: justify;
 }
 
 .column h1 {
@@ -35,4 +39,8 @@
 .column .info div p {
     font-size: 20px;
     margin-left: 30%;
+}
+
+.column .info .crear-contenedor{
+    margin: 40px;
 }

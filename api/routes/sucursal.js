@@ -72,4 +72,21 @@ router.get('/listarSucursales', function (req, res) {
     })
 });
 
+router.get('/sucursalId/:id', function (req, res) {
+    Sucursal.findById(req.params.id,function (err, sucursaleBD) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                msj: 'No se pueden listar las sucursales',
+                err
+            });
+        } else {
+            return res.json({
+                success: true,
+                sucursal: sucursaleBD
+            });
+        }
+    })
+});
+
 module.exports = router;
