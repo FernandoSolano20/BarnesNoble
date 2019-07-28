@@ -244,32 +244,32 @@ footer {
 .blockPerfil {
   display: grid;
   grid-template-columns: 1fr 1fr  ;
-  grid-template-rows: auto;
+  grid-template-rows: 1fm;
 }
 
 .blockPerfilRows {
   display: grid;
   grid-template-columns: 1fr   ;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 1fr ;
 }
 #twoColumns  {
   float: left;
   width: 50%;
   height: 150px;
   }
-  .row:after {
+.row:after {
     content: "";
     display: table;
     clear: both;
   }
 
-  .libreriaPerfilFoto  img {
+.libreriaPerfilFoto  img {
     width: 25%;
      margin-left: auto;
     margin-right: auto;
     vertical-align: middle;
   }
-  .center {
+.center {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -277,33 +277,145 @@ footer {
     text-align: center;
   }
 
-
-    #foto img {
+#foto img {
       width: 40%;
       align-self: center;
       display: flex;
       margin: 0 auto;
       padding: 8px;
+      width:75%;
     }
-    
-    .foto {
+.foto {
       align-self: center;
+      
     }
-#div-ofertasLibreria h2 {
+
+  #tbl-libreria h2{
+     text-align: center;
+      color: #fff;
+      background-color: #315c74;
+      font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
+      font-size: 25px;
+      margin: 15px 1%;
+      padding: 10px;
+    } 
+    #tbl-Libreria p {
+      text-align: left;
+   color: black;
+   font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
+   padding: 5px;
+   margin: 0px 1%;
+ }
+    
+
+
+#div-mapa h2 {
+  text-align: center;
+      color: #fff;
+      background-color: #315c74;
+      font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
+      font-size: 25px;
+      margin: 15px 1%;
+      padding: 10px;
+}
+
+#div-mapa iframe {
+  padding: 10px;
+}
+
+#tbl-ofertasLibreria h2{ 
   text-align: left;
   color: #fff;
   background-color: #315c74;
   font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
   font-size: 25px;
-
+  margin: 15px 1%;
+  padding: 10px;
 }
 
-.threeColumns {
+#tbl-ofertasLibreria h2 {
+  text-align: center;
+  color: #fff;
+  background-color: #315c74;
+  font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
+  font-size: 25px;
+  margin: 15px 1%;
+  padding: 10px;
+}
+#tbl-ofertasLibreria p {
+  text-align: left;
+   color: black;
+   font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
+   padding: 5px;
+   margin: 0px 1%;
+ }
+
+#tbl-clubesLectura h2 {
+ text-align: center;
+  color: #fff;
+  background-color: #315c74;
+  font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
+  font-size: 25px;
+  margin: 15px 1%;
+  padding: 10px;
+}
+#tbl-clubesLectura p {
+  text-align: left;
+   color: black;
+   font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
+   padding: 5px;
+   margin: 0px 1%;
+ }
+ 
+
+
+ .contenedor-tabla-libreria .tabla {
+  margin: 20px auto;
+  border: 2px solid #000;
+  box-shadow: 3px 3px 5px 6px #ccc;
+}
+
+.contenedor-tabla-libreria .tabla thead {
+  background-color: #315c74;
+  border: 2px solid #000;
+  color: #fff;
+  font-family: Roboto;
+}
+
+.contenedor-tabla-liberia .tabla thead th {
+  padding: 25px;
+}
+
+.contenedor-tabla-liberia .tabla tbody tr:hover {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.contenedor-tabla-liberia .tabla tbody td {
+  border-bottom: 2px solid black;
+}
+
+.contenedor-tabla-liberia .tabla thead th, .contenedor-tabla .tabla tbody td {
+  height: 30px;
+  padding: 15px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.contenedor-tabla-liberia .tabla tbody td:nth-child(2) {
+  text-align: justify;
+}
+
+.contenedor-tabla-liberia .tabla tbody td i {
+  font-size: 25px;
+}
+
+
+
+/* .threeColumns {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr ;
   grid-template-rows: 200px ;
 }
-* {box-sizing: border-box;}
 
 .threeColumns {
   border: 2px solid #f76707;
@@ -317,4 +429,4 @@ footer {
   background-color: #ffd8a8;
   padding: 1em;
   color: #d9480f;
-}
+} */

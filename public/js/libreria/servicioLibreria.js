@@ -24,7 +24,7 @@ let obtenerLibreriaId = async(_id) => {
             responseType: 'json'
         });
 
-        return response.data.listaLibrerias;
+        return response.data.listaLibreria;
     } catch (error) {
         console.log(error);
     }
