@@ -18,7 +18,8 @@ router.post('/registrarSucursal', function (req, res) {
         localizacionLatitud: body.localizacionLatitud,
         provincia: body.provincia,
         canton: body.canton,
-        distrito: body.distrito
+        distrito: body.distrito,
+        estado: body.estado
     });
 
     nuevoSucursal.save(
@@ -71,8 +72,8 @@ router.get('/listarSucursales', function (req, res) {
     })
 });
 
-router.get('/buscarIdLibreria/:id', function (req, res) {
-    Sucursal.find({ libreria: req.params.id }, function (err, sucursalesBD) {
+router.get('/sucursalId/:id', function (req, res) {
+    Sucursal.findById(req.params.id,function (err, sucursaleBD) {
         if (err) {
             return res.status(400).json({
                 success: false,
@@ -82,7 +83,7 @@ router.get('/buscarIdLibreria/:id', function (req, res) {
         } else {
             return res.json({
                 success: true,
-                listaSucursales: sucursalesBD
+                sucursal: sucursaleBD
             });
         }
     })

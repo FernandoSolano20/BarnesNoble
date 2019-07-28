@@ -23,6 +23,7 @@ let obtenerInformacionLibro = async function () {
         document.getElementById('isbn10').innerHTML = libro.listaLibro.isbn_10;
         document.getElementById('isbn13').innerHTML = libro.listaLibro.isbn_13;
         document.getElementById('precio').innerHTML = libro.listaLibro.precio;
+        animationVotes();
     }
 }
 

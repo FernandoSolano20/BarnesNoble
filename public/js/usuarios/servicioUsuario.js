@@ -74,3 +74,24 @@ let obtenerUsuarioPorId = async(id) => {
     }
 };
 
+let obtenerUsuarioPorIdFetch = async(id) => {
+    var response = await fetch('http://localhost:4000/api/usuarioId/' + id, {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        }
+    });
+    var result = await response.json();
+    return result;
+};
+
+let obtenerUsuarioPorIdLibreria = async(id) => {
+    var response = await fetch('http://localhost:4000/api/usuarioIdLibreria/' + id, {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        }
+    });
+    var result = await response.json();
+    return result;
+};
