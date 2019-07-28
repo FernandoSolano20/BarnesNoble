@@ -45,7 +45,7 @@ router.get('/buscarLibreria-id/:_id', function (req, res) {
         } else {
             return res.json({
                 success: true,
-                listaLibreria: libreriaDB
+                libreria: libreriaDB
             })
         }
     });
@@ -62,7 +62,7 @@ router.get('/buscarLibreria-nombreComercial/:nombreComercial', function (req, re
         } else {
             return res.json({
                 success: true,
-                listaLibreria: libreriaDB
+                libreria: libreriaDB
             })
         }
     });
