@@ -70,3 +70,7 @@ let txtFiltro = document.querySelector('#input-filtro');
 //document.getElementById('confirm').addEventListener('click', generoFunciones);
 inputFiltro.addEventListener('keyup', crearTabla);
 crearTabla();
+
+document.querySelector('#crear-elemento').addEventListener('click',function(){
+    window.location.href= 'http://localhost:3000/registrarOferta.html';
+})
