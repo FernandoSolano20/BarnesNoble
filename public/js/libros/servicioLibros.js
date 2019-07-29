@@ -52,19 +52,13 @@ let obtenerLibrosId = async (id) => {
 
 //SofiaZu-Para listar por preferencia
 let obtenerPreferencias = async (usuario) => {
-    try {
-        const response = axios({
-            method: 'get',
-            url: 'http://localhost:4000/api/libros/listarLibrosPorPreferencia',
-            responseType: 'json',
-            data: usuario
-
-        });
-
-        const result = await response;
-        return result.data.listaLibros;
-
-    } catch (error) {
-        console.log(error);
-    }
+    let response = await fetch('http://localhost:4000/api/libros/listarLibrosPorPreferencia', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body: JSON.stringify(usuario)
+    });
+    let result = await response.json();
+    return result.listaLibros;
 }

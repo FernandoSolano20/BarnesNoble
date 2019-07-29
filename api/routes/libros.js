@@ -128,7 +128,7 @@ router.get('/titulo/:titulo', async (req, res) => {
 });
 
 //SofiaZu-Prefrencia de libros del usuario
-router.get('/listarLibrosPorPreferencia', async (req, res) => {
+router.post('/listarLibrosPorPreferencia', async (req, res) => {
     console.log(req.body)
     Libros.find({genero: req.body.genero, autor: req.body.autor, categoria: req.body.categoria},function (err, librosPreferidos) {
         if (librosPreferidos != "") {
