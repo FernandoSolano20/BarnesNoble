@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="css/loadingBar.css">
 
 </head>
+
 <body>
     <header>
         <nav class="menuHorizontal">
@@ -34,56 +35,50 @@
         </nav>
 
         <nav class="menuIzquierdo">
-            <ul class="menu">
-                <li><a href="#">Mi perfil</a></li>
-                <li><a href="genero.html">Géneros</a></li>
-                <li><a href="categoria.html">Categorías</a></li>
-                <li><a href="#">Reportes</a></li>
-                <li><a href="#">Bitácora</a></li>
-                <li><a href="#">Usuarios</a></li>
-                <li><a href="#">Librerías</a></li>
+            <ul class="menu" id="menuDinamico">
+
             </ul>
         </nav>
     </header>
     <main>
-            
+
         <form class="formRegistro" name="formularioRegistro">
             <div class="column">
-            <div class="inputGroup">
-                <span class="left alertHidden" id="alert-img">Debe ser un archivo png o jpg.</span>
-                <label class="labelFile">
-                    <i class="fal fa-file-image"></i>
-                    <span class="title">Add File</span>
-                    <input type="file" / id="img">
-                </label>
-            </div>
-            <div class="inputGroup">
-                <span class="left alertHidden" id="alertNombre"></span>
-                <label>Nombre</label>
-                <input id="nombre" class="inputAutor" type="text" autocomplete="off">
-            </div>
-            <div class="inputGroup">
-                <span class="left alertHidden" id="alertNomArtistico"></span>
-                <label>Nombre artístico</label>
-                <input id="nomArtistico" class="inputAutor" type="text" autocomplete="off">
-            </div>
-            <div class="inputGroup">
-                <span class="left alertHidden" id="alertaNac">.</span>
-                <label>Fecha Nacimiento</label>
-                <input id="nacimiento" class="inputAutor" type="date" autocomplete="off">
-            </div>
-            <div class="inputGroup">
-                <span class="left alertHidden" id="alertaMuerte">.</span>
-                <label>Fecha Muerte</label>
-                <input id="muerte" class="inputAutor" type="date" autocomplete="off">
-            </div>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alert-img">Debe ser un archivo png o jpg.</span>
+                    <label class="labelFile">
+                        <i class="fal fa-file-image"></i>
+                        <span class="title">Add File</span>
+                        <input type="file" / id="img">
+                    </label>
+                </div>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alertNombre"></span>
+                    <label>Nombre</label>
+                    <input id="nombre" class="inputAutor" type="text" autocomplete="off">
+                </div>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alertNomArtistico"></span>
+                    <label>Nombre artístico</label>
+                    <input id="nomArtistico" class="inputAutor" type="text" autocomplete="off">
+                </div>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alertaNac">.</span>
+                    <label>Fecha Nacimiento</label>
+                    <input id="nacimiento" class="inputAutor" type="date" autocomplete="off">
+                </div>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alertaMuerte">.</span>
+                    <label>Fecha Muerte</label>
+                    <input id="muerte" class="inputAutor" type="date" autocomplete="off">
+                </div>
 
-            <div class="inputGroup">
-                <span class="left alertHidden" id="alertResenna"></span>
-                <label>Reseña</label>
-                <textarea id="resenna" class="textarea"></textarea>
-            </div>
-            <div class="inputGroup box">
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alertResenna"></span>
+                    <label>Reseña</label>
+                    <textarea id="resenna" class="textarea"></textarea>
+                </div>
+                <div class="inputGroup box">
                     <label>Nacionalidad</label>
                     <span class="left alertHidden" id="alertNacionalidad">Seleccione una opción.</span>
                     <select name="pais" id="paises">
@@ -91,12 +86,13 @@
                     </select>
                 </div>
 
-            
-            <div class="crear-contenedor">
-                    <button type="button" class="material-blue" id="registrar"><i class="far fa-clipboard-list"></i>Registrar</button>
+
+                <div class="crear-contenedor">
+                    <button type="button" class="material-blue" id="registrar"><i
+                            class="far fa-clipboard-list"></i>Registrar</button>
                 </div>
         </form>
-            </div>
+        </div>
     </main>
     <footer>
         <div class="blockFooter">
@@ -114,11 +110,11 @@
                 <a href="#"><i class="fab fa-twitter"></i></a>
             </div>
         </div>
-        
+
     </footer>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="js/cerrarSesion.js"></script>
     <script src="js/menu.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="js/direccion/servicioDireccion.js"></script>
     <script src="js/imagen/servicioImagen.js"></script>
     <script src="js/direccion/controladorPaises.js"></script>
@@ -126,6 +122,7 @@
     <script src="js/autor/controladorRegistarAutor.js"></script>
     <script src="js/autor/servicioAutor.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-    
+
 </body>
+
 </html>
