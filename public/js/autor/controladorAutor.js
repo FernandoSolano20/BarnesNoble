@@ -21,7 +21,7 @@ crearTabla();
 
 let filaNoDatos = function () {
     let tbody = document.querySelector('#tabla-elementos tbody');
-    if (lista.length === 0 || tbody.childElementCount === 0) {
+    if (listaAutores.length === 0 || tbody.childElementCount === 0) {
         let fila = tbody.insertRow();
         fila.setAttribute('id', 'no-data');
         let celda = fila.insertCell()
@@ -48,6 +48,42 @@ let agregarFilaAutores = function (autor) {
         window.location.href = `verPerfilAutor.html?_id=${this.dataset._id}`
     });
     perfil.appendChild(btnPerfil);
+
+    let premios = fila.insertCell();
+    let btnPremios = document.createElement('a');
+    btnPremios.innerText = 'Agregar Premios';
+    btnPremios.setAttribute('class', 'btnVerPerfil');
+    btnPremios.href = '#';
+    btnPremios.dataset._id = autor['_id'];
+
+    btnPremios.addEventListener('click', async function () {
+        Swal.fire({
+            title: 'Ingrese la información del premio',
+            html: '<input type= "text" id="valorNombrePremio" placeholder="Ingrese un nombre">' + '<input type= "text" id="valorAnnoPremio" placeholder="Ingrese el año de la premiación">' + '<input type= "text" id="valorDesPremio" placeholder="Ingrese una descripción">'
+        }).then(async () => {
+            let nombre = document.querySelector('#valorNombrePremio').value;
+            let anno = document.querySelector('#valorAnnoPremio').value;
+            let descripcion = document.querySelector('#valorDesPremio').value;
+            if (nombre && anno && descripcion) {
+                let response = await agregarPremios(this.dataset._id, nombre, anno, descripcion);
+                if (response.success) {
+                    Swal.fire({
+                        type: 'success',
+                        title: response.message
+                    })
+                }
+                else {
+                    Swal.fire({
+                        type: 'error',
+                        title: response.message
+                    })
+                }
+
+            }
+        }
+        )
+    });
+    premios.appendChild(btnPremios);
 
     let editarCelda = fila.insertCell();
     let editar = document.createElement('i');

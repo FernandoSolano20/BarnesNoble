@@ -1,18 +1,16 @@
-#imagen-login {
-	width: 100%;
-	min-height: 95vh;
-	height: 77%;
-	position: absolute;
-	opacity: 0.7;
+.contenedorLogin{
+	display: grid;
+    grid-template-columns: 1fr 1fr;
+
 }
 
 .formulario {
 	background: #fff;
-	padding: 2em 3em 2em;
-	max-width: 435px;
-	margin: 30px auto 0;
-	box-shadow: 0 0 1em #222;
-	border-radius: 5px;
+    padding: 10px 75px;
+    margin: 30px auto;
+    box-shadow: 0 0 1em #222;
+    border-radius: 5px;
+    min-width: 510px;
 }
 
 .formulario .title-form {
@@ -81,4 +79,11 @@
 
 .alertHidden {
     display: none;
+}
+
+.contenedorLogin #loginImage{
+	width: 90%;
+    height: 85%;
+    margin: 35px 0px;
+    opacity: 0.7;
 }
