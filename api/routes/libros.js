@@ -55,10 +55,10 @@ router.get('/listarLibros', async (req, res) => {
             });
         }
     })
-        .populate('genero', 'nombre -_id')
-        .populate('categoria', 'nombre -_id')
-        .populate('autor', 'nombre -_id')
-        .select('titulo caratula contraportada genero categoria autor');
+    .populate('genero', 'nombre -_id')
+    .populate('categoria', 'nombre -_id')
+    .populate('autor', 'nombre -_id')
+    .select('titulo caratula contraportada genero categoria autor');
 });
 
 router.get('/buscarLibroID/:id', async (req, res) => {
@@ -100,7 +100,11 @@ router.get('/listarMasVendidos', function (req, res) {
                 listaLibros: LibrosBD
             });
         }
-    }).limit(25).sort(criterioOrden);
+    }).limit(25).sort(criterioOrden)
+
+    .populate('autor', 'nombre -_id')
+    .select('titulo caratula  autor');
+
 });
 
 router.get('/titulo/:titulo', async (req, res) => {
@@ -122,5 +126,33 @@ router.get('/titulo/:titulo', async (req, res) => {
         .select('titulo');
     
 }); 
+
+
+router.get('/listarLibrosPorPreferencia', async (req, res) => {
+    Libros.find({genero: req.body.genero},function (err, librosGenero) {
+        if (librosGenero != "") {
+            return res.json({
+                success: true,
+                listaLibros: librosGenero
+            });
+        }
+        else {
+            Libros.find({categoria: req.body.categoria},function (err, librosCategoria) {
+                if (librosCategoria != "") {
+                    return res.json({
+                        success: true,
+                        listaLibros: librosCategoria
+                    });
+                }
+                else {
+                    return res.json({
+                        success: false,
+                        message: "No se encontro nada"
+                    });
+                }
+            })
+        }
+    })
+});
 
 module.exports = router;

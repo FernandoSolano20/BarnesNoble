@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Barnes & Noble</title>
+    <script src="js/validarSesionPlatafomra.js"></script>
     <link rel="stylesheet" href="css/reset.css">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
@@ -35,31 +36,25 @@
         </nav>
 
         <nav class="menuIzquierdo">
-            <ul class="menu">
-                <li><a href="#">Mi perfil</a></li>
-                <li><a href="genero.html">Géneros</a></li>
-                <li><a href="categoria.html">Categorías</a></li>
-                <li><a href="#">Reportes</a></li>
-                <li><a href="#">Bitácora</a></li>
-                <li><a href="#">Usuarios</a></li>
-                <li><a href="#">Librerías</a></li>
+            <ul class="menu" id="menuDinamico">
+
             </ul>
         </nav>
     </header>
     <main>
         <div>
-        <div class="subcontenedor">
-            <div class="busqueda">
-                <input type="text" id="txtFiltro" name="buscar" placeholder="Buscar...." autocomplete="off"
-                    autocorrect="off">
-                <button type="button" class="buscar"><i class="fa fa-search"></i><span>search</span></button>
-            </div>
-            <div class="crear-contenedor">
-                <button type="button" class="material-blue" data-action="crear" id="crear-elemento"><i
-                        class="far fa-plus-circle"></i>Crear</button>
-            </div>
+            <div class="subcontenedor">
+                <div class="busqueda">
+                    <input type="text" id="txtFiltro" name="buscar" placeholder="Buscar...." autocomplete="off"
+                        autocorrect="off">
+                    <button type="button" class="buscar"><i class="fa fa-search"></i><span>search</span></button>
+                </div>
+                <div class="crear-contenedor">
+                    <button type="button" class="material-blue" data-action="crear" id="crear-elemento"><i
+                            class="far fa-plus-circle"></i>Crear</button>
+                </div>
 
-        </div>
+            </div>
             <section id="listaLibros">
 
             </section>
