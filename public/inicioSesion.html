@@ -11,6 +11,7 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/botones.css">
     <link rel="stylesheet" href="css/formulario.css">
     <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
 
@@ -54,14 +55,23 @@
                     <button type="button" id="login">Enviar</button>
                 </div>
                 <div class="contenedor-input">
-                    <a href="#" id="olvidar">Olvidar contraseña</a>
-                    <a href="registroUsuarios.html">Regitrarse como lector</a>
-                    <a href="registroLibreria.html">Regitrarse como librería</a>
+                    <a href="#" class="linkForgot" id="olvidar">¿Olvidó su contraseña?</a>
                 </div>
             </form>
-            <div>
+            <div class="images">
                 <img id="loginImage" src="img/login.jpg" alt="">
-                <figcaption>computer by Cláudio Luiz Castro</figcaption>
+                <figcaption id="title">
+                    <h2>¿Aún no se ha registrado?</h2>
+                </figcaption>
+                <figcaption id="linkSingUp">
+                    <div class="crear-contenedor">
+                        <a class="material-blue" href="registroUsuarios.html"><i
+                                class="far fa-user"></i>Regitrarse como lector</a>
+                        <a class="material-blue" href="registroLibreria.html"><i
+                                class="far fa-user"></i>Regitrarse como
+                            librería</a>
+                    </div>
+                </figcaption>
             </div>
         </div>
     </main>
