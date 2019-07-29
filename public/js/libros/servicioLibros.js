@@ -49,3 +49,22 @@ let obtenerLibrosId = async (id) => {
     let result = await response.json();
     return result;
 }
+
+//SofiaZu-Para listar por preferencia
+let obtenerPreferencias = async (usuario) => {
+    try {
+        const response = axios({
+            method: 'get',
+            url: 'http://localhost:4000/api/libros/listarLibrosPorPreferencia',
+            responseType: 'json',
+            data: usuario
+
+        });
+
+        const result = await response;
+        return result.data.listaLibros;
+
+    } catch (error) {
+        console.log(error);
+    }
+}
