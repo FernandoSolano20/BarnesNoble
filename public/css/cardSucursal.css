@@ -1,0 +1,63 @@
+.contenedorSucursal{
+	text-align: center;
+}
+
+.containerCards {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.card {
+	height: auto;
+	max-height: 299px;
+	width: 200px;
+	overflow: hidden;
+	background-color: #FFFFFF;
+	border-radius: 10px;
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	text-align: center;
+	-webkit-transition: .1s ease-in-out;
+	transition: .1s ease-in-out;
+	margin: 15px 25px;
+	float: left;
+}
+
+.card:hover {
+	box-shadow: 0 15px 20px rgba(0, 0, 0, 0.2);
+}
+
+.sub-subTitile, .linkCard {
+	font-family: 'Roboto', sans-serif;
+	font-weight: lighter;
+	-webkit-transition: .1s ease-in-out;
+	transition: .1s ease-in-out;
+}
+
+.sub-subTitile {
+	margin-top: 45px;
+	margin-bottom: 5px;
+	font-size: 18px;
+	color: #212121;
+}
+
+.linkCard {
+	display: block;
+	padding: 5px 0px;
+	font-size: 14px;
+	color: #9E9E9E;
+	text-decoration: none;
+}
+
+.linkCard:hover {
+	background-color: #FAFAFA;
+	color: inherit;
+}
+
+.containerCards .card ul {
+	margin-top: 10px;
+	padding: 15px 0px;
+	background-color: #FAFAFA;
+}

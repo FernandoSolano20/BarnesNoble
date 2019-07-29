@@ -13,6 +13,7 @@
 
 .container span {
     position: relative;
+    margin: 3px;
 }
 
 .fa-book-alt {

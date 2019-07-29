@@ -194,6 +194,13 @@ input[type=file] {
     color: #fff;
 }
 
+.right {
+    left: 74%;
+    top: 100px;
+    font-size: 14px;
+    width: 160px;
+}
+
 .left {
     right: 102%;
     top: 0px;
@@ -241,39 +248,16 @@ input[type=file] {
     background-color: #af05078c !important;
 }
 
-#map {
-    height: 430px;
-    position: relative;
-    overflow: hidden;
-    width: 50%;
-    margin: 20px auto;
-}
-
-.containerMap {
-    position: relative;
-    display: block;
-}
-
-#floatingPanel {
-    position: absolute;
-    top: 10px;
-    left: 25%;
-    z-index: 5;
-    padding: 5px;
-    text-align: center;
-    font-family: 'Roboto', 'sans-serif';
-    line-height: 30px;
-    padding-left: 10px;
-    margin: 55px auto;
-    display: block;
-}
-
-.leftMap {
-    right: 78%;
-}
-
 #registrar{
     display: block;
     margin: 20px auto;
     width: 30%;
+}
+
+#fotosLibro{
+    display: flex;
+}
+
+#fotosLibro div{
+    margin: 35px;
 }
