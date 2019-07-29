@@ -127,4 +127,32 @@ router.get('/titulo/:titulo', async (req, res) => {
     
 }); 
 
+
+router.get('/listarLibrosPorPreferencia', async (req, res) => {
+    Libros.find({genero: req.body.genero},function (err, librosGenero) {
+        if (librosGenero != "") {
+            return res.json({
+                success: true,
+                listaLibros: librosGenero
+            });
+        }
+        else {
+            Libros.find({categoria: req.body.categoria},function (err, librosCategoria) {
+                if (librosCategoria != "") {
+                    return res.json({
+                        success: true,
+                        listaLibros: librosCategoria
+                    });
+                }
+                else {
+                    return res.json({
+                        success: false,
+                        message: "No se encontro nada"
+                    });
+                }
+            })
+        }
+    })
+});
+
 module.exports = router;

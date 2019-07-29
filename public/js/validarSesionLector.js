@@ -2,7 +2,7 @@
 if (!sessionStorage.tipoUsuario) {
     window.location.href = "http://localhost:3000";
 }
-else if (sessionStorage.tipoUsuario !== 'Lector' || sessionStorage.tipoUsuario !== 'Adminitrador plataforma') {
+else if (sessionStorage.tipoUsuario !== 'Lector' && sessionStorage.tipoUsuario !== 'Adminitrador plataforma') {
     if (sessionStorage.tipoUsuario === 'Adminitrador librería') {
         window.location.href = "http://localhost:3000/indexAdminLibreria.html";
     }
