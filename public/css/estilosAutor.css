@@ -43,7 +43,7 @@ outline: none;
     grid-template-columns: 30% 40% 20%;
 }
 
-.tituloDato, .fas, .fab{
+.tituloDato, span.fas, .fab{
     color: #555;
     font-size: 1.5rem;
     padding: 1.5% 3% 0 0;

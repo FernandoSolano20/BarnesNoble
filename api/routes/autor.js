@@ -83,13 +83,13 @@ router.post('/agregarPremios', function (req, res) {
         if(error){
             return res.status(400).json({
                 success: false,
-                msj: 'No se pudo agregar premio',
+                message: 'No se pudo agregar premio',
                 err
             })
         }else{
             return res.json({
                 success: true,
-                msj: 'Se agrego correctamente el premio'
+                message: 'Se agrego correctamente el premio'
             })
         }
     }

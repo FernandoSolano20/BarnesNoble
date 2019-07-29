@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Barnes & Noble</title>
+    <script src="js/validarSesionPlatafomra.js"></script>
     <link rel="stylesheet" href="css/reset.css">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
@@ -23,7 +24,7 @@
                 <li><a href="#" data-menu="mostrar-nav-izq"><i data-menu="mostrar-nav-izq" class="fas fa-bars"></i></a>
                 </li>
                 <li><a href="#"><i class="far fa-home"></i>Inicio</a></li>
-                <li class="submenu">
+                <li id="logout">
                     <a href="#"><i class="far fa-sign-out-alt"></i>Cerrar Sesión</a>
                 </li>
                 <li><a href="#"><i class="fal fa-address-book"></i>Contacto</a></li>
@@ -32,14 +33,8 @@
         </nav>
 
         <nav class="menuIzquierdo">
-            <ul class="menu">
-                <li><a href="#">Mi perfil</a></li>
-                <li><a href="genero.html">Géneros</a></li>
-                <li><a href="categoria.html">Categorías</a></li>
-                <li><a href="#">Reportes</a></li>
-                <li><a href="#">Bitácora</a></li>
-                <li><a href="#">Usuarios</a></li>
-                <li><a href="#">Librerías</a></li>
+            <ul class="menu" id="menuDinamico">
+
             </ul>
         </nav>
     </header>
@@ -73,7 +68,7 @@
                         <th>Precio</th>
                         <th>Ver Perfil</th>
 
-                        
+
                     </tr>
                 </thead>
                 <tbody>
@@ -101,8 +96,8 @@
                 <a href="#"><img src="img/barnes_and_noble_logo_png_94486.png" alt="Logo Fundacion Book for kids"></a>
             </div>
             <div class="copyrights">
-                    <h3> ⓒ 2019 Valhalla</h3>
-                </div>
+                <h3> ⓒ 2019 Valhalla</h3>
+            </div>
             <div class="redesSociales">
                 <a href="#"><i class="fab fa-facebook"></i></a>
                 <a href="#"><i class="fab fa-pinterest"></i></a>
@@ -110,9 +105,10 @@
                 <a href="#"><i class="fab fa-twitter"></i></a>
             </div>
         </div>
-        
+
     </footer>
     <script src="js/menu.js"></script>
+    <script src="js/cerrarSesion.js"></script>
     <!-- <script src="js/categoria/servicioCategoria.js"></script>
     <script src="js/categoria/controladorCategoria.js"></script> -->
     <!-- <script src="js/categoria/modalCategoria.js"></script> -->

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Perfil Autor</title>
-    
+    <script src="js/validarSesionUsuario.js"></script>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/estilosAutor.css">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
@@ -17,38 +17,30 @@
 
 <body>
     <header>
-        <header>
-            <nav class="menuHorizontal">
-                <ul class="list-menu">
-                    <li><a href="#" data-menu="mostrar-nav-izq"><i data-menu="mostrar-nav-izq" class="fas fa-bars"></i></a>
-                    </li>
-                    <li><a href="/"><i class="far fa-home"></i>Inicio</a></li>
-                    <li id="logout">
-                        <a href=""><i class="far fa-sign-out-alt"></i>Cerrar Sesión</a>
-                    </li>
-                    <li><a href="contacto.html"><i class="fal fa-address-book"></i>Contacto</a></li>
-                    <li class="link-imagen"><img src="img/logo_barnes-and-noble.png" alt="Logo de Barnes&Noble"></li>
-                </ul>
-            </nav>
-    
-            <nav class="menuIzquierdo">
-                <ul class="menu">
-                    <li><a href="#">Mi perfil</a></li>
-                    <li><a href="genero.html">Géneros</a></li>
-                    <li><a href="categoria.html">Categorías</a></li>
-                    <li><a href="autor.html">Autor</a></li>
-                    <li><a href="#">Reportes</a></li>
-                    <li><a href="#">Bitácora</a></li>
-                    <li><a href="#">Usuarios</a></li>
-                    <li><a href="#">Librerías</a></li>
-                </ul>
-            </nav>
-        </header>
+        <nav class="menuHorizontal">
+            <ul class="list-menu">
+                <li><a href="#" data-menu="mostrar-nav-izq"><i data-menu="mostrar-nav-izq" class="fas fa-bars"></i></a>
+                </li>
+                <li><a href="/"><i class="far fa-home"></i>Inicio</a></li>
+                <li id="logout">
+                    <a href=""><i class="far fa-sign-out-alt"></i>Cerrar Sesión</a>
+                </li>
+                <li><a href="contacto.html"><i class="fal fa-address-book"></i>Contacto</a></li>
+                <li class="link-imagen"><img src="img/logo_barnes-and-noble.png" alt="Logo de Barnes&Noble"></li>
+            </ul>
+        </nav>
+
+        <nav class="menuIzquierdo">
+            <ul class="menu" id="menuDinamico">
+
+            </ul>
+        </nav>
+    </header>
 
     <main>
         <section class="datosAutor">
-            <div class="alert-img-box">
-                    <img class="alert-text" id="avatar">
+            <div class="alert-img-box" id="cuerpo-modal">
+                <img class="alert-text" id="avatar">
             </div>
         <div class="informacion">
             <div class="contenedorDatos">
@@ -99,9 +91,9 @@
             </div>
         </div>
     </footer>
+    <script src="js/menu.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="js/cerrarSesion.js"></script>
-    <script src="js/menu.js"></script>
     <script src="js/imagen/servicioImagen.js"></script>
     <script src="js/autor/servicioAutor.js"></script>
     <script src="js/autor/controladorVerPerfilAutor.js"></script>
@@ -109,4 +101,3 @@
 </body>
 
 </html>
-
