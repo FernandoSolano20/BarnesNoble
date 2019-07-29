@@ -12,8 +12,8 @@ const descripcionAlert = document.getElementById('alertDescripcion');
 const estadoInput = document.getElementById('estado');
 
 
-const autorInput = document.getElementById('alertAutor');
-//const estadoAlert = document.getElementById('alertEstado');
+//const autorInput = document.getElementById('alertAutor');
+const estadoAlert = document.getElementById('alertEstado');
 const tipoOfertaAlert = document.getElementById('alertTipoOferta');
 const sucursalAlert = document.getElementById('alertSucursal');
 const autorAlert = document.getElementById('alertAutor');
@@ -27,74 +27,55 @@ const libroAlert = document.getElementById('alertLibro');
 
 
 let obtenerDatosUsuarios = async function () {
-    let error = validarNombre() | validarDescripcion() | validarDescuento() | validarSucursal() | validarAutor() | validarGenero() |validarCategoria() | validarLibro();
+    let error = validarNombre() | validarDescripcion() | validarDescuento() | validarSucursal() | validarAutor() | validarGenero() | validarCategoria() | validarLibro();
     if (!error) {
+        
+        let oferta = {
 
-       document.body.className = "loading";
-        let imgValue = document.getElementById('img');
-        let imgResult = await crearImagen(imgValue);
-        if (imgResult.success) {
-            let sexoValue;
-            for (let i = 0; i < sexoInput.length; i++) {
-                if (sexoInput[i].checked) {
-                    sexoValue = sexoInput[i].value;
-                    break;
-                }
-            } 
-            
-                      
-           
-            
-            
-            let oferta = {
-                
-                nombre: nombreInput.value,
-                descuento: descuentoInput.value,
-                descripcion: descripcionInput.value,
-                estado: estadoInput.value,                            
-                autor: autorSelect.value,
-                genero: generoSelect.value,
-                libro: libroSelect.value,
-                categoria: categoriaSelect.value,
-                autor: autorSelect.value,
-                sucursal: autorSelect.value,
-              
-            }
-            let nuevaOferta = await registrarOfertas(oferta);
-            document.body.className = "";
-            if (nuevaOferta.success) {
-                Swal.fire({
-                    type: 'success',
-                    title: nuevaOferta.message,
-                    showCloseButton: true,
-                    focusConfirm: false,
-                    confirmButtonText:
-                        '<a href="http://localhost:3000/inicioSesion.html" class="linkPage">Ok</a>'
-                });
-            }
-            else {
-                Swal.fire({
-                    type: 'error',
-                    title: nuevaOferta.message
-                });
-            }
+            nombre: nombreInput.value,
+            descuento: descuentoInput.value,
+            descripcion: descripcionInput.value,
+            estado: estadoInput.value,
+            autor: autorSelect.value,
+            genero: generoSelect.value,
+            libro: libroSelect.value,
+            categoria: categoriaSelect.value,
+            autor: autorSelect.value,
+            sucursal: autorSelect.value,
+
         }
-        else {
-            document.body.className = "";
+        let nuevaOferta = await registrarOfertas(oferta);
+        document.body.className = "";
+        if (nuevaOferta.success) {
             Swal.fire({
-                type: 'error',
-                title: imgResult.message
+                type: 'success',
+                title: nuevaOferta.message,
+                showCloseButton: true,
+                focusConfirm: false,
+                confirmButtonText:
+                    '<a href="http://localhost:3000/inicioSesion.html" class="linkPage">Ok</a>'
             });
         }
+        else {
+            Swal.fire({
+                type: 'error',
+                title: nuevaOferta.message
+            });
+        
+
+    
+        }
     }
+    
     else {
-        Swal.fire({
-            type: 'warning',
-            title: 'No se ha enviado su mensaje exitosamente',
-            text: 'Revise los campos resaltados e intételo de nuevo'
-        });
-    }
+    Swal.fire({
+        type: 'warning',
+        title: 'No se ha enviado su mensaje exitosamente',
+        text: 'Revise los campos resaltados e intételo de nuevo'
+    });
 }
+}
+
 
 
 
@@ -142,9 +123,9 @@ let validarTipoOferta = function () {
         alert: tipoOfertaAlert,
         input: tipoOfertaSelect
     }
-     
+
     return !(validarSelect(elementSelect));
-    
+
 }
 
 let validarSucursal = function () {

@@ -3,7 +3,7 @@
 
 
 let registrarOfertas = async (oferta) => {
-    let response = await fetch('http://localhost:4000/api/ofertas/registrarGenero', {
+    let response = await fetch('http://localhost:4000/api/ofertas/registrarOferta', {
         method: "POST",
         headers: {
             'Content-Type': 'application/json;charset=UTF-8',
