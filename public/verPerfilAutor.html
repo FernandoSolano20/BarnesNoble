@@ -8,6 +8,7 @@
     <title>Perfil Autor</title>
     <script src="js/validarSesionUsuario.js"></script>
     <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/estilosAutor.css">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/menu.css">
@@ -41,30 +42,43 @@
             <div class="alert-img-box" id="cuerpo-modal">
                 <img class="alert-text" id="avatar">
             </div>
+        <div class="informacion">
             <div class="contenedorDatos">
-                <h3 class="tituloDato" id="tituloDato">Nombre</h3>
-                <p class="valorDato"><span id="valorNombre"></span></p>
+                <h3 class="tituloDato" id="tituloDato"><span class="fas fa-user"></span>Nombre</h3>
+                <p class="valorDato" id="valorNombre"></p>
             </div>
             <div class="contenedorDatos">
-                <h3 class="tituloDato" id="tituloDato">Nombre Artístico</h3>
+                <h3 class="tituloDato" id="tituloDato"><span class="fas fa-user"></span>Nombre Artístico</h3>
                 <p class="valorDato" id="valorNombreArtistico"></p>
             </div>
             <div class="contenedorDatos">
-                <h3 class="tituloDato" id="tituloDato">Nacionalidad</h3>
+                <h3 class="tituloDato" id="tituloDato"><span class="fab fa-font-awesome-flag"></span>País de Nacimiento</h3>
                 <p class="valorDato" id="valorNacionalidad"></p>
             </div>
             <div class="contenedorDatos">
-                <h3 class="tituloDato" id="tituloDato">Fecha Nacimiento</h3>
+                <h3 class="tituloDato" id="tituloDato"><span class="fas fa-heartbeat"></span>Fecha Nacimiento</h3>
                 <p class="valorDato" id="valorNacimiento"></p>
             </div>
             <div class="contenedorDatos">
-                <h3 class="tituloDato" id="tituloDato">Fecha Defunción</h3>
+                <h3 class="tituloDato" id="tituloDato"><span class="fas fa-cross"></span>Fecha Defunción</h3>
                 <p class="valorDato" id="valorMuerte"></p>
             </div>
+<<<<<<< HEAD
             <div class="contenedorDatos">
                 <h3 class="tituloDato" id="tituloDato">Reseña</h3>
                 <p class="valorDato" id="valorResenna"></p>
             </div>
+=======
+        </div>
+        <div class="contenedorPremios">
+                <div class="contenedorDatos">
+                        <h3 class="tituloDato" id="tituloDato"><span class="fas fa-address-card"></span>Reseña</h3>
+                        <p class="valorDato" id="valorResenna"></p> 
+                    </div>
+            <h3 class="tituloDato" id="tituloDato"><span class="fas fa-award"></span>Premios</h3>
+            <p class="valorDato" id="valorNombre"></p>
+        </div>
+>>>>>>> 4a23242cfc72e853d6a9fd7cac11210d8c4c5720
         </section>
     </main>
     <footer>
@@ -83,7 +97,6 @@
                 <a href="#"><i class="fab fa-twitter"></i></a>
             </div>
         </div>
-
     </footer>
     <script src="js/menu.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
