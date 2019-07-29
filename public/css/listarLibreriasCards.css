@@ -467,7 +467,7 @@ footer {
 
 .fourColumns img{
   padding: 10px;
- 
+  width: 100%
 }
 .fourColumns:hover img{
   border: solid black 1px;   
