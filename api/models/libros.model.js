@@ -4,13 +4,9 @@ const mongoose = require('mongoose');
 
 let librosSchema = new mongoose.Schema({
     titulo: { type: String, required: true, unique: false },
-    edicion: { type: String, required: true, unique: false },
-    editorial: { type: String, required: true, unique: false },
-    annoEdicion: { type: String, required: true, unique: false },
-    isbl: { type: String, required: true, unique: false },
     caratula: { type: String, required: true, unique: false },
     contraportada: { type: String, required: true, unique: false },
-    precio: { type: String, required: true, unique: false },
+    vendidos: {type: Number, required: false, unique: false},
     genero: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Genero',
@@ -25,7 +21,16 @@ let librosSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Autor',
         required: true
-    }
+    },
+    voto: [{
+        usuario: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Usuario',
+            required: false
+        },
+        calificacion: { type: Number, required: false, unique: false },
+        comentario: { type: String, required: true, unique: false }
+    }]
 });
 
 

@@ -10,6 +10,24 @@ let libreriaSchema = new mongoose.Schema({
     provincia: { type: String, required: false, unique: false },
     canton: { type: String, required: false, unique: false },
     distrito: { type: String, required: false, unique: false },
+    estado: { type: Boolean, required: false, unique: false },
+    sucursales: [{
+        sucursal: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Sucursal',
+            required: false
+        }
+    }],
+    ejemplares: [{
+        libro: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Libro',
+            required: false
+        },
+        cantidad: { type: Number, required: false, unique: false },
+        estado: { type: Boolean, required: false, unique: false },
+        iva: { type: Number, required: false, unique: false }
+    }]
 });
 
 

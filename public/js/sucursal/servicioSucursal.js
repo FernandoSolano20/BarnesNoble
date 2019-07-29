@@ -11,11 +11,11 @@ let registrarSucursal = (pnombre, ptelefono, pcorreo, plocalizacionLongitud , pl
             correo: pcorreo,
             LocalizacionLongitud: plocalizacionLongitud,
             LocalizacionLatitud: plocalizacionLatitud,
-            IdLibreria: pIdLibreria,
-            IdProvincia:pIdProvincia,
-            IdCanton:pIdCanton,
-            IdDistrito: pIdDistrito
-
+            libreria: pIdLibreria,
+            provincia:pIdProvincia,
+            canton:pIdCanton,
+            distrito: pIdDistrito,
+            estado: 1
         }
     });
 };
@@ -32,4 +32,15 @@ let obtenerSucursales = async() => {
     } catch (error) {
         console.log(error);
     }
+};
+
+let obtenerSucursalPorId = async(id) => {
+    var response = await fetch('http://localhost:4000/api/sucursal/sucursalId/' + id, {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        }
+    });
+    var result = await response.json();
+    return result;
 };

@@ -1,0 +1,50 @@
+.perfil {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.informacion {
+    margin: 65px;
+    text-align: center;
+}
+
+#preferencias{
+    text-align: justify;
+}
+
+.column h1 {
+    margin: 30px auto;
+    text-align: center;
+}
+
+.column .info {
+    margin: 35px 10px;
+}
+
+.column .info div {
+    margin: 15px;
+    height: auto;
+    position: relative;
+    display: flex;
+}
+
+.column .info div span {
+    float: left;
+    font-size: 20px;
+    font-weight: bold;
+    min-width: 240px;
+}
+
+.column .info div span i {
+    margin-right: 18px;
+    min-width: 25px;
+}
+
+.column .info div p {
+    font-size: 20px;
+    margin-left: 70px;
+}
+
+.column .info .crear-contenedor{
+    margin: 40px;
+}

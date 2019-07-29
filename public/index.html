@@ -1,12 +1,572 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
+    <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
+    <link rel="stylesheet" href="css/landingPage.css">
+    <link rel="stylesheet" href="css/typehead.css">
+    <title>Barnes&Nobles</title>
 </head>
+
 <body>
-    lading
+    <header>
+        <nav class="menuHorizontal menuLP">
+
+            <ul class="list-menuLP">
+                <li class="link-imagenLP"><img src="img/barnes_and_noble_logo_png_94486.png" alt="Logo de Barnes&Noble">
+                </li>
+
+                <div class="linksInternos">
+                    <li><a href="#mas_vendididos"><i class="fas fa-heart"></i>Mas vendidos</a></li>
+                    <li>
+                        <a href="#club_lectura"><i class="fas fa-book-reader"></i>Club de lectura</a>
+                    </li>
+                    <li><a href="#mejor_calificados"><i class="fas fa-book"></i>Mejor Calificados</a></li>
+                    <li class="submenu">
+                        <a href="inicioSesion.html"><i class="far fa-sign-out-alt"></i>Registrarse</a>
+                        <ul class="children">
+                            <li><a href="registroUsuarios.html">Lector <span class="fas fa-users"></span></a></li>
+                            <li><a href="registroLibreria.html">Librería <span class="fas fa-users"></span></a></li>
+                        </ul>
+                    </li>
+                    <li><a href="contacto.html"><i class="fal fa-address-book"></i>Contacto</a></li>
+
+                </div>
+
+                <div class="btn_usuarios">
+                    <button type="button"> <a href="inicioSesion.html">Iniciar Sesión</a> </button>
+                </div>
+
+        </nav>
+    </header>
+
+    <section>
+        <div class="subcontenedor buscadorLanding">
+            <div class="busqueda">
+                <pre class="labelPlaceHolder" id="changePlaceholder"></pre>
+                <input type="text" id="input-filtro" name="buscar" placeholder="Buscar...." autocomplete="off"
+                    autocorrect="off">
+                <button type="button" class="buscar" id="searchButton"><i class="fa fa-search"></i><span>search</span></button>
+                <div id="container">
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <section class="masVendidos" id="mas_vendididos">
+            <h2>Los libros mas vendidos</h2>
+            <div class="wrapper">
+                <ul id="carrusel1" class="carousel" data-target="carousel">
+                </ul>
+                <div class="button-wrapper">
+                    <button data-action="slideLeft"><i class="fas fa-arrow-left"></i></button>
+                    <button data-action="slideRight"><i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <div class="cta_btn">
+                <button type="button"><a href="inicioSesion.html">Registrarse</a> </button>
+            </div>
+        </section> 
+
+        <section class="clubLectura" id="club_lectura">
+            <div>
+                <h2>Club de lectura</h2>
+                <p>¿Qué es un club de lectura?
+                    <br> Es donde nuestor lectores aficionados a un género determinado, libro o
+                    tema y se reunen a compartir sus experiencia y sus impresiones con otros aficionados .
+                    En las reuniones los lectores debaten sobre lo que han leído y en cada reunión se acuerda la
+                    cantidad a leer en los días posteriores ademas de que el coordinador de las sesiones es un lector
+                    que anima y modera los debates.
+                    <br>
+                    Tenemos club de lectura virtuales y presenciales para lo que se acomo mejor a tu horario. Busca tu
+                    club de lectur por tema favorito o por con cercania a tu localidad y reunete con personas que
+                    comparten mismo intereses.
+
+                    ¿No esperes mas para ser parte de un club de lectura?
+                </p>
+            </div>
+
+            <div>
+                <img src="img/book-club-reading.jpg" alt="">
+            </div>
+
+        </section>
+
+        <section class="mejorCalificados" id="mejor_calificados">
+            <h2>Los mejor calificados</h2>
+            <div class="wrapper">
+                <ul id="carrusel2" class="carousel" data-target="carousel2">
+                    <li class="card" data-target="card2">
+                        <img src="img/descarga.jpeg" alt="">
+                        <h3>Titulo del libro</h3>
+                        <form>
+                            <input id="radio1" type="radio" name="estrellas" value="5">
+                            <label for="radio1"><i class="fas fa-book"></i></label>
+                            <input id="radio2" type="radio" name="estrellas" value="4">
+                            <label for="radio2"><i class="fas fa-book"></i></label>
+                            <input id="radio3" type="radio" name="estrellas" value="3">
+                            <label for="radio3"><i class="fas fa-book"></i></label>
+                            <input id="radio4" type="radio" name="estrellas" value="2">
+                            <label for="radio4"><i class="fas fa-book"></i></label>
+                            <inp ut id="radio5" type="radio" name="estrellas" value="1">
+                                <label for="radio5"><i class="fas fa-book"></i></label>
+                        </form>
+                    </li>
+                    <li class="card" data-target="card2">
+                        <img src="img/descarga.jpeg" alt="">
+                        <h3>Titulo del libro</h3>
+                        <form>
+                            <p>
+                                <input id="radio1" type="radio" name="estrellas" value="5">
+                                <label for="radio1"><i class="fas fa-book"></i></label>
+                                <input id="radio2" type="radio" name="estrellas" value="4">
+                                <label for="radio2"><i class="fas fa-book"></i></label>
+                                <input id="radio3" type="radio" name="estrellas" value="3">
+                                <label for="radio3"><i class="fas fa-book"></i></label>
+                                <input id="radio4" type="radio" name="estrellas" value="2">
+                                <label for="radio4"><i class="fas fa-book"></i></label>
+                                <inp ut id="radio5" type="radio" name="estrellas" value="1">
+                                    <label for="radio5"><i class="fas fa-book"></i></label>
+                            </p>
+                        </form>
+                    </li>
+                    <li class="card" data-target="card2">
+                        <img src="img/descarga.jpeg" alt="">
+                        <h3>Titulo del libro</h3>
+                        <form>
+                            <p>
+                                <input id="radio1" type="radio" name="estrellas" value="5">
+                                <label for="radio1"><i class="fas fa-book"></i></label>
+                                <input id="radio2" type="radio" name="estrellas" value="4">
+                                <label for="radio2"><i class="fas fa-book"></i></label>
+                                <input id="radio3" type="radio" name="estrellas" value="3">
+                                <label for="radio3"><i class="fas fa-book"></i></label>
+                                <input id="radio4" type="radio" name="estrellas" value="2">
+                                <label for="radio4"><i class="fas fa-book"></i></label>
+                                <inp ut id="radio5" type="radio" name="estrellas" value="1">
+                                    <label for="radio5"><i class="fas fa-book"></i></label>
+                            </p>
+                        </form>
+                    </li>
+                    <li class="card" data-target="card2">
+                        <img src="img/descarga.jpeg" alt="">
+                        <h3>Titulo del libro</h3>
+                        <form>
+                            <p>
+                                <input id="radio1" type="radio" name="estrellas" value="5">
+                                <label for="radio1"><i class="fas fa-book"></i></label>
+                                <input id="radio2" type="radio" name="estrellas" value="4">
+                                <label for="radio2"><i class="fas fa-book"></i></label>
+                                <input id="radio3" type="radio" name="estrellas" value="3">
+                                <label for="radio3"><i class="fas fa-book"></i></label>
+                                <input id="radio4" type="radio" name="estrellas" value="2">
+                                <label for="radio4"><i class="fas fa-book"></i></label>
+                                <inp ut id="radio5" type="radio" name="estrellas" value="1">
+                                    <label for="radio5"><i class="fas fa-book"></i></label>
+                            </p>
+                        </form>
+                    </li>
+                    <li class="card" data-target="card2">
+                        <img src="img/descarga.jpeg" alt="">
+                        <h3>Titulo del libro</h3>
+                        <form>
+                            <p>
+                                <input id="radio1" type="radio" name="estrellas" value="5">
+                                <label for="radio1"><i class="fas fa-book"></i></label>
+                                <input id="radio2" type="radio" name="estrellas" value="4">
+                                <label for="radio2"><i class="fas fa-book"></i></label>
+                                <input id="radio3" type="radio" name="estrellas" value="3">
+                                <label for="radio3"><i class="fas fa-book"></i></label>
+                                <input id="radio4" type="radio" name="estrellas" value="2">
+                                <label for="radio4"><i class="fas fa-book"></i></label>
+                                <inp ut id="radio5" type="radio" name="estrellas" value="1">
+                                    <label for="radio5"><i class="fas fa-book"></i></label>
+                            </p>
+                        </form>
+                    </li>
+                    <li class="card" data-target="card2">
+                        <img src="img/descarga.jpeg" alt="">
+                        <h3>Titulo del libro</h3>
+                        <form>
+                            <p>
+                                <input id="librito" type="radio" name="estrellas" value="5">
+                                <label for="radio1"><i class="fas fa-book"></i></label>
+                                <input id="librito" type="radio" name="estrellas" value="4">
+                                <label for="radio2"><i class="fas fa-book"></i></label>
+                                <input id="librito" type="radio" name="estrellas" value="3">
+                                <label for="radio3"><i class="fas fa-book"></i></label>
+                                <input id="librito" type="radio" name="estrellas" value="2">
+                                <label for="radio4"><i class="fas fa-book"></i></label>
+                                <inp ut id="librito" type="radio" name="estrellas" value="1">
+                                    <label for="radio5"><i class="fas fa-book"></i></label>
+                            </p>
+                        </form>
+                    </li>
+                    <li class="card" data-target="card2">
+                        <img src="img/descarga.jpeg" alt="">
+                        <h3>Titulo del libro</h3>
+                        <form>
+                            <p>
+                                <input id="radio1" type="radio" name="estrellas" value="5">
+                                <label for="radio1"><i class="fas fa-book"></i></label>
+                                <input id="radio2" type="radio" name="estrellas" value="4">
+                                <label for="radio2"><i class="fas fa-book"></i></label>
+                                <input id="radio3" type="radio" name="estrellas" value="3">
+                                <label for="radio3"><i class="fas fa-book"></i></label>
+                                <input id="radio4" type="radio" name="estrellas" value="2">
+                                <label for="radio4"><i class="fas fa-book"></i></label>
+                                <inp ut id="radio5" type="radio" name="estrellas" value="1">
+                                    <label for="radio5"><i class="fas fa-book"></i></label>
+                            </p>
+                        </form>
+                    </li>
+                    <li class="card" data-target="card2">
+                        <img src="img/descarga.jpeg" alt="">
+                        <h3>Titulo del libro</h3>
+                        <form>
+                            <p>
+                                <input id="radio1" type="radio" name="estrellas" value="5">
+                                <label for="radio1"><i class="fas fa-book"></i></label>
+                                <input id="radio2" type="radio" name="estrellas" value="4">
+                                <label for="radio2"><i class="fas fa-book"></i></label>
+                                <input id="radio3" type="radio" name="estrellas" value="3">
+                                <label for="radio3"><i class="fas fa-book"></i></label>
+                                <input id="radio4" type="radio" name="estrellas" value="2">
+                                <label for="radio4"><i class="fas fa-book"></i></label>
+                                <inp ut id="radio5" type="radio" name="estrellas" value="1">
+                                    <label for="radio5"><i class="fas fa-book"></i></label>
+                            </p>
+                        </form>
+                    </li>
+                    <li class="card" data-target="card2">
+                        <img src="img/descarga.jpeg" alt="">
+                        <h3>Titulo del libro</h3>
+                        <form>
+                            <p>
+                                <input id="radio1" type="radio" name="estrellas" value="5">
+                                <label for="radio1"><i class="fas fa-book"></i></label>
+                                <input id="radio2" type="radio" name="estrellas" value="4">
+                                <label for="radio2"><i class="fas fa-book"></i></label>
+                                <input id="radio3" type="radio" name="estrellas" value="3">
+                                <label for="radio3"><i class="fas fa-book"></i></label>
+                                <input id="radio4" type="radio" name="estrellas" value="2">
+                                <label for="radio4"><i class="fas fa-book"></i></label>
+                                <inp ut id="radio5" type="radio" name="estrellas" value="1">
+                                    <label for="radio5"><i class="fas fa-book"></i></label>
+                            </p>
+                        </form>
+                    </li>
+                    <li class="card" data-target="card2">
+                        <img src="img/descarga.jpeg" alt="">
+                        <h3>Titulo del libro</h3>
+                        <form>
+                            <p>
+                                <input id="radio1" type="radio" name="estrellas" value="5">
+                                <label for="radio1"><i class="fas fa-book"></i></label>
+                                <input id="radio2" type="radio" name="estrellas" value="4">
+                                <label for="radio2"><i class="fas fa-book"></i></label>
+                                <input id="radio3" type="radio" name="estrellas" value="3">
+                                <label for="radio3"><i class="fas fa-book"></i></label>
+                                <input id="radio4" type="radio" name="estrellas" value="2">
+                                <label for="radio4"><i class="fas fa-book"></i></label>
+                                <inp ut id="radio5" type="radio" name="estrellas" value="1">
+                                    <label for="radio5"><i class="fas fa-book"></i></label>
+                            </p>
+                        </form>
+                    </li>
+                    <li class="card" data-target="card2">
+                        <img src="img/descarga.jpeg" alt="">
+                        <h3>Titulo del libro</h3>
+                        <form>
+                            <p>
+                                <input id="radio1" type="radio" name="estrellas" value="5">
+                                <label for="radio1"><i class="fas fa-book"></i></label>
+                                <input id="radio2" type="radio" name="estrellas" value="4">
+                                <label for="radio2"><i class="fas fa-book"></i></label>
+                                <input id="radio3" type="radio" name="estrellas" value="3">
+                                <label for="radio3"><i class="fas fa-book"></i></label>
+                                <input id="radio4" type="radio" name="estrellas" value="2">
+                                <label for="radio4"><i class="fas fa-book"></i></label>
+                                <inp ut id="radio5" type="radio" name="estrellas" value="1">
+                                    <label for="radio5"><i class="fas fa-book"></i></label>
+                            </p>
+                        </form>
+                    </li>
+                    <li class="card" data-target="card2">
+                        <img src="img/descarga.jpeg" alt="">
+                        <h3>Titulo del libro</h3>
+                        <form>
+                            <p>
+                                <input id="radio1" type="radio" name="estrellas" value="5">
+                                <label for="radio1"><i class="fas fa-book"></i></label>
+                                <input id="radio2" type="radio" name="estrellas" value="4">
+                                <label for="radio2"><i class="fas fa-book"></i></label>
+                                <input id="radio3" type="radio" name="estrellas" value="3">
+                                <label for="radio3"><i class="fas fa-book"></i></label>
+                                <input id="radio4" type="radio" name="estrellas" value="2">
+                                <label for="radio4"><i class="fas fa-book"></i></label>
+                                <inp ut id="radio5" type="radio" name="estrellas" value="1">
+                                    <label for="radio5"><i class="fas fa-book"></i></label>
+                            </p>
+                        </form>
+                    </li>
+                    <li class="card" data-target="card2">
+                        <img src="img/descarga.jpeg" alt="">
+                        <h3>Titulo del libro</h3>
+                        <form>
+                            <p>
+                                <input id="radio1" type="radio" name="estrellas" value="5">
+                                <label for="radio1"><i class="fas fa-book"></i></label>
+                                <input id="radio2" type="radio" name="estrellas" value="4">
+                                <label for="radio2"><i class="fas fa-book"></i></label>
+                                <input id="radio3" type="radio" name="estrellas" value="3">
+                                <label for="radio3"><i class="fas fa-book"></i></label>
+                                <input id="radio4" type="radio" name="estrellas" value="2">
+                                <label for="radio4"><i class="fas fa-book"></i></label>
+                                <inp ut id="radio5" type="radio" name="estrellas" value="1">
+                                    <label for="radio5"><i class="fas fa-book"></i></label>
+                            </p>
+                        </form>
+                    </li>
+                    <li class="card" data-target="card2">
+                        <img src="img/descarga.jpeg" alt="">
+                        <h3>Titulo del libro</h3>
+                        <form>
+                            <p>
+                                <input id="radio1" type="radio" name="estrellas" value="5">
+                                <label for="radio1"><i class="fas fa-book"></i></label>
+                                <input id="radio2" type="radio" name="estrellas" value="4">
+                                <label for="radio2"><i class="fas fa-book"></i></label>
+                                <input id="radio3" type="radio" name="estrellas" value="3">
+                                <label for="radio3"><i class="fas fa-book"></i></label>
+                                <input id="radio4" type="radio" name="estrellas" value="2">
+                                <label for="radio4"><i class="fas fa-book"></i></label>
+                                <inp ut id="radio5" type="radio" name="estrellas" value="1">
+                                    <label for="radio5"><i class="fas fa-book"></i></label>
+                            </p>
+                        </form>
+                    </li>
+                    <li class="card" data-target="card2">
+                        <img src="img/descarga.jpeg" alt="">
+                        <h3>Titulo del libro</h3>
+                        <form>
+                            <p>
+                                <input id="radio1" type="radio" name="estrellas" value="5">
+                                <label for="radio1"><i class="fas fa-book"></i></label>
+                                <input id="radio2" type="radio" name="estrellas" value="4">
+                                <label for="radio2"><i class="fas fa-book"></i></label>
+                                <input id="radio3" type="radio" name="estrellas" value="3">
+                                <label for="radio3"><i class="fas fa-book"></i></label>
+                                <input id="radio4" type="radio" name="estrellas" value="2">
+                                <label for="radio4"><i class="fas fa-book"></i></label>
+                                <inp ut id="radio5" type="radio" name="estrellas" value="1">
+                                    <label for="radio5"><i class="fas fa-book"></i></label>
+                            </p>
+                        </form>
+                    </li>
+                    <li class="card" data-target="card2">
+                        <img src="img/descarga.jpeg" alt="">
+                        <h3>Titulo del libro</h3>
+                        <form>
+                            <p>
+                                <input id="radio1" type="radio" name="estrellas" value="5">
+                                <label for="radio1"><i class="fas fa-book"></i></label>
+                                <input id="radio2" type="radio" name="estrellas" value="4">
+                                <label for="radio2"><i class="fas fa-book"></i></label>
+                                <input id="radio3" type="radio" name="estrellas" value="3">
+                                <label for="radio3"><i class="fas fa-book"></i></label>
+                                <input id="radio4" type="radio" name="estrellas" value="2">
+                                <label for="radio4"><i class="fas fa-book"></i></label>
+                                <inp ut id="radio5" type="radio" name="estrellas" value="1">
+                                    <label for="radio5"><i class="fas fa-book"></i></label>
+                            </p>
+                        </form>
+                    </li>
+                    <li class="card" data-target="card2">
+                        <img src="img/descarga.jpeg" alt="">
+                        <h3>Titulo del libro</h3>
+                        <form>
+                            <p>
+                                <input id="radio1" type="radio" name="estrellas" value="5">
+                                <label for="radio1"><i class="fas fa-book"></i></label>
+                                <input id="radio2" type="radio" name="estrellas" value="4">
+                                <label for="radio2"><i class="fas fa-book"></i></label>
+                                <input id="radio3" type="radio" name="estrellas" value="3">
+                                <label for="radio3"><i class="fas fa-book"></i></label>
+                                <input id="radio4" type="radio" name="estrellas" value="2">
+                                <label for="radio4"><i class="fas fa-book"></i></label>
+                                <inp ut id="radio5" type="radio" name="estrellas" value="1">
+                                    <label for="radio5"><i class="fas fa-book"></i></label>
+                            </p>
+                        </form>
+                    </li>
+                    <li class="card" data-target="card2">
+                        <img src="img/descarga.jpeg" alt="">
+                        <h3>Titulo del libro</h3>
+                        <form>
+                            <p>
+                                <input id="radio1" type="radio" name="estrellas" value="5">
+                                <label for="radio1"><i class="fas fa-book"></i></label>
+                                <input id="radio2" type="radio" name="estrellas" value="4">
+                                <label for="radio2"><i class="fas fa-book"></i></label>
+                                <input id="radio3" type="radio" name="estrellas" value="3">
+                                <label for="radio3"><i class="fas fa-book"></i></label>
+                                <input id="radio4" type="radio" name="estrellas" value="2">
+                                <label for="radio4"><i class="fas fa-book"></i></label>
+                                <inp ut id="radio5" type="radio" name="estrellas" value="1">
+                                    <label for="radio5"><i class="fas fa-book"></i></label>
+                            </p>
+                        </form>
+                    </li>
+                    <li class="card" data-target="card2">
+                        <img src="img/descarga.jpeg" alt="">
+                        <h3>Titulo del libro</h3>
+                        <form>
+                            <p>
+                                <input id="radio1" type="radio" name="estrellas" value="5">
+                                <label for="radio1"><i class="fas fa-book"></i></label>
+                                <input id="radio2" type="radio" name="estrellas" value="4">
+                                <label for="radio2"><i class="fas fa-book"></i></label>
+                                <input id="radio3" type="radio" name="estrellas" value="3">
+                                <label for="radio3"><i class="fas fa-book"></i></label>
+                                <input id="radio4" type="radio" name="estrellas" value="2">
+                                <label for="radio4"><i class="fas fa-book"></i></label>
+                                <inp ut id="radio5" type="radio" name="estrellas" value="1">
+                                    <label for="radio5"><i class="fas fa-book"></i></label>
+                            </p>
+                        </form>
+                    </li>
+                    <li class="card" data-target="card2">
+                        <img src="img/descarga.jpeg" alt="">
+                        <h3>Titulo del libro</h3>
+                        <form>
+                            <p>
+                                <input id="radio1" type="radio" name="estrellas" value="5">
+                                <label for="radio1"><i class="fas fa-book"></i></label>
+                                <input id="radio2" type="radio" name="estrellas" value="4">
+                                <label for="radio2"><i class="fas fa-book"></i></label>
+                                <input id="radio3" type="radio" name="estrellas" value="3">
+                                <label for="radio3"><i class="fas fa-book"></i></label>
+                                <input id="radio4" type="radio" name="estrellas" value="2">
+                                <label for="radio4"><i class="fas fa-book"></i></label>
+                                <inp ut id="radio5" type="radio" name="estrellas" value="1">
+                                    <label for="radio5"><i class="fas fa-book"></i></label>
+                            </p>
+                        </form>
+                    </li>
+                    <li class="card" data-target="card2">
+                        <img src="img/descarga.jpeg" alt="">
+                        <h3>Titulo del libro</h3>
+                        <form>
+                            <p>
+                                <input id="radio1" type="radio" name="estrellas" value="5">
+                                <label for="radio1"><i class="fas fa-book"></i></label>
+                                <input id="radio2" type="radio" name="estrellas" value="4">
+                                <label for="radio2"><i class="fas fa-book"></i></label>
+                                <input id="radio3" type="radio" name="estrellas" value="3">
+                                <label for="radio3"><i class="fas fa-book"></i></label>
+                                <input id="radio4" type="radio" name="estrellas" value="2">
+                                <label for="radio4"><i class="fas fa-book"></i></label>
+                                <inp ut id="radio5" type="radio" name="estrellas" value="1">
+                                    <label for="radio5"><i class="fas fa-book"></i></label>
+                            </p>
+                        </form>
+                    </li>
+                    <li class="card" data-target="card2">
+                        <img src="img/descarga.jpeg" alt="">
+                        <h3>Titulo del libro</h3>
+                        <form>
+                            <p>
+                                <input id="radio1" type="radio" name="estrellas" value="5">
+                                <label for="radio1"><i class="fas fa-book"></i></label>
+                                <input id="radio2" type="radio" name="estrellas" value="4">
+                                <label for="radio2"><i class="fas fa-book"></i></label>
+                                <input id="radio3" type="radio" name="estrellas" value="3">
+                                <label for="radio3"><i class="fas fa-book"></i></label>
+                                <input id="radio4" type="radio" name="estrellas" value="2">
+                                <label for="radio4"><i class="fas fa-book"></i></label>
+                                <inp ut id="radio5" type="radio" name="estrellas" value="1">
+                                    <label for="radio5"><i class="fas fa-book"></i></label>
+                            </p>
+                        </form>
+                    </li>
+                    <li class="card" data-target="card2">
+                        <img src="img/descarga.jpeg" alt="">
+                        <h3>Titulo del libro</h3>
+                        <form>
+                            <p>
+                                <input id="radio1" type="radio" name="estrellas" value="5">
+                                <label for="radio1"><i class="fas fa-book"></i></label>
+                                <input id="radio2" type="radio" name="estrellas" value="4">
+                                <label for="radio2"><i class="fas fa-book"></i></label>
+                                <input id="radio3" type="radio" name="estrellas" value="3">
+                                <label for="radio3"><i class="fas fa-book"></i></label>
+                                <input id="radio4" type="radio" name="estrellas" value="2">
+                                <label for="radio4"><i class="fas fa-book"></i></label>
+                                <inp ut id="radio5" type="radio" name="estrellas" value="1">
+                                    <label for="radio5"><i class="fas fa-book"></i></label>
+                            </p>
+                        </form>
+                    </li>
+                    <li class="card" data-target="card2">
+                        <img src="img/descarga.jpeg" alt="">
+                        <h3>Titulo del libro</h3>
+                        <form>
+                            <p>
+                                <input id="radio1" type="radio" name="estrellas" value="5">
+                                <label for="radio1"><i class="fas fa-book"></i></label>
+                                <input id="radio2" type="radio" name="estrellas" value="4">
+                                <label for="radio2"><i class="fas fa-book"></i></label>
+                                <input id="radio3" type="radio" name="estrellas" value="3">
+                                <label for="radio3"><i class="fas fa-book"></i></label>
+                                <input id="radio4" type="radio" name="estrellas" value="2">
+                                <label for="radio4"><i class="fas fa-book"></i></label>
+                                <inp ut id="radio5" type="radio" name="estrellas" value="1">
+                                    <label for="radio5"><i class="fas fa-book"></i></label>
+                            </p>
+                        </form>
+                    </li>
+                </ul>
+                <div class="button-wrapper">
+                    <button data-action="slideLeft2"><i class="fas fa-arrow-left"></i></button>
+                    <button data-action="slideRight2"><i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <div class="cta_btn">
+                <button type="button"><a href="inicioSesion.html">Registrarse</a> </button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="blockFooter">
+            <div class="logos">
+                <a href="#"><img src="img/barnes_and_noble_logo_png_94486.png" alt="Logo de Barnes&Noble"></a>
+                <a href="#"><img src="img/B&NKIFDS-01.png" alt="Logo Fundacion Book for kids"></a>
+            </div>
+            <div class="copyrights">
+                <h3> ⓒ 2019 Valhalla</h3>
+            </div>
+            <div class="redesSociales">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-pinterest"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+    <script src="js/typehead/typehead.js"></script>
+    <script src="js/landingPage/servicioLandigPage.js"></script>
+    <script src="js/landingPage/controladorLandingPage.js"></script>
+    <script src="js/landingPage/controladorSlider.js"></script>
 </body>
+
 </html>

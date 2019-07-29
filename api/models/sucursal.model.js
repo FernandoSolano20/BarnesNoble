@@ -10,11 +10,27 @@ let sucursal_schema = new mongoose.Schema({
     telefono: { type: String, required: true, unique: false },
     localizacionLongitud: { type: String, required: true, unique: false },
     localizacionLatitud: { type: String, required: true, unique: false },
-    IdLibreria: { type: String, required: false, unique: false },
-    IdProvincia: { type: String, required: false, unique: false },
-    IdCanton: { type: String, required: false, unique: false },
-    IdDistrito: { type: String, required: false, unique: false }
-
+    provincia: { type: String, required: false, unique: false },
+    canton: { type: String, required: false, unique: false },
+    distrito: { type: String, required: false, unique: false },
+    estado: { type: Boolean, required: false, unique: false },
+    ejemplares: [{
+        libro: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Libro',
+            required: false
+        },
+        cantidad: { type: Number, required: false, unique: false },
+        estado: { type: Boolean, required: false, unique: false },
+        iva: { type: Number, required: false, unique: false }
+    }],
+    usuariosSubscritos: [{
+        usuario: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Usuario',
+            required: false
+        }
+    }]
 });
 
-module.exports = mongoose.model('sucursal', sucursal_schema);
+module.exports = mongoose.model('Sucursal', sucursal_schema);

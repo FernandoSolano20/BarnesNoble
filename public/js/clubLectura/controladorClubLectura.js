@@ -15,9 +15,9 @@ let mostrar_tabla = async() => {
         let fila = tbody.insertRow();
         fila.insertCell().innerHTML = lista_clubesLectura[i]['nombre'];
         fila.insertCell().innerHTML = lista_clubesLectura[i]['tema'];
-        fila.insertCell().innerHTML = lista_clubesLectura[i]['correo'];
-        fila.insertCell().innerHTML = lista_clubesLectura[i]['localizacionLatitud'];
-        fila.insertCell().innerHTML = lista_clubesLectura[i]['localizacionLongitud'];
+        fila.insertCell().innerHTML = lista_clubesLectura[i]['tipoClub'];
+        fila.insertCell().innerHTML = lista_clubesLectura[i]['fechaReunion'];
+        fila.insertCell().innerHTML = lista_clubesLectura[i]['horaReunion'];
     }
 
 
@@ -30,13 +30,13 @@ let filtrar_tabla = async() => {
 
 
     for (let i = 0; i < lista_clubesLectura.length; i++) {
-        if (lista_clubesLectura[i]['nombre'].toLowerCase().includes(filtro) || lista_clubesLectura[i]['tipo'].toLowerCase().includes(filtro) || lista_clubesLectura[i]['tema'].toLowerCase().includes(filtro) || lista_clubesLectura[i]['fechaReunion'].toLowerCase().includes(filtro) ) {
+        if (lista_clubesLectura[i]['nombre'].toLowerCase().includes(filtro) || lista_clubesLectura[i]['tipoClub'].toLowerCase().includes(filtro) || lista_clubesLectura[i]['tema'].toLowerCase().includes(filtro) || lista_clubesLectura[i]['fechaReunion'].toLowerCase().includes(filtro) ) {
             let fila = tbody.insertRow();
             fila.insertCell().innerHTML = lista_clubesLectura[i]['nombre'];
-            fila.insertCell().innerHTML = lista_clubesLectura[i]['telefono'];
-            fila.insertCell().innerHTML = lista_clubesLectura[i]['correo'];
-            fila.insertCell().innerHTML = lista_clubesLectura[i]['localizacionLatitud'];
-            fila.insertCell().innerHTML = lista_clubesLectura[i]['localizacionLongitud'];
+            fila.insertCell().innerHTML = lista_clubesLectura[i]['tema'];
+            fila.insertCell().innerHTML = lista_clubesLectura[i]['tipoClub'];
+            fila.insertCell().innerHTML = lista_clubesLectura[i]['fechaReunion'];
+            fila.insertCell().innerHTML = lista_clubesLectura[i]['horaReunion'];
         }
 
     }

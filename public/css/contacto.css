@@ -1,0 +1,216 @@
+html{
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+
+}
+
+.menuLP img{
+    width: 60%;
+    padding: 10px;
+    margin-top: 10px;
+  }
+  
+  .list-menuLP{
+    margin: 0 auto;
+    display: inline;
+  }
+  
+  .list-menuLP{
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: auto;
+  }
+  .linksInternos{
+    float: left;
+  }
+  
+  .btn_usuarios button{
+    background: #f6c249;
+    font-size: 12px;
+    margin-left: 100px;
+    border-radius: 50px;
+    border: none;
+    margin-top: 12px;
+    padding: 14px;
+    width: 40%;
+    box-shadow: 0 0 5px;
+  }
+  
+  .menuLP button a{
+    text-decoration: none;
+    font-family: 'Roboto' sans-serif;
+    color: #ffffff;
+  }
+  
+  .menuLP button:hover{
+    background: #e9ab1bea;
+    --webkit-transition: all .5s;
+    -o-transition: all .5s;
+  }
+  
+  .cta_btn{
+      text-align: center;
+  }
+  .cta_btn button{
+    background:  #f6c249;
+    font-size: 12px;
+    border-radius: 50px;
+    border: none;
+    margin-bottom: 26px;
+    width: 14%;
+    color: #ffffff;
+    box-shadow: 0 0 5px;
+  }
+   .cta_btn button  a{
+    text-decoration: none;
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    color: #ffffff;
+    font-size: 1rem;
+    line-height: 56px;
+  }
+   .cta_btn button:hover {
+    background: #e9ab1bea;
+    --webkit-transition: all .5s;
+    -o-transition: all .5s;
+  }
+  
+  header .menuHorizontal ul li a {
+    color: #fff;
+      display: block;
+      text-decoration: none;
+      padding-top: 20px;
+      padding-left: 8px;
+  }
+
+  .infoLogo{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+      padding: 40px;
+    vertical-align: middle;
+  }
+
+  .infoLogo img{
+    width: 30%;
+    margin: 0 auto;
+    
+  }
+
+  .infoLogo p{
+      font-size: 1.6rem;
+      font-family: 'Roboto' sans-serif;
+      font-weight: 600;
+      color: #222;
+      line-height: 40px;
+      vertical-align: middle;
+  }
+
+  .misionVision{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    padding: 40px;
+    grid-gap: 100px;
+    text-align: center;
+    background-color: #80d1d3;
+    padding: 40px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px -6px #222;
+    line-height: 20px;
+    color: #ffffff;
+}
+
+.misionVision h3{
+  font-size: 1.5rem;
+  padding: 10px;
+
+}
+  
+  .valores1{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-gap: 20px;
+    padding: 40px;
+  }
+
+  .valores2{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-gap: 20px;
+    padding: 40px;
+  }
+
+  .integrantes1{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-gap: 20px;
+    padding: 40px;
+  }
+
+  .integrantes2{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-gap: 20px;
+    padding: 40px;
+    background-color: #faf8dd;
+    padding-bottom: 40px;
+  }
+
+  .cardValor{
+    border-bottom: 1px solid #222;
+    -webkit-box-shadow: 0 4px 6px -6px #222;
+    -moz-box-shadow: 0 4px 6px -6px #222;
+    box-shadow: 0 4px 6px -6px #222;
+    padding: 10px;
+  }
+
+  .cardValor h3{
+    background-color: #315c74;
+    color: #fff;
+    font-family: Roboto;
+    padding: 10px;
+    text-align: center;
+    line-height: 20pxpx;
+  }
+  .cardValor p{
+    padding: 10px;
+    text-align: center;
+    margin: 0 auto;
+    line-height: 20px;
+  }
+
+  .cardIntegrante img{
+    width: 60%; 
+    padding: 20px;
+    border-radius: 50%;
+    background-color: #f6c249;
+    margin-left: 20%;
+  }
+
+  .cardIntegrante h3{
+    font-size: 1.5rem;
+    text-align: center;
+    line-height: 42px;
+  }
+
+  .cardIntegrante h4{
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  h2{
+    font-family: 'Roboto', sans-serif;
+    font-size: 2rem;
+    color: #f2a5a0;
+    padding: 26px;
+    text-align: center;
+  }
+
+  .integrantes{
+    background-color: #faf8dd;
+  }

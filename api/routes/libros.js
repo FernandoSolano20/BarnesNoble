@@ -9,23 +9,15 @@ router.param('_id', function (req, res, next, _id) {
 
 })
 
-//Definición de la ruta para registrar libros
-
 router.post('/registrarLibro', function (req, res) {
     let body = req.body;
     let nuevoLibro = new Libros({
         titulo: body.titulo,
-        edicion: body.edicion,
-        editorial: body.editorial,
-        annoEdicion: body.annoEdicion,
-        isbl: body.isbl,
         caratula: body.caratula,
         contraportada: body.contraportada,
-        precio: body.precio,
         genero: body.genero,
         categoria: body.categoria,
         autor: body.autor
-
     });
 
     nuevoLibro.save(
@@ -33,26 +25,73 @@ router.post('/registrarLibro', function (req, res) {
             if (err) {
                 return res.status(400).json({
                     success: false,
-                    msj: 'No registró el libro correctamente',
+                    message: 'No se registro el libro correctamente',
                     err
                 });
 
             } else {
                 res.json({
                     success: true,
-                    msj: 'Se registró correctamente el libro'
+                    message: 'Se registró correctamente el libro'
                 });
             }
         }
     );
 });
 
-router.get('/listarLibros', function (req, res) {
+router.get('/listarLibros', async (req, res) => {
+    return await Libros.find(function (err, LibrosBD) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'No se encontro ningún libro',
+                err
+            });
+        }
+        else {
+            return res.json({
+                success: true,
+                listaLibros: LibrosBD
+            });
+        }
+    })
+        .populate('genero', 'nombre -_id')
+        .populate('categoria', 'nombre -_id')
+        .populate('autor', 'nombre -_id')
+        .select('titulo caratula contraportada genero categoria autor');
+});
+
+router.get('/buscarLibroID/:id', async (req, res) => {
+
+    return await Libros.findById(req.params.id, function (err, LibroBD) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'No se encontro ningún libro',
+                err
+            });
+        }
+        else {
+            return res.json({
+                success: true,
+                listaLibro: LibroBD
+            });
+        }
+    })
+        .populate('genero', 'nombre -_id')
+        .populate('categoria', 'nombre -_id')
+        .populate('autor', 'nombre resenna fechaNacimiento fechaMuerte nombreArtistico nacionalidad foto lugarNacimiento -_id')
+        .select('titulo caratula contraportada genero categoria autor');
+
+});
+
+router.get('/listarMasVendidos', function (req, res) {
+    let criterioOrden = { vendidos: -1 };
     Libros.find(function (err, LibrosBD) {
         if (err) {
             return res.status(400).json({
                 success: false,
-                msj: 'No se pueden listar los libros',
+                message: 'No se pueden listar los libros',
                 err
             });
         } else {
@@ -61,51 +100,60 @@ router.get('/listarLibros', function (req, res) {
                 listaLibros: LibrosBD
             });
         }
-    })
+    }).limit(25).sort(criterioOrden)
+
+        .populate('autor', 'nombre -_id')
+        .select('titulo caratula  autor');
+
 });
 
-router.get('/buscarLibroID/:id', async (req, res) => {
-    
-    return await Libros.findById(req.params.id, function (err, LibroBD) {
+router.get('/titulo/:titulo', async (req, res) => {
+    return await Libros.find({ "titulo": { "$regex": req.params.titulo, "$options": "i" } }, function (err, LibroBD) {
         if (err) {
             return res.status(400).json({
                 success: false,
-                msj: 'No se encontro ningún libro',
+                message: 'No se encontro ningún libro',
                 err
             });
         }
         else {
             return res.json({
                 success: true,
-                listaLibros: LibroBD
+                listaLibro: LibroBD
             });
         }
     })
-        .populate('genero', 'nombre -_id')
-        .populate('categoria', 'nombre -_id')
-        .populate('autor', 'nombre -_id')
-        .select('titulo genero categoria autor');
-    
+        .select('titulo');
+
 });
 
-router.get('/listarMasVendidos', function (req, res) {
-    let criterioOrden = { vendidos: -1 };
-
-    Libros.find().sort(criterioOrden).limit(25).toArray(function(err, masVendidos) {
-        if (err) {
-            return res.status(400).json({
-                success: false,
-                msj: 'No se pueden listar los libros',
-                err
-            });
-        } else {
+//SofiaZu-Prefrencia de libros del usuario
+router.post('/listarLibrosPorPreferencia', async (req, res) => {
+    Libros.find({genero: req.body.genero, autor: req.body.autor, categoria: req.body.categoria},function (err, librosPreferidos) {
+        if (librosPreferidos != "") {
             return res.json({
                 success: true,
-                listaMasVendidos: masVendidos
+                listaLibros: librosPreferidos
+            });
+        }
+        else {
+            // el $or busca las prefrencias por separado entre los libros
+            Libros.find({$or:[{genero: req.body.genero}, {autor: req.body.autor}, {categoria: req.body.categoria}]},function (err, librosPreferidos) {
+                if (librosPreferidos != "") {
+                    return res.json({
+                        success: true,
+                        listaLibros: librosPreferidos
+                    });
+                }
+                else {
+                    return res.json({
+                        success: false,
+                        message: "No se encontro nada"
+                    });
+                }
             })
         }
-    });
+    })
 });
-
 
 module.exports = router;

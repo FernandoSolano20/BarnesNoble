@@ -42,28 +42,27 @@ router.post('/registrarUsuario', function (req, res) {
         telefono: body.telefono,
         tipoUsuario: body.tipoUsuario,
         nacimiento: body.nacimiento,
-        sennas: body.sennas,
-        alias: body.alias,
-
-        localizacionLatitud: body.localizacionLatitud,
-        localizacionLongitud: body.localizacionLongitud,
         estado: body.estado,
 
         // /Direccion/
         provincia: body.provincia,
         canton: body.canton,
         distrito: body.distrito,
+        sennas: body.sennas,
+        localizacionLatitud: body.localizacionLatitud,
+        localizacionLongitud: body.localizacionLongitud,
     });
     // /Datos Extra-Lector/
-    
+    if (body.alias)
+        nuevoUsuario.alias = body.alias;
     if (body.autor)
-        nuevoUsuario.autor = body.autor
+        nuevoUsuario.autor = body.autor;
     if (body.genero)
-        nuevoUsuario.genero = body.genero
+        nuevoUsuario.genero = body.genero;
     if (body.libro)
-        nuevoUsuario.libro = body.libro
+        nuevoUsuario.libro = body.libro;
     if (body.categoria)
-        nuevoUsuario.categoria = body.categoria
+        nuevoUsuario.categoria = body.categoria;
     let createLibreria;
     let createUser = true;
     Usuario.findOne({ id: req.body.id }).then(
@@ -102,7 +101,8 @@ router.post('/registrarUsuario', function (req, res) {
                                                     localizacionLongitud: body.localizacionLongitud,
                                                     provincia: body.provincia,
                                                     canton: body.canton,
-                                                    distrito: body.distrito
+                                                    distrito: body.distrito,
+                                                    estado: 1
                                                 });
                                                 createLibreria = await nuevaLibreria.save();
                                                 createUser = true;
@@ -436,6 +436,94 @@ router.patch('/olvidarPass/:correo', function (req, res) {
                 });
             }
         }
+    );
+});
+
+router.get('/buscarLectorId/:_id', function (req, res) {
+    Usuario.findById(req.params._id, function (err, usuarioBD) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                msj: 'No se encontró ningún contacto con ese _id',
+                err
+            });
+        } else {
+            return res.json({
+                success: true,
+                usuario: usuarioBD
+            });
+        }
+    })
+});
+
+router.get('/usuarioId/:id', async (req, res) => {
+    return await Usuario.findById(req.params.id, function (err, usuario) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'No se encontro ninguna usuario',
+                err
+            });
+        }
+        else {
+            return res.json({
+                success: true,
+                usuario: usuario
+            });
+        }
+    })
+        .populate('genero', 'nombre')
+        .populate('categoria', 'nombre')
+        .populate('autor', 'nombre')
+        .populate('libro', 'titulo')
+        .populate({
+            path: 'libreria',
+            populate: {
+                path: 'sucursales.sucursal',
+                select: 'nombre localizacionLongitud localizacionLatitud provincia canton distrito'
+            },
+            select: 'nombreFantasia localizacionLongitud localizacionLatitud provincia canton distrito'
+        })
+        .populate('ejemplares.libro', 'titulo')
+        .select('id nombre segundoNombre primerApellido segundoApellido correo img sexo telefono tipoUsuario nacimiento sennas alias localizacionLatitud localizacionLongitud provincia canton distrito autor genero libro categoria libreria ejemplares');
+});
+
+router.get('/usuarioIdLibreria/:id', function (req, res) {
+    Usuario.findOne({ libreria: req.params.id }).then(
+        function (usuario) {
+            if (usuario) {
+                res.json({
+                    success: true,
+                    usuario: usuario
+                });
+            } else {
+                res.json({
+                    success: false,
+                    message: 'El usuario no existe'
+                });
+            }
+        }
+    );
+});
+
+//SofiaZu-Para listar por preferencia
+router.get('/obtenerPreferenciaUsuario/:id', async (req, res) => {
+
+    return await Usuario.findById(req.params.id, function (err, usuario) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'No se encontro ninguna usuario',
+                err
+            });
+        }
+        else {
+            return res.json({
+                success: true,
+                usuario: usuario
+            });
+        }
+    }
     );
 });
 

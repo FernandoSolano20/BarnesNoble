@@ -1,0 +1,62 @@
+.table-cell-resenna{
+    text-align: left;
+    padding: 4px 25px 1px;
+}
+
+.site-container {
+    margin: 35px auto;
+    max-width: 1200px;
+    width: 80%;
+}
+
+.site-container .subtitle {
+    text-align: center;
+}
+
+#response-container {
+    margin-top: 2em;
+}
+
+#response-container ul {
+    list-style: none;
+    padding: 0;
+}
+
+.fotoUsuario {
+    position: absolute;
+    left: 11%;
+    width: 50px;
+    margin-top: -10px;
+}
+
+#response-container ul .article {
+    border: solid 1px #dbe2e8;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    margin-bottom: 0.5em;
+    padding: 1em 2em 1em 4.8em;
+}
+
+#response-container ul .article:hover {
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+#response-container ul .article h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+}
+
+#response-container ul .article h2 a {
+    color: #02b3e4;
+    text-decoration: none;
+}
+
+#response-container ul .article h2 a:hover {
+    text-decoration: underline;
+}
+
+#response-container ul .article p {
+    font-size: 0.9em;
+    line-height: 1.4;
+    margin: 10px auto 1px auto;
+}
