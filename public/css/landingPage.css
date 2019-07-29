@@ -100,7 +100,8 @@ h2{
 
 
 .card img{
-  width: 80%;
+  width: auto;
+  height: 200px;
   margin-top: 20px;
   margin-bottom: 10px;
 }
@@ -133,11 +134,11 @@ h2{
 .card {
   background:#ffffff;
   min-width: 200px;
-  height: 100%;
   margin-right: 1rem;
   display: inline-block;
   box-shadow: 0px 0px 10px rgba(34, 34, 34, 0.438);
   text-align: center;
+  overflow: hidden;
 }
 /* Fin Estilos  Slider */
 
