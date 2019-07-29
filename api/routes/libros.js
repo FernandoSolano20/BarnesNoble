@@ -127,21 +127,21 @@ router.get('/titulo/:titulo', async (req, res) => {
     
 }); 
 
-
 router.get('/listarLibrosPorPreferencia', async (req, res) => {
-    Libros.find({genero: req.body.genero},function (err, librosGenero) {
-        if (librosGenero != "") {
+    Libros.find({genero: req.body.genero, autor: req.body.autor, categoria: req.body.categoria},function (err, librosPreferidos) {
+        if (librosPreferidos != "") {
             return res.json({
                 success: true,
-                listaLibros: librosGenero
+                listaLibros: librosPreferidos
             });
         }
         else {
-            Libros.find({categoria: req.body.categoria},function (err, librosCategoria) {
-                if (librosCategoria != "") {
+            // el $or busca las prefrencias por separado entre los libros
+            Libros.find({$or:[{genero: req.body.genero}, {autor: req.body.autor}, {categoria: req.body.categoria}]},function (err, librosPreferidos) {
+                if (librosPreferidos != "") {
                     return res.json({
                         success: true,
-                        listaLibros: librosCategoria
+                        listaLibros: librosPreferidos
                     });
                 }
                 else {
