@@ -60,20 +60,28 @@ let agregarFilaAutores = function (autor) {
         Swal.fire({
             title: 'Ingrese la información del premio',
             html: '<input type= "text" id="valorNombrePremio" placeholder="Ingrese un nombre">' + '<input type= "text" id="valorAnnoPremio" placeholder="Ingrese el año de la premiación">' + '<input type= "text" id="valorDesPremio" placeholder="Ingrese una descripción">'
-        }).then( () => {
+        }).then(async () => {
             let nombre = document.querySelector('#valorNombrePremio').value;
             let anno = document.querySelector('#valorAnnoPremio').value;
             let descripcion = document.querySelector('#valorDesPremio').value;
-            if(nombre && anno && descripcion){
-                agregarPremios(this.dataset._id, nombre, anno, descripcion)
-                Swal.fire(
-                    'Premio agregado',
-                    'El premio fue agregado de forma exitosa',
-                    'success'
-                )
+            if (nombre && anno && descripcion) {
+                let response = await agregarPremios(this.dataset._id, nombre, anno, descripcion);
+                if (response.success) {
+                    Swal.fire({
+                        type: 'success',
+                        title: response.message
+                    })
+                }
+                else {
+                    Swal.fire({
+                        type: 'error',
+                        title: response.message
+                    })
+                }
+
             }
         }
-    )
+        )
     });
     premios.appendChild(btnPremios);
 
