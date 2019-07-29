@@ -39,7 +39,7 @@ router.get('/buscarLibreria-id/:_id', function (req, res) {
         if (err) {
             return res.status(400).json({
                 success: false,
-                msj: 'No se encontró ningúna libreria con ese _id',
+                msj: 'No se encontró ningúna libreria con ese id',
                 err
             });
         } else {

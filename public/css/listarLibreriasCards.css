@@ -130,7 +130,7 @@ footer {
   background-color: #315c74;
   color: #ffffff;
   padding: 15px 0px;
-  /* position: relative; */
+  position: relative;
   font-size: 16px;
   color: #ffffff;
   bottom: 0px;
@@ -283,12 +283,20 @@ footer {
       display: flex;
       margin: 0 auto;
       padding: 8px;
-      width:75%;
+      width:50%;
     }
 .foto {
       align-self: center;
       
     }
+  #foto p {
+    text-align: left;
+    color: black;
+    font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
+    padding: 5px;
+    margin: 0px 1%;
+
+  }
 
   #tbl-libreria h2{
      text-align: center;
@@ -299,12 +307,13 @@ footer {
       margin: 15px 1%;
       padding: 10px;
     } 
-    #tbl-Libreria p {
+    .tbl-Libreria p {
       text-align: left;
-   color: black;
-   font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
-   padding: 5px;
-   margin: 0px 1%;
+      color: black;
+      font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
+      padding: 5px;
+      margin: 0px 1%;
+
  }
     
 
@@ -315,33 +324,25 @@ footer {
       background-color: #315c74;
       font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
       font-size: 25px;
-      margin: 15px 1%;
-      padding: 10px;
+      margin: 0px 1%;
+      padding: 5px;
 }
 
 #div-mapa iframe {
-  padding: 10px;
+  padding: 7px;
 }
 
 #tbl-ofertasLibreria h2{ 
-  text-align: left;
-  color: #fff;
-  background-color: #315c74;
-  font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
-  font-size: 25px;
-  margin: 15px 1%;
-  padding: 10px;
-}
-
-#tbl-ofertasLibreria h2 {
   text-align: center;
   color: #fff;
   background-color: #315c74;
   font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
   font-size: 25px;
-  margin: 15px 1%;
-  padding: 10px;
+  margin: 0px 1%;
+  padding: 5px;
 }
+
+
 #tbl-ofertasLibreria p {
   text-align: left;
    color: black;
@@ -356,15 +357,16 @@ footer {
   background-color: #315c74;
   font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
   font-size: 25px;
-  margin: 15px 1%;
-  padding: 10px;
+  margin: 0px 1%;
+  padding: 5px;
 }
 #tbl-clubesLectura p {
-  text-align: left;
+  text-align: center;
    color: black;
    font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
    padding: 5px;
    margin: 0px 1%;
+   padding: 5px;
  }
  
 
@@ -411,22 +413,99 @@ footer {
 
 
 
-/* .threeColumns {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr ;
-  grid-template-rows: 200px ;
+ /* columnas*/
+ .column {
+  float: left;
+  width: 50%;
+  height: 450px;
+  }
+
+.middleColumn {
+  float: left;
+  width: 100%;
+  padding: 10px;
+  background-color: #fff;
 }
 
-.threeColumns {
-  border: 2px solid #f76707;
-  border-radius: 5px;
-  background-color: #fff4e6;
+.middleColumn p{
+  font-size: 25px;
+  text-align: center;
 }
 
-.threeColumns > div {
-  border: 10px solid #ffa94d;
-  border-radius: 5px;
-  background-color: #ffd8a8;
-  padding: 1em;
-  color: #d9480f;
-} */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.fontScript{
+  font-family: 'Kaushan Script', cursive;
+  font-size: 36px;
+}
+
+.toursColumn {
+  float: left;
+  width: 25%;
+ 
+}
+/* Text in front of banner */
+.centered {
+ position: absolute;
+ top: 150px;
+ left: 40%;
+ transform: translate(-50%, -50%);
+ /* font-family: 'Kaushan Script', cursive; */
+}
+.threeColumn {
+ float: left;
+ width: 33%;
+ padding: 10px;
+}
+
+/* clubes css */
+.tbl-clubesLectura.tabla {
+  margin: 20px auto;
+  border: 2px solid #000;
+  box-shadow: 3px 3px 5px 6px #ccc;
+}
+
+.tbl-clubesLectura.tabla thead {
+  background-color: #315c74;
+  border: 2px solid #000;
+  color: #fff;
+  font-family: Roboto;
+  text-align: center;
+}
+
+.tbl-clubesLectura .tabla thead th {
+  padding: 25px;
+}
+
+.tbl-clubesLectura .tabla tbody tr:hover {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.tbl-clubesLectura .tabla tbody td {
+  border-bottom: 2px solid black;
+}
+
+.tbl-clubesLectura.tabla thead th, .tbl-clubesLectura.tabla tbody td {
+  height: 30px;
+  padding: 15px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.tbl-clubesLectura .tabla tbody td:nth-child(2) {
+  text-align: justify;
+}
+
+.tbl-clubesLectura.tabla tbody td i {
+  font-size: 25px;
+}
+
+.mySlides {display:none}
+.w3-left, .w3-right, .w3-badge {cursor:pointer}
+.w3-badge {height:13px;
+  width:100%;
+  padding:0}
