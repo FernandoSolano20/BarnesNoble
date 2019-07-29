@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Barnes & Noble</title>
-    <script src="js/validarSesionLector.js"></script>
+    <!-- <script src="js/validarSesionPlatafomra.js"></script> -->
     <link rel="stylesheet" href="css/reset.css">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
@@ -35,8 +35,11 @@
         </nav>
 
         <nav class="menuIzquierdo">
-            <ul class="menu" id="menuDinamico">
-
+            <ul class="menu">
+                <li><a href="#">Mi perfil</a></li>
+                <li><a href="verTarjeta.html">Tarjeta perfil</a></li>
+                <li><a href="registrarTarjeta.html">Nueva Tarjeta</a></li>
+                <li><a href="listarTarjetas.html">Mis Tarjetas</a></li>
             </ul>
         </nav>
     </header>
@@ -44,22 +47,23 @@
     <main>
         <section>
             <div class="center">
-                <h2>Registrar Tarjeta Nueva</h2>
-            </div>
-            <!-- class="center"          -->
-
-            <form class="formRegistro" name="formulario_registro" id='registrarTarjeta'>
+                  <form class="formRegistro" name="formulario_registro" id='registrarTarjeta'>
                 <div class="column">
+                    <div id="titulo-tarjeta">
+                           <h2>Registrar Tarjeta Nueva</h2>
+                    </div>
+                     
                     <div class="inputGroup">
                         <label for="">Nombre en la tarjeta</label>
                         <input placeholder="Campo Requerido" type="text" id="txt-nombre">
                     </div>
 
                     <div class="inputGroup">
-                        <label for="numeroTarjeta">Numero de tajeta</label>
-                        <input placeholder="La identificación debe tener 13 dígitos" type="number" id="nmr-tarjeta">
+                        <label for="numeroTarjeta">Número de tajeta</label>
+                        <input placeholder="El número debe tener 16 dígitos." type="number" id="nmr-tarjeta">
 
                     </div>
+
                     <div class="inputGroup">
                         <label for="">Tipo de Tarjeta</label>
                         <select id="slt-tipoTarjeta" required>
@@ -88,11 +92,11 @@
                         </select>
                         <select name='exYY' id='slt-expiracionYY' required>
                             <option value=''>Año</option>
-                            <option value='20'>2020</option>
-                            <option value='21'>2021</option>
-                            <option value='22'>2022</option>
-                            <option value='23'>2023</option>
-                            <option value='24'>2024</option>
+                            <option value='20'>20</option>
+                            <option value='21'>21</option>
+                            <option value='22'>22</option>
+                            <option value='23'>23</option>
+                            <option value='24'>24</option>
                         </select>
 
                     </div>
@@ -108,7 +112,7 @@
                     </div>
                 </div><!-- Final div column -->
             </form>
-
+        </div>
         </section>
     </main>
     <footer>
@@ -127,13 +131,15 @@
                 <a href="#"><i class="fab fa-twitter"></i></a>
             </div>
         </div>
+
     </footer>
-    <script src="js/menu.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>   
     <script src="js/tarjetas/servicioTarjeta.js"></script>
     <script src="js/tarjetas/controlador-registrar-tarjeta.js"></script>
+    <script src="js/validaciones/validacionesGenerales.js"></script>
+    <script src="js/menu.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-    <script src="js/cerrarSesion.js"></script>
+    <!-- <script src="js/cerrarSesion.js"></script> -->
 </body>
 
 </html>

@@ -18,6 +18,19 @@ let mostrar_tabla = async() => {
         fila.insertCell().innerHTML = listaLibrerias[i]['provincia'];
         fila.insertCell().innerHTML = listaLibrerias[i]['provincia'];
         fila.insertCell().innerHTML = listaLibrerias[i]['distrito'];
+        // fila.insertCell().innerHTML = listaLibrerias[i]['localizacionLatitud'];
+        // fila.insertCell().innerHTML = listaLibrerias[i]['localizacionLongitud'];
+        // // let celda_perfil = fila.insertCell();
+        // let boton_perfil = document.createElement('button');
+        // boton_perfil.type = 'button';
+        // boton_perfil.innerText = 'Ver perfil';
+        // boton_perfil.dataset._id = lista_contactos[i]['_id'];
+
+        // celda_perfil.appendChild(boton_perfil);
+
+        // boton_perfil.addEventListener('click', function() {
+             //     window.location.href = `verPerfil-libreria.html?_id=${this.dataset._id}`
+        // });
        
     }
 };
@@ -43,11 +56,11 @@ let filtrar_tabla = async() => {
             fila.insertCell().innerHTML = listaLibrerias[i]['provincia'];
             fila.insertCell().innerHTML = listaLibrerias[i]['provincia'];
             fila.insertCell().innerHTML = listaLibrerias[i]['distrito'];
+            // fila.insertCell().innerHTML = listaLibrerias[i]['localizacionLatitud'];
+            // fila.insertCell().innerHTML = listaLibrerias[i]['localizacionLongitud'];
         }
     }
 };
 
 txtFiltro.addEventListener('keyup', filtrar_tabla);
-
-
 
