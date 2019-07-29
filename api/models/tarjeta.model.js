@@ -17,6 +17,11 @@ usuario: {
     ref: 'Usuario',
     require: true
 }
+
+
+
+
+
 });
 
 module.exports = mongoose.model('Tarjeta', tarjeta_schema); 

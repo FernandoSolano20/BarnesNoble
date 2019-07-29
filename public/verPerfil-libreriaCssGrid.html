@@ -53,75 +53,48 @@
         </div> -->
     </div>
 
-
-    <section class="center">
-        <!-- <div class="middleColumn"> -->
-
-        <div class="w3-content w3-display-container" style="max-width: 100%">
-            <img class="mySlides" src="img/ofertasImgs/Homepage_Billboard_07-23_A1.jpg" style="width:100%">
-            <img class="mySlides" src="img/ofertasImgs/Homepage_Billboard_07-22_A4.jpg" style="width:100%">
-            <img class="mySlides" src="img/ofertasImgs/Homepage_Billboard_07-22_A5.jpg" style="width:100%">
-            <div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
-            <div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
-            <div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
-            <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
-            <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
-            <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
-            </div>
-        </div>
-        <!-- </div> -->
-    </section>
-
     <section class='center'>
-        <div class="row">
-            <div class="column" id="foto">
+        <div class="blockPerfil" id="contenedor-css-grid">
+            <div id="foto">
                 <img src="https://res.cloudinary.com/barnesnoble/image/upload/v1564193506/xvirtkcfjqqh0u1mqf0s.png"
                     alt="Foto de perfil" id="libPerfilFoto">
                 </img>
-            </div>
-            <div class="column" id="tbl-libreria">
-                <h2>Nosotros <span id="titulo"></span></h2>
-                <p> Nombre Comercial: <span id="txt-nombreComercial"></span></p>
-                <p> Nombre Fantasia: <span id="txt-nombreFantasia"> </span></p>
-                <p> Provincia: <span id="txt-provincia"></span> </p>
-                <p> Cantón: <span id="txt-canton"></span></p>
-                <p> Distrito: <span id="txt-distrito"></span></p>
-            </div>
-        </div>
-    </section>
 
-    <section class="center">
-        <div class="row">
-            <div class="column" id="div-mapa">
-                <h2>Ubicación <span id="map-ubicacion"></span></h2>
-                <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1Sk8jBng8QiZ09eZcTn3DGZ1AIU06jh4y" width="100%"
-                    height="90%"></iframe>
-            </div>
-
-            <div class="column">
-                <div class="tabla" id="tbl-clubesLectura">
-                    <h2>Clubes de lecturas <span id="tbl-contenedor-tabla-titulo"></span></h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th style="padding: 5px;" id='txt-nombreClub'>Nombre</th>
-                                <th style="padding: 5px;" id='txt-fecha'>Fecha de Reunion</th>
-                                <th style="padding: 5px;" id='txt-horaReunion'>Hora</th>
-                                <th style="padding: 5px;" id='txt-tema'>Tema</th>
-                                <th style="padding: 5px;" id='txt-tipoClub'>Tipo de Club</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                        </tbody>
-                    </table>
+                <div id="tbl-libreria">
+                    <h2>Nosotros <span id="titulo"></span></h2>
+                    <p> Nombre Comercial: <span id="txt-nombreComercial"></span></p>
+                    <p> Nombre Fantasia: <span id="txt-nombreFantasia"> </span></p>
+                    <p> Provincia: <span id="txt-provincia"></span> </p>
+                    <p> Cantón: <span id="txt-canton"></span></p>
+                    <p> Distrito: <span id="txt-distrito"></span></p>
                 </div>
-            </div>
-    </section>
 
-    <section class="center">
-        <div class="row">
-            <div class="column" id="tbl-ofertasLibreria">
+            </div>
+
+            <div class="blockPerfilRows" id="div-mapa">
+                <h2>Ubicación <span id="map-ubicacion"></span></h2>
+                <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1Sk8jBng8QiZ09eZcTn3DGZ1AIU06jh4y" width="635"
+                    height="480"></iframe>
+            </div>
+
+            <div id="tbl-clubesLectura">
+                <h2>Clubes de lecturas <span id="tbl-clubesLectura"></span></h2>
+                <table class="tabla" Id='tbl-clubesLectura'>
+                    <thead>
+                        <tr>
+                            <th id='txt-nombreClub'>Nombre</th>
+                            <th id='txt-fecha'>Fecha de Reunion</th>
+                            <th id='txt-horaReunion'>Hora</th>
+                            <th id='txt-tema'>Tema</th>
+                            <th id='txt-tipoClub'>Tipo de Club</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="tbl-ofertasLibreria">
                 <div>
                     <h2>Ofertas <span id="ofertas"></span></h2>
                     <p>Oferta 1: <span id="oferta1"></span></p>
@@ -129,14 +102,10 @@
                     <p>Oferta 3: <span id="oferta3"></span></p>
                     <p>Oferta 4: <span id="oferta4"></span></p>
                 </div>
+
+                
             </div>
-
-
         </div>
-
-    </section>
-
-    </div>
     </section>
     </main>
     <footer>
@@ -157,35 +126,6 @@
         </div>
 
     </footer>
-
-    <script>
-        var slideIndex = 1;
-        showDivs(slideIndex);
-
-        function plusDivs(n) {
-            showDivs(slideIndex += n);
-        }
-
-        function currentDiv(n) {
-            showDivs(slideIndex = n);
-        }
-
-        function showDivs(n) {
-            var i;
-            var x = document.getElementsByClassName("mySlides");
-            var dots = document.getElementsByClassName("demo");
-            if (n > x.length) { slideIndex = 1 }
-            if (n < 1) { slideIndex = x.length }
-            for (i = 0; i < x.length; i++) {
-                x[i].style.display = "none";
-            }
-            for (i = 0; i < dots.length; i++) {
-                dots[i].className = dots[i].className.replace(" w3-white", "");
-            }
-            x[slideIndex - 1].style.display = "block";
-            dots[slideIndex - 1].className += " w3-white";
-        }
-    </script>
 
 
     <script src="js/maps/maps.js"></script>

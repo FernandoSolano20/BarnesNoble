@@ -274,7 +274,7 @@ footer {
     margin-left: auto;
     margin-right: auto;
     width: 75%;
-    text-align: center;
+    /* text-align: center; */
   }
 
 #foto img {
@@ -290,7 +290,7 @@ footer {
       
     }
   #foto p {
-    text-align: left;
+    text-align: left !important;
     color: black;
     font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
     padding: 5px;
@@ -299,7 +299,7 @@ footer {
   }
 
   #tbl-libreria h2{
-     text-align: center;
+     text-align: left !important;
       color: #fff;
       background-color: #315c74;
       font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
@@ -307,11 +307,11 @@ footer {
       margin: 15px 1%;
       padding: 10px;
     } 
-    .tbl-Libreria p {
-      text-align: left;
+    .tbl-Libreria .column p {
+      text-align: left !important;
       color: black;
       font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
-      padding: 5px;
+      padding-left: 5px;
       margin: 0px 1%;
 
  }
@@ -347,8 +347,8 @@ footer {
   text-align: left;
    color: black;
    font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
-   padding: 5px;
-   margin: 0px 1%;
+   padding: 10px;
+   margin: 5px 1%;
  }
 
 #tbl-clubesLectura h2 {
@@ -360,13 +360,28 @@ footer {
   margin: 0px 1%;
   padding: 5px;
 }
-#tbl-clubesLectura p {
+#tbl-clubesLectura .column p {
+  text-align: left;
+   color: black;
+   font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
+   padding: 5px;
+   margin: 0px 1%;
+ }
+ 
+ #tbl-sucursalesLibreria h2 {
   text-align: center;
    color: black;
    font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
    padding: 5px;
    margin: 0px 1%;
    padding: 5px;
+ }
+ #tbl-sucursalesLibreria p {
+  text-align: left;
+  color: black;
+  font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
+  padding: 5px;
+  margin: 0px 1%;
  }
  
 
@@ -438,16 +453,44 @@ footer {
   clear: both;
 }
 
-.fontScript{
-  font-family: 'Kaushan Script', cursive;
-  font-size: 36px;
-}
-
-.toursColumn {
+.fourColumns {
   float: left;
   width: 25%;
+  margin-left: auto;
+    margin-right: auto;
+    
+}
+.fourColumns button{
+  width: 75%;
+  padding: 5px;
+}
+
+.fourColumns img{
+  padding: 10px;
  
 }
+.fourColumns:hover img{
+  border: solid black 1px;   
+}
+
+.button {
+	color: #315c74;
+  text-align: center;
+	border: solid white 1px;
+	font-weight: 100; 
+	padding: 10px;
+	font-family: 'Open Sans', sans-serif;
+	margin-bottom: 20px;
+	margin-left: 30px;
+}
+
+.button:hover{
+	background: orange;
+  color: white;
+  
+}
+
+
 /* Text in front of banner */
 .centered {
  position: absolute;
@@ -509,3 +552,18 @@ footer {
 .w3-badge {height:13px;
   width:100%;
   padding:0}
+
+
+  .footerLibreriaCards {
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    background-color: #315c74;
+    color: #ffffff;
+    padding: 15px 0px;
+    position: absolute;
+    font-size: 16px;
+    color: #ffffff;
+    bottom: 0px;
+    width: 100%;
+     }
