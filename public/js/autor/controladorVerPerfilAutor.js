@@ -5,8 +5,8 @@ let _id = urlParams.get('_id');
 const nombre = document.querySelector('#valorNombre');
 const nombreArtistico = document.querySelector('#valorNombreArtistico');
 const nacionalidad = document.querySelector('#valorNacionalidad');
-const nacimiento = document.querySelector('#valorNacimiento');
-const muerte = document.querySelector('#valorMuerte');
+let nacimiento = document.querySelector('#valorNacimiento');
+let muerte = document.querySelector('#valorMuerte');
 const resenna = document.querySelector('#valorResenna');
 const avatar = document.querySelector('#avatar');
 const nombrePremio = document.querySelector('#valorNombrePremio');
@@ -20,8 +20,8 @@ let llenarPerfil = async() => {
         nombre.innerHTML = autor['nombre'];
         nombreArtistico.innerHTML = autor['nombreArtistico'];
         nacionalidad.innerHTML = autor['nacionalidad'];
-        nacimiento.innerHTML = autor['fechaNacimiento'];
-        muerte.innerHTML = autor['fechaMuerte'];
+        nacimiento.innerHTML = formatearFecha(autor['fechaNacimiento']);
+        muerte.innerHTML = formatearFecha(autor['fechaMuerte']);
         resenna.innerHTML = autor['resenna'];
         avatar.setAttribute('src', autor.foto);
         for (let i = 0; i < premios.length; i++) {
@@ -34,3 +34,10 @@ let llenarPerfil = async() => {
 };
 
 llenarPerfil();
+
+var formatearFecha = function (pfecha) {
+
+    var fechaFormateada = new Date(pfecha);
+
+    return fechaFormateada.getDay() + "-" + (fechaFormateada.getMonth() + 1) + "-" + fechaFormateada.getFullYear();
+}
