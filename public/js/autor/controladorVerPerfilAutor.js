@@ -25,9 +25,9 @@ let llenarPerfil = async() => {
         resenna.innerHTML = autor['resenna'];
         avatar.setAttribute('src', autor.foto);
         for (let i = 0; i < premios.length; i++) {
-        nombrePremio.innerHTML = premios['nombre'];
-        annoPremio.innerHTML = premios['anno'];
-        descripPremio.innerHTML = premios['descripcion'];
+        nombrePremio.innerHTML = premios[i]['nombre'];
+        annoPremio.innerHTML = premios[i]['anno'];
+        descripPremio.innerHTML = premios[i]['descripcion'];
     }
     
     }
