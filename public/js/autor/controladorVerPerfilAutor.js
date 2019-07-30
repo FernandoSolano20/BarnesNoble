@@ -9,9 +9,13 @@ const nacimiento = document.querySelector('#valorNacimiento');
 const muerte = document.querySelector('#valorMuerte');
 const resenna = document.querySelector('#valorResenna');
 const avatar = document.querySelector('#avatar');
+const nombrePremio = document.querySelector('#valorNombrePremio');
+const annoPremio = document.querySelector('#valorAnnoPremio');
+const descripPremio = document.querySelector('#valorDesPremio');
 
 let llenarPerfil = async() => {
     let autor = await obtenerAutorId(_id);
+    let premios = autor['premios'];
     if (autor) {
         nombre.innerHTML = autor['nombre'];
         nombreArtistico.innerHTML = autor['nombreArtistico'];
@@ -19,9 +23,14 @@ let llenarPerfil = async() => {
         nacimiento.innerHTML = autor['fechaNacimiento'];
         muerte.innerHTML = autor['fechaMuerte'];
         resenna.innerHTML = autor['resenna'];
-        avatar.setAttribute('src', autor.foto   );
+        avatar.setAttribute('src', autor.foto);
+        for (let i = 0; i < premios.length; i++) {
+        nombrePremio.innerHTML = premios['nombre'];
+        annoPremio.innerHTML = premios['anno'];
+        descripPremio.innerHTML = premios['descripcion'];
+    }
+    
     }
 };
 
 llenarPerfil();
-    
