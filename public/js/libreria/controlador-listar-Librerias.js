@@ -28,7 +28,7 @@ let mostrar_tabla = async() => {
         btnPerfil.innerText = 'Ver Perfil'
         btnPerfil.dataset._id = listaLibrerias[i]['_id'];
         btnPerfil.addEventListener('click', function () {
-            window.location.href = `verPerfil-libreria.html?_id=${this.dataset._id}`;
+            window.location.href = `perfilLibreria.html?id=${this.dataset._id}`;
         });
     }
 };
