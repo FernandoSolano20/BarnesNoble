@@ -35,14 +35,8 @@
         </nav>
 
         <nav class="menuIzquierdo">
-            <ul class="menu">
-                <li><a href="#">Mi perfil</a></li>
-                <li><a href="genero.html">Géneros</a></li>
-                <li><a href="categoria.html">Categorías</a></li>
-                <li><a href="#">Reportes</a></li>
-                <li><a href="#">Bitácora</a></li>
-                <li><a href="#">Usuarios</a></li>
-                <li><a href="#">Librerías</a></li>
+            <ul class="menu" id="menuDinamico">
+
             </ul>
         </nav>
     </header>
@@ -53,13 +47,19 @@
                     autocorrect="off">
                 <button type="button" class="buscar"><i class="fa fa-search"></i><span>search</span></button>
             </div>
+            <div class="crear-contenedor">
+                    <a href="registrarAutor.html" type="button" class="material-blue" data-action="crear" id="crear-elemento"><i
+                            class="far fa-plus-circle"></i>Crear</a>
+                </div>
         </div>
+        
         <div class="contenedor-tabla">
             <table class="tabla" id="tabla-elementos">
                 <thead>
                     <tr>
                         <th>Autor</th>
                         <th>Perfil</th>
+                        <th>Premios</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
                         <th>Activar/Desactivar</th>
@@ -86,7 +86,7 @@
                 <a href="#"><i class="fab fa-twitter"></i></a>
             </div>
         </div>
-        
+
     </footer>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="js/cerrarSesion.js"></script>

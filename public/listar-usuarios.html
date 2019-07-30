@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="js/validarSesionPlatafomra.js"></script>
     <link rel="stylesheet" href="css/reset.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/menu.css">
@@ -31,21 +32,13 @@
         </nav>
 
         <nav class="menuIzquierdo">
-            <ul class="menu">
-                <li><a href="#">Mi perfil</a></li>
-                <li><a href="genero.html">Géneros</a></li>
-                <li><a href="categoria.html">Categorías</a></li>
-                <li><a href="#">Autores</a></li>
-                <li><a href="#">Libros</a></li>
-                <li><a href="#">Librerias</a></li>
-                <li><a href="#">Sucursales</a></li>
-                <li><a href="#">Intercambios</a></li>
-                <li><a href="#">Clubes de lectura</a></li>
+            <ul class="menu" id="menuDinamico">
+
             </ul>
         </nav>
     </header>
-
-    <div class="subcontenedor">
+    <main>
+        <div class="subcontenedor">
             <div class="busqueda">
                 <input type="text" id="input-filtro" name="buscar" placeholder="Buscar...." autocomplete="off"
                     autocorrect="off">
@@ -53,13 +46,13 @@
             </div>
 
             <div class="crear-contenedor">
-                   <a href="registroUsuarios.html"><button type="button" class="material-blue" data-action="crear" id="crear-elemento"><i
-                            class="far fa-plus-circle"></i> Crear</button></a> 
-                </div>
+                <a href="registroUsuarios.html"><button type="button" class="material-blue" data-action="crear"
+                        id="crear-elemento"><i class="far fa-plus-circle"></i> Crear</button></a>
             </div>
-    </div>
+        </div>
+        </div>
 
-    <div class="contenedor-tabla">
+        <div class="contenedor-tabla">
             <table class="tabla" id="tabla-elementos">
                 <thead>
                     <tr>
@@ -80,8 +73,8 @@
                 </tbody>
             </table>
         </div>
-        
-    <div id="modal" class="modal alert">
+
+        <div id="modal" class="modal alert">
             <div class="modal-content">
                 <div class="close" data-close="closeModal">&times;</div>
                 <p id="titulo-modal">Título</p>
@@ -93,10 +86,10 @@
                     <button class="alert-btn primary" id="confirm">Confirmar</button>
                 </div>
             </div>
-        </div> 
+        </div>
     </main>
 
-  <footer>
+    <footer>
         <div class="blockFooter">
             <div class="logos">
                 <a href="#"><img src="img/barnes_and_noble_logo_png_94486.png" alt="Logo de Barnes&Noble"></a>
@@ -112,12 +105,13 @@
                 <a href="#"><i class="fab fa-twitter"></i></a>
             </div>
         </div>
-       
+
     </footer>
 </body>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="js/cerrarSesion.js"></script>
 <script src="js/menu.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="js/usuarios/servicioUsuario.js"></script>
 <script src="js/usuarios/controlador-listarUsuarios.js"></script>
+
 </html>

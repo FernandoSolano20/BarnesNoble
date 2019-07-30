@@ -87,20 +87,24 @@ router.get('/buscarLibroID/:id', async (req, res) => {
 
 router.get('/listarMasVendidos', function (req, res) {
     let criterioOrden = { vendidos: -1 };
-    Libros.find(function(err,LibrosBD){
+    Libros.find(function (err, LibrosBD) {
         if (err) {
             return res.status(400).json({
                 success: false,
                 message: 'No se pueden listar los libros',
                 err
             });
-        }else{
+        } else {
             return res.json({
                 success: true,
                 listaLibros: LibrosBD
             });
         }
-    }).limit(25).sort(criterioOrden);
+    }).limit(25).sort(criterioOrden)
+
+        .populate('autor', 'nombre -_id')
+        .select('titulo caratula  autor');
+
 });
 
 router.get('/titulo/:titulo', async (req, res) => {
@@ -120,7 +124,36 @@ router.get('/titulo/:titulo', async (req, res) => {
         }
     })
         .select('titulo');
-    
-}); 
+
+});
+
+//SofiaZu-Prefrencia de libros del usuario
+router.post('/listarLibrosPorPreferencia', async (req, res) => {
+    Libros.find({genero: req.body.genero, autor: req.body.autor, categoria: req.body.categoria},function (err, librosPreferidos) {
+        if (librosPreferidos != "") {
+            return res.json({
+                success: true,
+                listaLibros: librosPreferidos
+            });
+        }
+        else {
+            // el $or busca las prefrencias por separado entre los libros
+            Libros.find({$or:[{genero: req.body.genero}, {autor: req.body.autor}, {categoria: req.body.categoria}]},function (err, librosPreferidos) {
+                if (librosPreferidos != "") {
+                    return res.json({
+                        success: true,
+                        listaLibros: librosPreferidos
+                    });
+                }
+                else {
+                    return res.json({
+                        success: false,
+                        message: "No se encontro nada"
+                    });
+                }
+            })
+        }
+    })
+});
 
 module.exports = router;

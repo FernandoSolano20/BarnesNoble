@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Barnes & Noble</title>
-    <script src="js/validarSesionLector.js"></script>
+    <script src="js/validarSesionUsuario.js"></script>
     <link rel="stylesheet" href="css/reset.css">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="css/voto.css">
     <link rel="stylesheet" href="css/resennas.css">
     <link rel="stylesheet" href="css/botones.css">
+    <link rel="stylesheet" href="css/radio.css">
 </head>
 
 <body>
@@ -35,14 +36,8 @@
         </nav>
 
         <nav class="menuIzquierdo">
-            <ul class="menu">
-                <li><a href="#">Mi perfil</a></li>
-                <li><a href="#"></a>Mis sucursales</a></li>
-                <li><a href="#">Catálogo de libros</a></li>
-                <li><a href="#">Ofertas</a></li>
-                <li><a href="#">Clubes de lectura</a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#">Librerías</a></li>
+            <ul class="menu" id="menuDinamico">
+
             </ul>
         </nav>
     </header>
@@ -53,22 +48,19 @@
                 <div class="blog-slider__container">
                     <div class="blogSlides fade">
                         <div class="blog-slider__numbertext">1 / 3</div>
-                        <img id="caratula"
-                            src="">
+                        <img id="caratula" src="">
                         <div class="blog-slider__text">Portada</div>
                     </div>
 
                     <div class="blogSlides fade">
                         <div class="blog-slider__numbertext">2 / 3</div>
-                        <img id="contraportada"
-                            src="">
+                        <img id="contraportada" src="">
                         <div class="blog-slider__text">Contraportada</div>
                     </div>
 
                     <div class="blogSlides fade">
                         <div class="blog-slider__numbertext">3 / 3</div>
-                        <img id="fotoAutor"
-                            src="">
+                        <img id="fotoAutor" src="">
                         <div class="blog-slider__text">Autor</div>
                     </div>
 
@@ -104,31 +96,12 @@
             <div class="column ">
                 <div class="info">
                     <h2>Información del libro</h2>
-                    <div>
-                        <span><i class="fas fa-newspaper"></i>Edición:</span>
-                        <p id="edicion"></p>
+                    <div class="radio" id="tipoLibro">
+                        
                     </div>
-                    <div>
-                        <span><i class="fas fa-newspaper"></i>Editorial:</span>
-                        <p id="editorial"></p>
-                    </div>
-                    <div>
-                        <span><i class="far fa-book"></i>ISBN:</span>
-                        <p id="isbn10"></p>
-                    </div>
-                    <div>
-                        <span><i class="far fa-book"></i>ISBN:</span>
-                        <p id="isbn13"></p>
-                    </div>
-                    <div>
-                        <span><i class="far fa-money-bill"></i>Precio:</span>
-                        <p id="precio"></p>
-                    </div>
-                    <div>
-                        <span><i class="far fa-calendar-week"></i>Año de edición:</span>
-                        <p id="annoEdicion"></p>
-                    </div>
-
+                    <section id="infoLibro">
+                        
+                    </section>
                 </div>
                 <div class="info">
                     <h2>Categoría:</h2>
@@ -300,9 +273,10 @@
     </footer>
     <script src="js/cerrarSesion.js"></script>
     <script src="js/menu.js"></script>
+    <script src="js/libros/servicioLibros.js"></script>
+    <script src="js/ejemplar/servicioEjemplar.js"></script>
     <script src="js/perfilSlider/slider.js"></script>
     <script src="js/voto/animacion.js"></script>
-    <script src="js/libros/servicioLibros.js"></script>
     <script src="js/libros/controladorPerfilLibro.js"></script>
 </body>
 

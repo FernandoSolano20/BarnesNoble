@@ -1,12 +1,9 @@
-<<<<<<< HEAD
-=======
 html{
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
 
 }
 
->>>>>>> de1939adb83ba2acf509665bfa1c57864f530291
 .menuLP img{
     width: 60%;
     padding: 10px;
@@ -90,23 +87,13 @@ html{
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: auto;
-<<<<<<< HEAD
-=======
       padding: 40px;
     vertical-align: middle;
->>>>>>> de1939adb83ba2acf509665bfa1c57864f530291
   }
 
   .infoLogo img{
     width: 30%;
     margin: 0 auto;
-<<<<<<< HEAD
-  }
-
-  .infoLogo p{
-      font-size: 1rem;
-      font-family: 'Roboto' sans-serif;
-=======
     
   }
 
@@ -117,17 +104,10 @@ html{
       color: #222;
       line-height: 40px;
       vertical-align: middle;
->>>>>>> de1939adb83ba2acf509665bfa1c57864f530291
   }
 
   .misionVision{
     display: grid;
-<<<<<<< HEAD
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: auto;
-  }
-
-=======
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
     padding: 40px;
@@ -147,47 +127,34 @@ html{
 
 }
   
->>>>>>> de1939adb83ba2acf509665bfa1c57864f530291
   .valores1{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto;
-<<<<<<< HEAD
-=======
     grid-gap: 20px;
     padding: 40px;
->>>>>>> de1939adb83ba2acf509665bfa1c57864f530291
   }
 
   .valores2{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: auto;
-<<<<<<< HEAD
-=======
     grid-gap: 20px;
     padding: 40px;
->>>>>>> de1939adb83ba2acf509665bfa1c57864f530291
   }
 
   .integrantes1{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto;
-<<<<<<< HEAD
-=======
     grid-gap: 20px;
     padding: 40px;
->>>>>>> de1939adb83ba2acf509665bfa1c57864f530291
   }
 
   .integrantes2{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto;
-<<<<<<< HEAD
-  }
-=======
     grid-gap: 20px;
     padding: 40px;
     background-color: #faf8dd;
@@ -247,4 +214,3 @@ html{
   .integrantes{
     background-color: #faf8dd;
   }
->>>>>>> de1939adb83ba2acf509665bfa1c57864f530291

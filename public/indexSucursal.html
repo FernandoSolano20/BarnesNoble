@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Barnes & Noble</title>
+    <script src="js/validarSesionLibreria.js"></script>
     <link rel="stylesheet" href="css/reset.css">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
@@ -22,59 +23,37 @@
             <ul class="list-menu">
                 <li><a href="#" data-menu="mostrar-nav-izq"><i data-menu="mostrar-nav-izq" class="fas fa-bars"></i></a>
                 </li>
-                <li><a href="#"><i class="far fa-home"></i>Inicio</a></li>
-                <li><a href="#"><i class="far fa-id-badge"></i>Registarse</a></li>
-                <li><a href="#"><i class="far fa-id-badge"></i>Registarse</a></li>
-                <li class="submenu">
-                    <a href="#"><i class="far fa-sign-in-alt"></i>Iniciar sesión<i class="fal fa-angle-down"></i></a>
-                    <ul class="children">
-                        <li><a href="#">SubElemento #1 <i class="fas fa-address-book"></i></a></li>
-                        <li><a href="#">SubElemento #2 <i class="fas fa-address-book"></i></a></li>
-                        <li><a href="#">SubElemento #3 <i class="fas fa-address-book"></i></a></li>
-                    </ul>
+                <li><a href="/"><i class="far fa-home"></i>Inicio</a></li>
+                <li id="logout">
+                    <a href=""><i class="far fa-sign-out-alt"></i>Cerrar Sesión</a>
                 </li>
-                <li><a href="#"><i class="fal fa-address-book"></i>Contacto</a></li>
+                <li><a href="contacto.html"><i class="fal fa-address-book"></i>Contacto</a></li>
                 <li class="link-imagen"><img src="img/logo_barnes-and-noble.png" alt="Logo de Barnes&Noble"></li>
             </ul>
         </nav>
 
         <nav class="menuIzquierdo">
-            <ul class="menu">
-                <li><a href="#">Nosotros</a></li>
-                <li><a href="#">La carta</a></li>
-                <li><a href="#">Reservas</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">La barra</a></li>
-                <li><a href="#">Contacto</a></li>
-                <li><a href="#">Nosotros</a></li>
-                <li><a href="#">La carta</a></li>
-                <li><a href="#">Reservas</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">La barra</a></li>
-                <li><a href="#">Contacto</a></li>
-                <li><a href="#">Reservas</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">La barra</a></li>
-                <li><a href="#">Contacto</a></li>
+            <ul class="menu" id="menuDinamico">
+
             </ul>
         </nav>
     </header>
 
     <main>
 
-<div class="grid">
-        <div>
-           <h1 class="title">${nombre de sucursal}</h1>
-           <img class="img" src="img/dibujo sucursal.png" alt="Imagen de la sucursal">
-        </div>
+        <div class="grid">
+            <div>
+                <h1 class="title">${nombre de sucursal}</h1>
+                <img class="img" src="img/dibujo sucursal.png" alt="Imagen de la sucursal">
+            </div>
 
-        <div>
-            <p>
-                dss
-            </p>
-        </div>
+            <div>
+                <p>
+                    dss
+                </p>
+            </div>
 
-    </div>
+        </div>
 
     </main>
 
@@ -105,6 +84,8 @@
             <h3> ⓒ 2019 Valhalla</h3>
         </div>
     </footer>
+    <script src="js/menu.js"></script>
+    <script src="js/cerrarSesion.js"></script>
     <script src="js/index.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </body>
