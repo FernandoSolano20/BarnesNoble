@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="js/validarSesionLector.js"></script>
     <link rel="stylesheet" href="css/reset.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
+    <script src="js/validarSesionUsuario.js"></script>
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/listarTarjetas.css">
     <link rel="stylesheet" href="css/modal.css">
@@ -32,8 +32,10 @@
         </nav>
 
         <nav class="menuIzquierdo">
-            <ul class="menu" id="menuDinamico">
-
+            <ul class="menu">
+                <li><a href="#">Mi perfil</a></li>
+                <li><a href="registrarTarjeta.html">Nueva Tarjeta</a></li>
+                <li><a href="listarTarjetas.html">Mis Tarjetas</a></li>
             </ul>
         </nav>
     </header>
@@ -46,9 +48,8 @@
         </div>
 
         <div class="crear-contenedor">
-            <button type="button" class="material-blue" data-action="crear" id="crear-elemento"
-                onclick="window.location.href = ('registrarTarjeta.html');"><i class="far fa-plus-circle"></i>Nueva
-                Tarjeta</button>
+            <button type="button" class="material-blue" data-action="crear" id="crear-elemento" onclick="window.location.href = ('registrarTarjeta.html');" ><i
+                    class="far fa-plus-circle"></i>Nueva Tarjeta</button> 
         </div>
     </div>
     </div>
@@ -63,6 +64,7 @@
                     <th>Tipo de Tarjeta</th>
                     <th>Expiración</th>
                     <th>Código CVV</th>
+                    <th>Editar</th>
                 </tr>
             </thead>
             <tbody>
@@ -104,12 +106,11 @@
 
     </footer>
 </body>
-<script src="js/menu.js"></script>
-<script src="js/cerrarSesion.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="js/cerrarSesion.js"></script>
 <script src="js/tarjetas/servicioTarjeta.js"></script>
 <script src="js/tarjetas/controlador-listar-tarjetas.js"></script>
-
+<script src="js/menu.js"></script>
 
 
 </html>

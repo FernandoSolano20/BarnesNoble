@@ -15,24 +15,17 @@ let obtenerLibrerias  = async () => {
     } 
 };
 
-let obtenerLibreriaPorId = async(id) => {
-    var response = await fetch('http://localhost:4000/api/libreriaId/' + id, {
-        method: "GET",
-        headers: {
-            'Content-Type': 'application/json;charset=UTF-8',
-        }
-    });
-    var result = await response.json();
-    return result;
-};
+let obtenerLibreriaId = async(_id) => {
+    try {
+        // fetch data from an url endpoint
+        const response = await axios({
+            method: 'get',
+            url: `http://localhost:4000/api/buscarLibreria-id/${_id}`,
+            responseType: 'json'
+        });
 
-let obtenerLibreriaPorIdSucursal = async(id) => {
-    var response = await fetch('http://localhost:4000/api/sucursalId/' + id, {
-        method: "GET",
-        headers: {
-            'Content-Type': 'application/json;charset=UTF-8',
-        }
-    });
-    var result = await response.json();
-    return result;
+        return response.data.libreria;
+    } catch (error) {
+        console.log(error);
+    }
 };

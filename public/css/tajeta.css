@@ -3,6 +3,17 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
   margin: 0;
 }
 
+.formRegistro h2{
+  text-align: center;
+      color: #fff;
+      background-color: #315c74;
+      font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
+      font-size: 25px;
+      margin: 15px 1%;
+      padding: 10px;
+
+}
+
 .formRegistro {
   display: grid;
   grid-template-columns: 1fr 1fr;

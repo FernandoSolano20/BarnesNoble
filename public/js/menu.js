@@ -35,7 +35,40 @@ let crearMenu = async function(){
         li.appendChild(anchor);
         if (sessionStorage.tipoUsuario === "Lector") {
             //Menu Lector
+            li = document.createElement('li');
+            listMenu.appendChild(li);
+            anchor = document.createElement('a');
+            anchor.innerHTML = "Página Principal";
+            anchor.href = "indexLector.html";
+            li.appendChild(anchor);
+
+            li = document.createElement('li');
+            listMenu.appendChild(li);
+            anchor = document.createElement('a');
+            anchor.innerHTML = "Clubes de lectura";
+            anchor.href = "clubLectura.html";
+            li.appendChild(anchor);
     
+            li = document.createElement('li');
+            listMenu.appendChild(li);
+            anchor = document.createElement('a');
+            anchor.innerHTML = "Catálogo de libros";
+            anchor.href = "#";
+            li.appendChild(anchor);
+
+            li = document.createElement('li');
+            listMenu.appendChild(li);
+            anchor = document.createElement('a');
+            anchor.innerHTML = "Mis libros";
+            anchor.href = "#";
+            li.appendChild(anchor);
+
+            li = document.createElement('li');
+            listMenu.appendChild(li);
+            anchor = document.createElement('a');
+            anchor.innerHTML = "Mis Tarjetas";
+            anchor.href = "listarTarjetas.html";
+            li.appendChild(anchor);
         }
         else if (sessionStorage.tipoUsuario === "Adminitrador plataforma") {
             //Plataforma

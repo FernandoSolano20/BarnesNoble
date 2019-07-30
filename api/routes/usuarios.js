@@ -506,4 +506,25 @@ router.get('/usuarioIdLibreria/:id', function (req, res) {
     );
 });
 
+//SofiaZu-Para listar por preferencia
+router.get('/obtenerPreferenciaUsuario/:id', async (req, res) => {
+
+    return await Usuario.findById(req.params.id, function (err, usuario) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'No se encontro ninguna usuario',
+                err
+            });
+        }
+        else {
+            return res.json({
+                success: true,
+                usuario: usuario
+            });
+        }
+    }
+    );
+});
+
 module.exports = router;

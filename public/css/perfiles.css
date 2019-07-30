@@ -23,12 +23,16 @@
 
 .column .info div {
     margin: 15px;
+    height: auto;
+    position: relative;
+    display: flex;
 }
 
 .column .info div span {
     float: left;
     font-size: 20px;
     font-weight: bold;
+    min-width: 240px;
 }
 
 .column .info div span i {
@@ -38,7 +42,7 @@
 
 .column .info div p {
     font-size: 20px;
-    margin-left: 30%;
+    margin-left: 70px;
 }
 
 .column .info .crear-contenedor{

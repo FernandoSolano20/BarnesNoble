@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="js/validarSesionLibreria.js"></script>
     <link rel="stylesheet" href="css/reset.css">
+    <script src="js/validarSesionUsuario.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/listarUsuario.css">
@@ -33,7 +33,11 @@
         </nav>
 
         <nav class="menuIzquierdo">
-            <ul class="menu" id="menuDinamico">
+            <ul class="menu">
+                <li><a href="#">Mi perfil</a></li>
+                <li><a href="registroLibreria.html">Nueva Libreria</a></li>
+                <li><a href="listarLibrerias-cards.html">Mis librerias Cards</a></li>
+                <li><a href="listarLibrerias.html">Mis librerias Lista</a></li>
 
             </ul>
         </nav>
@@ -64,6 +68,7 @@
                     <th>Provincia</th>
                     <th>Cantón</th>
                     <th>Distrito</th>
+                    <th>Mostar Libreria</th>
                 </tr>
             </thead>
             <tbody>
@@ -88,7 +93,7 @@
         <div class="blockFooter">
             <div class="logos">
                 <a href="#"><img src="img/barnes_and_noble_logo_png_94486.png" alt="Logo de Barnes&Noble"></a>
-                <a href="#"><img src="img/barnes_and_noble_logo_png_94486.png" alt="Logo Fundacion Book for kids"></a>
+                <a href="#"><img src="img/B_NKIFDS-01.png" alt="Logo Fundacion Book for kids"></a>
             </div>
             <div class="copyrights">
                 <h3> ⓒ 2019 Valhalla</h3>
@@ -109,7 +114,6 @@
 <script src="js/cerrarSesion.js"></script>
 <script src="js/libreria/servicioLibreria.js"></script>
 <script src="js/libreria/controlador-listar-Librerias.js"></script>
-
 
 
 </html>

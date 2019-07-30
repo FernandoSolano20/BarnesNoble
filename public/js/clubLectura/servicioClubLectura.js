@@ -19,6 +19,18 @@ let registrarClubLectura = (pnombre, ptema, ptipoClub, pfechaReunion , phoraReun
     });
 };
 
+var crearClubLectura = async (clubLectura) => {
+    var response = await fetch('http://localhost:4000/api/registrarClubLectura', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body:JSON.stringify(clubLectura)
+    });
+    var result = await response.json();
+    return result;
+}
+
 let obtenerClubesLectura = async() => {
     try {
         const response = await axios({

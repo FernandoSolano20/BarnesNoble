@@ -43,8 +43,7 @@ var cambiarPassword = async(usuario,id) => {
 }
 
 let obtenerLectorId = async(_id) => {
-    try {
-        
+    try { 
         const response = await axios({
             method: 'get',
             url: `http://localhost:4000/api/buscarLectorId/${_id}`,
@@ -78,3 +77,21 @@ let obtenerUsuarioPorIdLibreria = async(id) => {
     var result = await response.json();
     return result;
 };
+
+//SofiaZu-Para listar por preferencia
+let preferenciasUsuario = async(_id) => {
+    try { 
+        const response = await axios({
+            method: 'get',
+            url: `http://localhost:4000/api/obtenerPreferenciaUsuario/${_id}`,
+            responseType: 'json'
+        });
+
+        return response.data.usuario;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+
+
