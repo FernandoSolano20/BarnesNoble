@@ -19,7 +19,7 @@ let llenarPerfil = async() => {
         nacimiento.innerHTML = autor['fechaNacimiento'];
         muerte.innerHTML = autor['fechaMuerte'];
         resenna.innerHTML = autor['resenna'];
-        avatar.setAttribute('src', autor.foto);
+        avatar.setAttribute('src', autor.foto   );
     }
 };
 

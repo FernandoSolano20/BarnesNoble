@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Barnes & Noble</title>
+    <script src="js/validarSesionLibreria.js"></script>
     <link rel="stylesheet" href="css/reset.css">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
@@ -22,12 +23,20 @@
     <header>
         <nav class="menuHorizontal">
             <ul class="list-menu">
+                <li><a href="#" data-menu="mostrar-nav-izq"><i data-menu="mostrar-nav-izq" class="fas fa-bars"></i></a>
+                </li>
                 <li><a href="/"><i class="far fa-home"></i>Inicio</a></li>
                 <li id="logout">
                     <a href=""><i class="far fa-sign-out-alt"></i>Cerrar Sesión</a>
                 </li>
                 <li><a href="contacto.html"><i class="fal fa-address-book"></i>Contacto</a></li>
                 <li class="link-imagen"><img src="img/logo_barnes-and-noble.png" alt="Logo de Barnes&Noble"></li>
+            </ul>
+        </nav>
+
+        <nav class="menuIzquierdo">
+            <ul class="menu" id="menuDinamico">
+
             </ul>
         </nav>
     </header>
@@ -145,8 +154,9 @@
             <div id="map"></div>
         </div>
         <div class="crear-contenedor">
-                <button type="button" class="material-blue" id="registrar"><i class="far fa-clipboard-list"></i>Registrar</button>
-            </div>
+            <button type="button" class="material-blue" id="registrar"><i
+                    class="far fa-clipboard-list"></i>Registrar</button>
+        </div>
     </main>
 
     </div>
@@ -177,6 +187,8 @@
             <h3> ⓒ 2019 Valhalla</h3>
         </div>
     </footer>
+    <script src="js/menu.js"></script>
+    <script src="js/cerrarSesion.js"></script>
     <script src="js/maps/maps.js"></script>
     <script src="js/imagen/servicioImagen.js"></script>
     <script src="js/usuarios/servicioUsuario.js"></script>

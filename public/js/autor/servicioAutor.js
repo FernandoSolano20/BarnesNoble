@@ -35,3 +35,18 @@ let obtenerAutorId = async(_id) => {
         console.log(error);
     }
 };
+
+let agregarPremios = async (pid, pnombrePremio, pannoPremio, pDescPremio) => {
+    let response = await axios({
+        method: 'post',
+        url: `http://localhost:4000/api/autor/agregarPremios`,
+        responseType: 'json',
+        data: {
+            _id: pid,
+            nombre: pnombrePremio,
+            anno: pannoPremio,
+            descripcion: pDescPremio
+        }
+    });
+    return response.data;
+};

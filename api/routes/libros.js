@@ -55,10 +55,10 @@ router.get('/listarLibros', async (req, res) => {
             });
         }
     })
-    .populate('genero', 'nombre -_id')
-    .populate('categoria', 'nombre -_id')
-    .populate('autor', 'nombre -_id')
-    .select('titulo caratula contraportada genero categoria autor');
+        .populate('genero', 'nombre -_id')
+        .populate('categoria', 'nombre -_id')
+        .populate('autor', 'nombre -_id')
+        .select('titulo caratula contraportada genero categoria autor');
 });
 
 router.get('/buscarLibroID/:id', async (req, res) => {
@@ -87,14 +87,14 @@ router.get('/buscarLibroID/:id', async (req, res) => {
 
 router.get('/listarMasVendidos', function (req, res) {
     let criterioOrden = { vendidos: -1 };
-    Libros.find(function(err,LibrosBD){
+    Libros.find(function (err, LibrosBD) {
         if (err) {
             return res.status(400).json({
                 success: false,
                 message: 'No se pueden listar los libros',
                 err
             });
-        }else{
+        } else {
             return res.json({
                 success: true,
                 listaLibros: LibrosBD
@@ -102,8 +102,8 @@ router.get('/listarMasVendidos', function (req, res) {
         }
     }).limit(25).sort(criterioOrden)
 
-    .populate('autor', 'nombre -_id')
-    .select('titulo caratula  autor');
+        .populate('autor', 'nombre -_id')
+        .select('titulo caratula  autor');
 
 });
 
@@ -124,24 +124,25 @@ router.get('/titulo/:titulo', async (req, res) => {
         }
     })
         .select('titulo');
-    
-}); 
 
+});
 
-router.get('/listarLibrosPorPreferencia', async (req, res) => {
-    Libros.find({genero: req.body.genero},function (err, librosGenero) {
-        if (librosGenero != "") {
+//SofiaZu-Prefrencia de libros del usuario
+router.post('/listarLibrosPorPreferencia', async (req, res) => {
+    Libros.find({genero: req.body.genero, autor: req.body.autor, categoria: req.body.categoria},function (err, librosPreferidos) {
+        if (librosPreferidos != "") {
             return res.json({
                 success: true,
-                listaLibros: librosGenero
+                listaLibros: librosPreferidos
             });
         }
         else {
-            Libros.find({categoria: req.body.categoria},function (err, librosCategoria) {
-                if (librosCategoria != "") {
+            // el $or busca las prefrencias por separado entre los libros
+            Libros.find({$or:[{genero: req.body.genero}, {autor: req.body.autor}, {categoria: req.body.categoria}]},function (err, librosPreferidos) {
+                if (librosPreferidos != "") {
                     return res.json({
                         success: true,
-                        listaLibros: librosCategoria
+                        listaLibros: librosPreferidos
                     });
                 }
                 else {
