@@ -177,7 +177,7 @@ let crearMenu = async function(){
             listMenu.appendChild(li);
             anchor = document.createElement('a');
             anchor.innerHTML = "Ofertas";
-            anchor.href = "#";
+            anchor.href = "listarOfertas.html";
             li.appendChild(anchor);
         }
     }
