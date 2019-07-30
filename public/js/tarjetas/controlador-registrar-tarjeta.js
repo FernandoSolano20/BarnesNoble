@@ -9,6 +9,8 @@ const inputTipoTarjeta = document.querySelector('#slt-tipoTarjeta');
 const botonRegistrar = document.querySelector('#btn-registrar');
 const successMessage = 'Se ha registrado la tarjeta exitosamente';
 const errorMessage = 'No se ha registrado la tarjeta.';
+const tarjetaInput = document.getElementById('tarjeta');
+const tarjetaAlert = document.getElementById('alert-tarjeta');
 
 function formReset() {
     document.getElementById("registrarTarjeta").reset();
@@ -61,6 +63,8 @@ let validar = (pnombre1, ptipoTarjeta, pnumTarjeta, pexpiracionMM, pexpiracionYY
     return error;
 }
 
+
+
 let registrar = () => {
     let nombre1 = inputNombre1.value;
     let tipoTarjeta = inputTipoTarjeta.value;
@@ -105,7 +109,115 @@ let registrar = () => {
     }
 
 };
-    
-
+  
 botonRegistrar.addEventListener('click', registrar);
+
+// let validarId = function () {
+//     let elementNumber = {
+//         value: tarjetInput.value,
+//         alert: tarjetaAlert,
+//         input: tarjetaInput
+//     }
+//     if (elementNumber.input.name === 'Visa') {
+//         if (!validarNumeros(elementNumber))
+//             return true;
+//         else if (elementNumber.value.length != 1) {
+//             tarjetaAlert.innerText = "Debe tener 9 dígitos."
+//             tarjetaAlert.className = tarjetaAlert.className.replace("alertHidden", "");
+//             idInput.className = idInput.className.replace("inputError", "");
+//             idInput.className = idInput.className + " inputError";
+//             return true;
+//         }
+//     }
+//     else if (elementNumber.input.name === 'MasterCard') {
+//         if (!noVacio(elementNumber)) {
+//             return true;
+//         }
+//         if (elementNumber.value.length != 2) {
+//             tarjetaAlert.innerText = "Debe tener 44 dígitos."
+//             tarjetaAlert.className = tarjetaAlert.className.replace("alertHidden", "");
+//             idInput.className = idInput.className.replace("inputError", "");
+//             idInput.className = idInput.className + " inputError";
+//             return true;
+//         }
+//         else if (!regexPassport.test(elementNumber.value)) {
+//             tarjetaAlert.innerText = "El formato no coincide."
+//             tarjetaAlert.className = tarjetaAlert.className.replace("alertHidden", "");
+//             idInput.className = idInput.className.replace("inputError", "");
+//             idInput.className = idInput.className + " inputError";
+//             return true;
+//         }
+//     }
+//     else if (elementNumber.input.name === 'American Express') {
+//         if (!validarNumeros(elementNumber))
+//             return true;
+//         else if (elementNumber.value.length != 3) {
+//             tarjetaAlert.innerText = "Debe tener 12 dígitos."
+//             tarjetaAlert.className = tarjetaAlert.className.replace("alertHidden", "");
+//             idInput.className = idInput.className.replace("inputError", "");
+//             idInput.className = idInput.className + " inputError";
+//             return true;
+//         }
+//     }
+//     tarjetaAlert.className = tarjetaAlert.className.replace("alertHidden", "");
+//     tarjetaAlert.className = tarjetaAlert.className + " alertHidden";
+//     idInput.className = idInput.className.replace("inputError", "");
+//     return false;
+// }
+
+// let validarId = function () {
+//     let elementNumber = {
+//         value: tarjetInput.value,
+//         alert: tarjetaAlert,
+//         input: tarjetaInput
+//     }
+//     if (elementNumber.input.name === 'Visa') {
+//         if (!validarNumeros(elementNumber))
+//             return true;
+//         else if (elementNumber.value.length != 1) {
+//             tarjetaAlert.innerText = "Debe tener 9 dígitos."
+//             tarjetaAlert.className = tarjetaAlert.className.replace("alertHidden", "");
+//             idInput.className = idInput.className.replace("inputError", "");
+//             idInput.className = idInput.className + " inputError";
+//             return true;
+//         }
+//     }
+//     else if (elementNumber.input.name === 'MasterCard') {
+//         if (!noVacio(elementNumber)) {
+//             return true;
+//         }
+//         if (elementNumber.value.length != 2) {
+//             tarjetaAlert.innerText = "Debe tener 44 dígitos."
+//             tarjetaAlert.className = tarjetaAlert.className.replace("alertHidden", "");
+//             idInput.className = idInput.className.replace("inputError", "");
+//             idInput.className = idInput.className + " inputError";
+//             return true;
+//         }
+//         else if (!regexPassport.test(elementNumber.value)) {
+//             tarjetaAlert.innerText = "El formato no coincide."
+//             tarjetaAlert.className = tarjetaAlert.className.replace("alertHidden", "");
+//             idInput.className = idInput.className.replace("inputError", "");
+//             idInput.className = idInput.className + " inputError";
+//             return true;
+//         }
+//     }
+//     else if (elementNumber.input.name === 'American Express') {
+//         if (!validarNumeros(elementNumber))
+//             return true;
+//         else if (elementNumber.value.length != 3) {
+//             tarjetaAlert.innerText = "Debe tener 12 dígitos."
+//             tarjetaAlert.className = tarjetaAlert.className.replace("alertHidden", "");
+//             idInput.className = idInput.className.replace("inputError", "");
+//             idInput.className = idInput.className + " inputError";
+//             return true;
+//         }
+//     }
+//     tarjetaAlert.className = tarjetaAlert.className.replace("alertHidden", "");
+//     tarjetaAlert.className = tarjetaAlert.className + " alertHidden";
+//     idInput.className = idInput.className.replace("inputError", "");
+//     return false;
+// }
+
+
+
 // document.querySelector('body').addEventListener('click', mostarMenuIzquierdo);

@@ -11,6 +11,7 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/botones.css">
     <link rel="stylesheet" href="css/formulario.css">
     <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
 
@@ -24,9 +25,9 @@
                 <li class="submenu">
                     <a href="#"><i class="far fa-sign-out-alt"></i>Registrarse</a>
                     <ul class="children">
-						<li><a href="registroUsuarios.html">Lector <span class="fas fa-users"></span></a></li>
-						<li><a href="registroLibreria.html">Librería <span class="fas fa-users"></span></a></li>
-					</ul>
+                        <li><a href="registroUsuarios.html">Lector <span class="fas fa-users"></span></a></li>
+                        <li><a href="registroLibreria.html">Librería <span class="fas fa-users"></span></a></li>
+                    </ul>
                 </li>
                 <li class="submenu">
                     <a href="inicioSesion.html"><i class="far fa-sign-out-alt"></i>Iniciar sesión</a>
@@ -37,27 +38,42 @@
         </nav>
     </header>
     <main>
-        <form class="formulario">
-            <div class="title-form">
-                <img src="img/logo_barnes-and-noble.png" alt="Logo Barnes & Noble">
+        <div class="contenedorLogin">
+            <form class="formulario">
+                <div class="title-form">
+                    <img src="img/logo_barnes-and-noble.png" alt="Logo Barnes & Noble">
+                </div>
+                <div class="contenedor-input">
+                    <label for="email">Correo electrónico</label>
+                    <input id="email" name="email" type="email" autocomplete="off" autocorrect="off">
+                </div>
+                <div class="contenedor-input">
+                    <label for="password">Contraseña</label>
+                    <input id="password" name="password" type="password" autocomplete="off" autocorrect="off">
+                </div>
+                <div class="contenedor-input">
+                    <button type="button" id="login">Enviar</button>
+                </div>
+                <div class="contenedor-input">
+                    <a href="#" class="linkForgot" id="olvidar">¿Olvidó su contraseña?</a>
+                </div>
+            </form>
+            <div class="images">
+                <img id="loginImage" src="img/login.jpg" alt="">
+                <figcaption id="title">
+                    <h2>¿Aún no se ha registrado?</h2>
+                </figcaption>
+                <figcaption id="linkSingUp">
+                    <div class="crear-contenedor">
+                        <a class="material-blue" href="registroUsuarios.html"><i
+                                class="far fa-user"></i>Regitrarse como lector</a>
+                        <a class="material-blue" href="registroLibreria.html"><i
+                                class="far fa-user"></i>Regitrarse como
+                            librería</a>
+                    </div>
+                </figcaption>
             </div>
-            <div class="contenedor-input">
-                <label for="email">Correo electrónico</label>
-                <input id="email" name="email" type="email" autocomplete="off" autocorrect="off">
-            </div>
-            <div class="contenedor-input">
-                <label for="password">Contraseña</label>
-                <input id="password" name="password" type="password" autocomplete="off" autocorrect="off">
-            </div>
-            <div class="contenedor-input">
-                <button type="button" id="login">Enviar</button>
-            </div>
-            <div class="contenedor-input">
-                <a href="#" id="olvidar">Olvidar contraseña</a>
-                <a href="registroUsuarios.html">Regitrarse como lector</a>
-                <a href="registroLibreria.html">Regitrarse como librería</a>
-            </div>
-        </form>
+        </div>
     </main>
     <footer>
         <div class="blockFooter">
@@ -65,15 +81,8 @@
                 <a href="#"><img src="img/barnes_and_noble_logo_png_94486.png" alt="Logo de Barnes&Noble"></a>
                 <a href="#"><img src="img/barnes_and_noble_logo_png_94486.png" alt="Logo Fundacion Book for kids"></a>
             </div>
-            <div class="menuFooter">
-                <nav>
-                    <ul>
-                        <li> <a href="#">Inicio</a> </li>
-                        <li> <a href="#">Buscar</a> </li>
-                        <li> <a href="#">Los más vendidos</a> </li>
-                        <li> <a href="#">Los mejor calificados</a> </li>
-                    </ul>
-                </nav>
+            <div class="copyrights">
+                <h3> ⓒ 2019 Valhalla</h3>
             </div>
             <div class="redesSociales">
                 <a href="#"><i class="fab fa-facebook"></i></a>
@@ -82,9 +91,7 @@
                 <a href="#"><i class="fab fa-twitter"></i></a>
             </div>
         </div>
-        <div class="copyrights">
-            <h3> ⓒ 2019 Valhalla</h3>
-        </div>
+
     </footer>
     <script src="js/login/servicioLogin.js"></script>
     <script src="js/login/controladorLogin.js"></script>

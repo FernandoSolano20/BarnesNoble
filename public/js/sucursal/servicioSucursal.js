@@ -1,24 +1,17 @@
 'use strict';
-
-let registrarSucursal = (pnombre, ptelefono, pcorreo, plocalizacionLongitud , plocalizacionLatitud, pIdLibreria, pIdProvincia, pIdCanton, pIdDistrito,) => {
-    axios({
-        method: 'post',
-        url: 'http://localhost:4000/api/sucursal/registrarSucursal',
-        responseType: 'json',
-        data: {
-            nombre: pnombre,
-            telefono: ptelefono,
-            correo: pcorreo,
-            LocalizacionLongitud: plocalizacionLongitud,
-            LocalizacionLatitud: plocalizacionLatitud,
-            libreria: pIdLibreria,
-            provincia:pIdProvincia,
-            canton:pIdCanton,
-            distrito: pIdDistrito,
-            estado: 1
-        }
+var crearSucursal = async (sucursal) => {
+    var response = await fetch('http://localhost:4000/api/sucursal/registrarSucursal', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body:JSON.stringify(sucursal)
     });
-};
+    var result = await response.json();
+    return result;
+}
+
+
 
 let obtenerSucursales = async() => {
     try {

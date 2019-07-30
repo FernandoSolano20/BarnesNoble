@@ -23,6 +23,16 @@ let mostrar_tabla = async() => {
         // fila.insertCell().innerHTML = listaTarjetas[i]['expiracionYY'];
         fila.insertCell().innerHTML = (listaTarjetas[i]['expiracionMM']) +'/'+ (listaTarjetas[i]['expiracionYY'] ) ;
         fila.insertCell().innerHTML = listaTarjetas[i]['cvv'];
+
+        let celda_perfil = fila.insertCell();
+        let btnPerfil = document.createElement('button');
+       celda_perfil.appendChild(btnPerfil);
+     
+       btnPerfil.innerText = 'Editar'
+       btnPerfil.dataset._id = listaTarjetas[i]['_id'];
+       btnPerfil.addEventListener('click', function () {
+           window.location.href = `editarTajeta.html?_id=${this.dataset._id}`;
+       });
     }
 };
 

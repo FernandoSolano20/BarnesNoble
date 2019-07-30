@@ -36,8 +36,8 @@ router.post('/registrarEjemplar', function (req, res) {
     );
 });
 
-router.get('/listarEjemplar', async (req, res) => {
-    return await Ejemplar.find(function (err, LibrosBD) {
+router.get('/listarEjemplarIdLibro/:id', async (req, res) => {
+    return await Ejemplar.find({libro:req.params.id},function (err, LibrosBD) {
         if (err) {
             return res.status(400).json({
                 success: false,
@@ -52,8 +52,6 @@ router.get('/listarEjemplar', async (req, res) => {
             });
         }
     })
-        .populate('libro', 'titulo -_id')
-        .select('tipo precio isbn10 isbn13 editorial edicion annoEdicion cantidad libro');
 });
 
 module.exports = router;

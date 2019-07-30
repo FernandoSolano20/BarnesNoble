@@ -62,15 +62,17 @@ let mostrarTabla = async () => {
         let contenedorBotones = document.createElement('div');
         contenedorBotones.classList.add('contenedor');
         contenedorBotones.classList.add('column');
+        let contenedorBotones1 = document.createElement('div');
+        contenedorBotones1.classList.add('contenedor');
+        contenedorBotones1.classList.add('column');
 
 
-
-        let btnPerfil = document.createElement('button');
+        let btnPerfil = document.createElement('a');
         btnPerfil.classList.add('dosColumnas');
         btnPerfil.classList.add('botonVerLibro');
         btnPerfil.classList.add('material-blue');
         btnPerfil.setAttribute('id', 'verPerfil');
-        btnPerfil.setAttribute('type', 'button');
+        btnPerfil.href = "http://localhost:3000/perfilLibro.html?id="+listaLibros[i]._id;
         btnPerfil.innerText = 'Ver Perfil';
 
         let btnAgregarTipo = document.createElement('a');
@@ -87,8 +89,10 @@ let mostrarTabla = async () => {
         contenedorLibro.appendChild(categoria);
         //contenedorLibro.appendChild(pprecio);
         contenedorLibro.appendChild(contenedorBotones);
+        contenedorLibro.appendChild(contenedorBotones1);
         contenedorBotones.appendChild(btnAgregarTipo);
-        contenedorBotones.appendChild(btnPerfil);
+        
+        contenedorBotones1.appendChild(btnPerfil);
 
 
         sctLibros.appendChild(contenedorLibro);
