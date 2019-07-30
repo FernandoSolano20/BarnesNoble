@@ -13,14 +13,16 @@
 }
 
 #listaLibros .card .contenedorImagen img {
-    width: 100%;
+    /* width: 100%; */
+    width: 192px;
+    height: 286px;
 }
 
 
 .card .material-blue {
     height: 25 px;
     padding: 0 50px;
-    font-size: 10px;
+    font-size: 16px;
     text-decoration: none;
     color: white;
     border-radius: 1px;
@@ -104,7 +106,7 @@
 }
 
 .dosColumnas {
-    width: 50%;
+    width: 192px;;
     float: left;
 }
 
