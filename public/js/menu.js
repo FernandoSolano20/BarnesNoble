@@ -159,25 +159,25 @@ let crearMenu = async function(){
             anchor.href = "clubLectura.html";
             li.appendChild(anchor);
     
-            li = document.createElement('li');
-            listMenu.appendChild(li);
-            anchor = document.createElement('a');
-            anchor.innerHTML = "Catálogo de libros";
-            anchor.href = "#";
-            li.appendChild(anchor);
+            // li = document.createElement('li');
+            // listMenu.appendChild(li);
+            // anchor = document.createElement('a');
+            // anchor.innerHTML = "Catálogo de libros";
+            // anchor.href = "#";
+            // li.appendChild(anchor);
 
-            li = document.createElement('li');
-            listMenu.appendChild(li);
-            anchor = document.createElement('a');
-            anchor.innerHTML = "Mis libros";
-            anchor.href = "#";
-            li.appendChild(anchor);
+            // li = document.createElement('li');
+            // listMenu.appendChild(li);
+            // anchor = document.createElement('a');
+            // anchor.innerHTML = "Mis libros";
+            // anchor.href = "#";
+            // li.appendChild(anchor);
 
             li = document.createElement('li');
             listMenu.appendChild(li);
             anchor = document.createElement('a');
             anchor.innerHTML = "Ofertas";
-            anchor.href = "#";
+            anchor.href = "listarOfertas.html";
             li.appendChild(anchor);
         }
     }
