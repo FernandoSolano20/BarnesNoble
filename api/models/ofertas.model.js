@@ -10,7 +10,12 @@ let ofertasSchema = new mongoose.Schema({
     sucursal: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Sucursal',
-        required: true
+        required: false
+    },
+    libreria: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Libreria',
+        required: false
     },
     genero: {
         type: mongoose.Schema.Types.ObjectId,
