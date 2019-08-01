@@ -9,35 +9,46 @@ const express = require('express'),
 //- en el medio por standar
 router.post('/registrarTarjeta', function (req, res) {
     /*req lo que recibo y response lo que respondo */
-    let body = req.body; 
-    let nuevaTarjeta =  new Tarjeta({
+    let body = req.body;
+    let nuevaTarjeta = new Tarjeta({
         // /Datos de Tarejeta/
-        
-        nombre1 : body.nombre1,
-        numTarjeta : body.numTarjeta,
-        tipoTarjeta : body.tipoTarjeta,
-        expiracionMM : body.expiracionMM,
-        expiracionYY : body.expiracionYY,
-        cvv : body.cvv,
-        
+        nombre1: body.nombre,
+        numTarjeta: body.numero,
+        tipoTarjeta: body.tipo,
+        expiracionMM: body.mes,
+        expiracionYY: body.year,
+        cvv: body.cvv,
+        usuario: body.usuario
     });
-
-    nuevaTarjeta.save(
-        function(err, tarjetaDB){
-            if(err){
+    Tarjeta.findOne({ numTarjeta: body.numero }).then(
+        function (tarjeta) {
+            if (tarjeta) {
                 return res.status(400).json({
                     success: false,
-                    msj: 'La tarjeta no se pudo guardar',
+                    message: 'La tarjeta no se pudo guardar ya esta en el sistema',
                     err
                 });
-            }else{
-                return res.json({
-                    success: true,
-                    msj: 'La tajeta se guardó con éxito'
-                })
             }
-        }
-    );
+            else {
+                nuevaTarjeta.save(
+                    function (err, tarjetaDB) {
+                        if (err) {
+                            return res.status(400).json({
+                                success: false,
+                                message: 'La tarjeta no se pudo guardar',
+                                err
+                            });
+                        } else {
+                            return res.json({
+                                success: true,
+                                message: 'La tajeta se guardó con éxito'
+                            })
+                        }
+                    }
+                );
+            }
+        })
+
 });
 
 router.get('/listarTarjetas', function (req, res) {
@@ -56,7 +67,24 @@ router.get('/listarTarjetas', function (req, res) {
         }
     });
 });
- 
+
+router.get('/listarTarjetasPorId/:id', function (req, res) {
+    Tarjeta.find({usuario:req.params.id},function (err, tarjetasDB) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                msj: 'No se pueden listar las tarjetas',
+                err
+            });
+        } else {
+            return res.json({
+                success: true,
+                listaTarjetas: tarjetasDB
+            })
+        }
+    });
+});
+
 module.exports = router;
 
 //localhosta:3000/api/registrarUsuario/
@@ -72,8 +100,8 @@ module.exports = router;
 
 
 
-                
-                
+
+
             //Obtiene y devuelve todas las personas tras crear una de ellas
     //         Usario.find(function (err, conct) {
     //             if (err)
