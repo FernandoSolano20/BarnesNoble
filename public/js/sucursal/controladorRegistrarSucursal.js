@@ -42,7 +42,7 @@ let obtenerDatosSucursales = async function () {
             textCanton = sectionCantones.querySelector('[value="'+textCanton+'"]').innerText;
             textDistrito = sectionDistritos.value;
             textDistrito = sectionDistritos.querySelector('[value="'+textDistrito+'"]').innerText;
-            let usuario = {
+            let sucursal = {
                 nombre: nombreInput1.value,
                 latitud: latitudInput.value,
                 longitud: longitudInput.value,
@@ -93,15 +93,13 @@ let obtenerDatosSucursales = async function () {
     }
 }
 
-let cambiarIdentificacion = function () {
-    for (let i = 0; i < idRadios.length; i++) {
-        if (idRadios[i].checked) {
-            document.getElementById('labelID').innerHTML = idRadios[i].value;
-            idInput.name = idRadios[i].value;
-            break;
-        }
+let validarFotoPerfil = function () {
+    let elementPicture = {
+        value: imgInput.value,
+        alert: imgAlert,
+        input: imgInput
     }
-    validarId();
+    return !(noVacio(elementPicture) && validarFotos(elementPicture));
 }
 
 
@@ -114,36 +112,8 @@ let validarNombre1 = function () {
     return !(noVacio(elementText) && validarTexto(elementText));
 }
 
-let validarNombre2 = function () {
-    let elementText = {
-        value: nombreInput2.value,
-        alert: nombreAlert2,
-        input: nombreInput2
-    }
-    if (elementText.value != '')
-        return !(validarTexto(elementText));
-    return false;
-}
 
-let validarApellido1 = function () {
-    let elementText = {
-        value: apellidoInput1.value,
-        alert: apellidoAlert1,
-        input: apellidoInput1
-    }
-    return !(noVacio(elementText) && validarTexto(elementText));
-}
 
-let validarApellido2 = function () {
-    let elementText = {
-        value: apellidoInput2.value,
-        alert: apellidoAlert2,
-        input: apellidoInput2
-    }
-    if (elementText.value != '')
-        return !(validarTexto(elementText));
-    return false;
-}
 
 let validarTelefono = function () {
     let elementNumber = {
@@ -169,48 +139,7 @@ let validarTelefono = function () {
     }
 }
 
-let validarNacimiento = function () {
-    let elementDate = {
-        value: nacimientoInput.value,
-        alert: nacimientoAlert,
-        input: nacimientoInput
-    }
-    return !(validarFecha(elementDate) && validarFechaMayorActual(elementDate));
-}
 
-let validarFotoPerfil = function () {
-    let elementPicture = {
-        value: imgInput.value,
-        alert: imgAlert,
-        input: imgInput
-    }
-    return !(noVacio(elementPicture) && validarFotos(elementPicture));
-}
-
-let validarSexo = function () {
-    let elementCheckbox = {
-        alert: sexoAlert,
-        input: sexoInput
-    }
-    if (!validarRadio(elementCheckbox)) {
-        return true;
-    }
-    else {
-        sexoAlert.className = sexoAlert.className.replace("alertHidden", "");
-        sexoAlert.className = sexoAlert.className + " alertHidden";
-        sexoInput[0].parentElement.className = sexoInput[0].parentElement.className.replace("errorRadio", "");
-        return false;
-    }
-}
-
-let validarAlias = function () {
-    let elementText = {
-        value: aliasInput.value,
-        alert: aliasAlert,
-        input: aliasInput
-    }
-    return !(noVacio(elementText));
-}
 
 let validarProvincia = function () {
     let elementSelect = {
@@ -266,29 +195,6 @@ let validarSennas = function () {
     return !(noVacio(elementText));
 }
 
-let validarFavoritos = function () {
-    if (autorSelect.value === '' && generoSelect.value === '' && categoriaSelect.value === '' && libroSelect.value === '') {
-        favAlert.className = favAlert.className.replace("alertHidden", "");
-        autorSelect.className = autorSelect.className.replace("selectError", "");
-        autorSelect.className = autorSelect.className + " selectError";
-        generoSelect.className = generoSelect.className.replace("selectError", "");
-        generoSelect.className = generoSelect.className + " selectError";
-        categoriaSelect.className = categoriaSelect.className.replace("selectError", "");
-        categoriaSelect.className = categoriaSelect.className + " selectError";
-        libroSelect.className = libroSelect.className.replace("selectError", "");
-        libroSelect.className = libroSelect.className + " selectError";
-        return true;
-    }
-    else {
-        autorSelect.className = autorSelect.className.replace("selectError", "");
-        generoSelect.className = generoSelect.className.replace("selectError", "");
-        categoriaSelect.className = categoriaSelect.className.replace("selectError", "");
-        libroSelect.className = libroSelect.className.replace("selectError", "");
-        favAlert.className = favAlert.className.replace("alertHidden", "");
-        favAlert.className = favAlert.className + " alertHidden";
-        return false;
-    }
-}
 
 nombreInput1.addEventListener('blur', validarNombre1);
 latitudInput.addEventListener('blur', validarLatitud);
