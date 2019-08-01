@@ -41,14 +41,3 @@ let obtenerTarjetasUsuario  = async (id) => {
 };
 
 
-// var registrarTarjeta = async (pnombre1, pnumTarjeta, pexpiracion, pcvv, ptipoTarjeta ) => {
-//     var response = await fetch('http://localhost:4000/api/registrarTarjetas', {
-//         method: "POST",
-//         headers: {
-//             'Content-Type': 'application/json;charset=UTF-8',
-//         },
-//         body:JSON.stringify(pnombre1, pnumTarjeta, pexpiracion, pcvv, ptipoTarjeta )
-//     });
-//     var result = await response.json();
-//     return result;
-// }
