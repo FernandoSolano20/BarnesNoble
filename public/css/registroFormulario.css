@@ -261,3 +261,7 @@ input[type=file] {
 #fotosLibro div{
     margin: 35px;
 }
+
+.formRegistro .formTarjetaColumn{
+    margin: 16% 16%;
+}
