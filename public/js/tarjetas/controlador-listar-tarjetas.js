@@ -14,7 +14,7 @@ let mostrar_tabla = async () => {
         listaTarjetas = await obtenerTarjetasUsuario(sessionStorage.id);
     }
 
-    tbody.innerHTML = ''
+    tbody.innerHTML = '';
 
 
     for (let i = 0; i < listaTarjetas.length; i++) {
@@ -30,11 +30,15 @@ let mostrar_tabla = async () => {
         fila.insertCell().innerHTML = listaTarjetas[i]['cvv'];
 
         let celda_perfil = fila.insertCell();
+        let divContendor = document.createElement("div");
+        divContendor.setAttribute('class','crear-contenedor')
         let btnPerfil = document.createElement('button');
-        celda_perfil.appendChild(btnPerfil);
+        celda_perfil.appendChild(divContendor);
+        divContendor.appendChild(btnPerfil);
 
         btnPerfil.innerText = 'Editar'
         btnPerfil.dataset._id = listaTarjetas[i]['_id'];
+        btnPerfil.setAttribute('class', 'material-blue')
         btnPerfil.addEventListener('click', function () {
             window.location.href = `editarTajeta.html?_id=${this.dataset._id}`;
         });
