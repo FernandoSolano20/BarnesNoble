@@ -14,7 +14,7 @@ let mostrar_tabla = async () => {
         listaTarjetas = await obtenerTarjetasUsuario(sessionStorage.id);
     }
 
-    tbody.innerHTML = '';
+    tbody.innerHTML = ''
 
 
     for (let i = 0; i < listaTarjetas.length; i++) {
