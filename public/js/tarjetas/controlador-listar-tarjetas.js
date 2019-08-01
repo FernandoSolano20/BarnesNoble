@@ -24,14 +24,12 @@ let mostrar_tabla = async () => {
         fila.insertCell().innerHTML = listaTarjetas[i]['nombre1'];
         fila.insertCell().innerHTML = listaTarjetas[i]['numTarjeta'];
         fila.insertCell().innerHTML = listaTarjetas[i]['tipoTarjeta'];
-        // fila.insertCell().innerHTML = listaTarjetas[i]['expiracionMM'];
-        // fila.insertCell().innerHTML = listaTarjetas[i]['expiracionYY'];
         fila.insertCell().innerHTML = (listaTarjetas[i]['expiracionMM']) + '/' + (listaTarjetas[i]['expiracionYY']);
         fila.insertCell().innerHTML = listaTarjetas[i]['cvv'];
 
         let celda_perfil = fila.insertCell();
         let divContendor = document.createElement("div");
-        divContendor.setAttribute('class','crear-contenedor')
+        divContendor.setAttribute('class', 'crear-contenedor')
         let btnPerfil = document.createElement('button');
         celda_perfil.appendChild(divContendor);
         divContendor.appendChild(btnPerfil);
@@ -40,7 +38,7 @@ let mostrar_tabla = async () => {
         btnPerfil.dataset._id = listaTarjetas[i]['_id'];
         btnPerfil.setAttribute('class', 'material-blue')
         btnPerfil.addEventListener('click', function () {
-            window.location.href = `editarTajeta.html?_id=${this.dataset._id}`;
+            window.location.href = "#";
         });
     }
 };
@@ -59,20 +57,22 @@ let filtrar_tabla = async () => {
             fila.insertCell().innerHTML = listaTarjetas[i]['nombre1'];
             fila.insertCell().innerHTML = listaTarjetas[i]['tipoTarjeta'];
             fila.insertCell().innerHTML = listaTarjetas[i]['numTarjeta'];
-            // fila.insertCell().innerHTML = listaTarjetas[i]['expiracionMM'];
-            // fila.insertCell().innerHTML = listaTarjetas[i]['expiracionYY'];
             fila.insertCell().innerHTML = listaTarjetas[i]['cvv'];
             fila.insertCell().innerHTML = (listaTarjetas[i]['expiracionMM']) + '/' + (listaTarjetas[i]['expiracionYY']);
 
 
             let celda_perfil = fila.insertCell();
+            let divContendor = document.createElement("div");
+            divContendor.setAttribute('class', 'crear-contenedor')
             let btnPerfil = document.createElement('button');
-            celda_perfil.appendChild(btnPerfil);
+            celda_perfil.appendChild(divContendor);
+            divContendor.appendChild(btnPerfil);
 
             btnPerfil.innerText = 'Editar'
             btnPerfil.dataset._id = listaTarjetas[i]['_id'];
+            btnPerfil.setAttribute('class', 'material-blue')
             btnPerfil.addEventListener('click', function () {
-                window.location.href = `editarTajeta.html?_id=${this.dataset._id}`;
+                window.location.href = "#";
             });
 
 
