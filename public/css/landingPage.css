@@ -59,11 +59,10 @@ main{
 h2{
   font-size: 1.8rem;
   font-weight: 800;
-  text-align: center;
   margin: 26px;
-  text-transform: uppercase;
   color: #315c74;
   padding-top: 26px;
+  text-align: center;
 }
 
 .masVendidos {
@@ -150,7 +149,7 @@ h2{
   grid-template-rows: auto;
   grid-gap: 60px;
   margin: 60px;
-  text-align: center;
+
 }
 
 .clubLectura img{
