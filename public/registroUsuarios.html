@@ -11,8 +11,8 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/botones.css">
-    <link rel="stylesheet" href="css/registroFormulario.css">
     <link rel="stylesheet" href="css/mapa.css">
+    <link rel="stylesheet" href="css/registroFormulario.css">
     <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
     <link rel="stylesheet" href="css/loadingBar.css">
 </head>
@@ -26,9 +26,9 @@
                 <li class="submenu">
                     <a href="#"><i class="far fa-sign-out-alt"></i>Registrarse</a>
                     <ul class="children">
-						<li><a href="registroUsuarios.html">Lector <span class="fas fa-users"></span></a></li>
-						<li><a href="registroLibreria.html">Librería <span class="fas fa-users"></span></a></li>
-					</ul>
+                        <li><a href="registroUsuarios.html">Lector <span class="fas fa-users"></span></a></li>
+                        <li><a href="registroLibreria.html">Librería <span class="fas fa-users"></span></a></li>
+                    </ul>
                 </li>
                 <li class="submenu">
                     <a href="inicioSesion.html"><i class="far fa-sign-out-alt"></i>Iniciar sesión</a>
@@ -92,15 +92,10 @@
                     <input type="date" id="nacimiento-input" name="fecha de nacimiento">
                 </div>
                 <div class="inputGroup">
-                    <span class="left alertHidden" id="alert-img">Debe ser un archivo png o jpg.</span>
-                    <label class="labelFile">
-                        <i class="fal fa-file-image"></i>
-                        <span class="title">Add File</span>
-                        <input type="file" / id="img">
-                    </label>
+                    <span class="left alertHidden" id="alert-alias">No debe estar vacio.</span>
+                    <label class="label" for="alias-input">Alias:</label>
+                    <input type="text" id="alias-input" name="alias">
                 </div>
-            </div>
-            <div class="column">
                 <div class="inputGroup radio">
                     <span class="left alertHidden" id="alert-sexo">Seleccione una opción.</span>
                     <input type="radio" name="sexo" id="hombre" value="Hombre">
@@ -111,10 +106,15 @@
                     <label for="otro" class="labelRadio">Otro</label>
                 </div>
                 <div class="inputGroup">
-                    <span class="left alertHidden" id="alert-alias">No debe estar vacio.</span>
-                    <label class="label" for="alias-input">Alias:</label>
-                    <input type="text" id="alias-input" name="alias">
+                    <span class="left alertHidden" id="alert-img">Debe ser un archivo png o jpg.</span>
+                    <label class="labelFile" id="fotoPerfilUser">
+                        <i class="fal fa-file-image"></i>
+                        <span class="title">Foto de perfil</span>
+                        <input type="file" / id="img">
+                    </label>
                 </div>
+            </div>
+            <div class="column">
                 <div class="inputGroup box">
                     <span class="left alertHidden" id="alert-provincia">Seleccione una opción.</span>
                     <select name="Provincia" id="provincias">
@@ -133,9 +133,18 @@
                         <option value="">--Seleccione un distrito--</option>
                     </select>
                 </div>
+                <div class="inputGroup box">
+                    <span class="left alertHidden leftMap" id="alert-mapa">Inserte la localización.</span>
+                    <div id="floatingPanel">
+                        <button onclick="deleteMarkers();" type=button class="material orange">Borrar Marca</button>
+                    </div>
+                    <div id="mapaFormulario">
+                        <div id="map"></div>
+                    </div>
+                </div>
                 <div class="inputGroup">
                     <span class="left alertHidden" id="alert-sennas">Campo requerido.</span>
-                    <label class="label" for="sennas-input">Señas:</label>
+                    <label class="label" for="sennas-input">Dirección exacta:</label>
                     <input type="text" id="sennas-input" name="señas">
                 </div>
                 <div class="inputGroup box">
@@ -154,15 +163,12 @@
             </div>
         </form>
         <div class="containerMap">
-            <span class="left alertHidden leftMap" id="alert-mapa">Inserte la localización.</span>
-            <div id="floatingPanel">
-                <button onclick="deleteMarkers();" type=button class="material orange">Borrar Marca</button>
-            </div>
-            <div id="map"></div>
+
         </div>
         <div class="crear-contenedor">
-                <button type="button" class="material-blue" id="registrar"><i class="far fa-clipboard-list"></i>Registrar</button>
-            </div>
+            <button type="button" class="material-blue" id="registrar"><i
+                    class="far fa-clipboard-list"></i>Registrar</button>
+        </div>
     </main>
 
     </div>
@@ -182,7 +188,7 @@
                 <a href="#"><i class="fab fa-twitter"></i></a>
             </div>
         </div>
-       
+
     </footer>
     <script src="js/maps/maps.js"></script>
     <script src="js/imagen/servicioImagen.js"></script>
