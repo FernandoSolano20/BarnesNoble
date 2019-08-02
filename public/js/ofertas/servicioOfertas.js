@@ -22,7 +22,7 @@ let obtenerOfertas= async () => {
         }
     });
     let result = await response.json();
-    return result.listaOfertas;
+    return result;
 }
 
 let editarOferta = async(oferta,id) => {
@@ -58,4 +58,16 @@ let estadoOferta = async(oferta,id) => {
     });
     let result = await response.json();
     return result.response;
+}
+
+var obtenerOfertasPorLibreria = async (tiendas) => {
+    var response = await fetch('http://localhost:4000/api/ofertas/listarOfertasPorTiendas', {
+        method: "PATCH",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body:JSON.stringify(tiendas)
+    });
+    var result = await response.json();
+    return result;
 }
