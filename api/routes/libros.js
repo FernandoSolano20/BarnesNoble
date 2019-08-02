@@ -103,7 +103,9 @@ router.get('/listarMasVendidos', function (req, res) {
     }).limit(25).sort(criterioOrden)
 
         .populate('autor', 'nombre -_id')
-        .select('titulo caratula  autor');
+        .populate('genero', 'nombre -_id')
+        .populate('categoria', 'nombre -_id')
+        .select('titulo caratula autor genero categoria');
 
 });
 
