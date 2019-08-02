@@ -56,6 +56,17 @@ let filtrar_tabla = async() => {
             fila.insertCell().innerHTML = listaLibrerias[i]['distrito'];
             // fila.insertCell().innerHTML = listaLibrerias[i]['localizacionLatitud'];
             // fila.insertCell().innerHTML = listaLibrerias[i]['localizacionLongitud'];
+
+            let celda_perfil = fila.insertCell();
+            let btnPerfil = document.createElement('button');
+           celda_perfil.appendChild(btnPerfil);
+         
+           btnPerfil.innerText = 'Ver Perfil'
+           btnPerfil.dataset._id = listaLibrerias[i]['_id'];
+           btnPerfil.addEventListener('click', function () {
+               window.location.href = `perfilLibreria.html?id=${this.dataset._id}`;
+           });
+
         }
     }
 };
