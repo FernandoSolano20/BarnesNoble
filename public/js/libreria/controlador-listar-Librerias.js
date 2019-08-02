@@ -6,7 +6,14 @@ let txtFiltro = document.querySelector('#txt-filtro');
 
 let mostrar_tabla = async() => {
 
-    listaLibrerias = await obtenerLibrerias();
+    if (sessionStorage.tipoUsuario == 'Adminitrador libreria') {
+        listaLibrerias = await obtenerLibrerias();
+    }
+    else {
+        listaLibrerias = await obtenerLibreriaPorId(sessionStorage.id);
+    }
+
+//    listaLibrerias = await obtenerLibrerias();
     tbody.innerHTML = '';
    
      
@@ -19,14 +26,13 @@ let mostrar_tabla = async() => {
         fila.insertCell().innerHTML = listaLibrerias[i]['provincia'];
         fila.insertCell().innerHTML = listaLibrerias[i]['distrito'];
 
-        // fila.insertCell().innerHTML = listaLibrerias[i]['localizacionLatitud'];
-        // fila.insertCell().innerHTML = listaLibrerias[i]['localizacionLongitud'];
-        let celda_perfil = fila.insertCell();
+         let celda_perfil = fila.insertCell();
          let btnPerfil = document.createElement('button');
         celda_perfil.appendChild(btnPerfil);
       
         btnPerfil.innerText = 'Ver Perfil'
         btnPerfil.dataset._id = listaLibrerias[i]['_id'];
+        btnPerfil.setAttribute('class', 'material-blue')
         btnPerfil.addEventListener('click', function () {
             window.location.href = `perfilLibreria.html?id=${this.dataset._id}`;
         });
