@@ -1,6 +1,6 @@
 'use strict';
 
-let registrarClubLectura = (pnombre, ptema, ptipoClub, pfechaReunion , phoraReunion, pIdSucursal, pIdCategoria, pIdGenero, pIdUsuario,) => {
+let crearClubLectura = (pnombre, ptema, ptipoClub, pfechaReunion , phoraReunion, pIdSucursal, pIdCategoria, pIdGenero, pIdUsuario,) => {
     axios({
         method: 'post',
         url: 'http://localhost:4000/api/clubLectura/registrarClubLectura',
@@ -19,15 +19,15 @@ let registrarClubLectura = (pnombre, ptema, ptipoClub, pfechaReunion , phoraReun
     });
 };
 
-var crearClubLectura = async (clubLectura) => {
-    var response = await fetch('http://localhost:4000/api/registrarClubLectura', {
+let registrarClubLectura = async (clubLectura) => {
+    let response = await fetch('http://localhost:4000/api/clubLectura/registrarClubLectura', {
         method: "POST",
         headers: {
             'Content-Type': 'application/json;charset=UTF-8',
         },
         body:JSON.stringify(clubLectura)
     });
-    var result = await response.json();
+    let result = await response.json();
     return result;
 }
 

@@ -3,13 +3,6 @@
 const nombreInput1 = document.getElementById('nombre-input');
 const nombreAlert1 = document.getElementById('alert-nombre1');
 
-
-const latitudInput = document.getElementById('latitud-input');
-const latitudAlert = document.getElementById('alert-latitud');
-
-const longitudInput = document.getElementById('longitud-input');
-const longitudAlert = document.getElementById('alert-longitud');
-
 const correoInput = document.getElementById('correo-input');
 const correoAlert = document.getElementById('alert-correo');
 
@@ -27,21 +20,20 @@ const favAlert = document.getElementById('alert-favorito');
 const mapaAlert = document.getElementById('alert-mapa');
 
 let obtenerDatosSucursales = async function () {
-    let error =  validarNombre1() | validarLatitud() | validarLongitud() | validarCorreo() | validarTelefono() | validarProvincia() | validarCanton() | validarDistrito() | validarMapa();
+    let error = validarNombre1() | validarCorreo() | validarTelefono() | validarProvincia() | validarCanton() | validarDistrito() | validarMapa();
     if (!error) {
 
         document.body.className = "loading";
         let imgValue = document.getElementById('img');
         let imgResult = await crearImagen(imgValue);
         if (imgResult.success) {
-            
             let textProvincia, textCanton, textDistrito;
             textProvincia = sectionProvincia.value;
-            textProvincia = sectionProvincia.querySelector('[value="'+textProvincia+'"]').innerText;
+            textProvincia = sectionProvincia.querySelector('[value="' + textProvincia + '"]').innerText;
             textCanton = sectionCantones.value;
-            textCanton = sectionCantones.querySelector('[value="'+textCanton+'"]').innerText;
+            textCanton = sectionCantones.querySelector('[value="' + textCanton + '"]').innerText;
             textDistrito = sectionDistritos.value;
-            textDistrito = sectionDistritos.querySelector('[value="'+textDistrito+'"]').innerText;
+            textDistrito = sectionDistritos.querySelector('[value="' + textDistrito + '"]').innerText;
             let sucursal = {
                 nombre: nombreInput1.value,
                 latitud: latitudInput.value,
@@ -159,23 +151,7 @@ let validarCanton = function () {
     return !(validarSelect(elementSelect));
 }
 
-let validarLatitud = function(){
-    let elementNumber = {
-        value: latitudInput.value,
-        alert:latitudAlert,
-        input: latitudInput
-    }
-    return !(noVacio(elementNumber));
-}
 
-let validarLongitud = function(){
-    let elementNumber = {
-        value: longitudInput.value,
-        alert: longitudAlert,
-        input: longitudInput
-    }
-    return !(noVacio(elementNumber));
-}
 
 let validarDistrito = function () {
     let elementSelect = {
@@ -197,8 +173,7 @@ let validarSennas = function () {
 
 
 nombreInput1.addEventListener('blur', validarNombre1);
-latitudInput.addEventListener('blur', validarLatitud);
-longitudInput.addEventListener('blur', validarLongitud);
+
 correoInput.addEventListener('blur', validarCorreo);
 telefonoInput.addEventListener('blur', validarTelefono);
 imgInput.addEventListener('change', validarFotoPerfil);
