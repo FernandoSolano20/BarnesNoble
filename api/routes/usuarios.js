@@ -480,7 +480,7 @@ router.get('/usuarioId/:id', async (req, res) => {
             path: 'libreria',
             populate: {
                 path: 'sucursales.sucursal',
-                select: 'nombre localizacionLongitud localizacionLatitud provincia canton distrito'
+                select: '_id nombre localizacionLongitud localizacionLatitud provincia canton distrito'
             },
             select: 'nombreFantasia localizacionLongitud localizacionLatitud provincia canton distrito'
         })
@@ -525,6 +525,34 @@ router.get('/obtenerPreferenciaUsuario/:id', async (req, res) => {
         }
     }
     );
+});
+
+
+router.get('/usuarioIdGetTiendas/:id', async (req, res) => {
+    return await Usuario.findById(req.params.id, function (err, usuario) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'No se encontro ninguna usuario',
+                err
+            });
+        }
+        else {
+            return res.json({
+                success: true,
+                usuario: usuario
+            });
+        }
+    })
+        .populate({
+            path: 'libreria',
+            populate: {
+                path: 'sucursales.sucursal',
+                select: '_id nombre'
+            },
+            select: '_id nombreFantasia'
+        })
+        .select('_id libreria');
 });
 
 module.exports = router;

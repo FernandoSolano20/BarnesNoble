@@ -6,6 +6,11 @@ const nombreAlert = document.getElementById('alertNombre');
 const descuentoInput = document.getElementById('descuento');
 const descuentoAlert = document.getElementById('alertDescuento');
 
+const estadoSelect = document.getElementById('estado');
+
+
+const tipoOfertaSelect = document.getElementById('tipoOferta');
+
 const descripcionInput = document.getElementById('descripcion');
 const descripcionAlert = document.getElementById('alertDescripcion');
 
@@ -16,10 +21,7 @@ const estadoInput = document.getElementById('estado');
 const estadoAlert = document.getElementById('alertEstado');
 const tipoOfertaAlert = document.getElementById('alertTipoOferta');
 const sucursalAlert = document.getElementById('alertSucursal');
-const autorAlert = document.getElementById('alertAutor');
-const generoAlert = document.getElementById('alertGenero');
-const categoriaAlert = document.getElementById('alertCategoria');
-const libroAlert = document.getElementById('alertLibro');
+const favAlert = document.getElementById('alertAutor');
 
 //const favAlert = document.getElementById('alertFavorito');
 
@@ -27,23 +29,31 @@ const libroAlert = document.getElementById('alertLibro');
 
 
 let obtenerDatosUsuarios = async function () {
-    let error = validarNombre() | validarDescripcion() | validarDescuento() | validarSucursal() | validarAutor() | validarGenero() | validarCategoria() | validarLibro();
+    let error = validarNombre() | validarDescripcion() | validarDescuento() | validarSucursal() | validarOferta() | validarTipoOferta() | validarEstado();
     if (!error) {
-        
+        let txtTienda;
+        txtTienda = sucursalSelect.value;
+        txtTienda = sucursalSelect.querySelector('[value="'+txtTienda+'"]').getAttribute('data-tienda');
         let oferta = {
-
+            tipoOferta : tipoOfertaSelect.value,
             nombre: nombreInput.value,
             descuento: descuentoInput.value,
             descripcion: descripcionInput.value,
-            estado: estadoInput.value,
-            autor: autorSelect.value,
-            genero: generoSelect.value,
-            libro: libroSelect.value,
-            categoria: categoriaSelect.value,
-            autor: autorSelect.value,
-            sucursal: autorSelect.value,
-
+            estado: estadoInput.value
         }
+        if (autorSelect.value)
+            oferta.autor = autorSelect.value;
+        if (generoSelect.value)
+            oferta.genero = generoSelect.value;
+        if (categoriaSelect.value)
+            oferta.categoria = categoriaSelect.value;
+        if (libroSelect.value)
+            oferta.libro = libroSelect.value;
+        if(txtTienda == "Libreria")
+            oferta.libreria = sucursalSelect.value;
+        else
+            oferta.sucursal = sucursalSelect.value;
+
         let nuevaOferta = await registrarOfertas(oferta);
         document.body.className = "";
         if (nuevaOferta.success) {
@@ -61,19 +71,19 @@ let obtenerDatosUsuarios = async function () {
                 type: 'error',
                 title: nuevaOferta.message
             });
-        
 
-    
+
+
         }
     }
-    
+
     else {
-    Swal.fire({
-        type: 'warning',
-        title: 'No se ha enviado su mensaje exitosamente',
-        text: 'Revise los campos resaltados e intételo de nuevo'
-    });
-}
+        Swal.fire({
+            type: 'warning',
+            title: 'No se ha enviado su mensaje exitosamente',
+            text: 'Revise los campos resaltados e intételo de nuevo'
+        });
+    }
 }
 
 
@@ -137,40 +147,28 @@ let validarSucursal = function () {
     return !(validarSelect(elementSelect));
 }
 
-let validarAutor = function () {
-    let elementSelect = {
-        value: autorSelect.value,
-        alert: autorAlert,
-        input: autorSelect
+let validarOferta = function () {
+    if (autorSelect.value === '' && generoSelect.value === '' && categoriaSelect.value === '' && libroSelect.value === '') {
+        favAlert.className = favAlert.className.replace("alertHidden", "");
+        autorSelect.className = autorSelect.className.replace("selectError", "");
+        autorSelect.className = autorSelect.className + " selectError";
+        generoSelect.className = generoSelect.className.replace("selectError", "");
+        generoSelect.className = generoSelect.className + " selectError";
+        categoriaSelect.className = categoriaSelect.className.replace("selectError", "");
+        categoriaSelect.className = categoriaSelect.className + " selectError";
+        libroSelect.className = libroSelect.className.replace("selectError", "");
+        libroSelect.className = libroSelect.className + " selectError";
+        return true;
     }
-    return !(validarSelect(elementSelect));
-}
-
-let validarGenero = function () {
-    let elementSelect = {
-        value: generoSelect.value,
-        alert: generoAlert,
-        input: generoSelect
+    else {
+        autorSelect.className = autorSelect.className.replace("selectError", "");
+        generoSelect.className = generoSelect.className.replace("selectError", "");
+        categoriaSelect.className = categoriaSelect.className.replace("selectError", "");
+        libroSelect.className = libroSelect.className.replace("selectError", "");
+        favAlert.className = favAlert.className.replace("alertHidden", "");
+        favAlert.className = favAlert.className + " alertHidden";
+        return false;
     }
-    return !(validarSelect(elementSelect));
-}
-
-let validarCategoria = function () {
-    let elementSelect = {
-        value: categoriaSelect.value,
-        alert: categoriaAlert,
-        input: categoriaSelect
-    }
-    return !(validarSelect(elementSelect));
-}
-
-let validarLibro = function () {
-    let elementSelect = {
-        value: libroSelect.value,
-        alert: libroAlert,
-        input: libroSelect
-    }
-    return !(validarSelect(elementSelect));
 }
 
 
@@ -178,11 +176,11 @@ let validarLibro = function () {
 nombreInput.addEventListener('blur', validarNombre);
 descuentoInput.addEventListener('blur', validarDescuento);
 descripcionInput.addEventListener('blur', validarDescripcion);
-//estadoSelect.addEventListener('change', validarEstado);
-//tipoOfertaSelect.addEventListener('change', validarTipoOferta);
+estadoSelect.addEventListener('change', validarEstado);
+tipoOfertaSelect.addEventListener('change', validarTipoOferta);
 sucursalSelect.addEventListener('change', validarSucursal);
-autorSelect.addEventListener('change', validarAutor);
-generoSelect.addEventListener('change', validarGenero);
-categoriaSelect.addEventListener('change', validarCategoria);
-libroSelect.addEventListener('change', validarLibro);
+autorSelect.addEventListener('change', validarOferta);
+generoSelect.addEventListener('change', validarOferta);
+categoriaSelect.addEventListener('change', validarOferta);
+libroSelect.addEventListener('change', validarOferta);
 document.getElementById('registrar').addEventListener('click', obtenerDatosUsuarios);

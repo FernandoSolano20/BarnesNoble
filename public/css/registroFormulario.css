@@ -56,7 +56,7 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
 }
 
 .formRegistro .column .radio {
-    margin: 10px auto;
+    margin: 20px auto;
 }
 
 .formRegistro .column .radio label {
@@ -163,7 +163,7 @@ input[type=file] {
     font-family: FontAwesome;
     position: absolute;
     top: 0;
-    right: 70px;
+    right: 95px;
     width: 14%;
     height: 100%;
     text-align: center;
@@ -260,4 +260,38 @@ input[type=file] {
 
 #fotosLibro div{
     margin: 35px;
+}
+
+#mapaFormulario{
+    height: 320px;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    margin: 20px auto;
+}
+
+#map {
+    height: 320px;
+    width: 100%;
+}
+
+#floatingPanel {
+    left: 0px;
+}
+
+#fotoPerfilUser{
+    width: 100%;
+    height: 100%;
+}
+
+.fileInpuLibrary{
+    height: 380px;
+}
+
+.centerText{
+    margin: 15% auto;
+}
+
+.formRegistro .formTarjetaColumn{
+    margin: 16% 16%;
 }

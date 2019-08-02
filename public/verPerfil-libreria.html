@@ -7,13 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/reset.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
-    <script src="js/validarSesionUsuario.js"></script>
+    <!-- <script src="js/validarSesionUsuario.js"></script> -->
+
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/listarLibreriasCards.css">
     <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" href="css/searchBar.css">
     <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
-
     <link rel="stylesheet" href="css/perfiles.css">
     <link rel="stylesheet" href="css/perfilSlider.css">
     <link rel="stylesheet" href="css/mapa.css">
@@ -39,14 +39,13 @@
         </nav>
 
         <nav class="menuIzquierdo">
-            <ul class="menu">
-                <li><a href="#">Mi perfil</a></li>
-                <li><a href="registroLibreria.html">Nueva Libreria</a></li>
-                <li><a href="editarLibreria.html">Editar</a></li>
-            </ul>
-        </nav>
+                <ul class="menu" id="menuDinamico">
+    
+                </ul>
+            </nav>
     </header>
-    <!-- Aqui se ubica el filtro y el botton crear -->
+    <main>
+            <!-- Aqui se ubica el filtro y el botton crear -->
     <div class="subcontenedor">
         <div class="busqueda">
             <input type="text" id="txt-filtro" name="buscar" placeholder="Buscar...." autocomplete="off"
@@ -60,8 +59,6 @@
                 Librerias</button>
         </div> -->
     </div>
-
-
     <section class="center">
         <!-- <div class="middleColumn"> -->
 
@@ -84,7 +81,7 @@
     <section class='center'>
         <div class="row">
             <div class="column" id="foto">
-                <img src=""alt="Foto de perfil libreria" id="libPerfilFoto">
+                <img src="img/avatarFrank-01.png" alt="Foto de perfil libreria" id="libPerfilFoto">
                 </img>
             </div>
             <div class="column" id="tbl-ofertasLibreria">
@@ -108,62 +105,62 @@
 
             <div class="column">
                 <div class="columna" id="tbl-ofertasLibreria">
-                    <h2>Clubes de lecturas <span ></span></h2>
+                    <h2>Clubes de lecturas <span></span></h2>
                     <p>Un club de lectura es un grupo de personas que leen al mismo tiempo un libro. Cada uno lo hace en
                         su casa pero una vez a la semana, en un día y a una hora fijos, se reúnen todos para comentar
                         las páginas avanzadas desde el encuentro anterior.</p>
-                        <p>En las reuniones se debate sobre lo que se ha leído en casa: el estilo literario, la Club de
+                    <p>En las reuniones se debate sobre lo que se ha leído en casa: el estilo literario, la Club de
                         Lectura de Almansa acción misma, los personajes... y es bastante frecuente derivar desde el
                         libro a las experiencias personales de los miembros del club. En cada reunión se acuerda la
                         cantidad a leer en los días posteriores, y es ese trozo solamente el que se comenta en la
                         siguiente. Naturalmente cualquiera tiene el derecho a sobrepasar ese límite, pero no puede
                         desvelar a sus compañeros lo que sucede después del punto marcado.</p>
-                        </p>
-                     <div class="crear-contenedor">
+                    </p>
+                    <div class="crear-contenedor">
                         <button type="button" class="material-blue" data-action="crear" id="crear-elemento"
                             onclick="window.location.href = ('clubLectura.html');"><i
                                 class="far fa-plus-circle"></i>Clubes Activos</button>
-                            </div>
-                   
-                   
                     </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="center">
+        <div class="row">
+            <div id="tbl-ofertasLibreria">
+                <div>
+                    <h2>Mas Vendidos <span id="masVendidos"></span></h2>
+                </div>
+                <div class="fourColumns">
+                    <img src="img/libroOutlander.jpeg"></img>
+                    <!-- <h2 class="primerParrafo" style="background-color: #f39c12;">Harry Potter</h2> -->
+                    <button type="button" class="button" data-action="crear" id="crear-elemento"
+                        onclick="window.location.href = ('libros.html');"><i class="far fa-plus-circle"></i>Ver
+                        más</button>
+                </div>
+                <div class="fourColumns">
+                    <img src="img/earl.jpg"></img>
+                    <button type="button" class="button" data-action="crear" id="crear-elemento"
+                        onclick="window.location.href = ('libros.html');"><i class="far fa-plus-circle"></i>Ver
+                        más</button>
+                </div>
+
+                <div class="fourColumns">
+                    <img src="img/children.jpg"></img>
+                    <button type="button" class="button" data-action="crear" id="crear-elemento"
+                        onclick="window.location.href = ('libros.html');"><i class="far fa-plus-circle"></i>Ver
+                        más</button>
+                </div>
+                <div class="fourColumns">
+                    <img src="img/dads.jpg"></img>
+                    <button type="button" class="button" data-action="crear" id="crear-elemento"
+                        onclick="window.location.href = ('libros.html');"><i class="far fa-plus-circle"></i>Ver
+                        más</button>
                 </div>
             </div>
     </section>
-    <section class="center">
-            <div class="row">
-                <div  id="tbl-ofertasLibreria">
-                    <div>
-                        <h2>Mas Vendidos <span id="sucursales"></span></h2>
-                    </div>
-                    <div class="fourColumns">
-                        <img src="img/libroOutlander.jpeg" ></img>
-                        <!-- <h2 class="primerParrafo" style="background-color: #f39c12;">Harry Potter</h2> -->
-                        <button type="button" class="button" data-action="crear" id="crear-elemento"
-                            onclick="window.location.href = ('libros.html');"><i class="far fa-plus-circle"></i>Ver
-                            más</button>
-                    </div>
-                    <div class="fourColumns">
-                        <img src="img/earl.jpg" ></img>
-                        <button type="button" class="button" data-action="crear" id="crear-elemento"
-                            onclick="window.location.href = ('libros.html');"><i class="far fa-plus-circle"></i>Ver
-                            más</button>
-                    </div>
-    
-                    <div class="fourColumns">
-                        <img src="img/children.jpg" ></img>
-                        <button type="button" class="button" data-action="crear" id="crear-elemento"
-                            onclick="window.location.href = ('libros.html');"><i class="far fa-plus-circle"></i>Ver
-                            más</button>
-                    </div>
-                    <div class="fourColumns">
-                        <img src="img/dads.jpg"></img>
-                        <button type="button" class="button" data-action="crear" id="crear-elemento"
-                            onclick="window.location.href = ('libros.html');"><i class="far fa-plus-circle"></i>Ver
-                            más</button>
-                    </div>
-                </div>
-        </section>
     <section class="center">
         <div class="row">
             <div class="column" id="tbl-ofertasLibreria">
@@ -175,22 +172,28 @@
                     <p>Oferta 4: <span id="oferta4"></span></p>
                 </div>
             </div>
-            <div class="column" id="tbl-ofertasLibreria">
-                <div>
-                    <h2>Sucursales <span id="sucursales"></span></h2>
-                    <p>Sucursale 1: <span id="sucurla1"></span></p>
-                    <p>Sucursale 2: <span id="sucurla2"></span></p>
-                    <p>Sucursale 3: <span id="sucurla3"></span></p>
-                    <p>Sucursale 4: <span id="sucurla4"></span></p>
-                </div>
+            <div class="column" id="contenedor-tabla">
+                <table class="tabla" Id='tbl_librerias'>
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Provincia</th>
+                            <th>Cantón</th>
+                            <th>Distrito</th>
+                            <th>Telefono</th>
+                            <th>Mostar Mas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+
+                    </tbody>
+                </table>
+
             </div>
 
         </div>
     </section>
-
-    
-
-
     </main>
     <footer>
         <div class="PerfilblockFooter">
@@ -208,17 +211,17 @@
                 <a href="#"><i class="fab fa-twitter"></i></a>
             </div>
         </div>
-
+</main>
     </footer>
-
-
     <script src="js/maps/maps.js"></script>
     <script src="js/menu.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="js/cerrarSesion.js"></script>
-    <script src="js/libreria/servicioLibreria.js"></script>    
+    <script src="js/libreria/servicioLibreria.js"></script>
     <script src="js/libreria/controlador-perfil-libreria.js"></script>
     <script src="js/libreria/controlador-perfil-libreria-slider.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKXA3_YJlVwwt1lx60eO0ljRVUKQO3fNY&callback=initMap"
+        async defer></script>
 </body>
 
 </html>
