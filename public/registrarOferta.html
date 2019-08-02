@@ -47,16 +47,6 @@
         <h2>Registro de Oferta</h2>
         <form class="formRegistro" name="formulario_registro">
             <div class="column">
-                <!-- <div class="inputGroup radio">
-                    <input type="radio" name="id" id="cedula-input" value="Cédula" checked>
-                    <label for="cedula-input" class="labelRadio">Cédula</label>
-                    <input type="radio" name="id" id="pasaporte-input" value="Pasaporte">
-                    <label for="pasaporte-input" class="labelRadio">Pasaporte</label>
-                    <input type="radio" name="id" id="residente-input" value="Residente">
-                    <label for="residente-input" class="labelRadio">Residente</label>
-                </div> -->
-
-
                 <div class="inputGroup">
                     <span class="left alertHidden" id="alertNombre">El campo no debe de estar vacío</span>
                     <label class="label" for="ID" id="nombreInput">Nombre de la Oferta:</label>
@@ -74,49 +64,19 @@
                     <label class="label" for="descripcionInput">Descripción:</label>
                     <input type="text" id="descripcion" name="descripcion">
                 </div>
-                <!-- <div class="inputGroup">
-                    <span class="left alertHidden" id="alertEstado">Seleccione una opción</span>
-                    <label class="label" for="estadoInput">Estado Inicial:</label>
-                    <input type="text" id="estado" name="estado">
-                </div> -->
                 <label class="label" for="descripcionInput">La oferta se crea activa o inactiva:</label>
                 <div class="inputGroup box">
-                        
+
                     <span class="left alertHidden" id="alertEstado">La oferta se crea activa o inactiva:</span>
                     <select name="estado" id="estado">
-                            <option value="">--Seleccione una opción--</option>
-                            <option value=true>Activa</option>
-                            <option value=false>Inactiva</option>
-                            
+                        <option value="">--Seleccione una opción--</option>
+                        <option value=true>Activa</option>
+                        <option value=false>Inactiva</option>
+
 
                     </select>
-                    
+
                 </div>
-
-
-
-
-
-                <!-- <div class="inputGroup">
-                    <span class="left alertHidden" id="alert-img">Debe ser un archivo png o jpg.</span>
-                    <label class="labelFile">
-                        <i class="fal fa-file-image"></i>
-                        <span class="title">Add File</span>
-                        <input type="file" / id="img">
-                    </label>
-                </div> -->
-            </div>
-            <div class="column">
-                <!-- <div class="inputGroup radio">
-                    <span class="left alertHidden" id="alert-sexo">Seleccione una opción.</span>
-                    <input type="radio" name="sexo" id="hombre" value="Hombre">
-                    <label for="hombre" class="labelRadio">Hombre</label>
-                    <input type="radio" name="sexo" id="mujer" value="Mujer">
-                    <label for="mujer" class="labelRadio">Mujer</label>
-                    <input type="radio" name="sexo" id="otro" value="Otro">
-                    <label for="otro" class="labelRadio">Otro</label>
-                </div> -->
-
                 <div class="inputGroup box">
                     <span class="left alertHidden" id="alertTipoOferta">Seleccione una opción.</span>
                     <select name="tipoOferta" id="tipoOferta">
@@ -126,6 +86,8 @@
                         <option value="3x2">Oferta de lleve 3x2</option>
                     </select>
                 </div>
+            </div>
+            <div class="column">
                 <div class="inputGroup box">
                     <span class="left alertHidden" id="alertSucursal">Seleccione una opción.</span>
                     <select name="sucursal" id="sucursal"></select>
@@ -175,25 +137,19 @@
     <script src="js/menu.js"></script>
     <script src="js/cerrarSesion.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="js/imagen/servicioImagen.js"></script>
     <script src="js/usuarios/servicioUsuario.js"></script>
     <script src="js/categoria/servicioCategoria.js"></script>
     <script src="js/autor/servicioAutor.js"></script>
     <script src="js/libros/servicioLibros.js"></script>
     <script src="js/genero/servicioGenero.js"></script>
-    <script src="js/sucursal/servicioSucursal.js"></script>
-    <!-- <script src="js/direccion/servicioDireccion.js"></script>
-    <script src="js/direccion/controladorDireccion.js"></script> -->
     <script src="js/selects/controladorSelectsGenero.js"></script>
     <script src="js/selects/controladorSelectsCategoria.js"></script>
     <script src="js/selects/controladorSelectsAutor.js"></script>
     <script src="js/selects/controladorSelectsLibro.js"></script>
     <script src="js/selects/controladorSelectTiendas.js"></script>
     <script src="js/validaciones/validacionesGenerales.js"></script>
-    <!-- <script src="js/usuarios/lector/controladorLector.js"></script> -->
-    <script src="js/ofertas/controladorRegistrarOfertas.js"></script>
     <script src="js/ofertas/servicioOfertas.js"></script>
-    
+    <script src="js/ofertas/controladorRegistrarOfertas.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </body>
 

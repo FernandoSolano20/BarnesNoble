@@ -48,9 +48,27 @@ let agregarFilaGenero = function (listaOfertas) {
     let fila = tbody.insertRow();
 
     fila.setAttribute('data-id', listaOfertas._id);
-    fila.insertCell().innerHTML = listaOfertas.nombre;
-    fila.insertCell().innerHTML = listaOfertas.descripcion;
+    fila.insertCell().innerHTML = listaOfertas.nombre + " " + listaOfertas.descripcion;
+    let descripcion = "";
+    if (listaOfertas.autor)
+        descripcion = "Autor: " + listaOfertas.autor.nombre + "<br>";
 
+    if (listaOfertas.categoria)
+        descripcion = "Categoría: " + listaOfertas.categoria.nombre + "<br>";
+
+    if (listaOfertas.libro)
+        descripcion = "Libro: " + listaOfertas.libro.titulo + "<br>";
+
+    if (listaOfertas.genero)
+        descripcion = "Género: " + listaOfertas.genero.nombre + "<br>";
+
+    fila.insertCell().innerHTML = descripcion;
+    if (listaOfertas.sucursal) {
+        fila.insertCell().innerHTML = listaOfertas.sucursal.nombre;
+    }
+    else {
+        fila.insertCell().innerHTML = listaOfertas.libreria.nombreFantasia;
+    }
 
     let editarCelda = fila.insertCell();
     let editar = document.createElement('i');

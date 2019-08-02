@@ -165,7 +165,6 @@ router.patch('/listarOfertasPorTiendas', function (req, res) {
     let sucursales = [];
     for (var i = 0; i < req.body.sucursal.length; i++)
         sucursales.push(new mongoose.Types.ObjectId(req.body.sucursal[i]));
-    console.log(sucursales)
 
     Ofertas.find({ $or: [{ libreria: req.body.libreria }, { sucursal: { $in: sucursales } }] }, function (err, OfertasBD) {
         if (err) {
@@ -186,7 +185,7 @@ router.patch('/listarOfertasPorTiendas', function (req, res) {
         .populate('autor', 'nombre -_id')
         .populate('genero', 'nombre -_id')
         .populate('categoria', 'nombre -_id')
-        .populate('libro', 'nombre -_id')
+        .populate('libro', 'titulo -_id')
         .select('nombre descripcion descuento estado tipoOferta sucursal libreria autor genero categoria libro');
 });
 
