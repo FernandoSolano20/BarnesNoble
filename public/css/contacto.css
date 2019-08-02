@@ -5,17 +5,16 @@ html{
 }
 
 .menuLP img{
-  width: 180px;
-  height: 100%;
-  padding: 10px;
-  margin-left: 30px;
-  margin-top: -15px;
+    position: absolute;
+    width: 150px;
+    height: 100%;
+    padding: 10px;
+    margin-left: 30px;
   }
   
   .list-menuLP{
     margin: 0 auto;
     display: inline;
-    padding-top: 20px
   }
   
   .list-menuLP{
