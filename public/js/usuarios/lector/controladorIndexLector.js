@@ -9,6 +9,7 @@ let mostrarUsuarioRegistrado = async () => {
     avatar.setAttribute('src', usuarioActual.img);
     nombre.innerHTML = usuarioActual.nombre;
 
+
     if (usuarioActual.alias) {
         alias.innerHTML = usuarioActual.alias;
     }

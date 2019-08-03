@@ -61,24 +61,21 @@ router.get('/listarClubLectura', function (req, res) {
     })
 });
 
-module.exports = router;
-
-
-router.get('/usuarioId/:id', async (req, res) => {
-    return await Usuario.findById(req.params.id, function (err, usuario) {
+router.get('/listarClubLecturaPorUsuario/:id', function(req, res) {
+    ClubLectura.find({administrador:req.params.id},function(err, clubesLecturaBD) {
         if (err) {
             return res.status(400).json({
                 success: false,
-                message: 'No se encontro ninguna usuario',
+                msj: 'No se pueden listar los clubes de lectura',
                 err
             });
-        }
-        else {
+        } else {
             return res.json({
                 success: true,
-                usuario: usuario
+                listaClubesLectura: clubesLecturaBD
             });
         }
     })
-     
 });
+
+module.exports = router;

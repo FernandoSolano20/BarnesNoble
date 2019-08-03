@@ -62,5 +62,14 @@ router.get('/sucursalId/:id', function (req, res) {
         }
     })
 });
+
+router.get('/countLibreria', function (req, res) {
+    Libreria.countDocuments(function (err, count) {
+        return res.json({
+            success: true,
+            count: count
+        });
+    });
+})
  
 module.exports = router;

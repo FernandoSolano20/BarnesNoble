@@ -1,0 +1,210 @@
+.material {
+    height: 50px;
+    padding: 0 50px;
+    font-size: 18px;
+    text-decoration: none;
+    color: #ffffff;
+    border-radius: 1px;
+    background-color: #2196f3;
+    border: none;
+    -webkit-box-shadow: 0px 3px 3px 0px rgba(50, 50, 50, 0.1);
+    -moz-box-shadow: 0px 3px 3px 0px rgba(50, 50, 50, 0.1);
+    box-shadow: 0px 3px 3px 0px rgba(50, 50, 50, 0.1);
+    margin: 25px 0;
+    display: inline-block;
+    line-height: 50px;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
+    box-sizing: border-box;
+    -webkit-transition: 0.3s ease;
+    transition: 0.3s ease;
+}
+
+.material.full {
+    width: 100%;
+}
+
+.material.sm {
+    width: 150px;
+}
+
+.material.md {
+    width: 200px;
+}
+
+.material.lg {
+    width: 300px;
+}
+
+.material .ink {
+    position: absolute;
+    border-radius: 50%;
+    height: 1px;
+    width: 1px;
+    border: 1px solid rgba(13, 71, 161, 0.8);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    opacity: 0.8;
+    box-sizing: border-box;
+    -webkit-transition: 0.3s ease;
+    transition: 0.3s ease;
+}
+
+.material:active,
+.material:focus {
+    background-color: #1976d2;
+    -webkit-box-shadow: 0px 4px 3px 0px rgba(50, 50, 50, 0.2);
+    -moz-box-shadow: 0px 4px 3px 0px rgba(50, 50, 50, 0.2);
+    box-shadow: 0px 4px 3px 0px rgba(50, 50, 50, 0.2);
+    outline: 0;
+    -webkit-transition: 0.3s ease;
+    transition: 0.3s ease;
+}
+
+.material:hover {
+    background-color: #1669bb;
+    -webkit-box-shadow: 0px 5px 3px 0px rgba(50, 50, 50, 0.3);
+    -moz-box-shadow: 0px 5px 3px 0px rgba(50, 50, 50, 0.3);
+    box-shadow: 0px 5px 3px 0px rgba(50, 50, 50, 0.3);
+    cursor: pointer;
+    -webkit-transition: 0.3s ease;
+    transition: 0.3s ease;
+}
+
+.material.yellow {
+    background-color: #ffeb3b;
+    color: #333333;
+}
+
+.material.yellow.ghost {
+    color: #ffeb3b;
+}
+
+.material.yellow .ink {
+    border-color: rgba(245, 127, 23, 0.8);
+}
+
+.material.yellow:active,
+.material.yellow:focus {
+    background-color: #fbc02d;
+}
+
+.material.yellow:hover {
+    background-color: #fbb814;
+}
+
+.material.teal {
+    background-color: #009688;
+    color: white;
+}
+
+.material.teal.ghost {
+    color: #009688;
+}
+
+.material.teal .ink {
+    border-color: rgba(0, 77, 64, 0.8);
+}
+
+.material.teal:active,
+.material.teal:focus {
+    background-color: #00796b;
+}
+
+.material.teal:hover {
+    background-color: #006054;
+}
+
+.material.red {
+    background-color: #f44336;
+    color: #ffffff;
+}
+
+.material.red.ghost {
+    color: #f44336;
+}
+
+.material.red .ink {
+    border-color: rgba(183, 28, 28, 0.8);
+}
+
+.material.red:active,
+.material.red:focus {
+    background-color: #d32f2f;
+}
+
+.material.red:hover {
+    background-color: #c02929;
+}
+
+.material.ghost {
+    color: #2196f3;
+    background-color: transparent;
+}
+
+.material.ghost:hover,
+.material.ghost:active,
+.material.ghost:focus {
+    background-color: transparent;
+}
+
+.material.disabled {
+    background-color: #999999;
+    color: #666666;
+    -webkit-box-shadow: 0 0 0 0 transparent;
+    -moz-box-shadow: 0 0 0 0 transparent;
+    box-shadow: 0 0 0 0 transparent;
+}
+
+.material.disabled .ink {
+    display: none;
+}
+
+.material.disabled:hover,
+.material.disabled:active,
+.material.disabled:focus {
+    cursor: initial;
+    background-color: #999999;
+    -webkit-box-shadow: 0 0 0 0 transparent;
+    -moz-box-shadow: 0 0 0 0 transparent;
+    box-shadow: 0 0 0 0 transparent;
+}
+
+@media (max-width: 720px) {
+
+    .material.sm,
+    .material.md,
+    .material.lg {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+
+.title {
+    color: #2196f3;
+}
+
+.desc {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.btnLibreria {
+    vertical-align: middle;
+    max-height: 102px;
+    min-height: 43px;
+    max-width: 90px;
+    padding: 0 4px;
+    min-width: 85px;
+    font-size: 18px;
+    margin: 5px;
+    line-height: normal;
+}
+#btnPerfil{
+    line-height: 44px;
+}

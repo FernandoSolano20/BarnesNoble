@@ -5,7 +5,11 @@ const express = require('express'),
     randomString = require("randomstring"),
     nodeMailer = require("nodemailer"),
     Usuario = require('../models/usuarios.model'),
-    Libreria = require('../models/libreria.model');
+    Libreria = require('../models/libreria.model'),
+    Autor = require('../models/autor.model'),
+    Libro = require('../models/libros.model'),
+    Categoria = require('../models/categoria.model'),
+    Genero = require('../models/genero.model');
 
 const transporter = nodeMailer.createTransport({
     service: 'gmail',
@@ -554,5 +558,86 @@ router.get('/usuarioIdGetTiendas/:id', async (req, res) => {
         })
         .select('_id libreria');
 });
+
+router.get('/autorFavCount', async (req, res) => {
+    return await Usuario.aggregate(
+        [{
+            "$group": {
+                "_id": "$autor",
+                "count": { "$sum": 1 }
+            }
+        }])
+        .exec(function (err, transactions) {
+            Autor.populate(transactions, { path: '_id', select: '_id nombre' }, function (err, populatedTransactions) {
+                return res.json({
+                    success: true,
+                    usuario: populatedTransactions
+                });
+            });
+        });
+})
+
+router.get('/libroFavCount', function (req, res) {
+    Usuario.aggregate(
+        [{
+            "$group": {
+                "_id": "$libro",
+                "count": { "$sum": 1 }
+            }
+        }])
+        .exec(function (err, transactions) {
+            Libro.populate(transactions, { path: '_id', select: '_id titulo' }, function (err, populatedTransactions) {
+                return res.json({
+                    success: true,
+                    usuario: populatedTransactions
+                });
+            });
+        });
+})
+
+router.get('/generoFavCount', function (req, res) {
+    Usuario.aggregate(
+        [{
+            "$group": {
+                "_id": "$genero",
+                "count": { "$sum": 1 }
+            }
+        }])
+        .exec(function (err, transactions) {
+            Genero.populate(transactions, { path: '_id', select: '_id nombre' }, function (err, populatedTransactions) {
+                return res.json({
+                    success: true,
+                    usuario: populatedTransactions
+                });
+            });
+        });
+})
+
+router.get('/categoriaFavCount', function (req, res) {
+    Usuario.aggregate(
+        [{
+            "$group": {
+                "_id": "$categoria",
+                "count": { "$sum": 1 }
+            }
+        }])
+        .exec(function (err, transactions) {
+            Categoria.populate(transactions, { path: '_id', select: '_id nombre' }, function (err, populatedTransactions) {
+                return res.json({
+                    success: true,
+                    usuario: populatedTransactions
+                });
+            });
+        });
+})
+
+router.get('/countUser', function (req, res) {
+    Usuario.countDocuments({ tipoUsuario: 'Lector' }, function (err, count) {
+        return res.json({
+            success: true,
+            count: count
+        });
+    });
+})
 
 module.exports = router;

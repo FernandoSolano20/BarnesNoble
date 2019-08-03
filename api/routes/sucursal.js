@@ -106,23 +106,15 @@ router.get('/buscarIdLibreria/:id', function(req, res) {
     })
 });
 
-router.get('/libreriaId/:id', async (req, res) => {
-    return await Libreria.findById(req.params.id,function (err, librerias) {
-        if (err) {
-            return res.status(400).json({
-                success: false,
-                message: 'No se encontro ninguna librería',
-                err
-            });
-        }
-        else {
-            return res.json({
-                success: true,
-                listaLibrerias: librerias
-            });
-        }
-    })
-});
 
+
+router.get('/countSucursal', function (req, res) {
+    Sucursal.countDocuments(function (err, count) {
+        return res.json({
+            success: true,
+            count: count
+        });
+    });
+})
 
 module.exports = router;
