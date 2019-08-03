@@ -6,12 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/reset.css">
-    <!-- <script src="js/validarSesionUsuario.js"></script> -->
+    <script src="js/validarSesionUsuario.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/menu.css">
+<<<<<<< HEAD
     <link rel="stylesheet" href="css/listarUsuario.css">
     <link rel="stylesheet" href="css/botones.css">
     <!-- <link rel="stylesheet" href="css/franListarElementos.css"> -->
+=======
+    <link rel="stylesheet" href="css/listarElementos.css">
+>>>>>>> b155fe733304609a7d5969f6afb911e516df7be6
     <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" href="css/searchBar.css">
     <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
@@ -47,16 +51,12 @@
             <button type="button" class="buscar"><i class="fa fa-search"></i><span>search</span></button>
         </div>
 
-        <div class="crear-contenedor">
-            <button type="button" class="material-blue" data-action="crear" id="crear-elemento"
-                onclick="window.location.href = ('registroLibreria.html');"><i class="far fa-plus-circle"></i>Nueva
-                Libreria</button>
+        <div class="crear-contenedor" id="boton">
         </div>
     </div>
     </div>
 
     <div class="contenedor-tabla">
-        <!-- id="tabla-elementos" -->
         <table class="tabla" Id='tbl_librerias'>
             <thead>
                 <tr>
@@ -109,8 +109,8 @@
 
 </body>
 <script src="js/menu.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="js/cerrarSesion.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="js/libreria/servicioLibreria.js"></script>
 <script src="js/libreria/controlador-listar-Librerias.js"></script>
 

@@ -39,16 +39,6 @@ let agregarFilaAutores = function (autor) {
     fila.insertCell().innerHTML = autor.nombre;
 
 
-    let perfil = fila.insertCell();
-    let btnPerfil = document.createElement('button');
-    btnPerfil.innerText = 'Ver perfil';
-    btnPerfil.setAttribute('class', 'btnVerPerfil');
-    btnPerfil.dataset._id = autor['_id'];
-    btnPerfil.addEventListener('click', function () {
-        window.location.href = `verPerfilAutor.html?_id=${this.dataset._id}`
-    });
-    perfil.appendChild(btnPerfil);
-
     let premios = fila.insertCell();
     let btnPremios = document.createElement('a');
     btnPremios.innerText = 'Agregar Premios';
@@ -110,4 +100,18 @@ let agregarFilaAutores = function (autor) {
     estadoLabel.setAttribute('data-action', 'estado');
     estadoLabel.setAttribute('for', autor._id);
     estadoCelda.appendChild(estadoLabel);
+
+    let perfil = fila.insertCell();
+    let btnPerfil = document.createElement('button');
+    btnPerfil.innerText = 'Ver perfil';
+    btnPerfil.setAttribute('class', 'btnVerPerfil');
+    btnPerfil.dataset._id = autor['_id'];
+    btnPerfil.addEventListener('click', function () {
+        window.location.href = `verPerfilAutor.html?_id=${this.dataset._id}`
+    });
+    perfil.appendChild(btnPerfil);
 }
+
+
+
+

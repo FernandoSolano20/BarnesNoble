@@ -1,6 +1,7 @@
 'use strict';
 
 let listaLibros = [];
+let obtenerAutorId = [];
 const containerCard = document.querySelector('#cardElements')
 const txtFiltro = document.getElementById("txtFiltro");
 
@@ -17,7 +18,7 @@ let mostarLibros = async (event) => {
     filaNoDatos();
 };
 
-let agregarCardLibro = function (libro) {
+let agregarCardLibro = function (libro, autor) {
     let divParrent = document.createElement('div');
     divParrent.setAttribute('class', 'parrent');
     containerCard.appendChild(divParrent);
@@ -58,11 +59,13 @@ let agregarCardLibro = function (libro) {
         btnFormato.setAttribute('class', 'material btnLibreria');
         btnFormato.setAttribute('id', 'btnFormato');
         btnFormato.innerText = 'Autor';
-        btnFormato.href = "verPerfilAutor.html?_id=" + libro.autor._id;
+        btnFormato.href = "verPerfilAutor.html?_id=" + libro._id;
         child2.appendChild(btnFormato);
     }
 
 }
+
+
 
 let filaNoDatos = function () {
     if (listaLibros.length === 0 || containerCard.childElementCount === 0) {

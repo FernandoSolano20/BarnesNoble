@@ -69,7 +69,6 @@ let mostrar_tabla = async (event) => {
             
         }
     }
-    filaNoDatos();
 };
 
 let filaNoDatos = function () {

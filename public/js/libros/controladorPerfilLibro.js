@@ -11,6 +11,7 @@ let obtenerInformacionLibro = async function () {
             document.getElementById('caratula').src = libro.listaLibro.caratula;
             document.getElementById('contraportada').src = libro.listaLibro.contraportada;
             document.getElementById('autor').innerHTML = libro.listaLibro.autor.nombre;
+            document.getElementById('perfilAutor').href = "verPerfilAutor.html?_id=" + libro.listaLibro.autor._id;
 
             document.getElementById('nombreArtistico').innerHTML = libro.listaLibro.autor.nombreArtistico;
             document.getElementById('fotoAutor').src = libro.listaLibro.autor.foto;

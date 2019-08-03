@@ -200,10 +200,10 @@
     min-height: 43px;
     max-width: 90px;
     padding: 0 4px;
-    min-width: 85px;
-    font-size: 18px;
+    min-width: 40%;
+    font-size: 16px;
     margin: 5px;
-    line-height: normal;
+    /* line-height: normal; */
 }
 #btnPerfil{
     line-height: 44px;

@@ -81,7 +81,7 @@ router.get('/buscarLibroID/:id', async (req, res) => {
     })
         .populate('genero', 'nombre -_id')
         .populate('categoria', 'nombre -_id')
-        .populate('autor', 'nombre resenna fechaNacimiento fechaMuerte nombreArtistico nacionalidad foto lugarNacimiento -_id')
+        .populate('autor', '_id nombre resenna fechaNacimiento fechaMuerte nombreArtistico nacionalidad foto lugarNacimiento')
         .select('titulo caratula contraportada genero categoria autor');
 
 });
