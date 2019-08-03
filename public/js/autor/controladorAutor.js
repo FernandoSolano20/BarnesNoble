@@ -38,7 +38,31 @@ let agregarFilaAutores = function (autor) {
     fila.setAttribute('data-id', autor._id);
     fila.insertCell().innerHTML = autor.nombre;
 
+    let editarCelda = fila.insertCell();
+    let editar = document.createElement('i');
+    editar.setAttribute('class', 'far fa-edit');
+    editar.setAttribute('data-id', autor._id);
+    editarCelda.appendChild(editar);
 
+    let eliminarCelda = fila.insertCell();
+    let eliminar = document.createElement('i');
+    eliminar.setAttribute('class', 'fal fa-trash-alt');
+    eliminar.setAttribute('data-action', 'borrar');
+    eliminarCelda.appendChild(eliminar);
+
+    let estadoCelda = fila.insertCell();
+
+    let estadoInput = document.createElement('input');
+    estadoInput.setAttribute('class', 'switch');
+    estadoInput.setAttribute('id', autor._id);
+    estadoInput.setAttribute('type', 'checkbox');
+    estadoCelda.appendChild(estadoInput);
+    estadoInput.checked = !autor.estado;
+
+    let estadoLabel = document.createElement('label');
+    estadoLabel.setAttribute('data-action', 'estado');
+    estadoLabel.setAttribute('for', autor._id);
+    estadoCelda.appendChild(estadoLabel);
     let premios = fila.insertCell();
     let btnPremios = document.createElement('a');
     btnPremios.innerText = 'Agregar Premios';
@@ -49,13 +73,54 @@ let agregarFilaAutores = function (autor) {
     btnPremios.addEventListener('click', async function () {
         Swal.fire({
             title: 'Ingrese la información del premio',
-            html: '<input type= "text" id="valorNombrePremio" placeholder="Ingrese un nombre">' + '<input type= "text" id="valorAnnoPremio" placeholder="Ingrese el año de la premiación">' + '<input type= "text" id="valorDesPremio" placeholder="Ingrese una descripción">'
+            html: `<form class="formRegistro" name="formulario_registro">
+            <div class="column">
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alertNombrePremio">La identificación debe tener 9 dígitos.</span>
+                    <label class="label" for="valorNombrePremio">Nombre del Premio:</label>
+                    <input type="text" id="valorNombrePremio" name="Cédula">
+                </div>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alertAnno">La identificación debe tener 9 dígitos.</span>
+                    <label class="label" for="valorAnnoPremio">Año del premio:</label>
+                    <input type="text" id="valorAnnoPremio" name="Año premio">
+                </div>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alertDescrip">La identificación debe tener 9 dígitos.</span>
+                    <label class="label" for="valorDesPremio">Descripción:</label>
+                    <input type="text" id="valorDesPremio" name="Descripción">
+                </div>
+                `
         }).then(async () => {
-            let nombre = document.querySelector('#valorNombrePremio').value;
-            let anno = document.querySelector('#valorAnnoPremio').value;
-            let descripcion = document.querySelector('#valorDesPremio').value;
-            if (nombre && anno && descripcion) {
-                let response = await agregarPremios(this.dataset._id, nombre, anno, descripcion);
+            let nombre = document.querySelector('#valorNombrePremio');
+            let nombreAlert = document.querySelector('#alertNombrePremio');
+            let elementText = {
+                value: nombre.value,
+                alert: nombreAlert,
+                input: nombre
+            }
+            var err1 = !(noVacio(elementText) && validarTexto(elementText));
+
+            let anno = document.querySelector('#valorAnnoPremio');
+            let annoAlert = document.querySelector('#alertAnno');
+            let elementNumber = {
+                value: anno.value,
+                alert: annoAlert,
+                input: anno
+            }
+            var err2 = !(validarNumeros(elementNumber) && validarAnno(elementNumber));
+
+            let descripcion = document.querySelector('#valorDesPremio');
+            let alertDescrip = document.querySelector('#alertDescrip');
+            elementText = {
+                value: descripcion.value,
+                alert: alertDescrip,
+                input: descripcion
+            }
+            var err3 = !(noVacio(elementText));
+
+            if (!(err1 || err2 || err3)) {
+                let response = await agregarPremios(this.dataset._id, nombre.value, anno.value, descripcion.value);
                 if (response.success) {
                     Swal.fire({
                         type: 'success',
@@ -69,6 +134,12 @@ let agregarFilaAutores = function (autor) {
                     })
                 }
 
+            }
+            else {
+                Swal.fire({
+                    type: 'warning',
+                    title: "El premio no se pudo guardar"
+                })
             }
         }
         )
@@ -112,6 +183,16 @@ let agregarFilaAutores = function (autor) {
     perfil.appendChild(btnPerfil);
 }
 
-
-
-
+let validarAnno = function (elementos) {
+    if (elementos.value > new Date().getFullYear()) {
+        elementos.alert.innerText = "Debe ser menor que el año actual."
+        elementos.alert.className = elementos.alert.className.replace("alertHidden", "");
+        elementos.input.className = elementos.input.className.replace("inputError", "");
+        elementos.input.className = elementos.input.className + " inputError";
+        return false;
+    }
+    elementos.alert.className = elementos.alert.className.replace("alertHidden", "");
+    elementos.alert.className = elementos.alert.className + " alertHidden";
+    elementos.input.className = elementos.input.className.replace("inputError", "");
+    return true;
+}

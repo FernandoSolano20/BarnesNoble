@@ -32,10 +32,6 @@
     vertical-align: middle;
 }
 
-.contenedor-tabla .tabla tbody td:nth-child(2) {
-    text-align: justify;
-}
-
 .contenedor-tabla .tabla tbody td i {
     font-size: 25px;
 }
@@ -82,4 +78,8 @@
 
 #tbl_sucursales .campoLibreria{
     min-width: 0px;
+}
+
+.contenedor-tabla .tabla tbody .justify {
+    text-align: justify;
 }

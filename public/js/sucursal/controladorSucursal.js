@@ -36,6 +36,11 @@ let mostrar_tabla = async (event) => {
         tr = document.createElement('th');
         tr.innerHTML = 'Activar/Desactivar';
         fila.appendChild(tr);
+        fila.appendChild(tr);
+        tr = document.createElement('th');
+        tr.innerHTML = 'Perfil';
+        fila.appendChild(tr);
+
         if (sessionStorage.tipoUsuario != 'Lector') {
             let btn = document.createElement('a');
             btn.type = "button";
@@ -115,6 +120,20 @@ let agregarFilaSucursal = function (sucursal, libreria) {
         estadoLabel.setAttribute('data-action', 'estado');
         estadoLabel.setAttribute('for', sucursal._id);
         estadoCelda.appendChild(estadoLabel);
+
+        let celda_perfil = fila.insertCell();
+        let divContendor = document.createElement("div");
+        divContendor.setAttribute('class', 'crear-contenedor')
+        let btnPerfil = document.createElement('button');
+        celda_perfil.appendChild(divContendor);
+        divContendor.appendChild(btnPerfil);
+
+        btnPerfil.innerText = 'Ver perfil'
+        btnPerfil.dataset._id = sucursal['_id'];
+        btnPerfil.setAttribute('class', 'material-blue')
+        btnPerfil.addEventListener('click', function () {
+            window.location.href = "perfilSucursal.html?id=" + sucursal._id;
+        });
     }
 }
 

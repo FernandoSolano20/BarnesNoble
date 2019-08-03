@@ -79,8 +79,8 @@ router.post('/agregarPremios', function (req, res) {
             }
         }
     },
-    function(error){
-        if(error){
+    function(err, premio){
+        if(err){
             return res.status(400).json({
                 success: false,
                 message: 'No se pudo agregar premio',

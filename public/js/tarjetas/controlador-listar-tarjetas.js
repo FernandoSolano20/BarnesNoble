@@ -29,7 +29,7 @@ let mostrar_tabla = async () => {
 
         let celda_perfil = fila.insertCell();
         let divContendor = document.createElement("div");
-        divContendor.setAttribute('class', 'crear-contenedor')
+        divContendor.setAttribute('class', 'crear-contenedor');
         let btnPerfil = document.createElement('button');
         celda_perfil.appendChild(divContendor);
         divContendor.appendChild(btnPerfil);

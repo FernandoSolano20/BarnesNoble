@@ -9,9 +9,6 @@ const correoAlert = document.getElementById('alert-correo');
 const telefonoInput = document.getElementById('telefono-input');
 const telefonoAlert = document.getElementById('alert-telefono');
 
-const imgInput = document.getElementById('img');
-const imgAlert = document.getElementById('alert-img');
-
 const provinciaAlert = document.getElementById('alert-provincia');
 const cantonAlert = document.getElementById('alert-canton');
 const distritoAlert = document.getElementById('alert-distrito');
@@ -24,53 +21,42 @@ let obtenerDatosSucursales = async function () {
     if (!error) {
 
         document.body.className = "loading";
-        let imgValue = document.getElementById('img');
-        let imgResult = await crearImagen(imgValue);
-        if (imgResult.success) {
-            let textProvincia, textCanton, textDistrito;
-            textProvincia = sectionProvincia.value;
-            textProvincia = sectionProvincia.querySelector('[value="' + textProvincia + '"]').innerText;
-            textCanton = sectionCantones.value;
-            textCanton = sectionCantones.querySelector('[value="' + textCanton + '"]').innerText;
-            textDistrito = sectionDistritos.value;
-            textDistrito = sectionDistritos.querySelector('[value="' + textDistrito + '"]').innerText;
-            let sucursal = {
-                nombre: nombreInput1.value,
-                correo: correoInput.value,
-                img: imgResult.result.secure_url,
-                telefono: telefonoInput.value,
-                localizacionLatitud: markers[0].position.lat(),
-                localizacionLongitud: markers[0].position.lng(),
-                estado: 1,
-                provincia: textProvincia,
-                canton: textCanton,
-                distrito: textDistrito,
-                idLibreria: adminLib.usuario.libreria
-            }
-            let nuevoSucursal = await crearSucursal(sucursal);
-            document.body.className = "";
-            if (nuevoSucursal.success) {
-                Swal.fire({
-                    type: 'success',
-                    title: nuevoSucursal.message,
-                    showCloseButton: true,
-                    focusConfirm: false,
-                    confirmButtonText:
-                        '<a href="http://localhost:3000/sucursales.html" class="linkPage">Ok</a>'
-                });
-            }
-            else {
-                Swal.fire({
-                    type: 'error',
-                    title: nuevoSucursal.message
-                });
-            }
+        let textProvincia, textCanton, textDistrito;
+        textProvincia = sectionProvincia.value;
+        textProvincia = sectionProvincia.querySelector('[value="' + textProvincia + '"]').innerText;
+        textCanton = sectionCantones.value;
+        textCanton = sectionCantones.querySelector('[value="' + textCanton + '"]').innerText;
+        textDistrito = sectionDistritos.value;
+        textDistrito = sectionDistritos.querySelector('[value="' + textDistrito + '"]').innerText;
+        let sucursal = {
+            nombre: nombreInput1.value,
+            correo: correoInput.value,
+            img: imgResult.result.secure_url,
+            telefono: telefonoInput.value,
+            localizacionLatitud: markers[0].position.lat(),
+            localizacionLongitud: markers[0].position.lng(),
+            estado: 1,
+            provincia: textProvincia,
+            canton: textCanton,
+            distrito: textDistrito,
+            idLibreria: adminLib.usuario.libreria
+        }
+        let nuevoSucursal = await crearSucursal(sucursal);
+        document.body.className = "";
+        if (nuevoSucursal.success) {
+            Swal.fire({
+                type: 'success',
+                title: nuevoSucursal.message,
+                showCloseButton: true,
+                focusConfirm: false,
+                confirmButtonText:
+                    '<a href="http://localhost:3000/sucursales.html" class="linkPage">Ok</a>'
+            });
         }
         else {
-            document.body.className = "";
             Swal.fire({
                 type: 'error',
-                title: imgResult.message
+                title: nuevoSucursal.message
             });
         }
     }
@@ -82,16 +68,6 @@ let obtenerDatosSucursales = async function () {
         });
     }
 }
-
-let validarFotoPerfil = function () {
-    let elementPicture = {
-        value: imgInput.value,
-        alert: imgAlert,
-        input: imgInput
-    }
-    return !(noVacio(elementPicture) && validarFotos(elementPicture));
-}
-
 
 let validarNombre1 = function () {
     let elementText = {
@@ -174,7 +150,6 @@ nombreInput1.addEventListener('blur', validarNombre1);
 
 correoInput.addEventListener('blur', validarCorreo);
 telefonoInput.addEventListener('blur', validarTelefono);
-imgInput.addEventListener('change', validarFotoPerfil);
 sectionProvincia.addEventListener('change', validarProvincia);
 sectionCantones.addEventListener('change', validarCanton);
 sectionDistritos.addEventListener('change', validarDistrito);
