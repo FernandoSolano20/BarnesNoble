@@ -69,6 +69,20 @@ let crearMenu = async function(){
             anchor.innerHTML = "Mis Tarjetas";
             anchor.href = "listarTarjetas.html";
             li.appendChild(anchor);
+
+            li = document.createElement('li');
+            listMenu.appendChild(li);
+            anchor = document.createElement('a');
+            anchor.innerHTML = "Librerias";
+            anchor.href = "listarLibrerias.html";
+            li.appendChild(anchor);
+    
+            li = document.createElement('li');
+            listMenu.appendChild(li);
+            anchor = document.createElement('a');
+            anchor.innerHTML = "Sucursales";
+            anchor.href = "sucursales.html";
+            li.appendChild(anchor);
         }
         else if (sessionStorage.tipoUsuario === "Adminitrador plataforma") {
             //Plataforma

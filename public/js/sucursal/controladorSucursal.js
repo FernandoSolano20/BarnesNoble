@@ -7,7 +7,22 @@ let txt_filtro = document.querySelector('#txt_filtro');
 
 let mostrar_tabla = async (event) => {
     if (!event) {
-        if (sessionStorage.tipoUsuario == 'Adminitrador plataforma') {
+        if (sessionStorage.tipoUsuario != 'Lector') {
+            let btn = document.createElement('a');
+            btn.type = "button";
+            btn.setAttribute('class', 'material-blue');
+            btn.href = "registrarSucursal.html";
+            document.getElementById('boton').appendChild(btn);
+            
+            let label = document.createTextNode('Crear');
+            btn.appendChild(label);
+
+            let icon = document.createElement('i');
+            icon.setAttribute('class', 'far fa-plus-circle');
+            btn.insertBefore(icon, label);
+            
+        }
+        if (sessionStorage.tipoUsuario != 'Adminitrador librería') {
             lista_sucursales = await obtenerSucursales();
         }
         else {
@@ -67,7 +82,3 @@ let agregarFilaSucursal = function (sucursal) {
 
 mostrar_tabla();
 txt_filtro.addEventListener('keyup', mostrar_tabla);
-
-document.querySelector('#crear-elemento').addEventListener('click', function () {
-    window.location.href = 'http://localhost:3000/registrarSucursal.html';
-})
