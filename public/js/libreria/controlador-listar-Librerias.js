@@ -6,7 +6,7 @@ let txtFiltro = document.querySelector('#txt-filtro');
 
 let mostrar_tabla = async() => {
 
-    if (sessionStorage.tipoUsuario == 'Adminitrador libreria') {
+    if (sessionStorage.tipoUsuario == 'Adminitrador plataforma') {
         listaLibrerias = await obtenerLibrerias();
     }
     else {

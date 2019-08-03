@@ -17,7 +17,8 @@ router.post('/registrarLibro', function (req, res) {
         contraportada: body.contraportada,
         genero: body.genero,
         categoria: body.categoria,
-        autor: body.autor
+        autor: body.autor,
+        resenna: body.resenna
     });
 
     nuevoLibro.save(

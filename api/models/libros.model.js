@@ -6,7 +6,8 @@ let librosSchema = new mongoose.Schema({
     titulo: { type: String, required: true, unique: false },
     caratula: { type: String, required: true, unique: false },
     contraportada: { type: String, required: true, unique: false },
-    vendidos: {type: Number, required: false, unique: false},
+    vendidos: { type: Number, required: false, unique: false },
+    resenna: { type: String, required: true, unique: false },
     genero: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Genero',
