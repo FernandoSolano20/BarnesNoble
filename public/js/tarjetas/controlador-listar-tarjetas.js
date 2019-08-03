@@ -3,9 +3,7 @@
 const tbody = document.querySelector('#tbl_tarjetas tbody');
 let listaTarjetas = [];
 let txtFiltro = document.querySelector('#txt-filtro');
-//  let expiracionMM =  listaTarjetas[i]['expiracionMM'];
-//      let expiracionYY = listaTarjetas[i]['expiracionYY'];
-// let expiracionFormateada = expiracionMM + ' / ' + expiracionYY;
+
 let mostrar_tabla = async () => {
     if (sessionStorage.tipoUsuario == 'Adminitrador plataforma') {
         listaTarjetas = await obtenerTarjetas();
@@ -18,8 +16,7 @@ let mostrar_tabla = async () => {
 
 
     for (let i = 0; i < listaTarjetas.length; i++) {
-        //   let expiracionMM =  listaTarjetas[i]['expiracionMM'];
-        // let expiracionYY = listaTarjetas[i]1Y'];
+      
         let fila = tbody.insertRow();
         fila.insertCell().innerHTML = listaTarjetas[i]['nombre1'];
         fila.insertCell().innerHTML = listaTarjetas[i]['numTarjeta'];
