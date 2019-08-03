@@ -63,7 +63,7 @@ let obtenerDatosUsuarios = async function () {
                 showCloseButton: true,
                 focusConfirm: false,
                 confirmButtonText:
-                    '<a href="http://localhost:3000/inicioSesion.html" class="linkPage">Ok</a>'
+                    '<a href="http://localhost:3000/listarOfertas.html" class="linkPage">Ok</a>'
             });
         }
         else {

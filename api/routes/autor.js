@@ -89,7 +89,7 @@ router.post('/agregarPremios', function (req, res) {
         }else{
             return res.json({
                 success: true,
-                message: 'Se agrego correctamente el premio'
+                message: 'Se agregó correctamente el premio'
             })
         }
     }
