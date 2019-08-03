@@ -26,20 +26,29 @@ let mostrar_tabla = async() => {
         fila.insertCell().innerHTML = listaLibrerias[i]['provincia'];
         fila.insertCell().innerHTML = listaLibrerias[i]['distrito'];
 
-         let celda_perfil = fila.insertCell();
-         let btnPerfil = document.createElement('button');
-        celda_perfil.appendChild(btnPerfil);
-      
-        btnPerfil.innerText = 'Ver Perfil'
-        btnPerfil.dataset._id = listaLibrerias[i]['_id'];
-        btnPerfil.setAttribute('class', 'material-blue')
-        btnPerfil.addEventListener('click', function () {
-            window.location.href = `perfilLibreria.html?id=${this.dataset._id}`;
-        });
+
+
+        let celda_perfil = fila.insertCell();
+        let divContenedor = document.createElement("div");
+        divContenedor.setAttribute('class', 'crear-contenedor');
+        celda_perfil.appendChild(divContenedor);
+        
+        let boton_perfil = document.createElement('button');
+        boton_perfil.type = 'button';
+        boton_perfil.innerText = 'Ver perfil';
+        boton_perfil.dataset._id = listaLibrerias[i]['_id'];
+        boton_perfil.setAttribute('class', 'material-blue');
+        divContenedor.appendChild(boton_perfil);
+
+    boton_perfil.addEventListener('click', function() {
+        //console.log(this.dataset._id);
+        window.location.href = `perfilLibreria.html?id=${this.dataset._id}`
+
+    }); 
+    
     }
 };
 
-mostrar_tabla();
 
 let filtrar_tabla = async() => {
 
@@ -64,18 +73,40 @@ let filtrar_tabla = async() => {
             // fila.insertCell().innerHTML = listaLibrerias[i]['localizacionLongitud'];
 
             let celda_perfil = fila.insertCell();
-            let btnPerfil = document.createElement('button');
-           celda_perfil.appendChild(btnPerfil);
-         
-           btnPerfil.innerText = 'Ver Perfil'
-           btnPerfil.dataset._id = listaLibrerias[i]['_id'];
-           btnPerfil.addEventListener('click', function () {
-               window.location.href = `perfilLibreria.html?id=${this.dataset._id}`;
-           });
+        let divContenedor = document.createElement("div");
+        divContenedor.setAttribute('class', 'crear-contenedor');
+        celda_perfil.appendChild(divContenedor);
+        
+        let boton_perfil = document.createElement('button');
+        boton_perfil.type = 'button';
+        boton_perfil.innerText = 'Ver perfil';
+        boton_perfil.dataset._id = listaLibrerias[i]['_id'];
+        boton_perfil.setAttribute('class', 'material-blue');
+        divContenedor.appendChild(boton_perfil);
+
+    boton_perfil.addEventListener('click', function() {
+        //console.log(this.dataset._id);
+        window.location.href = `perfilLibreria.html?id=${this.dataset._id}`
+
+    }); 
 
         }
+       
+    }
+    filaNoDatos();  
+};
+
+let filaNoDatos = function () {
+    let tbody = document.querySelector('#tbl_librerias tbody');
+    if (listaLibrerias.length === 0 || tbody.childElementCount === 0) {
+        let fila = tbody.insertRow();
+        fila.setAttribute('id', 'no-data');
+        let celda = fila.insertCell()
+        celda.innerHTML = 'No se encontró datos';
+        celda.setAttribute('colspan', '6');
     }
 };
 
+mostrar_tabla();
 txtFiltro.addEventListener('keyup', filtrar_tabla);
 

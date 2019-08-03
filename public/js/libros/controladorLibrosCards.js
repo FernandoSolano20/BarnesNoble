@@ -7,6 +7,7 @@ const txtFiltro = document.getElementById("txtFiltro");
 let mostarLibros = async (event) => {
     if (!event)
         listaLibros = await obtenerLibrosFetch();
+
     let filtro = txtFiltro.value;
     containerCard.innerHTML = '';
     for (let i = 0; i < listaLibros.length; i++) {
@@ -52,13 +53,15 @@ let agregarCardLibro = function (libro) {
     btnPerfil.innerText = 'Perfil';
     child2.appendChild(btnPerfil);
 
-    if (sessionStorage.tipoUsuario == 'Adminitrador plataforma') {
+    if (sessionStorage.tipoUsuario == 'Lector') {
         let btnFormato = document.createElement('a');
         btnFormato.setAttribute('class', 'material btnLibreria');
-        btnFormato.innerText = 'Añadir formato';
-        btnFormato.href = "formatoLibro.html?id=" + libro._id;
+        btnFormato.setAttribute('id', 'btnFormato');
+        btnFormato.innerText = 'Autor';
+        btnFormato.href = "verPerfilAutor.html?_id=" + libro.autor._id;
         child2.appendChild(btnFormato);
     }
+
 }
 
 let filaNoDatos = function () {
