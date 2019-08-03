@@ -29,10 +29,6 @@ function formReset() {
     document.getElementById("registrarTarjeta").reset();
 }
 
-let redirect = () => {
-    window.location.assign("listarTarjetas.html");
-}
-
 let validarDatosTarjetas = async () => {
 
     let error = validarNombre() | validarTarjeta() | validarExpMM() | validarExpYY() | validarCVV();
@@ -60,10 +56,11 @@ let validarDatosTarjetas = async () => {
             Swal.fire({
                 title: nuevaTarjeta.message,
                 type: 'success',
-                text: 'Se tarjeta se registró correctamente'
+                text: 'Se tarjeta se registró correctamente',
+                confirmButtonText:
+                '<a href="http://localhost:3000/listarTarjetas.html" class="linkPage">Ok</a>'
 
             })
-            redirect();
         } else {
             Swal.fire({
                 title: nuevaTarjeta.message,

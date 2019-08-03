@@ -5,12 +5,16 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
     padding: 37px;
+    margin-left: -30%;
   }
   .nombre_lector{
     font-size: 2rem;
     font-family: 'Roboto' sans-serif;
   }
 
+  h3{
+  font-size: 1.5rem;
+}
   .correo_lector a{
     text-decoration: none;
     font-size: 1rem;
@@ -19,10 +23,12 @@
   }
 
   .lectorInfo img{
-    width:25%;
+    width: 200px;
+    height: 200px;
     float: right;
     border-radius: 50%;
   }
+
 
   .infoNombre{
     margin-top: 24px;

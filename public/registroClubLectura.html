@@ -36,7 +36,7 @@
 
         <nav class="menuIzquierdo">
             <ul class="menu" id="menuDinamico">
-                
+
             </ul>
         </nav>
     </header>
@@ -47,14 +47,14 @@
             <div class="column">
 
                 <div class="inputGroup">
-                    <span class="left alertHidden" id="alert-nombre1">Digite solo letras.</span>
+                    <span class="left alertHidden" id="alert-nombre">Digite solo letras.</span>
                     <label class="label" for="nombre-input">Nombre:</label>
                     <input type="text" id="nombre-input" name="primer nombre">
                 </div>
 
                 <div class="inputGroup">
                     <span class="left alertHidden" id="alert-tema">Digite solo letras.</span>
-                    <label class="label" for="tema-input">Tema</label>
+                    <label class="label" for="tema-input">Tema del club</label>
                     <input type="text" id="tema-input" name="tema">
                 </div>
                 <div>
@@ -62,58 +62,43 @@
                         <p>Tipo de club:</p>
                     </p>
                 </div>
-                <div class="inputGroup radio">
-                    <span class="left alertHidden" id="alert-tipo">Seleccione una opción.</span>
-                    <input type="radio" name="tipo" id="presencial" value="presencial">
+                <div class="inputGroup radio" id="tipo-club-input">
+                    <span class="left alertHidden" id="alert-tipo-club">Seleccione una opción.</span>
+                    <input type="radio" name="tipoClub" id="presencial" value="presencial">
                     <label for="presencial" class="labelRadio">Presencial</label>
-                    <input type="radio" name="tipo" id="virtual" value="virtual">
+                    <input type="radio" name="tipoClub" id="virtual" value="virtual">
                     <label for="virtual" class="labelRadio">Virtual</label>
 
                 </div>
-                <div>
-                        <p>
-                            <p>Dia de reunion:</p>
-                        </p>
-                    </div>
-                    <div class="inputGroup radio">
-                        <span class="left alertHidden" id="alert-dia">Seleccione una opción.</span>
-                        <input type="radio" name="dia" id="domingo" value="domingo">
-                        <label for="domingo" class="labelRadio">Domingo</label>
 
-                        <input type="radio" name="dia" id="lunes" value="lunes">
-                        <label for="lunes" class="labelRadio">Lunes</label>
-
-                        <input type="radio" name="dia" id="martes" value="martes">
-                        <label for="martes" class="labelRadio">Martes</label>
-
-                        <input type="radio" name="dia" id="miercoles" value="miercoles">
-                        <label for="miercoles" class="labelRadio">Miercoles</label>
-
-                        <input type="radio" name="dia" id="jueves" value="jueves">
-                        <label for="jueves" class="labelRadio">Jueves</label>
-
-                        <input type="radio" name="dia" id="viernes" value="viernes">
-                        <label for="viernes" class="labelRadio">Viernes</label>
-
-                        <input type="radio" name="dia" id="sabado" value="sabado">
-                        <label for="sabado" class="labelRadio">Sabado</label>
-    
-                    </div>
-                <div class="inputGroup">
-                    <span class="left alertHidden" id="alert-hora">Debe estar dentro del horario de la sucursal.</span>
-                    <label class="label" for="hora">Hora de reunion:</label>
-                    <input type="time" id="hora" name="hora de reunion" min="09:00" max="21:00" step="3600">
-                </div>
 
             </div>
             <div class="column">
-                    <div class="inputGroup">
-                            <span class="left alertHidden" id="alert-img">Debe ser un archivo png o jpg.</span>
-                            <label class="labelFile">
-                                <i class="fal fa-file-image"></i>
-                                <span class="title">Add File</span>
-                                <input type="file" / id="img">
-                            </label>
+                <div>
+                    <p>
+                        <p>Dia de reunion:</p>
+                    </p>
+                </div>
+
+                <div class="inputGroup box">
+                    <span class="left alertHidden" id="alert-fecha-reunion">Seleccione una opción.</span>
+                    <select name="dia" id="fecha-reunion-input">
+                        <option value="">--Seleccione el dia de reunion--</option>
+                        <option value="1">Domingo</option>
+                        <option value="2">Lunes</option>
+                        <option value="3">Martes</option>
+                        <option value="4">Miercoles</option>
+                        <option value="5">Jueves</option>
+                        <option value="6">Viernes</option>
+                        <option value="7">Sabado</option>
+                    </select>
+                </div>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alert-hora-reunion">Debe estar dentro del horario de la sucursal.</span>
+                    <label class="label" for="hora">Hora de reunion:</label>
+                    <input type="time" id="hora-reunion-input" name="hora de reunion" min="09:00" max="21:00" step="3600">
+                </div>
+
             </div>
         </form>
         <div class="containerMap">
@@ -130,7 +115,7 @@
         <div class="blockFooter">
             <div class="logos">
                 <a href="#"><img src="img/barnes_and_noble_logo_png_94486.png" alt="Logo de Barnes&Noble"></a>
-                <a href="#"><img src="img/barnes_and_noble_logo_png_94486.png" alt="Logo Fundacion Book for kids"></a>
+                <a href="#"><img src="img/B&NKIFDS-01.png" alt="Logo Fundacion Book for kids"></a>
             </div>
             <div class="copyrights">
                 <h3> ⓒ 2019 Valhalla</h3>
@@ -146,13 +131,10 @@
     </footer>
     <script src="js/menu.js"></script>
     <script src="js/cerrarSesion.js"></script>
-    <script src="js/maps/maps.js"></script>
     <script src="js/imagen/servicioImagen.js"></script>
     <script src="js/clubLectura/servicioClubLectura.js"></script>
+    <script src="js/validaciones/validacionesGenerales.js"></script>
     <script src="js/clubLectura/controladorRegistrarClubLectura.js"></script>
-
-
-
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </body>
 

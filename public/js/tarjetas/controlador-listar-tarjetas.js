@@ -41,9 +41,20 @@ let mostrar_tabla = async () => {
             window.location.href = "#";
         });
     }
+    filaNoDatos();
 };
 
+let filaNoDatos = function () {
+    if (listaTarjetas.length === 0 || tbody.childElementCount === 0) {
+        let fila = tbody.insertRow();
+        fila.setAttribute('id', 'no-data');
+        let celda = fila.insertCell()
+        celda.innerHTML = 'No se encontró datos';
+        celda.setAttribute('colspan', '6');
+    }
+}
 mostrar_tabla();
+
 
 let filtrar_tabla = async () => {
 
@@ -78,6 +89,7 @@ let filtrar_tabla = async () => {
 
         }
     }
+    filaNoDatos();
 };
 
 txtFiltro.addEventListener('keyup', filtrar_tabla);

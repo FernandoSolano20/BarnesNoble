@@ -56,4 +56,21 @@ router.get('/listarClubLectura', function(req, res) {
     })
 });
 
+router.get('/listarClubLecturaPorUsuario/:id', function(req, res) {
+    ClubLectura.find({administrador:req.params.id},function(err, clubesLecturaBD) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                msj: 'No se pueden listar los clubes de lectura',
+                err
+            });
+        } else {
+            return res.json({
+                success: true,
+                listaClubesLectura: clubesLecturaBD
+            });
+        }
+    })
+});
+
 module.exports = router;

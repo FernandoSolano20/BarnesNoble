@@ -22,7 +22,7 @@ let obtenerUsuarioIdInfoBasicaFetch = async(id) => {
     var result = await response.json();
     return result;
 };
-
+var adminLib;
 let listMenu = document.getElementById('menuDinamico');
 let crearMenu = async function(){
     if (listMenu) {
@@ -46,7 +46,7 @@ let crearMenu = async function(){
             listMenu.appendChild(li);
             anchor = document.createElement('a');
             anchor.innerHTML = "Clubes de lectura";
-            anchor.href = "clubLectura.html";
+            anchor.href = "listarClubLectura.html";
             li.appendChild(anchor);
     
             li = document.createElement('li');
@@ -68,6 +68,20 @@ let crearMenu = async function(){
             anchor = document.createElement('a');
             anchor.innerHTML = "Mis Tarjetas";
             anchor.href = "listarTarjetas.html";
+            li.appendChild(anchor);
+
+            li = document.createElement('li');
+            listMenu.appendChild(li);
+            anchor = document.createElement('a');
+            anchor.innerHTML = "Librerias";
+            anchor.href = "listarLibrerias.html";
+            li.appendChild(anchor);
+    
+            li = document.createElement('li');
+            listMenu.appendChild(li);
+            anchor = document.createElement('a');
+            anchor.innerHTML = "Sucursales";
+            anchor.href = "sucursales.html";
             li.appendChild(anchor);
         }
         else if (sessionStorage.tipoUsuario === "Adminitrador plataforma") {
@@ -132,12 +146,12 @@ let crearMenu = async function(){
             listMenu.appendChild(li);
             anchor = document.createElement('a');
             anchor.innerHTML = "Clubes de lectura";
-            anchor.href = "clubLectura.html";
+            anchor.href = "listarClubLectura.html";
             li.appendChild(anchor);
         }
         else if (sessionStorage.tipoUsuario === "Adminitrador librería") {
             //Libreria
-            var adminLib = await obtenerUsuarioIdInfoBasicaFetch(sessionStorage.id);
+            adminLib = await obtenerUsuarioIdInfoBasicaFetch(sessionStorage.id);
             li = document.createElement('li');
             listMenu.appendChild(li);
             anchor = document.createElement('a');
@@ -151,12 +165,19 @@ let crearMenu = async function(){
             anchor.innerHTML = "Mi Tiendas";
             anchor.href = "perfilLibreria.html?id="+adminLib.usuario.libreria+"";
             li.appendChild(anchor);
+
+            li = document.createElement('li');
+            listMenu.appendChild(li);
+            anchor = document.createElement('a');
+            anchor.innerHTML = "Mis Sucursales";
+            anchor.href = "sucursales.html";
+            li.appendChild(anchor);
     
             li = document.createElement('li');
             listMenu.appendChild(li);
             anchor = document.createElement('a');
             anchor.innerHTML = "Clubes de lectura";
-            anchor.href = "clubLectura.html";
+            anchor.href = "listarClubLectura.html";
             li.appendChild(anchor);
     
             // li = document.createElement('li');

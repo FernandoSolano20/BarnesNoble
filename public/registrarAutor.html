@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Barnes & Noble</title>
-    <script src="js/validarSesionPlatafomra.js"></script>
+    
     <link rel="stylesheet" href="css/reset.css">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
@@ -44,6 +44,7 @@
 
         <form class="formRegistro" name="formularioRegistro">
             <div class="column">
+                <div class="columna1">
                 <div class="inputGroup">
                     <span class="left alertHidden" id="alert-img">Debe ser un archivo png o jpg.</span>
                     <label class="labelFile">
@@ -67,12 +68,14 @@
                     <label>Fecha Nacimiento</label>
                     <input id="nacimiento" class="inputAutor" type="date" autocomplete="off">
                 </div>
-                <div class="inputGroup">
-                    <span class="left alertHidden" id="alertaMuerte">.</span>
-                    <label>Fecha Muerte</label>
-                    <input id="muerte" class="inputAutor" type="date" autocomplete="off">
-                </div>
 
+            </div>
+            <div class="columna2">
+                    <div class="inputGroup">
+                            <span class="left alertHidden" id="alertaMuerte">.</span>
+                            <label>Fecha Muerte</label>
+                            <input id="muerte" class="inputAutor" type="date" autocomplete="off">
+                        </div>
                 <div class="inputGroup">
                     <span class="left alertHidden" id="alertResenna"></span>
                     <label>Reseña</label>
@@ -85,14 +88,13 @@
                         <option value="">--Seleccione un pais--</option>
                     </select>
                 </div>
-
-
-                <div class="crear-contenedor">
-                    <button type="button" class="material-blue" id="registrar"><i
-                            class="far fa-clipboard-list"></i>Registrar</button>
                 </div>
+            </div>
         </form>
-        </div>
+        <div class="crear-contenedor">
+                <button type="button" class="material-blue" id="registrar"><i
+                        class="far fa-clipboard-list"></i>Registrar</button>
+            </div>
     </main>
     <footer>
         <div class="blockFooter">

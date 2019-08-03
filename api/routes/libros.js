@@ -17,7 +17,8 @@ router.post('/registrarLibro', function (req, res) {
         contraportada: body.contraportada,
         genero: body.genero,
         categoria: body.categoria,
-        autor: body.autor
+        autor: body.autor,
+        resenna: body.resenna
     });
 
     nuevoLibro.save(
@@ -80,7 +81,7 @@ router.get('/buscarLibroID/:id', async (req, res) => {
     })
         .populate('genero', 'nombre -_id')
         .populate('categoria', 'nombre -_id')
-        .populate('autor', 'nombre resenna fechaNacimiento fechaMuerte nombreArtistico nacionalidad foto lugarNacimiento -_id')
+        .populate('autor', '_id nombre resenna fechaNacimiento fechaMuerte nombreArtistico nacionalidad foto lugarNacimiento')
         .select('titulo caratula contraportada genero categoria autor');
 
 });
@@ -157,5 +158,14 @@ router.post('/listarLibrosPorPreferencia', async (req, res) => {
         }
     })
 });
+
+router.get('/countLibros', function (req, res) {
+    Libros.countDocuments(function (err, count) {
+        return res.json({
+            success: true,
+            count: count
+        });
+    });
+})
 
 module.exports = router;

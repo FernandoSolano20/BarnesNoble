@@ -4,19 +4,35 @@ const tbody = document.querySelector('#tbl_librerias tbody');
 let listaLibrerias = [];
 let txtFiltro = document.querySelector('#txt-filtro');
 
-let mostrar_tabla = async() => {
+let mostrar_tabla = async () => {
 
-    if (sessionStorage.tipoUsuario == 'Adminitrador libreria') {
+    if (sessionStorage.tipoUsuario != 'Lector') {
+        let btn = document.createElement('a');
+        btn.type = "button";
+        btn.setAttribute('class', 'material-blue');
+        btn.href = "registroLibreria.html";
+        document.getElementById('boton').appendChild(btn);
+        
+        let label = document.createTextNode('Crear');
+        btn.appendChild(label);
+
+        let icon = document.createElement('i');
+        icon.setAttribute('class', 'far fa-plus-circle');
+        btn.insertBefore(icon, label);
+        
+    }
+
+    if (sessionStorage.tipoUsuario != 'Adminitrador librería') {
         listaLibrerias = await obtenerLibrerias();
     }
     else {
         listaLibrerias = await obtenerLibreriaPorId(sessionStorage.id);
     }
 
-//    listaLibrerias = await obtenerLibrerias();
+    //    listaLibrerias = await obtenerLibrerias();
     tbody.innerHTML = '';
-   
-     
+
+
     for (let i = 0; i < listaLibrerias.length; i++) {
 
         let fila = tbody.insertRow();
@@ -26,10 +42,10 @@ let mostrar_tabla = async() => {
         fila.insertCell().innerHTML = listaLibrerias[i]['provincia'];
         fila.insertCell().innerHTML = listaLibrerias[i]['distrito'];
 
-         let celda_perfil = fila.insertCell();
-         let btnPerfil = document.createElement('button');
+        let celda_perfil = fila.insertCell();
+        let btnPerfil = document.createElement('button');
         celda_perfil.appendChild(btnPerfil);
-      
+
         btnPerfil.innerText = 'Ver Perfil'
         btnPerfil.dataset._id = listaLibrerias[i]['_id'];
         btnPerfil.setAttribute('class', 'material-blue')
@@ -41,18 +57,18 @@ let mostrar_tabla = async() => {
 
 mostrar_tabla();
 
-let filtrar_tabla = async() => {
+let filtrar_tabla = async () => {
 
     let filtro = txtFiltro.value.toLowerCase();
     tbody.innerHTML = '';
 
-    for (let i = 0; i < listaLibrerias.length; i++) {   
+    for (let i = 0; i < listaLibrerias.length; i++) {
 
         if (listaLibrerias[i]['nombreComercial'].toLowerCase().includes(filtro)
-         || listaLibrerias[i]['nombreFantasia'].toLowerCase().includes(filtro)
-         || listaLibrerias[i]['provincia'].toLowerCase().includes(filtro)
-         || listaLibrerias[i]['canton'].toLowerCase().includes(filtro)
-         || listaLibrerias[i]['distrito'].toLowerCase().includes(filtro) ) {
+            || listaLibrerias[i]['nombreFantasia'].toLowerCase().includes(filtro)
+            || listaLibrerias[i]['provincia'].toLowerCase().includes(filtro)
+            || listaLibrerias[i]['canton'].toLowerCase().includes(filtro)
+            || listaLibrerias[i]['distrito'].toLowerCase().includes(filtro)) {
 
             let fila = tbody.insertRow();
             fila.insertCell().innerHTML = listaLibrerias[i]['nombreComercial'];
@@ -65,13 +81,13 @@ let filtrar_tabla = async() => {
 
             let celda_perfil = fila.insertCell();
             let btnPerfil = document.createElement('button');
-           celda_perfil.appendChild(btnPerfil);
-         
-           btnPerfil.innerText = 'Ver Perfil'
-           btnPerfil.dataset._id = listaLibrerias[i]['_id'];
-           btnPerfil.addEventListener('click', function () {
-               window.location.href = `perfilLibreria.html?id=${this.dataset._id}`;
-           });
+            celda_perfil.appendChild(btnPerfil);
+
+            btnPerfil.innerText = 'Ver Perfil'
+            btnPerfil.dataset._id = listaLibrerias[i]['_id'];
+            btnPerfil.addEventListener('click', function () {
+                window.location.href = `perfilLibreria.html?id=${this.dataset._id}`;
+            });
 
         }
     }
