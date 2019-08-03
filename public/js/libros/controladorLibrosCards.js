@@ -52,11 +52,13 @@ let agregarCardLibro = function (libro) {
     btnPerfil.innerText = 'Perfil';
     child2.appendChild(btnPerfil);
 
-    let btnFormato = document.createElement('a');
-    btnFormato.setAttribute('class', 'material btnLibreria');
-    btnFormato.innerText = 'Añadir formato';
-    btnFormato.href = "formatoLibro.html?id=" + libro._id;
-    child2.appendChild(btnFormato);
+    if (sessionStorage.tipoUsuario == 'Adminitrador plataforma') {
+        let btnFormato = document.createElement('a');
+        btnFormato.setAttribute('class', 'material btnLibreria');
+        btnFormato.innerText = 'Añadir formato';
+        btnFormato.href = "formatoLibro.html?id=" + libro._id;
+        child2.appendChild(btnFormato);
+    }
 }
 
 let filaNoDatos = function () {
