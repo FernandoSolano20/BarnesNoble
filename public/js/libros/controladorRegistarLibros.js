@@ -6,6 +6,9 @@ const tituloAlert = document.getElementById('alertitulo');
 const imgInput1 = document.getElementById('img1');
 const imgAlert1 = document.getElementById('alertImg1');
 
+const resennaInput = document.getElementById('resenna');
+const resennaAlert = document.getElementById('alerResenna');
+
 const imgInput2 = document.getElementById('img2');
 const imgAlert2 = document.getElementById('alertImg2');
 
@@ -14,7 +17,7 @@ const generoAlert = document.getElementById('alertGenero');
 const categoriaAlert = document.getElementById('alertCategoria');
 
 let obtenerDatosLibro = async function () {
-    let error = validarTitulo() | validarFotoPortada() | validarFotoContraPortada() | validarAutor() | validarGenero() | validarCategoria();
+    let error = validarTitulo() | validarFotoPortada() | validarFotoContraPortada() | validarAutor() | validarGenero() | validarCategoria() | validarResenna();
 
     if (!error) {
 
@@ -22,18 +25,19 @@ let obtenerDatosLibro = async function () {
 
         let imgValue = document.getElementById('img1');
         let imgResult1 = await crearImagen(imgValue);
-        
+
         imgValue = document.getElementById('img2');
         let imgResult2 = await crearImagen(imgValue);
         if (imgResult1.success && imgResult2.success) {
-            
+
             let libro = {
                 titulo: tituloInput.value,
                 caratula: imgResult1.result.secure_url,
                 contraportada: imgResult2.result.secure_url,
                 autor: autorSelect.value,
                 genero: generoSelect.value,
-                categoria: categoriaSelect.value
+                categoria: categoriaSelect.value,
+                resenna: resennaInput.value
             }
             let nuevoLibro = await registrarLibros(libro);
             document.body.className = "";
@@ -99,6 +103,15 @@ let validarFotoContraPortada = function () {
     return !(noVacio(elementPicture) && validarFotos(elementPicture));
 }
 
+let validarResenna = function () {
+    let elementText = {
+        value: resennaInput.value,
+        alert: resennaAlert,
+        input: resennaInput
+    }
+    return !(noVacio(elementText));
+}
+
 let validarAutor = function () {
     let elementSelect = {
         value: autorSelect.value,
@@ -131,6 +144,7 @@ imgInput1.addEventListener('change', validarFotoPortada);
 imgInput2.addEventListener('change', validarFotoContraPortada);
 autorSelect.addEventListener('change', validarAutor);
 generoSelect.addEventListener('change', validarGenero);
+resennaInput.addEventListener('blur', validarResenna);
 categoriaSelect.addEventListener('change', validarCategoria);
 const botonRegistrar = document.querySelector('#registrar');
 botonRegistrar.addEventListener('click', obtenerDatosLibro);

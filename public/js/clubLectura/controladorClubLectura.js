@@ -7,7 +7,7 @@ let txt_filtro = document.querySelector('#txt_filtro');
 
 let mostrar_tabla = async (event) => {
     if (!event) {
-        if (sessionStorage.tipoUsuario === 'Adminitrador plataforma') {
+        if (sessionStorage.tipoUsuario === 'Adminitrador plataforma' || sessionStorage.tipoUsuario === 'Lector') {
             lista_clubesLectura = await obtenerClubesLectura();
         }
         else {

@@ -122,7 +122,7 @@ const crearTablaClub = async () => {
         agregarClub(listaClub[i]);
     }
     document.getElementById('club').addEventListener('click', function(){
-        window.location.href = "clubLectura.html";
+        window.location.href = "listarClubLectura.html";
     });
     filaNoDatosClub();
 };
