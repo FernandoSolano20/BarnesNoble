@@ -75,9 +75,7 @@ let filtrar_tabla = async() => {
     
             });          
         }
-
-        filaNoDatos();}
-
+        filaNoDatos();
 };
 
 var formatearFecha = function (pfecha) {
@@ -96,8 +94,7 @@ let filaNoDatos = function () {
         celda.innerHTML = 'No se encontró datos';
         celda.setAttribute('colspan', '6');
     }
-}
-
+};
 
 mostrar_tabla();
 txt_filtro.addEventListener('keyup', filtrar_tabla);

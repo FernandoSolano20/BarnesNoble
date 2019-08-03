@@ -72,4 +72,24 @@ router.get('/countLibreria', function (req, res) {
     });
 })
  
+
+router.get('/obtenerTiendas', async (req, res) => {
+    return await Libreria.find(function (err, librerias) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'No se encontro ninguna librería',
+                err
+            });
+        }
+        else {
+            return res.json({
+                success: true,
+                listaLibrerias: librerias
+            });
+        }
+    })
+        .populate('sucursales.sucursal', 'nombre correo telefono')
+        .select('nombreFantasia sucursales');
+});
 module.exports = router;
