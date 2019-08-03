@@ -45,7 +45,9 @@ let validarDatosClubLectura = async function () {
             Swal.fire({
                 title: nuevoClubLectura.message,
                 type: 'success',
-                text: 'Se tarjeta se registró correctamente'
+                text: 'Se tarjeta se registró correctamente',
+                confirmButtonText:
+                        '<a href="http://localhost:3000/listarClubLectura.html" class="linkPage">Ok</a>'
 
             })
             redirect();

@@ -484,7 +484,7 @@ router.get('/usuarioId/:id', async (req, res) => {
             path: 'libreria',
             populate: {
                 path: 'sucursales.sucursal',
-                select: '_id nombre localizacionLongitud localizacionLatitud provincia canton distrito'
+                select: '_id nombre localizacionLongitud localizacionLatitud provincia canton distrito telefono correo'
             },
             select: 'nombreFantasia localizacionLongitud localizacionLatitud provincia canton distrito'
         })

@@ -36,8 +36,6 @@ let obtenerDatosSucursales = async function () {
             textDistrito = sectionDistritos.querySelector('[value="' + textDistrito + '"]').innerText;
             let sucursal = {
                 nombre: nombreInput1.value,
-                latitud: latitudInput.value,
-                longitud: longitudInput.value,
                 correo: correoInput.value,
                 img: imgResult.result.secure_url,
                 telefono: telefonoInput.value,
@@ -47,7 +45,7 @@ let obtenerDatosSucursales = async function () {
                 provincia: textProvincia,
                 canton: textCanton,
                 distrito: textDistrito,
-                libreria: ''
+                idLibreria: adminLib.usuario.libreria
             }
             let nuevoSucursal = await crearSucursal(sucursal);
             document.body.className = "";
@@ -58,7 +56,7 @@ let obtenerDatosSucursales = async function () {
                     showCloseButton: true,
                     focusConfirm: false,
                     confirmButtonText:
-                        '<a href="http://localhost:3000/inicioSesion.html" class="linkPage">Ok</a>'
+                        '<a href="http://localhost:3000/sucursales.html" class="linkPage">Ok</a>'
                 });
             }
             else {

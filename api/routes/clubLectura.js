@@ -4,30 +4,25 @@ const express = require('express'),
     router = express.Router(),
     ClubLectura = require('../models/clubLectura.model');
 
-router.param('_id'), function (req, res, next, _id) {
-    req.body._id = _id;
-    next();
-}
-
 //Definición de la ruta para registrar contactos
 
-router.post('/registrarClubLectura', function (req, res) {
+router.post('/registrarClubLectura', function(req, res) {
     let body = req.body;
 
     let nuevoClubLectura = new ClubLectura({
         nombre: body.nombre,
-        tema: body.tema,
+        tema:body.tema,
         tipoClub: body.tipoClub,
         fechaReunion: body.fechaReunion,
         horaReunion: body.horaReunion,
-        sucursal: body.sucursal,
-        administrador: body.administrador,
-        categoria: body.categoria,
-        genero: body.genero
+        sucursal:body.sucursal,
+        administrador:body.administrador,
+        categoria:body.categoria,
+        genero:body.genero
     });
 
     nuevoClubLectura.save(
-        function (err, clubesLecturaDB) {
+        function(err, clubesLecturaDB) {
             if (err) {
                 return res.status(400).json({
                     success: false,
@@ -44,8 +39,8 @@ router.post('/registrarClubLectura', function (req, res) {
     );
 });
 
-router.get('/listarClubLectura', function (req, res) {
-    ClubLectura.find(function (err, clubesLecturaBD) {
+router.get('/listarClubLectura', function(req, res) {
+    ClubLectura.find(function(err, clubesLecturaBD) {
         if (err) {
             return res.status(400).json({
                 success: false,
