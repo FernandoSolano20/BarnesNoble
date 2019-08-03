@@ -12,8 +12,9 @@ const avatar = document.querySelector('#avatar');
 const nombrePremio = document.querySelector('#valorNombrePremio');
 const annoPremio = document.querySelector('#valorAnnoPremio');
 const descripPremio = document.querySelector('#valorDesPremio');
+const premioDiv = document.querySelector('#premios');
 
-let llenarPerfil = async() => {
+let llenarPerfil = async () => {
     let autor = await obtenerAutorId(_id);
     let premios = autor['premios'];
     if (autor) {
@@ -25,11 +26,12 @@ let llenarPerfil = async() => {
         resenna.innerHTML = autor['resenna'];
         avatar.setAttribute('src', autor.foto);
         for (let i = 0; i < premios.length; i++) {
-        nombrePremio.innerHTML = premios[i]['nombre'];
-        annoPremio.innerHTML = premios[i]['anno'];
-        descripPremio.innerHTML = premios[i]['descripcion'];
-    }
-    
+            let premioPa = document.createElement('p');
+            premioPa.setAttribute('class','valorDato');
+            premioPa.innerText = premios[i]['nombre'] + " " + premios[i]['anno'];
+            premioDiv.appendChild(premioPa);
+        }
+
     }
 };
 

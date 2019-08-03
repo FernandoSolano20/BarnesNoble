@@ -13,6 +13,7 @@ const crearSliderMasVendidos = async () => {
     for (let i = 0; i < listaLibrosMasVendidos.length; i++) {
         agregarLibroCarruselMasVendidos(listaLibrosMasVendidos[i]);
     }
+    filaNoDatosMasVendidos();
     movimentoSlider1();
 };
 
@@ -39,17 +40,15 @@ const agregarLibroCarruselMasVendidos = function (libro) {
 }
 
 let filaNoDatos = function () {
-    if (listaLibrosMasVendidos.length === 0 || carrusel1.childElementCount === 0) {
+    if (listaLibros.length === 0 || carrusel2.childElementCount === 0) {
         let cardElement = document.createElement('li');
         cardElement.setAttribute('class', 'card noData');
         cardElement.setAttribute('data-target', 'card');
-        carrusel1.appendChild(cardElement);
+        carrusel2.appendChild(cardElement);
 
         let titulo = document.createElement('h3');
         titulo.innerHTML = "No se encontraron datos";
         cardElement.appendChild(titulo);
-
-        card = carousel.querySelector("[data-target='card']");
     }
     if (carrusel2.childElementCount < 5) {
         carrusel2.className = carrusel2.className.replace("centerFlex", "");
@@ -93,6 +92,20 @@ const agregarLibroCarrusel = function (libro) {
 
     carrusel2.appendChild(cardElement);
     card2 = carrusel2.querySelector("[data-target='card2']");
+}
+
+let filaNoDatosMasVendidos = function () {
+    if (listaLibrosMasVendidos.length === 0 || carrusel1.childElementCount === 0) {
+        let cardElement = document.createElement('li');
+        cardElement.setAttribute('class', 'card noData');
+        cardElement.setAttribute('data-target', 'card');
+        carrusel1.appendChild(cardElement);
+
+        let titulo = document.createElement('h3');
+        titulo.innerHTML = "No se encontraron datos";
+        cardElement.appendChild(titulo);
+        carrusel1.className = carrusel1.className + " centerFlex";
+    }
 }
 
 

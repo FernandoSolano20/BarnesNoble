@@ -12,8 +12,8 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/botones.css">
-    <link rel="stylesheet" href="css/registroFormulario.css">
     <link rel="stylesheet" href="css/mapa.css">
+    <link rel="stylesheet" href="css/registroFormulario.css">
     <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
     <link rel="stylesheet" href="css/loadingBar.css">
 </head>
@@ -45,13 +45,13 @@
         <h2>Datos de la sucursal</h2>
         <form class="formRegistro" name="formulario_registro">
             <div class="column">
-               
+
                 <div class="inputGroup">
                     <span class="left alertHidden" id="alert-nombre1">Digite solo letras.</span>
                     <label class="label" for="nombre-input">Nombre:</label>
                     <input type="text" id="nombre-input" name="primer nombre">
                 </div>
-               
+
                 <div class="inputGroup">
                     <span class="left alertHidden" id="alert-correo">El correo no cumple con el formato.</span>
                     <label class="label" for="correo-input">Correo electrónico:</label>
@@ -62,18 +62,6 @@
                     <label class="label" for="telefono-input">Teléfono:</label>
                     <input type="number" id="telefono-input" name="telefono">
                 </div>
-                              
-                <div class="inputGroup">
-                    <span class="left alertHidden" id="alert-img">Debe ser un archivo png o jpg.</span>
-                    <label class="labelFile">
-                        <i class="fal fa-file-image"></i>
-                        <span class="title">Add File</span>
-                        <input type="file" / id="img">
-                    </label>
-                </div>
-            </div>
-            <div class="column">
-              
                 <div class="inputGroup box">
                     <span class="left alertHidden" id="alert-provincia">Seleccione una opción.</span>
                     <select name="Provincia" id="provincias">
@@ -92,16 +80,19 @@
                         <option value="">--Seleccione un distrito--</option>
                     </select>
                 </div>
-             
+            </div>
+            <div class="column">
+                <div class="inputGroup box">
+                    <span class="left alertHidden leftMap" id="alert-mapa">Inserte la localización.</span>
+                    <div id="floatingPanel">
+                        <button onclick="deleteMarkers();" type=button class="material orange">Borrar Marca</button>
+                    </div>
+                    <div id="mapaFormulario">
+                        <div id="map"></div>
+                    </div>
+                </div>
             </div>
         </form>
-        <div class="containerMap">
-            <span class="left alertHidden leftMap" id="alert-mapa">Inserte la localización.</span>
-            <div id="floatingPanel">
-                <button onclick="deleteMarkers();" type=button class="material orange">Borrar Marca</button>
-            </div>
-            <div id="map"></div>
-        </div>
         <div class="crear-contenedor">
             <button type="button" class="material-blue" id="registrar"><i
                     class="far fa-clipboard-list"></i>Registrar</button>
@@ -125,7 +116,7 @@
                 <a href="#"><i class="fab fa-twitter"></i></a>
             </div>
         </div>
-       
+
     </footer>
     <script src="js/menu.js"></script>
     <script src="js/cerrarSesion.js"></script>
