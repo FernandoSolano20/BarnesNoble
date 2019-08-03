@@ -13,7 +13,7 @@ let mostrar_tabla = async () => {
         btn.href = "registroLibreria.html";
         document.getElementById('boton').appendChild(btn);
         
-        let label = document.createTextNode('Crear');
+        let label = document.createTextNode('Nueva Libreria');
         btn.appendChild(label);
 
         let icon = document.createElement('i');
