@@ -36,8 +36,7 @@ let validarDatosClubLectura = async function () {
             tipoClub: tipoClubInput,
             fechaReunion: fechaReunion,
             horaReunion: horaReunion,
-         
-            usuario: sessionStorage.id
+            administrador: sessionStorage.id
         }
 
         let nuevoClubLectura = await registrarClubLectura(clubLectura);

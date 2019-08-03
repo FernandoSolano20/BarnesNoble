@@ -263,6 +263,6 @@ footer {
   border: 2px solid red !important;
 }
 
-.fa-users{
+header .fa-users{
   float: right;
 }

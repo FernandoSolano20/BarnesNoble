@@ -31,16 +31,24 @@ let registrarClubLectura = async (clubLectura) => {
     return result;
 }
 
-let obtenerClubesLectura = async() => {
-    try {
-        const response = await axios({
-            method: 'get',
-            url: 'http://localhost:4000/api/clubLectura/listarClubLectura',
-            responseType: 'json'
-        });
+let obtenerClubesLectura = async () => {
+    let response = await fetch('http://localhost:4000/api/clubLectura/listarClubLectura', {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        }
+    });
+    let result = await response.json();
+    return result.listaClubesLectura;
+}
 
-        return response.data.listaClubesLectura;
-    } catch (error) {
-        console.log(error);
-    }
-};
+let obtenerClubesLecturaUsuarioAdminClub = async (id) => {
+    let response = await fetch('http://localhost:4000/api/clubLectura/listarClubLecturaPorUsuario/' + id, {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        }
+    });
+    let result = await response.json();
+    return result.listaClubesLectura;
+}

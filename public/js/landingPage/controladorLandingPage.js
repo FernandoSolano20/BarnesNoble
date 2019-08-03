@@ -2,113 +2,101 @@
 
 const carrusel1 = document.querySelector('#carrusel1');
 const carrusel2 = document.querySelector('#carrusel2');
-let card;
+const txtFiltro = document.getElementById("txtFiltro");
+let listaLibrosMasVendidos;
+let listaLibros;
+let card, card2;
 
-const crearSliderMasVendidos = async (event) => {
-
-    let listaLibrosMasVendidos = await obtenerLibrosMasVendidos();
-
+const crearSliderMasVendidos = async () => {
+    listaLibrosMasVendidos = await obtenerLibrosMasVendidos();
+    carrusel1.innerHTML = '';
     for (let i = 0; i < listaLibrosMasVendidos.length; i++) {
-        agregarLibroCarrusel(listaLibrosMasVendidos[i]);
+        agregarLibroCarruselMasVendidos(listaLibrosMasVendidos[i]);
     }
+    movimentoSlider1();
 };
 
-const agregarLibroCarrusel = function (libro) {  
-    
-
+const agregarLibroCarruselMasVendidos = function (libro) {
     let cardElement = document.createElement('li');
-        cardElement.classList.add('card');
-        cardElement.setAttribute('data-target', 'card');
+    cardElement.classList.add('card');
+    cardElement.setAttribute('data-target', 'card');
 
-        let imagen = document.createElement('img');
-    //     //deberia cargar el url de la imagen del objeto libro de la base de datos.
-        imagen.setAttribute('src', libro.caratula); //TODO: cambiar src por el correcto
+    let imagen = document.createElement('img');
+    imagen.setAttribute('src', libro.caratula);
 
     let titulo = document.createElement('h3');
-        titulo.innerHTML = libro.titulo;
+    titulo.innerHTML = libro.titulo;
 
     let informacion = document.createElement('p');
-        informacion.innerHTML = libro.autor.nombre;
+    informacion.innerHTML = libro.autor.nombre;
 
-        cardElement.appendChild(imagen);
+    cardElement.appendChild(imagen);
     cardElement.appendChild(titulo);
     cardElement.appendChild(informacion);
 
     carrusel1.appendChild(cardElement);
-    card = carousel.querySelector("[data-target='card']");
-    movimentoSlider1();
+    card = carrusel1.querySelector("[data-target='card']");
 }
 
-const crearSliderMejorCalificados = async (event) => {
+let filaNoDatos = function () {
+    if (listaLibrosMasVendidos.length === 0 || carrusel1.childElementCount === 0) {
+        let cardElement = document.createElement('li');
+        cardElement.setAttribute('class', 'card noData');
+        cardElement.setAttribute('data-target', 'card');
+        carrusel1.appendChild(cardElement);
 
-    //TODO: Falta hacer el endpoint que ordena por calificacion.
-    //cuando un usuario vota, el sistema debe calcular la calificacion
+        let titulo = document.createElement('h3');
+        titulo.innerHTML = "No se encontraron datos";
+        cardElement.appendChild(titulo);
 
-    //se debe guardar la calificacion que el ususario realizo en una tabla aparte
-    //esto solo para verificar que el usuario no voto ya por ese libro
-
-    //se debe guardar en el libro dos campos, cantidad de votos, y calificacion,
-    //cuando se agrega un nuevo voto, se tiene que calcular la calificacion de la siguiente manera:
-
-    // nuevaCalificacion= ((<calificafion actual> * <numero de votos actual>) + <nuevoVoto>) / <numero de votos actual> + 1
-    // nuevoNumerodeVotos = <numero de votos actual> + 1
-
-    let listaLibrosMejorCalificados = await obtenerLibrosMejorCalificados();
-
-    for (let i = 0; i < listaLibrosMejorCalificados.length; i++) {
-        agregarLibroCalificacion(listaLibrosMejorCalificados[i]);
+        card = carousel.querySelector("[data-target='card']");
     }
+    if (carrusel2.childElementCount < 5) {
+        carrusel2.className = carrusel2.className.replace("centerFlex", "");
+        carrusel2.className = carrusel2.className + " centerFlex";
+    }
+    else {
+        carrusel2.className = carrusel2.className.replace("centerFlex", "");
+    }
+}
+
+const crearSliderLibros = async (event) => {
+    if (!event)
+        listaLibros = await obtenerLibrosFetch();
+    let filtro = txtFiltro.value;
+    carrusel2.innerHTML = '';
+    for (let i = 0; i < listaLibros.length; i++) {
+        if (listaLibros[i].titulo.toLowerCase().includes(filtro.toLowerCase()) || listaLibros[i].autor.nombre.toLowerCase().includes(filtro.toLowerCase()) || listaLibros[i].genero.nombre.toLowerCase().includes(filtro.toLowerCase()) || listaLibros[i].categoria.nombre.toLowerCase().includes(filtro.toLowerCase()))
+        agregarLibroCarrusel(listaLibros[i]);
+    }
+    filaNoDatos();
+    movimentoSlider2();
 };
 
-const agregarLibroCalificacion = function (libro) {
+const agregarLibroCarrusel = function (libro) {
+    let cardElement = document.createElement('li');
+    cardElement.classList.add('card');
+    cardElement.setAttribute('data-target', 'card2');
 
-    let card = document.createElement('li');
-        card.classList.add('card');
-        card.setAttribute('data-target', 'card');
-    
     let imagen = document.createElement('img');
-        //deberia cargar el url de la imagen del objeto libro de la base de datos.
-        imagen.setAttribute('src', 'img/descarga.jpeg'); //TODO: cambiar src por el correcto
+    imagen.setAttribute('src', libro.caratula);
 
     let titulo = document.createElement('h3');
-        titulo.innerHTML = libro.titulo;
+    titulo.innerHTML = libro.titulo;
 
-    let form = document.createElement('form');
+    let informacion = document.createElement('p');
+    informacion.innerHTML = libro.autor.nombre;
 
-    //TODO: Agregar la calificacion al libro en la bbdd
-    for (let i = 1; i <= 5; i++) {
+    cardElement.appendChild(imagen);
+    cardElement.appendChild(titulo);
+    cardElement.appendChild(informacion);
 
-        let inputId = 'radio' + i + "-" + libro.id;
-
-        let input = document.createElement('input');
-            input.id = inputId;
-            input.setAttribute('type', 'radio');
-            input.setAttribute('name', inputId);
-            input.setAttribute('value', i);
-        
-        let label = document.createElement('label');
-            input.setAttribute('for', inputId);
-
-        let icon = document.createElement('i');
-            icon.classList.add('fas');
-            icon.classList.add('fa-book');
-
-
-        if(i > libro.calificacion){
-            icon.classList.add('blanco');
-        }
-
-        label.appendChild(icon);
-        form.appendChild(input);
-        form.appendChild(label);
-    }
-
-    card.appendChild(imagen);
-    card.appendChild(titulo);
-    card.appendChild(form);
-
-    carrusel2.appendChild(card);
+    carrusel2.appendChild(cardElement);
+    card2 = carrusel2.querySelector("[data-target='card2']");
 }
 
+
 crearSliderMasVendidos();
+crearSliderLibros();
+txtFiltro.addEventListener('keyup', crearSliderLibros);
 //crearSliderMejorCalificados();

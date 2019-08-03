@@ -5,20 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/reset.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
+    <title>Barnes & Noble</title>
     <script src="js/validarSesionUsuario.js"></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/menu.css">
-    <link rel="stylesheet" href="css/listarLibreriasCards.css">
-    <link rel="stylesheet" href="css/modal.css">
-    <link rel="stylesheet" href="css/searchBar.css">
+    <link rel="stylesheet" href="css/botones.css">
     <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
-
     <link rel="stylesheet" href="css/perfiles.css">
     <link rel="stylesheet" href="css/perfilSlider.css">
-    <link rel="stylesheet" href="css/mapa.css">
     <link rel="stylesheet" href="css/cardSucursal.css">
-    <title>B & N - Perfil de Libreria</title>
 </head>
 
 <body>
@@ -29,8 +28,6 @@
                 </li>
                 <li><a href="/"><i class="far fa-home"></i>Inicio</a></li>
                 <li id="logout">
-
-
                     <a href=""><i class="far fa-sign-out-alt"></i>Cerrar Sesión</a>
                 </li>
                 <li><a href="contacto.html"><i class="fal fa-address-book"></i>Contacto</a></li>
@@ -44,157 +41,108 @@
             </ul>
         </nav>
     </header>
-    <!-- Aqui se ubica el filtro y el botton crear -->
-    <div class="subcontenedor">
-        <div class="busqueda">
-            <input type="text" id="txt-filtro" name="buscar" placeholder="Buscar...." autocomplete="off"
-                autocorrect="off">
-            <button type="button" class="buscar"><i class="fa fa-search"></i><span>search</span></button>
-        </div>
-
-        <!-- <div class="crear-contenedor">
-            <button type="button" class="material-blue" data-action="crear" id="crear-elemento"
-                onclick="window.location.href = ('listarLibrerias-cards.html');"><i class="far fa-plus-circle"></i>Mis
-                Librerias</button>
-        </div> -->
-    </div>
-
-
-    <section class="center">
-        <!-- <div class="middleColumn"> -->
-
-        <div class="w3-content w3-display-container" style="max-width: 100%">
-            <img class="mySlides" src="img/ofertasImgs/Homepage_Billboard_07-23_A1.jpg" style="width:100%">
-            <img class="mySlides" src="img/ofertasImgs/Homepage_Billboard_07-22_A4.jpg" style="width:100%">
-            <img class="mySlides" src="img/ofertasImgs/Homepage_Billboard_07-22_A5.jpg" style="width:100%">
-            <div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle"
-                style="width:100%">
-                <div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
-                <div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
-                <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
-                <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
-                <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
-            </div>
-        </div>
-        <!-- </div> -->
-    </section>
-
-    <section class='center'>
-        <div class="row">
-            <div class="column" id="foto">
-                <img src=""alt="Foto de perfil libreria" id="libPerfilFoto">
-                </img>
-            </div>
-            <div class="column" id="tbl-ofertasLibreria">
-                <h2>Nosotros <span id="titulo"></span></h2>
-                <p> Nombre Comercial: <span id="txt-nombreComercial"></span></p>
-                <p> Nombre Fantasia: <span id="txt-nombreFantasia"> </span></p>
-                <p> Provincia: <span id="txt-provincia"></span> </p>
-                <p> Cantón: <span id="txt-canton"></span></p>
-                <p> Distrito: <span id="txt-distrito"></span></p>
-            </div>
-        </div>
-    </section>
-
-    <section class="center">
-        <div class="row">
-            <div class="column" id="div-mapa">
-                <h2>Ubicación <span id="map-ubicacion"></span></h2>
-                <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1Sk8jBng8QiZ09eZcTn3DGZ1AIU06jh4y" width="100%"
-                    height="90%"></iframe>
-            </div>
-
-            <div class="column">
-                <div class="columna" id="tbl-ofertasLibreria">
-                    <h2>Clubes de lecturas <span ></span></h2>
-                    <p>Un club de lectura es un grupo de personas que leen al mismo tiempo un libro. Cada uno lo hace en
-                        su casa pero una vez a la semana, en un día y a una hora fijos, se reúnen todos para comentar
-                        las páginas avanzadas desde el encuentro anterior.</p>
-                        <p>En las reuniones se debate sobre lo que se ha leído en casa: el estilo literario, la Club de
-                        Lectura de Almansa acción misma, los personajes... y es bastante frecuente derivar desde el
-                        libro a las experiencias personales de los miembros del club. En cada reunión se acuerda la
-                        cantidad a leer en los días posteriores, y es ese trozo solamente el que se comenta en la
-                        siguiente. Naturalmente cualquiera tiene el derecho a sobrepasar ese límite, pero no puede
-                        desvelar a sus compañeros lo que sucede después del punto marcado.</p>
-                        </p>
-                     <div class="crear-contenedor">
-                        <button type="button" class="material-blue" data-action="crear" id="crear-elemento"
-                            onclick="window.location.href = ('clubLectura.html');"><i
-                                class="far fa-plus-circle"></i>Clubes Activos</button>
-                            </div>
-                   
-                   
+    <main>
+        <!-- Seccion foto Sucural -->
+        <section>
+            <div class="perfil">
+                <div class="column">
+                    <h1 id="titulo"></h1>
+                    <div class="blog-slider__container">
+                        <div class="blogSlides fade">
+                            <img id="fotoPerfil" src="img/dibujo sucursal.png">
+                            <div class="blog-slider__text" id="tiendaNombre"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-    </section>
-    <section class="center">
-            <div class="row">
-                <div  id="tbl-ofertasLibreria">
-                    <div>
-                        <h2>Mas Vendidos <span id="sucursales"></span></h2>
-                    </div>
-                    <div class="fourColumns">
-                        <img src="img/libroOutlander.jpeg" ></img>
-                        <!-- <h2 class="primerParrafo" style="background-color: #f39c12;">Harry Potter</h2> -->
-                        <button type="button" class="button" data-action="crear" id="crear-elemento"
-                            onclick="window.location.href = ('libros.html');"><i class="far fa-plus-circle"></i>Ver
-                            más</button>
-                    </div>
-                    <div class="fourColumns">
-                        <img src="img/earl.jpg" ></img>
-                        <button type="button" class="button" data-action="crear" id="crear-elemento"
-                            onclick="window.location.href = ('libros.html');"><i class="far fa-plus-circle"></i>Ver
-                            más</button>
-                    </div>
-    
-                    <div class="fourColumns">
-                        <img src="img/children.jpg" ></img>
-                        <button type="button" class="button" data-action="crear" id="crear-elemento"
-                            onclick="window.location.href = ('libros.html');"><i class="far fa-plus-circle"></i>Ver
-                            más</button>
-                    </div>
-                    <div class="fourColumns">
-                        <img src="img/dads.jpg"></img>
-                        <button type="button" class="button" data-action="crear" id="crear-elemento"
-                            onclick="window.location.href = ('libros.html');"><i class="far fa-plus-circle"></i>Ver
-                            más</button>
-                    </div>
+                <div class="column " id="informacionLibreria">
+
                 </div>
+            </div>
         </section>
-    <section class="center">
-        <div class="row">
-            <div class="column" id="tbl-ofertasLibreria">
-                <div>
-                    <h2>Ofertas <span id="ofertas"></span></h2>
-                    <p>Oferta 1: <span id="oferta1"></span></p>
-                    <p>Oferta 2: <span id="oferta2"></span></p>
-                    <p>Oferta 3: <span id="oferta3"></span></p>
-                    <p>Oferta 4: <span id="oferta4"></span></p>
-                </div>
-            </div>
-            <div class="column" id="tbl-ofertasLibreria">
-                <div>
-                    <h2>Sucursales <span id="sucursales"></span></h2>
-                    <p>Sucursale 1: <span id="sucurla1"></span></p>
-                    <p>Sucursale 2: <span id="sucurla2"></span></p>
-                    <p>Sucursale 3: <span id="sucurla3"></span></p>
-                    <p>Sucursale 4: <span id="sucurla4"></span></p>
-                </div>
-            </div>
+        <section>
 
+            <!-- Modal -->
+            <!-- <div id="id01" class="w3-modal">
+        <div class="w3-modal-content w3-card-4 w3-animate-top">
+          <header class="w3-container w3-theme-l1"> 
+            <span onclick="document.getElementById('id01').style.display='none'"
+            class="w3-button w3-display-topright">×</span>
+            <h4>Oh snap! We just showed you a modal..</h4>
+            <h5>Because we can <i class="fa fa-smile-o"></i></h5>
+          </header>
+          <div class="w3-padding">
+            <p>Cool huh? Ok, enough teasing around..</p>
+            <p>Go to our <a class="w3-btn" href="/w3css/default.asp">W3.CSS Tutorial</a> to learn more!</p>
+          </div>
+          <footer class="w3-container w3-theme-l1">
+            <p>Modal footer</p>
+          </footer>
         </div>
-    </section>
+    </div> -->
 
-    
+            <div class="w3-row-padding w3-center w3-margin-top">
+                <div class="w3-third">
+                    <div class="w3-card w3-container" style="min-height:400px">
+                        <h3>Mis Sucursales</h3><br>
+                        <img id="sucursales" src="img/sucursales.png">
+                        <div class="crear-contenedor">
+                            <button type="button" class="material-blue" data-action="crear" id="crear-elemento"
+                                onclick="window.location.href = ('sucursales.html');"><i
+                                    class="far fa-plus-circle"></i>Mis Sucursales</button>
+                        </div>
+                        <div class="crear-contenedor">
+                            <button type="button" class="material-blue" data-action="crear" id="crear-elemento"
+                                onclick="window.location.href = ('registrarSucursal.html');"><i
+                                    class="far fa-plus-circle"></i>Nueva Sucursal</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w3-third">
+                    <div class="w3-card w3-container" style="min-height:400px">
+                        <h3>Mis Clubes de Lectura</h3><br>
+                        <img id="bookclub" src="img/BookClubIcon.png">
+
+                        <div class="crear-contenedor">
+                            <button type="button" class="material-blue" data-action="crear" id="crear-elemento"
+                                onclick="window.location.href = ('clubLectura.html');"><i
+                                    class="far fa-plus-circle"></i>Clubes Activos</button>
+                        </div>
+                        <div class="crear-contenedor">
+                            <button type="button" class="material-blue" data-action="crear" id="crear-elemento"
+                                onclick="window.location.href = ('registroClubLectura.html');"><i
+                                    class="far fa-plus-circle"></i>Nuevo Club</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="w3-third">
+                    <div class="w3-card w3-container" style="min-height:400px">
+                        <h3>Mis Ajustes</h3><br>
+                        <img id="bookclub" src="img/BookClubIcon.png">
+
+                        <div class="crear-contenedor">
+                            <button type="button" class="material-blue" data-action="crear" id="crear-elemento"
+                                onclick="window.location.href = ('perfilLibreria.html');"><i
+                                    class="far fa-plus-circle"></i>Libreria</button>
+                        </div>
+                        <div class="crear-contenedor">
+                            <button type="button" class="material-blue" data-action="crear" id="crear-elemento"
+                                onclick="window.location.href = (`perfilUsuario.html`);"><i
+                                    class="far fa-plus-circle"></i>Mi Perfil</button>
+                    </div>
+                </div>
+            </div>           
+        </section>
 
 
     </main>
     <footer>
-        <div class="PerfilblockFooter">
+        <div class="blockFooter">
             <div class="logos">
                 <a href="#"><img src="img/barnes_and_noble_logo_png_94486.png" alt="Logo de Barnes&Noble"></a>
-                <a href="#"><img src="img/B&NKIFDS-01.png" alt="Logo Fundacion Book for kids"></a>
+                <a href="#"><img src="img/barnes_and_noble_logo_png_94486.png" alt="Logo Fundacion Book for kids"></a>
             </div>
             <div class="copyrights">
                 <h3> ⓒ 2019 Valhalla</h3>
@@ -208,15 +156,12 @@
         </div>
 
     </footer>
-
-
-    <script src="js/maps/maps.js"></script>
-    <script src="js/menu.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="js/cerrarSesion.js"></script>
-    <script src="js/libreria/servicioLibreria.js"></script>    
-    <script src="js/libreria/controlador-perfil-libreria.js"></script>
-    <script src="js/libreria/controlador-perfil-libreria-slider.js"></script>
-</body>
+    <script src="js/usuarios/servicioUsuario.js"></script>
+    <script src="js/libreria/servicioLibreria.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="js/libreria/controlador-Libreria-perfil.js"></script>
+ </body>
 
 </html>

@@ -51,3 +51,14 @@ let obtenerLibreriaPorIdSucursal = async(id) => {
     var result = await response.json();
     return result;
 };
+
+let obtenerCountLibreria = async function () {
+    var response = await fetch('http://localhost:4000/api/countLibreria', {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        }
+    });
+    var result = await response.json();
+    return result.count;
+}
