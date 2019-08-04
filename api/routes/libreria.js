@@ -27,7 +27,7 @@ router.get('/listarLibrerias', async (req, res) => {
 });
 
 router.get('/libreriaId/:id', async (req, res) => {
-    return await Libreria.findById(req.params.id,function (err, librerias) {
+    return await Libreria.findById(req.params.id, function (err, librerias) {
         if (err) {
             return res.status(400).json({
                 success: false,
@@ -47,7 +47,7 @@ router.get('/libreriaId/:id', async (req, res) => {
 });
 
 router.get('/sucursalId/:id', function (req, res) {
-    Libreria.find({ 'sucursales.sucursal': mongoose.Types.ObjectId(req.params.id) },function (err, libreria) {
+    Libreria.find({ 'sucursales.sucursal': mongoose.Types.ObjectId(req.params.id) }, function (err, libreria) {
         if (err) {
             return res.status(400).json({
                 success: false,
@@ -71,7 +71,7 @@ router.get('/countLibreria', function (req, res) {
         });
     });
 })
- 
+
 
 router.get('/obtenerTiendas', async (req, res) => {
     return await Libreria.find(function (err, librerias) {
@@ -92,4 +92,5 @@ router.get('/obtenerTiendas', async (req, res) => {
         .populate('sucursales.sucursal', 'nombre correo telefono')
         .select('nombreFantasia sucursales');
 });
+
 module.exports = router;

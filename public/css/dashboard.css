@@ -46,6 +46,10 @@
   grid-column: 1 / -1;
 }
 
+.dashboard__item--half {
+  flex-basis: 100%;
+}
+
 .dashboard__item--col {
   flex-basis: calc(100% / var(--column-count));
   grid-column-end: span 1;
@@ -93,6 +97,11 @@
 
 .card__item {
   padding: 20px 30px;
+}
+
+.card__content img{
+  width: 70px;
+  height: 70px;
 }
 
 .textContent {

@@ -62,8 +62,7 @@
 
 .center {
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 65px auto;
   width: 75%;
   /* text-align: center; */
 }
@@ -109,12 +108,16 @@
 
 #div-mapa h2 {
   text-align: center;
-  color: #fff;
-  background-color: #315c74;
+  /* color: #fff; */
+  /* background-color: #315c74; */
   font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
   font-size: 25px;
   margin: 0px 1%;
+  font-weight: 700;
+  font-size: 40px;
+  text-align: center;
   padding: 5px;
+  border-bottom: 2px solid #e6eaee;
 }
 
 #div-mapa iframe {
@@ -316,6 +319,6 @@
 
 #map {
   width: 95%;
-  height: 390px;
+  height: 500px;
   margin: 10px auto;
 }

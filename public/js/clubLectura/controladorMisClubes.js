@@ -3,11 +3,13 @@ let listaClub;
 
 const crearTablaClub = async () => {
     listaClub = await obtenerClubesLecturaUsuarioAdminClub(sessionStorage.id);
-    tbodyClub.innerHTML = '';
+    let clubesCount = document.getElementById('groups')
+    clubesCount?(clubesCount.innerHTML=listaClub.length):"";
+        tbodyClub.innerHTML = '';
     for (let i = 0; i < listaClub.length; i++) {
         agregarClub(listaClub[i]);
     }
-    document.getElementById('club').addEventListener('click', function(){
+    document.getElementById('club').addEventListener('click', function () {
         window.location.href = "listarClubLectura.html";
     });
     filaNoDatosClub();

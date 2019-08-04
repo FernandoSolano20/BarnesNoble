@@ -11,11 +11,9 @@ let usuario;
     document.getElementById('nombreAdmin').innerText = usuario.usuario.nombre + " " + usuario.usuario.primerApellido; 
     let libreria = usuario.usuario.libreria;
     let sucursales = libreria.sucursales;
+    document.getElementById('sucursal').innerText = sucursales.length;
     nombreComercial.innerHTML = libreria.nombreComercial;
     nombreFantasia.innerHTML = libreria.nombreFantasia;
-    provincia.innerHTML = libreria.provincia;
-    canton.innerHTML = libreria.canton;
-    distrito.innerHTML = libreria.distrito;
 
     let haightAshbury = { lat: 9.9281, lng: -84.0907 };
     initMap(haightAshbury, 8);
@@ -30,8 +28,11 @@ let usuario;
         lng: Number(libreria.localizacionLongitud)
     }
     addMarker(position, message);
-
+    let totLibros = libreria.ejemplares?libreria.ejemplares.length:0;
+    let usuariosSubs = 0;
     for (let i = 0; i < sucursales.length; i++) {
+        totLibros += sucursales[i].sucursal.ejemplares.length;
+        usuariosSubs += sucursales[i].sucursal.usuariosSubscritos.length;
         let message = '<h1 id="firstHeading" class="firstHeading"> Sucursal ' + sucursales[i].sucursal.nombre + '</h1>' +
             '<div id="bodyContent">' +
             '<p>' + sucursales[i].sucursal.provincia + ", " + sucursales[i].sucursal.canton + ", " + sucursales[i].sucursal.distrito + '</p>' +
@@ -43,5 +44,7 @@ let usuario;
             lng: Number(sucursales[i].sucursal.localizacionLongitud)
         }
         addMarker(position, message);
+        document.getElementById('librosCont').innerText = totLibros;
+        document.getElementById('userSubs').innerText = usuariosSubs;
     }
 })();
