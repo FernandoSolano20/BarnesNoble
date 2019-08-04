@@ -1,0 +1,364 @@
+html{
+    font-size: 16px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-family: 'Roboto' sans-serif;
+
+}
+
+.lector{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+}
+
+.libreria{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+}
+
+.headPage img{
+    border-radius: 20px;
+    width: 100%;
+}
+
+.cta_headpage{
+    font-weight: 500;
+    font-size: 2rem;
+    font-family: 'Nanum Brush Script', cursive;
+    color: #ffffff;
+    margin-top: -400px;
+    text-align: center;
+}
+.cta_headpage h4{
+    margin-top: -38px;
+}
+
+.cta_headpage a{
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: #ffff;
+}
+.cta_headpage button{
+    background: none;
+    padding: 16px;
+    color: #fff;
+    -webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+
+.cta_headpage button:hover{
+    border-color: #D2652D;
+    box-shadow: 3px 9px 13px rgba(138, 133, 133, 0.6);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+
+.bYn{
+    margin-top: 130px;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 3px 9px 13px rgba(138, 133, 133, 0.6);
+  
+}
+.bYn:hover{
+    box-shadow: 3px 9px 13px rgba(0.4, 0.4, 0.4, 0.6);
+}
+
+
+.principal h2{
+    font-family: 'Nanum Brush Script', cursive;
+    font-size: 2.6rem;
+    color: #D2652D;
+    margin: 10px;
+}
+
+.principal p{
+    margin: 0 auto;
+    padding: 0 70px 0 70px;
+    font-size: 1.2rem;
+    font-family: 'Roboto';
+    font-weight: 400;
+    line-height: 30px;
+    color: #989494;
+}
+
+.app{
+    margin-top: 32px;
+    background-color: #d2652d1f;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 3px 9px 13px rgba(138, 133, 133, 0.6);
+}
+
+.app:hover{
+    box-shadow: 3px 9px 13px rgba(0.4, 0.4, 0.4, 0.6); 
+}
+
+.lector img{
+    width: 40%;
+    padding: 30px;
+    position: relative;
+    display: flex;
+    float: right; 
+    -webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+
+.libreria img{
+    width: 40%;
+    padding: 30px;
+    position: relative;
+    display: flex;
+    -webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+
+}
+
+.tipoUsuario p{
+    margin: 0 auto;
+    padding: 0 70px 0 70px;
+    font-size: 1.2rem;
+    font-family: 'Roboto';
+    font-weight: 400;
+    line-height: 30px;
+    color: #315c748a;
+} 
+
+.libreria{
+    text-align: end;
+}
+
+.tipoUsuario h2{
+    padding: 0 70px 0 70px;
+    font-family: 'Nanum Brush Script', cursive;
+    font-size: 2.8rem;
+    color: #315c74;
+    margin: 10px;
+}
+
+.libreria:hover img {
+	-webkit-transform: scale(1.2);
+    transform: scale(1.2);
+}
+
+.lector:hover img{
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+}
+
+.tipoUsuario {
+    margin-top: 38px;
+    box-shadow: 0px 5px 20px rgba(0.4, 0.4, 0.4, 0.6);
+    padding: 30px;
+    border-radius: 20px;
+
+}
+
+h2.background {
+    font-size: 3.4rem;
+    position: relative;
+    z-index: 1;
+}
+    
+h2.background:before {
+    border-top: 2px solid #315c74;
+    content:"";
+    margin: 0 auto; /* this centers the line to the full width specified */
+    position: absolute; /* positioning must be absolute here, and relative positioning must be applied to the parent */
+    top: 50%; left: 0; right: 0; bottom: 0;
+    width: 95%;
+    z-index: -1;
+}
+
+span { 
+    /* to hide the lines from behind the text, you have to set the background color the same as the container */ 
+    background: #fff; 
+    padding: 0 15px; 
+}
+
+.infoCards{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    margin-top: 20px;
+}
+/* Menu */
+
+.menuLP img{
+    width: 60%;
+    padding: 10px;
+    margin-top: 10px;
+  }
+  
+  .list-menuLP{
+    margin: 0 auto;
+    display: inline;
+  }
+  
+  .list-menuLP{
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-rows: auto;
+  }
+  .linksInternos{
+    float: left;
+  }
+  
+  .btn_usuarios button{
+    background: #f6c249;
+    font-size: 12px;
+    margin-left: 100px;
+    border-radius: 50px;
+    border: none;
+    margin-top: 12px;
+    padding: 14px;
+    width: 40%;
+    box-shadow: 0 0 5px;
+  }
+  
+  .menuLP button a{
+    text-decoration: none;
+    font-family: 'Roboto' sans-serif;
+    color: #ffffff;
+  }
+  
+  .menuLP button:hover{
+    background: #e9ab1bea;
+    --webkit-transition: all .5s;
+    -o-transition: all .5s;
+  }
+  
+  .cta_btn{
+      text-align: center;
+  }
+  .cta_btn button{
+    background:  #f6c249;
+    font-size: 12px;
+    border-radius: 50px;
+    border: none;
+    margin-bottom: 26px;
+    width: 14%;
+    color: #ffffff;
+    box-shadow: 0 0 5px;
+  }
+   .cta_btn button  a{
+    text-decoration: none;
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    color: #ffffff;
+    font-size: 1rem;
+    line-height: 56px;
+  }
+   .cta_btn button:hover {
+    background: #e9ab1bea;
+    --webkit-transition: all .5s;
+    -o-transition: all .5s;
+  }
+  
+  header .menuHorizontal ul li a {
+    color: #fff;
+      display: block;
+      text-decoration: none;
+      padding-top: 20px;
+      padding-left: 8px;
+  }
+  
+  .noData{
+    line-height: 285px;
+    justify-content: center;
+  }
+  
+  /* footer */
+
+footer {
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    background-color: #315c74;
+    color: #ffffff;
+    padding: 15px 0px;
+    /* position: absolute; */
+    font-size: 16px;
+    color: #ffffff;
+    bottom: 0px;
+    width: 100%;
+    padding: 15px 0px;
+    margin-top: 40px;
+    border-radius: 20px;
+  }
+  
+  .blockFooter {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+  }
+  
+  .logos img {
+    width: 40%;
+    align-self: center;
+    display: flex;
+    margin: 0 auto;
+    padding: 8px;
+  }
+  
+  .logos {
+    align-self: center;
+  }
+  
+  .menuFooter {
+    text-align: -webkit-center;
+  }
+  
+  .redesSociales i {
+    color: #ffffff;
+    font-size: 40px;
+    padding: 10px;
+  }
+  
+  
+  .redesSociales {
+    text-align: -webkit-center;
+    align-self: center;
+  }
+  
+  .redesSociales i:hover {
+    background: #1a3b4d;
+    padding: 10px;
+    border-radius: 50%;
+  }
+  
+  .copyrights {
+    width: 96%;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 100;
+    margin-top: 30px;
+    padding: 10px;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #ffffff;
+    margin-left: 8px;
+    margin-right: 8px;
+  }
+  
+  .error{
+    border: 2px solid red !important;
+  }
+  
+  header .fa-users{
+    float: right;
+  }
+  
+
+  
+

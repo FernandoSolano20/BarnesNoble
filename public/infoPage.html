@@ -1,34 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <title>Barnes & Noble</title>
+    <link rel="stylesheet" href="css/infoPage.css">
+    <link rel="stylesheet" href="css/cardsInfoPage.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Brush+Script&display=swap" rel="stylesheet">
 </head>
+
 <body>
+        <header>
+                <nav class="menuHorizontal">
+                    <ul class="list-menu">
+                        <li><a href="#" data-menu="mostrar-nav-izq"><i data-menu="mostrar-nav-izq" class="fas fa-bars"></i></a>
+                        </li>
+                        <li><a href="/"><i class="far fa-home"></i>Inicio</a></li>
+                        <li id="logout">
+                            <a href=""><i class="far fa-sign-out-alt"></i>Cerrar Sesión</a>
+                        </li>
+                        <li><a href="contacto.html"><i class="fal fa-address-book"></i>Contacto</a></li>
+                        <li class="link-imagen"><img src="img/logo_barnes-and-noble.png" alt="Logo de Barnes&Noble"></li>
+                    </ul>
+                </nav>
+        
+                <nav class="menuIzquierdo">
+                    <ul class="menu" id="menuDinamico">
+        
+                    </ul>
+                </nav>
+            </header>
 
     <main>
-        <div class="bYn">
+        <div class="principal">
+            <div class="headPage">
+                <img src="img/headpage-01.png" alt="">
+            </div>
 
-            <h2>
-                ¿Quienes somos y qué hacemos?
-            </h2>
-            <p>Barnes & Noble, Inc. es la mayor librería de los Estados Unidos.2​3​ Opera principalmente a través de la cadena Barnes & Noble Booksellers, con sede central en el Lower Manhattan, Nueva York.<br>
-            La empresa es conocida por sus grandes puntos de venta, muchos de ellos incluyen un café Starbucks Coffee, y por sus precios competitivos. La mayoría de las librerías también venden revistas, periódicos, DVD, novelas gráficas, regalos, juegos y música. Barnes & Noble también es conocida por vender el Barnes & Noble Nook. <br>
-            La empresa cuenta con 717 locales en todos los Estados Unidos y el Distrito de Columbia, además de 637 librerías universitarias que llegan a 4 millones de estudiantes y 250.000 docentes universitarios en todo el país.5​
-            </p>
+            <div class="cta_headpage">
+                <h1>Librería Barnes & Noble</h1>
+                <h4>Ya puedes ser parte de la libreríamas famosa de USA</h4>
+
+                <button type="button"> <a href="index.html">Conocer más</a> </button>
+            </div>
+
+            <div class="bYn">
+
+                <h2>
+                    ¿Quiénes somos y qué hacemos?
+                </h2>
+                <p>Es una empresa interesada en fomentar la lectura en las familias, poniendo en prioridad a los niños
+                    con
+                    la intención de crear en ellos el tan impórtate hábito de la lectura. Buscamos poner al alcance de
+                    las
+                    familias los libros más populares y educativos al mejor precio del mercado y facilitando tanto su
+                    entrega como su descarga, por medio de una plataforma que permita la oportunidad de comprar tanto en
+                    digital como en impreso los libros.
+                </p>
+            </div>
+
+            <div class="app">
+                <h2>¿De que se trata nuestra aplicación?</h2>
+
+                <p>Es una plataforma que vela por el cumplimiento de los objetivos de Barnes&Nobel que buscan poner al
+                    alcance de las familias un lugar donde puedan fácil, económica y eficazmente acceder a lecturas muy
+                    populares, educativas y variadas. Todo ello con el fin de siempre velar por la promoción en la
+                    lectura
+                    en los niños desde temprana edad.
+                    Le da la oportunidad a las librerías y sus sucursales de promocionarse y posicionarse en el mercado
+                    y al
+                    lector le da la posibilidad de acceder fácilmente a sus libros favoritos, brindándole la facilidad
+                    de
+                    adquirirlos tanto de forma digital como impresa, de calificarlos, de comentarlos en clubes de
+                    lectura y
+                    de intercambiarlos.
+                </p>
+
+            </div>
+
         </div>
 
-        <div class="app">
-            <h2>¿De que se trata nuestra aplicación?</h2>
+        <section class="tipoUsuario">
 
-            <p>
-                
-            </p>
+            <h2 class="background double"><span>Usuarios</span></h2>
 
+            <div class="lector">
+                <div>
+                    <a href="registroUsuarios.html"><img src="img/lector-01.png" alt=""></a>
+                </div>
+                <div class="contenedorTexto">
+                    <h2>Lector</h2>
+                    <p>Desde el perfil de lector el usuario puede comprar libros, votar por ellos, intercambiarlos con
+                        otros lectores, calificar a los lectores involucrados en los intercambios y participar en clubes
+                        de lectura. La plataforma le permite al usuario lector adquirir fácilmente los libros, con el
+                        propósito siempre de estimular en el hábito de la lectura. </p>
+                </div>
+            </div>
+
+            <div class="libreria">
+                <div class="contenedorTexto">
+                    <h2>Librería</h2>
+                    <p>El usuario librería tiene la posibilidad de promover su negocio y aumentar sus ventas utilizando
+                        la plataforma como herramienta. Tiene la posibilidad de agregar cuantas sucursales desee siempre
+                        y a través de ellas posee la oportunidad de adquirir los productos de Baners&Nobel y revenderlos
+                        a los usuarios lectores con un margen alto de ganancia.</p>
+                </div>
+
+                <div>
+                    <a href="registroLibreria.html"><img src="img/admin-01.png" alt=""></a>
+                </div>
+            </div>
+        </section>
+
+
+        <div class="infoCards">
+
+            <div class="blog-card1 blog-card spring-fever">
+                <div class="title-content">
+                    <h3>Club de lectura</h3>
+                    <div class="intro">Generando comunidad</div>
+                </div>
+                <div class="card-info">
+                    Este es un espacio en donde los usuarios amantes de la lectura y que comparten entre ellos el
+                    interés por un mismo libro o varios pueden reunirse con el fin de comentar sus perspectivas sobre
+                    los libros y aportar comentarios o críticas sobre ellos.
+                    <!-- En este espacio debe perdurar siempre un buen comportamiento entre lectores ya que es una gran herramienta pensada en el bien común de todos los participantes.-->
+                </div>
+                <div class="gradient-overlay"></div>
+                <div class="color-overlay"></div>
+            </div>
+
+            <div class="blog-card2 blog-card spring-fever">
+                <div class="title-content">
+                    <h3>Intercambios de libros</h3>
+                    <div class="intro">Generando comunidad</div>
+                </div>
+                <div class="card-info">
+                    Es un espacio que brinda a los lectores la oportunidad de intercambiar sus libros ya adquiridos
+                    previamente en la plataforma con cualquier otro usuario interesado en ellos.
+                    <!--El lector tiene la posibilidad de escoger qué libros desea intercambiar y de solicitar, aprobar o rechazar intercambios.-->
+                </div>
+                <div class="gradient-overlay"></div>
+                <div class="color-overlay"></div>
+            </div>
+
+            <div class="blog-card3 blog-card spring-fever">
+                <div class="title-content">
+                    <h3>Compra de libros</h3>
+                    <div class="intro">Generando comunidad</div>
+                </div>
+                <div class="card-info">
+                    La plataforma pone al alcance del lector una herramienta sencilla en donde el puede comprar
+                    fácilmente los libros en los que esta interesado,
+                    <!--le da la posibilidad de buscar su libro anhelado dentro de la sucursal que mejor le convenga y de agregarlo a su carrito de compras en donde él puede elegir su método de entrega y de pago; -->!facilitando
+                    la adquisición de los libros con el fin siempre de poner al alcance del usuario recursos que
+                    promuevan en él o su hogar la lectura
+                </div>
+                <div class="gradient-overlay"></div>
+                <div class="color-overlay"></div>
+            </div>
         </div>
+
     </main>
-    
+    <footer>
+        <div class="blockFooter">
+            <div class="logos">
+                <a href="#"><img src="img/barnes_and_noble_logo_png_94486.png" alt="Logo de Barnes&Noble"></a>
+                <a href="#"><img src="img/B&NKIFDS-01.png" alt="Logo Fundacion Book for kids"></a>
+            </div>
+            <div class="copyrights">
+                <h3> ⓒ 2019 Valhalla</h3>
+            </div>
+            <div class="redesSociales">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-pinterest"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
 </body>
+
 </html>
