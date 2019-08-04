@@ -67,6 +67,13 @@ router.get('/listarOfertas', function (req, res) {
             });
         }
     })
+        .populate('sucursal', 'nombre -_id')
+        .populate('libreria', 'nombreFantasia -_id')
+        .populate('autor', 'nombre -_id')
+        .populate('genero', 'nombre -_id')
+        .populate('categoria', 'nombre -_id')
+        .populate('libro', 'titulo -_id')
+        .select('nombre descripcion descuento estado tipoOferta sucursal libreria autor genero categoria libro');
 });
 
 router.get('/buscarOfertaId/:id', function (req, res) {

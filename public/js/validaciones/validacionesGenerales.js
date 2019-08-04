@@ -13,6 +13,13 @@ let validarNumeros = function (elementos) {
         elementos.input.className = elementos.input.className + " inputError";
         return false;
     }
+    else if (elementos.value < 0) {
+        elementos.alert.innerText = "Debe ser números positivos."
+        elementos.alert.className = elementos.alert.className.replace("alertHidden", "");
+        elementos.input.className = elementos.input.className.replace("inputError", "");
+        elementos.input.className = elementos.input.className + " inputError";
+        return false;
+    }
     elementos.alert.className = elementos.alert.className.replace("alertHidden", "");
     elementos.alert.className = elementos.alert.className + " alertHidden";
     elementos.input.className = elementos.input.className.replace("inputError", "");
@@ -77,6 +84,7 @@ let validarRadio = function (elementos) {
         if (elementos.input[i].checked) {
             elementos.alert.className = elementos.alert.className.replace("alertHidden", "");
             elementos.alert.className = elementos.alert.className + " alertHidden";
+            elementos.input[0].parentElement.className = elementos.input[0].parentElement.className.replace("errorRadio", "");
             return true;
         }
     }

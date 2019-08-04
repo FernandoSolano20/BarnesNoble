@@ -36,6 +36,11 @@ let mostrar_tabla = async (event) => {
         tr = document.createElement('th');
         tr.innerHTML = 'Activar/Desactivar';
         fila.appendChild(tr);
+        fila.appendChild(tr);
+        tr = document.createElement('th');
+        tr.innerHTML = 'Perfil';
+        fila.appendChild(tr);
+
         if (sessionStorage.tipoUsuario != 'Lector') {
             let btn = document.createElement('a');
             btn.type = "button";
@@ -81,7 +86,7 @@ let mostrar_tabla = async (event) => {
 
 let agregarFilaSucursal = function (sucursal, libreria) {
     let filtro = txt_filtro.value.toLowerCase();
-    if (sucursal['nombre'].toLowerCase().includes(filtro) || sucursal['correo'].toLowerCase().includes(filtro) || sucursal['telefono'].toLowerCase().includes(filtro) || libreria.toLowerCase().includes(filtro)) {
+    if (sucursal['nombre'].toLowerCase().includes(filtro) || sucursal['correo'].toLowerCase().includes(filtro) || sucursal['telefono'].toLowerCase().includes(filtro) || (libreria?libreria:"").toLowerCase().includes(filtro)) {
         let fila = tbody.insertRow();
         fila.insertCell().innerHTML = sucursal['nombre'];
         fila.insertCell().innerHTML = sucursal['correo'];
@@ -115,6 +120,20 @@ let agregarFilaSucursal = function (sucursal, libreria) {
         estadoLabel.setAttribute('data-action', 'estado');
         estadoLabel.setAttribute('for', sucursal._id);
         estadoCelda.appendChild(estadoLabel);
+
+        let celda_perfil = fila.insertCell();
+        let divContendor = document.createElement("div");
+        divContendor.setAttribute('class', 'crear-contenedor')
+        let btnPerfil = document.createElement('button');
+        celda_perfil.appendChild(divContendor);
+        divContendor.appendChild(btnPerfil);
+
+        btnPerfil.innerText = 'Ver perfil'
+        btnPerfil.dataset._id = sucursal['_id'];
+        btnPerfil.setAttribute('class', 'material-blue')
+        btnPerfil.addEventListener('click', function () {
+            window.location.href = "perfilSucursal.html?id=" + sucursal._id;
+        });
     }
 }
 
@@ -126,7 +145,7 @@ let filaNoDatos = function () {
         fila.setAttribute('id', 'no-data');
         let celda = fila.insertCell()
         celda.innerHTML = 'No se encontró datos';
-        celda.setAttribute('colspan', '7');
+        celda.setAttribute('colspan', '8');
     }
 }
 

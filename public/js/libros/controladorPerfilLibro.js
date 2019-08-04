@@ -21,20 +21,18 @@ let obtenerInformacionLibro = async function () {
             let radioTipoLibro = document.getElementById('tipoLibro');
             let infoLibro = document.getElementById('infoLibro');
             ejemplares = ejemplares.listaLibros;
-            for (let i = 0; i < ejemplares.length; i++){
-                // <input type="radio" name="id" id="dura" value="Tapa dura" checked="">
-                //         <label for="dura" class="labelRadio">Tapa Dura</label>
+            for (let i = 0; i < ejemplares.length; i++) {
                 let input = document.createElement('input');
-                input.setAttribute('type','radio');
-                input.setAttribute('name','id');
-                input.setAttribute('id', 'input'+ i);
-                input.setAttribute('value',i);
+                input.setAttribute('type', 'radio');
+                input.setAttribute('name', 'id');
+                input.setAttribute('id', 'input' + i);
+                input.setAttribute('value', i);
                 input.addEventListener('change', changeText);
                 radioTipoLibro.appendChild(input);
 
                 let label = document.createElement('label');
-                label.setAttribute('for','input'+ i);
-                label.setAttribute('class','labelRadio');
+                label.setAttribute('for', 'input' + i);
+                label.setAttribute('class', 'labelRadio');
                 label.innerText = ejemplares[i].tipo;
                 radioTipoLibro.appendChild(label);
 
@@ -61,16 +59,18 @@ let obtenerInformacionLibro = async function () {
                 <p id="annoEdicion">${ejemplares[i].annoEdicion}</p>
             </div>`
             }
-            let firstInput =document.getElementById("input0")
-            if(firstInput)
+            let firstInput = document.getElementById("input0")
+            if (firstInput)
                 firstInput.checked = true;
-            infoLibro.innerHTML = arrayEjemplar[0];
+
+            if (arrayEjemplar[0])
+                infoLibro.innerHTML = arrayEjemplar[0];
             animationVotes();
         }
     }
 }
 
-let changeText = function(event){
+let changeText = function (event) {
     document.getElementById('infoLibro').innerHTML = arrayEjemplar[event.target.value];
 }
 

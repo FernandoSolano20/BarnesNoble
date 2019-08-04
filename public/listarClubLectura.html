@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/botones.css">
-    <link rel="stylesheet" href="css/listarElementos.css">
+    <link rel="stylesheet" href="css/listarUsuario.css">
     <link rel="stylesheet" href="css/botones.css">
     <link rel="stylesheet" href="css/searchBar.css">
     <link rel="stylesheet" href="css/modal.css">
@@ -26,11 +26,10 @@
             <ul class="list-menu">
                 <li><a href="#" data-menu="mostrar-nav-izq"><i data-menu="mostrar-nav-izq" class="fas fa-bars"></i></a>
                 </li>
-                <li><a href="#"><i class="far fa-home"></i>Inicio</a></li>
+                <li><a href="/"><i class="far fa-home"></i>Inicio</a></li>
                 <li id="logout">
                     <a href="#"><i class="far fa-sign-out-alt"></i>Cerrar Sesión</a>
                 </li>
-                <li><a href="#"><i class="fal fa-address-book"></i>Contacto</a></li>
                 <li class="link-imagen"><img src="img/logo_barnes-and-noble.png" alt="Logo de Barnes&Noble"></li>
             </ul>
         </nav>
@@ -67,6 +66,8 @@
                         <th>Tipo de club</th>
                         <th>Fecha de reunion</th>
                         <th>Hora de la reunion</th>
+                        <th>Sucursal</th>
+                        <th>Club de Lectura</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -111,8 +112,6 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="js/clubLectura/servicioClubLectura.js"></script>
     <script src="js/clubLectura/controladorClubLectura.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-
 </body>
 
 </html>

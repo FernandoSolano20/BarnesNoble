@@ -5,7 +5,7 @@ let lista_usuarios = [];
 let txt_filtro = document.querySelector('#input-filtro');
 
 
-let mostrar_tabla = async() => {
+let mostrar_tabla = async () => {
 
     lista_usuarios = await obtenerUsuarios();
     tbody.innerHTML = '';
@@ -13,49 +13,48 @@ let mostrar_tabla = async() => {
 
     for (let i = 0; i < lista_usuarios.length; i++) {
         let fila = tbody.insertRow();
-        fila.insertCell().innerHTML = lista_usuarios[i]['id']; 
+        fila.insertCell().innerHTML = lista_usuarios[i]['id'];
         fila.insertCell().innerHTML = lista_usuarios[i]['nombre'];
         fila.insertCell().innerHTML = lista_usuarios[i]['primerApellido'];
         fila.insertCell().innerHTML = lista_usuarios[i]['correo'];
         fila.insertCell().innerHTML = formatearFecha(lista_usuarios[i]['nacimiento']);
-        
-        let celda_perfil = fila.insertCell();
-            let divContenedor = document.createElement("div");
-            divContenedor.setAttribute('class', 'crear-contenedor');
-            celda_perfil.appendChild(divContenedor);
-            
-            let boton_perfil = document.createElement('button');
-            boton_perfil.type = 'button';
-            boton_perfil.innerText = 'Ver perfil';
-            boton_perfil.dataset._id = lista_usuarios[i]['_id'];
-            boton_perfil.setAttribute('class', 'material-blue');
-            divContenedor.appendChild(boton_perfil);
 
-        boton_perfil.addEventListener('click', function() {
+        let celda_perfil = fila.insertCell();
+        let divContenedor = document.createElement("div");
+        divContenedor.setAttribute('class', 'crear-contenedor');
+        celda_perfil.appendChild(divContenedor);
+
+        let boton_perfil = document.createElement('button');
+        boton_perfil.type = 'button';
+        boton_perfil.innerText = 'Ver perfil';
+        boton_perfil.dataset._id = lista_usuarios[i]['_id'];
+        boton_perfil.setAttribute('class', 'material-blue');
+        divContenedor.appendChild(boton_perfil);
+
+        boton_perfil.addEventListener('click', function () {
             //console.log(this.dataset._id);
             window.location.href = `perfilUsuario.html?id=${this.dataset._id}`
 
-        });       
+        });
     }
     filaNoDatos();
 };
 
-let filtrar_tabla = async() => {
+let filtrar_tabla = async () => {
 
     let filtro = txt_filtro.value.toLowerCase();
     tbody.innerHTML = '';
 
 
     for (let i = 0; i < lista_usuarios.length; i++) {
-        if (lista_usuarios[i]['nombre'].toLowerCase().includes(filtro) || lista_usuarios[i]['segundoNombre'].toLowerCase().includes(filtro) || lista_usuarios[i]['primerApellido'].toLowerCase().includes(filtro) || lista_usuarios[i]['segundoApellido'].toLowerCase().includes(filtro)|| lista_usuarios[i]['alias'].toLowerCase().includes(filtro) || lista_usuarios[i]['telefono'].toLowerCase().includes(filtro) || lista_usuarios[i]['correo'].toLowerCase().includes(filtro) || lista_usuarios[i]['nacimiento'].toLowerCase().includes(filtro)  || lista_usuarios[i]['sexo'].toLowerCase().includes(filtro) || lista_usuarios[i]['id'].toLowerCase().includes(filtro))
-         {
+        if (lista_usuarios[i]['nombre'].toLowerCase().includes(filtro) || lista_usuarios[i]['segundoNombre'].toLowerCase().includes(filtro) || lista_usuarios[i]['primerApellido'].toLowerCase().includes(filtro) || lista_usuarios[i]['segundoApellido'].toLowerCase().includes(filtro) || lista_usuarios[i]['alias'].toLowerCase().includes(filtro) || lista_usuarios[i]['telefono'].toLowerCase().includes(filtro) || lista_usuarios[i]['correo'].toLowerCase().includes(filtro) || lista_usuarios[i]['nacimiento'].toLowerCase().includes(filtro) || lista_usuarios[i]['sexo'].toLowerCase().includes(filtro) || lista_usuarios[i]['id'].toLowerCase().includes(filtro)) {
             let fila = tbody.insertRow();
-            fila.insertCell().innerHTML = lista_usuarios[i]['id']; 
+            fila.insertCell().innerHTML = lista_usuarios[i]['id'];
             fila.insertCell().innerHTML = lista_usuarios[i]['nombre'];
             fila.insertCell().innerHTML = lista_usuarios[i]['primerApellido'];
             fila.insertCell().innerHTML = lista_usuarios[i]['correo'];
             fila.insertCell().innerHTML = formatearFecha(lista_usuarios[i]['nacimiento']);
-     
+
 
             let celda_perfil = fila.insertCell();
             let divContenedor = document.createElement("div");
@@ -69,14 +68,15 @@ let filtrar_tabla = async() => {
             boton_perfil.setAttribute('class', 'material-blue');
             divContenedor.appendChild(boton_perfil);
 
-            boton_perfil.addEventListener('click', function() {
+            boton_perfil.addEventListener('click', function () {
                 //console.log(this.dataset._id);
                 window.location.href = `indexLector.html?_id=${this.dataset._id}`;
-    
-            });          
+
+            });
         }
         filaNoDatos();
-};
+    };
+}
 
 var formatearFecha = function (pfecha) {
 
@@ -96,5 +96,5 @@ let filaNoDatos = function () {
     }
 };
 
-mostrar_tabla();
 txt_filtro.addEventListener('keyup', filtrar_tabla);
+mostrar_tabla();
