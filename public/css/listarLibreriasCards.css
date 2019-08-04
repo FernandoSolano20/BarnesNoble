@@ -1,338 +1,127 @@
-.contenedor-tabla .tabla {
-    margin: 20px auto;
-    border: 2px solid #000;
-    box-shadow: 3px 3px 5px 6px #ccc;
-}
-
-.contenedor-tabla .tabla thead {
-    background-color: #315c74;
-    border: 2px solid #000;
-    color: #fff;
-    font-family: Roboto;
-}
-
-.contenedor-tabla .tabla thead th {
-    padding: 25px;
-}
-
-.contenedor-tabla .tabla tbody tr:hover {
-    background: rgba(0, 0, 0, 0.15);
-}
-
-.contenedor-tabla .tabla tbody td {
-    border-bottom: 2px solid black;
-}
-
-.contenedor-tabla .tabla thead th, .contenedor-tabla .tabla tbody td {
-    height: 30px;
-    padding: 15px;
-    text-align: center;
-    vertical-align: middle;
-}
-
-.contenedor-tabla .tabla tbody td:nth-child(2) {
-    text-align: justify;
-}
-
-.contenedor-tabla .tabla tbody td i {
-    font-size: 25px;
-}
-
-.switch {
-    display: none;
-}
-
-.switch+label {
-    width: 70px;
-    height: 35px;
-    position: relative;
-    background: #212121;
-    border-radius: 35px;
-    display: inline-block;
-    transition: all .4s ease-in-out 0s;
-}
-
-.switch+label:before {
-    top: 50%;
-    content: '';
-    right: 38px;
-    width: 23px;
-    height: 23px;
-    background: #fff;
-    border-radius: 50%;
-    position: absolute;
-    margin-top: -11.5px;
-    transition: inherit;
-}
-
-.switch:checked+label {
-    background: #212121;
-    border-color: #212121;
-    box-shadow: 0 1px 1px rgba(206, 206, 206, .5);
-}
-
-.switch:checked+label:before {
-    right: 3px;
-    background: #cecece;
-    border-color: transparent;
-    box-shadow: 0 3px 3px #000;
-}
-
-.crear-contenedor {
-    margin: 0px auto;
-}
-
-.crear-contenedor .material-blue {
-    height: 50px;
-    padding: 0 50px;
-    font-size: 18px;
-    text-decoration: none;
-    color: white;
-    border-radius: 1px;
-    background-color: #315c74;
-    border: none;
-    -webkit-box-shadow: 0px 4px 3px 0px rgba(50, 50, 50, 0.2);
-    -moz-box-shadow: 0px 4px 3px 0px rgba(50, 50, 50, 0.2);
-    box-shadow: 0px 4px 3px 0px rgba(50, 50, 50, 0.2);
-    display: inline-block;
-    line-height: 50px;
-    text-align: center;
-    overflow: hidden;
-    position: relative;
-    font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
-    box-sizing: border-box;
-}
-
-.crear-contenedor .material-blue:hover{
-    background-color: #1976d2;
-    box-shadow: 0px 5px 3px 0px rgba(50, 50, 50, 0.3);
-    cursor: pointer;
-}
-
-.crear-contenedor .material-blue i {
-    margin-right: 15px;
-}
-#slt-expiracionMM{
-    width: 128px;
-  }
-  #slt-tipoTarjeta{
-    width: 95px;
-  }
-  .input_error{
-    border: 2px #f6c249 solid !important;
-    }
-
-
-footer {
-  width: 100%;
-  font-family: 'Roboto', sans-serif;
-  font-size: 16px;
-  background-color: #315c74;
-  color: #ffffff;
-  padding: 15px 0px;
-  position: relative;
-  font-size: 16px;
-  color: #ffffff;
-  bottom: 0px;
-  width: 100%;
-  padding: 15px 0px;
-}
-
-.blockFooter {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: auto;
-
-}
-.PerfilblockFooter {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: auto;
-    position: absolute;
-    background-color: #315c74;
-}
-
-.logos img {
-  width: 40%;
-  align-self: center;
-  display: flex;
-  margin: 0 auto;
-  padding: 8px;
-}
-
-.logos {
-  align-self: center;
-}
-
-.menuFooter {
-  text-align: -webkit-center;
-}
-
-.redesSociales i {
-  color: #ffffff;
-  font-size: 40px;
-  padding: 10px;
-}
-
-
-.redesSociales {
-  text-align: -webkit-center;
-  align-self: center;
-}
-
-.redesSociales i:hover {
-  background: #1a3b4d;
-  padding: 10px;
-  border-radius: 50%;
-}
-
-.copyrights {
-  width: 96%;
-  margin: 0 auto;
-  text-align: center;
-  font-size: 14px;
-  font-weight: 100;
-  margin-top: 30px;
-  padding: 10px;
-  border-left: 2px solid #ffffff;
-  border-right: 2px solid #ffffff;
-  margin-left: 8px;
-  margin-right: 8px;
-}
-
-.error{
-  border: 2px solid red !important;
-}
-
-.fa-users{
-  float: right;
-}
-
-
 #listaLibrerias .card {
-    width: 30%;
-    float: left;
-    margin: 30px 1%;
+  width: 30%;
+  float: left;
+  margin: 30px 1%;
 }
 
-#listaLibrerias .card header{
-    background: #315c74;
-    color: #fff;
-    text-align: center;
-    height: 30px;
-    padding-top: 10px;
-   
+#listaLibrerias .card header {
+  background: #315c74;
+  color: #fff;
+  text-align: center;
+  height: 30px;
+  padding-top: 10px;
 }
 
 #listaLibrerias .card .contenerdorImagen img {
   width: 100%;
-   margin-left: auto;
+  margin-left: auto;
   margin-right: auto;
   vertical-align: middle;
 }
 
-#listaLibrerias .card p{
+#listaLibrerias .card p {
   background: #77c2eb;
   color: black;
   text-align: center;
   padding-top: 10px;
   padding-bottom: 10px;
- 
 }
 
 /* Css Ver Perfil */
+
 .blockPerfil {
   display: grid;
-  grid-template-columns: 1fr 1fr  ;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fm;
 }
 
 .blockPerfilRows {
   display: grid;
-  grid-template-columns: 1fr   ;
-  grid-template-rows: 1fr ;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
 }
-#twoColumns  {
+
+#twoColumns {
   float: left;
   width: 50%;
   height: 150px;
-  }
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
+}
 
-.libreriaPerfilFoto  img {
-    width: 25%;
-     margin-left: auto;
-    margin-right: auto;
-    vertical-align: middle;
-  }
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.libreriaPerfilFoto img {
+  width: 25%;
+  margin-left: auto;
+  margin-right: auto;
+  vertical-align: middle;
+}
+
 .center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 75%;
-    /* text-align: center; */
-  }
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+  /* text-align: center; */
+}
 
 #foto img {
-      width: 40%;
-      align-self: center;
-      display: flex;
-      margin: 0 auto;
-      padding: 8px;
-      width:50%;
-    }
+  width: 40%;
+  align-self: center;
+  display: flex;
+  margin: 0 auto;
+  padding: 8px;
+  width: 50%;
+}
+
 .foto {
-      align-self: center;
-      
-    }
-  #foto p {
-    text-align: left !important;
-    color: black;
-    font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
-    padding: 5px;
-    margin: 0px 1%;
+  align-self: center;
+}
 
-  }
+#foto p {
+  text-align: center;
+  color: black;
+  font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
+  padding: 5px;
+  margin: 0px 1%;
+}
 
-  #tbl-libreria h2{
-     text-align: left !important;
-      color: #fff;
-      background-color: #315c74;
-      font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
-      font-size: 25px;
-      margin: 15px 1%;
-      padding: 10px;
-    } 
-    .tbl-Libreria .column p {
-      text-align: left !important;
-      color: black;
-      font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
-      padding-left: 5px;
-      margin: 0px 1%;
+#tbl-libreria h2 {
+  text-align: left !important;
+  color: #fff;
+  background-color: #315c74;
+  font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
+  font-size: 25px;
+  margin: 15px 1%;
+  padding: 10px;
+}
 
- }
-    
-
+.tbl-Libreria .column p {
+  text-align: center !important;
+  color: black;
+  font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
+  padding-left: 5px;
+  margin: 0px 1%;
+}
 
 #div-mapa h2 {
   text-align: center;
-      color: #fff;
-      background-color: #315c74;
-      font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
-      font-size: 25px;
-      margin: 0px 1%;
-      padding: 5px;
+  color: #fff;
+  background-color: #315c74;
+  font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
+  font-size: 25px;
+  margin: 0px 1%;
+  padding: 5px;
 }
 
 #div-mapa iframe {
   padding: 7px;
 }
 
-#tbl-ofertasLibreria h2{ 
+#tbl-ofertasLibreria h2 {
   text-align: center;
   color: #fff;
   background-color: #315c74;
@@ -341,18 +130,17 @@ footer {
   margin: 0px 1%;
   padding: 5px;
 }
-
 
 #tbl-ofertasLibreria p {
   text-align: left;
-   color: black;
-   font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
-   padding: 10px;
-   margin: 5px 1%;
- }
+  color: black;
+  font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
+  padding: 10px;
+  margin: 5px 1%;
+}
 
 #tbl-clubesLectura h2 {
- text-align: center;
+  text-align: center;
   color: #fff;
   background-color: #315c74;
   font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
@@ -360,80 +148,43 @@ footer {
   margin: 0px 1%;
   padding: 5px;
 }
+
 #tbl-clubesLectura .column p {
-  text-align: left;
-   color: black;
-   font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
-   padding: 5px;
-   margin: 0px 1%;
- }
- 
- #tbl-sucursalesLibreria h2 {
-  text-align: center;
-   color: black;
-   font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
-   padding: 5px;
-   margin: 0px 1%;
-   padding: 5px;
- }
- #tbl-sucursalesLibreria p {
   text-align: left;
   color: black;
   font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
   padding: 5px;
   margin: 0px 1%;
- }
- 
-
-
- .contenedor-tabla-libreria .tabla {
-  margin: 20px auto;
-  border: 2px solid #000;
-  box-shadow: 3px 3px 5px 6px #ccc;
 }
 
-.contenedor-tabla-libreria .tabla thead {
-  background-color: #315c74;
-  border: 2px solid #000;
-  color: #fff;
-  font-family: Roboto;
-}
-
-.contenedor-tabla-liberia .tabla thead th {
-  padding: 25px;
-}
-
-.contenedor-tabla-liberia .tabla tbody tr:hover {
-  background: rgba(0, 0, 0, 0.15);
-}
-
-.contenedor-tabla-liberia .tabla tbody td {
-  border-bottom: 2px solid black;
-}
-
-.contenedor-tabla-liberia .tabla thead th, .contenedor-tabla .tabla tbody td {
-  height: 30px;
-  padding: 15px;
+#tbl-sucursalesLibreria h2 {
   text-align: center;
-  vertical-align: middle;
+  color: black;
+  font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
+  padding: 5px;
+  margin: 0px 1%;
+  padding: 5px;
 }
 
-.contenedor-tabla-liberia .tabla tbody td:nth-child(2) {
-  text-align: justify;
+#tbl-sucursalesLibreria p {
+  text-align: left;
+  color: black;
+  font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
+  padding: 5px;
+  margin: 0px 1%;
 }
 
-.contenedor-tabla-liberia .tabla tbody td i {
-  font-size: 25px;
-}
+/* columnas*/
 
-
-
- /* columnas*/
- .column {
+.column {
   float: left;
   width: 50%;
-  height: 450px;
-  }
+  height: auto;
+}
+
+.localizacion{
+  width: 100%;
+}
 
 .middleColumn {
   float: left;
@@ -442,7 +193,7 @@ footer {
   background-color: #fff;
 }
 
-.middleColumn p{
+.middleColumn p {
   font-size: 25px;
   text-align: center;
 }
@@ -457,55 +208,57 @@ footer {
   float: left;
   width: 25%;
   margin-left: auto;
-    margin-right: auto;
-    
+  margin-right: auto;
 }
-.fourColumns button{
+
+.fourColumns button {
   width: 75%;
   padding: 5px;
 }
 
-.fourColumns img{
+.fourColumns img {
   padding: 10px;
   width: 100%
 }
-.fourColumns:hover img{
-  border: solid black 1px;   
+
+.fourColumns:hover img {
+  border: solid black 1px;
 }
 
 .button {
-	color: #315c74;
+  color: #315c74;
   text-align: center;
-	border: solid white 1px;
-	font-weight: 100; 
-	padding: 10px;
-	font-family: 'Open Sans', sans-serif;
-	margin-bottom: 20px;
-	margin-left: 30px;
+  border: solid white 1px;
+  font-weight: 100;
+  padding: 10px;
+  font-family: 'Open Sans', sans-serif;
+  margin-bottom: 20px;
+  margin-left: 30px;
 }
 
-.button:hover{
-	background: orange;
+.button:hover {
+  background: orange;
   color: white;
-  
 }
-
 
 /* Text in front of banner */
+
 .centered {
- position: absolute;
- top: 150px;
- left: 40%;
- transform: translate(-50%, -50%);
- /* font-family: 'Kaushan Script', cursive; */
+  position: absolute;
+  top: 150px;
+  left: 40%;
+  transform: translate(-50%, -50%);
+  /* font-family: 'Kaushan Script', cursive; */
 }
+
 .threeColumn {
- float: left;
- width: 33%;
- padding: 10px;
+  float: left;
+  width: 33%;
+  padding: 10px;
 }
 
 /* clubes css */
+
 .tbl-clubesLectura.tabla {
   margin: 20px auto;
   border: 2px solid #000;
@@ -547,23 +300,22 @@ footer {
   font-size: 25px;
 }
 
-.mySlides {display:none}
-.w3-left, .w3-right, .w3-badge {cursor:pointer}
-.w3-badge {height:13px;
-  width:100%;
-  padding:0}
+.mySlides {
+  display: none
+}
 
+.w3-left, .w3-right, .w3-badge {
+  cursor: pointer
+}
 
-  .footerLibreriaCards {
-    width: 100%;
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    background-color: #315c74;
-    color: #ffffff;
-    padding: 15px 0px;
-    position: absolute;
-    font-size: 16px;
-    color: #ffffff;
-    bottom: 0px;
-    width: 100%;
-     }
+.w3-badge {
+  height: 13px;
+  width: 100%;
+  padding: 0
+}
+
+#map {
+  width: 95%;
+  height: 390px;
+  margin: 10px auto;
+}
