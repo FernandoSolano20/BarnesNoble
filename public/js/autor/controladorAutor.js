@@ -145,6 +145,16 @@ let agregarFilaAutores = function (autor) {
         )
     });
     premios.appendChild(btnPremios);
+
+    let perfil = fila.insertCell();
+    let btnPerfil = document.createElement('button');
+    btnPerfil.innerText = 'Ver perfil';
+    btnPerfil.setAttribute('class', 'btnVerPerfil');
+    btnPerfil.dataset._id = autor['_id'];
+    btnPerfil.addEventListener('click', function () {
+        window.location.href = `verPerfilAutor.html?_id=${this.dataset._id}`
+    });
+    perfil.appendChild(btnPerfil);
 }
 
 let validarAnno = function (elementos) {
