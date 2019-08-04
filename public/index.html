@@ -22,12 +22,12 @@
                 </li>
 
                 <div class="linksInternos">
-                    <li><a href="#mas_vendididos"><i class="fas fa-heart"></i>Más vendidos</a></li>
+                    <li><a href="#libros"><i class="fas fa-book"></i>Libros</a></li>
                     <li>
                         <a href="#club_lectura"><i class="fas fa-book-reader"></i>Club de lectura</a>
                     </li>
-                    <li><a href="#mejor_calificados"><i class="fas fa-book"></i>Mejor Calificados</a></li>
-                    <li class="submenu">
+                    <li><a href="#mas_vendididos"><i class="fas fa-book-user"></i>Más vendidos</a></li>
+                    <li class="submenu" id="signIn">
                         <a href="inicioSesion.html"><i class="far fa-sign-out-alt"></i>Registrarse</a>
                         <ul class="children">
                             <li><a href="registroUsuarios.html">Lector <span class="fas fa-users"></span></a></li>
@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="btn_usuarios">
-                    <button type="button"> <a href="inicioSesion.html">Iniciar Sesión</a> </button>
+                    <button type="button" id="login"> <a href="inicioSesion.html">Iniciar Sesión</a> </button>
                 </div>
 
         </nav>
@@ -208,6 +208,8 @@
         </div>
     </footer>
     <!-- <script src="js/typehead/typehead.js"></script> -->
+    <script src="js/loginMenu.js"></script>
+    <script src="js/cerrarSesion.js"></script>
     <script src="js/libros/servicioLibros.js"></script>
     <script src="js/landingPage/servicioLandigPage.js"></script>
     <script src="js/landingPage/controladorLandingPage.js"></script>

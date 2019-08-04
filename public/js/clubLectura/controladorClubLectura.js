@@ -28,7 +28,7 @@ let mostrar_tabla = async (event) => {
             fila.insertCell().innerHTML = lista_clubesLectura[i].sucursal ? lista_clubesLectura[i].sucursal.nombre : "-";
 
 
-            if (sessionStorage.tipoUsuario == 'Adminitrador plataforma') {
+            if (sessionStorage.tipoUsuario == 'Adminitrador plataforma' || sessionStorage.id == (lista_clubesLectura[i].administrador ? lista_clubesLectura[i].administrador._id : "-")) {
 
                 let celda_perfil = fila.insertCell();
                 let divContenedor = document.createElement("div");
@@ -43,8 +43,7 @@ let mostrar_tabla = async (event) => {
                 divContenedor.appendChild(boton_perfil);
 
                 boton_perfil.addEventListener('click', function () {
-                    //console.log(this.dataset._id);
-                    // window.location.href = `perfilUsuario.html?id=${this.dataset._id}`
+                    window.location.href = `perfilClubLectura.html?id=${lista_clubesLectura[i]._id}`
 
                 });
             } else {
@@ -61,8 +60,7 @@ let mostrar_tabla = async (event) => {
                 divContenedor.appendChild(boton_perfil);
 
                 boton_perfil.addEventListener('click', function () {
-                    //console.log(this.dataset._id);
-                    // window.location.href = `perfilUsuario.html?id=${this.dataset._id}`
+                    window.location.href = `perfilClubLectura.html?id=${lista_clubesLectura[i]._id}`
 
                 });
             }

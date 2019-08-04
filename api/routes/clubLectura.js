@@ -98,5 +98,28 @@ router.get('/obtenerContClubAdministrador/:id', function (req, res) {
     });
 });
 
+router.get('/listarClubLecturaPorId/:id', function (req, res) {
+    ClubLectura.findById(req.params.id,function (err, clubesLecturaBD) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                msj: 'No se pueden listar los clubes de lectura',
+                err
+            });
+        } else {
+            return res.json({
+                success: true,
+                clubLectura: clubesLecturaBD
+            });
+        }
+    })
+        .populate('administrador', '_id nombre primerApellido correo')
+        .populate('sucursal', 'nombre _id')
+        .populate('genero', 'nombre _id')
+        .populate('categoria', 'nombre _id')
+        .populate('participantes.usuario', '_id nombre primerApellido correo')
+        .select('nombre tema tipoClub fechaReunion horaReunion administrador sucursal participantes chat genero categoria');
+});
+
 
 module.exports = router;

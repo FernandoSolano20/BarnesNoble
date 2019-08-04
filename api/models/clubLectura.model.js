@@ -23,7 +23,7 @@ let clubLectura_schema = new mongoose.Schema({
     sucursal: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Sucursal',
-        required: true
+        required: false
     },
     administrador: {
         type: mongoose.Schema.Types.ObjectId,

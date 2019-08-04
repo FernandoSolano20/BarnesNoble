@@ -64,14 +64,16 @@
                 </div>
                 <div class="inputGroup radio" id="tipo-club-input">
                     <span class="left alertHidden" id="alert-tipo-club">Seleccione una opción.</span>
-                    <input type="radio" name="tipoClub" id="presencial" value="presencial">
+                    <input type="radio" name="tipoClub" id="presencial" value="Presencial">
                     <label for="presencial" class="labelRadio">Presencial</label>
-                    <input type="radio" name="tipoClub" id="virtual" value="virtual">
+                    <input type="radio" name="tipoClub" id="virtual" value="Virtual">
                     <label for="virtual" class="labelRadio">Virtual</label>
 
                 </div>
-
-
+                <div class="inputGroup box alertHidden" id="tiendas">
+                    <span class="left alertHidden" id="alertSucursal">Seleccione una opción.</span>
+                    <select name="sucursal" id="sucursal"></select>
+                </div>
             </div>
             <div class="column">
                 <div>
@@ -101,10 +103,12 @@
                         step="3600">
                 </div>
                 <div class="inputGroup box">
-                    <span class="left alertHidden" id="alertSucursal">Seleccione una opción.</span>
-                    <select name="sucursal" id="sucursal"></select>
+                    <span class="left alertHidden" id="alertTipo">Seleccione una opción.</span>
+                    <select name="genero" id="genero"></select>
                 </div>
-
+                <div class="inputGroup box">
+                    <select name="categoria" id="categoria"></select>
+                </div>
             </div>
         </form>
         <div class="containerMap">
@@ -139,9 +143,13 @@
     <script src="js/cerrarSesion.js"></script>
     <script src="js/usuarios/servicioUsuario.js"></script>
     <script src="js/clubLectura/servicioClubLectura.js"></script>
+    <script src="js/genero/servicioGenero.js"></script>
+    <script src="js/categoria/servicioCategoria.js"></script>
     <script src="js/sucursal/servicioSucursal.js"></script>
     <script src="js/validaciones/validacionesGenerales.js"></script>
     <script src="js/selects/controladorSelectSucursal.js"></script>
+    <script src="js/selects/controladorSelectsGenero.js"></script>
+    <script src="js/selects/controladorSelectsCategoria.js"></script>
     <script src="js/clubLectura/controladorRegistrarClubLectura.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </body>
