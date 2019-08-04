@@ -146,32 +146,6 @@ let agregarFilaAutores = function (autor) {
     });
     premios.appendChild(btnPremios);
 
-    let editarCelda = fila.insertCell();
-    let editar = document.createElement('i');
-    editar.setAttribute('class', 'far fa-edit');
-    editar.setAttribute('data-id', autor._id);
-    editarCelda.appendChild(editar);
-
-    let eliminarCelda = fila.insertCell();
-    let eliminar = document.createElement('i');
-    eliminar.setAttribute('class', 'fal fa-trash-alt');
-    eliminar.setAttribute('data-action', 'borrar');
-    eliminarCelda.appendChild(eliminar);
-
-    let estadoCelda = fila.insertCell();
-
-    let estadoInput = document.createElement('input');
-    estadoInput.setAttribute('class', 'switch');
-    estadoInput.setAttribute('id', autor._id);
-    estadoInput.setAttribute('type', 'checkbox');
-    estadoCelda.appendChild(estadoInput);
-    estadoInput.checked = !autor.estado;
-
-    let estadoLabel = document.createElement('label');
-    estadoLabel.setAttribute('data-action', 'estado');
-    estadoLabel.setAttribute('for', autor._id);
-    estadoCelda.appendChild(estadoLabel);
-
     let perfil = fila.insertCell();
     let btnPerfil = document.createElement('button');
     btnPerfil.innerText = 'Ver perfil';
