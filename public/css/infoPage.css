@@ -358,6 +358,153 @@ footer {
   header .fa-users{
     float: right;
   }
+
+
+  header .menuHorizontal {
+    background: #315c74;
+    width: 100%;
+    margin: 0px auto;
+    z-index: 10000;
+    border-radius: 20px;
+  }
+  
+  header .menuHorizontal ul {
+    list-style: none;
+  }
+  
+  header .menuHorizontal ul li {
+    display: inline-block;
+    font-family: 'Roboto';
+  }
+  
+  header .menuHorizontal .list-menu .link-imagen {
+    margin: 10px 26px;
+  }
+  
+  header .menuHorizontal .list-menu .link-imagen {
+    background-color: transparent;
+  }
+  
+  header .menuHorizontal ul li:hover {
+    background: #1a3b4d;
+  }
+  
+  header .menuHorizontal ul li a {
+    color: #fff;
+    display: block;
+    text-decoration: none;
+    padding: 18px;
+  }
+  
+  header .menuHorizontal ul li a i {
+    margin-right: 8px;
+  }
+  
+  header .menuHorizontal ul li:hover .children {
+    display: block;
+  }
+  
+  header .menuHorizontal ul li .children {
+    display: none;
+    background: #315c74;
+    position: absolute;
+    width: 150%;
+    z-index: 1000;
+  }
+  
+  header .menuHorizontal ul li .children li {
+    display: block;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255, 255, 255, .5);
+  }
+  
+  header .menuHorizontal ul li .children li a {
+    display: block;
+  }
+  
+  header .menuHorizontal ul li .children li a i {
+    float: right;
+    position: relative;
+    top: 3px;
+    margin-right: 0;
+    margin-left: 10px;
+  }
+  
+  header .menuHorizontal ul li .caret {
+    position: relative;
+    top: 3px;
+    margin-left: 10px;
+    margin-right: 0px;
+  }
+  
+  .menu {
+    list-style: none;
+    max-height: 90vh;
+    line-height: 46px;
+    padding-left: 0;
+    margin: 0.1em auto;
+    width: 15em;
+    overflow-x: hidden;
+    overflow-y: auto;
+    font-family: 'Roboto';
+  }
+  
+  .menu a {
+    color: #ffffff;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    padding-left: 3em;
+  }
+  
+  .menu a:hover {
+    margin-left: 1em;
+    --webkit-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s;
+  }
+  
+  .menu li {
+    /*outline:  1px solid green;*/
+    box-shadow: 3px 0 rgba(255, 255, 255, .2) inset;
+    padding-left: .8em;
+    margin-bottom: 3px;
+    --webkit-transition: all .5s;
+    -o-transition: all .5s;
+  }
+  
+  .menu li:hover {
+    box-shadow: 15em 0 rgba(250, 248, 221, .2) inset;
+  }
+  
+  .menu li a:hover {
+    color: #1a3b4d;
+  }
+  
+  .menu li:nth-child(2) a {
+    background-position: 0 -46px;
+  }
+  
+  .menu li:nth-child(3) a {
+    background-position: 0 -92px;
+  }
+  
+  .menu li:nth-child(4) a {
+    background-position: 0 -138px;
+  }
+  
+  .menu li:nth-child(5) a {
+    background-position: 0 -184px;
+  }
+  
+  .menu li:last-child a {
+    background-position: 0 -230px;
+  }
+ .link-imagen img{
+    margin-top: 20px;
+    width: 40%
+ }
+  
   
 
   

@@ -9,32 +9,45 @@
     <title>Barnes & Noble</title>
     <link rel="stylesheet" href="css/infoPage.css">
     <link rel="stylesheet" href="css/cardsInfoPage.css">
+    <!-- <link rel="stylesheet" href="css/menu.css"> -->
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nanum+Brush+Script&display=swap" rel="stylesheet">
+    <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
 </head>
 
 <body>
-        <header>
-                <nav class="menuHorizontal">
-                    <ul class="list-menu">
-                        <li><a href="#" data-menu="mostrar-nav-izq"><i data-menu="mostrar-nav-izq" class="fas fa-bars"></i></a>
+    <header>
+        <nav class="menuHorizontal">
+            <ul class="list-menu">
+                </li>
+                <li class="link-imagen"><img src="img/barnes_and_noble_logo_png_94486.png" alt="Logo de Barnes&Noble"></li>
+                <li><a href="index.html">Applicación Librería Barnes&Noble</a></li>
+                <li id="logout">
+                    <a href="#quien">¿Quiénes somos?</a>
+                </li>
+                <li id="logout">
+                        <a href="#app">La aplicación</a>
+                    </li>
+                    <li id="logout">
+                            <a href="#usuarios">Los usuarios</a>
                         </li>
-                        <li><a href="/"><i class="far fa-home"></i>Inicio</a></li>
                         <li id="logout">
-                            <a href=""><i class="far fa-sign-out-alt"></i>Cerrar Sesión</a>
-                        </li>
-                        <li><a href="contacto.html"><i class="fal fa-address-book"></i>Contacto</a></li>
-                        <li class="link-imagen"><img src="img/logo_barnes-and-noble.png" alt="Logo de Barnes&Noble"></li>
-                    </ul>
-                </nav>
-        
-                <nav class="menuIzquierdo">
-                    <ul class="menu" id="menuDinamico">
-        
-                    </ul>
-                </nav>
-            </header>
+                                <a href="#info">Más sobre la aplicación</a>
+                            </li>
+                        <li id="logout">
+                                <a href="#quien"></a>
+                            <!-- </li>
+                <li class="link-imagen"><img src="img/logo_barnes-and-noble.png" alt="Logo de Barnes&Noble"></li> -->
+            </ul>
+        </nav>
+
+        <nav class="menuIzquierdo">
+            <ul class="menu" id="menuDinamico">
+
+            </ul>
+        </nav>
+    </header>
 
     <main>
         <div class="principal">
@@ -49,7 +62,7 @@
                 <button type="button"> <a href="index.html">Conocer más</a> </button>
             </div>
 
-            <div class="bYn">
+            <div class="bYn" id="quien">
 
                 <h2>
                     ¿Quiénes somos y qué hacemos?
@@ -64,7 +77,7 @@
                 </p>
             </div>
 
-            <div class="app">
+            <div class="app" id="app">
                 <h2>¿De que se trata nuestra aplicación?</h2>
 
                 <p>Es una plataforma que vela por el cumplimiento de los objetivos de Barnes&Nobel que buscan poner al
@@ -85,7 +98,7 @@
 
         </div>
 
-        <section class="tipoUsuario">
+        <section class="tipoUsuario" id="usuarios">
 
             <h2 class="background double"><span>Usuarios</span></h2>
 
@@ -118,7 +131,7 @@
         </section>
 
 
-        <div class="infoCards">
+        <div class="infoCards" id="info">
 
             <div class="blog-card1 blog-card spring-fever">
                 <div class="title-content">
@@ -186,5 +199,5 @@
     </footer>
 
 </body>
-
+<script src="js/menu.js"></script>
 </html>
