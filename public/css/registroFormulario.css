@@ -32,6 +32,18 @@ input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner
     position: relative;
 }
 
+.textarea {
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    border: none;
+    border-bottom: 2px solid #80d1d3;
+    outline: none;
+}
+
 .formRegistro .column .inputGroup input {
     width: 100%;
     height: 34px;
