@@ -56,9 +56,9 @@ router.get('/listarLibros', async (req, res) => {
             });
         }
     })
-        .populate('genero', 'nombre -_id')
-        .populate('categoria', 'nombre -_id')
-        .populate('autor', 'nombre -_id')
+        .populate('genero', 'nombre _id')
+        .populate('categoria', 'nombre _id')
+        .populate('autor', 'nombre _id')
         .select('titulo caratula contraportada genero categoria autor');
 });
 

@@ -1,19 +1,15 @@
 'use strict';
 
 let listaLibros = [];
-let obtenerAutorId = [];
-const containerCard = document.querySelector('#cardElements')
-const txtFiltro = document.getElementById("txtFiltro");
+const containerCard = document.querySelector('#cardElements');
 
 let mostarLibros = async (event) => {
     if (!event)
-        listaLibros = await obtenerLibrosFetch();
+        listaLibros = await obtenerLibrosMasVendidos();
 
-    let filtro = txtFiltro.value;
     containerCard.innerHTML = '';
     for (let i = 0; i < listaLibros.length; i++) {
-        if (listaLibros[i].titulo.toLowerCase().includes(filtro.toLowerCase()) || listaLibros[i].autor.nombre.toLowerCase().includes(filtro.toLowerCase()) || listaLibros[i].genero.nombre.toLowerCase().includes(filtro.toLowerCase()) || listaLibros[i].categoria.nombre.toLowerCase().includes(filtro.toLowerCase()))
-            agregarCardLibro(listaLibros[i]);
+        agregarCardLibro(listaLibros[i]);
     }
     filaNoDatos();
 };
@@ -53,16 +49,6 @@ let agregarCardLibro = function (libro, autor) {
     btnPerfil.href = "perfilLibro.html?id=" + libro._id;
     btnPerfil.innerText = 'Perfil';
     child2.appendChild(btnPerfil);
-
-    if (sessionStorage.tipoUsuario == 'Lector') {
-        let btnFormato = document.createElement('a');
-        btnFormato.setAttribute('class', 'material btnLibreria');
-        btnFormato.setAttribute('id', 'btnFormato');
-        btnFormato.innerText = 'Autor';
-        btnFormato.href = "verPerfilAutor.html?_id=" + libro.autor._id;
-        child2.appendChild(btnFormato);
-    }
-
 }
 
 
@@ -92,4 +78,3 @@ let filaNoDatos = function () {
 }
 
 mostarLibros();
-txtFiltro.addEventListener('keyup', mostarLibros);

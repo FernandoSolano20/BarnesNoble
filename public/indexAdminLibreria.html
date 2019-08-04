@@ -5,19 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Barnes & Noble</title>
-    <script src="js/validarSesionUsuario.js"></script>
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
-    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
+    <script src="js/validarSesionUsuario.js"></script>
     <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/listarLibreriasCards.css">
+    <link rel="stylesheet" href="css/searchBar.css">
+    <link rel="stylesheet" href="css/listarUsuario.css">
     <link rel="stylesheet" href="css/botones.css">
+    <link rel="stylesheet" href="css/cards.css">
+    <link rel="stylesheet" href="css/dashboard.css">
     <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
-    <link rel="stylesheet" href="css/perfiles.css">
-    <link rel="stylesheet" href="css/perfilSlider.css">
-    <link rel="stylesheet" href="css/cardSucursal.css">
+    <title>B & N - Perfil de Libreria</title>
 </head>
 
 <body>
@@ -28,9 +27,10 @@
                 </li>
                 <li><a href="/"><i class="far fa-home"></i>Inicio</a></li>
                 <li id="logout">
+
+
                     <a href=""><i class="far fa-sign-out-alt"></i>Cerrar Sesión</a>
                 </li>
-                <li><a href="contacto.html"><i class="fal fa-address-book"></i>Contacto</a></li>
                 <li class="link-imagen"><img src="img/logo_barnes-and-noble.png" alt="Logo de Barnes&Noble"></li>
             </ul>
         </nav>
@@ -42,107 +42,156 @@
         </nav>
     </header>
     <main>
-        <!-- Seccion foto Sucural -->
-        <section>
-            <div class="perfil">
-                <div class="column">
-                    <h1 id="titulo"></h1>
-                    <div class="blog-slider__container">
-                        <div class="blogSlides fade">
-                            <img id="fotoPerfil" src="img/dibujo sucursal.png">
-                            <div class="blog-slider__text" id="tiendaNombre"></div>
+
+        <div class="admin">
+            <div class="admin__main">
+                <div class="dashboard">
+                    <a href="#">
+                        <div class="dashboard__item dashboard__item--col">
+                            <div class="card littleCards">
+                                <div class="card__header">
+                                    <i class="fal fa-user"></i>
+                                </div>
+                                <div class="card__content">
+                                    <div class="card__item">
+                                        <div class="textContent">
+                                            <h2 id="userSubs">-</h2>
+                                            <p>Usuarios subcriptos</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                    </a>
+                    <a href="sucursales.html">
+                        <div class="dashboard__item dashboard__item--col">
+                            <div class="card littleCards">
+                                <div class="card__header">
+                                    <i class="far fa-store"></i>
+                                </div>
+                                <div class="card__content">
+                                    <div class="card__item">
+                                        <div class="textContent">
+                                            <h2 id="sucursal">-</h2>
+                                            <p>Sucursales</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="listarClubLectura.html">
+                        <div class="dashboard__item dashboard__item--col">
+                            <div class="card littleCards">
+                                <div class="card__header">
+                                    <i class="fal fa-users"></i>
+                                </div>
+                                <div class="card__content">
+                                    <div class="card__item">
+                                        <div class="textContent">
+                                            <h2 id="groups">-</h2>
+                                            <p>Grupos de lectura</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class="dashboard__item dashboard__item--col">
+                            <div class="card littleCards">
+                                <div class="card__header">
+                                    <i class="far fa-books"></i>
+                                </div>
+                                <div class="card__content">
+                                    <div class="card__item">
+                                        <div class="textContent">
+                                            <h2 id="librosCont">-</h2>
+                                            <p>Mis libros</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="dashboard__item dashboard__item--half">
+                        <a href="#">
+                            <div class="card littleCards">
+                                <div class="card__header">
+                                    <h4>Administrador</h4>
+                                </div>
+                                <div class="card__content">
+                                    <div class="card__item">
+                                        <div class="textContent">
+                                            <img src="img/nouser.jpg" alt="Foto de perfil libreria" id="libPerfilFoto">
+                                            <p id="nombreAdmin"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                </div>
-                <div class="column " id="informacionLibreria">
+                    <div class="dashboard__item dashboard__item--half">
+                        <a href="#">
+                            <div class="card littleCards">
+                                <div class="card__header">
+                                    <h4>Librería</h4>
+                                </div>
+                                <div class="card__content">
+                                    <div class="card__item">
+                                        <div class="textContent">
+                                            <p> Nombre Comercial: <span id="txt-nombreComercial"></span></p>
+                                            <p> Nombre Fantasia: <span id="txt-nombreFantasia"> </span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
 
                 </div>
             </div>
-        </section>
-        <section>
-
-            <!-- Modal -->
-            <!-- <div id="id01" class="w3-modal">
-        <div class="w3-modal-content w3-card-4 w3-animate-top">
-          <header class="w3-container w3-theme-l1"> 
-            <span onclick="document.getElementById('id01').style.display='none'"
-            class="w3-button w3-display-topright">×</span>
-            <h4>Oh snap! We just showed you a modal..</h4>
-            <h5>Because we can <i class="fa fa-smile-o"></i></h5>
-          </header>
-          <div class="w3-padding">
-            <p>Cool huh? Ok, enough teasing around..</p>
-            <p>Go to our <a class="w3-btn" href="/w3css/default.asp">W3.CSS Tutorial</a> to learn more!</p>
-          </div>
-          <footer class="w3-container w3-theme-l1">
-            <p>Modal footer</p>
-          </footer>
         </div>
-    </div> -->
-
-            <div class="w3-row-padding w3-center w3-margin-top">
-                <div class="w3-third">
-                    <div class="w3-card w3-container" style="min-height:400px">
-                        <h3>Mis Sucursales</h3><br>
-                        <img id="sucursales" src="img/sucursales.png">
-                        <div class="crear-contenedor">
-                            <button type="button" class="material-blue" data-action="crear" id="crear-elemento"
-                                onclick="window.location.href = ('sucursales.html');"><i
-                                    class="far fa-plus-circle"></i>Mis Sucursales</button>
-                        </div>
-                        <div class="crear-contenedor">
-                            <button type="button" class="material-blue" data-action="crear" id="crear-elemento"
-                                onclick="window.location.href = ('registrarSucursal.html');"><i
-                                    class="far fa-plus-circle"></i>Nueva Sucursal</button>
-                        </div>
-                    </div>
+        <section>
+            <div class="row">
+                <div class="localizacion" id="div-mapa">
+                    <h2>Libros más vendidos <span id="map-ubicacion"></span></h2>
                 </div>
+            </div>
+            <div class="main" id="cardElements">
 
-                <div class="w3-third">
-                    <div class="w3-card w3-container" style="min-height:400px">
-                        <h3>Mis Clubes de Lectura</h3><br>
-                        <img id="bookclub" src="img/BookClubIcon.png">
-
-                        <div class="crear-contenedor">
-                            <button type="button" class="material-blue" data-action="crear" id="crear-elemento"
-                                onclick="window.location.href = ('clubLectura.html');"><i
-                                    class="far fa-plus-circle"></i>Clubes Activos</button>
-                        </div>
-                        <div class="crear-contenedor">
-                            <button type="button" class="material-blue" data-action="crear" id="crear-elemento"
-                                onclick="window.location.href = ('registroClubLectura.html');"><i
-                                    class="far fa-plus-circle"></i>Nuevo Club</button>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="w3-third">
-                    <div class="w3-card w3-container" style="min-height:400px">
-                        <h3>Mis Ajustes</h3><br>
-                        <img id="bookclub" src="img/BookClubIcon.png">
-
-                        <div class="crear-contenedor">
-                            <button type="button" class="material-blue" data-action="crear" id="crear-elemento"
-                                onclick="window.location.href = ('perfilLibreria.html');"><i
-                                    class="far fa-plus-circle"></i>Libreria</button>
-                        </div>
-                        <div class="crear-contenedor">
-                            <button type="button" class="material-blue" data-action="crear" id="crear-elemento"
-                                onclick="window.location.href = (`perfilUsuario.html`);"><i
-                                    class="far fa-plus-circle"></i>Mi Perfil</button>
-                    </div>
-                </div>
-            </div>           
+            </div>
         </section>
-
-
+        <div class="admin">
+            <div class="admin__main">
+                <div class="dashboard">
+                    <div class="dashboard__item dashboard__item--full" id="libros">
+                        <a href="#">
+                            <div class="card">
+                                <div class="card__header">
+                                    Localización
+                                </div>
+                                <div class="card__content">
+                                    <div class="card__item">
+                                        <div class="localizacion" id="div-mapa">
+                                            <div class="containerMap">
+                                                <div id="map"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
     <footer>
         <div class="blockFooter">
             <div class="logos">
                 <a href="#"><img src="img/barnes_and_noble_logo_png_94486.png" alt="Logo de Barnes&Noble"></a>
-                <a href="#"><img src="img/barnes_and_noble_logo_png_94486.png" alt="Logo Fundacion Book for kids"></a>
+                <a href="#"><img src="img/B&NKIFDS-01.png" alt="Logo Fundacion Book for kids"></a>
             </div>
             <div class="copyrights">
                 <h3> ⓒ 2019 Valhalla</h3>
@@ -154,14 +203,17 @@
                 <a href="#"><i class="fab fa-twitter"></i></a>
             </div>
         </div>
-
     </footer>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="js/cerrarSesion.js"></script>
-    <script src="js/usuarios/servicioUsuario.js"></script>
-    <script src="js/libreria/servicioLibreria.js"></script>
     <script src="js/menu.js"></script>
-    <script src="js/libreria/controlador-Libreria-perfil.js"></script>
- </body>
+    <script src="js/usuarios/servicioUsuario.js"></script>
+    <script src="js/clubLectura/servicioClubLectura.js"></script>
+    <script src="js/landingPage/servicioLandigPage.js"></script>
+    <script src="js/maps/showMap.js"></script>
+    <script src="js/indexAdminLib/controladorIndexLibreria.js"></script>
+    <script src="js/indexAdminLib/MasVendidosCards.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKXA3_YJlVwwt1lx60eO0ljRVUKQO3fNY&callback=initMap"
+        async defer></script>
+</body>
 
 </html>

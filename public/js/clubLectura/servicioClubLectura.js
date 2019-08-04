@@ -52,3 +52,26 @@ let obtenerClubesLecturaUsuarioAdminClub = async (id) => {
     let result = await response.json();
     return result.listaClubesLectura;
 }
+
+let obtenerContClubAdministrador = async (id) => {
+    let response = await fetch('http://localhost:4000/api/clubLectura/obtenerContClubAdministrador/' + id, {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        }
+    });
+    let result = await response.json();
+    return result.count;
+}
+
+
+let obtenerClubPorId = async (id) => {
+    let response = await fetch('http://localhost:4000/api/clubLectura/listarClubLecturaPorId/' + id, {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        }
+    });
+    let result = await response.json();
+    return result;
+}

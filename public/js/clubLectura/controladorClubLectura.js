@@ -25,50 +25,50 @@ let mostrar_tabla = async (event) => {
             fila.insertCell().innerHTML = lista_clubesLectura[i]['tipoClub'];
             fila.insertCell().innerHTML = lista_clubesLectura[i]['fechaReunion'];
             fila.insertCell().innerHTML = lista_clubesLectura[i]['horaReunion'];
-      
+            fila.insertCell().innerHTML = lista_clubesLectura[i].sucursal ? lista_clubesLectura[i].sucursal.nombre : "-";
 
-        if (sessionStorage.tipoUsuario == 'Adminitrador plataforma') {
 
-            let celda_perfil = fila.insertCell();
-            let divContenedor = document.createElement("div");
-            divContenedor.setAttribute('class', 'crear-contenedor');
-            celda_perfil.appendChild(divContenedor);
-            
-            let boton_perfil = document.createElement('button');
-            boton_perfil.type = 'button';
-            boton_perfil.innerText = 'Ver información';
-            boton_perfil.dataset._id = lista_clubesLectura[i]['_id'];
-            boton_perfil.setAttribute('class', 'material-blue');
-            divContenedor.appendChild(boton_perfil);
+            if (sessionStorage.tipoUsuario == 'Adminitrador plataforma' || sessionStorage.id == (lista_clubesLectura[i].administrador ? lista_clubesLectura[i].administrador._id : "-")) {
 
-        boton_perfil.addEventListener('click', function() {
-            //console.log(this.dataset._id);
-            // window.location.href = `perfilUsuario.html?id=${this.dataset._id}`
+                let celda_perfil = fila.insertCell();
+                let divContenedor = document.createElement("div");
+                divContenedor.setAttribute('class', 'crear-contenedor');
+                celda_perfil.appendChild(divContenedor);
 
-        });
-        } else{
-            let celda_perfil = fila.insertCell();
-            let divContenedor = document.createElement("div");
-            divContenedor.setAttribute('class', 'crear-contenedor');
-            celda_perfil.appendChild(divContenedor);
-            
-            let boton_perfil = document.createElement('button');
-            boton_perfil.type = 'button';
-            boton_perfil.innerText = 'Unirme';
-            boton_perfil.dataset._id = lista_clubesLectura[i]['_id'];
-            boton_perfil.setAttribute('class', 'material-blue');
-            divContenedor.appendChild(boton_perfil);
+                let boton_perfil = document.createElement('button');
+                boton_perfil.type = 'button';
+                boton_perfil.innerText = 'Ver información';
+                boton_perfil.dataset._id = lista_clubesLectura[i]['_id'];
+                boton_perfil.setAttribute('class', 'material-blue');
+                divContenedor.appendChild(boton_perfil);
 
-        boton_perfil.addEventListener('click', function() {
-            //console.log(this.dataset._id);
-            // window.location.href = `perfilUsuario.html?id=${this.dataset._id}`
+                boton_perfil.addEventListener('click', function () {
+                    window.location.href = `perfilClubLectura.html?id=${lista_clubesLectura[i]._id}`
 
-        });
-        }
+                });
+            } else {
+                let celda_perfil = fila.insertCell();
+                let divContenedor = document.createElement("div");
+                divContenedor.setAttribute('class', 'crear-contenedor');
+                celda_perfil.appendChild(divContenedor);
 
-            
+                let boton_perfil = document.createElement('button');
+                boton_perfil.type = 'button';
+                boton_perfil.innerText = 'Unirme';
+                boton_perfil.dataset._id = lista_clubesLectura[i]['_id'];
+                boton_perfil.setAttribute('class', 'material-blue');
+                divContenedor.appendChild(boton_perfil);
+
+                boton_perfil.addEventListener('click', function () {
+                    window.location.href = `perfilClubLectura.html?id=${lista_clubesLectura[i]._id}`
+
+                });
+            }
+
+
         }
     }
+    filaNoDatos();
 };
 
 let filaNoDatos = function () {
@@ -77,7 +77,7 @@ let filaNoDatos = function () {
         fila.setAttribute('id', 'no-data');
         let celda = fila.insertCell()
         celda.innerHTML = 'No se encontró datos';
-        celda.setAttribute('colspan', '6');
+        celda.setAttribute('colspan', '7');
     }
 }
 
