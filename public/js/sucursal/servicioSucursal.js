@@ -14,17 +14,14 @@ var crearSucursal = async (sucursal) => {
 
 
 let obtenerSucursales = async() => {
-    try {
-        const response = await axios({
-            method: 'get',
-            url: 'http://localhost:4000/api/sucursal/listarSucursales',
-            responseType: 'json'
-        });
-
-        return response.data.listaSucursales;
-    } catch (error) {
-        console.log(error);
-    }
+    var response = await fetch('http://localhost:4000/api/sucursal/listarSucursales', {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        }
+    });
+    var result = await response.json();
+    return result.listaSucursales;
 };
 
 let obtenerSucursalPorId = async(id) => {

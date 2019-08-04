@@ -8,7 +8,7 @@ let usuario;
 (async () => {
     usuario = await obtenerUsuarioPorIdFetch(sessionStorage.id);
     document.getElementById('libPerfilFoto').src = usuario.usuario.img;
-    document.getElementById('nombreAdmin').innerText = usuario.usuario.nombre + " " + usuario.usuario.primerApellido; 
+    document.getElementById('nombreAdmin').innerText = usuario.usuario.nombre + " " + usuario.usuario.primerApellido;
     let libreria = usuario.usuario.libreria;
     let sucursales = libreria.sucursales;
     document.getElementById('sucursal').innerText = sucursales.length;
@@ -28,7 +28,7 @@ let usuario;
         lng: Number(libreria.localizacionLongitud)
     }
     addMarker(position, message);
-    let totLibros = libreria.ejemplares?libreria.ejemplares.length:0;
+    let totLibros = libreria.ejemplares ? libreria.ejemplares.length : 0;
     let usuariosSubs = 0;
     for (let i = 0; i < sucursales.length; i++) {
         totLibros += sucursales[i].sucursal.ejemplares.length;
@@ -44,7 +44,9 @@ let usuario;
             lng: Number(sucursales[i].sucursal.localizacionLongitud)
         }
         addMarker(position, message);
-        document.getElementById('librosCont').innerText = totLibros;
-        document.getElementById('userSubs').innerText = usuariosSubs;
     }
+    document.getElementById('librosCont').innerText = totLibros;
+    document.getElementById('userSubs').innerText = usuariosSubs;
+    let countClub = await obtenerContClubAdministrador(sessionStorage.id);
+    document.getElementById('groups').innerText = countClub;
 })();

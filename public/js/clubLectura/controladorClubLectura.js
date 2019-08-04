@@ -25,6 +25,7 @@ let mostrar_tabla = async (event) => {
             fila.insertCell().innerHTML = lista_clubesLectura[i]['tipoClub'];
             fila.insertCell().innerHTML = lista_clubesLectura[i]['fechaReunion'];
             fila.insertCell().innerHTML = lista_clubesLectura[i]['horaReunion'];
+            fila.insertCell().innerHTML = lista_clubesLectura[i].sucursal?lista_clubesLectura[i].sucursal.nombre:"-";
       
 
         if (sessionStorage.tipoUsuario == 'Adminitrador plataforma') {

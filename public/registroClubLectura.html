@@ -84,19 +84,25 @@
                     <span class="left alertHidden" id="alert-fecha-reunion">Seleccione una opción.</span>
                     <select name="dia" id="fecha-reunion-input">
                         <option value="">--Seleccione el dia de reunion--</option>
-                        <option value="1">Domingo</option>
-                        <option value="2">Lunes</option>
-                        <option value="3">Martes</option>
-                        <option value="4">Miercoles</option>
-                        <option value="5">Jueves</option>
-                        <option value="6">Viernes</option>
-                        <option value="7">Sabado</option>
+                        <option value="Domingo">Domingo</option>
+                        <option value="Lunes">Lunes</option>
+                        <option value="Martes">Martes</option>
+                        <option value="Miércoles">Miércoles</option>
+                        <option value="Jueves">Jueves</option>
+                        <option value="Viernes">Viernes</option>
+                        <option value="Sábado">Sábado</option>
                     </select>
                 </div>
                 <div class="inputGroup">
-                    <span class="left alertHidden" id="alert-hora-reunion">Debe estar dentro del horario de la sucursal.</span>
+                    <span class="left alertHidden" id="alert-hora-reunion">Debe estar dentro del horario de la
+                        sucursal.</span>
                     <label class="label" for="hora">Hora de reunion:</label>
-                    <input type="time" id="hora-reunion-input" name="hora de reunion" min="09:00" max="21:00" step="3600">
+                    <input type="time" id="hora-reunion-input" name="hora de reunion" min="09:00" max="21:00"
+                        step="3600">
+                </div>
+                <div class="inputGroup box">
+                    <span class="left alertHidden" id="alertSucursal">Seleccione una opción.</span>
+                    <select name="sucursal" id="sucursal"></select>
                 </div>
 
             </div>
@@ -131,9 +137,11 @@
     </footer>
     <script src="js/menu.js"></script>
     <script src="js/cerrarSesion.js"></script>
-    <script src="js/imagen/servicioImagen.js"></script>
+    <script src="js/usuarios/servicioUsuario.js"></script>
     <script src="js/clubLectura/servicioClubLectura.js"></script>
+    <script src="js/sucursal/servicioSucursal.js"></script>
     <script src="js/validaciones/validacionesGenerales.js"></script>
+    <script src="js/selects/controladorSelectSucursal.js"></script>
     <script src="js/clubLectura/controladorRegistrarClubLectura.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </body>

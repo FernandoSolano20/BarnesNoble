@@ -17,6 +17,8 @@
 @media screen and (min-width: 48rem) {
   .admin {
     --spacing: 2rem;
+    margin: 0px 20px;
+
   }
 }
 

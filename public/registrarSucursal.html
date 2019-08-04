@@ -91,6 +91,10 @@
                         <div id="map"></div>
                     </div>
                 </div>
+                <div class="inputGroup box alertHidden" id="selecttSucursal">
+                    <span class="left alertHidden" id="alertLibreria">Seleccione una opción.</span>
+                    <select name="sucursal" id="libreria"></select>
+                </div>
             </div>
         </form>
         <div class="crear-contenedor">
@@ -123,12 +127,14 @@
     <script src="js/maps/maps.js"></script>
     <script src="js/imagen/servicioImagen.js"></script>
     <script src="js/sucursal/servicioSucursal.js"></script>
+    <script src="js/libreria/servicioLibreria.js"></script>
     <script src="js/categoria/servicioCategoria.js"></script>
     <script src="js/autor/servicioAutor.js"></script>
     <script src="js/libros/servicioLibros.js"></script>
     <script src="js/genero/servicioGenero.js"></script>
     <script src="js/direccion/servicioDireccion.js"></script>
     <script src="js/direccion/controladorDireccion.js"></script>
+    <script src="js/selects/controladorSelectLibreria.js"></script>
     <script src="js/validaciones/validacionesGenerales.js"></script>
     <script src="js/sucursal/controladorRegistrarSucursal.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKXA3_YJlVwwt1lx60eO0ljRVUKQO3fNY&callback=initMap"

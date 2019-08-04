@@ -3,8 +3,6 @@ let listaClub;
 
 const crearTablaClub = async () => {
     listaClub = await obtenerClubesLecturaUsuarioAdminClub(sessionStorage.id);
-    let clubesCount = document.getElementById('groups')
-    clubesCount?(clubesCount.innerHTML=listaClub.length):"";
         tbodyClub.innerHTML = '';
     for (let i = 0; i < listaClub.length; i++) {
         agregarClub(listaClub[i]);

@@ -148,6 +148,13 @@ let crearMenu = async function(){
             anchor.innerHTML = "Clubes de lectura";
             anchor.href = "listarClubLectura.html";
             li.appendChild(anchor);
+
+            li = document.createElement('li');
+            listMenu.appendChild(li);
+            anchor = document.createElement('a');
+            anchor.innerHTML = "Ofertas";
+            anchor.href = "listarOfertas.html";
+            li.appendChild(anchor);
         }
         else if (sessionStorage.tipoUsuario === "Adminitrador librería") {
             //Libreria

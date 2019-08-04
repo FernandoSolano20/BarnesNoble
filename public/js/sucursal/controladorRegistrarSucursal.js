@@ -16,8 +16,10 @@ const distritoAlert = document.getElementById('alert-distrito');
 const favAlert = document.getElementById('alert-favorito');
 const mapaAlert = document.getElementById('alert-mapa');
 
+const alertLibreria = document.getElementById('alertLibreria');
+
 let obtenerDatosSucursales = async function () {
-    let error = validarNombre1() | validarCorreo() | validarTelefono() | validarProvincia() | validarCanton() | validarDistrito() | validarMapa();
+    let error = validarNombre1() | validarCorreo() | validarTelefono() | validarProvincia() | validarCanton() | validarDistrito() | validarMapa() | validarSelectLibreria();
     if (!error) {
 
         document.body.className = "loading";
@@ -31,7 +33,6 @@ let obtenerDatosSucursales = async function () {
         let sucursal = {
             nombre: nombreInput1.value,
             correo: correoInput.value,
-            img: imgResult.result.secure_url,
             telefono: telefonoInput.value,
             localizacionLatitud: markers[0].position.lat(),
             localizacionLongitud: markers[0].position.lng(),
@@ -39,7 +40,12 @@ let obtenerDatosSucursales = async function () {
             provincia: textProvincia,
             canton: textCanton,
             distrito: textDistrito,
-            idLibreria: adminLib.usuario.libreria
+        }
+        if(sessionStorage.tipoUsuario == "Adminitrador plataforma"){
+            sucursal.idLibreria = libreriaSelect.value;
+        }
+        else{
+            sucursal.idLibreria = adminLib.usuario.libreria;
         }
         let nuevoSucursal = await crearSucursal(sucursal);
         document.body.className = "";
@@ -136,6 +142,17 @@ let validarDistrito = function () {
     return !(validarSelect(elementSelect));
 }
 
+let validarSelectLibreria = function () {
+    let elementSelect = {
+        value: libreriaSelect.value,
+        alert: alertLibreria,
+        input: libreriaSelect
+    }
+    if(sessionStorage.tipoUsuario == "Adminitrador plataforma"){
+        return !(validarSelect(elementSelect));
+    }   
+}
+
 let validarSennas = function () {
     let elementText = {
         value: sennasInput.value,
@@ -153,5 +170,6 @@ telefonoInput.addEventListener('blur', validarTelefono);
 sectionProvincia.addEventListener('change', validarProvincia);
 sectionCantones.addEventListener('change', validarCanton);
 sectionDistritos.addEventListener('change', validarDistrito);
+libreriaSelect.addEventListener('change', validarSelectLibreria);
 document.getElementById('registrar').addEventListener('click', obtenerDatosSucursales);
 document.getElementById('map').addEventListener('click', validarMapa);

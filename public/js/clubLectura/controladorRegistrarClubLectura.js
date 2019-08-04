@@ -14,9 +14,11 @@ const fechaReunionAlert = document.getElementById('alert-fecha-reunion');
 const horaReunionInput = document.getElementById('hora-reunion-input');
 const horaReunionAlert = document.getElementById('alert-hora-reunion');
 
+const sucursalAlert  = document.getElementById('alertSucursal');
+
 
 let validarDatosClubLectura = async function () {
-    let error = validarNombre() | validarTema() | validarTipoClub()  | validarFechaReunion() | validarHoraReunion();
+    let error = validarNombre() | validarTema() | validarTipoClub()  | validarFechaReunion() | validarHoraReunion() | validarSelectSucursal();
     if (!error) {
 
         let nombre = nombreInput.value;
@@ -36,7 +38,8 @@ let validarDatosClubLectura = async function () {
             tipoClub: tipoClubInput,
             fechaReunion: fechaReunion,
             horaReunion: horaReunion,
-            administrador: sessionStorage.id
+            administrador: sessionStorage.id,
+            sucursal: sucursalSelect.value
         }
 
         let nuevoClubLectura = await registrarClubLectura(clubLectura);
@@ -112,10 +115,20 @@ let validarHoraReunion = function () {
     return !(noVacio(elementTime));
 }
 
+let validarSelectSucursal = function () {
+    let elementSelect = {
+        value: sucursalSelect.value,
+        alert: sucursalAlert,
+        input: sucursalSelect
+    }
+    return !(validarSelect(elementSelect));
+}
+
 nombreInput.addEventListener('blur', validarNombre);
 temaInput.addEventListener('blur', validarTema);
 for (let i = 0; i < tipoClubInput.length; i++)
 tipoClubInput[i].addEventListener('change', validarTipoClub);
 fechaReunionInput.addEventListener('change', validarFechaReunion);
-horaReunionInput.addEventListener('change', validarHoraReunion);
+horaReunionInput.addEventListener('blur', validarHoraReunion);
+sucursalSelect.addEventListener('change', validarSelectSucursal);
 document.getElementById('registrar').addEventListener('click', validarDatosClubLectura);

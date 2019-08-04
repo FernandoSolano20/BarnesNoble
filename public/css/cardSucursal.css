@@ -47,17 +47,21 @@
 	display: block;
 	padding: 5px 0px;
 	font-size: 14px;
-	color: #9E9E9E;
+	color: #000000c7;;
 	text-decoration: none;
-}
-
-.linkCard:hover {
-	background-color: #FAFAFA;
-	color: inherit;
 }
 
 .containerCards .card ul {
 	margin-top: 10px;
 	padding: 15px 0px;
-	background-color: #FAFAFA;
+	background-color:#35627ca8;
+	color: white !important;
+}
+
+.containerCards .card ul:hover {
+	background-color:#35627c7a;
+}
+
+.containerCards .card ul a {
+	color: white;
 }

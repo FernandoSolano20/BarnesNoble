@@ -1,18 +1,14 @@
 'use strict';
 
 let obtenerLibrerias  = async () => {
-    try{ 
-        //Fetch data from an url endpoint:
-        const response = await axios({
-            method: 'get',
-            url: 'http://localhost:4000/api/listarLibrerias',  
-            responseType: 'json'   
-        });
-        const result = await response;
-        return result.data.listaLibrerias;
-    }catch (error){
-        console.log(error);
-    } 
+    var response = await fetch('http://localhost:4000/api/listarLibrerias', {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        }
+    });
+    var result = await response.json();
+    return result.listaLibrerias;
 };
 
 let obtenerLibreriaId = async(_id) => {

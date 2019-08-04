@@ -59,7 +59,7 @@ let agregarCardLibro = function (libro, autor) {
         btnFormato.setAttribute('class', 'material btnLibreria');
         btnFormato.setAttribute('id', 'btnFormato');
         btnFormato.innerText = 'Autor';
-        btnFormato.href = "verPerfilAutor.html?_id=" + libro._id;
+        btnFormato.href = "verPerfilAutor.html?_id=" + libro.autor._id;
         child2.appendChild(btnFormato);
     }
 
