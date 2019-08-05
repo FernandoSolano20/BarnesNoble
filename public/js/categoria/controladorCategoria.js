@@ -111,7 +111,9 @@ let agregarFilaCategoria = function (categoria) {
     let fila = tbody.insertRow();
     fila.setAttribute('data-id', categoria._id);
     fila.insertCell().innerHTML = categoria.nombre;
-    fila.insertCell().innerHTML = categoria.descripcion;
+    let descripcionFila = fila.insertCell();
+    descripcionFila.innerHTML = categoria.descripcion;
+    descripcionFila.setAttribute('class','left');
 
     let editarCelda = fila.insertCell();
     let editar = document.createElement('i');
