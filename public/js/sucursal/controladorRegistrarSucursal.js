@@ -81,7 +81,7 @@ let validarNombre1 = function () {
         alert: nombreAlert1,
         input: nombreInput1
     }
-    return !(noVacio(elementText) && validarTexto(elementText));
+    return !(noVacio(elementText) && validarTextoNumero(elementText));
 }
 
 
