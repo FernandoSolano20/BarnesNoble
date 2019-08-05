@@ -108,3 +108,7 @@
 .crear-contenedor .material-blue i {
     margin-right: 15px;
 } */
+
+.contenedor-tabla .tabla tbody .left {
+    text-align: left;
+}
