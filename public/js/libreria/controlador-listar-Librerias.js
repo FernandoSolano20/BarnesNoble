@@ -43,7 +43,7 @@ let mostrar_tabla = async (event) => {
             fila.insertCell().innerHTML = listaLibrerias[i]['nombreComercial'];
             fila.insertCell().innerHTML = listaLibrerias[i]['nombreFantasia'];
             fila.insertCell().innerHTML = listaLibrerias[i]['provincia'];
-            fila.insertCell().innerHTML = listaLibrerias[i]['provincia'];
+            fila.insertCell().innerHTML = listaLibrerias[i]['canton'];
             fila.insertCell().innerHTML = listaLibrerias[i]['distrito'];
 
             let celda_perfil = fila.insertCell();
