@@ -30,10 +30,6 @@
     vertical-align: middle;
 }
 
-.contenedor-tabla .tabla tbody td:nth-child(2) {
-    text-align: justify;
-}
-
 .contenedor-tabla .tabla tbody td i {
     font-size: 25px;
 }

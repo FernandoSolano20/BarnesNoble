@@ -9,7 +9,7 @@ let crearTabla = async (event) => {
 
     tbody.innerHTML = '';
     for (let i = 0; i < listaAutores.length; i++) {
-        if (listaAutores[i].nombre.toLowerCase().includes(filtro.toLowerCase())) {
+        if (listaAutores[i].nombre.toLowerCase().includes(filtro.toLowerCase()) || listaAutores[i].nombreArtistico.toLowerCase().includes(filtro.toLowerCase())) {
             agregarFilaAutores(listaAutores[i]);
         }
     }
@@ -37,6 +37,7 @@ let agregarFilaAutores = function (autor) {
     let fila = tbody.insertRow();
     fila.setAttribute('data-id', autor._id);
     fila.insertCell().innerHTML = autor.nombre;
+    fila.insertCell().innerHTML = autor.nombreArtistico;
 
     let editarCelda = fila.insertCell();
     let editar = document.createElement('i');

@@ -90,7 +90,6 @@
 
 .column {
     display: grid;
-    grid-template-columns: 70% 70%;
 }
 
 .columna2 {
