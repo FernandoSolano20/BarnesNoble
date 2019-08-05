@@ -58,7 +58,7 @@ router.get('/listarLibros', async (req, res) => {
     })
         .populate('genero', 'nombre _id')
         .populate('categoria', 'nombre _id')
-        .populate('autor', 'nombre _id')
+        .populate('autor', 'nombre nombreArtistico _id')
         .select('titulo caratula contraportada genero categoria autor');
 });
 
@@ -103,7 +103,7 @@ router.get('/listarMasVendidos', function (req, res) {
         }
     }).limit(25).sort(criterioOrden)
 
-        .populate('autor', 'nombre -_id')
+        .populate('autor', 'nombre nombreArtistico -_id')
         .populate('genero', 'nombre -_id')
         .populate('categoria', 'nombre -_id')
         .select('titulo caratula autor genero categoria');
