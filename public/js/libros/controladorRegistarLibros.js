@@ -82,7 +82,7 @@ let validarTitulo = function () {
         alert: tituloAlert,
         input: tituloInput
     }
-    return !(noVacio(elementText));
+    return !(noVacio(elementText) && validarTextoNumero(elementText));
 }
 
 let validarFotoPortada = function () {
@@ -109,7 +109,7 @@ let validarResenna = function () {
         alert: resennaAlert,
         input: resennaInput
     }
-    return !(noVacio(elementText));
+    return !(noVacio(elementText) && validarTextoNumero(elementText));
 }
 
 let validarAutor = function () {

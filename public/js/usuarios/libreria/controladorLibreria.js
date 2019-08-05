@@ -270,7 +270,7 @@ let validarNombreComercial = function () {
         alert: nombreComercialAlert,
         input: nombreComercialInput
     }
-    return !(noVacio(elementText) && validarTexto(elementText));
+    return !(noVacio(elementText) && validarTextoNumero(elementText));
 }
 
 let validarNombreFantasia = function () {
@@ -279,7 +279,7 @@ let validarNombreFantasia = function () {
         alert: nombreFantasiaAlert,
         input: nombreFantasiaInput
     }
-    return !(noVacio(elementText) && validarTexto(elementText));
+    return !(noVacio(elementText) && validarTextoNumero(elementText));
 }
 
 let validarTelefono = function () {
