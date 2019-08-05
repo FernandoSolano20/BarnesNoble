@@ -144,7 +144,7 @@ let validarResenna = function () {
         alert: alertResenna,
         input: inputResenna
     }
-    return !(noVacio(validarRes) && validarTexto(validarRes));
+    return !(noVacio(validarRes));
 };
 
 let validarFotoPerfil = function () {
