@@ -62,8 +62,19 @@ let mostrar_tabla = async (event) => {
             divContendor.appendChild(btnPerfil);
         }
     }
+    filaNoDatos();
 };
 
 mostrar_tabla();
 
 txtFiltro.addEventListener('keyup', mostrar_tabla);
+
+let filaNoDatos = function () {
+    if (listaLibrerias.length === 0 || tbody.childElementCount === 0) {
+        let fila = tbody.insertRow();
+        fila.setAttribute('id', 'no-data');
+        let celda = fila.insertCell()
+        celda.innerHTML = 'No se encontró datos';
+        celda.setAttribute('colspan', '6');
+    }
+}

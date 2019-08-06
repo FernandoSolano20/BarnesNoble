@@ -114,7 +114,6 @@ html{
     grid-template-rows: auto;
     padding: 40px;
     grid-gap: 100px;
-    text-align: center;
     background-color: #80d1d3;
     padding: 40px;
     margin-bottom: 30px;
@@ -126,7 +125,6 @@ html{
 .misionVision h3{
   font-size: 1.5rem;
   padding: 10px;
-
 }
   
   .valores1{
@@ -181,7 +179,6 @@ html{
   }
   .cardValor p{
     padding: 10px;
-    text-align: center;
     margin: 0 auto;
     line-height: 20px;
   }
