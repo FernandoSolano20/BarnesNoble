@@ -65,3 +65,17 @@
 .containerCards .card ul a {
 	color: white;
 }
+
+.cardsSucursal{
+	position: relative;
+}
+
+.linkLast{
+	margin-bottom: 35%;
+}
+
+.containerCards .card ul{
+	position: absolute;
+    width: 100%;
+    bottom: 0px;
+}

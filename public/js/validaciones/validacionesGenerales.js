@@ -1,4 +1,5 @@
 let regexText = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+(\s*[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*)*[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/;
+let regexTextNumber = /^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ,.\s]+(\s*[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ,.\s]*)*[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ,.\s]+$/;
 let regexEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 let regexPassport = /^[A-Z0-9<]{9}[0-9]{1}[A-Z]{3}[0-9]{7}[A-Z]{1}[0-9]{7}[A-Z0-9<]{14}[0-9]{2}$/;
 
@@ -29,6 +30,20 @@ let validarNumeros = function (elementos) {
 let validarTexto = function (elementos) {
     if (!regexText.test(elementos.value)) {
         elementos.alert.innerText = "Solo debe tener letras."
+        elementos.alert.className = elementos.alert.className.replace("alertHidden", "");
+        elementos.input.className = elementos.input.className.replace("inputError", "");
+        elementos.input.className = elementos.input.className + " inputError";
+        return false;
+    }
+    elementos.alert.className = elementos.alert.className.replace("alertHidden", "");
+    elementos.alert.className = elementos.alert.className + " alertHidden";
+    elementos.input.className = elementos.input.className.replace("inputError", "");
+    return true;
+}
+
+let validarTextoNumero = function (elementos) {
+    if (!regexTextNumber.test(elementos.value)) {
+        elementos.alert.innerText = "Solo debe tener letras o números."
         elementos.alert.className = elementos.alert.className.replace("alertHidden", "");
         elementos.input.className = elementos.input.className.replace("inputError", "");
         elementos.input.className = elementos.input.className + " inputError";

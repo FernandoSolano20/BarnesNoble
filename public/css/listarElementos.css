@@ -80,6 +80,6 @@
     min-width: 0px;
 }
 
-.contenedor-tabla .tabla tbody .justify {
-    text-align: justify;
+.contenedor-tabla .tabla tbody .left {
+    text-align: left;
 }

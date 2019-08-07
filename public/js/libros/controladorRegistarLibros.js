@@ -25,36 +25,44 @@ let obtenerDatosLibro = async function () {
 
         let imgValue = document.getElementById('img1');
         let imgResult1 = await crearImagen(imgValue);
+        if (imgResult1.success) {
+            imgValue = document.getElementById('img2');
+            let imgResult2 = await crearImagen(imgValue);
+            if (imgResult2.success) {
 
-        imgValue = document.getElementById('img2');
-        let imgResult2 = await crearImagen(imgValue);
-        if (imgResult1.success && imgResult2.success) {
-
-            let libro = {
-                titulo: tituloInput.value,
-                caratula: imgResult1.result.secure_url,
-                contraportada: imgResult2.result.secure_url,
-                autor: autorSelect.value,
-                genero: generoSelect.value,
-                categoria: categoriaSelect.value,
-                resenna: resennaInput.value
-            }
-            let nuevoLibro = await registrarLibros(libro);
-            document.body.className = "";
-            if (nuevoLibro.success) {
-                Swal.fire({
-                    type: 'success',
-                    title: nuevoLibro.message,
-                    showCloseButton: true,
-                    focusConfirm: false,
-                    confirmButtonText:
-                        '<a href="http://localhost:3000/listarLibrosCards.html" class="linkPage">Ok</a>'
-                });
+                let libro = {
+                    titulo: tituloInput.value,
+                    caratula: imgResult1.result.secure_url,
+                    contraportada: imgResult2.result.secure_url,
+                    autor: autorSelect.value,
+                    genero: generoSelect.value,
+                    categoria: categoriaSelect.value,
+                    resenna: resennaInput.value
+                }
+                let nuevoLibro = await registrarLibros(libro);
+                document.body.className = "";
+                if (nuevoLibro.success) {
+                    Swal.fire({
+                        type: 'success',
+                        title: nuevoLibro.message,
+                        showCloseButton: true,
+                        focusConfirm: false,
+                        confirmButtonText:
+                            '<a href="http://localhost:3000/listarLibrosCards.html" class="linkPage">Ok</a>'
+                    });
+                }
+                else {
+                    Swal.fire({
+                        type: 'error',
+                        title: nuevoLibro.message
+                    });
+                }
             }
             else {
+                document.body.className = "";
                 Swal.fire({
                     type: 'error',
-                    title: nuevoLibro.message
+                    title: imgResult2.message
                 });
             }
         }
@@ -82,7 +90,7 @@ let validarTitulo = function () {
         alert: tituloAlert,
         input: tituloInput
     }
-    return !(noVacio(elementText) && validarTexto(elementText));
+    return !(noVacio(elementText) && validarTextoNumero(elementText));
 }
 
 let validarFotoPortada = function () {
@@ -109,7 +117,7 @@ let validarResenna = function () {
         alert: resennaAlert,
         input: resennaInput
     }
-    return !(noVacio(elementText));
+    return !(noVacio(elementText) && validarTextoNumero(elementText));
 }
 
 let validarAutor = function () {

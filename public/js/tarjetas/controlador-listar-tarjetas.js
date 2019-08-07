@@ -60,7 +60,7 @@ let filtrar_tabla = async () => {
 
     for (let i = 0; i < listaTarjetas.length; i++) {
 
-        if (listaTarjetas[i]['nombre1'].toLowerCase().includes(filtro) || listaTarjetas[i]['tipoTarjeta'].toLowerCase().includes(filtro)) {
+        if (listaTarjetas[i]['nombre1'].toLowerCase().includes(filtro) || listaTarjetas[i]['tipoTarjeta'].toLowerCase().includes(filtro) || String(listaTarjetas[i]['numTarjeta']).includes(filtro)) {
             let fila = tbody.insertRow();
             fila.insertCell().innerHTML = listaTarjetas[i]['nombre1'];
             fila.insertCell().innerHTML = listaTarjetas[i]['tipoTarjeta'];

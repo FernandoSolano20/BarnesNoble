@@ -27,16 +27,19 @@ let mostrar_tabla = async (event) => {
             tr.innerHTML = 'Librería';
             fila.appendChild(tr);
         }
-        tr = document.createElement('th');
-        tr.innerHTML = 'Editar';
-        fila.appendChild(tr);
-        tr = document.createElement('th');
-        tr.innerHTML = 'Eliminar';
-        fila.appendChild(tr);
-        tr = document.createElement('th');
-        tr.innerHTML = 'Activar/Desactivar';
-        fila.appendChild(tr);
-        fila.appendChild(tr);
+        if (sessionStorage.tipoUsuario != 'Lector') {
+            tr = document.createElement('th');
+            tr.innerHTML = 'Editar';
+            fila.appendChild(tr);
+            tr = document.createElement('th');
+            tr.innerHTML = 'Eliminar';
+            fila.appendChild(tr);
+            tr = document.createElement('th');
+            tr.innerHTML = 'Activar/Desactivar';
+            fila.appendChild(tr);
+            fila.appendChild(tr);
+        }
+
         tr = document.createElement('th');
         tr.innerHTML = 'Perfil';
         fila.appendChild(tr);
@@ -86,7 +89,7 @@ let mostrar_tabla = async (event) => {
 
 let agregarFilaSucursal = function (sucursal, libreria) {
     let filtro = txt_filtro.value.toLowerCase();
-    if (sucursal['nombre'].toLowerCase().includes(filtro) || sucursal['correo'].toLowerCase().includes(filtro) || sucursal['telefono'].toLowerCase().includes(filtro) || (libreria?libreria:"").toLowerCase().includes(filtro)) {
+    if (sucursal['nombre'].toLowerCase().includes(filtro) || sucursal['correo'].toLowerCase().includes(filtro) || sucursal['telefono'].toLowerCase().includes(filtro) || (libreria ? libreria : "").toLowerCase().includes(filtro)) {
         let fila = tbody.insertRow();
         fila.insertCell().innerHTML = sucursal['nombre'];
         fila.insertCell().innerHTML = sucursal['correo'];
@@ -96,30 +99,32 @@ let agregarFilaSucursal = function (sucursal, libreria) {
             fila.insertCell().innerHTML = libreria;
         }
 
-        let editarCelda = fila.insertCell();
-        let editar = document.createElement('i');
-        editar.setAttribute('class', 'far fa-edit');
-        editar.setAttribute('data-action', 'editar');
-        editarCelda.appendChild(editar);
+        if (sessionStorage.tipoUsuario != 'Lector') {
+            let editarCelda = fila.insertCell();
+            let editar = document.createElement('i');
+            editar.setAttribute('class', 'far fa-edit');
+            editar.setAttribute('data-action', 'editar');
+            editarCelda.appendChild(editar);
 
-        let eliminarCelda = fila.insertCell();
-        let eliminar = document.createElement('i');
-        eliminar.setAttribute('class', 'fal fa-trash-alt');
-        eliminar.setAttribute('data-action', 'borrar');
-        eliminarCelda.appendChild(eliminar);
+            let eliminarCelda = fila.insertCell();
+            let eliminar = document.createElement('i');
+            eliminar.setAttribute('class', 'fal fa-trash-alt');
+            eliminar.setAttribute('data-action', 'borrar');
+            eliminarCelda.appendChild(eliminar);
 
-        let estadoCelda = fila.insertCell();
+            let estadoCelda = fila.insertCell();
 
-        let estadoInput = document.createElement('input');
-        estadoInput.setAttribute('class', 'switch');
-        estadoInput.setAttribute('id', sucursal._id);
-        estadoInput.setAttribute('type', 'checkbox');
-        estadoCelda.appendChild(estadoInput);
+            let estadoInput = document.createElement('input');
+            estadoInput.setAttribute('class', 'switch');
+            estadoInput.setAttribute('id', sucursal._id);
+            estadoInput.setAttribute('type', 'checkbox');
+            estadoCelda.appendChild(estadoInput);
 
-        let estadoLabel = document.createElement('label');
-        estadoLabel.setAttribute('data-action', 'estado');
-        estadoLabel.setAttribute('for', sucursal._id);
-        estadoCelda.appendChild(estadoLabel);
+            let estadoLabel = document.createElement('label');
+            estadoLabel.setAttribute('data-action', 'estado');
+            estadoLabel.setAttribute('for', sucursal._id);
+            estadoCelda.appendChild(estadoLabel);
+        }
 
         let celda_perfil = fila.insertCell();
         let divContendor = document.createElement("div");

@@ -165,7 +165,7 @@ let partialInformacionLibreria = function (contenedor) {
     let sucursales = libreria.listaLibrerias.sucursales;
     for (let i = 0; i < sucursales.length; i++) {
         let card = document.createElement('div');
-        card.setAttribute('class', 'card');
+        card.setAttribute('class', 'card cardsSucursal');
         containerSucursal.appendChild(card);
 
         let h3 = document.createElement('h3');
@@ -180,7 +180,7 @@ let partialInformacionLibreria = function (contenedor) {
         card.appendChild(anchorEmail);
 
         let anchorTelefono = document.createElement('a');
-        anchorTelefono.setAttribute('class', 'linkCard');
+        anchorTelefono.setAttribute('class', 'linkCard linkLast');
         anchorTelefono.setAttribute('href', 'http://localhost:3000/perfilSucursal.html?id='+sucursales[i].sucursal._id);
         anchorTelefono.innerText = sucursales[i].sucursal.telefono;
         card.appendChild(anchorTelefono);

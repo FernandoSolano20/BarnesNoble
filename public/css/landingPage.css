@@ -1,9 +1,9 @@
 /* Estlos SearchBar */
+
 .subcontenedor {
   width: 80%;
   margin: 0 auto;
   padding: 50px;
-
 }
 
 .subcontenedor .busqueda {
@@ -48,11 +48,12 @@
 .subcontenedor .busqueda .buscar span {
   display: none;
 }
+
 /* Fin Estlos SearchBar */
 
-
 /* Estilos de Secion Slider */
-h2{
+
+h2 {
   font-size: 1.8rem;
   font-weight: 800;
   margin: 26px;
@@ -62,7 +63,7 @@ h2{
 }
 
 .masVendidos {
-  background-color:#80d1d3;
+  background-color: #80d1d3;
 }
 
 .wrapper {
@@ -83,31 +84,30 @@ h2{
   position: absolute;
 }
 
-.wrapper button{
+.wrapper button {
   padding: 8px;
   border-radius: 50%;
   width: 34px;
   height: 34px;
   text-align: center;
   border: none;
-  background:  #315d7494;
+  background: #315d7494;
 }
 
-
-.card img{
+.card img {
   width: auto;
   height: 200px;
   margin-top: 20px;
   margin-bottom: 10px;
 }
 
-.card h3{
+.card h3 {
   font-size: 1rem;
   padding: 5px;
   text-align: center;
 }
 
-.card p, .card form{
+.card p, .card form {
   font-size: 12px;
   font-weight: 100;
   padding: 3px;
@@ -126,12 +126,12 @@ h2{
   transition: all 1s ease;
 }
 
-.centerFlex{
+.centerFlex {
   justify-content: center;
 }
 
 .card {
-  background:#ffffff;
+  background: #ffffff;
   min-width: 200px;
   max-width: 200px;
   margin-right: 1rem;
@@ -140,36 +140,35 @@ h2{
   text-align: center;
   overflow: hidden;
 }
+
 /* Fin Estilos  Slider */
 
 /* Estilos Club de Lectura */
 
-.clubLectura{
+.clubLectura {
   display: grid;
   grid-template-columns: 3fr 2fr;
   grid-template-rows: auto;
   grid-gap: 60px;
   margin: 60px;
-
 }
 
-.clubLectura img{
+.clubLectura img {
   display: block;
   width: 100%;
   box-shadow: 0px 0px 10px rgba(34, 34, 34, 0.438);
 }
 
-.clubLectura p{
+.clubLectura p {
   font-weight: 700;
   line-height: 20px;
-
 }
 
 /* Fin Estilos Club de Lectura */
 
 /* Estilos Mejor Calificados */
 
-.mejorCalificados{
+.mejorCalificados {
   background-color: #80d1d3;
 }
 
@@ -181,11 +180,11 @@ input[type="radio"] {
   font-size: 20px;
 }
 
-.fas.blanco{
+.fas.blanco {
   font-weight: 400;
 }
 
-.mejorCalificados .card{
+.mejorCalificados .card {
   background: #f2a5a083;
   min-width: 200px;
   height: 100%;
@@ -197,27 +196,32 @@ input[type="radio"] {
 
 /* Menu */
 
-.menuLP img{
+.menuLP img {
   width: 60%;
   padding: 10px;
   margin-top: 10px;
 }
 
-.list-menuLP{
+.list-menuLP {
   margin: 0 auto;
   display: inline;
 }
 
-.list-menuLP{
+.list-menuLP {
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
   grid-template-rows: auto;
 }
-.linksInternos{
+
+.list-menuLPFour {
+  grid-template-columns: 0.2fr 1fr 3fr 1fr;
+}
+
+.linksInternos {
   float: left;
 }
 
-.btn_usuarios button{
+.btn_usuarios button {
   background: #f6c249;
   font-size: 12px;
   margin-left: 100px;
@@ -229,23 +233,24 @@ input[type="radio"] {
   box-shadow: 0 0 5px;
 }
 
-.menuLP button a{
+.menuLP button a {
   text-decoration: none;
   font-family: 'Roboto' sans-serif;
   color: #ffffff;
 }
 
-.menuLP button:hover{
+.menuLP button:hover {
   background: #e9ab1bea;
   --webkit-transition: all .5s;
   -o-transition: all .5s;
 }
 
-.cta_btn{
-    text-align: center;
+.cta_btn {
+  text-align: center;
 }
-.cta_btn button{
-  background:  #f6c249;
+
+.cta_btn button {
+  background: #f6c249;
   font-size: 12px;
   border-radius: 50px;
   border: none;
@@ -254,7 +259,8 @@ input[type="radio"] {
   color: #ffffff;
   box-shadow: 0 0 5px;
 }
- .cta_btn button  a{
+
+.cta_btn button a {
   text-decoration: none;
   font-weight: 400;
   font-family: 'Roboto', sans-serif;
@@ -262,7 +268,8 @@ input[type="radio"] {
   font-size: 1rem;
   line-height: 56px;
 }
- .cta_btn button:hover {
+
+.cta_btn button:hover {
   background: #e9ab1bea;
   --webkit-transition: all .5s;
   -o-transition: all .5s;
@@ -270,14 +277,13 @@ input[type="radio"] {
 
 header .menuHorizontal ul li a {
   color: #fff;
-    display: block;
-    text-decoration: none;
-    padding-top: 20px;
-    padding-left: 8px;
+  display: block;
+  text-decoration: none;
+  padding-top: 20px;
+  padding-left: 8px;
 }
 
-.noData{
+.noData {
   line-height: 285px;
   justify-content: center;
 }
-

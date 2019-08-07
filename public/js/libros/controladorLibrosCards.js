@@ -12,7 +12,7 @@ let mostarLibros = async (event) => {
     let filtro = txtFiltro.value;
     containerCard.innerHTML = '';
     for (let i = 0; i < listaLibros.length; i++) {
-        if (listaLibros[i].titulo.toLowerCase().includes(filtro.toLowerCase()) || listaLibros[i].autor.nombre.toLowerCase().includes(filtro.toLowerCase()) || listaLibros[i].genero.nombre.toLowerCase().includes(filtro.toLowerCase()) || listaLibros[i].categoria.nombre.toLowerCase().includes(filtro.toLowerCase()))
+        if (listaLibros[i].titulo.toLowerCase().includes(filtro.toLowerCase()) || listaLibros[i].autor.nombre.toLowerCase().includes(filtro.toLowerCase()) || listaLibros[i].autor.nombreArtistico.toLowerCase().includes(filtro.toLowerCase()) || listaLibros[i].genero.nombre.toLowerCase().includes(filtro.toLowerCase()) || listaLibros[i].categoria.nombre.toLowerCase().includes(filtro.toLowerCase()))
             agregarCardLibro(listaLibros[i]);
     }
     filaNoDatos();
@@ -54,7 +54,16 @@ let agregarCardLibro = function (libro, autor) {
     btnPerfil.innerText = 'Perfil';
     child2.appendChild(btnPerfil);
 
-    if (sessionStorage.tipoUsuario == 'Lector') {
+    if (sessionStorage.tipoUsuario == 'Adminitrador plataforma') {
+        let btnFormato = document.createElement('a');
+        btnFormato.setAttribute('class', 'material btnLibreria');
+        btnFormato.setAttribute('id', 'btnFormato');
+        btnFormato.innerText = 'Añadir formato';
+        btnFormato.setAttribute('style','line-height:normal')
+        btnFormato.href = "formatoLibro.html?id=" + libro._id;
+        child2.appendChild(btnFormato);
+    }
+    else{
         let btnFormato = document.createElement('a');
         btnFormato.setAttribute('class', 'material btnLibreria');
         btnFormato.setAttribute('id', 'btnFormato');

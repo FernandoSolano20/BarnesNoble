@@ -32,7 +32,7 @@ let crearTabla = async (event) => {
 
     tbody.innerHTML = '';
     for (let i = 0; i < listaOfertas.listaOfertas.length; i++) {
-        if (listaOfertas.listaOfertas[i].nombre.toLowerCase().includes(filtro.toLowerCase()) || listaOfertas.listaOfertas[i].descripcion.toLowerCase().includes(filtro.toLowerCase())) {
+        if (listaOfertas.listaOfertas[i].nombre.toLowerCase().includes(filtro.toLowerCase()) || listaOfertas.listaOfertas[i].descripcion.toLowerCase().includes(filtro.toLowerCase()) || (listaOfertas.listaOfertas[i].autor?listaOfertas.listaOfertas[i].autor.nombre:"").toLowerCase().includes(filtro.toLowerCase()) || (listaOfertas.listaOfertas[i].genero?listaOfertas.listaOfertas[i].genero.nombre:"").toLowerCase().includes(filtro.toLowerCase()) || (listaOfertas.listaOfertas[i].categoria?listaOfertas.listaOfertas[i].categoria.nombre:"").toLowerCase().includes(filtro.toLowerCase())) {
             agregarFilaGenero(listaOfertas.listaOfertas[i]);
         }
 
@@ -51,18 +51,20 @@ let agregarFilaGenero = function (listaOfertas) {
     fila.insertCell().innerHTML = listaOfertas.nombre + " " + listaOfertas.descripcion;
     let descripcion = "";
     if (listaOfertas.autor)
-        descripcion = "Autor: " + listaOfertas.autor.nombre + "<br>";
+        descripcion += "Autor: " + listaOfertas.autor.nombre + "<br>";
 
     if (listaOfertas.categoria)
-        descripcion = "Categoría: " + listaOfertas.categoria.nombre + "<br>";
+        descripcion += "Categoría: " + listaOfertas.categoria.nombre + "<br>";
 
     if (listaOfertas.libro)
-        descripcion = "Libro: " + listaOfertas.libro.titulo + "<br>";
+        descripcion += "Libro: " + listaOfertas.libro.titulo + "<br>";
 
     if (listaOfertas.genero)
-        descripcion = "Género: " + listaOfertas.genero.nombre + "<br>";
+        descripcion += "Género: " + listaOfertas.genero.nombre + "<br>";
 
-    fila.insertCell().innerHTML = descripcion;
+    let descripcionFila = fila.insertCell();
+    descripcionFila.innerHTML = descripcion;
+    descripcionFila.setAttribute('class','left');
     if (listaOfertas.sucursal) {
         fila.insertCell().innerHTML = listaOfertas.sucursal.nombre;
     }
