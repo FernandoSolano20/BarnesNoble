@@ -38,7 +38,7 @@ let mostrar_tabla = async () => {
         btnPerfil.dataset._id = listaTarjetas[i]['_id'];
         btnPerfil.setAttribute('class', 'material-blue')
         btnPerfil.addEventListener('click', function () {
-            window.location.href = "#";
+            window.location.href = "modificarTarjeta.html";
         });
     }
     filaNoDatos();
