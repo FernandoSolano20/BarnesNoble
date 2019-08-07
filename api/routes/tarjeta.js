@@ -85,28 +85,38 @@ router.get('/listarTarjetasPorId/:id', function (req, res) {
     });
 });
 
+router.delete('/eliminarTarjeta/:id', function (req, res) {
+    Categoria.findByIdAndRemove(req.params.id, function (err) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'La tarjeta no se pudo eliminar',
+                err
+            });
+        }
+        return res.status(200).json({
+            success: true,
+            message: "Tarjeta fue elimnada"
+        });
+    });
+});
+
+router.update('/actualizarTarjeta/:id', function (req, res) {
+    Categoria.findByIdAndRemove(req.params.id, function (err) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'La tarjeta no se pudo actualizar',
+                err
+            });
+        }
+        return res.status(200).json({
+            success: true,
+            message: "Tarjeta fue actualizada"
+        });
+    });
+});
+
+
+
 module.exports = router;
-
-//localhosta:3000/api/registrarUsuario/
-//localhosta:3000/api/registrarTarjeta/
-
-  // nuevoUsuario.save(   
-    //     function (err, usuarioDB) {
-    //         if (err)
-    //             res.status(400).json({
-    //                 success: true,
-    //                 msj: 'El usario no se guardó con éxito' 
-    //             });
-
-
-
-
-
-            //Obtiene y devuelve todas las personas tras crear una de ellas
-    //         Usario.find(function (err, conct) {
-    //             if (err)
-    //                 res.send(err)
-    //             res.json(conct);
-    //         })
-    //     }
-    // );
