@@ -189,12 +189,12 @@ let crearMenu = async function () {
             anchor.href = "listarClubLectura.html";
             li.appendChild(anchor);
 
-            // li = document.createElement('li');
-            // listMenu.appendChild(li);
-            // anchor = document.createElement('a');
-            // anchor.innerHTML = "Catálogo de libros";
-            // anchor.href = "#";
-            // li.appendChild(anchor);
+            li = document.createElement('li');
+            listMenu.appendChild(li);
+            anchor = document.createElement('a');
+            anchor.innerHTML = "Catálogo de libros";
+            anchor.href = "listarLibrosCards.html";
+            li.appendChild(anchor);
 
             // li = document.createElement('li');
             // listMenu.appendChild(li);

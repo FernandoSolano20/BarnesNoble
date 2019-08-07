@@ -3,7 +3,8 @@
 const express = require('express'),
     router = express.Router(),//permite crear la ruta
     Libreria = require('../models/libreria.model'),
-    mongoose = require('mongoose');
+    mongoose = require('mongoose'),
+    Ejemplar = require('../models/ejemplar.model');
 
 
 router.get('/listarLibrerias', async (req, res) => {
@@ -91,6 +92,71 @@ router.get('/obtenerTiendas', async (req, res) => {
     })
         .populate('sucursales.sucursal', 'nombre correo telefono')
         .select('nombreFantasia sucursales');
+});
+
+router.patch('/comprarLibroLibreria', function (req, res) {
+    let ejemplarId = new mongoose.Types.ObjectId(req.body.libro);
+    Ejemplar.updateOne({ _id: req.body.libro, 'cantidad': { $gte: req.body.cantidad } }, { $inc: { "cantidad": -(req.body.cantidad) } }, function (err, ejemp) {
+        if (err)
+            return res.json({
+                success: false,
+                message: 'No se agregaron los libros al catálogo de libros de la librería',
+                err
+            })
+        else {
+            if (ejemp.n) {
+                Libreria.updateOne({ _id: req.body.idLibreria, "ejemplares.libro": ejemplarId }, { $inc: { "ejemplares.$.cantidad": (req.body.cantidad) } }, function (err, ejemplar) {
+                    if (err) {
+                        return res.status(400).json({
+                            success: false,
+                            message: 'Ocurrio un error',
+                            err
+                        });
+                    } else if (ejemplar.n) {
+                        return res.json({
+                            success: true,
+                            message: 'Se agregaron los libros al catálogo de libros de la librería 1'
+                        })
+                    }
+                    else {
+                        Libreria.update({ _id: req.body.idLibreria }, {
+                            $push: {
+                                'ejemplares': {
+                                    libro: req.body.libro,
+                                    cantidad: req.body.cantidad,
+                                    estado: 1,
+                                    iva: req.body.iva
+                                }
+                            }
+                        },
+                            function (err, ejemplar) {
+                                if (err) {
+                                    return res.status(400).json({
+                                        success: false,
+                                        message: 'No se pudo comprar el libro',
+                                        err
+                                    })
+                                } else {
+                                    return res.json({
+                                        success: true,
+                                        message: 'Se agregaron los libros al catálogo de libros de la librería 1'
+                                    })
+                                }
+                            }
+                        )
+
+                    }
+                });
+            }
+            else{
+                return res.json({
+                    success: false,
+                    message: 'No hay muchos libros en stock',
+                    err
+                })
+            }
+        }
+    });
 });
 
 module.exports = router;

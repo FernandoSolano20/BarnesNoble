@@ -52,8 +52,8 @@ router.get('/listarAutores', function (req, res) {
     });
 });
 
-router.get('/buscarAutorId/:_id', function(req, res) {
-    Autor.findById(req.params._id, function(err, autoresBD) {
+router.get('/buscarAutorId/:_id', function (req, res) {
+    Autor.findById(req.params._id, function (err, autoresBD) {
         if (err) {
             return res.status(400).json({
                 success: false,
@@ -70,30 +70,30 @@ router.get('/buscarAutorId/:_id', function(req, res) {
 });
 
 router.post('/agregarPremios', function (req, res) {
-    Autor.update({_id: req.body._id}, {
+    Autor.update({ _id: req.body._id }, {
         $push: {
-            'premios':{
+            'premios': {
                 nombre: req.body.nombre,
                 anno: req.body.anno,
                 descripcion: req.body.descripcion
             }
         }
     },
-    function(err, premio){
-        if(err){
-            return res.status(400).json({
-                success: false,
-                message: 'No se pudo agregar premio',
-                err
-            })
-        }else{
-            return res.json({
-                success: true,
-                message: 'Se agregó correctamente el premio'
-            })
+        function (err, premio) {
+            if (err) {
+                return res.status(400).json({
+                    success: false,
+                    message: 'No se pudo agregar premio',
+                    err
+                })
+            } else {
+                return res.json({
+                    success: true,
+                    message: 'Se agregó correctamente el premio'
+                })
+            }
         }
-    }
     )
-    });
+});
 
 module.exports = router;
