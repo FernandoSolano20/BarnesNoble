@@ -20,19 +20,7 @@ let mostrar_tabla = async (event) => {
             icon.setAttribute('class', 'far fa-plus-circle');
             btn.insertBefore(icon, label);
 
-<<<<<<< HEAD
-    if (sessionStorage.tipoUsuario != 'Lector') {
-        let btn = document.createElement('a');
-        btn.type = "button";
-        btn.setAttribute('class', 'material-blue');
-        btn.href = "registroLibreria.html";
-        document.getElementById('boton').appendChild(btn);
-        
-        let label = document.createTextNode('Nueva Libreria');
-        btn.appendChild(label);
-=======
         }
->>>>>>> Sprint
 
         if (sessionStorage.tipoUsuario != 'Adminitrador librería') {
             listaLibrerias = await obtenerLibrerias();
@@ -44,39 +32,6 @@ let mostrar_tabla = async (event) => {
     }
     tbody.innerHTML = '';
 
-<<<<<<< HEAD
-
-    for (let i = 0; i < listaLibrerias.length; i++) {
-
-        let fila = tbody.insertRow();
-        fila.insertCell().innerHTML = listaLibrerias[i]['nombreComercial'];
-        fila.insertCell().innerHTML = listaLibrerias[i]['nombreFantasia'];
-        fila.insertCell().innerHTML = listaLibrerias[i]['provincia'];
-        fila.insertCell().innerHTML = listaLibrerias[i]['provincia'];
-        fila.insertCell().innerHTML = listaLibrerias[i]['distrito'];
-
-        let celda_perfil = fila.insertCell();
-        let divContendor = document.createElement("div");
-        divContendor.setAttribute('class', 'crear-contenedor')
-        let btnPerfil = document.createElement('button');
-        celda_perfil.appendChild(divContendor);
-        divContendor.appendChild(btnPerfil);
-
-        btnPerfil.innerText = 'Ver Perfil'
-        btnPerfil.dataset._id = listaLibrerias[i]['_id'];
-        btnPerfil.setAttribute('class', 'material-blue')
-        btnPerfil.addEventListener('click', function () {
-            window.location.href = `perfilLibreria.html?id=${this.dataset._id}`;
-        });
-    }
-};
-
-mostrar_tabla();
-
-let filtrar_tabla = async () => {
-
-=======
->>>>>>> Sprint
     let filtro = txtFiltro.value.toLowerCase();
     for (let i = 0; i < listaLibrerias.length; i++) {
         if (listaLibrerias[i]['nombreComercial'].toLowerCase().includes(filtro)
@@ -90,22 +45,12 @@ let filtrar_tabla = async () => {
             fila.insertCell().innerHTML = listaLibrerias[i]['provincia'];
             fila.insertCell().innerHTML = listaLibrerias[i]['canton'];
             fila.insertCell().innerHTML = listaLibrerias[i]['distrito'];
-<<<<<<< HEAD
-            
-            let celda_perfil = fila.insertCell();
-            let divContendor = document.createElement("div");
-            divContendor.setAttribute('class', 'crear-contenedor')
-            let btnPerfil = document.createElement('button');
-            celda_perfil.appendChild(divContendor);
-            divContendor.appendChild(btnPerfil);
-=======
 
             let celda_perfil = fila.insertCell();
             let divContendor = document.createElement("div");
             divContendor.setAttribute('class', 'crear-contenedor');
 
             let btnPerfil = document.createElement('button');
->>>>>>> Sprint
 
             btnPerfil.innerText = 'Ver Perfil'
             btnPerfil.dataset._id = listaLibrerias[i]['_id'];

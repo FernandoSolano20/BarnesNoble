@@ -85,4 +85,73 @@ router.get('/listarTarjetasPorId/:id', function (req, res) {
     });
 });
 
+router.delete('/eliminarTarjeta/:id', function (req, res) {
+    Categoria.findByIdAndRemove(req.params.id, function (err) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'La tarjeta no se pudo eliminar',
+                err
+            });
+        }
+        return res.status(200).json({
+            success: true,
+            message: "Tarjeta fue elimnada"
+        });
+    });
+});
+
+// router.post('/actualizarTarjeta/:id', function (req, res) {
+//     Tarjeta.update({_id: req.body.id,}; {
+//         if (err) {
+//             return res.status(400).json({
+//                 success: false,
+//                 message: 'La tarjeta no se pudo actualizar',
+//                 err
+//             });
+//         }
+//         return res.status(200).json({
+//             success: true,
+//             message: "Tarjeta fue actualizada"
+//         });
+//     });
+// });
+
+router.put('/editarTarjeta/:id', function (req, res) {
+    Tarjeta.findByIdAndUpdate(req.params.id, { $set: req.body }, function (err) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'La tarjeta no se pudo actualizar',
+                err
+            });
+        }
+        Tarjeta.findById(req.params.id, (err, tarjetaDB) => {
+            return res.status(200).json({
+                success: true,
+                message: "Tarjeta fue actualizada",
+                listaTarjetas: tarjetasDB
+            })
+        });
+    });
+});
+
+router.delete('/eliminar/:id', function (req, res) {
+    Tarjeta.findByIdAndRemove(req.params.id, function (err) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'La tarjeta no se pudo eliminar',
+                err
+            });
+        }
+        return res.status(200).json({
+            success: true,
+            message: "Tarjeta eliminada"
+        });
+    });
+});
+
+
+
 module.exports = router;
