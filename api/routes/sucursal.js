@@ -2,6 +2,7 @@
 
 const express = require('express'),
     router = express.Router(),
+    mongoose = require('mongoose'),
     Sucursal = require('../models/sucursal.model'),
     Libreria = require('../models/libreria.model');
 
@@ -73,7 +74,7 @@ router.get('/listarSucursales', function (req, res) {
 });
 
 router.get('/sucursalId/:id', function (req, res) {
-    Sucursal.findById(req.params.id,function (err, sucursaleBD) {
+    Sucursal.findById(req.params.id, function (err, sucursaleBD) {
         if (err) {
             return res.status(400).json({
                 success: false,
@@ -87,10 +88,22 @@ router.get('/sucursalId/:id', function (req, res) {
             });
         }
     })
+        .populate({
+            path: 'ejemplares.libro',
+            populate: {
+                path: 'libro',
+                populate: {
+                    path: 'genero categoria autor',
+                    select: '_id nombre nombreArtistico'
+                },
+                select: '_id titulo genero categoria caratula contraportada'
+            },
+            select: '_id tipo precio isbn10 isbn13 cantidad iva libro'
+        })
 });
 
-router.get('/buscarIdLibreria/:id', function(req, res) {
-    Sucursal.find({libreria: req.params.id},function(err, sucursalesBD) {
+router.get('/buscarIdLibreria/:id', function (req, res) {
+    Sucursal.find({ libreria: req.params.id }, function (err, sucursalesBD) {
         if (err) {
             return res.status(400).json({
                 success: false,
@@ -116,5 +129,207 @@ router.get('/countSucursal', function (req, res) {
         });
     });
 })
+
+
+router.patch('/comprarLibroSucursalLibreria', function (req, res) {
+    let ejemplarId = new mongoose.Types.ObjectId(req.body.ejemplar);
+
+    Libreria.updateOne({ _id: req.body.idLibreria,"ejemplares.libro": req.body.ejemplar, 'ejemplares.cantidad': { $gte: req.body.cantidad } }, { $inc: { "ejemplares.$.cantidad": -(req.body.cantidad) } }, function (err, ejemp) {
+        if (err)
+            return res.json({
+                success: false,
+                message: 'No se agregaron los libros al catálogo de libros de la librería',
+                err
+            })
+        else {
+            if (ejemp.n) {
+                Sucursal.updateOne({ _id: req.body.idSucursal, "ejemplares.libro": ejemplarId }, { $inc: { "ejemplares.$.cantidad": (req.body.cantidad) } }, function (err, ejemplar) {
+                    if (err) {
+                        return res.status(400).json({
+                            success: false,
+                            message: 'Ocurrio un error',
+                            err
+                        });
+                    } else if (ejemplar.n) {
+                        return res.json({
+                            success: true,
+                            message: 'Se agregaron los libros al catálogo de libros de la sucursal'
+                        })
+                    }
+                    else {
+                        Sucursal.updateOne({ _id: req.body.idSucursal }, {
+                            $push: {
+                                'ejemplares': {
+                                    libro: req.body.ejemplar,
+                                    cantidad: req.body.cantidad,
+                                    estado: 1,
+                                    iva: req.body.iva
+                                }
+                            }
+                        },
+                            function (err, ejemplar) {
+                                if (err) {
+                                    return res.status(400).json({
+                                        success: false,
+                                        message: 'No se pudo comprar el libro',
+                                        err
+                                    })
+                                } else {
+                                    return res.json({
+                                        success: true,
+                                        message: 'Se agregaron los libros al catálogo de libros de la sucursal'
+                                    })
+                                }
+                            }
+                        )
+
+                    }
+                });
+            }
+            else {
+                return res.json({
+                    success: false,
+                    message: 'No hay muchos libros en stock',
+                    err,
+                    ejemp
+                })
+            }
+        }
+    });
+});
+
+router.patch('/pasarLibrosEntreSucursales', function (req, res) {
+    let ejemplarId = new mongoose.Types.ObjectId(req.body.ejemplar);
+
+    Sucursal.updateOne({ _id: req.body.idSucursal,"ejemplares.libro": req.body.ejemplar, 'ejemplares.cantidad': { $gte: req.body.cantidad } }, { $inc: { "ejemplares.$.cantidad": -(req.body.cantidad) } }, function (err, ejemp) {
+        if (err)
+            return res.json({
+                success: false,
+                message: 'No se agregaron los libros al catálogo de libros de la sucursal',
+                err
+            })
+        else {
+            if (ejemp.n) {
+                Sucursal.updateOne({ _id: req.body.idSucursal2, "ejemplares.libro": ejemplarId }, { $inc: { "ejemplares.$.cantidad": (req.body.cantidad) } }, function (err, ejemplar) {
+                    if (err) {
+                        return res.status(400).json({
+                            success: false,
+                            message: 'Ocurrio un error',
+                            err
+                        });
+                    } else if (ejemplar.n) {
+                        return res.json({
+                            success: true,
+                            message: 'Se agregaron los libros al catálogo de libros de la sucursal'
+                        })
+                    }
+                    else {
+                        Sucursal.updateOne({ _id: req.body.idSucursal2 }, {
+                            $push: {
+                                'ejemplares': {
+                                    libro: req.body.ejemplar,
+                                    cantidad: req.body.cantidad,
+                                    estado: 1,
+                                    iva: req.body.iva
+                                }
+                            }
+                        },
+                            function (err, ejemplar) {
+                                if (err) {
+                                    return res.status(400).json({
+                                        success: false,
+                                        message: 'No se pudo comprar el libro',
+                                        err
+                                    })
+                                } else {
+                                    return res.json({
+                                        success: true,
+                                        message: 'Se agregaron los libros al catálogo de libros de la sucursal'
+                                    })
+                                }
+                            }
+                        )
+
+                    }
+                });
+            }
+            else {
+                return res.json({
+                    success: false,
+                    message: 'No hay muchos libros en stock',
+                    err,
+                    ejemp
+                })
+            }
+        }
+    });
+});
+
+router.patch('/pasarLibrosEntreSucursalLibreria', function (req, res) {
+    let ejemplarId = new mongoose.Types.ObjectId(req.body.ejemplar);
+
+    Sucursal.updateOne({ _id: req.body.idSucursal,"ejemplares.libro": req.body.ejemplar, 'ejemplares.cantidad': { $gte: req.body.cantidad } }, { $inc: { "ejemplares.$.cantidad": -(req.body.cantidad) } }, function (err, ejemp) {
+        if (err)
+            return res.json({
+                success: false,
+                message: 'No se agregaron los libros al catálogo de libros de la librería',
+                err
+            })
+        else {
+            if (ejemp.n) {
+                Libreria.updateOne({ _id: req.body.idLibreria, "ejemplares.libro": ejemplarId }, { $inc: { "ejemplares.$.cantidad": (req.body.cantidad) } }, function (err, ejemplar) {
+                    if (err) {
+                        return res.status(400).json({
+                            success: false,
+                            message: 'Ocurrio un error',
+                            err
+                        });
+                    } else if (ejemplar.n) {
+                        return res.json({
+                            success: true,
+                            message: 'Se agregaron los libros al catálogo de libros de la librería'
+                        })
+                    }
+                    else {
+                        Libreria.updateOne({ _id: req.body.idLibreria }, {
+                            $push: {
+                                'ejemplares': {
+                                    libro: req.body.ejemplar,
+                                    cantidad: req.body.cantidad,
+                                    estado: 1,
+                                    iva: req.body.iva
+                                }
+                            }
+                        },
+                            function (err, ejemplar) {
+                                if (err) {
+                                    return res.status(400).json({
+                                        success: false,
+                                        message: 'No se pudo comprar el libro',
+                                        err
+                                    })
+                                } else {
+                                    return res.json({
+                                        success: true,
+                                        message: 'Se agregaron los libros al catálogo de libros de la librería'
+                                    })
+                                }
+                            }
+                        )
+
+                    }
+                });
+            }
+            else {
+                return res.json({
+                    success: false,
+                    message: 'No hay muchos libros en stock',
+                    err,
+                    ejemp
+                })
+            }
+        }
+    });
+});
 
 module.exports = router;

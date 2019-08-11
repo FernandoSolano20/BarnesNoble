@@ -2,22 +2,23 @@
 
 let listaLibros = [];
 let obtenerAutorId = [];
+let listaEjemplares = [];
 const containerCard = document.querySelector('#cardElements')
 const txtFiltro = document.getElementById("txtFiltro");
 
 let mostarLibros = async (event) => {
-    if (!event){
-        if(sessionStorage.tipoUsuario == 'Adminitrador plataforma'){
+    if (!event) {
+        if (sessionStorage.tipoUsuario == 'Adminitrador plataforma') {
             let btnCrear = document.getElementById('container-btn');
-            if(btnCrear){
+            if (btnCrear) {
                 let anchorElementCreate = document.createElement('a');
-                anchorElementCreate.setAttribute('type','button');
-                anchorElementCreate.setAttribute('class','material-blue');
-                anchorElementCreate.setAttribute('href','http://localhost:3000/registrarlibro.html');
+                anchorElementCreate.setAttribute('type', 'button');
+                anchorElementCreate.setAttribute('class', 'material-blue');
+                anchorElementCreate.setAttribute('href', 'http://localhost:3000/registrarlibro.html');
                 btnCrear.appendChild(anchorElementCreate);
                 let label = document.createTextNode('Crear');
                 anchorElementCreate.appendChild(label);
-    
+
                 let icon = document.createElement('i');
                 icon.setAttribute('class', 'far fa-plus-circle');
                 anchorElementCreate.insertBefore(icon, label);
@@ -53,7 +54,7 @@ let agregarCardLibro = function (libro, autor) {
     divParrent.appendChild(child2);
 
     let divInformationBook = document.createElement('div');
-    divInformationBook.setAttribute('class','informacionLibro');
+    divInformationBook.setAttribute('class', 'informacionLibro');
     child2.appendChild(divInformationBook);
 
     let h3 = document.createElement('h3');
@@ -69,7 +70,7 @@ let agregarCardLibro = function (libro, autor) {
     divInformationBook.appendChild(p1);
 
     let divContainerButtons = document.createElement('div');
-    divContainerButtons.setAttribute('class','containerButtonsCards');
+    divContainerButtons.setAttribute('class', 'containerButtonsCards');
     child2.appendChild(divContainerButtons);
 
     let btnPerfil = document.createElement('a');
@@ -84,11 +85,11 @@ let agregarCardLibro = function (libro, autor) {
         btnFormato.setAttribute('class', 'material btnLibreria downButton');
         btnFormato.setAttribute('id', 'btnFormato');
         btnFormato.innerText = 'Añadir formato';
-        btnFormato.setAttribute('style','line-height:normal')
+        btnFormato.setAttribute('style', 'line-height:normal')
         btnFormato.href = "formatoLibro.html?id=" + libro._id;
         divContainerButtons.appendChild(btnFormato);
     }
-    else if(sessionStorage.tipoUsuario == 'Lector'){
+    else if (sessionStorage.tipoUsuario == 'Lector') {
         let btnFormato = document.createElement('a');
         btnFormato.setAttribute('class', 'material btnLibreria downButton');
         btnFormato.setAttribute('id', 'btnFormato');
@@ -96,7 +97,15 @@ let agregarCardLibro = function (libro, autor) {
         btnFormato.href = "verPerfilAutor.html?_id=" + libro.autor._id;
         divContainerButtons.appendChild(btnFormato);
     }
-
+    else if (sessionStorage.tipoUsuario == 'Adminitrador librería') {
+        let btnComprar = document.createElement('button');
+        btnComprar.setAttribute('class', 'material btnLibreria downButton');
+        btnComprar.setAttribute('id', 'btnComprar');
+        btnComprar.setAttribute('data-libro', libro._id);
+        btnComprar.innerText = 'Comprar';
+        btnComprar.addEventListener('click', modalComprarLibroBarnesNoble);
+        divContainerButtons.appendChild(btnComprar);
+    }
 }
 
 

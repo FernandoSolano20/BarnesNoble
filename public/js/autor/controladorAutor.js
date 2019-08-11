@@ -134,7 +134,6 @@ let agregarFilaAutores = function (autor) {
                         title: response.message
                     })
                 }
-
             }
             else {
                 Swal.fire({

@@ -5,6 +5,25 @@ let obtenerInformacionLibro = async function () {
 
     let libro = await obtenerLibrosId(id);
     if (libro.success) {
+
+        if (sessionStorage.tipoUsuario != 'Adminitrador plataforma') {
+            let divButton = document.getElementById('contenedorBotonCompra');
+
+            let btnCompra = document.createElement('button');
+            btnCompra.setAttribute('type', 'button');
+            btnCompra.setAttribute('class', 'material-blue');
+            btnCompra.addEventListener('click',modalComprarLibroBarnesNoble);
+            btnCompra.setAttribute('data-libro', libro.listaLibro._id);
+            divButton.appendChild(btnCompra);
+
+            let label = document.createTextNode((sessionStorage.tipoUsuario == 'Lector'? 'Agregar a carrito':'Comprar'));
+            btnCompra.appendChild(label);
+
+            let icon = document.createElement('i');
+            icon.setAttribute('class', 'far fa-plus-circle');
+            btnCompra.insertBefore(icon, label);
+        }
+
         let ejemplares = await obtenerEjemplaresPorIdLibro(id);
         if (ejemplares.success) {
             document.getElementById('titulo').innerHTML = libro.listaLibro.titulo;

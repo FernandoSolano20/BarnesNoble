@@ -119,7 +119,7 @@ router.patch('/comprarLibroLibreria', function (req, res) {
                         })
                     }
                     else {
-                        Libreria.update({ _id: req.body.idLibreria }, {
+                        Libreria.updateOne({ _id: req.body.idLibreria }, {
                             $push: {
                                 'ejemplares': {
                                     libro: req.body.libro,
@@ -148,7 +148,7 @@ router.patch('/comprarLibroLibreria', function (req, res) {
                     }
                 });
             }
-            else{
+            else {
                 return res.json({
                     success: false,
                     message: 'No hay muchos libros en stock',
@@ -157,6 +157,72 @@ router.patch('/comprarLibroLibreria', function (req, res) {
             }
         }
     });
+});
+
+router.get('/obtenerLibrosPorLibreriaID/:id', async (req, res) => {
+    return await Libreria.findById(req.params.id, function (err, libreria) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'No se encontro ninguna librería',
+                err
+            });
+        }
+        else {
+            return res.json({
+                success: true,
+                listaLibrerias: libreria
+            });
+        }
+    })
+        // .populate({
+        //     path: 'sucursales.sucursal',
+        //     populate: {
+        //         path: 'ejemplares.libro',
+        //     populate: {
+        //         path: 'libro',
+        //         populate: {
+        //             path: 'genero categoria autor',
+        //             select: '_id nombre nombreArtistico'
+        //         },
+        //         select: '_id titulo genero categoria caratula contraportada'
+        //     },
+        //     select: '_id tipo precio isbn10 isbn13 cantidad iva libro'
+        //     },
+        //     select: '_id nombre'
+        // })
+        .populate({
+            path: 'ejemplares.libro',
+            populate: {
+                path: 'libro',
+                populate: {
+                    path: 'genero categoria autor',
+                    select: '_id nombre nombreArtistico'
+                },
+                select: '_id titulo genero categoria caratula contraportada'
+            },
+            select: '_id tipo precio isbn10 isbn13 cantidad iva libro'
+        })
+        .select('nombreFantasia sucursales ejemplares');
+});
+
+router.get('/obtenerSucursalesPorLibreriaId/:id', function (req, res) {
+    Libreria.findById(req.params.id, function (err, libreria) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                msj: 'No se encontro libreria',
+                err
+            });
+        } else {
+            return res.json({
+                success: true,
+                libreria: libreria
+            });
+        }
+    })
+    .populate('sucursales.sucursal','nombre')
+    .select('nombreFantasia sucursales')
 });
 
 module.exports = router;

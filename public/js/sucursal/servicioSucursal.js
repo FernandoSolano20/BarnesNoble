@@ -45,3 +45,39 @@ let obtenerCountSucursal = async function () {
     var result = await response.json();
     return result.count;
 }
+
+let pasarLibroLibreriaSucursal = async function (compra) {
+    var response = await fetch('http://localhost:4000/api/sucursal/comprarLibroSucursalLibreria', {
+        method: "PATCH",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body:JSON.stringify(compra)
+    });
+    var result = await response.json();
+    return result;
+}
+
+let pasarLibroEntreSucursales = async function (compra) {
+    var response = await fetch('http://localhost:4000/api/sucursal/pasarLibrosEntreSucursales', {
+        method: "PATCH",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body:JSON.stringify(compra)
+    });
+    var result = await response.json();
+    return result;
+}
+
+let pasarLibroEntreSucursaleLibreria = async function (compra) {
+    var response = await fetch('http://localhost:4000/api/sucursal/pasarLibrosEntreSucursalLibreria', {
+        method: "PATCH",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body:JSON.stringify(compra)
+    });
+    var result = await response.json();
+    return result;
+}
