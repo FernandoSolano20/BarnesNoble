@@ -443,4 +443,32 @@ let reviewsUsuario = function () {
     liArt.appendChild(p);
 };
 
+let cambiarPass = async function () {
+    const { value: email } = await Swal.fire({
+        title: 'Digite su correo eléctronico',
+        input: 'email',
+        inputPlaceholder: 'Correo eléctronico'
+    });
+
+    let usuario = {
+        correo: email
+    }
+
+    let user = await forgetPass(usuario);
+
+    if (user.success) {
+        Swal.fire({
+            type: 'success',
+            title: user.message
+        },logoutCambioPassword());
+    }
+    else {
+        Swal.fire({
+            type: 'error',
+            title: user.message
+        });
+    }
+}
+
 informacionUsuario();
+document.getElementById('cambiarPassword').addEventListener('click', cambiarPass);

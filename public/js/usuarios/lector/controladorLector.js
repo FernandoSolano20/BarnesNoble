@@ -572,4 +572,5 @@ for (let i = 0; i < idRadios.length; i++)
     idRadios[i].addEventListener('change', cambiarIdentificacion);
 document.getElementById('modificar').addEventListener('click', actualizarDatosUsuarios);
 
+
 cargarDatosUsuario();
