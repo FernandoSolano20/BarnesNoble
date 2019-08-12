@@ -2,6 +2,7 @@
 
 let listaLibrerias = [];
 let txtFiltro = document.querySelector('#txt-filtro');
+const regexText = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+(\s*[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*)*[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/;
 
 let mostrar_tabla = async (event) => {
     let tbody = document.querySelector('#tbl_librerias tbody');
@@ -100,7 +101,7 @@ let libreriaFunciones = async (event) => {
     distritoInput = document.getElementById('distrito');
 
     let accion = document.getElementById("modal").getAttribute('data-action');
-          let idLibreria = document.getElementById('cuerpo-modal').getAttribute('data-libreria');
+    let idLibreria = document.getElementById('cuerpo-modal').getAttribute('data-libreria');
         if (accion === 'editar') {
             let libreria = {
                 nombreComercial: nombreComercialInput.value,
@@ -108,10 +109,30 @@ let libreriaFunciones = async (event) => {
                 provincia: provinciaInput.value,
                 canton: cantonInput.value,
                 distrito: distritoInput.value,
-
                 estado: Number(!document.getElementById(idLibreria).checked)
             }
-            
+            if (!validarCampos(libreria)) {
+                let nuevaLibreria = await editarGenero(libreria, idLibreria);
+                if (nuevaLibreria.success) {
+                    let trElemento = document.querySelector('[data-id="' + nuevaLibreria.libreria._id + '"]');
+                    let tdElementos = trElemento.querySelectorAll('td');
+                    tdElementos[0].innerText = nuevaLibreria.libreria.nombreComercial;
+                    tdElementos[1].innerText = nuevaLibreria.libreria.nombreFantasia;
+                    tdElementos[2].innerText = nuevaLibreria.libreria.provincia;
+                    tdElementos[3].innerText = nuevaLibreria.libreria.canton;
+                    tdElementos[4].innerText = nuevaLibreria.libreria.distrito;
+
+                    sweetAlertSuccess(nuevaLibreria.message);
+                    removerForm();
+                    editarListaLibreria(nuevaLibreria.genero);
+                }
+                else {
+                    sweetAlertError(nuevaLibreria.message);
+                }
+            }
+            else {
+                sweetAlertWarning();
+            }
         } else if (accion === 'borrar') {
             let trElemento = document.querySelector('[data-id="' + idLibreria + '"]');
             trElemento.remove();
@@ -140,7 +161,7 @@ let libreriaFunciones = async (event) => {
             }
         }
     }
-}
+
 
 mostrar_tabla();
 document.getElementById('confirm').addEventListener('click', libreriaFunciones);
@@ -153,5 +174,74 @@ let filaNoDatos = function () {
         let celda = fila.insertCell()
         celda.innerHTML = 'No se encontró datos';
         celda.setAttribute('colspan', '6');
+    }
+}
+
+let validarCampos = function (genero) {
+    let error = false;
+    if (genero.nombre === "" || !regexText.test(genero.nombre)) {
+        error = true;
+        nombreGeneroInput.className = nombreGeneroInput.className.replace("error", "");
+        nombreGeneroInput.className = nombreGeneroInput.className + " error";
+    }
+    else {
+        nombreGeneroInput.className = nombreGeneroInput.className.replace("error", "");
+    }
+
+    if (genero.descripcion === "") {
+        error = true;
+        descripcionGeneroInput.className = descripcionGeneroInput.className.replace("error", "");
+        descripcionGeneroInput.className = descripcionGeneroInput.className + " error";
+    }
+    else {
+        descripcionGeneroInput.className = descripcionGeneroInput.className.replace("error", "");
+    }
+
+    return error;
+}
+
+let sweetAlertSuccess = function (message) {
+    Swal.fire({
+        type: 'success',
+        title: message
+    });
+}
+
+let sweetAlertWarning = function () {
+    Swal.fire({
+        type: 'warning',
+        title: 'No se ha enviado su mensaje exitosamente',
+        text: 'Revise los campos resaltados e intételo de nuevo'
+    });
+}
+
+let sweetAlertError = function (message) {
+    Swal.fire({
+        type: 'error',
+        title: message
+    });
+}
+
+let removerListaGenero = function (idGenero) {
+    for (let i = 0; i < listaGeneros.length; i++) {
+        if (listaGeneros[i]._id === idGenero) {
+            listaGeneros.splice(i, 1);
+            break;
+        }
+    }
+}
+
+let agregarListaGenero = function (genero) {
+    listaGeneros.push(genero);
+}
+
+let editarListaGenero = function (genero) {
+    for (let i = 0; i < listaGeneros.length; i++) {
+        if (listaGeneros[i]._id === genero._id) {
+            listaGeneros[i].nombre = genero.nombre;
+            listaGeneros[i].descripcion = genero.descripcion;
+            listaGeneros[i].estado = genero.estado
+            break;
+        }
     }
 }
