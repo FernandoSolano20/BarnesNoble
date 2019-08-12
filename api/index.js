@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const fileupload = require('express-fileupload');
 const cloudinary = require('cloudinary').v2;
 
+
 //Archivo de routes aqui
 const generoRoute = require('./routes/genero');
 const categoriaRoute = require('./routes/categoria');
@@ -36,6 +37,7 @@ app.use(cors());
 app.use(express.static(__dirname + "/public"));
 app.use(body_parser.json());
 app.use(body_parser.urlencoded({ extended: false }));
+
 
 app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
