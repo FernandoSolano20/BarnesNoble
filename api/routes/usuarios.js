@@ -640,4 +640,160 @@ router.get('/countUser', function (req, res) {
     });
 })
 
+
+// Editar Perfil Lector
+
+router.patch('/editarUsuario/:id', function (req, res) {
+    let body = req.body;
+    let usuarioRegistrado = false;
+    let usuarioModificado = false;
+
+    console.log(req.params.id);
+
+    Usuario.findById(req.params.id).then(
+        function (usuario) {
+            console.log(usuario);
+            if (!usuario) {
+                return res.json({
+                    success: false,
+                    message: 'El usuario no se encuentra en el sistema'
+                });
+            }
+            else {
+                let cambios =  {};
+
+                usuarioRegistrado = usuario;
+                if (usuarioRegistrado.correo != req.body.correo) {
+                    Usuario.findOne({ correo: req.body.correo }).then(
+                        function (usuario) {
+                            if (usuario && usuario.id != usuarioRegistrado.id) {
+                                return res.json({
+                                    success: false,
+                                    message: 'El correo ya se encuentra en el sistema'
+                                });
+                            }else{
+                                cambios.correo = req.body.correo;
+                                usuarioModificado = true;
+                                
+                            }
+                        }
+                    );
+                }
+                if (usuarioRegistrado.telefono != req.body.telefono) {
+                    Usuario.findOne({ telefono: req.body.telefono }).then(
+                        function (usuario) {
+                            if (usuario && usuario.id != usuarioRegistrado.id) {
+                                return res.json({
+                                    success: false,
+                                    message: 'El telefono ya se encuentra en el sistema'
+                                });
+                            }else{
+                                cambios.telefono = req.body.telefono;
+                                usuarioModificado = true;
+
+                            }
+                        }
+                    );
+                }
+                if(usuarioRegistrado.nombre != req.body.nombre){
+                    cambios.nombre = req.body.nombre;
+                    usuarioModificado = true;
+                }
+                if(usuarioRegistrado.segundoNombre != req.body.segundoNombre){
+                    cambios.segundoNombre = req.body.segundoNombre;
+                    usuarioModificado = true;
+                }
+                if(usuarioRegistrado.primerApellido != req.body.primerApellido){
+                    cambios.primerApellido = req.body.primerApellido;
+                    usuarioModificado = true;
+                }
+                if(usuarioRegistrado.segundoApellido != req.body.segundoApellido){
+                    cambios.segundoApellido = req.body.segundoApellido;
+                    usuarioModificado = true;
+                }
+                if(req.body.img && usuarioRegistrado.img != req.body.img){
+                    cambios.img = req.body.img;
+                    usuarioModificado = true;
+                }
+                if(usuarioRegistrado.sexo != req.body.sexo){
+                    cambios.sexo = req.body.sexo;
+                    usuarioModificado = true;
+                }
+                if(usuarioRegistrado.nacimiento != req.body.nacimiento){
+                    cambios.nacimiento = req.body.nacimiento;
+                    usuarioModificado = true;
+                }
+                if(usuarioRegistrado.provincia != req.body.provincia){
+                    cambios.provincia = req.body.provincia;
+                    usuarioModificado = true;
+                }
+                if(usuarioRegistrado.canton != req.body.canton){
+                    cambios.canton = req.body.canton;
+                    usuarioModificado = true;
+                }
+                if(usuarioRegistrado.distrito != req.body.distrito){
+                    cambios.distrito = req.body.distrito;
+                    usuarioModificado = true;
+                }
+                if(usuarioRegistrado.sennas != req.body.sennas){
+                    cambios.sennas = req.body.sennas;
+                    usuarioModificado = true;
+                }
+                if(usuarioRegistrado.alias != req.body.alias){
+                    cambios.alias = req.body.alias;
+                    usuarioModificado = true;
+                }
+                if(usuarioRegistrado.localizacionLatitud != req.body.localizacionLatitud){
+                    cambios.localizacionLatitud = req.body.localizacionLatitud;
+                    usuarioModificado = true;
+                }
+                if(usuarioRegistrado.localizacionLongitud != req.body.localizacionLongitud){
+                    cambios.localizacionLongitud = req.body.localizacionLongitud;
+                    usuarioModificado = true;
+                } 
+
+                if (!usuarioModificado){
+                    return res.json({
+                        success: true,
+                        message: 'No se ha realizado ninguna modificación'
+                    }); 
+                } else{
+                    Usuario.findByIdAndUpdate(req.params.id, { $set: cambios }, function (err) {
+                        if (err) {
+                            return res.status(400).json({
+                                success: false,
+                                message: 'El usuario no se pudo guardar',
+                                err
+                            });
+                        }
+                        Usuario.findById(req.params.id, (err, usuario) => {
+                            return res.status(200).json({
+                                success: true,
+                                message: "Los cambios han sido guardados'",
+                                usuarios: usuario
+                            }); 
+                        });
+                    });
+                    usuarioModificado.save(
+                        function (err, usuarioDB) {
+                            if (err) {
+                                return res.status(400).json({
+                                    success: false,
+                                    message: 'El usuario no se pudo guardar',
+                                    err
+                                });
+                            } else {
+                                return res.json({
+                                    success: true,
+                                    message: 'Los cambios han sido guardados'
+                                }); 
+                            }
+                        }
+                    ); 
+                }
+            }
+        }
+    );
+});
+
 module.exports = router;
