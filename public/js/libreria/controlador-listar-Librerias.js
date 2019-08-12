@@ -109,31 +109,31 @@ let libreriaFunciones = async (event) => {
                 canton: cantonInput.value,
                 distrito: distritoInput.value,
 
-                estado: Number(!document.getElementById(idfLibreria).checked)
+                estado: Number(!document.getElementById(idLibreria).checked)
             }
             
         } else if (accion === 'borrar') {
-            let trElemento = document.querySelector('[data-id="' + idGenero + '"]');
+            let trElemento = document.querySelector('[data-id="' + idLibreria + '"]');
             trElemento.remove();
-            let result = await eliminarGenero(idGenero);
+            let result = await eliminarGenero(idLibreria);
             if (result.success) {
                 sweetAlertSuccess(result.message);
                 removerForm();
-                removerListaGenero(idGenero);
+                removerListaGenero(idLibreria);
                 filaNoDatos();
             }
             else {
                 sweetAlertError(result.message);
             }
         } else if (accion === 'estado') {
-            let genero = {
-                estado: Number(!document.getElementById(idGenero).checked)
+            let libreria = {
+                estado: Number(!document.getElementById(idLibreria).checked)
             };
-            let result = await estadoGenero(genero, idGenero);
+            let result = await estadoGenero(libreria, idLibreria);
             if (result.success) {
                 sweetAlertSuccess(result.message);
                 removerForm(result.success);
-                editarListaGenero(result.genero);
+                editarListaGenero(result.libreria);
             }
             else {
                 sweetAlertError(result.message);
