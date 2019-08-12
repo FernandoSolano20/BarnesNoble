@@ -157,3 +157,26 @@ let obtenerCountUsers = async function () {
     return result.count;
 }
 
+let comprarLibroEnLibreria = async function (compra) {
+    var response = await fetch('http://localhost:4000/api/comprarLibroUsuarioLibreria', {
+        method: "PATCH",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body:JSON.stringify(compra)
+    });
+    var result = await response.json();
+    return result;
+}
+
+let comprarLibroEnSucursal = async function (compra) {
+    var response = await fetch('http://localhost:4000/api/comprarLibroUsuarioSucursal', {
+        method: "PATCH",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body:JSON.stringify(compra)
+    });
+    var result = await response.json();
+    return result;
+}

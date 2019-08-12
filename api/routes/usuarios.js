@@ -642,139 +642,173 @@ router.get('/countUser', function (req, res) {
     });
 })
 
-router.patch('/comprarLibroUsuarioLibreria', function (req, res)  {
+router.patch('/comprarLibroUsuarioLibreria', function (req, res) {
     let ejemplarId = new mongoose.Types.ObjectId(req.body.ejemplar);
-    console.log("Libreria");
-    console.log(req.body);
-    Libreria.updateOne({ _id: req.body.idLibreria,"ejemplares.libro": req.body.ejemplar, 'ejemplares.cantidad': { $gte: req.body.cantidad } }, { $inc: { "ejemplares.$.cantidad": -(req.body.cantidad) } }, function (err, ejemp) {
-        if (err)
+    Libreria.findOne({ _id: req.body.idLibreria }, function (err, ejemp) {
+        if (err) {
             return res.json({
                 success: false,
                 message: 'No se agregaron los libros al catálogo de libros de la librería',
                 err
             })
+        }
         else {
-            return res.json({
-                success: false,
-                message: 'se compro el libro',
-                ejemp:ejemp
-            })
-            // if (ejemp.n) {
-            //     Usuario.updateOne({ _id: req.body.idUsuario, "ejemplares.libro": ejemplarId }, { $inc: { "ejemplares.$.cantidad": (req.body.cantidad) } }, function (err, ejemplar) {
-            //         if (err) {
-            //             return res.status(400).json({
-            //                 success: false,
-            //                 message: 'Ocurrio un error',
-            //                 err
-            //             });
-            //         } else if (ejemplar.n) {
-            //             return res.json({
-            //                 success: true,
-            //                 message: 'Se logró comprar los libros'
-            //             })
-            //         }
-            //         else {
-            //             Usuario.updateOne({ _id: req.body.idUsuario }, {
-            //                 $push: {
-            //                     'ejemplares': {
-            //                         libro: req.body.ejemplar,
-            //                         cantidad: req.body.cantidad,
-            //                         estadoIntercambio: 1
-            //                     }
-            //                 }
-            //             },
-            //                 function (err, ejemplar) {
-            //                     if (err) {
-            //                         return res.status(400).json({
-            //                             success: false,
-            //                             message: 'No se pudo comprar el libro',
-            //                             err
-            //                         })
-            //                     } else {
-            //                         return res.json({
-            //                             success: true,
-            //                             message: 'Se logró comprar los libros'
-            //                         })
-            //                     }
-            //                 }
-            //             )
+            let query;
+            if (ejemp) {
+                for (let i = 0; i < ejemp.ejemplares.length; i++) {
+                    if (ejemp.ejemplares[i].libro == req.body.ejemplar) {
+                        query = i;
+                    }
+                }
+            }
 
-            //         }
-            //     });
-            // }
-            // else {
-            //     return res.json({
-            //         success: false,
-            //         message: 'No hay muchos libros en stock',
-            //         err
-            //     })
-            // }
+            query = "ejemplares." + query + ".cantidad";
+
+            Libreria.updateOne({ _id: req.body.idLibreria, "ejemplares.libro": req.body.ejemplar, [`${query}`]: { $gte: req.body.cantidad } }, { $inc: { [`${query}`]: -(req.body.cantidad) } }, function (err, ejemp) {
+                if (err)
+                    return res.json({
+                        success: false,
+                        message: 'No se agregaron los libros al catálogo de libros de la librería',
+                        err
+                    })
+                else {
+                    if (ejemp.n) {
+                        Usuario.updateOne({ _id: req.body.idUsuario, "ejemplares.libro": ejemplarId }, { $inc: { "ejemplares.$.cantidad": (req.body.cantidad) } }, function (err, ejemplar) {
+                            if (err) {
+                                return res.status(400).json({
+                                    success: false,
+                                    message: 'Ocurrio un error',
+                                    err
+                                });
+                            } else if (ejemplar.n) {
+                                return res.json({
+                                    success: true,
+                                    message: 'Se logró comprar los libros'
+                                })
+                            }
+                            else {
+                                Usuario.updateOne({ _id: req.body.idUsuario }, {
+                                    $push: {
+                                        'ejemplares': {
+                                            libro: req.body.ejemplar,
+                                            cantidad: req.body.cantidad,
+                                            estadoIntercambio: 1
+                                        }
+                                    }
+                                },
+                                    function (err, ejemplar) {
+                                        if (err) {
+                                            return res.status(400).json({
+                                                success: false,
+                                                message: 'No se pudo comprar el libro',
+                                                err
+                                            })
+                                        } else {
+                                            return res.json({
+                                                success: true,
+                                                message: 'Se logró comprar los libros'
+                                            })
+                                        }
+                                    }
+                                )
+
+                            }
+                        });
+                    }
+                    else {
+                        return res.json({
+                            success: false,
+                            message: 'No hay muchos libros en stock',
+                            err
+                        })
+                    }
+                }
+            });
         }
     });
 });
 
-router.patch('/comprarLibroUsuarioSucursal', function (req, res)  {
+router.patch('/comprarLibroUsuarioSucursal', function (req, res) {
     let ejemplarId = new mongoose.Types.ObjectId(req.body.ejemplar);
-    console.log("Sucursal");
-    console.log(req.body)
-    Sucursal.updateOne({ _id: req.body.idSucursal,"ejemplares.libro": req.body.ejemplar, 'ejemplares.cantidad': { $gte: req.body.cantidad } }, { $inc: { "ejemplares.$.cantidad": -(req.body.cantidad) } }, function (err, ejemp) {
-        if (err)
+    Sucursal.findOne({ _id: req.body.idSucursal }, function (err, ejemp) {
+        if (err) {
             return res.json({
                 success: false,
-                message: 'No se compro el libro',
+                message: 'No se agregaron los libros al catálogo de libros de la librería',
                 err
             })
+        }
         else {
-            if (ejemp.n) {
-                Usuario.updateOne({ _id: req.body.idUsuario, "ejemplares.libro": ejemplarId }, { $inc: { "ejemplares.$.cantidad": (req.body.cantidad) } }, function (err, ejemplar) {
-                    if (err) {
-                        return res.status(400).json({
-                            success: false,
-                            message: 'Ocurrio un error',
-                            err
+            let query;
+            if (ejemp) {
+                for (let i = 0; i < ejemp.ejemplares.length; i++) {
+                    if (ejemp.ejemplares[i].libro == req.body.ejemplar) {
+                        query = i;
+                    }
+                }
+            }
+
+            query = "ejemplares." + query + ".cantidad";
+            Sucursal.updateOne({ _id: req.body.idSucursal, "ejemplares.libro": req.body.ejemplar, [`${query}`]: { $gte: req.body.cantidad } }, { $inc: { [`${query}`]: -(req.body.cantidad) } }, function (err, ejemp) {
+                if (err)
+                    return res.json({
+                        success: false,
+                        message: 'No se compro el libro',
+                        err
+                    })
+                else {
+                    if (ejemp.n) {
+                        Usuario.updateOne({ _id: req.body.idUsuario, "ejemplares.libro": ejemplarId }, { $inc: { "ejemplares.$.cantidad": (req.body.cantidad) } }, function (err, ejemplar) {
+                            if (err) {
+                                return res.status(400).json({
+                                    success: false,
+                                    message: 'Ocurrio un error',
+                                    err
+                                });
+                            } else if (ejemplar.n) {
+                                return res.json({
+                                    success: true,
+                                    message: 'Se logró comprar los libros'
+                                })
+                            }
+                            else {
+                                Usuario.updateOne({ _id: req.body.idUsuario }, {
+                                    $push: {
+                                        'ejemplares': {
+                                            libro: req.body.ejemplar,
+                                            cantidad: req.body.cantidad,
+                                            estadoIntercambio: 1
+                                        }
+                                    }
+                                },
+                                    function (err, ejemplar) {
+                                        if (err) {
+                                            return res.status(400).json({
+                                                success: false,
+                                                message: 'No se pudo comprar el libro',
+                                                err
+                                            })
+                                        } else {
+                                            return res.json({
+                                                success: true,
+                                                message: 'Se logró comprar los libros'
+                                            })
+                                        }
+                                    }
+                                )
+
+                            }
                         });
-                    } else if (ejemplar.n) {
-                        return res.json({
-                            success: true,
-                            message: 'Se logró comprar los libros'
-                        })
                     }
                     else {
-                        Usuario.updateOne({ _id: req.body.idUsuario }, {
-                            $push: {
-                                'ejemplares': {
-                                    libro: req.body.ejemplar,
-                                    cantidad: req.body.cantidad,
-                                    estadoIntercambio: 1
-                                }
-                            }
-                        },
-                            function (err, ejemplar) {
-                                if (err) {
-                                    return res.status(400).json({
-                                        success: false,
-                                        message: 'No se pudo comprar el libro',
-                                        err
-                                    })
-                                } else {
-                                    return res.json({
-                                        success: true,
-                                        message: 'Se logró comprar los libros'
-                                    })
-                                }
-                            }
-                        )
-
+                        return res.json({
+                            success: false,
+                            message: 'No hay muchos libros en stock',
+                            err
+                        })
                     }
-                });
-            }
-            else {
-                return res.json({
-                    success: false,
-                    message: 'No hay muchos libros en stock',
-                    err
-                })
-            }
+                }
+            });
         }
     });
 });
