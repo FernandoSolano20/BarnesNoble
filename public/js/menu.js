@@ -209,6 +209,14 @@ let crearMenu = async function () {
             anchor.innerHTML = "Ofertas";
             anchor.href = "listarOfertas.html";
             li.appendChild(anchor);
+
+            li = document.createElement('li');
+            listMenu.appendChild(li);
+            anchor = document.createElement('a');
+            anchor.innerHTML = "Reporte de Localizacion de Sucursales";
+            anchor.href = "reporteLocalizacionesSucursal.html";
+            li.appendChild(anchor);
+
         }
     }
 }
