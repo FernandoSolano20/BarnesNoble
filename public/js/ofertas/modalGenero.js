@@ -1,7 +1,7 @@
 let modal = document.getElementById("modal");
 let tbody = document.querySelector("#tabla-elementos tbody");
 
-function eventosGenero(event) {
+function eventosLibreria(event) {
   let elemento = event.target;
   let accion = elemento.getAttribute('data-action');
   if (accion) {
@@ -115,5 +115,5 @@ let soloLetras = function (e) {
 }
 
 window.addEventListener('click', closeModal);
-tbody.addEventListener('click', eventosGenero);
-document.getElementById('crear-elemento').addEventListener('click', eventosGenero);
+tbody.addEventListener('click', eventosLibreria);
+document.getElementById('crear-elemento').addEventListener('click', eventosLibreria);
