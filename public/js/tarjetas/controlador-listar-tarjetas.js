@@ -3,9 +3,7 @@
 const tbody = document.querySelector('#tbl_tarjetas tbody');
 let listaTarjetas = [];
 let txtFiltro = document.querySelector('#txt-filtro');
-//  let expiracionMM =  listaTarjetas[i]['expiracionMM'];
-//      let expiracionYY = listaTarjetas[i]['expiracionYY'];
-// let expiracionFormateada = expiracionMM + ' / ' + expiracionYY;
+
 let mostrar_tabla = async () => {
     if (sessionStorage.tipoUsuario == 'Adminitrador plataforma') {
         listaTarjetas = await obtenerTarjetas();
@@ -18,8 +16,7 @@ let mostrar_tabla = async () => {
 
 
     for (let i = 0; i < listaTarjetas.length; i++) {
-        //   let expiracionMM =  listaTarjetas[i]['expiracionMM'];
-        // let expiracionYY = listaTarjetas[i]1Y'];
+      
         let fila = tbody.insertRow();
         fila.insertCell().innerHTML = listaTarjetas[i]['nombre1'];
         fila.insertCell().innerHTML = listaTarjetas[i]['numTarjeta'];
@@ -27,22 +24,55 @@ let mostrar_tabla = async () => {
         fila.insertCell().innerHTML = (listaTarjetas[i]['expiracionMM']) + '/' + (listaTarjetas[i]['expiracionYY']);
         fila.insertCell().innerHTML = listaTarjetas[i]['cvv'];
 
-        let celda_perfil = fila.insertCell();
-        let divContendor = document.createElement("div");
-        divContendor.setAttribute('class', 'crear-contenedor');
-        let btnPerfil = document.createElement('button');
-        celda_perfil.appendChild(divContendor);
-        divContendor.appendChild(btnPerfil);
+        let celda_editar = fila.insertCell();
+        let divContendorEditar = document.createElement("div");
+        divContendorEditar.setAttribute('class', 'crear-contenedor');
+        let btnEditar = document.createElement('button');
+        celda_editar.appendChild(divContendorEditar);
+        divContendorEditar.appendChild(btnEditar);
 
-        btnPerfil.innerText = 'Editar'
-        btnPerfil.dataset._id = listaTarjetas[i]['_id'];
-        btnPerfil.setAttribute('class', 'material-blue')
-        btnPerfil.addEventListener('click', function () {
-            window.location.href = "#";
-        });
+        btnEditar.innerText = 'Editar'
+        btnEditar.dataset._id = listaTarjetas[i]['_id'];
+        btnEditar.setAttribute('class', 'material-blue')
+        btnEditar.addEventListener('click', function () {
+            window.location.href = `modificarTarjeta.html?id=${this.dataset._id}`;
+         });    
+
+        let celda_eliminar = fila.insertCell();
+        let divContendorEliminar = document.createElement("div");
+        divContendorEliminar.setAttribute('class', 'crear-contenedor');
+        let btnEliminar = document.createElement('button');
+        celda_eliminar.appendChild(divContendorEliminar);
+        divContendorEliminar.appendChild(btnEliminar);
+
+        btnEliminar.innerText = 'Eliminar'
+        btnEliminar.dataset._id = listaTarjetas[i]['_id'];
+        btnEliminar.setAttribute('class', 'material-blue')
+        btnEliminar.addEventListener('click', function () {
+            window.location.href = `#`; 
+    }); 
+       
     }
     filaNoDatos();
 };
+
+      // let editarCelda = fila.insertCell();
+            // let editar = document.createElement('i');
+            // editar.setAttribute('class', 'far fa-edit');
+            // editar.setAttribute('data-action', 'editar');
+            // editarCelda.appendChild(editar);
+            // editar.addEventListener('click', function () {
+            //     window.location.href = `modificarTarjeta.html?id=${this.dataset._id}`;
+        
+            // let eliminarCelda = fila.insertCell();
+            // let eliminar = document.createElement('i');
+            // eliminar.setAttribute('class', 'fal fa-trash-alt');
+            // eliminar.setAttribute('data-action', 'borrar');
+            // eliminarCelda.appendChild(eliminar);
+
+
+
+
 
 let filaNoDatos = function () {
     if (listaTarjetas.length === 0 || tbody.childElementCount === 0) {
@@ -83,7 +113,7 @@ let filtrar_tabla = async () => {
             btnPerfil.dataset._id = listaTarjetas[i]['_id'];
             btnPerfil.setAttribute('class', 'material-blue')
             btnPerfil.addEventListener('click', function () {
-                window.location.href = "#";
+                window.location.href = `modificarTarjeta.html?id=${this.dataset._id}`;
             });
 
 
