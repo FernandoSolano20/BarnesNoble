@@ -7,7 +7,7 @@ const express = require('express'),
 
 
 router.get('/listarLibrerias', async (req, res) => {
-    return await Libreria.find(function (err, librerias) {
+    return await Libreria.find(function (err, libreriasDB) {
         if (err) {
             return res.status(400).json({
                 success: false,
@@ -18,7 +18,7 @@ router.get('/listarLibrerias', async (req, res) => {
         else {
             return res.json({
                 success: true,
-                listaLibrerias: librerias
+                listaLibrerias: libreriasDB
             });
         }
     })
@@ -117,13 +117,13 @@ router.delete('/eliminar/:id', function (req, res) {
         if (err) {
             return res.status(400).json({
                 success: false,
-                message: 'El género no se pudo eliminar',
+                message: 'La libreria no se pudo eliminar',
                 err
             });
         }
         return res.status(200).json({
             success: true,
-            message: 'Libreria eliminado'
+            message: 'Libreria eliminada'
         });
     });
 });
@@ -152,7 +152,7 @@ router.patch('/modificarEstado/:id', function (req, res) {
                 response = {
                     success: true,
                     message: "Libreria activada",
-                    libreria: libreriasBD
+                    libreria: libreria
                 };
             } else {
                 response = {
@@ -169,7 +169,7 @@ router.patch('/modificarEstado/:id', function (req, res) {
 router.post('/deshabilitar-libreria', function (req, res) {
     let body = req.body;
 
-    Contacto.findByIdAndUpdate(body._id, {
+    Libreria.findByIdAndUpdate(body._id, {
         $set: {
             estado: 'Deshabilitada'
         }
@@ -190,7 +190,7 @@ router.post('/deshabilitar-libreria', function (req, res) {
 router.post('/habilitar-libreria', function (req, res) {
     let body = req.body;
 
-    Contacto.findByIdAndUpdate(body._id, {
+    Libreria.findByIdAndUpdate(body._id, {
         $set: {
             estado: req.body.estado
         }

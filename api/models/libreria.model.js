@@ -28,7 +28,7 @@ let libreriaSchema = new mongoose.Schema({
         estado: { type: Boolean, required: false, unique: false },
         iva: { type: Number, required: false, unique: false }
     }],
-    estado: {type: Boolean, required: true, unique: false}
+    
 });
 
 

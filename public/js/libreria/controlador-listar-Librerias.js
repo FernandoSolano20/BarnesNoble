@@ -1,11 +1,12 @@
 'use strict';
 
+const tbody = document.querySelector('#tbl_librerias tbody');
 let listaLibrerias = [];
-let nombreComercialInput = document.getElementById('nombreComercial');
-let nombreFantasiaInput;
-let provinciaInput;
-let cantonInput;
-let distritoInput;
+let nombreComercialInput ;
+let nombreFantasiaInput ;
+let provinciaInput ;
+let cantonInput ;
+let distritoInput ; 
 let txtFiltro = document.querySelector('#txt-filtro');
 const regexText = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+(\s*[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*)*[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/;
 
@@ -39,9 +40,10 @@ let mostrar_tabla = async (event) => {
         }
 
     }
-    tbody.innerHTML = '';
 
     let filtro = txtFiltro.value.toLowerCase();
+    tbody.innerHTML = '';
+
     for (let i = 0; i < listaLibrerias.length; i++) {
         if (listaLibrerias[i]['nombreComercial'].toLowerCase().includes(filtro.toLowerCase())
             || listaLibrerias[i]['nombreFantasia'].toLowerCase().includes(filtro.toLowerCase())
@@ -56,7 +58,7 @@ let mostrar_tabla = async (event) => {
             fila.insertCell().innerHTML = listaLibrerias[i]['canton'];
             fila.insertCell().innerHTML = listaLibrerias[i]['distrito'];
 
-           let celda_perfil = fila.insertCell();
+            let celda_perfil = fila.insertCell();
             let divContendor = document.createElement("div");
             divContendor.setAttribute('class', 'crear-contenedor');
 
@@ -86,14 +88,14 @@ let mostrar_tabla = async (event) => {
             let estadoCelda = fila.insertCell();
             let estadoInput = document.createElement('input');
             estadoInput.setAttribute('class', 'switch');
-            estadoInput.setAttribute('id', libreria.id);
+            // estadoInput.setAttribute('id', libreria._id);
             estadoInput.setAttribute('type', 'checkbox');
             estadoCelda.appendChild(estadoInput);
-            estadoInput.checked = !libreria.estado;
+            // estadoInput.checked = !libreria.estado;
 
             let estadoLabel = document.createElement('label');
             estadoLabel.setAttribute('data-action', 'estado');
-            estadoLabel.setAttribute('for', libreria.id);
+            // estadoLabel.setAttribute('for', libreria._id);
             estadoCelda.appendChild(estadoLabel);
         }
     }
@@ -111,38 +113,38 @@ let libreriaFunciones = async (event) => {
 
     let accion = document.getElementById("modal").getAttribute('data-action');
     let idLibreria = document.getElementById('cuerpo-modal').getAttribute('data-libreria');
-        if (accion === 'editar') {
-            let libreria = {
-                nombreComercial: nombreComercialInput.value,
-                nombreFantasia: nombreFantasiaInput.value,
-                provincia: provinciaInput.value,
-                canton: cantonInput.value,
-                distrito: distritoInput.value,
-                estado: Number(!document.getElementById(idLibreria).checked)
-            }
-            if (!validarCampos(libreria)) {
-                let nuevaLibreria = await editarlibreria(libreria, idLibreria);
-                if (nuevaLibreria.success) {
-                    let trElemento = document.querySelector('[data-id="' + nuevaLibreria.libreria._id + '"]');
-                    let tdElementos = trElemento.querySelectorAll('td');
-                    tdElementos[0].innerText = nuevaLibreria.libreria.nombreComercial;
-                    tdElementos[1].innerText = nuevaLibreria.libreria.nombreFantasia;
-                    tdElementos[2].innerText = nuevaLibreria.libreria.provincia;
-                    tdElementos[3].innerText = nuevaLibreria.libreria.canton;
-                    tdElementos[4].innerText = nuevaLibreria.libreria.distrito;
+        // if (accion === 'editar') {
+        //     let libreria = {
+        //         nombreComercial: nombreComercialInput.value,
+        //         nombreFantasia: nombreFantasiaInput.value,
+        //         provincia: provinciaInput.value,
+        //         canton: cantonInput.value,
+        //         distrito: distritoInput.value,
+        //         estado: Number(!document.getElementById(idLibreria).checked)
+        //     }
+        //     if (!validarCampos(libreria)) {
+        //         let nuevaLibreria = await editarlibreria(libreria, idLibreria);
+        //         if (nuevaLibreria.success) {
+        //             let trElemento = document.querySelector('[data-id="' + nuevaLibreria.libreria._id + '"]');
+        //             let tdElementos = trElemento.querySelectorAll('td');
+        //             tdElementos[0].innerText = nuevaLibreria.libreria.nombreComercial;
+        //             tdElementos[1].innerText = nuevaLibreria.libreria.nombreFantasia;
+        //             tdElementos[2].innerText = nuevaLibreria.libreria.provincia;
+        //             tdElementos[3].innerText = nuevaLibreria.libreria.canton;
+        //             tdElementos[4].innerText = nuevaLibreria.libreria.distrito;
 
-                    sweetAlertSuccess(nuevaLibreria.message);
-                    removerForm();
-                    editarListaLibreria(nuevaLibreria.libreria);
-                }
-                else {
-                    sweetAlertError(nuevaLibreria.message);
-                }
-            }
-            else {
-                sweetAlertWarning();
-            }
-        } else if (accion === 'borrar') {
+        //             sweetAlertSuccess(nuevaLibreria.message);
+        //             removerForm();
+        //             editarListaLibreria(nuevaLibreria.libreria);
+        //         }
+        //         else {
+        //             sweetAlertError(nuevaLibreria.message);
+        //         }
+        //     }
+        //     else {
+        //         sweetAlertWarning();
+        //     }
+         if (accion === 'borrar') {
             let trElemento = document.querySelector('[data-id="' + idLibreria + '"]');
             trElemento.remove();
             let result = await eliminarlibreria(idLibreria);
@@ -211,14 +213,14 @@ let agregarFilaLibreria = function (libreria)  {
     
     let estadoInput = document.createElement('input');
     estadoInput.setAttribute('class', 'switch');
-    estadoInput.setAttribute('id', libreria._id);
+    // estadoInput.setAttribute('id', libreria._id);
     estadoInput.setAttribute('type', 'checkbox');
     estadoCelda.appendChild(estadoInput);
-    estadoInput.checked = !libreria.estado;
+    // estadoInput.checked = !libreria.estado;
     
     let estadoLabel = document.createElement('label');
     estadoLabel.setAttribute('data-action', 'estado');
-    estadoLabel.setAttribute('for', libreria._id);
+    // estadoLabel.setAttribute('for', libreria._id);
     estadoCelda.appendChild(estadoLabel);
     }
 

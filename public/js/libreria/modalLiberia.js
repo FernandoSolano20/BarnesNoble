@@ -1,5 +1,4 @@
 let modal = document.getElementById("modal");
-let tbody = document.querySelector("#tbl_librerias tbody");
 
 function eventosLibreria(event) {
   let elemento = event.target;
