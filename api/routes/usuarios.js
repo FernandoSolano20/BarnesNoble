@@ -695,19 +695,19 @@ router.patch('/editarUsuario/:id', function (req, res) {
                         }
                     );
                 }
-                if(usuarioRegistrado.nombre != req.body.nombre){
+                if(req.body.nombre && usuarioRegistrado.nombre != req.body.nombre){
                     cambios.nombre = req.body.nombre;
                     usuarioModificado = true;
                 }
-                if(usuarioRegistrado.segundoNombre != req.body.segundoNombre){
+                if(req.body.segundoNombre && usuarioRegistrado.segundoNombre != req.body.segundoNombre){
                     cambios.segundoNombre = req.body.segundoNombre;
                     usuarioModificado = true;
                 }
-                if(usuarioRegistrado.primerApellido != req.body.primerApellido){
+                if(req.body.primerApellido && usuarioRegistrado.primerApellido != req.body.primerApellido){
                     cambios.primerApellido = req.body.primerApellido;
                     usuarioModificado = true;
                 }
-                if(usuarioRegistrado.segundoApellido != req.body.segundoApellido){
+                if(req.body.segundoApellido && usuarioRegistrado.segundoApellido != req.body.segundoApellido){
                     cambios.segundoApellido = req.body.segundoApellido;
                     usuarioModificado = true;
                 }
@@ -715,39 +715,47 @@ router.patch('/editarUsuario/:id', function (req, res) {
                     cambios.img = req.body.img;
                     usuarioModificado = true;
                 }
-                if(usuarioRegistrado.sexo != req.body.sexo){
+                if(req.body.sexo && usuarioRegistrado.sexo != req.body.sexo){
                     cambios.sexo = req.body.sexo;
                     usuarioModificado = true;
                 }
-                if(usuarioRegistrado.nacimiento != req.body.nacimiento){
+                if(req.body.nacimiento && usuarioRegistrado.nacimiento != req.body.nacimiento){
                     cambios.nacimiento = req.body.nacimiento;
                     usuarioModificado = true;
                 }
-                if(usuarioRegistrado.provincia != req.body.provincia){
+                if(req.body.provincia && usuarioRegistrado.provincia != req.body.provincia){
                     cambios.provincia = req.body.provincia;
                     usuarioModificado = true;
                 }
-                if(usuarioRegistrado.canton != req.body.canton){
+                if(req.body.canton && usuarioRegistrado.canton != req.body.canton){
                     cambios.canton = req.body.canton;
                     usuarioModificado = true;
                 }
-                if(usuarioRegistrado.distrito != req.body.distrito){
+                if(req.body.distrito && usuarioRegistrado.distrito != req.body.distrito){
                     cambios.distrito = req.body.distrito;
                     usuarioModificado = true;
                 }
-                if(usuarioRegistrado.sennas != req.body.sennas){
+                if(req.body.sennas && usuarioRegistrado.sennas != req.body.sennas){
                     cambios.sennas = req.body.sennas;
                     usuarioModificado = true;
                 }
-                if(usuarioRegistrado.alias != req.body.alias){
+                if(req.body.alias && usuarioRegistrado.alias != req.body.alias){
                     cambios.alias = req.body.alias;
                     usuarioModificado = true;
                 }
-                if(usuarioRegistrado.localizacionLatitud != req.body.localizacionLatitud){
+                if(req.body.nombreComercial && usuarioRegistrado.nombreComercial != req.body.nombreComercial){
+                    cambios.sennas = req.body.nombreComercial;
+                    usuarioModificado = true;
+                }
+                if(req.body.nombreFantasia && usuarioRegistrado.nombreFantasia != req.body.nombreFantasia){
+                    cambios.alias = req.body.nombreFantasia;
+                    usuarioModificado = true;
+                }
+                if(req.body.localizacionLatitud && usuarioRegistrado.localizacionLatitud != req.body.localizacionLatitud){
                     cambios.localizacionLatitud = req.body.localizacionLatitud;
                     usuarioModificado = true;
                 }
-                if(usuarioRegistrado.localizacionLongitud != req.body.localizacionLongitud){
+                if(req.body.localizacionLongitud && usuarioRegistrado.localizacionLongitud != req.body.localizacionLongitud){
                     cambios.localizacionLongitud = req.body.localizacionLongitud;
                     usuarioModificado = true;
                 } 

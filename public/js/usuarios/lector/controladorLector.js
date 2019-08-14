@@ -570,7 +570,9 @@ if(document.getElementById('map')){
 }
 for (let i = 0; i < idRadios.length; i++)
     idRadios[i].addEventListener('change', cambiarIdentificacion);
-document.getElementById('modificar').addEventListener('click', actualizarDatosUsuarios);
 
+if(document.getElementById('modificar')){
+    document.getElementById('modificar').addEventListener('click', actualizarDatosUsuarios);
+}
 
 cargarDatosUsuario();

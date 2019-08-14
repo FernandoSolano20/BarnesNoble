@@ -1,5 +1,6 @@
 let usuario;
 
+
 let informacionUsuario = async function () {
     let contenedor = document.getElementById('informacionUsuario');
     let url = new URL(window.location.href);
@@ -7,10 +8,10 @@ let informacionUsuario = async function () {
 
     usuario = await obtenerUsuarioPorIdFetch(id);
 
-    partialInformacionUsuario(contenedor);
+    partialInformacionUsuario(contenedor, id);
 }
 
-let partialInformacionUsuario = function (contenedor) {
+let partialInformacionUsuario = function (contenedor, idUser) {
     let infoContainer = document.createElement('div');
     infoContainer.setAttribute('class', 'info');
     contenedor.appendChild(infoContainer);
@@ -128,6 +129,7 @@ let partialInformacionUsuario = function (contenedor) {
     text = document.createElement('p');
     text.innerText = calcularEdad(nacimiento.getFullYear() + '-' + Number(nacimiento.getUTCMonth() + 1) + '-' + nacimiento.getUTCDate()) + " años"
     divInfo.appendChild(text);
+
 
     if (usuario.usuario.tipoUsuario === "Lector" || usuario.usuario.tipoUsuario === "Adminitrador plataforma") {
         divInfo = document.createElement('div');
@@ -256,6 +258,26 @@ let partialInformacionUsuario = function (contenedor) {
             contendorPreferencia.setAttribute('id', 'preferencias');
             contenedorVotoPrefe.appendChild(contendorPreferencia);
 
+            if (idUser == usuario.usuario._id) {
+                let btnPerfil = document.createElement('button');
+
+                btnPerfil.innerText = 'Editar perfil'
+                btnPerfil.dataset._id = usuario.usuario['_id'];
+                btnPerfil.setAttribute('class', 'material-blue')
+                contendorPreferencia.appendChild(btnPerfil);
+                btnPerfil.addEventListener('click', function () {
+                    window.location.href = `editarPerfilUsuarios.html?id=${this.dataset._id}`;
+                });
+
+                btnPerfil = document.createElement('button');
+                btnPerfil.innerText = 'Cambiar contraseña'
+                btnPerfil.dataset._id = usuario.usuario['_id'];
+                btnPerfil.setAttribute('class', 'material-blue');
+                btnPerfil.addEventListener('click', cambiarPass);
+                contendorPreferencia.appendChild(btnPerfil);
+                
+            }
+
             infoContainer = document.createElement('div');
             infoContainer.setAttribute('class', 'info');
             contendorPreferencia.appendChild(infoContainer);
@@ -324,7 +346,7 @@ let partialInformacionUsuario = function (contenedor) {
                 divInfo.appendChild(text);
             }
             reviewsUsuario();
-        }else{
+        } else {
             document.getElementById('map').remove();
         }
     } else {
@@ -460,7 +482,7 @@ let cambiarPass = async function () {
         Swal.fire({
             type: 'success',
             title: user.message
-        },logoutCambioPassword());
+        }, logoutCambioPassword());
     }
     else {
         Swal.fire({
@@ -471,4 +493,3 @@ let cambiarPass = async function () {
 }
 
 informacionUsuario();
-document.getElementById('cambiarPassword').addEventListener('click', cambiarPass);
