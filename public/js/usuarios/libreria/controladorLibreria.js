@@ -216,7 +216,7 @@ let obtenerDatosUsuarios = async function () {
 }
 
 let actualizarDatosUsuarios = async function () {
-    let error = validarId() | validarNombre1() | validarNombre2() | validarApellido1() | validarApellido2() | validarCorreo() | validarTelefono() | validarNacimiento() | validarSexo() | validarAlias() | validarProvincia() | validarCanton() | validarDistrito() | validarSennas() | validarFavoritos() | validarNombreComercial() | validarNombreFantasia();
+    let error = validarId() | validarNombre1() | validarNombre2() | validarApellido1() | validarApellido2() | validarCorreo() | validarTelefono() | validarNacimiento() | validarSexo() | validarProvincia() | validarCanton() | validarDistrito() | validarSennas() | validarNombreComercial() | validarNombreFantasia();
     if (!error && usuarioRegistrado) {
 
         document.body.className = "loading";
