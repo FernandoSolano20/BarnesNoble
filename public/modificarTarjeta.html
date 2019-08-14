@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/registroFormulario.css">
     <link rel="stylesheet" href="css/botones.css">
+    <link rel="stylesheet" href="css/modal.css">
     <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
 
 </head>
@@ -58,7 +59,7 @@
                         <div class="inputGroup">
                             <span class="left alertHidden" id="alert-tarjeta">La tarjta debe tener 16 dígitos.</span>
                             <label class="label" for="tarjeta-input">Número de Tarjeta:</label>
-                            <input type="number" id="tarjeta" name="tarjeta">
+                            <input type="number" id="numTarjeta" name="tarjeta">
                         </div>
                         <div class="inputGroup">
                             <span class="left alertHidden" id="alert-nombre">Digite solo letras.</span>
@@ -101,19 +102,15 @@
                         <div class="inputGroup">
                             <span class="left alertHidden" id="alert-cvv">CVV deber ser de 3 dígitos.</span>
                             <label class="label" for="cvv-input">Código CVV</label>
-                            <input type="number" id="cvv">
                         </div>
                     </div>
-            </div>
-            <!-- Final div column -->
+            </div><!-- Final div column -->
             </form>
             <div class="crear-contenedor">
-                    <button type="button" class="material-blue" id="registrar"><i class="far fa-clipboard-list"></i>Guardar</button>
+                    <button type="button" class="material-blue" id="guardar"><i class="far fa-clipboard-list"></i> Gurardar</button>
                 </div>
-                <div class="crear-contenedor">
-                    <button type="button" class="material-blue" id="registrar"><i class="far fa-clipboard-list"></i>Eliminar</button>
-                </div>
-        </section>
+            </div>
+          </section>
     </main>
     <footer>
         <div class="blockFooter">
@@ -136,8 +133,10 @@
     <script src="js/menu.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="js/tarjetas/servicioTarjeta.js"></script>
-    <!-- <script src="js/validaciones/validacionesGenerales.js"></script>
-    <script src="js/tarjetas/controlador-registrar-tarjeta-test.js"></script> -->
+    <!-- <script src="js/validaciones/validacionesGenerales.js"></script> -->
+    <!-- <script src="js/tarjetas/controlador-registrar-tarjeta-test.js"></script> -->
+    <script src="js/tarjetas/controlador_editar_tarjeta.js"></script>
+    <!-- <script src="js/tarjetas/modalTarjeta.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script src="js/cerrarSesion.js"></script>
 </body>

@@ -1,7 +1,7 @@
 let modal = document.getElementById("modal");
 let tbody = document.querySelector("#tbl_tarjetas tbody");
 
-function eventosTarjeta(event) {
+function eventosLibreria(event) {
   let elemento = event.target;
   let accion = elemento.getAttribute('data-action');
   if (accion) {
@@ -11,7 +11,7 @@ function eventosTarjeta(event) {
 
     if (accion === 'crear') {
       modal.setAttribute('data-action', 'crear');
-      tituloModal.innerText = 'Crear género';
+      tituloModal.innerText = 'Crear Tarjeta';
       textoModal.innerText = '';
       crearFomrulario(cuerpoModal);
     }
@@ -23,24 +23,23 @@ function eventosTarjeta(event) {
         tipoTarjeta: trTarjeta.children[1].innerText,
         numTarjeta: trTarjeta.children[2].innerText,
         expiracionMM: trTarjeta.children[3].innerText,
-        expiracionMM: trTarjeta.children[4].innerText,
+        expiracionYY: trTarjeta.children[4].innerText,
         cvv: trTarjeta.children[5].innerText
-     };
 
+      };
       cuerpoModal.setAttribute("data-tarjeta", tarjeta.id);
 
       if (accion === 'editar') {
         modal.setAttribute('data-action', 'editar');
-        tituloModal.innerText = 'Editar tarjeta ' + genero.nombre;
+        tituloModal.innerText = 'Editar tarjeta ' + tarjeta.tipoTarjeta;
         textoModal.innerText = '¿Está seguro que quiere editar esta tarjeta?';
 
         crearFomrulario(cuerpoModal, tarjeta);
       } else if (accion === 'borrar') {
         modal.setAttribute('data-action', 'borrar');
-        tituloModal.innerText = 'Elimnar tarjeta ';
+        tituloModal.innerText = 'Elimnar tarjeta ' + tarjeta.tipoTarjeta;
         textoModal.innerText = '¿Está seguro que quiere elimnar esta tarjeta?';
       } 
-      
     }
     modal.style.display = "block";
   }
@@ -54,62 +53,66 @@ function crearFomrulario(cuerpoModal, tarjeta) {
   let inputNombre = document.createElement('input');
   inputNombre.setAttribute('type', 'text');
   inputNombre.setAttribute('onkeypress', "return soloLetras(event)");
-  inputNombre.setAttribute('placeholder', 'Nombre');
+  inputNombre.setAttribute('placeholder', 'Nombre en la Tarjeta');
   inputNombre.setAttribute('id', 'nombre1');
   inputNombre.setAttribute('name', 'nombre');
 
   let inputTipoTarjeta = document.createElement('input');
   inputTipoTarjeta.setAttribute('type', 'text');
-  inputTipoTarjeta.setAttribute('onkeypress', "return soloLetras(event)");
+  inputTipoTarjeta.setAttribute('onkeypress', "return (event)");
   inputTipoTarjeta.setAttribute('placeholder', 'Tipo de Tarjeta');
-  inputTipoTarjeta.setAttribute('id', 'tipoTarjeta');
+  inputTipoTarjeta.setAttribute('id', 'tipo');
   inputTipoTarjeta.setAttribute('name', 'tipo');
 
   let inputNumTarjeta = document.createElement('input');
   inputNumTarjeta.setAttribute('type', 'text');
   inputNumTarjeta.setAttribute('onkeypress', "return soloNumeros(event)");
-  inputNumTarjeta.setAttribute('placeholder', 'Numero de Tarjeta');
-  inputNumTarjeta.setAttribute('id', 'numTarjeta');
-  inputNumTarjeta.setAttribute('name', 'numero');
+  inputNumTarjeta.setAttribute('placeholder', 'Número de tarjeta');
+  inputNumTarjeta.setAttribute('id', 'tarjeta');
+  inputNumTarjeta.setAttribute('name', 'tarjeta');
 
-    let inputExpiracionMM = document.createElement('input');
+  let inputExpiracionMM = document.createElement('input');
   inputExpiracionMM.setAttribute('type', 'text');
   inputExpiracionMM.setAttribute('onkeypress', "return soloNumeros(event)");
-  inputExpiracionMM.setAttribute('placeholder', 'Mes de expericion');
-  inputExpiracionMM.setAttribute('id', 'expiracionMM');
-  inputExpiracionMM.setAttribute('name', 'expiracionMM');
+  inputExpiracionMM.setAttribute('placeholder', 'Mes de expiración');
+  inputExpiracionMM.setAttribute('id', 'mes');
+  inputExpiracionMM.setAttribute('name', 'mes');
 
   let inputExpiracionYY = document.createElement('input');
   inputExpiracionYY.setAttribute('type', 'text');
   inputExpiracionYY.setAttribute('onkeypress', "return soloNumeros(event)");
-  inputExpiracionYY.setAttribute('placeholder', 'Mes de expericion');
-  inputExpiracionYY.setAttribute('id', 'expiracionYY');
-  inputExpiracionYY.setAttribute('name', 'expiracionYY');
-
-  let inputCvv = document.createElement('input');
-  inputCvv.setAttribute('type', 'text');
-  inputCvv.setAttribute('onkeypress', "return soloNumeros(event)");
-  inputCvv.setAttribute('placeholder', 'Numero CVV');
-  inputCvv.setAttribute('id', 'cvv');
-  inputCvv.setAttribute('name', 'cvv');
+  inputExpiracionYY.setAttribute('placeholder', 'Año de expiración');
+  inputExpiracionYY.setAttribute('id', 'year');
+  inputExpiracionYY.setAttribute('name', 'year');
 
   if (tarjeta) {
     inputNombre.setAttribute('value', tarjeta.nombre1);
+    inputNombre.innerText = tarjeta.nombre1;
+
     inputTipoTarjeta.setAttribute('value', tarjeta.tipoTarjeta);
+    inputTipoTarjeta.innerText = tarjeta.tipoTarjeta;
+
     inputNumTarjeta.setAttribute('value', tarjeta.numTarjeta);
-    inputExpiracionMM.setAttribute('value', tarjeta.expiracionMM);
+    inputNumTarjeta.innerText = tarjeta.numTarjeta;
+
+    inputExpiracionMM.setAttribute('value', tarjeta.numTarjeta);
+    inputExpiracionMM.innerText = tarjeta.numTarjeta;
+
     inputExpiracionYY.setAttribute('value', tarjeta.expiracionYY);
+    inputExpiracionYY.innerText = tarjeta.numTarjeta;
+
     inputCvv.setAttribute('value', tarjeta.cvv);
+    inputCvv.innerText = tarjeta.cvv;
+
   }
 
-  form.appendChild(inputNombre);  
+  form.appendChild(inputNombre);
   form.appendChild(inputTipoTarjeta);
   form.appendChild(inputNumTarjeta);
   form.appendChild(inputExpiracionMM);
   form.appendChild(inputExpiracionYY);
   form.appendChild(inputCvv);
 }
-
 
 let removerForm = function () {
   modal.style.display = "none";
@@ -122,8 +125,8 @@ let removerForm = function () {
 let closeModal = function (event) {
   if (event.target == modal || event.target.getAttribute('data-close') === 'closeModal') {
     if (event.target.id !== "confirm" && modal.getAttribute('data-action') === 'estado') {
-      let generoId = document.querySelector('#cuerpo-modal').getAttribute('data-genero');
-      let inputChecked = document.getElementById(generoId);
+      let tarjetaId = document.querySelector('#cuerpo-modal').getAttribute('data-tarjeta');
+      let inputChecked = document.getElementById(tarjetaId);
       inputChecked.checked = !inputChecked.checked;
     }
     removerForm();
@@ -146,14 +149,16 @@ let soloLetras = function (e) {
   if (letras.indexOf(tecla) == -1 && !tecla_especial)
     return false;
 }
-function soloNumeros(evt) {
-  var iKeyCode = (evt.which) ? evt.which : evt.keyCode
-  if (iKeyCode != 46 && iKeyCode > 31 && (iKeyCode < 48 || iKeyCode > 57))
-      return false;
 
+function soloNumeros(evt) {
+  evt = (evt) ? evt : window.event;
+  var charCode = (evt.which) ? evt.which : evt.keyCode;
+  if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+  }
   return true;
-} 
+}
 
 window.addEventListener('click', closeModal);
-tbody.addEventListener('click', eventosGenero);
-document.getElementById('crear-elemento').addEventListener('click', eventosGenero);
+tbody.addEventListener('click', eventosLibreria);
+document.getElementById('crear-elemento').addEventListener('click', eventosLibreria);

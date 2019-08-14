@@ -24,23 +24,39 @@ let mostrar_tabla = async () => {
         fila.insertCell().innerHTML = (listaTarjetas[i]['expiracionMM']) + '/' + (listaTarjetas[i]['expiracionYY']);
         fila.insertCell().innerHTML = listaTarjetas[i]['cvv'];
 
-        let celda_perfil = fila.insertCell();
-        let divContendor = document.createElement("div");
-        divContendor.setAttribute('class', 'crear-contenedor');
-        let btnPerfil = document.createElement('button');
-        celda_perfil.appendChild(divContendor);
-        divContendor.appendChild(btnPerfil);
+        let celda_editar = fila.insertCell();
+        let divContendorEditar = document.createElement("div");
+        divContendorEditar.setAttribute('class', 'crear-contenedor');
+        let btnEditar = document.createElement('button');
+        celda_editar.appendChild(divContendorEditar);
+        divContendorEditar.appendChild(btnEditar);
 
-        btnPerfil.innerText = 'Editar'
-        btnPerfil.dataset._id = listaTarjetas[i]['_id'];
-        btnPerfil.setAttribute('class', 'material-blue')
-        btnPerfil.addEventListener('click', function () {
+        btnEditar.innerText = 'Editar'
+        btnEditar.dataset._id = listaTarjetas[i]['_id'];
+        btnEditar.setAttribute('class', 'material-blue')
+        btnEditar.addEventListener('click', function () {
             window.location.href = `modificarTarjeta.html?id=${this.dataset._id}`;
-        });
+         });    
+
+        let celda_eliminar = fila.insertCell();
+        let divContendorEliminar = document.createElement("div");
+        divContendorEliminar.setAttribute('class', 'crear-contenedor');
+        let btnEliminar = document.createElement('button');
+        celda_eliminar.appendChild(divContendorEliminar);
+        divContendorEliminar.appendChild(btnEliminar);
+
+        btnEliminar.innerText = 'Eliminar'
+        btnEliminar.dataset._id = listaTarjetas[i]['_id'];
+        btnEliminar.setAttribute('class', 'material-blue')
+        btnEliminar.addEventListener('click', function () {
+            window.location.href = `#`; 
+    }); 
+       
     }
     filaNoDatos();
 };
 
+     
 let filaNoDatos = function () {
     if (listaTarjetas.length === 0 || tbody.childElementCount === 0) {
         let fila = tbody.insertRow();

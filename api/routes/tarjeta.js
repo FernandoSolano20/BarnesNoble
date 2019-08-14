@@ -51,6 +51,39 @@ router.post('/registrarTarjeta', function (req, res) {
 
 });
 
+
+router.post('/modificarTarjeta', function (req, res) {
+    let body = req.body;
+    console.log("modificar tarjeta ejecutado");
+    console.log(body);
+
+    Contacto.findByIdAndUpdate(body._id, {
+        $set: {
+            nombre1: body.nombre,
+            numTarjeta: body.numero,
+            tipoTarjeta: body.tipo,
+            expiracionMM: body.mes,
+            expiracionYY: body.year,
+            cvv: body.cvv,
+        }
+    },
+        function (error) {
+
+            if (error) {
+                console.log("error");
+                console.log(error);
+                res.json({ success: false, msg: 'La tarjeta no se pudo actualizar' });
+            } else {
+                console.log("Tarjeta fue actualizada");
+                res.json({ success: true, msg: 'Tarjeta fue actualizada"' });
+            }
+        }
+    )
+
+});
+
+
+
 router.get('/listarTarjetas', function (req, res) {
     Tarjeta.find(function (err, tarjetasDB) {
         if (err) {

@@ -29,9 +29,13 @@ function formReset() {
     document.getElementById("registrarTarjeta").reset();
 }
 
+let redirect = () => {
+    window.location.assign("listarTarjetas.html");
+}
+
 let validarDatosTarjetas = async () => {
 
-    let error = validarNombre() | validarTarjeta() | validarExpMM() | validarExpYY() | validarCVV() | validarCVVAmex;
+    let error = validarNombre() | validarTarjeta() | validarExpMM() | validarExpYY() | validarCVV();
     if (!error) {
         let nombre1 = nombreInput.value;
         let numTarjeta = tarjetaInput.value;
@@ -56,11 +60,10 @@ let validarDatosTarjetas = async () => {
             Swal.fire({
                 title: nuevaTarjeta.message,
                 type: 'success',
-                text: 'Se tarjeta se registró correctamente',
-                confirmButtonText:
-                '<a href="http://localhost:3000/listarTarjetas.html" class="linkPage">Ok</a>'
+                text: 'Se tarjeta se registró correctamente'
 
             })
+            redirect();
         } else {
             Swal.fire({
                 title: nuevaTarjeta.message,
@@ -141,10 +144,7 @@ let validarTarjeta = function () {
         tarjetaInput.className = tarjetaInput.className.replace("inputError", "");
         return false;
     }
-
-
 };
-
 
 let validarCVV = function () {
     let cvv = {
@@ -169,31 +169,6 @@ let validarCVV = function () {
         return false;
     }
 };
-
-let validarCVVAmex = function () {
-    let cvv = {
-        value: cvvInput.value,
-        alert: alertCvv,
-        input: cvvInput
-    }
-    if (!validarNumeros(cvv)) {
-        return true;
-    }
-    else if (tipoTarjeta == 'AmericanExpress'&& (cvv.value.length != 4)) {
-        alertCvv.innerText = "Debe tener 4 dígitos."
-        alertCvv.className = alertCvv.className.replace("alertHidden", "");
-        cvvInput.className = cvvInput.className.replace("inputError", "");
-        cvvInput.className = cvvInput.className + " inputError";
-        return true;
-    }
-    else {
-        alertCvv.className = alertCvv.className.replace("alertHidden", "");
-        alertCvv.className = alertCvv.className + " alertHidden";
-        cvvInput.className = cvvInput.className.replace("inputError", "");
-        return false;
-    }
-};
-
 
 let validarExpMM = function () {
     let mes = {
@@ -221,17 +196,6 @@ function cardnumberMastercard(inputtxt) {
     }
     else {
         alert("Not a valid Mastercard number!");
-        return false;
-    }
-}
-
-function amexCvv(inputtxt) {
-    var cardno = /^(?:5[1-5][0-9]{4})$/;
-    if (inputtxt.value.match(cardno)) {
-        return true;
-    }
-    else {
-        alert("Not a valid Cvv number!");
         return false;
     }
 }
