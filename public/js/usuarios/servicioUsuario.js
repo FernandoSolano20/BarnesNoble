@@ -180,3 +180,26 @@ let comprarLibroEnSucursal = async function (compra) {
     var result = await response.json();
     return result;
 }
+
+let verLibrosCompradosLector = async function (id) {
+    var response = await fetch('http://localhost:4000/api/librosLector/' + id, {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        }
+    });
+    var result = await response.json();
+    return result;
+}
+
+let tieneElLibroVoto = async function (usuario) {
+    var response = await fetch('http://localhost:4000/api/tieneElLibro', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body: JSON.stringify(usuario)
+    });
+    var result = await response.json();
+    return result;
+}

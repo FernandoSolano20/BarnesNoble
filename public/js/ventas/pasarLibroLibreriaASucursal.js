@@ -53,6 +53,7 @@ let modalDarLibrosASucursal = async (event) => {
             if (response.success) {
                 editarListaEjemplar(ejemplarSucursal.ejemplar,ejemplarSucursal.cantidad);
                 document.querySelector('[data-idEjemplar="'+ejemplarSucursal.ejemplar+'"] #pCantidad').innerHTML = "Cantidad: " + (stockLibreria -= ejemplarSucursal.cantidad);
+                document.querySelector('[data-libro="'+ejemplarSucursal.ejemplar+'"]').setAttribute('data-cantidad',stockLibreria);
                 Swal.fire({
                     type: 'success',
                     title: response.message

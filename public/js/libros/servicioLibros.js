@@ -73,3 +73,15 @@ let obtenerCountLibro = async function () {
     var result = await response.json();
     return result.count;
 }
+
+let votarPorLibro = async function (voto) {
+    var response = await fetch('http://localhost:4000/api/libros/votarLibro', {
+        method: "PATCH",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body:JSON.stringify(voto)
+    });
+    var result = await response.json();
+    return result;
+}

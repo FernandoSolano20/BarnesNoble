@@ -167,16 +167,16 @@ router.post('/registrarUsuario', function (req, res) {
                                                               <div class="container">
                                                                 <h1>Bienvenido a Barnes & Noble</h1>
                                                               <h2>Su biblioteca digital</h2>
-                                                              
+
                                                               <p>Saludos ${nuevoUsuario.nombre} ${nuevoUsuario.primerApellido} le agradecemos por escoger utilizar los servicios de Barnes & Noble</p>
                                                               <p>El correo electrónico asociado es: ${nuevoUsuario.correo}</p>
                                                               <p>Su contraseña temporal es: ${nuevoUsuario.pass}</p>
-                                                              <p>Para ingresar visite el siguiente<p> 
+                                                              <p>Para ingresar visite el siguiente<p>
                                                                 <a href="http://localhost:3000/inicioSesion.html" class="boton">Ingresar a Barnes & Noble </a>
                                                               </div>
-                                                              
+
                                                             </body>
-                                                            
+
                                                           </html>`
                                                         };
                                                         transporter.sendMail(mailOption, function (error, info) {
@@ -409,17 +409,17 @@ router.patch('/olvidarPass/:correo', function (req, res) {
                           <div class="container">
                             <h1>Cambio de contraseña en Barnes & Noble</h1>
                           <h2>Su biblioteca digital</h2>
-                          
+
                           <p>Saludos ${usuarioDB.nombre} ${usuarioDB.primerApellido}</p>
                           <p>Se ha solicitado el cambio de contraseña de su cuenta</p>
                           <p>El correo electrónico asociado es: ${usuarioDB.correo}</p>
                           <p>Su contraseña temporal es: ${randomPass}</p>
-                          <p>Para ingresar visite el siguiente<p> 
+                          <p>Para ingresar visite el siguiente<p>
                             <a href="http://localhost:3000/inicioSesion.html" class="boton">Ingresar a Barnes & Noble </a>
                           </div>
-                          
+
                         </body>
-                        
+
                       </html>`
                     };
                     transporter.sendMail(mailOption, function (error, info) {
@@ -654,6 +654,7 @@ router.patch('/comprarLibroUsuarioLibreria', function (req, res) {
         }
         else {
             let query;
+            let vendidoQuery;
             if (ejemp) {
                 for (let i = 0; i < ejemp.ejemplares.length; i++) {
                     if (ejemp.ejemplares[i].libro == req.body.ejemplar) {
@@ -661,10 +662,11 @@ router.patch('/comprarLibroUsuarioLibreria', function (req, res) {
                     }
                 }
             }
-
+            vendidoQuery = "ejemplares." + query + ".vendidos";
             query = "ejemplares." + query + ".cantidad";
-
-            Libreria.updateOne({ _id: req.body.idLibreria, "ejemplares.libro": req.body.ejemplar, [`${query}`]: { $gte: req.body.cantidad } }, { $inc: { [`${query}`]: -(req.body.cantidad) } }, function (err, ejemp) {
+            console.log(vendidoQuery)
+            console.log(query)
+            Libreria.updateOne({ _id: req.body.idLibreria, "ejemplares.libro": req.body.ejemplar, [`${query}`]: { $gte: req.body.cantidad } }, { $inc: { [`${query}`]: -(req.body.cantidad) }, $inc: { [`${vendidoQuery}`]: (req.body.cantidad) } }, function (err, ejemp) {
                 if (err)
                     return res.json({
                         success: false,
@@ -740,6 +742,7 @@ router.patch('/comprarLibroUsuarioSucursal', function (req, res) {
         }
         else {
             let query;
+            let vendidoQuery;
             if (ejemp) {
                 for (let i = 0; i < ejemp.ejemplares.length; i++) {
                     if (ejemp.ejemplares[i].libro == req.body.ejemplar) {
@@ -747,9 +750,9 @@ router.patch('/comprarLibroUsuarioSucursal', function (req, res) {
                     }
                 }
             }
-
+            vendidoQuery = "ejemplares." + query + ".vendidos";
             query = "ejemplares." + query + ".cantidad";
-            Sucursal.updateOne({ _id: req.body.idSucursal, "ejemplares.libro": req.body.ejemplar, [`${query}`]: { $gte: req.body.cantidad } }, { $inc: { [`${query}`]: -(req.body.cantidad) } }, function (err, ejemp) {
+            Sucursal.updateOne({ _id: req.body.idSucursal, "ejemplares.libro": req.body.ejemplar, [`${query}`]: { $gte: req.body.cantidad } }, { $inc: { [`${query}`]: -(req.body.cantidad) }, $inc: { [`${vendidoQuery}`]: (req.body.cantidad) } }, function (err, ejemp) {
                 if (err)
                     return res.json({
                         success: false,
@@ -811,6 +814,76 @@ router.patch('/comprarLibroUsuarioSucursal', function (req, res) {
             });
         }
     });
+});
+
+router.get('/librosLector/:id', async (req, res) => {
+    return await Usuario.findById(req.params.id, function (err, usuario) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'No se encontro ninguna usuario',
+                err
+            });
+        }
+        else {
+            return res.json({
+                success: true,
+                usuario: usuario
+            });
+        }
+    })
+        .populate({
+            path: 'ejemplares.libro',
+            populate: {
+                path: 'libro',
+                populate: {
+                    path: 'genero categoria autor',
+                    select: '_id nombre nombreArtistico'
+                },
+                select: '_id titulo genero categoria caratula contraportada'
+            },
+            select: '_id tipo precio isbn10 isbn13 cantidad iva libro'
+        })
+        .select('nombre libreria ejemplares');
+});
+
+router.post('/tieneElLibro/', async (req, res) => {
+    req.body.ejemplares = ["5d5131169837dc0c904cc098", "5d5131549837dc0c904cc099", "5d51318b9837dc0c904cc09a"];
+    let libros = [];
+    for (var i = 0; i < req.body.ejemplares.length; i++)
+        libros.push(new mongoose.Types.ObjectId(req.body.ejemplares[i]));
+
+    Usuario.find({ _id: req.body.idUsuario, "ejemplares.libro": { $in: libros } }, function (err, usuario) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                err
+            });
+        }
+        else if (usuario != "") {
+            Libro.findOne({ _id: req.body.idLibro, "voto.usuario": req.body.idUsuario }, function (err, user) {
+                if (err) {
+                    return res.status(400).json({
+                        success: false,
+                        err
+                    });
+                } else if (user) {
+                    return res.json({
+                        success: false
+                    });
+                } else {
+                    return res.json({
+                        success: true
+                    });
+                }
+            });
+        }
+        else {
+            return res.json({
+                success: false
+            });
+        }
+    })
 });
 
 module.exports = router;

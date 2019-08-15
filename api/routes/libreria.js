@@ -4,7 +4,8 @@ const express = require('express'),
     router = express.Router(),//permite crear la ruta
     Libreria = require('../models/libreria.model'),
     mongoose = require('mongoose'),
-    Ejemplar = require('../models/ejemplar.model');
+    Ejemplar = require('../models/ejemplar.model'),
+    Libro = require('../models/libros.model');
 
 
 router.get('/listarLibrerias', async (req, res) => {
@@ -95,6 +96,7 @@ router.get('/obtenerTiendas', async (req, res) => {
 });
 
 router.patch('/comprarLibroLibreria', function (req, res) {
+    console.log(req.body)
     let ejemplarId = new mongoose.Types.ObjectId(req.body.libro);
     Ejemplar.updateOne({ _id: req.body.libro, 'cantidad': { $gte: req.body.cantidad } }, { $inc: { "cantidad": -(req.body.cantidad) } }, function (err, ejemp) {
         if (err)
@@ -105,46 +107,65 @@ router.patch('/comprarLibroLibreria', function (req, res) {
             })
         else {
             if (ejemp.n) {
-                Libreria.updateOne({ _id: req.body.idLibreria, "ejemplares.libro": ejemplarId }, { $inc: { "ejemplares.$.cantidad": (req.body.cantidad) } }, function (err, ejemplar) {
-                    if (err) {
-                        return res.status(400).json({
-                            success: false,
-                            message: 'Ocurrio un error',
-                            err
-                        });
-                    } else if (ejemplar.n) {
+                Libro.updateOne({ _id: req.body.id }, { $inc: { "vendidos": (req.body.cantidad) } }, function (err, libro) {
+                    if (err){
                         return res.json({
-                            success: true,
-                            message: 'Se agregaron los libros al catálogo de libros de la librería 1'
+                            success: false,
+                            message: 'No se agregaron los libros al catálogo de libros de la librería',
+                            err
                         })
                     }
-                    else {
-                        Libreria.updateOne({ _id: req.body.idLibreria }, {
-                            $push: {
-                                'ejemplares': {
-                                    libro: req.body.libro,
-                                    cantidad: req.body.cantidad,
-                                    estado: 1,
-                                    iva: req.body.iva
-                                }
-                            }
-                        },
-                            function (err, ejemplar) {
+                    else{
+                        if(libro.n){
+                            Libreria.updateOne({ _id: req.body.idLibreria, "ejemplares.libro": ejemplarId }, { $inc: { "ejemplares.$.cantidad": (req.body.cantidad) } }, function (err, ejemplar) {
                                 if (err) {
                                     return res.status(400).json({
                                         success: false,
-                                        message: 'No se pudo comprar el libro',
+                                        message: 'Ocurrio un error',
                                         err
-                                    })
-                                } else {
+                                    });
+                                } else if (ejemplar.n) {
                                     return res.json({
                                         success: true,
                                         message: 'Se agregaron los libros al catálogo de libros de la librería 1'
                                     })
                                 }
-                            }
-                        )
-
+                                else {
+                                    Libreria.updateOne({ _id: req.body.idLibreria }, {
+                                        $push: {
+                                            'ejemplares': {
+                                                libro: req.body.libro,
+                                                cantidad: req.body.cantidad,
+                                                estado: 1,
+                                                iva: req.body.iva
+                                            }
+                                        }
+                                    },
+                                        function (err, ejemplar) {
+                                            if (err) {
+                                                return res.status(400).json({
+                                                    success: false,
+                                                    message: 'No se pudo comprar el libro',
+                                                    err
+                                                })
+                                            } else {
+                                                return res.json({
+                                                    success: true,
+                                                    message: 'Se agregaron los libros al catálogo de libros de la librería 1'
+                                                })
+                                            }
+                                        }
+                                    )
+            
+                                }
+                            });
+                        }else{
+                            return res.json({
+                                success: false,
+                                message: 'Error al actulizar el libro',
+                                err
+                            })
+                        }
                     }
                 });
             }
@@ -221,8 +242,8 @@ router.get('/obtenerSucursalesPorLibreriaId/:id', function (req, res) {
             });
         }
     })
-    .populate('sucursales.sucursal','nombre')
-    .select('nombreFantasia sucursales')
+        .populate('sucursales.sucursal', 'nombre')
+        .select('nombreFantasia sucursales')
 });
 
 module.exports = router;
