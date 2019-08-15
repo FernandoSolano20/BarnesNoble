@@ -50,3 +50,39 @@ let agregarPremios = async (pid, pnombrePremio, pannoPremio, pDescPremio) => {
     });
     return response.data;
 };
+
+
+let editarAutor = async(autor,id) => {
+    let response = await fetch('http://localhost:4000/api/autor/editar/' + id, {
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body:JSON.stringify(autor)
+    });
+    let result = await response.json();
+    return result;
+}
+
+let eliminarAutor = async(id) => {
+    let response = await fetch('http://localhost:4000/api/autor/eliminar/' + id, {
+        method: "DELETE",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+    });
+    let result = await response.json();
+    return result;
+}
+
+let estadoAutor = async(autor,id) => {
+    let response = await fetch('http://localhost:4000/api/autor/modificarEstado/' + id, {
+        method: "PATCH",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body:JSON.stringify(autor)
+    });
+    let result = await response.json();
+    return result.response;
+}

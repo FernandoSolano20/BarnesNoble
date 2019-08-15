@@ -171,3 +171,5 @@ let validarAnno = function (elementos) {
     elementos.input.className = elementos.input.className.replace("inputError", "");
     return true;
 }
+
+    

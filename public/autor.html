@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="css/searchBar.css">
     <link rel="stylesheet" href="css/estilosAutor.css">
     <link rel="stylesheet" href="css/registroFormulario.css">
+    <link rel="stylesheet" href="css/modal.css">
     <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
 
 </head>
@@ -70,6 +71,19 @@
                 </tbody>
             </table>
         </div>
+        <div id="modal" class="modal alert">
+            <div class="modal-content">
+                <div class="close" data-close="closeModal">&times;</div>
+                <p id="titulo-modal">Título</p>
+                <div class="alert-img-box" id="cuerpo-modal">
+                    <p class="alert-text" id="texto-modal">Hola.</p>
+                </div>
+                <div class="alert-btn-wrapper">
+                    <button class="alert-btn" id="cancel" data-close="closeModal">Cancelar</button>
+                    <button class="alert-btn primary" id="confirm">Confirmar</button>
+                </div>
+            </div>
+        </div>
     </main>
     <footer>
         <div class="blockFooter">
@@ -95,6 +109,7 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="js/autor/servicioAutor.js"></script>
     <script src="js/autor/controladorAutor.js"></script>
+    <script src="js/autor/ModalAutor.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </body>
 
