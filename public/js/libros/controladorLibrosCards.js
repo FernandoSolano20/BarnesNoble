@@ -60,7 +60,7 @@ let agregarCardLibro = function (libro, autor) {
         btnFormato.setAttribute('id', 'btnFormato');
         btnFormato.innerText = 'Añadir formato';
         btnFormato.setAttribute('style','line-height:normal')
-        btnFormato.href = "formatoLibro.html?id=" + libro.autor._id;
+        btnFormato.href = "formatoLibro.html?id=" + libro._id;
         child2.appendChild(btnFormato);
     }
     else{

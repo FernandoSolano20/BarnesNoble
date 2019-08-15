@@ -386,7 +386,7 @@ let reviewsUsuario = function () {
     let reviewsContainer = document.getElementById("reviews");
     let tituloH2 = document.createElement("h2");
     tituloH2.setAttribute('class', 'subtitle');
-    tituloH2.innerText = "Reseñas del libro";
+    tituloH2.innerText = "Reseñas del lector";
     reviewsContainer.appendChild(tituloH2);
 
     let divConatinerReview = document.createElement("div");
