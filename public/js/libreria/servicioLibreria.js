@@ -104,3 +104,38 @@ let obtenerSucursalesPorLibreriaId = async function (id) {
     var result = await response.json();
     return result;
 }
+
+let editarLibreria = async(libreria,id) => {
+    let response = await fetch('http://localhost:4000/api/editarLibreria/' + id, {
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body:JSON.stringify(libreria)
+    });
+    let result = await response.json();
+    return result;
+}
+
+let eliminarLibreria = async(id) => {
+    let response = await fetch('http://localhost:4000/api/eliminarLibreria/' + id, {
+        method: "DELETE",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+    });
+    let result = await response.json();
+    return result;
+}
+
+let estadoLibreria = async(genero,id) => {
+    let response = await fetch('http://localhost:4000/api/modificarEstadoLibreria/' + id, {
+        method: "PATCH",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body:JSON.stringify(libreria)
+    });
+    let result = await response.json();
+    return result.response;
+}

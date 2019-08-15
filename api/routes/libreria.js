@@ -246,4 +246,45 @@ router.get('/obtenerSucursalesPorLibreriaId/:id', function (req, res) {
         .select('nombreFantasia sucursales')
 });
 
+router.post('/deshabilitar-libreria', function (req, res) {
+    let body = req.body;
+
+    Contacto.findByIdAndUpdate(body._id, {
+        $set: {
+            estado: 'Deshabilitada'
+        }
+    },
+        function (error) {
+            if (error) {
+                console.log("error")
+                console.log(error)
+                res.json({ success: false, msg: 'No se pudo deshabilitar la libreria' });
+            } else {
+                console.log("scuccess")
+                res.json({ success: true, msg: 'La libreria se deshabilitó con éxito' });
+            }
+        }
+    )
+});
+
+router.post('/habilitar-libreria', function (req, res) {
+    let body = req.body;
+
+    Contacto.findByIdAndUpdate(body._id, {
+        $set: {
+            estado: req.body.estado
+        }
+    },
+        function (error) {
+
+            if (error) {
+                res.json({ success: false, msg: 'No se pudo habilitar la libreria' });
+            } else {
+                res.json({ success: true, msg: 'La libreria se habilitó con éxito' });
+            }
+        }
+    )
+});
+
+
 module.exports = router;
