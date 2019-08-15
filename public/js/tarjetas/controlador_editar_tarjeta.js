@@ -24,14 +24,14 @@ let cargar_formulario = async () =>{
         
         cargar_formulario();
 
-        let editar = () => {
+let editar = () => {
 
-            modificar(_id, input_nombre1.value, input_tipoTarjeta.value, input_numTarjeta.value, input_expiracionMM.value, input_expiracionYY.value, input_cvv.value );
-        };
+        modificar(_id, input_nombre1.value, input_tipoTarjeta.value, input_numTarjeta.value, input_expiracionMM.value, input_expiracionYY.value, input_cvv.value );
+ };
         
         
-        cargar_formulario();
-        btnGuardar.addEventListener('click', guardar);
+cargar_formulario();
+btnGuardar.addEventListener('click', guardar);
 // redirect();
 
 

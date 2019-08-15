@@ -7,6 +7,41 @@ const express = require('express'),
 //Definir la ruta para registar contactos
 //empizan con / por estandar
 //- en el medio por standar
+router.param('_id', function (req, res, next, _id) {
+    req.body._id = _id;
+    next();
+});
+
+router.param('nombre1', function (req, res, next, nombre1) {
+    req.body.nombre1 = nombre1;
+    next();
+});
+
+router.param('numTarjeta', function (req, res, next, numTarjeta) {
+    req.body.numTarjeta = numTarjeta;
+    next();
+});
+
+router.param('tipoTarjeta', function (req, res, next, tipoTarjeta) {
+    req.body.tipoTarjeta = tipoTarjeta;
+    next();
+});
+
+router.param('expiracionMM', function (req, res, next, expiracionMM) {
+    req.body.expiracionMM = expiracionMM;
+    next();
+});
+
+router.param('expiracionYY', function (req, res, next, expiracionYY) {
+    req.body.expiracionYY = expiracionYY;
+    next();
+});
+
+router.param('cvv', function (req, res, next, cvv) {
+    req.body.cvv = cvv;
+    next();
+});
+
 router.post('/registrarTarjeta', function (req, res) {
     /*req lo que recibo y response lo que respondo */
     let body = req.body;
@@ -62,7 +97,7 @@ router.post('/modificarTarjeta', function (req, res) {
             tipoTarjeta: body.tipoTarjeta,
             expiracionMM: body.expiracionMM,
             expiracionYY: body.expiracionYY,
-            cvv: body.cvv,
+            cvv: body.cvv
         }
     },
         function (error) {
@@ -100,7 +135,7 @@ router.get('/listarTarjetas', function (req, res) {
 });
 
 router.get('/listarTarjetasPorId/:id', function (req, res) {
-    Tarjeta.find({usuario:req.params.id},function (err, tarjetasDB) {
+    Tarjeta.findById({usuario:req.params.id},function (err, tarjetasDB) {
         if (err) {
             return res.status(400).json({
                 success: false,
