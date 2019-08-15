@@ -38,7 +38,7 @@ let crearMenu = async function () {
         li.appendChild(anchor);
         if (sessionStorage.tipoUsuario === "Lector") {
             //Menu Lector
-            let vertMenu = document.getElementById('verticalMenuUser');
+            let vertMenu = document.getElementById('verticalMenuUser') || document.getElementById('menuVertical');
             let divCarrito = document.createElement('div');
             divCarrito.setAttribute('id','cd-cart-trigger');
             vertMenu.appendChild(divCarrito);
