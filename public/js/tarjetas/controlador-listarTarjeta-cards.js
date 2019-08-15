@@ -11,8 +11,6 @@ let mostrar_tabla = async() => {
    
      
     for (let i = 0; i < listaTarjetas.length; i++) {
-//   let expiracionMM =  listaTarjetas[i]['expiracionMM'];
-// let expiracionYY = listaTarjetas[i]['expiracionYY'];
         let fila = tbody.insertRow();
         fila.insertCell().innerHTML = listaTarjetas[i]['nombre1'];
         fila.insertCell().innerHTML = listaTarjetas[i]['numTarjeta'];

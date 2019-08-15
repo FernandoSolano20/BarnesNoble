@@ -35,7 +35,7 @@ let mostrar_tabla = async () => {
         btnEditar.dataset._id = listaTarjetas[i]['_id'];
         btnEditar.setAttribute('class', 'material-blue')
         btnEditar.addEventListener('click', function () {
-            window.location.href = `modificarTarjeta.html?id=${this.dataset._id}`;
+            window.location.href = `modificarTarjeta.html?_id=${this.dataset._id}`;
          });    
 
         let celda_eliminar = fila.insertCell();

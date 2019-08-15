@@ -9,7 +9,7 @@ const cardnoAmerican = /^(?:3[47][0-9]{13})$/;
 const nombreInput = document.getElementById('nombre1');
 const alertNombre = document.getElementById('alert-nombre');
 
-const tarjetaInput = document.getElementById('tarjeta');
+const tarjetaInput = document.getElementById('numTarjeta');
 const alertTarjeta = document.getElementById('alert-tarjeta');
 
 const tipoInput = document.getElementById('tipo');

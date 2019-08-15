@@ -54,16 +54,14 @@ router.post('/registrarTarjeta', function (req, res) {
 
 router.post('/modificarTarjeta', function (req, res) {
     let body = req.body;
-    console.log("modificar tarjeta ejecutado");
-    console.log(body);
-
-    Contacto.findByIdAndUpdate(body._id, {
+   
+    Tarjeta.findByIdAndUpdate(body._id, {
         $set: {
-            nombre1: body.nombre,
-            numTarjeta: body.numero,
-            tipoTarjeta: body.tipo,
-            expiracionMM: body.mes,
-            expiracionYY: body.year,
+            nombre1: body.nombre1,
+            numTarjeta: body.numTarjeta,
+            tipoTarjeta: body.tipoTarjeta,
+            expiracionMM: body.expiracionMM,
+            expiracionYY: body.expiracionYY,
             cvv: body.cvv,
         }
     },
@@ -75,7 +73,7 @@ router.post('/modificarTarjeta', function (req, res) {
                 res.json({ success: false, msg: 'La tarjeta no se pudo actualizar' });
             } else {
                 console.log("Tarjeta fue actualizada");
-                res.json({ success: true, msg: 'Tarjeta fue actualizada"' });
+                res.json({ success: true, msg: 'Tarjeta fue actualizada' });
             }
         }
     )

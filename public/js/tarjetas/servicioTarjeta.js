@@ -40,11 +40,11 @@ let obtenerTarjetasUsuario  = async (id) => {
     } 
 };
 
-let editarTarjetaServicio  =  (pid, pnombre1, pnumTarjeta, ptipoTarjeta, pexpiracionMM, pexpiracionYY, pcvv) => {
+let modificar =  (pid, pnombre1, pnumTarjeta, ptipoTarjeta, pexpiracionMM, pexpiracionYY, pcvv) => {
     axios({ 
         //Fetch data from an url endpoint:
            method: 'post',
-            url: 'http://localhost:4000/api/modificarTarjeta/:id',  
+            url: 'http://localhost:4000/api/modificarTarjeta/' + id,  
             responseType: 'json'   ,
             data: {
                 _id: pid,
