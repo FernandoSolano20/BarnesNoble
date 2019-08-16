@@ -128,10 +128,13 @@ let agregarFilaSucursal = function (sucursal, libreria) {
 
         let celda_perfil = fila.insertCell();
         let divContendor = document.createElement("div");
-        divContendor.setAttribute('class', 'crear-contenedor')
         let btnPerfil = document.createElement('button');
+        let btnSuscribir = document.createElement('button');
+        let separator = document.createElement('span');
+
+        divContendor.setAttribute('class', 'crear-contenedor')
         celda_perfil.appendChild(divContendor);
-        divContendor.appendChild(btnPerfil);
+        
 
         btnPerfil.innerText = 'Ver perfil'
         btnPerfil.dataset._id = sucursal['_id'];
@@ -139,7 +142,66 @@ let agregarFilaSucursal = function (sucursal, libreria) {
         btnPerfil.addEventListener('click', function () {
             window.location.href = "perfilSucursal.html?id=" + sucursal._id;
         });
+        divContendor.appendChild(btnPerfil);
+
+        if(usuarioSuscito(sucursal.usuariosSubscritos, sessionStorage.id)){
+            btnSuscribir.innerText = 'Cancelar';
+            btnSuscribir.addEventListener('click', async function () {
+                let response = await desuscribirUsuario({
+                    idUsuario : sessionStorage.id,
+                    idSucursal : sucursal['_id']
+                });
+                if (response.success) {
+                    btnSuscribir.innerText = 'Subscribir';
+                    Swal.fire({
+                        type: 'success',
+                        title: response.message
+                    })
+                }
+                else {
+                    Swal.fire({
+                        type: 'error',
+                        title: response.message
+                    })
+                }
+            });
+        }
+        else{
+            btnSuscribir.innerText = 'Subscribir';
+            btnSuscribir.addEventListener('click', async function () {
+                let response = await suscribirUsuario({
+                    idUsuario : sessionStorage.id,
+                    idSucursal : sucursal['_id']
+                });
+                if (response.success) {
+                    btnSuscribir.innerText = 'Cancelar';
+                    Swal.fire({
+                        type: 'success',
+                        title: response.message
+                    })
+                }
+                else {
+                    Swal.fire({
+                        type: 'error',
+                        title: response.message
+                    })
+                }
+            });
+        }
+
+        btnSuscribir.setAttribute('class', 'material-blue');
+        separator.innerHTML = '&nbsp;';
+        divContendor.appendChild(separator);
+        divContendor.appendChild(btnSuscribir);
+        
     }
+}
+
+let usuarioSuscito = function(lista, idUsuario){
+    for (let i = 0; i < lista.length; i++) {
+        if(lista[i].usuario == idUsuario) return true;
+    }
+    return false;
 }
 
 let filaNoDatos = function () {

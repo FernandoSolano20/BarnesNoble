@@ -130,6 +130,90 @@ router.get('/countSucursal', function (req, res) {
     });
 })
 
+router.patch('/suscribirUsuarioSucursal', function(req, res){
+    if(req.body.idUsuario && req.body.idSucursal){
+        Sucursal.findById(req.params.id, (err, usuarios) => {
+            if (err) {
+                return res.status(400).json({
+                    success: false,
+                    msj: 'No se encontro esta sucursal',
+                    err
+                });
+            }
+            Sucursal.updateOne({ _id: req.body.idSucursal }, {
+                $push: {
+                    'usuariosSubscritos': {
+                        usuario: req.body.idUsuario
+                    }
+                }
+            },
+            function (err, usuario) {
+                if (err) {
+                    return res.status(400).json({
+                        success: false,
+                        message: 'No se pudo realizar la suscripcion',
+                        err
+                    })
+                } else {
+                    return res.json({
+                        success: true,
+                        message: 'Subscripcion exitosa'
+                    })
+                }
+            });
+        });
+    }
+    else{
+        return res.json({
+            success: false,
+            message: 'Debe seleccionar un usuario y una libreria',
+            err
+        }) 
+    }
+});
+
+router.patch('/desuscribirUsuarioSucursal', function(req, res){
+    if(req.body.idUsuario && req.body.idSucursal){
+        Sucursal.findOne({ _id: req.body.idSucursal, "usuariosSubscritos.usuario": req.params.id }, (err, usuarios) => {
+            if (err) {
+                return res.status(400).json({
+                    success: false,
+                    msj: 'El usuario no esta suscrito a esta sucursal',
+                    err
+                });
+            }
+            Sucursal.updateOne({ _id: req.body.idSucursal }, {
+                $pull: {
+                    'usuariosSubscritos': {
+                        usuario: req.body.idUsuario
+                    }
+                }
+            },
+            function (err, usuario) {
+                if (err) {
+                    return res.status(400).json({
+                        success: false,
+                        message: 'No se pudo cancelar la suscripcion',
+                        err
+                    })
+                } else {
+                    return res.json({
+                        success: true,
+                        message: 'Subscripcion cancelada'
+                    })
+                }
+            });
+        });
+    }
+    else{
+        return res.json({
+            success: false,
+            message: 'Debe seleccionar un usuario y una libreria',
+            err
+        }) 
+    }
+});
+
 
 router.patch('/comprarLibroSucursalLibreria', function (req, res) {
     let ejemplarId = new mongoose.Types.ObjectId(req.body.ejemplar);
