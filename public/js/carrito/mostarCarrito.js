@@ -35,12 +35,21 @@ let mostarTarjetas = async (event) => {
                                 </label>
                             </div>`;
     }
+    if(listaTarjetas.length == 0){
+        misTarjetasHTML = ` <div class="crear-contenedor">
+                                <p>Se ocupa tener por lo menos una tarjeta</p>
+                                <a href="registrarTarjeta.html" type="button" class="material-blue" data-action="crear" id="crear-elemento"><i
+                                        class="far fa-plus-circle"></i>Crear Tarjeta</a>
+                            </div>`;
+        
+    }
 
     Swal.fire({
         title: 'Datos para la venta',
         html: ` <div>${misTarjetasHTML}
                 </div>`,
-        showCancelButton: true
+        showCancelButton: true,
+        showConfirmButton: !!(listaTarjetas.length)
     }).then(async (result) => {
         if (result.value) {
             var tarjeta;
@@ -56,7 +65,8 @@ let mostarTarjetas = async (event) => {
             comprar(event, tarjeta)
         }
     });
-    document.getElementById(listaTarjetas[0]._id).checked = true;
+    if(listaTarjetas[0])
+        document.getElementById(listaTarjetas[0]._id).checked = true;
 }
 
 let enviarCorreo = async (libros, tarjeta) => {
@@ -83,7 +93,7 @@ let comprar = async (event, tarjeta) => {
             let compra = {
                 idLibreria: compras[0].idtienda,
                 idUsuario: sessionStorage.id,
-                cantidad: document.getElementById("input" + compras[0].idtienda + "" + compras[i].idEjemplar).value,
+                cantidad: document.getElementById("input" + compras[0].idtienda + "-" + compras[i].idEjemplar).value,
                 ejemplar: compras[i].idEjemplar
             }
             let response = await comprarLibroEnLibreria(compra);
@@ -92,7 +102,7 @@ let comprar = async (event, tarjeta) => {
                     titulo: compras[i].titulo,
                     tipo: compras[i].tipo,
                     iva: compras[i].iva,
-                    cantidad: compras[i].cantidad,
+                    cantidad: document.getElementById("input" + compras[0].idtienda + "-" + compras[i].idEjemplar).value,
                     precio: compras[i].precio
                 })
                 librosComprados[1].total += compras[i].cantidad;
@@ -135,7 +145,7 @@ let comprar = async (event, tarjeta) => {
             let compra = {
                 idSucursal: compras[0].idtienda,
                 idUsuario: sessionStorage.id,
-                cantidad: document.getElementById("input" + compras[0].idtienda + "" + compras[i].idEjemplar).value,
+                cantidad: document.getElementById("input" + compras[0].idtienda + "-" + compras[i].idEjemplar).value,
                 ejemplar: compras[i].idEjemplar
             }
             let response = await comprarLibroEnSucursal(compra);
@@ -185,6 +195,16 @@ let comprar = async (event, tarjeta) => {
     }
 }
 
+let changeInput = function(event){
+    let idEjemp = event.target.getAttribute("id");
+    let idLib = idEjemp.split('-');
+    let precioAntes = document.querySelector('[data-id="'+idEjemp+'"]');
+    let total = document.querySelector('[data-total="'+idLib[0]+'"]');
+    let precio = Number(event.target.getAttribute("data-precio")) * Number(event.target.value);
+    total.innerHTML = Number(total.innerText) - Number(precioAntes.innerHTML) + precio;
+    precioAntes.innerHTML =  precio;
+}
+
 let mostarCarrito = function () {
     var listaLibrosCarrito = allStorage();
     let carritoHTML = ``;
@@ -199,13 +219,13 @@ let mostarCarrito = function () {
                                         <div class="name">${listaLibrosCarrito[i].tienda[j].titulo}</div>
                                         <div class="other-info">
                                             <div class="amount">${listaLibrosCarrito[i].tienda[j].tipo}</div>
-                                            <div class="basket-price">${Number(listaLibrosCarrito[i].tienda[j].precio) * Number(listaLibrosCarrito[i].tienda[j].cantidad)}</div>
+                                            <div class="basket-price" data-id="input${listaLibrosCarrito[i].tienda[0].idtienda}-${listaLibrosCarrito[i].tienda[j].idEjemplar}">${Number(listaLibrosCarrito[i].tienda[j].precio) * Number(listaLibrosCarrito[i].tienda[j].cantidad)}</div>
                                         </div>
                                     </div>
                                     <button class="fa fa-close remove" data-id="${listaLibrosCarrito[i].tienda[0].idtienda}-${listaLibrosCarrito[i].tienda[j].idEjemplar}"></button>
                                 </div>
                                 <div class="quantity-buttons">
-                                    <input id="input${listaLibrosCarrito[i].tienda[0].idtienda}${listaLibrosCarrito[i].tienda[j].idEjemplar}" type="text" value="${listaLibrosCarrito[i].tienda[j].cantidad}" class="input quanity-input" />
+                                    <input id="input${listaLibrosCarrito[i].tienda[0].idtienda}-${listaLibrosCarrito[i].tienda[j].idEjemplar}" type="text" value="${listaLibrosCarrito[i].tienda[j].cantidad}" data-precio="${listaLibrosCarrito[i].tienda[j].precio}" class="input quanity-input" />
                                 </div>
                             </div>`;
             total += Number(listaLibrosCarrito[i].tienda[j].precio) * Number(listaLibrosCarrito[i].tienda[j].cantidad);
@@ -215,11 +235,13 @@ let mostarCarrito = function () {
                                 <i class="far fa-shopping-cart"></i>Comprar
                             </button>
                         </div>
-                        <p id="total">Total:<span id="totalValor">${total}</span></p>
+                        <p id="total">Total:<span data-total="input${listaLibrosCarrito[i].tienda[0].idtienda}">${total}</span></p>
                         </div>
                         </div>`;
     }
     document.getElementById('carritoLibros').innerHTML = carritoHTML;
+    var inputs = document.querySelectorAll(".input");
+    inputs.forEach((ele) => ele.addEventListener('keyup', changeInput));
     filaNoDatos();
     var cardsElements = document.getElementsByClassName("remove");
     var btnComprar = document.querySelectorAll("[data-action='comprar']");
