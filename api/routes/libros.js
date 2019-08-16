@@ -82,7 +82,8 @@ router.get('/buscarLibroID/:id', async (req, res) => {
         .populate('genero', 'nombre -_id')
         .populate('categoria', 'nombre -_id')
         .populate('autor', '_id nombre resenna fechaNacimiento fechaMuerte nombreArtistico nacionalidad foto lugarNacimiento')
-        .select('titulo caratula contraportada genero categoria autor');
+        .populate('voto.usuario', '_id nombre primerApellido img')
+        .select('titulo caratula contraportada genero categoria autor voto');
 
 });
 
@@ -166,6 +167,32 @@ router.get('/countLibros', function (req, res) {
             count: count
         });
     });
+})
+
+router.patch('/votarLibro', function (req, res) {
+    Libros.findByIdAndUpdate(req.body.idLibro, {
+        $push: {
+            'voto': {
+                usuario: req.body.idUsuario,
+                calificacion: req.body.voto,
+                comentario: req.body.comentario
+            }
+        }
+    }, function (err, voto) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'Ocurrio un error al votar por el libro',
+                err
+            });
+        }
+        else{
+            return res.json({
+                success: true,
+                message: "El voto se ha guardado en el sistema"
+            });
+        }
+    });;
 })
 
 module.exports = router;

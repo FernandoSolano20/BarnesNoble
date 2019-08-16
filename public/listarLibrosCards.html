@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Barnes & Noble</title>
-    <script src="js/validarSesionPlatafomra.js"></script>
+    <script src="js/validarSesionLibreria.js"></script>
     <link rel="stylesheet" href="css/reset.css">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" href="css/cards.css">
     <link rel="stylesheet" href="css/btnClass.css">
+    <link rel="stylesheet" href="css/registroFormulario.css">
     <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
 
 </head>
@@ -24,7 +25,7 @@
 <body>
     <header>
         <nav class="menuHorizontal">
-            <ul class="list-menu">
+            <ul class="list-menu" id="verticalMenuUser">
                 <li><a href="#" data-menu="mostrar-nav-izq"><i data-menu="mostrar-nav-izq" class="fas fa-bars"></i></a>
                 </li>
                 <li><a href="/"><i class="far fa-home"></i>Inicio</a></li>
@@ -49,9 +50,8 @@
                         autocorrect="off">
                     <button type="button" class="buscar"><i class="fa fa-search"></i><span>search</span></button>
                 </div>
-                <div class="crear-contenedor">
-                    <a type="button" class="material-blue" data-action="crear" id="crear-elemento"
-                        href="http://localhost:3000/registrarlibro.html"> <i class="far fa-plus-circle"></i>Crear</a>
+                <div class="crear-contenedor" id="container-btn">
+                    
                 </div>
 
             </div>
@@ -82,9 +82,12 @@
     </footer>
     <script src="js/cerrarSesion.js"></script>
     <script src="js/menu.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="js/libros/servicioLibros.js"></script>
+    <script src="js/ejemplar/servicioEjemplar.js"></script>
+    <script src="js/libreria/servicioLibreria.js"></script>
+    <script src="js/validaciones/validacionesGenerales.js"></script>
     <script src="js/libros/controladorLibrosCards.js"></script>
+    <script src="js/ventas/ventaBarnesNoble.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </body>
 

@@ -2,10 +2,12 @@
 
 const express = require('express'),
     router = express.Router(),
+    mongoose = require('mongoose'),
     randomString = require("randomstring"),
     nodeMailer = require("nodemailer"),
     Usuario = require('../models/usuarios.model'),
     Libreria = require('../models/libreria.model'),
+    Sucursal = require("../models/sucursal.model"),
     Autor = require('../models/autor.model'),
     Libro = require('../models/libros.model'),
     Categoria = require('../models/categoria.model'),
@@ -165,16 +167,16 @@ router.post('/registrarUsuario', function (req, res) {
                                                               <div class="container">
                                                                 <h1>Bienvenido a Barnes & Noble</h1>
                                                               <h2>Su biblioteca digital</h2>
-                                                              
+
                                                               <p>Saludos ${nuevoUsuario.nombre} ${nuevoUsuario.primerApellido} le agradecemos por escoger utilizar los servicios de Barnes & Noble</p>
                                                               <p>El correo electrónico asociado es: ${nuevoUsuario.correo}</p>
                                                               <p>Su contraseña temporal es: ${nuevoUsuario.pass}</p>
-                                                              <p>Para ingresar visite el siguiente<p> 
+                                                              <p>Para ingresar visite el siguiente<p>
                                                                 <a href="http://localhost:3000/inicioSesion.html" class="boton">Ingresar a Barnes & Noble </a>
                                                               </div>
-                                                              
+
                                                             </body>
-                                                            
+
                                                           </html>`
                                                         };
                                                         transporter.sendMail(mailOption, function (error, info) {
@@ -407,17 +409,17 @@ router.patch('/olvidarPass/:correo', function (req, res) {
                           <div class="container">
                             <h1>Cambio de contraseña en Barnes & Noble</h1>
                           <h2>Su biblioteca digital</h2>
-                          
+
                           <p>Saludos ${usuarioDB.nombre} ${usuarioDB.primerApellido}</p>
                           <p>Se ha solicitado el cambio de contraseña de su cuenta</p>
                           <p>El correo electrónico asociado es: ${usuarioDB.correo}</p>
                           <p>Su contraseña temporal es: ${randomPass}</p>
-                          <p>Para ingresar visite el siguiente<p> 
+                          <p>Para ingresar visite el siguiente<p>
                             <a href="http://localhost:3000/inicioSesion.html" class="boton">Ingresar a Barnes & Noble </a>
                           </div>
-                          
+
                         </body>
-                        
+
                       </html>`
                     };
                     transporter.sendMail(mailOption, function (error, info) {
@@ -486,7 +488,7 @@ router.get('/usuarioId/:id', async (req, res) => {
                 path: 'sucursales.sucursal',
                 select: '_id nombre localizacionLongitud localizacionLatitud provincia canton distrito telefono correo ejemplares usuariosSubscritos'
             },
-            select: 'nombreComercial nombreFantasia localizacionLongitud localizacionLatitud provincia canton distrito'
+            select: 'nombreComercial nombreFantasia localizacionLongitud localizacionLatitud provincia canton distrito ejemplares'
         })
         .populate('ejemplares.libro', 'titulo')
         .select('id nombre segundoNombre primerApellido segundoApellido correo img sexo telefono tipoUsuario nacimiento sennas alias localizacionLatitud localizacionLongitud provincia canton distrito autor genero libro categoria libreria ejemplares');
@@ -637,6 +639,343 @@ router.get('/countUser', function (req, res) {
             success: true,
             count: count
         });
+    });
+})
+
+router.patch('/comprarLibroUsuarioLibreria', function (req, res) {
+    let ejemplarId = new mongoose.Types.ObjectId(req.body.ejemplar);
+    Libreria.findOne({ _id: req.body.idLibreria }, function (err, ejemp) {
+        if (err) {
+            return res.json({
+                success: false,
+                message: 'No se agregaron los libros al catálogo de libros de la librería',
+                err
+            })
+        }
+        else {
+            let query;
+            let vendidoQuery;
+            if (ejemp) {
+                for (let i = 0; i < ejemp.ejemplares.length; i++) {
+                    if (ejemp.ejemplares[i].libro == req.body.ejemplar) {
+                        query = i;
+                    }
+                }
+            }
+            vendidoQuery = "ejemplares." + query + ".vendidos";
+            query = "ejemplares." + query + ".cantidad";
+            Libreria.updateOne({ _id: req.body.idLibreria, "ejemplares.libro": req.body.ejemplar, [`${query}`]: { $gte: req.body.cantidad } }, { $inc: { [`${query}`]: -(req.body.cantidad), [`${vendidoQuery}`]: (req.body.cantidad) } }, function (err, ejemp) {
+                if (err)
+                    return res.json({
+                        success: false,
+                        message: 'No se agregaron los libros al catálogo de libros de la librería',
+                        err
+                    })
+                else {
+                    if (ejemp.n) {
+                        Usuario.updateOne({ _id: req.body.idUsuario, "ejemplares.libro": ejemplarId }, { $inc: { "ejemplares.$.cantidad": (req.body.cantidad) } }, function (err, ejemplar) {
+                            if (err) {
+                                return res.status(400).json({
+                                    success: false,
+                                    message: 'Ocurrio un error',
+                                    err
+                                });
+                            } else if (ejemplar.n) {
+                                return res.json({
+                                    success: true,
+                                    message: 'Se logró comprar los libros'
+                                })
+                            }
+                            else {
+                                Usuario.updateOne({ _id: req.body.idUsuario }, {
+                                    $push: {
+                                        'ejemplares': {
+                                            libro: req.body.ejemplar,
+                                            cantidad: req.body.cantidad,
+                                            estadoIntercambio: 1
+                                        }
+                                    }
+                                },
+                                    function (err, ejemplar) {
+                                        if (err) {
+                                            return res.status(400).json({
+                                                success: false,
+                                                message: 'No se pudo comprar el libro',
+                                                err
+                                            })
+                                        } else {
+                                            return res.json({
+                                                success: true,
+                                                message: 'Se logró comprar los libros'
+                                            })
+                                        }
+                                    }
+                                )
+
+                            }
+                        });
+                    }
+                    else {
+                        return res.json({
+                            success: false,
+                            message: 'No hay muchos libros en stock',
+                            err
+                        })
+                    }
+                }
+            });
+        }
+    });
+});
+
+router.patch('/comprarLibroUsuarioSucursal', function (req, res) {
+    let ejemplarId = new mongoose.Types.ObjectId(req.body.ejemplar);
+    Sucursal.findOne({ _id: req.body.idSucursal }, function (err, ejemp) {
+        if (err) {
+            return res.json({
+                success: false,
+                message: 'No se agregaron los libros al catálogo de libros de la librería',
+                err
+            })
+        }
+        else {
+            let query;
+            let vendidoQuery;
+            if (ejemp) {
+                for (let i = 0; i < ejemp.ejemplares.length; i++) {
+                    if (ejemp.ejemplares[i].libro == req.body.ejemplar) {
+                        query = i;
+                    }
+                }
+            }
+            vendidoQuery = "ejemplares." + query + ".vendidos";
+            query = "ejemplares." + query + ".cantidad";
+            Sucursal.updateOne({ _id: req.body.idSucursal, "ejemplares.libro": req.body.ejemplar, [`${query}`]: { $gte: req.body.cantidad } }, { $inc: { [`${query}`]: -(req.body.cantidad), [`${vendidoQuery}`]: (req.body.cantidad) } }, function (err, ejemp) {
+                if (err)
+                    return res.json({
+                        success: false,
+                        message: 'No se compro el libro',
+                        err
+                    })
+                else {
+                    if (ejemp.n) {
+                        Usuario.updateOne({ _id: req.body.idUsuario, "ejemplares.libro": ejemplarId }, { $inc: { "ejemplares.$.cantidad": (req.body.cantidad) } }, function (err, ejemplar) {
+                            if (err) {
+                                return res.status(400).json({
+                                    success: false,
+                                    message: 'Ocurrio un error',
+                                    err
+                                });
+                            } else if (ejemplar.n) {
+                                return res.json({
+                                    success: true,
+                                    message: 'Se logró comprar los libros'
+                                })
+                            }
+                            else {
+                                Usuario.updateOne({ _id: req.body.idUsuario }, {
+                                    $push: {
+                                        'ejemplares': {
+                                            libro: req.body.ejemplar,
+                                            cantidad: req.body.cantidad,
+                                            estadoIntercambio: 1
+                                        }
+                                    }
+                                },
+                                    function (err, ejemplar) {
+                                        if (err) {
+                                            return res.status(400).json({
+                                                success: false,
+                                                message: 'No se pudo comprar el libro',
+                                                err
+                                            })
+                                        } else {
+                                            return res.json({
+                                                success: true,
+                                                message: 'Se logró comprar los libros'
+                                            })
+                                        }
+                                    }
+                                )
+
+                            }
+                        });
+                    }
+                    else {
+                        return res.json({
+                            success: false,
+                            message: 'No hay muchos libros en stock',
+                            err
+                        })
+                    }
+                }
+            });
+        }
+    });
+});
+
+router.get('/librosLector/:id', async (req, res) => {
+    return await Usuario.findById(req.params.id, function (err, usuario) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'No se encontro ninguna usuario',
+                err
+            });
+        }
+        else {
+            return res.json({
+                success: true,
+                usuario: usuario
+            });
+        }
+    })
+        .populate({
+            path: 'ejemplares.libro',
+            populate: {
+                path: 'libro',
+                populate: {
+                    path: 'genero categoria autor',
+                    select: '_id nombre nombreArtistico'
+                },
+                select: '_id titulo genero categoria caratula contraportada'
+            },
+            select: '_id tipo precio isbn10 isbn13 cantidad iva libro'
+        })
+        .select('nombre libreria ejemplares');
+});
+
+router.post('/tieneElLibro/', async (req, res) => {
+    req.body.ejemplares = ["5d5131169837dc0c904cc098", "5d5131549837dc0c904cc099", "5d51318b9837dc0c904cc09a"];
+    let libros = [];
+    for (var i = 0; i < req.body.ejemplares.length; i++)
+        libros.push(new mongoose.Types.ObjectId(req.body.ejemplares[i]));
+
+    Usuario.find({ _id: req.body.idUsuario, "ejemplares.libro": { $in: libros } }, function (err, usuario) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                err
+            });
+        }
+        else if (usuario != "") {
+            Libro.findOne({ _id: req.body.idLibro, "voto.usuario": req.body.idUsuario }, function (err, user) {
+                if (err) {
+                    return res.status(400).json({
+                        success: false,
+                        err
+                    });
+                } else if (user) {
+                    return res.json({
+                        success: false
+                    });
+                } else {
+                    return res.json({
+                        success: true
+                    });
+                }
+            });
+        }
+        else {
+            return res.json({
+                success: false
+            });
+        }
+    })
+});
+
+router.post('/correoCompra', function (req, res) {
+    let libreria = req.body.libros[0];
+    let tarjeta = req.body.tarjeta;
+    let user = req.body.tarjeta.usuario;
+    let libros = req.body.libros;
+    let total = 0;
+    let htmlLibro = '';
+    for(let i = 2; i < libros.length; i++){
+        let precioActual = Number(libros[i].precio) * Number(libros[i].cantidad);
+        htmlLibro += `  <tr>
+                            <td>${libros[i].titulo} (${libros[i].tipo})</td>
+                            <td>${libros[i].cantidad}</td>
+                            <td>${libros[i].iva}%</td>
+                            <td>${precioActual}</td>
+                        </tr>`;
+        total += precioActual;
+    }
+    let date = new Date();
+    let day = date.getDate();
+    let month = date.getMonth()+1;
+    let year = date.getFullYear();
+    let mailOption = {
+        from: 'grupovalhalla2019@gmail.com',
+        to: user.correo,
+        subject: `Compra en ${libreria.nombre}`,
+        html: `<head>
+        <meta charset="UTF-8">
+        <title>INVOICE</title>
+        <style>
+            table{
+                margin-left:auto; 
+                margin-right:auto; 
+                padding:20px;
+                }
+            table,td,th{
+                border:1.5px solid black;
+                border-collapse:collapse;
+                text-align:left;
+                width:800px;
+                }
+            td,tr,th{
+            font-size:20px;
+            padding:15px;
+            text-align:left;
+            }
+            th{
+                background-color:lightcyan;
+            }          
+        </style>
+      </head>
+      <body>
+      
+        <table >
+          <tr>
+              <th colspan="3">Factura</th>
+              <th colspan="2">Fecha ${day}/${month}/${year}</th>
+          </tr>
+          <tr> <td colspan="2"><strong>Tienda:</strong>
+            <br>${libreria.nombre} 
+            </td>
+            <td colspan="2"><strong>Cliente:</strong>
+              <br>Nombre: ${user.nombre} ${user.primerApellido} 
+              <br>Tarjeta: ${tarjeta.numTarjeta}
+              <br>${tarjeta.nombre1}
+             </td>
+          </tr>
+          
+          <tr>
+            <th>Item:</th>
+            <th>Cantidad:</th>
+            <th>IVA: </th>
+            <th>Precio:</th>
+          </tr>
+          ${htmlLibro}
+           <th colspan="3">Total:</th>
+            <td>${total}</td>
+          </tr>
+        </table>
+      </body>
+      </html>`
+    };
+    transporter.sendMail(mailOption, function (error, info) {
+        if (error) {
+            return res.json({
+                success: true,
+                message: `No se pudo enviar el correo de factura`
+            })
+        }
+        return res.json({
+            success: true,
+            message: 'Revise su correo eléctronico'
+        })
     });
 })
 

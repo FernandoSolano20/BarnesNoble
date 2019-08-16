@@ -44,6 +44,7 @@
     font-size: 18px;
     font-weight: 600;
     margin: 0;
+    text-align: left;
 }
 
 #response-container ul .article h2 a {

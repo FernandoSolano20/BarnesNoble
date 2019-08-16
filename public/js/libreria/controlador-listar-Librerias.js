@@ -79,14 +79,14 @@ let mostrar_tabla = async (event) => {
 
             let estadoInput = document.createElement('input');
             estadoInput.setAttribute('class', 'switch');
-            estadoInput.setAttribute('id', libreria._id);
+            estadoInput.setAttribute('id', listaLibrerias[i]._id);
             estadoInput.setAttribute('type', 'checkbox');
             estadoCelda.appendChild(estadoInput);
-            estadoInput.checked = !libreria.estado;
+            estadoInput.checked = !listaLibrerias[i].estado;
 
             let estadoLabel = document.createElement('label');
             estadoLabel.setAttribute('data-action', 'estado');
-            estadoLabel.setAttribute('for', libreria._id);
+            estadoLabel.setAttribute('for', listaLibrerias[i]._id);
             estadoCelda.appendChild(estadoLabel);
         }
     }

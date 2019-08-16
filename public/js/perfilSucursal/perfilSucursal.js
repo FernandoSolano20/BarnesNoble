@@ -118,6 +118,7 @@ let partialInformacionSucursal = function (contenedor) {
         '<p>Está es la localización de la sucursal ' +
         '</p> </div>';
     addMarker(position, message);
+    mostarLibros();
 }
 
 informacionLibreria();
