@@ -280,7 +280,7 @@ let actualizarDatosUsuarios = async function () {
             Swal.fire({
                 type: 'success',
                 title: updateUsuario.message
-            });
+            }, setTimeout(function(){ window.location.href = "http://localhost:3000/perfilLibreria.html";}, 2000));
         }
         else {
             Swal.fire({
