@@ -1,10 +1,11 @@
 let carritoLibrosContainer = document.getElementById('carritoLibros');
+let listaTarjetas = [];
 let removeCard = function (event) {
     var element = event.target;
     var idCard;
-    if(element){
+    if (element) {
         idCard = element.getAttribute('data-id');
-    }else{
+    } else {
         idCard = event;
     }
     var containerCard = document.getElementById(idCard);
@@ -18,12 +19,65 @@ let removeCard = function (event) {
     filaNoDatos();
 }
 
-let comprar = async (event) => {
+let mostarTarjetas = async (event) => {
+    let misTarjetasHTML = '';
+    listaTarjetas = await obtenerTarjetasUsuarioIdFetch(sessionStorage.id);
+    listaTarjetas = listaTarjetas.listaTarjetas;
+    for (let i = 0; i < listaTarjetas.length; i++) {
+        misTarjetasHTML += ` <div class="radioCard">
+                                <input class="radioCard__input" id="${listaTarjetas[i]._id}" data-num="${listaTarjetas[i].numTarjeta}" data-nombre="${listaTarjetas[i].nombre1}" type="radio" name="tarjeta" />
+                                <label class="radioCard__button" for="${listaTarjetas[i]._id}" tabindex="1">
+                                    <img class="radioCard__icon" src="img/${listaTarjetas[i].tipoTarjeta}.png" alt="" />
+                                    <span class="radioCard__content">
+                                        <span class="radioCard__title">${listaTarjetas[i].numTarjeta}</span>
+                                        <span class="radioCard__description">${listaTarjetas[i].nombre1}</span>
+                                    </span>
+                                </label>
+                            </div>`;
+    }
+
+    Swal.fire({
+        title: 'Datos para la venta',
+        html: ` <div>${misTarjetasHTML}
+                </div>`,
+        showCancelButton: true
+    }).then(async (result) => {
+        if (result.value) {
+            var tarjeta;
+            document.querySelectorAll("[name='tarjeta']").forEach((element) => {
+                if (element.checked) {
+                    listaTarjetas.forEach((tarj) => {
+                        if (tarj.numTarjeta == element.getAttribute('data-num')) {
+                            tarjeta = tarj;
+                        }
+                    })
+                }
+            });
+            comprar(event, tarjeta)
+        }
+    });
+    document.getElementById(listaTarjetas[0]._id).checked = true;
+}
+
+let enviarCorreo = async (libros, tarjeta) => {
+    let email = {
+        libros: libros,
+        tarjeta: tarjeta
+    }
+    let correoEnviar = await enviarCorreoUserCompra(email);
+}
+
+let comprar = async (event, tarjeta) => {
     let element = event.target;
     let idLibreria = element.getAttribute('id');
     let compras = localStorage.getItem(idLibreria);
     compras = JSON.parse(compras);
     let err = [];
+    let librosComprados = [];
+    librosComprados.push(compras[0]);
+    librosComprados.push({
+        total: 0
+    });
     if (compras[0].tienda == "libreria") {
         for (let i = 1; i < compras.length; i++) {
             let compra = {
@@ -33,8 +87,17 @@ let comprar = async (event) => {
                 ejemplar: compras[i].idEjemplar
             }
             let response = await comprarLibroEnLibreria(compra);
-            if (response.success)
+            if (response.success) {
+                librosComprados.push({
+                    titulo: compras[i].titulo,
+                    tipo: compras[i].tipo,
+                    iva: compras[i].iva,
+                    cantidad: compras[i].cantidad,
+                    precio: compras[i].precio
+                })
+                librosComprados[1].total += compras[i].cantidad;
                 removeCard(compras[0].idtienda + "-" + compras[i].idEjemplar);
+            }
             err.push(response);
         }
         var error = false;
@@ -45,10 +108,19 @@ let comprar = async (event) => {
                 index = i;
             }
         }
+        if (librosComprados.length > 2) {
+            enviarCorreo(librosComprados, tarjeta);
+        }
         if (!error) {
             Swal.fire({
                 type: 'success',
-                title: err[0].message
+                title: err[0].message,
+                confirmButtonText:`<a href="perfilUsuario.html?id=${sessionStorage.id}" style="
+                display: inline-block;
+                border-left-color: rgb(48, 133, 214);
+                border-right-color: rgb(48, 133, 214);
+                color: white;
+                text-decoration: none;">OK</a>`
             });
         }
         else {
@@ -67,8 +139,17 @@ let comprar = async (event) => {
                 ejemplar: compras[i].idEjemplar
             }
             let response = await comprarLibroEnSucursal(compra);
-            if (response.success)
+            if (response.success){
+                librosComprados.push({
+                    titulo: compras[i].titulo,
+                    tipo: compras[i].tipo,
+                    iva: compras[i].iva,
+                    cantidad: compras[i].cantidad,
+                    precio: compras[i].precio
+                })
+                librosComprados[1].total += compras[i].cantidad;
                 removeCard(compras[0].idtienda + "-" + compras[i].idEjemplar);
+            }
             err.push(response);
         }
         var error = false;
@@ -79,10 +160,19 @@ let comprar = async (event) => {
                 index = i;
             }
         }
+        if (librosComprados.length > 2) {
+            enviarCorreo(librosComprados, tarjeta);
+        }
         if (!error) {
             Swal.fire({
                 type: 'success',
-                title: err[0].message
+                title: err[0].message,
+                confirmButtonText:`<a href="perfilUsuario.html?id=${sessionStorage.id}" style="
+                display: inline-block;
+                border-left-color: rgb(48, 133, 214);
+                border-right-color: rgb(48, 133, 214);
+                color: white;
+                text-decoration: none;">OK</a>`
             });
         }
         else {
@@ -134,7 +224,7 @@ let mostarCarrito = function () {
     var cardsElements = document.getElementsByClassName("remove");
     var btnComprar = document.querySelectorAll("[data-action='comprar']");
     Array.from(cardsElements).forEach((ele) => ele.addEventListener('click', removeCard));
-    Array.from(btnComprar).forEach((ele) => ele.addEventListener('click', comprar));
+    Array.from(btnComprar).forEach((ele) => ele.addEventListener('click', mostarTarjetas));
 }
 
 let filaNoDatos = function () {
