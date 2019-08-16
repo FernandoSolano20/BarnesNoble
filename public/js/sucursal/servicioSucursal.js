@@ -81,3 +81,27 @@ let pasarLibroEntreSucursaleLibreria = async function (compra) {
     var result = await response.json();
     return result;
 }
+
+let obtenerSucursalesPorEjemplaresId = async(ejemplares) => {
+    let response = await fetch('http://localhost:4000/api/sucursal/obtenerSucursalesPorEjemplaresId', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body:JSON.stringify(ejemplares)
+    });
+    let result = await response.json();
+    return result;
+}
+
+let obtenerCantidadEjemplarPorSucursal = async(ejemplares) => {
+    let response = await fetch('http://localhost:4000/api/sucursal/obtenerCantidadEjemplarPorSucursal', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body:JSON.stringify(ejemplares)
+    });
+    let result = await response.json();
+    return result;
+}

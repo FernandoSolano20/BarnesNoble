@@ -1,5 +1,8 @@
 let arrayEjemplar = [];
 let libro = [];
+let listaEjemp = [];
+let radioEjemple = '';
+
 let obtenerInformacionLibro = async function () {
     let url = new URL(window.location.href);
     let id = url.searchParams.get("id");
@@ -22,7 +25,7 @@ let obtenerInformacionLibro = async function () {
                 label = document.createTextNode('Comprar');
             }
             else {
-                //btnCompra.addEventListener('click',modalComprarLibroBarnesNoble);
+                btnCompra.addEventListener('click',modalComprarLibroBarnesNobleLector);
                 label = document.createTextNode('Agregar a carrito');
             }
 
@@ -50,8 +53,9 @@ let obtenerInformacionLibro = async function () {
             let radioTipoLibro = document.getElementById('tipoLibro');
             let infoLibro = document.getElementById('infoLibro');
             ejemplares = ejemplares.listaLibros;
-            let listaEjemp = [];
             for (let i = 0; i < ejemplares.length; i++) {
+                radioEjemple += `<input type="radio" name="ejempRadio" id="${ejemplares[i]._id}" data-libro="${ejemplares[i]._id}"  data-nombreLibro="${libro.listaLibro.titulo}" data-tipoLibro="${ejemplares[i].tipo}" data-img="${libro.listaLibro.caratula}" data-precio="${ejemplares[i].precio}">
+                                <label for="${ejemplares[i]._id}" class="labelRadio">${ejemplares[i].tipo}</label>`;
                 listaEjemp.push(ejemplares[i]._id);
                 let input = document.createElement('input');
                 input.setAttribute('type', 'radio');
