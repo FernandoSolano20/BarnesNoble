@@ -96,7 +96,6 @@ router.get('/obtenerTiendas', async (req, res) => {
 });
 
 router.patch('/comprarLibroLibreria', function (req, res) {
-    console.log(req.body)
     let ejemplarId = new mongoose.Types.ObjectId(req.body.libro);
     Ejemplar.updateOne({ _id: req.body.libro, 'cantidad': { $gte: req.body.cantidad } }, { $inc: { "cantidad": -(req.body.cantidad) } }, function (err, ejemp) {
         if (err)

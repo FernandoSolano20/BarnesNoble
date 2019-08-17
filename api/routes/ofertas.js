@@ -196,4 +196,38 @@ router.patch('/listarOfertasPorTiendas', function (req, res) {
         .select('nombre descripcion descuento estado tipoOferta sucursal libreria autor genero categoria libro');
 });
 
+router.get('/listarOfertasPorLibreriasId/:id', function (req, res) {
+    Ofertas.find({ libreria: req.params.id }, function (err, OfertasBD) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                msj: 'No se pueden listar las ofertas',
+                err
+            });
+        } else {
+            return res.json({
+                success: true,
+                listaOfertas: OfertasBD
+            });
+        }
+    })
+});
+
+router.get('/listarOfertasPorSucursalesId/:id', function (req, res) {
+    Ofertas.find({ sucursal: req.params.id }, function (err, OfertasBD) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                msj: 'No se pueden listar las ofertas',
+                err
+            });
+        } else {
+            return res.json({
+                success: true,
+                listaOfertas: OfertasBD
+            });
+        }
+    })
+});
+
 module.exports = router;

@@ -68,7 +68,8 @@ let modalComprarLibroBarnesNoble = async (event) => {
                 idLibreria: adminLib.usuario.libreria,
                 cantidad: elementCant.value,
                 iva: elementIVA.value,
-                libro: listaEjemplares.listaLibros[tipoLibroRadio]._id
+                libro: listaEjemplares.listaLibros[tipoLibroRadio]._id,
+                id: listaEjemplares.listaLibros[tipoLibroRadio].libro
             }
             let response = await comprarLibros(ejemplarLibreria);
             if (response.success) {
