@@ -1,10 +1,11 @@
 let carritoLibrosContainer = document.getElementById('carritoLibros');
+let listaTarjetas = [];
 let removeCard = function (event) {
     var element = event.target;
     var idCard;
-    if(element){
+    if (element) {
         idCard = element.getAttribute('data-id');
-    }else{
+    } else {
         idCard = event;
     }
     var containerCard = document.getElementById(idCard);
@@ -18,23 +19,95 @@ let removeCard = function (event) {
     filaNoDatos();
 }
 
-let comprar = async (event) => {
+let mostarTarjetas = async (event) => {
+    let misTarjetasHTML = '';
+    listaTarjetas = await obtenerTarjetasUsuarioIdFetch(sessionStorage.id);
+    listaTarjetas = listaTarjetas.listaTarjetas;
+    for (let i = 0; i < listaTarjetas.length; i++) {
+        misTarjetasHTML += ` <div class="radioCard">
+                                <input class="radioCard__input" id="${listaTarjetas[i]._id}" data-num="${listaTarjetas[i].numTarjeta}" data-nombre="${listaTarjetas[i].nombre1}" type="radio" name="tarjeta" />
+                                <label class="radioCard__button" for="${listaTarjetas[i]._id}" tabindex="1">
+                                    <img class="radioCard__icon" src="img/${listaTarjetas[i].tipoTarjeta}.png" alt="" />
+                                    <span class="radioCard__content">
+                                        <span class="radioCard__title">${listaTarjetas[i].numTarjeta}</span>
+                                        <span class="radioCard__description">${listaTarjetas[i].nombre1}</span>
+                                    </span>
+                                </label>
+                            </div>`;
+    }
+    if(listaTarjetas.length == 0){
+        misTarjetasHTML = ` <div class="crear-contenedor">
+                                <p>Se ocupa tener por lo menos una tarjeta</p>
+                                <a href="registrarTarjeta.html" type="button" class="material-blue" data-action="crear" id="crear-elemento"><i
+                                        class="far fa-plus-circle"></i>Crear Tarjeta</a>
+                            </div>`;
+        
+    }
+
+    Swal.fire({
+        title: 'Datos para la venta',
+        html: ` <div>${misTarjetasHTML}
+                </div>`,
+        showCancelButton: true,
+        showConfirmButton: !!(listaTarjetas.length)
+    }).then(async (result) => {
+        if (result.value) {
+            var tarjeta;
+            document.querySelectorAll("[name='tarjeta']").forEach((element) => {
+                if (element.checked) {
+                    listaTarjetas.forEach((tarj) => {
+                        if (tarj.numTarjeta == element.getAttribute('data-num')) {
+                            tarjeta = tarj;
+                        }
+                    })
+                }
+            });
+            comprar(event, tarjeta)
+        }
+    });
+    if(listaTarjetas[0])
+        document.getElementById(listaTarjetas[0]._id).checked = true;
+}
+
+let enviarCorreo = async (libros, tarjeta) => {
+    let email = {
+        libros: libros,
+        tarjeta: tarjeta
+    }
+    let correoEnviar = await enviarCorreoUserCompra(email);
+}
+
+let comprar = async (event, tarjeta) => {
     let element = event.target;
     let idLibreria = element.getAttribute('id');
     let compras = localStorage.getItem(idLibreria);
     compras = JSON.parse(compras);
     let err = [];
+    let librosComprados = [];
+    librosComprados.push(compras[0]);
+    librosComprados.push({
+        total: 0
+    });
     if (compras[0].tienda == "libreria") {
         for (let i = 1; i < compras.length; i++) {
             let compra = {
                 idLibreria: compras[0].idtienda,
                 idUsuario: sessionStorage.id,
-                cantidad: document.getElementById("input" + compras[0].idtienda + "" + compras[i].idEjemplar).value,
+                cantidad: document.getElementById("input" + compras[0].idtienda + "-" + compras[i].idEjemplar).value,
                 ejemplar: compras[i].idEjemplar
             }
             let response = await comprarLibroEnLibreria(compra);
-            if (response.success)
+            if (response.success) {
+                librosComprados.push({
+                    titulo: compras[i].titulo,
+                    tipo: compras[i].tipo,
+                    iva: compras[i].iva,
+                    cantidad: document.getElementById("input" + compras[0].idtienda + "-" + compras[i].idEjemplar).value,
+                    precio: compras[i].precio
+                })
+                librosComprados[1].total += compras[i].cantidad;
                 removeCard(compras[0].idtienda + "-" + compras[i].idEjemplar);
+            }
             err.push(response);
         }
         var error = false;
@@ -45,10 +118,19 @@ let comprar = async (event) => {
                 index = i;
             }
         }
+        if (librosComprados.length > 2) {
+            enviarCorreo(librosComprados, tarjeta);
+        }
         if (!error) {
             Swal.fire({
                 type: 'success',
-                title: err[0].message
+                title: err[0].message,
+                confirmButtonText:`<a href="perfilUsuario.html?id=${sessionStorage.id}" style="
+                display: inline-block;
+                border-left-color: rgb(48, 133, 214);
+                border-right-color: rgb(48, 133, 214);
+                color: white;
+                text-decoration: none;">OK</a>`
             });
         }
         else {
@@ -63,12 +145,21 @@ let comprar = async (event) => {
             let compra = {
                 idSucursal: compras[0].idtienda,
                 idUsuario: sessionStorage.id,
-                cantidad: document.getElementById("input" + compras[0].idtienda + "" + compras[i].idEjemplar).value,
+                cantidad: document.getElementById("input" + compras[0].idtienda + "-" + compras[i].idEjemplar).value,
                 ejemplar: compras[i].idEjemplar
             }
             let response = await comprarLibroEnSucursal(compra);
-            if (response.success)
+            if (response.success){
+                librosComprados.push({
+                    titulo: compras[i].titulo,
+                    tipo: compras[i].tipo,
+                    iva: compras[i].iva,
+                    cantidad: compras[i].cantidad,
+                    precio: compras[i].precio
+                })
+                librosComprados[1].total += compras[i].cantidad;
                 removeCard(compras[0].idtienda + "-" + compras[i].idEjemplar);
+            }
             err.push(response);
         }
         var error = false;
@@ -79,10 +170,19 @@ let comprar = async (event) => {
                 index = i;
             }
         }
+        if (librosComprados.length > 2) {
+            enviarCorreo(librosComprados, tarjeta);
+        }
         if (!error) {
             Swal.fire({
                 type: 'success',
-                title: err[0].message
+                title: err[0].message,
+                confirmButtonText:`<a href="perfilUsuario.html?id=${sessionStorage.id}" style="
+                display: inline-block;
+                border-left-color: rgb(48, 133, 214);
+                border-right-color: rgb(48, 133, 214);
+                color: white;
+                text-decoration: none;">OK</a>`
             });
         }
         else {
@@ -93,6 +193,16 @@ let comprar = async (event) => {
             });
         }
     }
+}
+
+let changeInput = function(event){
+    let idEjemp = event.target.getAttribute("id");
+    let idLib = idEjemp.split('-');
+    let precioAntes = document.querySelector('[data-id="'+idEjemp+'"]');
+    let total = document.querySelector('[data-total="'+idLib[0]+'"]');
+    let precio = Number(event.target.getAttribute("data-precio")) * Number(event.target.value);
+    total.innerHTML = Number(total.innerText) - Number(precioAntes.innerHTML) + precio;
+    precioAntes.innerHTML =  precio;
 }
 
 let mostarCarrito = function () {
@@ -109,13 +219,13 @@ let mostarCarrito = function () {
                                         <div class="name">${listaLibrosCarrito[i].tienda[j].titulo}</div>
                                         <div class="other-info">
                                             <div class="amount">${listaLibrosCarrito[i].tienda[j].tipo}</div>
-                                            <div class="basket-price">${Number(listaLibrosCarrito[i].tienda[j].precio) * Number(listaLibrosCarrito[i].tienda[j].cantidad)}</div>
+                                            <div class="basket-price" data-id="input${listaLibrosCarrito[i].tienda[0].idtienda}-${listaLibrosCarrito[i].tienda[j].idEjemplar}">${Number(listaLibrosCarrito[i].tienda[j].precio) * Number(listaLibrosCarrito[i].tienda[j].cantidad)}</div>
                                         </div>
                                     </div>
                                     <button class="fa fa-close remove" data-id="${listaLibrosCarrito[i].tienda[0].idtienda}-${listaLibrosCarrito[i].tienda[j].idEjemplar}"></button>
                                 </div>
                                 <div class="quantity-buttons">
-                                    <input id="input${listaLibrosCarrito[i].tienda[0].idtienda}${listaLibrosCarrito[i].tienda[j].idEjemplar}" type="text" value="${listaLibrosCarrito[i].tienda[j].cantidad}" class="input quanity-input" />
+                                    <input id="input${listaLibrosCarrito[i].tienda[0].idtienda}-${listaLibrosCarrito[i].tienda[j].idEjemplar}" type="text" value="${listaLibrosCarrito[i].tienda[j].cantidad}" data-precio="${listaLibrosCarrito[i].tienda[j].precio}" class="input quanity-input" />
                                 </div>
                             </div>`;
             total += Number(listaLibrosCarrito[i].tienda[j].precio) * Number(listaLibrosCarrito[i].tienda[j].cantidad);
@@ -125,16 +235,18 @@ let mostarCarrito = function () {
                                 <i class="far fa-shopping-cart"></i>Comprar
                             </button>
                         </div>
-                        <p id="total">Total:<span id="totalValor">${total}</span></p>
+                        <p id="total">Total:<span data-total="input${listaLibrosCarrito[i].tienda[0].idtienda}">${total}</span></p>
                         </div>
                         </div>`;
     }
     document.getElementById('carritoLibros').innerHTML = carritoHTML;
+    var inputs = document.querySelectorAll(".input");
+    inputs.forEach((ele) => ele.addEventListener('keyup', changeInput));
     filaNoDatos();
     var cardsElements = document.getElementsByClassName("remove");
     var btnComprar = document.querySelectorAll("[data-action='comprar']");
     Array.from(cardsElements).forEach((ele) => ele.addEventListener('click', removeCard));
-    Array.from(btnComprar).forEach((ele) => ele.addEventListener('click', comprar));
+    Array.from(btnComprar).forEach((ele) => ele.addEventListener('click', mostarTarjetas));
 }
 
 let filaNoDatos = function () {

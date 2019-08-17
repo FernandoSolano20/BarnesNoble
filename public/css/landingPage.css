@@ -242,7 +242,7 @@ input[type="radio"] {
 .menuLP button:hover {
   background: #e9ab1bea;
   --webkit-transition: all .5s;
-  -o-transition: all .5s;
+  transition: all .5s;
 }
 
 .cta_btn {
@@ -272,7 +272,7 @@ input[type="radio"] {
 .cta_btn button:hover {
   background: #e9ab1bea;
   --webkit-transition: all .5s;
-  -o-transition: all .5s;
+  transition: all .5s;
 }
 
 header .menuHorizontal ul li a {

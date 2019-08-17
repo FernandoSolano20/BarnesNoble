@@ -82,7 +82,9 @@ router.get('/listarTarjetasPorId/:id', function (req, res) {
                 listaTarjetas: tarjetasDB
             })
         }
-    });
+    })
+    .populate('usuario', 'nombre primerApellido correo')
+    .select('nombre1 numTarjeta tipoTarjeta expiracionMM expiracionYY cvv usuario');
 });
 
 router.delete('/eliminarTarjeta/:id', function (req, res) {
