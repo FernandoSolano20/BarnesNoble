@@ -15,7 +15,6 @@ router.post('/registrarOferta', function (req, res) {
     let body = req.body;
     let nuevaOferta = new Ofertas({
         nombre: body.nombre,
-        tipoOferta: body.tipoOferta,
         descuento: body.descuento,
         descripcion: body.descripcion,
         estado: body.estado
@@ -73,7 +72,7 @@ router.get('/listarOfertas', function (req, res) {
         .populate('genero', 'nombre -_id')
         .populate('categoria', 'nombre -_id')
         .populate('libro', 'titulo -_id')
-        .select('nombre descripcion descuento estado tipoOferta sucursal libreria autor genero categoria libro');
+        .select('nombre descripcion descuento estado sucursal libreria autor genero categoria libro');
 });
 
 router.get('/buscarOfertaId/:id', function (req, res) {
@@ -193,7 +192,41 @@ router.patch('/listarOfertasPorTiendas', function (req, res) {
         .populate('genero', 'nombre -_id')
         .populate('categoria', 'nombre -_id')
         .populate('libro', 'titulo -_id')
-        .select('nombre descripcion descuento estado tipoOferta sucursal libreria autor genero categoria libro');
+        .select('nombre descripcion descuento estado sucursal libreria autor genero categoria libro');
+});
+
+router.get('/listarOfertasPorLibreriasId/:id', function (req, res) {
+    Ofertas.find({ libreria: req.params.id }, function (err, OfertasBD) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                msj: 'No se pueden listar las ofertas',
+                err
+            });
+        } else {
+            return res.json({
+                success: true,
+                listaOfertas: OfertasBD
+            });
+        }
+    })
+});
+
+router.get('/listarOfertasPorSucursalesId/:id', function (req, res) {
+    Ofertas.find({ sucursal: req.params.id }, function (err, OfertasBD) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                msj: 'No se pueden listar las ofertas',
+                err
+            });
+        } else {
+            return res.json({
+                success: true,
+                listaOfertas: OfertasBD
+            });
+        }
+    })
 });
 
 module.exports = router;
