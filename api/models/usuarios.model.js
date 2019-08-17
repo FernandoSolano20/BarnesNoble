@@ -55,7 +55,7 @@ let usuarios_schema = new mongoose.Schema({
     ejemplares: [{
         libro: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Libro',
+            ref: 'Ejemplar',
             required: false
         },
         cantidad: { type: Number, required: false, unique: false },

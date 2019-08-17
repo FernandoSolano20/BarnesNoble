@@ -20,12 +20,16 @@
     <link rel="stylesheet" href="css/btnClass.css">
     <link rel="stylesheet" href="css/botones.css">
     <link rel="stylesheet" href="css/mapa.css">
+    <link rel="stylesheet" href="css/cardSucursal.css">
+    <link rel="stylesheet" href="css/searchBar.css">
+    <link rel="stylesheet" href="css/cards.css">
+    <link rel="stylesheet" href="css/btnClass.css">
 </head>
 
 <body>
     <header>
         <nav class="menuHorizontal">
-            <ul class="list-menu">
+            <ul class="list-menu" id="verticalMenuUser">
                 <li><a href="#" data-menu="mostrar-nav-izq"><i data-menu="mostrar-nav-izq" class="fas fa-bars"></i></a>
                 </li>
                 <li><a href="/"><i class="far fa-home"></i>Inicio</a></li>
@@ -83,6 +87,22 @@
             <div id="map"></div>
         </div>
 
+        <div>
+            <div class="subcontenedor">
+                <div class="busqueda">
+                    <input type="text" id="txtFiltro" name="buscar" placeholder="Buscar...." autocomplete="off"
+                        autocorrect="off">
+                    <button type="button" class="buscar"><i class="fa fa-search"></i><span>search</span></button>
+                </div>
+                <div class="crear-contenedor" id="container-btn">
+
+                </div>
+
+            </div>
+        </div>
+        <div class="main" id="cardElements">
+        </div>
+
         <div class="site-container" id="reviews">
             
         </div>
@@ -110,6 +130,7 @@
     <script src="js/maps/showMap.js"></script>
     <script src="js/voto/animacion.js"></script>
     <script src="js/usuarios/servicioUsuario.js"></script>
+    <script src="js/perfilUsuario/librosUsuario.js"></script>
     <script src="js/perfilUsuario/perfilUsuario.js"></script>
     <script src="js/login/servicioLogin.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKXA3_YJlVwwt1lx60eO0ljRVUKQO3fNY"

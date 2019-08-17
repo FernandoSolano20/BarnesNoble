@@ -121,8 +121,8 @@ let validarISBN13 = function () {
     else if (elementNumber.value.length != 13) {
         isbn13Alert.innerText = "Debe tener 13 dígitos."
         isbn13Alert.className = isbn13Alert.className.replace("alertHidden", "");
-        isbn10Input.className = isbn10Input.className.replace("inputError", "");
-        isbn10Input.className = isbn10Input.className + " inputError";
+        isbn13Input.className = isbn13Input.className.replace("inputError", "");
+        isbn13Input.className = isbn13Input.className + " inputError";
         return true;
     }
     else if (!regexISBN13.test(elementNumber.value)) {

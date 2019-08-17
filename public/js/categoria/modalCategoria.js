@@ -38,12 +38,12 @@ function eventosCategoria(event) {
         modal.setAttribute('data-action', 'estado');
         let checkBoxEstado = document.getElementById(categoria.id);
         if (!checkBoxEstado.checked) {
-          tituloModal.innerText = 'Desactilet categoría ' + categoria.nombre;
-          textoModal.innerText = '¿Está seguro que quiere desactilet esta categoría?';
+          tituloModal.innerText = 'Desactivar categoría ' + categoria.nombre;
+          textoModal.innerText = '¿Está seguro que quiere desactivar esta categoría?';
         }
         else {
-          tituloModal.innerText = 'Actilet categoría ' + categoria.nombre;
-          textoModal.innerText = '¿Está seguro que quiere actilet esta categoría?';
+          tituloModal.innerText = 'Activar categoría ' + categoria.nombre;
+          textoModal.innerText = '¿Está seguro que quiere activar esta categoría?';
         }
       }
     }

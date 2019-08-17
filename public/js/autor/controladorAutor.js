@@ -134,7 +134,6 @@ let agregarFilaAutores = function (autor) {
                         title: response.message
                     })
                 }
-
             }
             else {
                 Swal.fire({
@@ -171,3 +170,5 @@ let validarAnno = function (elementos) {
     elementos.input.className = elementos.input.className.replace("inputError", "");
     return true;
 }
+
+    
