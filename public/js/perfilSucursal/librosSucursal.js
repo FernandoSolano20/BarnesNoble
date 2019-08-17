@@ -1,11 +1,17 @@
 const containerCard = document.querySelector('#cardElements')
 const txtFiltro = document.getElementById("txtFiltro");
+let listaOfertas = [];
 
 let mostarLibros = async (event) => {
     let url = new URL(window.location.href);
     let id = url.searchParams.get("id");
     let filtro = txtFiltro.value;
     containerCard.innerHTML = '';
+    if(!event){
+        if (sessionStorage.tipoUsuario == 'Lector') {
+            listaOfertas = await obtenerOfertasSucursalId(id);
+        }
+    }
     for (let i = 0; i < sucursal.sucursal.ejemplares.length; i++) {
         let libro = sucursal.sucursal.ejemplares[i].libro.libro;
         let ejemplar = sucursal.sucursal.ejemplares[i].libro;
@@ -16,6 +22,27 @@ let mostarLibros = async (event) => {
 };
 
 let agregarCardLibro = function (libro, ejemplar, infoEjemplar, SucursalIDURL) {
+    let oferta = 0;
+    let nombreOferta;
+    listaOfertas.listaOfertas.forEach((ofer) => {
+        if (ofer.autor == libro.autor._id) {
+            oferta = ofer.descuento;
+            nombreOferta = ofer.nombre;
+            return;
+        } else if (ofer.categoria == libro.categoria._id) {
+            oferta = ofer.descuento;
+            nombreOferta = ofer.nombre;
+            return;
+        } else if (ofer.libro == libro._id) {
+            oferta = ofer.descuento;
+            nombreOferta = ofer.nombre;
+            return;
+        } else if (ofer.genero == libro.genero._id) {
+            oferta = ofer.descuento;
+            nombreOferta = ofer.nombre;
+            return;
+        }
+    });
     let divParrent = document.createElement('div');
     divParrent.setAttribute('class', 'parrent');
     divParrent.setAttribute('data-idEjemplar', ejemplar._id);
@@ -37,6 +64,13 @@ let agregarCardLibro = function (libro, ejemplar, infoEjemplar, SucursalIDURL) {
     divInformationBook.setAttribute('class', 'informacionLibro');
     child2.appendChild(divInformationBook);
 
+    if (oferta) {
+        let ofertaDiv = document.createElement('div');
+        ofertaDiv.setAttribute('class', 'bookie-offers__sash');
+        ofertaDiv.innerHTML = "Oferta: " + nombreOferta + " de " + oferta + "%";
+        divInformationBook.appendChild(ofertaDiv);
+    }
+
     let h3 = document.createElement('h3');
     h3.innerText = libro.titulo;
     divInformationBook.appendChild(h3);
@@ -52,7 +86,9 @@ let agregarCardLibro = function (libro, ejemplar, infoEjemplar, SucursalIDURL) {
 
     p1 = document.createElement('p');
     p1.setAttribute('class', 'infoBook');
-    p1.innerText = "Precio: " + (ejemplar.precio + ejemplar.precio * Number(infoEjemplar.iva) / 100);
+    let precioFinal = ejemplar.precio + ejemplar.precio * Number(infoEjemplar.iva) / 100;
+    precioFinal -= precioFinal * Number("0." + oferta);
+    p1.innerText = "Precio: ₡" + precioFinal;
     divInformationBook.appendChild(p1);
 
     p1 = document.createElement('p');
@@ -90,7 +126,7 @@ let agregarCardLibro = function (libro, ejemplar, infoEjemplar, SucursalIDURL) {
         btnAsignarSucursal.setAttribute('data-tienda', "sucursal");
         btnAsignarSucursal.setAttribute('data-img', libro.caratula);
         btnAsignarSucursal.setAttribute('data-nombreTienda', sucursal.sucursal.nombre);
-        btnAsignarSucursal.setAttribute('data-precio', (ejemplar.precio + ejemplar.precio * Number(infoEjemplar.iva)/100));
+        btnAsignarSucursal.setAttribute('data-precio', precioFinal);
         btnAsignarSucursal.setAttribute('style', 'line-height:normal');
         btnAsignarSucursal.addEventListener('click',modalAgregarCarrito);
         divContainerButtons.appendChild(btnAsignarSucursal);
