@@ -828,9 +828,7 @@ router.patch('/comprarLibroUsuarioLibreria', function (req, res) {
             }
             vendidoQuery = "ejemplares." + query + ".vendidos";
             query = "ejemplares." + query + ".cantidad";
-            console.log(vendidoQuery)
-            console.log(query)
-            Libreria.updateOne({ _id: req.body.idLibreria, "ejemplares.libro": req.body.ejemplar, [`${query}`]: { $gte: req.body.cantidad } }, { $inc: { [`${query}`]: -(req.body.cantidad) }, $inc: { [`${vendidoQuery}`]: (req.body.cantidad) } }, function (err, ejemp) {
+            Libreria.updateOne({ _id: req.body.idLibreria, "ejemplares.libro": req.body.ejemplar, [`${query}`]: { $gte: req.body.cantidad } }, { $inc: { [`${query}`]: -(req.body.cantidad), [`${vendidoQuery}`]: (req.body.cantidad) } }, function (err, ejemp) {
                 if (err)
                     return res.json({
                         success: false,
@@ -916,7 +914,7 @@ router.patch('/comprarLibroUsuarioSucursal', function (req, res) {
             }
             vendidoQuery = "ejemplares." + query + ".vendidos";
             query = "ejemplares." + query + ".cantidad";
-            Sucursal.updateOne({ _id: req.body.idSucursal, "ejemplares.libro": req.body.ejemplar, [`${query}`]: { $gte: req.body.cantidad } }, { $inc: { [`${query}`]: -(req.body.cantidad) }, $inc: { [`${vendidoQuery}`]: (req.body.cantidad) } }, function (err, ejemp) {
+            Sucursal.updateOne({ _id: req.body.idSucursal, "ejemplares.libro": req.body.ejemplar, [`${query}`]: { $gte: req.body.cantidad } }, { $inc: { [`${query}`]: -(req.body.cantidad), [`${vendidoQuery}`]: (req.body.cantidad) } }, function (err, ejemp) {
                 if (err)
                     return res.json({
                         success: false,
@@ -1049,5 +1047,100 @@ router.post('/tieneElLibro/', async (req, res) => {
         }
     })
 });
+
+router.post('/correoCompra', function (req, res) {
+    let libreria = req.body.libros[0];
+    let tarjeta = req.body.tarjeta;
+    let user = req.body.tarjeta.usuario;
+    let libros = req.body.libros;
+    let total = 0;
+    let htmlLibro = '';
+    for(let i = 2; i < libros.length; i++){
+        let precioActual = Number(libros[i].precio) * Number(libros[i].cantidad);
+        htmlLibro += `  <tr>
+                            <td>${libros[i].titulo} (${libros[i].tipo})</td>
+                            <td>${libros[i].cantidad}</td>
+                            <td>${libros[i].iva}%</td>
+                            <td>${precioActual}</td>
+                        </tr>`;
+        total += precioActual;
+    }
+    let date = new Date();
+    let day = date.getDate();
+    let month = date.getMonth()+1;
+    let year = date.getFullYear();
+    let mailOption = {
+        from: 'grupovalhalla2019@gmail.com',
+        to: user.correo,
+        subject: `Compra en ${libreria.nombre}`,
+        html: `<head>
+        <meta charset="UTF-8">
+        <title>INVOICE</title>
+        <style>
+            table{
+                margin-left:auto; 
+                margin-right:auto; 
+                padding:20px;
+                }
+            table,td,th{
+                border:1.5px solid black;
+                border-collapse:collapse;
+                text-align:left;
+                width:800px;
+                }
+            td,tr,th{
+            font-size:20px;
+            padding:15px;
+            text-align:left;
+            }
+            th{
+                background-color:lightcyan;
+            }          
+        </style>
+      </head>
+      <body>
+      
+        <table >
+          <tr>
+              <th colspan="3">Factura</th>
+              <th colspan="2">Fecha ${day}/${month}/${year}</th>
+          </tr>
+          <tr> <td colspan="2"><strong>Tienda:</strong>
+            <br>${libreria.nombre} 
+            </td>
+            <td colspan="2"><strong>Cliente:</strong>
+              <br>Nombre: ${user.nombre} ${user.primerApellido} 
+              <br>Tarjeta: ${tarjeta.numTarjeta}
+              <br>${tarjeta.nombre1}
+             </td>
+          </tr>
+          
+          <tr>
+            <th>Item:</th>
+            <th>Cantidad:</th>
+            <th>IVA: </th>
+            <th>Precio:</th>
+          </tr>
+          ${htmlLibro}
+           <th colspan="3">Total:</th>
+            <td>${total}</td>
+          </tr>
+        </table>
+      </body>
+      </html>`
+    };
+    transporter.sendMail(mailOption, function (error, info) {
+        if (error) {
+            return res.json({
+                success: true,
+                message: `No se pudo enviar el correo de factura`
+            })
+        }
+        return res.json({
+            success: true,
+            message: 'Revise su correo eléctronico'
+        })
+    });
+})
 
 module.exports = router;

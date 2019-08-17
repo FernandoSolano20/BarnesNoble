@@ -1,0 +1,133 @@
+.radioCard {
+    width: 100%;
+    text-align: left;
+    --faux-radio-button: block;
+    /* block | none */
+    --padding: 16px 16px 18px 16px;
+    /* bump the bottom margin to optically center radio */
+    --gutter: 8px;
+    --animation-timing: all 0.2s ease-in-out;
+    --border-color-default: #BAC1CC;
+    --background-color-default: #FFFFFF;
+    --box-shadow-default: 0 3px 1px 0 rgba(0, 0, 0, 0.12);
+    /* low */
+    --border-color-hover: #6F7682;
+    --background-color-hover: #FFFFFF;
+    --box-shadow-hover: 0 4px 4px 0 rgba(0, 0, 0, 0.09);
+    /* middle */
+    --border-color-checked: #0068FF;
+    --background-color-checked: #FBFCFF;
+    --box-shadow-checked: 0 4px 4px 0 rgba(0, 0, 0, 0.09);
+    /* middle */
+    --border-color-disabled: #E0E5EC;
+    --background-color-disabled: #F7F8FA;
+    --box-shadow-disabled: none;
+}
+
+.radioCard+.radioCard {
+    margin-top: 10px;
+}
+
+.radioCard__input {
+    display: none;
+}
+
+.radioCard__input:checked+.radioCard__button {
+    border-color: var(--border-color-checked);
+    background-color: var(--background-color-checked);
+    box-shadow: var(--box-shadow-checked);
+}
+
+.radioCard__input:checked+.radioCard__button .radioCard__content:after {
+    border-color: #fff;
+    background-color: var(--border-color-checked);
+    box-shadow: 0px 0px 0px 1px var(--border-color-checked);
+    position: absolute;
+    right: 20px;
+}
+
+.radioCard__input:disabled+.radioCard__button {
+    cursor: not-allowed;
+    box-shadow: var(--box-shadow-disabled);
+    border-color: var(--border-color-disabled);
+    background-color: var(--background-color-disabled);
+}
+
+.radioCard__input:disabled+.radioCard__button .radioCard__content:after {
+    border-color: var(--background-color-disabled);
+    box-shadow: 0px 0px 0px 1px var(--border-color-disabled);
+}
+
+.radioCard__input:checked:disabled+.radioCard__button .radioCard__content:after {
+    background-color: var(--border-color-disabled);
+}
+
+.radioCard__button {
+    display: flex;
+    border: solid var(--border-color-default) 1px;
+    border-radius: 2px;
+    font-family: sans-serif;
+    padding: var(--padding);
+    cursor: pointer;
+    transition: var(--animation-timing);
+    box-shadow: var(--box-shadow-default);
+}
+
+.radioCard__button:hover, .radioCard__button:focus {
+    outline: none;
+    box-shadow: var(--box-shadow-hover);
+    border-color: var(--border-color-hover);
+}
+
+.radioCard__button:hover .radioCard__content:after, .radioCard__button:focus .radioCard__content:after {
+    box-shadow: 0px 0px 0px 1px var(--border-color-hover);
+}
+
+.radioCard__icon {
+    display: block;
+    width: 100px;
+    height: 60px;
+}
+
+.radioCard__content {
+    margin-left: var(--gutter);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.radioCard__content:after {
+    display: var(--faux-radio-button);
+    border: solid #fff 3px;
+    box-shadow: 0px 0px 0px 1px var(--border-color-default);
+    content: "";
+    width: 15px;
+    height: 15px;
+    border-radius: 16px;
+    margin-top: 8px;
+    -webkit-transform: translatex(-16px);
+    transform: translatex(-16px);
+    transition: var(--animation-timing);
+    position: absolute;
+    right: 20px;
+}
+
+.radioCard__title {
+    color: black;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0px;
+    line-height: 24px;
+    width: 100%;
+}
+
+.radioCard__description {
+    margin-top: 2px;
+    color: #6f7682;
+    font-size: 12px;
+    font-weight: normal;
+    letter-spacing: -0.22px;
+    line-height: 16px;
+    width: 100%;
+}

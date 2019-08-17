@@ -395,4 +395,48 @@ router.patch('/pasarLibrosEntreSucursalLibreria', function (req, res) {
     });
 });
 
+router.post('/obtenerSucursalesPorEjemplaresId', function (req, res) {
+    let ejemplares = [];
+    for(let i = 0; i < req.body.ejemplar; i++){
+        ejemplares.push(new mongoose.Types.ObjectId(req.body.ejemplar[i]));
+    }
+    Sucursal.find({ "ejemplares.libro": { $in: req.body.ejemplar } }, function (err, sucursales) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                msj: 'No se encontro sucursales',
+                err
+            });
+        } else {
+            return res.json({
+                success: true,
+                sucursales: sucursales
+            });
+        }
+    })
+    .select("nombre");
+});
+
+router.post('/obtenerCantidadEjemplarPorSucursal', function (req, res) {
+    Sucursal.findOne({
+        _id: req.body.idSucursal,
+        'ejemplares.libro': req.body.ejemplar
+    }, {
+            'ejemplares.$': 1
+        }, function (err, ejempl) {
+            if (err) {
+                return res.status(400).json({
+                    success: false,
+                    msj: 'No se encontro libros',
+                    err
+                });
+            } else {
+                return res.json({
+                    success: true,
+                    ejemplar: ejempl
+                });
+            }
+        });
+});
+
 module.exports = router;

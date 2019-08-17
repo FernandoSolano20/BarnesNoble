@@ -57,3 +57,14 @@ let editarTarjetaUsuario  =  (pid, pnombre1, ptipoTarjeta, pexpiracionMM, pexpir
         });
     
 };
+
+let obtenerTarjetasUsuarioIdFetch  = async (id) => {
+    var response = await fetch('http://localhost:4000/api/listarTarjetasPorId/' + id, {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        }
+    });
+    var result = await response.json();
+    return result;
+};
