@@ -7,10 +7,8 @@ let mostarLibros = async (event) => {
     let id = url.searchParams.get("id");
     let filtro = txtFiltro.value;
     containerCard.innerHTML = '';
-    if(!event){
-        if (sessionStorage.tipoUsuario == 'Lector') {
-            listaOfertas = await obtenerOfertasSucursalId(id);
-        }
+    if (!event) {
+        listaOfertas = await obtenerOfertasSucursalId(id);
     }
     for (let i = 0; i < sucursal.sucursal.ejemplares.length; i++) {
         let libro = sucursal.sucursal.ejemplares[i].libro.libro;
@@ -24,6 +22,7 @@ let mostarLibros = async (event) => {
 let agregarCardLibro = function (libro, ejemplar, infoEjemplar, SucursalIDURL) {
     let oferta = 0;
     let nombreOferta;
+
     listaOfertas.listaOfertas.forEach((ofer) => {
         if (ofer.autor == libro.autor._id) {
             oferta = ofer.descuento;
@@ -43,6 +42,7 @@ let agregarCardLibro = function (libro, ejemplar, infoEjemplar, SucursalIDURL) {
             return;
         }
     });
+
     let divParrent = document.createElement('div');
     divParrent.setAttribute('class', 'parrent');
     divParrent.setAttribute('data-idEjemplar', ejemplar._id);
@@ -112,7 +112,7 @@ let agregarCardLibro = function (libro, ejemplar, infoEjemplar, SucursalIDURL) {
         btnAsignarSucursal.setAttribute('style', 'line-height:normal');
         btnAsignarSucursal.addEventListener('click', modalDarLibrosASucursal);
         divContainerButtons.appendChild(btnAsignarSucursal);
-    }else if(sessionStorage.tipoUsuario == 'Lector'){
+    } else if (sessionStorage.tipoUsuario == 'Lector') {
         let btnAsignarSucursal = document.createElement('a');
         btnAsignarSucursal.setAttribute('class', 'material btnLibreria downButton');
         btnAsignarSucursal.setAttribute('id', 'btnFormato');
@@ -128,9 +128,9 @@ let agregarCardLibro = function (libro, ejemplar, infoEjemplar, SucursalIDURL) {
         btnAsignarSucursal.setAttribute('data-nombreTienda', sucursal.sucursal.nombre);
         btnAsignarSucursal.setAttribute('data-precio', precioFinal);
         btnAsignarSucursal.setAttribute('style', 'line-height:normal');
-        btnAsignarSucursal.addEventListener('click',modalAgregarCarrito);
+        btnAsignarSucursal.addEventListener('click', modalAgregarCarrito);
         divContainerButtons.appendChild(btnAsignarSucursal);
-}
+    }
 }
 
 let filaNoDatos = function () {

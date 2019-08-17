@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 
 let ofertasSchema = new mongoose.Schema({
     nombre: {type: String, required: true, unique: true },
-    tipoOferta: {type: String, required: true, unique: false },
     descuento: {type: Number, required: true, unique: false },
     descripcion: {type: String, required: true, unique: false},
     sucursal: {

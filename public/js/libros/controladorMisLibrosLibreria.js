@@ -14,9 +14,7 @@ let mostarLibros = async (event) => {
         listaLibreria = await obtenerLibrosTienda(id);
         listaLibreria = listaLibreria.listaLibrerias;
         listaEjemplares = listaLibreria.ejemplares;
-        if (sessionStorage.tipoUsuario == 'Lector') {
-            listaOfertas = await obtenerOfertasLibreriaId(id);
-        }
+        listaOfertas = await obtenerOfertasLibreriaId(id);
     }
 
     let filtro = txtFiltro.value;
@@ -33,6 +31,7 @@ let mostarLibros = async (event) => {
 let agregarCardLibro = function (libro, ejemplar, iva, cantidad, idLibreria) {
     let oferta = 0;
     let nombreOferta;
+
     listaOfertas.listaOfertas.forEach((ofer) => {
         if (ofer.autor == libro.autor._id) {
             oferta = ofer.descuento;
@@ -52,6 +51,7 @@ let agregarCardLibro = function (libro, ejemplar, iva, cantidad, idLibreria) {
             return;
         }
     });
+
     let divParrent = document.createElement('div');
     divParrent.setAttribute('class', 'parrent');
     divParrent.setAttribute('data-idEjemplar', ejemplar._id);

@@ -6,16 +6,8 @@ const nombreAlert = document.getElementById('alertNombre');
 const descuentoInput = document.getElementById('descuento');
 const descuentoAlert = document.getElementById('alertDescuento');
 
-const estadoSelect = document.getElementById('estado');
-
-
-const tipoOfertaSelect = document.getElementById('tipoOferta');
-
 const descripcionInput = document.getElementById('descripcion');
 const descripcionAlert = document.getElementById('alertDescripcion');
-
-const estadoInput = document.getElementById('estado');
-
 
 //const autorInput = document.getElementById('alertAutor');
 const estadoAlert = document.getElementById('alertEstado');
@@ -29,17 +21,16 @@ const favAlert = document.getElementById('alertAutor');
 
 
 let obtenerDatosUsuarios = async function () {
-    let error = validarNombre() | validarDescripcion() | validarDescuento() | validarSucursal() | validarOferta() | validarTipoOferta() | validarEstado();
+    let error = validarNombre() | validarDescripcion() | validarDescuento() | validarSucursal() | validarOferta();
     if (!error) {
         let txtTienda;
         txtTienda = sucursalSelect.value;
-        txtTienda = sucursalSelect.querySelector('[value="'+txtTienda+'"]').getAttribute('data-tienda');
+        txtTienda = sucursalSelect.querySelector('[value="' + txtTienda + '"]').getAttribute('data-tienda');
         let oferta = {
-            tipoOferta : tipoOfertaSelect.value,
             nombre: nombreInput.value,
             descuento: descuentoInput.value,
             descripcion: descripcionInput.value,
-            estado: estadoInput.value
+            estado: 1
         }
         if (autorSelect.value)
             oferta.autor = autorSelect.value;
@@ -49,7 +40,7 @@ let obtenerDatosUsuarios = async function () {
             oferta.categoria = categoriaSelect.value;
         if (libroSelect.value)
             oferta.libro = libroSelect.value;
-        if(txtTienda == "Libreria")
+        if (txtTienda == "Libreria")
             oferta.libreria = sucursalSelect.value;
         else
             oferta.sucursal = sucursalSelect.value;
@@ -59,7 +50,7 @@ let obtenerDatosUsuarios = async function () {
         if (nuevaOferta.success) {
             Swal.fire({
                 type: 'success',
-                title: nuevaOferta.message,
+                title: nuevaOferta.msj,
                 showCloseButton: true,
                 focusConfirm: false,
                 confirmButtonText:
@@ -69,7 +60,7 @@ let obtenerDatosUsuarios = async function () {
         else {
             Swal.fire({
                 type: 'error',
-                title: nuevaOferta.message
+                title: nuevaOferta.msj
             });
 
 
@@ -106,7 +97,20 @@ let validarDescuento = function () {
         alert: descuentoAlert,
         input: descuentoInput
     }
-    return !(noVacio(elementText) && validarNumeros(elementText));
+    if (!(noVacio(elementText) && validarNumeros(elementText))) {
+        return true;
+    }
+    else if (elementText.value > 100) {
+        elementText.alert.innerText = "Debe ser menor al 100%."
+        elementText.alert.className = elementText.alert.className.replace("alertHidden", "");
+        elementText.input.className = elementText.input.className.replace("inputError", "");
+        elementText.input.className = elementText.input.className + " inputError";
+        return true;
+    }
+    elementText.alert.className = elementText.alert.className.replace("alertHidden", "");
+    elementText.alert.className = elementText.alert.className + " alertHidden";
+    elementText.input.className = elementText.input.className.replace("inputError", "");
+    return false;
 }
 
 let validarDescripcion = function () {
@@ -116,26 +120,6 @@ let validarDescripcion = function () {
         input: descripcionInput
     }
     return !(noVacio(elementText));
-}
-
-let validarEstado = function () {
-    let elementSelect = {
-        value: estadoSelect.value,
-        alert: estadoAlert,
-        input: estadoSelect
-    }
-    return !(validarSelect(elementSelect));
-}
-
-let validarTipoOferta = function () {
-    let elementSelect = {
-        value: tipoOfertaSelect.value,
-        alert: tipoOfertaAlert,
-        input: tipoOfertaSelect
-    }
-
-    return !(validarSelect(elementSelect));
-
 }
 
 let validarSucursal = function () {
@@ -176,8 +160,6 @@ let validarOferta = function () {
 nombreInput.addEventListener('blur', validarNombre);
 descuentoInput.addEventListener('blur', validarDescuento);
 descripcionInput.addEventListener('blur', validarDescripcion);
-estadoSelect.addEventListener('change', validarEstado);
-tipoOfertaSelect.addEventListener('change', validarTipoOferta);
 sucursalSelect.addEventListener('change', validarSucursal);
 autorSelect.addEventListener('change', validarOferta);
 generoSelect.addEventListener('change', validarOferta);
