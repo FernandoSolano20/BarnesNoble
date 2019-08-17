@@ -71,7 +71,7 @@ let agregarCardLibro = function (libro, ejemplar, infoEjemplar) {
 }
 
 let filaNoDatos = function () {
-    if (sucursal.sucursal.ejemplares.length === 0 || containerCard.childElementCount === 0) {
+    if (listaLibroUsuario.usuario.ejemplares.length === 0 || containerCard.childElementCount === 0) {
         let divParrent = document.createElement('div');
         divParrent.setAttribute('class', 'parrent');
         containerCard.appendChild(divParrent);

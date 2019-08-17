@@ -256,6 +256,7 @@ let partialInformacionUsuario = function (contenedor, idUser) {
 
             let contendorPreferencia = document.createElement('div');
             contendorPreferencia.setAttribute('id', 'preferencias');
+            contendorPreferencia.setAttribute('class','crear-contenedor');
             contenedorVotoPrefe.appendChild(contendorPreferencia);
 
             if (idUser == usuario.usuario._id) {
