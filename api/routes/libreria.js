@@ -325,4 +325,25 @@ router.post('/obtenerCantidadEjemplarPorLibreria', function (req, res) {
         });
 });
 
+router.get('/listarLibreriasCompletas', async (req, res) => {
+    return await Libreria.find(function (err, librerias) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'No se encontro ninguna librería',
+                err
+            });
+        }
+        else {
+            return res.json({
+                success: true,
+                listaLibrerias: librerias
+            });
+        }
+    })
+        .populate('sucursales.sucursal', 'nombre')
+        .select('nombreComercial nombreFantasia localizacionLatitud localizacionLongitud provincia canton distrito estado sucursales ejemplares');
+});
+
+
 module.exports = router;
