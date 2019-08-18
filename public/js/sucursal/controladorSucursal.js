@@ -16,9 +16,6 @@ let mostrar_tabla = async (event) => {
         tr.innerHTML = 'Nombre';
         fila.appendChild(tr);
         tr = document.createElement('th');
-        tr.innerHTML = 'Correo';
-        fila.appendChild(tr);
-        tr = document.createElement('th');
         tr.innerHTML = 'Teléfono';
         fila.appendChild(tr);
 
@@ -92,7 +89,6 @@ let agregarFilaSucursal = function (sucursal, libreria) {
     if (sucursal['nombre'].toLowerCase().includes(filtro) || sucursal['correo'].toLowerCase().includes(filtro) || sucursal['telefono'].toLowerCase().includes(filtro) || (libreria ? libreria : "").toLowerCase().includes(filtro)) {
         let fila = tbody.insertRow();
         fila.insertCell().innerHTML = sucursal['nombre'];
-        fila.insertCell().innerHTML = sucursal['correo'];
         fila.insertCell().innerHTML = sucursal['telefono'];
 
         if (libreria) {
@@ -129,8 +125,6 @@ let agregarFilaSucursal = function (sucursal, libreria) {
         let celda_perfil = fila.insertCell();
         let divContendor = document.createElement("div");
         let btnPerfil = document.createElement('button');
-        let btnSuscribir = document.createElement('button');
-        let separator = document.createElement('span');
 
         divContendor.setAttribute('class', 'crear-contenedor')
         celda_perfil.appendChild(divContendor);
@@ -143,65 +137,8 @@ let agregarFilaSucursal = function (sucursal, libreria) {
             window.location.href = "perfilSucursal.html?id=" + sucursal._id;
         });
         divContendor.appendChild(btnPerfil);
-
-        if(usuarioSuscrito(sucursal.usuariosSubscritos, sessionStorage.id)){
-            btnSuscribir.innerText = 'Cancelar';
-            btnSuscribir.addEventListener('click', async function () {
-                let response = await desuscribirUsuario({
-                    idUsuario : sessionStorage.id,
-                    idSucursal : sucursal['_id']
-                });
-                if (response.success) {
-                    btnSuscribir.innerText = 'Subscribir';
-                    Swal.fire({
-                        type: 'success',
-                        title: response.message
-                    })
-                }
-                else {
-                    Swal.fire({
-                        type: 'error',
-                        title: response.message
-                    })
-                }
-            });
-        }
-        else{
-            btnSuscribir.innerText = 'Subscribir';
-            btnSuscribir.addEventListener('click', async function () {
-                let response = await suscribirUsuario({
-                    idUsuario : sessionStorage.id,
-                    idSucursal : sucursal['_id']
-                });
-                if (response.success) {
-                    btnSuscribir.innerText = 'Cancelar Suscribción';
-                    Swal.fire({
-                        type: 'success',
-                        title: response.message
-                    })
-                }
-                else {
-                    Swal.fire({
-                        type: 'error',
-                        title: response.message
-                    })
-                }
-            });
-        }
-
-        btnSuscribir.setAttribute('class', 'material-blue');
-        separator.innerHTML = '&nbsp;';
-        divContendor.appendChild(separator);
-        divContendor.appendChild(btnSuscribir);
         
     }
-}
-
-let usuarioSuscrito = function(lista, idUsuario){
-    for (let i = 0; i < lista.length; i++) {
-        if(lista[i].usuario == idUsuario) return true;
-    }
-    return false;
 }
 
 let filaNoDatos = function () {

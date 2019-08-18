@@ -103,9 +103,32 @@ let partialInformacionSucursal = function (contenedor) {
     infoContainer.appendChild(divInfo);
     let button = document.createElement('a');
     button.setAttribute("href", "http://localhost:3000/perfilLibreria.html?id=" + libreria.libreria[0]._id);
-    button.setAttribute("class", "material-blue");
+    button.setAttribute("class", "material-blue btn-sucursal");
     button.innerText = "Ver perfil librería";
     divInfo.appendChild(button);
+
+    if (sessionStorage.tipoUsuario == 'Lector') {
+        let btnSuscribir = document.createElement('button');
+        btnSuscribir.addEventListener('click', function () {
+            if (usuarioSuscrito(sucursal.sucursal.usuariosSubscritos, sessionStorage.id)) {
+                btnSuscribir.innerText = 'Cancelar suscribción';
+                desuscribir(btnSuscribir);
+            }
+            else {
+                btnSuscribir.innerText = 'Subscribir';
+                subscribir(btnSuscribir);
+            }
+        })
+
+        if (usuarioSuscrito(sucursal.sucursal.usuariosSubscritos, sessionStorage.id))
+            btnSuscribir.innerText = 'Cancelar suscribción';
+        else
+            btnSuscribir.innerText = 'Subscribir';
+
+        btnSuscribir.setAttribute('class', 'material-blue btn-sucursal');
+        btnSuscribir.setAttribute('id', 'subscribir');
+        divInfo.appendChild(btnSuscribir);
+    }
 
     let position = {
         lat: Number(sucursal.sucursal.localizacionLatitud),
@@ -119,6 +142,69 @@ let partialInformacionSucursal = function (contenedor) {
         '</p> </div>';
     addMarker(position, message);
     mostarLibros();
+}
+
+let desuscribir = async (btnSuscribir) => {
+    let response = await desuscribirUsuario({
+        idUsuario: sessionStorage.id,
+        idSucursal: sucursal.sucursal['_id']
+    });
+    if (response.success) {
+        btnSuscribir.innerText = 'Subscribir';
+        Swal.fire({
+            type: 'success',
+            title: response.message
+        })
+        removerUsuarioLista();
+    }
+    else {
+        Swal.fire({
+            type: 'error',
+            title: response.message
+        })
+    }
+}
+
+let subscribir = async (btnSuscribir) => {
+    let response = await suscribirUsuario({
+        idUsuario: sessionStorage.id,
+        idSucursal: sucursal.sucursal['_id'],
+        correo: sessionStorage.correo
+    });
+    if (response.success) {
+        btnSuscribir.innerText = 'Cancelar suscribción';
+        Swal.fire({
+            type: 'success',
+            title: response.message
+        })
+        agregarUsuarioLista();
+    }
+    else {
+        Swal.fire({
+            type: 'error',
+            title: response.message
+        })
+    }
+}
+
+let usuarioSuscrito = function (lista, idUsuario) {
+    for (let i = 0; i < lista.length; i++) {
+        if (lista[i].usuario == idUsuario) return true;
+    }
+    return false;
+}
+
+let removerUsuarioLista = function () {
+    for (let i = 0; i < sucursal.sucursal.usuariosSubscritos.length; i++) {
+        if (sucursal.sucursal.usuariosSubscritos[i].usuario === sessionStorage.id) {
+            sucursal.sucursal.usuariosSubscritos.splice(i, 1);
+            break;
+        }
+    }
+}
+
+let agregarUsuarioLista = function () {
+    sucursal.sucursal.usuariosSubscritos.push({ usuario: sessionStorage.id });
 }
 
 informacionLibreria();

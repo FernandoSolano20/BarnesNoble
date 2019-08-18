@@ -4,7 +4,16 @@ const express = require('express'),
     router = express.Router(),
     mongoose = require('mongoose'),
     Sucursal = require('../models/sucursal.model'),
+    nodeMailer = require("nodemailer"),
     Libreria = require('../models/libreria.model');
+
+const transporter = nodeMailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'grupovalhalla2019@gmail.com',
+        pass: 'BarnesNoblePass123'
+    }
+});
 
 //Definición de la ruta para registrar contactos
 
@@ -130,8 +139,8 @@ router.get('/countSucursal', function (req, res) {
     });
 })
 
-router.patch('/suscribirUsuarioSucursal', function(req, res){
-    if(req.body.idUsuario && req.body.idSucursal){
+router.patch('/suscribirUsuarioSucursal', function (req, res) {
+    if (req.body.idUsuario && req.body.idSucursal) {
         Sucursal.findById(req.params.id, (err, usuarios) => {
             if (err) {
                 return res.status(400).json({
@@ -140,40 +149,94 @@ router.patch('/suscribirUsuarioSucursal', function(req, res){
                     err
                 });
             }
-            Sucursal.updateOne({ _id: req.body.idSucursal }, {
+            Sucursal.findOneAndUpdate({ _id: req.body.idSucursal }, {
                 $push: {
                     'usuariosSubscritos': {
-                        usuario: req.body.idUsuario
+                        usuario: req.body.idUsuario,
+                        correo: req.body.correo
                     }
                 }
             },
-            function (err, usuario) {
-                if (err) {
-                    return res.status(400).json({
-                        success: false,
-                        message: 'No se pudo realizar la suscripcion',
-                        err
-                    })
-                } else {
-                    return res.json({
-                        success: true,
-                        message: 'Subscripcion exitosa'
-                    })
-                }
-            });
+                function (err, sucursal) {
+                    if (err) {
+                        return res.status(400).json({
+                            success: false,
+                            message: 'No se pudo realizar la suscripcion',
+                            err
+                        })
+                    } else {
+                        let mailOption = {
+                            from: 'grupovalhalla2019@gmail.com',
+                            to: req.body.correo,
+                            subject: `Subcripcion a sucursal ${sucursal.nombre}`,
+                            html: `<html>
+                        <head>
+                          <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+                          <style>
+                           .wrapper{
+                          background : #81ecec;
+                          font-family: 'Roboto', sans-serif;
+                        }
+                        .container{
+                          margin: 0 auto;
+                          background: #fff;
+                          width: 500px;
+                          text-align: center;
+                          padding: 10px;
+                        }
+                        .boton{
+                          background: #ff7675;
+                          color: #fff;
+                          display: block;
+                          padding: 15px;
+                          text-decoration: none;
+                          width: 50%;
+                          margin: 0 auto;
+                        }
+                        </style>
+                        </head>
+                        <body class="wrapper">
+                          <div class="container">
+                            <h1>Subscripción a sucursal ${sucursal.nombre}</h1>
+
+                          <p>Usted se ha subscripto a una sucursal ${sucursal.nombre}</p>
+                          <p>El correo electrónico asociado es: ${req.body.correo}</p>
+                          <p>Recibirá información acerca de las ofertas de la sucursal</p>
+                          <p>Para ingresar visite nuestra página<p>
+                            <a href="http://localhost:3000/inicioSesion.html" class="boton">Ingresar a Barnes & Noble </a>
+                          </div>
+
+                        </body>
+
+                      </html>`
+                        };
+                        transporter.sendMail(mailOption, function (error, info) {
+                            if (error) {
+                                return res.json({
+                                    success: true,
+                                    message: `Ocurrio un error al envio del correo, contacte con el administrador de la plataforma`
+                                })
+                            }
+                            return res.json({
+                                success: true,
+                                message: 'Subscripcion exitosa'
+                            })
+                        });
+                    }
+                });
         });
     }
-    else{
+    else {
         return res.json({
             success: false,
             message: 'Debe seleccionar un usuario y una libreria',
             err
-        }) 
+        })
     }
 });
 
-router.patch('/desuscribirUsuarioSucursal', function(req, res){
-    if(req.body.idUsuario && req.body.idSucursal){
+router.patch('/desuscribirUsuarioSucursal', function (req, res) {
+    if (req.body.idUsuario && req.body.idSucursal) {
         Sucursal.findOne({ _id: req.body.idSucursal, "usuariosSubscritos.usuario": req.params.id }, (err, usuarios) => {
             if (err) {
                 return res.status(400).json({
@@ -189,28 +252,28 @@ router.patch('/desuscribirUsuarioSucursal', function(req, res){
                     }
                 }
             },
-            function (err, usuario) {
-                if (err) {
-                    return res.status(400).json({
-                        success: false,
-                        message: 'No se pudo cancelar la suscripcion',
-                        err
-                    })
-                } else {
-                    return res.json({
-                        success: true,
-                        message: 'Subscripcion cancelada'
-                    })
-                }
-            });
+                function (err, usuario) {
+                    if (err) {
+                        return res.status(400).json({
+                            success: false,
+                            message: 'No se pudo cancelar la suscripcion',
+                            err
+                        })
+                    } else {
+                        return res.json({
+                            success: true,
+                            message: 'Subscripcion cancelada'
+                        })
+                    }
+                });
         });
     }
-    else{
+    else {
         return res.json({
             success: false,
             message: 'Debe seleccionar un usuario y una libreria',
             err
-        }) 
+        })
     }
 });
 
@@ -324,7 +387,7 @@ router.patch('/pasarLibrosEntreSucursales', function (req, res) {
             }
 
             query = "ejemplares." + query + ".cantidad";
-            
+
             Sucursal.updateOne({ _id: req.body.idSucursal, "ejemplares.libro": req.body.ejemplar, [`${query}`]: { $gte: req.body.cantidad } }, { $inc: { [`${query}`]: -(req.body.cantidad) } }, function (err, ejemp) {
                 if (err)
                     return res.json({
@@ -481,7 +544,7 @@ router.patch('/pasarLibrosEntreSucursalLibreria', function (req, res) {
 
 router.post('/obtenerSucursalesPorEjemplaresId', function (req, res) {
     let ejemplares = [];
-    for(let i = 0; i < req.body.ejemplar; i++){
+    for (let i = 0; i < req.body.ejemplar; i++) {
         ejemplares.push(new mongoose.Types.ObjectId(req.body.ejemplar[i]));
     }
     Sucursal.find({ "ejemplares.libro": { $in: req.body.ejemplar } }, function (err, sucursales) {
@@ -498,7 +561,7 @@ router.post('/obtenerSucursalesPorEjemplaresId', function (req, res) {
             });
         }
     })
-    .select("nombre");
+        .select("nombre");
 });
 
 router.post('/obtenerCantidadEjemplarPorSucursal', function (req, res) {
