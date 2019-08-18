@@ -3,11 +3,22 @@
 const express = require('express'),
     router = express.Router(),
     Ofertas = require('../models/ofertas.model'),
+    nodeMailer = require("nodemailer"),
+    Sucursal = require('../models/sucursal.model'),
     mongoose = require('mongoose');
+
 router.param('id', function (req, res, next, id) {
     req.body.id = id;
     next();
 })
+
+const transporter = nodeMailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'grupovalhalla2019@gmail.com',
+        pass: 'BarnesNoblePass123'
+    }
+});
 
 //Definición de la ruta para registrar ofertas
 
@@ -42,6 +53,80 @@ router.post('/registrarOferta', function (req, res) {
                 });
 
             } else {
+                if (body.sucursal) {
+                    Sucursal.findById(body.sucursal, function (err, sucursal) {
+                        if (err) {
+                            return res.status(400).json({
+                                success: false,
+                                msj: 'No se encontro la surcusal',
+                                err
+                            });
+                        }
+                        else {
+                            let terxtoCorreo = ``;
+                            
+                            let usuarios = sucursal.usuariosSubscritos;
+                            for (let i = 0; i < usuarios.length; i++) {
+                                let mailOption = {
+                                    from: 'grupovalhalla2019@gmail.com',
+                                    to: usuarios[i].correo,
+                                    subject: `Oferta en sucursal ${sucursal.nombre} `,
+                                    html: `<html>
+                                <head>
+                                  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+                                  <style>
+                                   .wrapper{
+                                  background : #81ecec;
+                                  font-family: 'Roboto', sans-serif;
+                                }
+                                .container{
+                                  margin: 0 auto;
+                                  background: #fff;
+                                  width: 500px;
+                                  text-align: center;
+                                  padding: 10px;
+                                }
+                                .boton{
+                                  background: #ff7675;
+                                  color: #fff;
+                                  display: block;
+                                  padding: 15px;
+                                  text-decoration: none;
+                                  width: 50%;
+                                  margin: 0 auto;
+                                }
+                                </style>
+                                </head>
+                                <body class="wrapper">
+                                  <div class="container">
+                                    <h1>Nueva oferta en ${sucursal.nombre}</h1>
+        
+                                  <p>La sucursal ${sucursal.nombre} ha creado una nueva oferta.</p>
+                                  <p>El nombre de la oferta es ${body.nombre}</p>
+                                  <p>Para más información entrar a la aplicación<p>
+                                    <a href="http://localhost:3000/inicioSesion.html" class="boton">Ingresar a Barnes & Noble </a>
+                                  </div>
+        
+                                </body>
+        
+                              </html>`
+                                };
+                                transporter.sendMail(mailOption, function (error, info) {
+                                    if (error) {
+                                        return res.json({
+                                            success: true,
+                                            message: `Ocurrio un error al envio del correo, contacte con el administrador de la plataforma`
+                                        })
+                                    }
+                                    return res.json({
+                                        success: true,
+                                        message: 'Se registró correctamente la oferta'
+                                    })
+                                });
+                            }
+                        }
+                    })
+                }
                 res.json({
                     success: true,
                     msj: 'Se registró correctamente la oferta'

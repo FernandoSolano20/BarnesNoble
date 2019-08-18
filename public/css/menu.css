@@ -327,3 +327,7 @@ header .fa-users {
   color: white;
   text-decoration: none;
 }
+
+.linkGrande {
+  line-height: 25px;
+}

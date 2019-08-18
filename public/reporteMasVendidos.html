@@ -5,16 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Barnes & Noble</title>
     <script src="js/validarSesionPlatafomra.js"></script>
     <link rel="stylesheet" href="css/reset.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/menu.css">
-    <link rel="stylesheet" href="css/listarUsuario.css">
-    <link rel="stylesheet" href="css/modal.css">
-    <link rel="stylesheet" href="css/searchBar.css">
+    <link rel="stylesheet" href="css/listarElementos.css">
+    <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="css/botones.css">
+    <link rel="stylesheet" href="css/searchBar.css">
     <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
-    <title>usuarios</title>
+
 </head>
 
 <body>
@@ -33,7 +35,6 @@
 
         <nav class="menuIzquierdo">
             <ul class="menu" id="menuDinamico">
-
             </ul>
         </nav>
     </header>
@@ -42,27 +43,17 @@
             <div class="busqueda">
                 <input type="text" id="input-filtro" name="buscar" placeholder="Buscar...." autocomplete="off"
                     autocorrect="off">
-                <button type="button" class="buscar "><i class="fa fa-search"></i><span>search</span></button>
-            </div>
-
-            <div class="crear-contenedor">
-                <a href="registroUsuarios.html"><button type="button" class="material-blue" data-action="crear"
-                        id="crear-elemento"><i class="far fa-plus-circle"></i> Crear</button></a>
+                <button type="button" class="buscar"><i class="fa fa-search"></i><span>search</span></button>
             </div>
         </div>
-        </div>
-
         <div class="contenedor-tabla">
-            <table class="tabla" id="tabla-elementos">
+            <h2 class="subTilte">Reporte de libros más vendidos</h2>
+            <table class="tabla" id="tabla-elementos-libro">
                 <thead>
                     <tr>
-                        <th>Cédula</th>
-                        <th>Nombre</th>
-                        <th>Tipo usuario</th>
-                        <th>Correo</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
-                        <th>Activar/Desactivar</th>
+                        <th>Libro</th>
+                        <th>Vendidos</th>
+                        <th>Autor</th>
                         <th>Perfil</th>
                     </tr>
                 </thead>
@@ -71,21 +62,7 @@
             </table>
         </div>
 
-        <div id="modal" class="modal alert">
-            <div class="modal-content">
-                <div class="close" data-close="closeModal">&times;</div>
-                <p id="titulo-modal">Título</p>
-                <div class="alert-img-box" id="cuerpo-modal">
-                    <p class="alert-text" id="texto-modal">Hola.</p>
-                </div>
-                <div class="alert-btn-wrapper">
-                    <button class="alert-btn" id="cancel" data-close="closeModal">Cancelar</button>
-                    <button class="alert-btn primary" id="confirm">Confirmar</button>
-                </div>
-            </div>
-        </div>
     </main>
-
     <footer>
         <div class="blockFooter">
             <div class="logos">
@@ -104,12 +81,12 @@
         </div>
 
     </footer>
+    <script src="js/cerrarSesion.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="js/libros/servicioLibros.js"></script>
+    <script src="js/landingPage/servicioLandigPage.js"></script>
+    <script src="js/reportes/masVendidos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </body>
-<script src="js/cerrarSesion.js"></script>
-<script src="js/menu.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="js/usuarios/servicioUsuario.js"></script>
-<script src="js/usuarios/controlador-listarUsuarios.js"></script>
-<script src="js/usuarios/modalAccionesUsuario.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
 </html>
