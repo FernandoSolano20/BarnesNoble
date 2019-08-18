@@ -85,3 +85,14 @@ let votarPorLibro = async function (voto) {
     var result = await response.json();
     return result;
 }
+
+const obtenerLibrosMejoresCalificados = async () => {
+    let response = await fetch('http://localhost:4000/api/libros/listarMejoreCalificados', {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        }
+    });
+    let result = await response.json();
+    return result.listaLibros;
+}

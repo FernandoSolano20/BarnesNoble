@@ -1,25 +1,20 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Barnes & Noble</title>
-    <script src="js/validarSesionLibreria.js"></script>
+    <script src="js/validarSesionPlatafomra.js"></script>
     <link rel="stylesheet" href="css/reset.css">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/listarElementos.css">
+    <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="css/botones.css">
     <link rel="stylesheet" href="css/searchBar.css">
-    <link rel="stylesheet" href="css/modal.css">
-    <link rel="stylesheet" href="css/cards.css">
-    <link rel="stylesheet" href="css/btnClass.css">
-    <link rel="stylesheet" href="css/registroFormulario.css">
-    <link rel="stylesheet" href="css/selectButton.css">
-    <link rel="stylesheet" href="css/ofertas.css">
     <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
 
 </head>
@@ -32,7 +27,7 @@
                 </li>
                 <li><a href="/"><i class="far fa-home"></i>Inicio</a></li>
                 <li id="logout">
-                    <a href="#"><i class="far fa-sign-out-alt"></i>Cerrar Sesión</a>
+                    <a href=""><i class="far fa-sign-out-alt"></i>Cerrar Sesión</a>
                 </li>
                 <li class="link-imagen"><img src="img/logo_barnes-and-noble.png" alt="Logo de Barnes&Noble"></li>
             </ul>
@@ -40,30 +35,34 @@
 
         <nav class="menuIzquierdo">
             <ul class="menu" id="menuDinamico">
-
             </ul>
         </nav>
     </header>
     <main>
-        <div>
-            <div class="subcontenedor">
-                <div class="busqueda">
-                    <input type="text" id="txtFiltro" name="buscar" placeholder="Buscar...." autocomplete="off"
-                        autocorrect="off">
-                    <button type="button" class="buscar"><i class="fa fa-search"></i><span>search</span></button>
-                </div>
-                <div class="crear-contenedor" id="container-btn">
-                    
-                </div>
-
+        <div class="subcontenedor">
+            <div class="busqueda">
+                <input type="text" id="input-filtro" name="buscar" placeholder="Buscar...." autocomplete="off"
+                    autocorrect="off">
+                <button type="button" class="buscar"><i class="fa fa-search"></i><span>search</span></button>
             </div>
         </div>
-        <div class="main" id="cardElements">
+        <div class="contenedor-tabla">
+            <h2 class="subTilte">Reporte de libros más vendidos</h2>
+            <table class="tabla" id="tabla-elementos-libro">
+                <thead>
+                    <tr>
+                        <th>Libro</th>
+                        <th>Vendidos</th>
+                        <th>Autor</th>
+                        <th>Perfil</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
         </div>
 
     </main>
-
-
     <footer>
         <div class="blockFooter">
             <div class="logos">
@@ -85,15 +84,8 @@
     <script src="js/cerrarSesion.js"></script>
     <script src="js/menu.js"></script>
     <script src="js/libros/servicioLibros.js"></script>
-    <script src="js/ejemplar/servicioEjemplar.js"></script>
-    <script src="js/libreria/servicioLibreria.js"></script>
-    <script src="js/sucursal/servicioSucursal.js"></script>
-    <script src="js/usuarios/servicioUsuario.js"></script>
-    <script src="js/ofertas/servicioOfertas.js"></script>
-    <script src="js/validaciones/validacionesGenerales.js"></script>
-    <script src="js/ventas/pasarLibroLibreriaASucursal.js"></script>
-    <script src="js/selects/controladorSelectSucursalModal.js"></script>
-    <script src="js/libros/controladorMisLibrosLibreria.js"></script>
+    <script src="js/landingPage/servicioLandigPage.js"></script>
+    <script src="js/reportes/masVendidos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </body>
 
