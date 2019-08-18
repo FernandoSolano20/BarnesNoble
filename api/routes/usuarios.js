@@ -299,8 +299,6 @@ router.delete('/eliminarUsuario/:id', function (req, res) {
             });
         }
         Libreria.findByIdAndRemove(user.libreria, function (err, libreria) {
-            console.log(libreria)
-            console.log(libreria.sucursal)
             if (err) {
                 return res.status(400).json({
                     success: false,
@@ -309,23 +307,30 @@ router.delete('/eliminarUsuario/:id', function (req, res) {
                 });
             }
             else {
-                let sucursales = [];
-                for (var i = 0; i < libreria.sucursales.length; i++)
-                    sucursales.push(new mongoose.Types.ObjectId(libreria.sucursales[i].sucursal));
-                    
-                Sucursal.remove({ _id: { $in: sucursales } }, function (err, sucursal) {
-                    if (err) {
-                        return res.status(400).json({
-                            success: false,
-                            message: 'El usuario no se pudo eliminar',
-                            err
+                if (libreria && libreria.sucursales) {
+                    let sucursales = [];
+                    for (var i = 0; i < libreria.sucursales.length; i++)
+                        sucursales.push(new mongoose.Types.ObjectId(libreria.sucursales[i].sucursal));
+
+                    Sucursal.remove({ _id: { $in: sucursales } }, function (err, sucursal) {
+                        if (err) {
+                            return res.status(400).json({
+                                success: false,
+                                message: 'El usuario no se pudo eliminar',
+                                err
+                            });
+                        }
+                        return res.status(200).json({
+                            success: true,
+                            message: "Usuario elimnado"
                         });
-                    }
+                    })
+                } else {
                     return res.status(200).json({
                         success: true,
                         message: "Usuario elimnado"
                     });
-                })
+                }
             }
         })
 
@@ -689,6 +694,170 @@ router.get('/countUser', function (req, res) {
         });
     });
 })
+
+
+// Editar Perfil Lector
+
+router.patch('/editarUsuario/:id', function (req, res) {
+    let body = req.body;
+    let usuarioRegistrado = false;
+    let usuarioModificado = false;
+
+    console.log(req.params.id);
+
+    Usuario.findById(req.params.id).then(
+        function (usuario) {
+            console.log(usuario);
+            if (!usuario) {
+                return res.json({
+                    success: false,
+                    message: 'El usuario no se encuentra en el sistema'
+                });
+            }
+            else {
+                let cambios = {};
+
+                usuarioRegistrado = usuario;
+                if (usuarioRegistrado.correo != req.body.correo) {
+                    Usuario.findOne({ correo: req.body.correo }).then(
+                        function (usuario) {
+                            if (usuario && usuario.id != usuarioRegistrado.id) {
+                                return res.json({
+                                    success: false,
+                                    message: 'El correo ya se encuentra en el sistema'
+                                });
+                            } else {
+                                cambios.correo = req.body.correo;
+                                usuarioModificado = true;
+
+                            }
+                        }
+                    );
+                }
+                if (usuarioRegistrado.telefono != req.body.telefono) {
+                    Usuario.findOne({ telefono: req.body.telefono }).then(
+                        function (usuario) {
+                            if (usuario && usuario.id != usuarioRegistrado.id) {
+                                return res.json({
+                                    success: false,
+                                    message: 'El telefono ya se encuentra en el sistema'
+                                });
+                            } else {
+                                cambios.telefono = req.body.telefono;
+                                usuarioModificado = true;
+
+                            }
+                        }
+                    );
+                }
+                if (req.body.nombre && usuarioRegistrado.nombre != req.body.nombre) {
+                    cambios.nombre = req.body.nombre;
+                    usuarioModificado = true;
+                }
+                if (req.body.segundoNombre && usuarioRegistrado.segundoNombre != req.body.segundoNombre) {
+                    cambios.segundoNombre = req.body.segundoNombre;
+                    usuarioModificado = true;
+                }
+                if (req.body.primerApellido && usuarioRegistrado.primerApellido != req.body.primerApellido) {
+                    cambios.primerApellido = req.body.primerApellido;
+                    usuarioModificado = true;
+                }
+                if (req.body.segundoApellido && usuarioRegistrado.segundoApellido != req.body.segundoApellido) {
+                    cambios.segundoApellido = req.body.segundoApellido;
+                    usuarioModificado = true;
+                }
+                if (req.body.img && usuarioRegistrado.img != req.body.img) {
+                    cambios.img = req.body.img;
+                    usuarioModificado = true;
+                }
+                if (req.body.sexo && usuarioRegistrado.sexo != req.body.sexo) {
+                    cambios.sexo = req.body.sexo;
+                    usuarioModificado = true;
+                }
+                if (req.body.nacimiento && usuarioRegistrado.nacimiento != req.body.nacimiento) {
+                    cambios.nacimiento = req.body.nacimiento;
+                    usuarioModificado = true;
+                }
+                if (req.body.provincia && usuarioRegistrado.provincia != req.body.provincia) {
+                    cambios.provincia = req.body.provincia;
+                    usuarioModificado = true;
+                }
+                if (req.body.canton && usuarioRegistrado.canton != req.body.canton) {
+                    cambios.canton = req.body.canton;
+                    usuarioModificado = true;
+                }
+                if (req.body.distrito && usuarioRegistrado.distrito != req.body.distrito) {
+                    cambios.distrito = req.body.distrito;
+                    usuarioModificado = true;
+                }
+                if (req.body.sennas && usuarioRegistrado.sennas != req.body.sennas) {
+                    cambios.sennas = req.body.sennas;
+                    usuarioModificado = true;
+                }
+                if (req.body.alias && usuarioRegistrado.alias != req.body.alias) {
+                    cambios.alias = req.body.alias;
+                    usuarioModificado = true;
+                }
+                if (req.body.nombreComercial && usuarioRegistrado.nombreComercial != req.body.nombreComercial) {
+                    cambios.sennas = req.body.nombreComercial;
+                    usuarioModificado = true;
+                }
+                if (req.body.nombreFantasia && usuarioRegistrado.nombreFantasia != req.body.nombreFantasia) {
+                    cambios.alias = req.body.nombreFantasia;
+                    usuarioModificado = true;
+                }
+                if (req.body.localizacionLatitud && usuarioRegistrado.localizacionLatitud != req.body.localizacionLatitud) {
+                    cambios.localizacionLatitud = req.body.localizacionLatitud;
+                    usuarioModificado = true;
+                }
+                if (req.body.localizacionLongitud && usuarioRegistrado.localizacionLongitud != req.body.localizacionLongitud) {
+                    cambios.localizacionLongitud = req.body.localizacionLongitud;
+                    usuarioModificado = true;
+                }
+
+                if (!usuarioModificado) {
+                    return res.json({
+                        success: true,
+                        message: 'No se ha realizado ninguna modificación'
+                    });
+                } else {
+                    Usuario.findByIdAndUpdate(req.params.id, { $set: cambios }, function (err) {
+                        if (err) {
+                            return res.status(400).json({
+                                success: false,
+                                message: 'El usuario no se pudo guardar',
+                                err
+                            });
+                        }
+                        Usuario.findById(req.params.id, (err, usuario) => {
+                            return res.status(200).json({
+                                success: true,
+                                message: "Los cambios han sido guardados'",
+                                usuarios: usuario
+                            });
+                        });
+                    });
+                    usuarioModificado.save(
+                        function (err, usuarioDB) {
+                            if (err) {
+                                return res.status(400).json({
+                                    success: false,
+                                    message: 'El usuario no se pudo guardar',
+                                    err
+                                });
+                            } else {
+                                return res.json({
+                                    success: true,
+                                    message: 'Los cambios han sido guardados'
+                                });
+                            }
+                        }
+                    );
+                }
+            }
+        }
+    );
+});
 
 router.patch('/comprarLibroUsuarioLibreria', function (req, res) {
     let ejemplarId = new mongoose.Types.ObjectId(req.body.ejemplar);
