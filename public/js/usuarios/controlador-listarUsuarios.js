@@ -13,16 +13,40 @@ let mostrar_tabla = async () => {
 
     for (let i = 0; i < lista_usuarios.length; i++) {
         let fila = tbody.insertRow();
-        fila.insertCell().innerHTML = lista_usuarios[i]['id'];
         fila.insertCell().innerHTML = lista_usuarios[i]['nombre'];
         fila.insertCell().innerHTML = lista_usuarios[i]['primerApellido'];
         fila.insertCell().innerHTML = lista_usuarios[i]['correo'];
-        fila.insertCell().innerHTML = formatearFecha(lista_usuarios[i]['nacimiento']);
 
         let celda_perfil = fila.insertCell();
         let divContenedor = document.createElement("div");
         divContenedor.setAttribute('class', 'crear-contenedor');
         celda_perfil.appendChild(divContenedor);
+
+        let editarCelda = fila.insertCell();
+        let editar = document.createElement('i');
+        editar.setAttribute('class', 'far fa-edit');
+        editar.setAttribute('data-action', 'editar');
+        editarCelda.appendChild(editar);
+    
+        let eliminarCelda = fila.insertCell();
+        let eliminar = document.createElement('i');
+        eliminar.setAttribute('class', 'fal fa-trash-alt');
+        eliminar.setAttribute('data-action', 'borrar');
+        eliminarCelda.appendChild(eliminar);
+    
+        let estadoCelda = fila.insertCell();
+    
+        let estadoInput = document.createElement('input');
+        estadoInput.setAttribute('class', 'switch');
+        estadoInput.setAttribute('id', categoria._id);
+        estadoInput.setAttribute('type', 'checkbox');
+        estadoCelda.appendChild(estadoInput);
+        estadoInput.checked = !categoria.estado;
+    
+        let estadoLabel = document.createElement('label');
+        estadoLabel.setAttribute('data-action', 'estado');
+        estadoLabel.setAttribute('for', categoria._id);
+        estadoCelda.appendChild(estadoLabel);
 
         let boton_perfil = document.createElement('button');
         boton_perfil.type = 'button';
