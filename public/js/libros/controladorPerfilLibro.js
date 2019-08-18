@@ -101,7 +101,7 @@ let obtenerInformacionLibro = async function () {
                     ejemplares: listaEjemp,
                 }
                 let response = await tieneElLibroVoto(usuario);
-                if (response.success) {
+                if (response.success && ejemplares.length) {
                     let divButtones = document.getElementById('contendorVoto');
                     let btnVotar = document.createElement('button');
                     btnVotar.setAttribute('type', 'button');

@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="css/perfilSlider.css">
     <link rel="stylesheet" href="css/voto.css">
     <link rel="stylesheet" href="css/resennas.css">
+    <link rel="stylesheet" href="css/btnEditar.css">
+    <link rel="stylesheet" href="css/btnClass.css">
     <link rel="stylesheet" href="css/botones.css">
     <link rel="stylesheet" href="css/mapa.css">
     <link rel="stylesheet" href="css/cardSucursal.css">
@@ -47,7 +49,7 @@
     <main>
         <div class="perfil">
             <div class="column">
-                <h1 id="titulo"></h1>
+                <h2 id="titulo"></h2>
                 <div class="blog-slider__container">
                     <div class="blogSlides fade">
                         <img id="fotoPerfil" src="img/nouser.jpg">
@@ -76,6 +78,9 @@
             <div class="column " id="informacionUsuario">
 
             </div>
+            <div class="contenedor-input btnVerPerfil">
+                
+            </div>
         </div>
 
         <div class="containerMap">
@@ -83,7 +88,7 @@
         </div>
 
         <div>
-            <div class="subcontenedor">
+            <div class="subcontenedor" id="searchBarUser">
                 <div class="busqueda">
                     <input type="text" id="txtFiltro" name="buscar" placeholder="Buscar...." autocomplete="off"
                         autocorrect="off">
@@ -127,8 +132,10 @@
     <script src="js/usuarios/servicioUsuario.js"></script>
     <script src="js/perfilUsuario/librosUsuario.js"></script>
     <script src="js/perfilUsuario/perfilUsuario.js"></script>
+    <script src="js/login/servicioLogin.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKXA3_YJlVwwt1lx60eO0ljRVUKQO3fNY"
         async defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </body>
 
 </html>
