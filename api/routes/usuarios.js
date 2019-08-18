@@ -48,7 +48,6 @@ router.post('/registrarUsuario', function (req, res) {
         telefono: body.telefono,
         tipoUsuario: body.tipoUsuario,
         nacimiento: body.nacimiento,
-        estado: body.estado,
 
         // /Direccion/
         provincia: body.provincia,
@@ -99,6 +98,7 @@ router.post('/registrarUsuario', function (req, res) {
                                     }
                                     else {
                                         if (nuevoUsuario.tipoUsuario === "Adminitrador librería") {
+                                            nuevoUsuario.estado = 0;
                                             try {
                                                 let nuevaLibreria = new Libreria({
                                                     nombreComercial: body.nombreComercial,
@@ -123,6 +123,9 @@ router.post('/registrarUsuario', function (req, res) {
                                             }
 
                                         }
+                                        else {
+                                            nuevoUsuario.estado = 1;
+                                        }
                                         if (createUser) {
                                             nuevoUsuario.save(
                                                 function (err, usuarioDB) {
@@ -133,11 +136,12 @@ router.post('/registrarUsuario', function (req, res) {
                                                             err
                                                         });
                                                     } else {
-                                                        let mailOption = {
-                                                            from: 'grupovalhalla2019@gmail.com',
-                                                            to: nuevoUsuario.correo,
-                                                            subject: 'Bienvenido a Barnes & Noble',
-                                                            html: `<html>
+                                                        if (nuevoUsuario.tipoUsuario === "Lector") {
+                                                            let mailOption = {
+                                                                from: 'grupovalhalla2019@gmail.com',
+                                                                to: nuevoUsuario.correo,
+                                                                subject: 'Bienvenido a Barnes & Noble',
+                                                                html: `<html>
                                                             <head>
                                                               <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
                                                               <style>
@@ -178,19 +182,27 @@ router.post('/registrarUsuario', function (req, res) {
                                                             </body>
 
                                                           </html>`
-                                                        };
-                                                        transporter.sendMail(mailOption, function (error, info) {
-                                                            if (error) {
+                                                            };
+                                                            transporter.sendMail(mailOption, function (error, info) {
+                                                                if (error) {
+                                                                    return res.json({
+                                                                        success: true,
+                                                                        message: `Ocurrio un error al envio del correo, su contraseña es ${nuevoUsuario.pass}`
+                                                                    })
+                                                                }
                                                                 return res.json({
                                                                     success: true,
-                                                                    message: `Ocurrio un error al envio del correo, su contraseña es ${nuevoUsuario.pass}`
+                                                                    message: 'El usuario se guardó con éxito, revise su correo eléctronico'
                                                                 })
-                                                            }
+                                                            });
+                                                        }
+                                                        else {
                                                             return res.json({
                                                                 success: true,
-                                                                message: 'El usuario se guardó con éxito, revise su correo eléctronico'
-                                                            })
-                                                        });
+                                                                message: 'La libreria se ha creado, espere a ser aprobado.',
+                                                                err
+                                                            });
+                                                        }
                                                     }
                                                 }
                                             );
@@ -211,14 +223,23 @@ router.post('/login', function (req, res) {
         function (usuario) {
             if (usuario) {
                 if (usuario.pass === req.body.pass) {
-                    res.json({
-                        success: true,
-                        usuario: usuario
-                    });
+                    if (usuario.estado) {
+                        res.json({
+                            success: true,
+                            usuario: usuario
+                        });
+                    }
+                    else {
+                        res.json({
+                            success: false,
+                            message: 'El usuario está desactivado'
+                        });
+                    }
                 }
                 else {
                     res.json({
-                        success: false
+                        success: false,
+                        message: 'El usuario o contraseña no coinciden'
                     });
                 }
             } else {
@@ -249,7 +270,7 @@ router.get('/listarUsuarios', function (req, res) {
     });
 });
 
-router.put('/editar/:id', function (req, res) {
+router.put('/editarUsuario/:id', function (req, res) {
     Usuario.findByIdAndUpdate(req.params.id, { $set: req.body }, function (err) {
         if (err) {
             return res.status(400).json({
@@ -268,8 +289,8 @@ router.put('/editar/:id', function (req, res) {
     });
 });
 
-router.delete('/eliminar/:id', function (req, res) {
-    Usuario.findByIdAndRemove(req.params.id, function (err) {
+router.delete('/eliminarUsuario/:id', function (req, res) {
+    Usuario.findByIdAndRemove(req.params.id, function (err, user) {
         if (err) {
             return res.status(400).json({
                 success: false,
@@ -277,14 +298,41 @@ router.delete('/eliminar/:id', function (req, res) {
                 err
             });
         }
-        return res.status(200).json({
-            success: true,
-            message: "Usuario elimnado"
-        });
+        Libreria.findByIdAndRemove(user.libreria, function (err, libreria) {
+            console.log(libreria)
+            console.log(libreria.sucursal)
+            if (err) {
+                return res.status(400).json({
+                    success: false,
+                    message: 'El usuario no se pudo eliminar',
+                    err
+                });
+            }
+            else {
+                let sucursales = [];
+                for (var i = 0; i < libreria.sucursales.length; i++)
+                    sucursales.push(new mongoose.Types.ObjectId(libreria.sucursales[i].sucursal));
+                    
+                Sucursal.remove({ _id: { $in: sucursales } }, function (err, sucursal) {
+                    if (err) {
+                        return res.status(400).json({
+                            success: false,
+                            message: 'El usuario no se pudo eliminar',
+                            err
+                        });
+                    }
+                    return res.status(200).json({
+                        success: true,
+                        message: "Usuario elimnado"
+                    });
+                })
+            }
+        })
+
     });
 });
 
-router.patch('/modificarEstado/:id', function (req, res) {
+router.patch('/modificarEstadoUsuario/:id', function (req, res) {
     Usuario.findById(req.params.id, (err, usuarios) => {
         if (err) {
             return res.status(400).json({
@@ -891,7 +939,7 @@ router.post('/correoCompra', function (req, res) {
     let libros = req.body.libros;
     let total = 0;
     let htmlLibro = '';
-    for(let i = 2; i < libros.length; i++){
+    for (let i = 2; i < libros.length; i++) {
         let precioActual = Number(libros[i].precio) * Number(libros[i].cantidad);
         htmlLibro += `  <tr>
                             <td>${libros[i].titulo} (${libros[i].tipo})</td>
@@ -903,7 +951,7 @@ router.post('/correoCompra', function (req, res) {
     }
     let date = new Date();
     let day = date.getDate();
-    let month = date.getMonth()+1;
+    let month = date.getMonth() + 1;
     let year = date.getFullYear();
     let mailOption = {
         from: 'grupovalhalla2019@gmail.com',
@@ -978,5 +1026,126 @@ router.post('/correoCompra', function (req, res) {
         })
     });
 })
+
+router.get('/obtenerLibreriasPendientesCount', async (req, res) => {//Adminitrador librería
+    return await Usuario.countDocuments({ estado: 0, tipoUsuario: 'Adminitrador librería', cambiarPass: 1 }, function (err, count) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'No se encontro ninguna libreria',
+                err
+            });
+        }
+        else {
+            return res.json({
+                success: true,
+                count: count
+            });
+        }
+    });
+});
+
+router.get('/obtenerLibreriasPendientes', async (req, res) => {
+    return await Usuario.find({ estado: 0, tipoUsuario: 'Adminitrador librería', cambiarPass: 1 }, function (err, libreria) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'No se encontro ninguna libreria',
+                err
+            });
+        }
+        else {
+            return res.json({
+                success: true,
+                libreria: libreria
+            });
+        }
+    })
+        .populate('libreria', 'nombreComercial nombreFantasia')
+        .select('nombre primerApellido correo libreria');
+});
+
+router.patch('/aprobarSolcitud/:id', function (req, res) {
+    Usuario.findById(req.params.id, (err, usuarios) => {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'No se pudo cambiar el estado del usuario',
+                err
+            });
+        }
+
+        usuarios.set(req.body);
+
+        usuarios.save((err, usuariosDB) => {
+            if (err)
+                return res.status(400).json({
+                    success: false,
+                    message: 'No se pudo cambiar el estado del usuario',
+                    err
+                });
+            else {
+                let mailOption = {
+                    from: 'grupovalhalla2019@gmail.com',
+                    to: usuariosDB.correo,
+                    subject: 'Bienvenido a Barnes & Noble',
+                    html: `<html>
+                    <head>
+                      <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+                      <style>
+                       .wrapper{
+                      background : #81ecec;
+                      font-family: 'Roboto', sans-serif;
+                    }
+                    .container{
+                      margin: 0 auto;
+                      background: #fff;
+                      width: 500px;
+                      text-align: center;
+                      padding: 10px;
+                    }
+                    .boton{
+                      background: #ff7675;
+                      color: #fff;
+                      display: block;
+                      padding: 15px;
+                      text-decoration: none;
+                      width: 50%;
+                      margin: 0 auto;
+                    }
+                    </style>
+                    </head>
+                    <body class="wrapper">
+                      <div class="container">
+                        <h1>Bienvenido a Barnes & Noble</h1>
+                      <h2>Su biblioteca digital</h2>
+    
+                      <p>Saludos ${usuariosDB.nombre} ${usuariosDB.primerApellido} le agradecemos por escoger utilizar los servicios de Barnes & Noble</p>
+                      <p>El correo electrónico asociado es: ${usuariosDB.correo}</p>
+                      <p>Su contraseña temporal es: ${usuariosDB.pass}</p>
+                      <p>Para ingresar visite el siguiente<p>
+                        <a href="http://localhost:3000/inicioSesion.html" class="boton">Ingresar a Barnes & Noble </a>
+                      </div>
+    
+                    </body>
+    
+                  </html>`
+                };
+                transporter.sendMail(mailOption, function (error, info) {
+                    if (error) {
+                        return res.json({
+                            success: true,
+                            message: `Ocurrio un error al envio del correo, su contraseña es ${usuariosDB.pass}`
+                        })
+                    }
+                    return res.json({
+                        success: true,
+                        message: 'El usuario se guardó con éxito, revise su correo eléctronico'
+                    })
+                });
+            }
+        });
+    });
+});
 
 module.exports = router;

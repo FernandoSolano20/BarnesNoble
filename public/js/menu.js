@@ -25,6 +25,18 @@ let obtenerUsuarioIdInfoBasicaFetch = async (id) => {
     var result = await response.json();
     return result;
 };
+
+let obtenerLibreriasPendientesCount = async () => {
+    var response = await fetch('http://localhost:4000/api/obtenerLibreriasPendientesCount', {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        }
+    });
+    var result = await response.json();
+    return result.count;
+};
+
 var adminLib;
 let listMenu = document.getElementById('menuDinamico');
 let crearMenu = async function () {
@@ -106,6 +118,24 @@ let crearMenu = async function () {
         }
         else if (sessionStorage.tipoUsuario === "Adminitrador plataforma") {
             //Plataforma
+            let countLib = await obtenerLibreriasPendientesCount();
+            let vertMenu = document.getElementById('verticalMenuUser') || document.getElementById('menuVertical');
+            let divCarrito = document.createElement('div');
+            divCarrito.setAttribute('id','cd-cart-trigger');
+            vertMenu.appendChild(divCarrito);
+
+            let spanNumber = document.createElement('span');
+            spanNumber.setAttribute('class','p1 fa-stack fa-2x has-badge');
+            spanNumber.setAttribute('id','numCarrito');
+            spanNumber.setAttribute('data-count', countLib);
+            divCarrito.appendChild(spanNumber);
+
+            let iconBell = document.createElement('a');
+            iconBell.setAttribute('class','fal fa-bell');
+            iconBell.setAttribute('id','bell');
+            iconBell.setAttribute('href','solicitudLibreria.html');
+            spanNumber.appendChild(iconBell);
+
             li = document.createElement('li');
             listMenu.appendChild(li);
             anchor = document.createElement('a');

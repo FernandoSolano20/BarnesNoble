@@ -273,14 +273,14 @@ header .fa-users {
   height: 100%;
 }
 
-#cd-cart-trigger a {
+#cd-cart-trigger .cd-img-replace {
   position: relative;
   width: 100px;
   border-left: none;
   background-color: #26292f;
 }
 
-#cd-cart-trigger a {
+#cd-cart-trigger .cd-img-replace {
   background: #26292f url(../img/cd-cart.svg) no-repeat center center;
 }
 
@@ -295,29 +295,35 @@ header .fa-users {
   right: -2px;
 }
 
-#cd-cart-trigger a {
+#cd-cart-trigger .cd-img-replace {
   width: 100px;
   height: 100%;
 }
- .p1[data-count]:after{
-  position:absolute;
-  right:10%;
-  top:8%;
+
+.p1[data-count]:after {
+  position: absolute;
+  right: 15%;
+  top: 8%;
   content: attr(data-count);
-  font-size:40%;
-  padding:.2em;
-  border-radius:50%;
-  line-height:1em;
+  font-size: 40%;
+  padding: .2em;
+  border-radius: 50%;
+  line-height: 1em;
   color: white;
-  background:rgba(255,0,0,.85);
-  text-align:center;
+  background: rgba(255, 0, 0, .85);
+  text-align: center;
   min-width: 1em;
-  font-weight:bold;
+  font-weight: bold;
 }
 
-#numCarrito{
+#numCarrito {
   height: 2.1em;
-  width: 100px
+  width: 100px;
+  background: #26292f;
 }
 
-
+#bell {
+  text-indent: 130%;
+  color: white;
+  text-decoration: none;
+}

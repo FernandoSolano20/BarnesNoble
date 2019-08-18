@@ -367,6 +367,7 @@ let partialInformacionUsuario = function (contenedor) {
             addMarker(position, message);
         }
     }
+    mostarLibros();
 }
 
 function calcularEdad(fecha) {
