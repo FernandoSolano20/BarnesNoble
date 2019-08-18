@@ -3,18 +3,22 @@ const txtFiltro = document.getElementById("txtFiltro");
 let listaLibroUsuario;
 
 let mostarLibros = async (event) => {
-    let url = new URL(window.location.href);
-    let id = url.searchParams.get("id");
-    listaLibroUsuario = await verLibrosCompradosLector(id);
-    let filtro = txtFiltro.value;
-    containerCard.innerHTML = '';
-    for (let i = 0; i < listaLibroUsuario.usuario.ejemplares.length; i++) {
-        let libro = listaLibroUsuario.usuario.ejemplares[i].libro.libro;
-        let ejemplar = listaLibroUsuario.usuario.ejemplares[i].libro;
-        if (ejemplar.tipo.toLowerCase().includes(filtro.toLowerCase()) || libro.titulo.toLowerCase().includes(filtro.toLowerCase()) || libro.autor.nombre.toLowerCase().includes(filtro.toLowerCase()) || libro.autor.nombreArtistico.toLowerCase().includes(filtro.toLowerCase()) || libro.genero.nombre.toLowerCase().includes(filtro.toLowerCase()) || libro.categoria.nombre.toLowerCase().includes(filtro.toLowerCase()))
-            agregarCardLibro(libro, ejemplar, listaLibroUsuario.usuario.ejemplares[i]);
+    if (usuario.usuario.tipoUsuario == 'Lector') {
+        var search = document.getElementById('searchBarUser');
+        search.removeAttribute('id');
+        let url = new URL(window.location.href);
+        let id = url.searchParams.get("id");
+        listaLibroUsuario = await verLibrosCompradosLector(id);
+        let filtro = txtFiltro.value;
+        containerCard.innerHTML = '';
+        for (let i = 0; i < listaLibroUsuario.usuario.ejemplares.length; i++) {
+            let libro = listaLibroUsuario.usuario.ejemplares[i].libro.libro;
+            let ejemplar = listaLibroUsuario.usuario.ejemplares[i].libro;
+            if (ejemplar.tipo.toLowerCase().includes(filtro.toLowerCase()) || libro.titulo.toLowerCase().includes(filtro.toLowerCase()) || libro.autor.nombre.toLowerCase().includes(filtro.toLowerCase()) || libro.autor.nombreArtistico.toLowerCase().includes(filtro.toLowerCase()) || libro.genero.nombre.toLowerCase().includes(filtro.toLowerCase()) || libro.categoria.nombre.toLowerCase().includes(filtro.toLowerCase()))
+                agregarCardLibro(libro, ejemplar, listaLibroUsuario.usuario.ejemplares[i]);
+        }
+        filaNoDatos();
     }
-    filaNoDatos();
 };
 
 let agregarCardLibro = function (libro, ejemplar, infoEjemplar) {
@@ -95,4 +99,3 @@ let filaNoDatos = function () {
 }
 
 txtFiltro.addEventListener('keyup', mostarLibros);
-mostarLibros();

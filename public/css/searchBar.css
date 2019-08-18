@@ -47,3 +47,7 @@
 .subcontenedor .busqueda .buscar span {
     display: none;
 }
+
+#searchBarUser{
+    display: none;
+}

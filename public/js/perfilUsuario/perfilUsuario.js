@@ -1,5 +1,9 @@
 let usuario;
 
+let formatearFech = function(date){
+    return ""+((date.getUTCDate() + 1 < 10 ? "0"+ Number(date.getUTCDate()) : Number(date.getUTCDate())) + '/' + (date.getUTCMonth() + 1 < 10 ? "0"+ Number(date.getUTCMonth() + 1) : Number(date.getUTCMonth() + 1)) + '/' + date.getFullYear())+"";
+}
+
 
 let informacionUsuario = async function () {
     let contenedor = document.getElementById('informacionUsuario');
@@ -10,6 +14,7 @@ let informacionUsuario = async function () {
 
     partialInformacionUsuario(contenedor, id);
 }
+
 
 let partialInformacionUsuario = function (contenedor, idUser) {
     let infoContainer = document.createElement('div');
@@ -114,7 +119,7 @@ let partialInformacionUsuario = function (contenedor, idUser) {
     span.insertBefore(icon, label);
     text = document.createElement('p');
     var nacimiento = new Date(usuario.usuario.nacimiento);
-    text.innerText = nacimiento.getUTCDate() + '/' + Number(nacimiento.getUTCMonth() + 1) + '/' + nacimiento.getFullYear();
+    text.innerText = formatearFech(nacimiento);
     divInfo.appendChild(text);
 
     divInfo = document.createElement('div');
@@ -259,26 +264,6 @@ let partialInformacionUsuario = function (contenedor, idUser) {
             contendorPreferencia.setAttribute('class','crear-contenedor');
             contenedorVotoPrefe.appendChild(contendorPreferencia);
 
-            if (idUser == usuario.usuario._id) {
-                let btnPerfil = document.createElement('button');
-
-                btnPerfil.innerText = 'Editar perfil'
-                btnPerfil.dataset._id = usuario.usuario['_id'];
-                btnPerfil.setAttribute('class', 'material-blue')
-                contendorPreferencia.appendChild(btnPerfil);
-                btnPerfil.addEventListener('click', function () {
-                    window.location.href = `editarPerfilUsuarios.html?id=${this.dataset._id}`;
-                });
-
-                btnPerfil = document.createElement('button');
-                btnPerfil.innerText = 'Cambiar contraseña'
-                btnPerfil.dataset._id = usuario.usuario['_id'];
-                btnPerfil.setAttribute('class', 'material-blue');
-                btnPerfil.addEventListener('click', cambiarPass);
-                contendorPreferencia.appendChild(btnPerfil);
-                
-            }
-
             infoContainer = document.createElement('div');
             infoContainer.setAttribute('class', 'info');
             contendorPreferencia.appendChild(infoContainer);
@@ -390,6 +375,7 @@ let partialInformacionUsuario = function (contenedor, idUser) {
             addMarker(position, message);
         }
     }
+    mostarLibros();
 }
 
 function calcularEdad(fecha) {
@@ -465,32 +451,5 @@ let reviewsUsuario = function () {
     p.innerText = "Pesimo";
     liArt.appendChild(p);
 };
-
-let cambiarPass = async function () {
-    const { value: email } = await Swal.fire({
-        title: 'Digite su correo eléctronico',
-        input: 'email',
-        inputPlaceholder: 'Correo eléctronico'
-    });
-
-    let usuario = {
-        correo: email
-    }
-
-    let user = await forgetPass(usuario);
-
-    if (user.success) {
-        Swal.fire({
-            type: 'success',
-            title: user.message
-        }, logoutCambioPassword());
-    }
-    else {
-        Swal.fire({
-            type: 'error',
-            title: user.message
-        });
-    }
-}
 
 informacionUsuario();
