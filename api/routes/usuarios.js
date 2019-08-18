@@ -299,8 +299,6 @@ router.delete('/eliminarUsuario/:id', function (req, res) {
             });
         }
         Libreria.findByIdAndRemove(user.libreria, function (err, libreria) {
-            console.log(libreria)
-            console.log(libreria.sucursal)
             if (err) {
                 return res.status(400).json({
                     success: false,

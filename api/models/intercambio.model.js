@@ -28,4 +28,4 @@ let intercambio_schema = new mongoose.Schema({
     }]
 });
 
-module.exports = mongoose.model('intercambio', intercambio_schema);
+module.exports = mongoose.model('Intercambio', intercambio_schema);
