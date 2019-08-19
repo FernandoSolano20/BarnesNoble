@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+​
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +18,7 @@
     <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
     <title>B & N - Perfil de Libreria</title>
 </head>
-
+​
 <body>
     <header>
         <nav class="menuHorizontal">
@@ -27,22 +27,22 @@
                 </li>
                 <li><a href="/"><i class="far fa-home"></i>Inicio</a></li>
                 <li id="logout">
-
-
+​
+​
                     <a href=""><i class="far fa-sign-out-alt"></i>Cerrar Sesión</a>
                 </li>
                 <li class="link-imagen"><img src="img/logo_barnes-and-noble.png" alt="Logo de Barnes&Noble"></li>
             </ul>
         </nav>
-
+​
         <nav class="menuIzquierdo">
             <ul class="menu" id="menuDinamico">
-
+​
             </ul>
         </nav>
     </header>
     <main>
-
+​
         <div class="admin">
             <div class="admin__main">
                 <div class="dashboard">
@@ -148,7 +148,7 @@
                             </div>
                         </a>
                     </div>
-
+​
                 </div>
             </div>
         </div>
@@ -159,9 +159,34 @@
                 </div>
             </div>
             <div class="main" id="cardElements">
-
+​
             </div>
         </section>
+        <div class="dashboard__item dashboard__item--full" id="club">
+            <div class="card">
+                <div class="card__header">
+                    Mis clubes de lectura
+                </div>
+                <div class="card__content">
+                    <div class="card__item">
+                        <div class="contenedor-tabla">
+                            <table class="tabla" id="tbl_clubesLectura">
+                                <thead>
+                                    <tr>
+                                        <th>Club de lectura</th>
+                                        <th>Tema</th>
+                                        <th>Tipo de club</th>
+                                        <th>Fecha de reunión</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="admin">
             <div class="admin__main">
                 <div class="dashboard">
@@ -212,7 +237,8 @@
     <script src="js/indexAdminLib/MasVendidosCards.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKXA3_YJlVwwt1lx60eO0ljRVUKQO3fNY&callback=initMap"
         async defer></script>
+    <script src="js/clubLectura/controladorMisClubes.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </body>
-
+​
 </html>

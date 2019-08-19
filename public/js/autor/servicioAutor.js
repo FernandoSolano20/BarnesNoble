@@ -52,17 +52,22 @@ let agregarPremios = async (pid, pnombrePremio, pannoPremio, pDescPremio) => {
 };
 
 
-let editarAutor = async(autor,id) => {
-    let response = await fetch('http://localhost:4000/api/autor/editar/' + id, {
-        method: "PUT",
-        headers: {
-            'Content-Type': 'application/json;charset=UTF-8',
-        },
-        body:JSON.stringify(autor)
+let modificarAutor = (pid, pnombre, presenna, pfechaNacimiento, pfechaMuerte, pnombreArtistico, pnacionalidad) => {
+    axios({
+        method: 'post',
+        url: 'http://localhost:4000/api/autor/editar/',
+        responseType: 'json',
+        data: {
+            _id: pid,
+            nombre: pnombre,
+            resenna: presenna,
+            fechaNacimiento: pfechaNacimiento,
+            fechaMuerte: pfechaMuerte,
+            nombreArtistico : pnombreArtistico,
+            nacionalidad : pnacionalidad
+        }
     });
-    let result = await response.json();
-    return result;
-}
+};
 
 let eliminarAutor = async(id) => {
     let response = await fetch('http://localhost:4000/api/autor/eliminar/' + id, {

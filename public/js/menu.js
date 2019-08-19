@@ -254,6 +254,21 @@ let crearMenu = async function () {
             li = document.createElement('li');
             listMenu.appendChild(li);
             anchor = document.createElement('a');
+            anchor.innerHTML = "Editar perfil";
+            anchor.href = "editarPerfilUsuarios.html?id=" + sessionStorage.id;
+            li.appendChild(anchor);
+
+            li = document.createElement('li');
+            listMenu.appendChild(li);
+            anchor = document.createElement('a');
+            anchor.innerHTML = "Cambiar contraseña";
+            anchor.addEventListener('click', cambiarPassUsuario);
+            anchor.href = "#";
+            li.appendChild(anchor);
+
+            li = document.createElement('li');
+            listMenu.appendChild(li);
+            anchor = document.createElement('a');
             anchor.innerHTML = "Géneros";
             anchor.href = "genero.html";
             li.appendChild(anchor);
@@ -343,6 +358,14 @@ let crearMenu = async function () {
             li = document.createElement('li');
             listMenu.appendChild(li);
             anchor = document.createElement('a');
+            anchor.innerHTML = "Cambiar contraseña";
+            anchor.addEventListener('click', cambiarPassUsuario);
+            anchor.href = "#";
+            li.appendChild(anchor);
+
+            li = document.createElement('li');
+            listMenu.appendChild(li);
+            anchor = document.createElement('a');
             anchor.innerHTML = "Catálogo de libros";
             anchor.href = "listarLibrosCards.html";
             li.appendChild(anchor);
@@ -353,6 +376,7 @@ let crearMenu = async function () {
             anchor.innerHTML = "Mi librería";
             anchor.href = "perfilLibreria.html?id=" + adminLib.usuario.libreria + "";
             li.appendChild(anchor);
+
 
             li = document.createElement('li');
             listMenu.appendChild(li);
