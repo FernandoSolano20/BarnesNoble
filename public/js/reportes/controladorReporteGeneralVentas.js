@@ -37,7 +37,7 @@ const crearReporteGeneralVentas = async () => {
                 precioTotal = precioTotal + listaLibrerias[i].ejemplares[j].cantidad * Ejemplar.precio.precio;
             }
 
-            agregarLibros(listaLibrerias[i], contador, precioTotal);
+            agregarLibrerias(listaLibrerias[i], contador, precioTotal);
 
         }
 
@@ -66,7 +66,7 @@ function formatMoney(amount, decimalCount = 2, decimal = ".", thousands = ",") {
 };
 
 
-let agregarLibros = function (plibrerias, pcantidadLibrosVendidos, pprecioTotal) {
+let agregarLibrerias = function (plibrerias, pcantidadLibrosVendidos, pprecioTotal) {
     let fila = tbodyLibro.insertRow();
 
     if (sessionStorage.tipoUsuario == 'Adminitrador plataforma') {
