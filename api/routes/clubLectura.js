@@ -121,5 +121,108 @@ router.get('/listarClubLecturaPorId/:id', function (req, res) {
         .select('nombre tema tipoClub fechaReunion horaReunion administrador sucursal participantes chat genero categoria');
 });
 
+router.put('/editar/:id', function (req, res) {
+    ClubLectura.findByIdAndUpdate(req.params.id, { $set: req.body }, function (err) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'El club de lectura no se pudo editar',
+                err
+            });
+        }
+        ClubLectura.findById(req.params.id, (err, clubLectura) => {
+            return res.status(200).json({
+                success: true,
+                message: "Club de lectura editado",
+                clubLectura: clubLectura
+            })
+        });
+    });
+});
+
+router.patch('/suscribirUsuarioClubLectura', function(req, res){
+    if(req.body.idUsuario && req.body.idClubLectura){
+        ClubLectura.findById(req.params.id, (err, usuarios) => {
+            if (err) {
+                return res.status(400).json({
+                    success: false,
+                    msj: 'No se encontro este club de lectura',
+                    err
+                });
+            }
+            ClubLectura.updateOne({ _id: req.body.idClubLectura }, {
+                $push: {
+                    'usuariosSubscritos': {
+                        usuario: req.body.idUsuario
+                    }
+                }
+            },
+            function (err, usuario) {
+                if (err) {
+                    return res.status(400).json({
+                        success: false,
+                        message: 'No se pudo realizar la suscripcion',
+                        err
+                    })
+                } else {
+                    return res.json({
+                        success: true,
+                        message: 'Subscripcion exitosa'
+                    })
+                }
+            });
+        });
+    }
+    else{
+        return res.json({
+            success: false,
+            message: 'Debe seleccionar un usuario y una libreria',
+            err
+        }) 
+    }
+});
+
+router.patch('/desuscribirUsuarioClubLectura', function(req, res){
+    if(req.body.idUsuario && req.body.idClubLectura){
+        ClubLectura.findOne({ _id: req.body.idClubLectura, "usuariosSubscritos.usuario": req.params.id }, (err, usuarios) => {
+            if (err) {
+                return res.status(400).json({
+                    success: false,
+                    msj: 'El usuario no esta suscrito a este club de lectura',
+                    err
+                });
+            }
+            ClubLectura.updateOne({ _id: req.body.idClubLectura }, {
+                $pull: {
+                    'usuariosSubscritos': {
+                        usuario: req.body.idUsuario
+                    }
+                }
+            },
+            function (err, usuario) {
+                if (err) {
+                    return res.status(400).json({
+                        success: false,
+                        message: 'No se pudo cancelar la suscripción',
+                        err
+                    })
+                } else {
+                    return res.json({
+                        success: true,
+                        message: 'Subscripción cancelada'
+                    })
+                }
+            });
+        });
+    }
+    else{
+        return res.json({
+            success: false,
+            message: 'Debe seleccionar un usuario y una librería',
+            err
+        }) 
+    }
+});
+
 
 module.exports = router;

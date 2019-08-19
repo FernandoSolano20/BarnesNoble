@@ -30,7 +30,7 @@ let clubLectura_schema = new mongoose.Schema({
         ref: 'Usuario',
         required: true
     },
-    participantes: [{
+    usuariosSubscritos: [{
         usuario: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Usuario',

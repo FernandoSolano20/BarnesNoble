@@ -75,3 +75,39 @@ let obtenerClubPorId = async (id) => {
     let result = await response.json();
     return result;
 }
+
+let editarClubLectura = async(clubLectura,id) => {
+    let response = await fetch('http://localhost:4000/api/clubLectura/editar/' + id, {
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body:JSON.stringify(clubLectura)
+    });
+    let result = await response.json();
+    return result;
+}
+
+let suscribirUsuario = async function (data) {
+    var response = await fetch('http://localhost:4000/api/clubLectura/suscribirUsuarioClubLectura', {
+        method: "PATCH",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body:JSON.stringify(data)
+    });
+    var result = await response.json();
+    return result;
+}
+
+let desuscribirUsuario = async function (data) {
+    var response = await fetch('http://localhost:4000/api/clubLectura/desuscribirUsuarioClubLectura', {
+        method: "PATCH",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body:JSON.stringify(data)
+    });
+    var result = await response.json();
+    return result;
+}

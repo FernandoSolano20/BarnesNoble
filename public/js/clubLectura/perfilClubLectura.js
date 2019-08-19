@@ -150,5 +150,78 @@ let partialInformacionClub = function (contenedor) {
 
     }
 }
+let usuarioSuscito = function(lista, idUsuario){
+    for (let i = 0; i < lista.length; i++) {
+        if(lista[i].usuario == idUsuario) return true;
+    }
+    return false;
+}
+
+let clubLectura;
+let btnSuscribir = document.createElement('button');
+
+if(usuarioSuscito(clubLectura.usuariosSubscritos, sessionStorage.id)){
+    btnSuscribir.innerText = 'Cancelar subscripción';
+    btnSuscribir.addEventListener('click', async function () {
+        let response = await desuscribirUsuario({
+            idUsuario : sessionStorage.id,
+            idClubLectura : clubLectura['_id']
+        });
+        if (response.success) {
+            btnSuscribir.innerText = 'Subscribir';
+            Swal.fire({
+                type: 'success',
+                title: response.message
+            })
+        }
+        else {
+            Swal.fire({
+                type: 'error',
+                title: response.message
+            })
+        }
+    });
+}
+else{
+    btnSuscribir.innerText = 'Subscribir';
+    btnSuscribir.addEventListener('click', async function () {
+        let response = await suscribirUsuario({
+            idUsuario : sessionStorage.id,
+            idClubLectura : clubLectura['_id']
+        });
+        if (response.success) {
+            btnSuscribir.innerText = 'Cancelar';
+            Swal.fire({
+                type: 'success',
+                title: response.message
+            })
+        }
+        else {
+            Swal.fire({
+                type: 'error',
+                title: response.message
+            })
+        }
+    });
+}
+
+btnSuscribir.setAttribute('class', 'material-blue');
+separator.innerHTML = '&nbsp;';
+divContendor.appendChild(separator);
+divContendor.appendChild(btnSuscribir);
+
+
+
+let filaNoDatos = function () {
+    let tbody = document.querySelector('#tbl_clubesLectura tbody');
+    if (!lista_clubesLectura || tbody.childElementCount === 0) {
+        tbody.innerHTML = '';
+        let fila = tbody.insertRow();
+        fila.setAttribute('id', 'no-data');
+        let celda = fila.insertCell()
+        celda.innerHTML = 'No se encontró datos';
+        celda.setAttribute('colspan', '8');
+    }
+}
 
 informacionLibreria();

@@ -145,7 +145,7 @@ let agregarFilaSucursal = function (sucursal, libreria) {
         divContendor.appendChild(btnPerfil);
 
         if(usuarioSuscito(sucursal.usuariosSubscritos, sessionStorage.id)){
-            btnSuscribir.innerText = 'Cancelar';
+            btnSuscribir.innerText = 'Cancelar subscripción';
             btnSuscribir.addEventListener('click', async function () {
                 let response = await desuscribirUsuario({
                     idUsuario : sessionStorage.id,
