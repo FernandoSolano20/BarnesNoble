@@ -5,17 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/reset.css">
-    <script src="js/validarSesionLector.js"></script>
+    <title>Barnes & Noble</title>
+    <script src="js/validarSesionUsuario.js"></script>
     <link rel="stylesheet" href="css/reset.css">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/menu.css">
     <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
+    <link rel="stylesheet" href="css/perfiles.css">
+    <link rel="stylesheet" href="css/btnEditar.css">
+    <link rel="stylesheet" href="css/btnClass.css">
+    <link rel="stylesheet" href="css/botones.css">
     <link rel="stylesheet" href="css/searchBar.css">
     <link rel="stylesheet" href="css/cards.css">
     <link rel="stylesheet" href="css/btnClass.css">
-    <title>B & N </title>
 </head>
 
 <body>
@@ -34,21 +37,24 @@
 
         <nav class="menuIzquierdo">
             <ul class="menu" id="menuDinamico">
-
+                
             </ul>
         </nav>
     </header>
     <main>
-        <div class="subcontenedor">
-            <div class="busqueda">
-                <input type="text" id="txtFiltro" name="buscar" placeholder="Buscar...." autocomplete="off"
-                    autocorrect="off">
-                <button type="button" class="buscar"><i class="fa fa-search"></i><span>search</span></button>
-            </div>
 
-            <div class="crear-contenedor" id="boton">
+        <div>
+            <div class="subcontenedor">
+                <div class="busqueda">
+                    <input type="text" id="txtFiltro" name="buscar" placeholder="Buscar...." autocomplete="off"
+                        autocorrect="off">
+                    <button type="button" class="buscar"><i class="fa fa-search"></i><span>search</span></button>
+                </div>
+                <div class="crear-contenedor" id="container-btn">
+
+                </div>
+
             </div>
-        </div>
         </div>
         <div class="main" id="cardElements">
         </div>
@@ -72,12 +78,11 @@
         </div>
 
     </footer>
-
+    <script src="js/cerrarSesion.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="js/usuarios/servicioUsuario.js"></script>
+    <script src="js/misLibrosUsuario/misLibros.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </body>
-<script src="js/menu.js"></script>
-<script src="js/cerrarSesion.js"></script>
-<script src="js/usuarios/servicioUsuario.js"></script>
-<script src="js/intercambio/librosInterCambio.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 
 </html>

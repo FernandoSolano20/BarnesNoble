@@ -11,7 +11,8 @@ const express = require('express'),
     Autor = require('../models/autor.model'),
     Libro = require('../models/libros.model'),
     Categoria = require('../models/categoria.model'),
-    Genero = require('../models/genero.model');
+    Genero = require('../models/genero.model'),
+    Ejemplar = require('../models/ejemplar.model');
 
 const transporter = nodeMailer.createTransport({
     service: 'gmail',
@@ -1315,6 +1316,94 @@ router.patch('/aprobarSolcitud/:id', function (req, res) {
             }
         });
     });
+});
+
+router.get('/obtenerLibroIntercambio', function (req, res) {
+    Usuario.aggregate(
+        [{
+            $unwind: "$ejemplares"
+        },
+        {
+            "$group": {
+                "_id": "$ejemplares.libro",
+            }
+        }])
+        .exec(function (err, transactions) {
+            Ejemplar.populate(transactions, { path: '_id', select: '_id tipo libro' }, function (err, populatedTransactions) {
+                if (err) {
+                    return res.json({
+                        success: false,
+                        message: `Ocurrio un error`
+                    })
+                }
+                else {
+                    Libro.populate(populatedTransactions, { path: '_id.libro', select: '_id titulo caratula genero categoria autor' }, function (err, libro) {
+                        if (err) {
+                            return res.json({
+                                success: false,
+                                message: `Ocurrio un error`
+                            })
+                        }
+                        else {
+                            Autor.populate(populatedTransactions, { path: '_id.libro.autor', select: '_id nombre nombreArtistico' }, function (err, libro) {
+                                if (err) {
+                                    return res.json({
+                                        success: false,
+                                        message: `Ocurrio un error`
+                                    })
+                                }
+                                else {
+                                    Genero.populate(populatedTransactions, { path: '_id.libro.genero', select: '_id nombre' }, function (err, libro) {
+                                        if (err) {
+                                            return res.json({
+                                                success: false,
+                                                message: `Ocurrio un error`
+                                            })
+                                        }
+                                        else {
+                                            Categoria.populate(populatedTransactions, { path: '_id.libro.categoria', select: '_id nombre' }, function (err, libro) {
+                                                if (err) {
+                                                    return res.json({
+                                                        success: false,
+                                                        message: `Ocurrio un error`
+                                                    })
+                                                }
+                                                else {
+                                                    return res.json({
+                                                        success: true,
+                                                        libro: libro
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    })
+                }
+            });
+        });
+})
+
+router.get('/obtenerLectoresPorEjemplaresId/:idEjemplar', function (req, res) {
+    Usuario.find({ "ejemplares.libro": req.params.idEjemplar, "ejemplares.estadoIntercambio": 1 } ,{
+        'ejemplares.$': 1
+    }, function (err, usuario) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                msj: 'No se encontro usuarios',
+                err
+            });
+        } else {
+            return res.json({
+                success: true,
+                usuario: usuario
+            });
+        }
+    })
+        .select("nombre primerApellido provincia canton");
 });
 
 module.exports = router;

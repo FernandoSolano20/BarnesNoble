@@ -137,7 +137,7 @@ let crearMenu = async function () {
             //Menu Lector
             let vertMenu = document.getElementById('verticalMenuUser') || document.getElementById('menuVertical');
             let divCarrito = document.createElement('div');
-            divCarrito.setAttribute('id', 'cd-cart-trigger');
+            divCarrito.setAttribute('class', 'cd-cart-trigger');
             vertMenu.appendChild(divCarrito);
             allStorage();
             let spanNumber = document.createElement('span');
@@ -150,6 +150,23 @@ let crearMenu = async function () {
             anchorCarro.setAttribute('class', 'cd-img-replace');
             anchorCarro.setAttribute('href', 'carrito.html');
             anchorCarro.innerText = 'Carro';
+            spanNumber.appendChild(anchorCarro);
+
+            divCarrito = document.createElement('div');
+            divCarrito.setAttribute('class', 'cd-cart-trigger');
+            divCarrito.setAttribute('id','cd-bell-trigger');
+            vertMenu.appendChild(divCarrito);
+
+            spanNumber = document.createElement('span');
+            spanNumber.setAttribute('class', 'p1 fa-stack fa-2x has-badge');
+            spanNumber.setAttribute('id', 'numCarrito');
+            spanNumber.setAttribute('data-count', '0');
+            divCarrito.appendChild(spanNumber);
+
+            anchorCarro = document.createElement('a');
+            anchorCarro.setAttribute('class', 'fal fa-bell');
+            anchorCarro.setAttribute('id', 'bell');
+            anchorCarro.setAttribute('href', '#');
             spanNumber.appendChild(anchorCarro);
 
             li = document.createElement('li');
@@ -192,7 +209,7 @@ let crearMenu = async function () {
             listMenu.appendChild(li);
             anchor = document.createElement('a');
             anchor.innerHTML = "Mis libros";
-            anchor.href = "#";
+            anchor.href = "misLibrosUsuario.html";
             li.appendChild(anchor);
 
             li = document.createElement('li');
@@ -219,6 +236,13 @@ let crearMenu = async function () {
             li = document.createElement('li');
             listMenu.appendChild(li);
             anchor = document.createElement('a');
+            anchor.innerHTML = "Intercambios";
+            anchor.href = "intercambios.html";
+            li.appendChild(anchor);
+
+            li = document.createElement('li');
+            listMenu.appendChild(li);
+            anchor = document.createElement('a');
             anchor.innerHTML = "Eliminar cuenta";
             anchor.addEventListener('click', elimninarCuenta);
             anchor.href = "#";
@@ -229,7 +253,7 @@ let crearMenu = async function () {
             let countLib = await obtenerLibreriasPendientesCount();
             let vertMenu = document.getElementById('verticalMenuUser') || document.getElementById('menuVertical');
             let divCarrito = document.createElement('div');
-            divCarrito.setAttribute('id', 'cd-cart-trigger');
+            divCarrito.setAttribute('class', 'cd-cart-trigger');
             vertMenu.appendChild(divCarrito);
 
             let spanNumber = document.createElement('span');
