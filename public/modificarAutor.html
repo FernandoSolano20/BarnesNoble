@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Modificar Autor</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/botones.css">
+    <link rel="stylesheet" href="css/registroFormulario.css">
+    <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
+
+</head>
+
+<body>
+        <header>
+                <nav class="menuHorizontal">
+                    <ul class="list-menu">
+                        <li><a href="#" data-menu="mostrar-nav-izq"><i data-menu="mostrar-nav-izq" class="fas fa-bars"></i></a>
+                        </li>
+                        <li><a href="/"><i class="far fa-home"></i>Inicio</a></li>
+                        <li id="logout">
+                            <a href="#"><i class="far fa-sign-out-alt"></i>Cerrar Sesión</a>
+                        </li>
+                        <li class="link-imagen"><img src="img/logo_barnes-and-noble.png" alt="Logo de Barnes&Noble"></li>
+                    </ul>
+                </nav>
+        
+                <nav class="menuIzquierdo">
+                    <ul class="menu" id="menuDinamico">
+        
+                    </ul>
+                </nav>
+            </header>
+    <main>
+        <h2>Modificar autor</h2>
+        <form class="formRegistro" name="formularioRegistro">
+            <div class="column">
+              
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alertNombre"></span>
+                    <label>Nombre</label>
+                    <input id="nombre" class="inputAutor" type="text" autocomplete="off">
+                </div>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alertNomArtistico"></span>
+                    <label>Nombre artístico</label>
+                    <input id="nomArtistico" class="inputAutor" type="text" autocomplete="off">
+                </div>
+            </div>
+            <div class="column">
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alertaNac">.</span>
+                    <label>Fecha Nacimiento</label>
+                    <input id="nacimiento" class="inputAutor" type="date" autocomplete="off">
+                </div>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alertaMuerte">.</span>
+                    <label>Fecha Muerte</label>
+                    <input id="muerte" class="inputAutor" type="date" autocomplete="off">
+                </div>
+                <div class="inputGroup">
+                    <span class="left alertHidden" id="alertResenna"></span>
+                    <label>Reseña</label>
+                    <textarea id="resenna" class="textarea"></textarea>
+                </div>
+                <div class="inputGroup box">
+                    <label>Nacionalidad</label>
+                    <span class="left alertHidden" id="alertNacionalidad">Seleccione una opción.</span>
+                    <select name="pais" id="paises">
+                        <option value="">--Seleccione un pais--</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+        <div class="crear-contenedor">
+            <button type="button" class="material-blue" id="btnModificar"><i
+                    class="far fa-clipboard-list"></i>Modificar</button>
+        </div>
+        <footer>
+                <div class="blockFooter">
+                    <div class="logos">
+                        <a href="#"><img src="img/barnes_and_noble_logo_png_94486.png" alt="Logo de Barnes&Noble"></a>
+                        <a href="#"><img src="img/barnes_and_noble_logo_png_94486.png" alt="Logo Fundacion Book for kids"></a>
+                    </div>
+                    <div class="copyrights">
+                        <h3> ⓒ 2019 Valhalla</h3>
+                    </div>
+                    <div class="redesSociales">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+        
+            </footer>
+    </main>
+    <script src="js/cerrarSesion.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/direccion/servicioDireccion.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="js/validaciones/validacionesGenerales.js"></script>
+    <script src="js/direccion/controladorPaises.js"></script>
+    <script src="js/autor/controladorModificarAutor.js"></script>
+    <script src="js/autor/servicioAutor.js"></script>
+   
+    
+</body>
+
+</html>
