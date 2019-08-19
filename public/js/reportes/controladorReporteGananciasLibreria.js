@@ -13,7 +13,11 @@ const crearReporteLocalizacionesSurcursales = async () => {
         listaLibrerias = await obtenerLibreriasCompletas();
         tbodyLibro.innerHTML = '';
         for (let i = 0; i < listaLibrerias.length; i++) {
-
+            let librosVendidos = 0;
+            let idLibro = 0;
+            let iva = 0;
+            let precioLibro = 0;
+            let gananciaTotal = 0;
             if (listaLibrerias[i].ejemplares.length > 0) {
                 //let contador = 0;
                 //let precioTotal = 0;
@@ -23,7 +27,7 @@ const crearReporteLocalizacionesSurcursales = async () => {
                      let Ejemplar = await listaEjemplarPorID(idEjemplar);
                      precioTotal = precioTotal + listaLibrerias[i].ejemplares[j].cantidad * Ejemplar.precio.precio; */
 
-                    if (librosVendidos + listaLibrerias[i].ejemplares[j].vendidos > 0) {
+                    if (listaLibrerias[i].ejemplares[j].vendidos > 0) {
                         librosVendidos = librosVendidos + listaLibrerias[i].ejemplares[j].vendidos;
                     }
                     iva = listaLibrerias[i].ejemplares[j].iva
