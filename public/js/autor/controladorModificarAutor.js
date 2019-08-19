@@ -13,25 +13,26 @@ const alertResenna = document.querySelector('#alertResenna')
 const inputResenna = document.querySelector('#resenna');
 const urlParams = new URLSearchParams(window.location.search);
 let _id = urlParams.get('_id');
-//Hola hola
+
 let cargarFormulario = async() => {
     let autor = await obtenerAutorId(_id);
     if (autor) {
         inputnombre.value = autor['nombre'];
         inputNomArtistico.value = autor['nombreArtistico'];
         inputResenna.value = autor['resenna'];
+        await crearSectionPaises();
         inputNacionalidad.value  = autor['nacionalidad'];
 
         let fechaNacFormateada = new Date(autor['fechaNacimiento']);
         let mesNac = fechaNacFormateada.getUTCMonth() + 1;
         if (mesNac < 10) {
-            mesNac = '0' + mes;
+            mesNac = '0' + mesNac;
         }
         let diaNac = fechaNacFormateada.getDate();
         if (diaNac < 10) {
-            diaNac = '0' + dia;
+            diaNac = '0' + diaNac;
         }
-        inputNacimiento.value = fechaNacFormateada.getFullYear() + '-' + mes + '-' + dia;
+        inputNacimiento.value = fechaNacFormateada.getFullYear() + '-' + mesNac + '-' + diaNac;
        
         let fechaMuerFormateada = new Date(autor['fechaMuerte']);
         let mes = fechaMuerFormateada.getUTCMonth() + 1;
@@ -46,15 +47,26 @@ let cargarFormulario = async() => {
     }
 };
 
-let editar = () => {
-
-    modificarAutor(_id, inputnombre.value, inputNomArtistico.value, inputNacionalidad.value, inputResenna.value, inputNacimiento.value, inputMuerte.value);
+let editar = async () => {
+    let autor = {
+        nombre: inputnombre.value, 
+        nombreArtistico: inputNomArtistico.value, 
+        nacionalidad: inputNacionalidad.value, 
+        resenna: inputResenna.value, 
+        fechaNacimiento :new Date(inputNacimiento.value), 
+        
+    } 
+    if(inputMuerte.value){
+        autor.fechaMuerte = new Date(inputMuerte.value)
+    }
+    
+    return await modificarAutor(_id, autor);
 };
 
 let validarModificacion = async () =>{
 let error = validarNombre() | validarNombreArtistico() | validarFechaNacimiento() | validarFechaMuerte() | validarNacionalidad() | validarResenna();
 if (!error) { 
-let editarUsuario = editar();
+let editarUsuario = await editar();
 if (editarUsuario.success) {
     Swal.fire({
         title: editarUsuario.message,
@@ -76,7 +88,7 @@ Swal.fire({
     text: 'Revise los campos resaltados e inténtelo de nuevo'
 })
 }
-};
+}
 
 let validarNombre = function () {
 
@@ -168,3 +180,4 @@ inputMuerte.addEventListener('blur', validarFechaMuerte);
 inputNacionalidad.addEventListener('blur', validarNacionalidad);
 inputResenna.addEventListener('blur', validarResenna);
 document.getElementById('btnModificar').addEventListener('click', validarModificacion);
+cargarFormulario();
