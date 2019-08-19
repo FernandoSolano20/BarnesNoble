@@ -13,7 +13,7 @@ const alertResenna = document.querySelector('#alertResenna')
 const inputResenna = document.querySelector('#resenna');
 const urlParams = new URLSearchParams(window.location.search);
 let _id = urlParams.get('_id');
-//Hola
+//Hola hola
 let cargarFormulario = async() => {
     let autor = await obtenerAutorId(_id);
     let error = validarNombre() | validarNombreArtistico() | validarFechaNacimiento() | validarFechaMuerte() | validarNacionalidad() | validarResenna();
