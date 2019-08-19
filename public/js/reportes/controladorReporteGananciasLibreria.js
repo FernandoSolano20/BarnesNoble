@@ -112,7 +112,11 @@ const crearReporteLocalizacionesSurcursales = async () => {
 
     } else {
         for (let i = 0; i < listaLocalizacionesSucursal.length; i++) {
-
+            let librosVendidos = 0;
+            let idLibro = 0;
+            let iva = 0;
+            let precioLibro = 0;
+            let gananciaTotal = 0;
             for (let j = 0; j < listaLocalizacionesSucursal[i].sucursal.ejemplares.length; j++) {
 
                 if (listaLocalizacionesSucursal[i].sucursal.ejemplares[j].vendidos > 0) {
