@@ -30,7 +30,8 @@ let sucursal_schema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Usuario',
             required: false
-        }
+        },
+        correo: { type: String, required: true, unique: false }
     }]
 });
 

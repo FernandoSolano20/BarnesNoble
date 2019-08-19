@@ -16,9 +16,6 @@ let mostrar_tabla = async (event) => {
         tr.innerHTML = 'Nombre';
         fila.appendChild(tr);
         tr = document.createElement('th');
-        tr.innerHTML = 'Correo';
-        fila.appendChild(tr);
-        tr = document.createElement('th');
         tr.innerHTML = 'Teléfono';
         fila.appendChild(tr);
 
@@ -92,7 +89,6 @@ let agregarFilaSucursal = function (sucursal, libreria) {
     if (sucursal['nombre'].toLowerCase().includes(filtro) || sucursal['correo'].toLowerCase().includes(filtro) || sucursal['telefono'].toLowerCase().includes(filtro) || (libreria ? libreria : "").toLowerCase().includes(filtro)) {
         let fila = tbody.insertRow();
         fila.insertCell().innerHTML = sucursal['nombre'];
-        fila.insertCell().innerHTML = sucursal['correo'];
         fila.insertCell().innerHTML = sucursal['telefono'];
 
         if (libreria) {
@@ -128,10 +124,11 @@ let agregarFilaSucursal = function (sucursal, libreria) {
 
         let celda_perfil = fila.insertCell();
         let divContendor = document.createElement("div");
-        divContendor.setAttribute('class', 'crear-contenedor')
         let btnPerfil = document.createElement('button');
+
+        divContendor.setAttribute('class', 'crear-contenedor')
         celda_perfil.appendChild(divContendor);
-        divContendor.appendChild(btnPerfil);
+        
 
         btnPerfil.innerText = 'Ver perfil'
         btnPerfil.dataset._id = sucursal['_id'];
@@ -139,6 +136,8 @@ let agregarFilaSucursal = function (sucursal, libreria) {
         btnPerfil.addEventListener('click', function () {
             window.location.href = "perfilSucursal.html?id=" + sucursal._id;
         });
+        divContendor.appendChild(btnPerfil);
+        
     }
 }
 

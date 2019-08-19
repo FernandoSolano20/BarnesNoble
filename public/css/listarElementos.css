@@ -93,3 +93,7 @@ i[data-action="rechazar"]{
     color: #d43434;
     font-size: 35px !important;
 }
+
+.subTilte{
+    text-align: center;
+}
