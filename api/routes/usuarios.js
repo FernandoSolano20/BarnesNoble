@@ -1310,7 +1310,7 @@ router.patch('/aprobarSolcitud/:id', function (req, res) {
                     }
                     return res.json({
                         success: true,
-                        message: 'El usuario se guardó con éxito, revise su correo eléctronico'
+                        message: 'El usuario se guardó con éxito'
                     })
                 });
             }
@@ -1403,7 +1403,7 @@ router.get('/obtenerLectoresPorEjemplaresId/:idEjemplar', function (req, res) {
             });
         }
     })
-        .select("nombre primerApellido provincia canton");
+        .select("nombre primerApellido provincia canton img");
 });
 
 module.exports = router;

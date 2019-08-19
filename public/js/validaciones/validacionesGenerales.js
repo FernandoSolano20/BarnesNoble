@@ -215,6 +215,24 @@ let validarFechaMayorActual = function(elementos){
     }
 }
 
+let validarFechaMenorActualFech = function(elementos){
+    let nacimento = new Date(elementos.value);
+    nacimento = new Date(nacimento.getUTCFullYear() + "-" + (nacimento.getUTCMonth() + 1) + "-" + nacimento.getUTCDate());
+    if (nacimento < new Date()) {
+        elementos.alert.innerText = "Seleccione una fecha menor a la actual."
+        elementos.alert.className = elementos.alert.className.replace("alertHidden", "");
+        elementos.input.className = elementos.input.className.replace("inputError", "");
+        elementos.input.className = elementos.input.className + " inputError";
+        return false;
+    }
+    else{
+        elementos.alert.className = elementos.alert.className.replace("alertHidden", "");
+        elementos.alert.className = elementos.alert.className + " alertHidden";
+        elementos.input.className = elementos.input.className.replace("inputError", "");
+        return true;
+    }
+}
+
 let validarMapa = function () {
     if (markers.length === 0) {
         mapaAlert.className = mapaAlert.className.replace("alertHidden", "");

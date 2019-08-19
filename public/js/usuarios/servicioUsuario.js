@@ -286,7 +286,7 @@ let obtenerLibroIntercambio = async () => {
 };
 
 let obtenerLectoresPorEjemplaresId = async (id) => {
-    var response = await fetch('http://localhost:4000/api/obtenerLectoresPorEjemplaresId' + id, {
+    var response = await fetch('http://localhost:4000/api/obtenerLectoresPorEjemplaresId/' + id, {
         method: "GET",
         headers: {
             'Content-Type': 'application/json;charset=UTF-8',

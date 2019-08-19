@@ -122,6 +122,17 @@ let elimninarCuenta = function () {
     })
 }
 
+let solicitudesIntercambiosCount = async (id) => {
+    var response = await fetch('http://localhost:4000/api/intercambio/solicitudesIntercambiosCount/' + id, {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        }
+    });
+    var result = await response.json();
+    return result;
+};
+
 var adminLib;
 let listMenu = document.getElementById('menuDinamico');
 let crearMenu = async function () {
@@ -156,17 +167,20 @@ let crearMenu = async function () {
             divCarrito.setAttribute('class', 'cd-cart-trigger');
             divCarrito.setAttribute('id','cd-bell-trigger');
             vertMenu.appendChild(divCarrito);
+            
+            let listaIntercambio = await solicitudesIntercambiosCount(sessionStorage.id);
+            let count = listaIntercambio.count;
 
             spanNumber = document.createElement('span');
             spanNumber.setAttribute('class', 'p1 fa-stack fa-2x has-badge');
             spanNumber.setAttribute('id', 'numCarrito');
-            spanNumber.setAttribute('data-count', '0');
+            spanNumber.setAttribute('data-count', count);
             divCarrito.appendChild(spanNumber);
 
             anchorCarro = document.createElement('a');
             anchorCarro.setAttribute('class', 'fal fa-bell');
             anchorCarro.setAttribute('id', 'bell');
-            anchorCarro.setAttribute('href', '#');
+            anchorCarro.setAttribute('href', 'solicitudIntercambios.html');
             spanNumber.appendChild(anchorCarro);
 
             li = document.createElement('li');

@@ -6,17 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/reset.css">
-    <script src="js/validarSesionLector.js"></script>
-    <link rel="stylesheet" href="css/reset.css">
-    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <script src="js/validarSesionUsuario.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/menu.css">
-    <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
+    <link rel="stylesheet" href="css/listarElementos.css">
+    <link rel="stylesheet" href="css/botones.css">
+    <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" href="css/searchBar.css">
-    <link rel="stylesheet" href="css/cards.css">
-    <link rel="stylesheet" href="css/btnClass.css">
-    <link rel="stylesheet" href="css/radioCards.css">
-    <title>B & N </title>
+    <link rel="stylesheet" href="css/botones.css">
+    <link rel="stylesheet" href="css/registroFormulario.css">
+    <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
+    <title>B & N - Intercambios</title>
 </head>
 
 <body>
@@ -42,7 +42,7 @@
     <main>
         <div class="subcontenedor">
             <div class="busqueda">
-                <input type="text" id="txtFiltro" name="buscar" placeholder="Buscar...." autocomplete="off"
+                <input type="text" id="txt-filtro" name="buscar" placeholder="Buscar...." autocomplete="off"
                     autocorrect="off">
                 <button type="button" class="buscar"><i class="fa fa-search"></i><span>search</span></button>
             </div>
@@ -51,9 +51,24 @@
             </div>
         </div>
         </div>
-        <div class="main" id="cardElements">
-        </div>
 
+        <div class="contenedor-tabla">
+            <table class="tabla" Id='tbl_librerias'>
+                <thead>
+                    <tr>
+                        <th>Nombre del lector</th>
+                        <th>Mi libro</th>
+                        <th>Libro del lector</th>
+                        <th>Aprobar</th>
+                        <th>Rechazar</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+
+                </tbody>
+            </table>
+        </div>
     </main>
     <footer>
         <div class="blockFooter">
@@ -77,9 +92,12 @@
 </body>
 <script src="js/menu.js"></script>
 <script src="js/cerrarSesion.js"></script>
-<script src="js/usuarios/servicioUsuario.js"></script>
 <script src="js/intercambio/servicioIntercambio.js"></script>
-<script src="js/intercambio/librosInterCambio.js"></script>
+<script src="js/sucursal/servicioSucursal.js"></script>
+<script src="js/validaciones/validacionesGenerales.js"></script>
+<script src="js/selects/controladorSelectModalSucursal.js"></script>
+<script src="js/solicitudIntercambio/listaMisIntercambios.js"></script>
+<script src="js/solicitudIntercambio/accionesIntercambios.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 
 </html>
