@@ -1,12 +1,13 @@
 const containerCard = document.querySelector('#cardElements')
 const txtFiltro = document.getElementById("txtFiltro");
 let listaLibroUsuario;
+let listaUsersEjemplares = [];
 
 let mostarLibros = async (event) => {
-    if(!event){
+    if (!event) {
         listaLibroUsuario = await obtenerLibroIntercambio(sessionStorage.id);
     }
-    
+
     let filtro = txtFiltro.value;
     containerCard.innerHTML = '';
     for (let i = 0; i < listaLibroUsuario.length; i++) {
@@ -60,6 +61,7 @@ let agregarCardLibro = function (libro, ejemplar) {
     let btnIntercambio = document.createElement('a');
     btnIntercambio.setAttribute('class', 'material btnLibreria masGrande');
     btnIntercambio.innerText = 'Intercambiar';
+    btnIntercambio.addEventListener('click', intercambioModal);
     divContainerButtons.appendChild(btnIntercambio);
 }
 
@@ -84,6 +86,26 @@ let filaNoDatos = function () {
         let h3 = document.createElement('h3');
         h3.innerText = "No hay datos";
         child2.appendChild(h3);
+    }
+}
+
+let intercambioModal = function (event) {
+    let element = event.target;
+    idEjemplar = element.getAttribute('data-id');
+    listaUsersEjemplares = await obtenerLectoresPorEjemplaresId(idEjemplar);
+    listaUsersEjemplares = listaUsersEjemplares.usuario;
+
+    for (let i = 0; i < listaUsersEjemplares.length; i++) {
+        modalLector += ` <div class="radioCard">
+                        <input class="radioCard__input" id="${listaTarjetas[i]._id}" data-num="${listaTarjetas[i].numTarjeta}" data-nombre="${listaTarjetas[i].nombre1}" type="radio" name="tarjeta" />
+                        <label class="radioCard__button" for="${listaTarjetas[i]._id}" tabindex="1">
+                            <img class="radioCard__icon" src="img/${listaTarjetas[i].tipoTarjeta}.png" alt="" />
+                            <span class="radioCard__content">
+                                <span class="radioCard__title">${listaTarjetas[i].numTarjeta}</span>
+                                <span class="radioCard__description">${listaTarjetas[i].nombre1}</span>
+                            </span>
+                        </label>
+                    </div>`;
     }
 }
 
