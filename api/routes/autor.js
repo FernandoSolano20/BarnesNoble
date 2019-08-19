@@ -100,6 +100,8 @@ router.post('/agregarPremios', function (req, res) {
 });
 
 router.put('/editar/:id', function (req, res) {
+    console.log(req.body);
+    console.log(req.params)
     Autor.findByIdAndUpdate(req.params.id, { $set: req.body }, function (err) {
         if (err) {
             return res.status(400).json({
