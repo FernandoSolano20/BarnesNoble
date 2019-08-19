@@ -1,0 +1,4 @@
+.box::before {
+    right: 0%;
+    line-height: 90px;
+}

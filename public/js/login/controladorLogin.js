@@ -38,6 +38,8 @@ let obtenerCredenciales = async (event) => {
             sessionStorage.setItem('tipoUsuario', response.usuario.tipoUsuario);
             sessionStorage.setItem('cambiarPass', Number(response.usuario.cambiarPass));
             sessionStorage.setItem('id', response.usuario._id);
+            sessionStorage.setItem('correo', response.usuario.correo);
+            localStorage.clear();
             if (Number(sessionStorage.cambiarPass)) {
                 window.location.href = "http://localhost:3000/cambiarPassword.html";
             }
@@ -47,7 +49,7 @@ let obtenerCredenciales = async (event) => {
         else {
             Swal.fire({
                 type: 'error',
-                title: "El usuario o la contraseña no coinciden"
+                title: response.message
             });
         }
     }

@@ -1,6 +1,7 @@
-const sectionProvincia = document.getElementById('provincias');
-const sectionCantones = document.getElementById('cantones');
-const sectionDistritos = document.getElementById('distritos');
+let sectionProvincia = document.getElementById('provincias');
+let sectionCantones = document.getElementById('cantones');
+let sectionDistritos = document.getElementById('distritos');
+
 let listaObtenerProvincias = [];
 let listaObtenerCantones = [];
 let listaObtenerDistritos = [];
@@ -10,6 +11,7 @@ let crearSectionProvincias = async () => {
     listaObtenerProvincias = await obtenerProvincias();
 
     let sectionProvincias = document.getElementById('provincias');
+
     sectionProvincias.innerHTML = '';
 
     let optionElemento = document.createElement('option');
@@ -26,6 +28,9 @@ let crearSectionProvincias = async () => {
 };
 
 let crearSectionCantones = async () => {
+
+    let sectionProvincias = document.getElementById('provincias');
+    let sectionCantones = document.getElementById('cantones');
 
     let provincia = sectionProvincia.value;
     sectionCantones.innerHTML = '';
@@ -52,6 +57,10 @@ let crearSectionCantones = async () => {
 
 let crearSectionDistritos = async () => {
 
+    let sectionProvincias = document.getElementById('provincias');
+    let sectionCantones = document.getElementById('cantones');
+    let sectionDistritos = document.getElementById('distritos');
+
     let provincia = sectionProvincia.value;
     let canton = sectionCantones.value;
     sectionDistritos.innerHTML = '';
@@ -69,6 +78,8 @@ let crearSectionDistritos = async () => {
         sectionDistritos.appendChild(optionElemento);
     }
 };
+
+
 
 crearSectionProvincias();
 sectionProvincia.addEventListener('change', crearSectionCantones);

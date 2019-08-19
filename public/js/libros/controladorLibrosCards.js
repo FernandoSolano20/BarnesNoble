@@ -2,12 +2,30 @@
 
 let listaLibros = [];
 let obtenerAutorId = [];
+let listaEjemplares = [];
 const containerCard = document.querySelector('#cardElements')
 const txtFiltro = document.getElementById("txtFiltro");
 
 let mostarLibros = async (event) => {
-    if (!event)
+    if (!event) {
+        if (sessionStorage.tipoUsuario == 'Adminitrador plataforma') {
+            let btnCrear = document.getElementById('container-btn');
+            if (btnCrear) {
+                let anchorElementCreate = document.createElement('a');
+                anchorElementCreate.setAttribute('type', 'button');
+                anchorElementCreate.setAttribute('class', 'material-blue');
+                anchorElementCreate.setAttribute('href', 'http://localhost:3000/registrarlibro.html');
+                btnCrear.appendChild(anchorElementCreate);
+                let label = document.createTextNode('Crear');
+                anchorElementCreate.appendChild(label);
+
+                let icon = document.createElement('i');
+                icon.setAttribute('class', 'far fa-plus-circle');
+                anchorElementCreate.insertBefore(icon, label);
+            }
+        }
         listaLibros = await obtenerLibrosFetch();
+    }
 
     let filtro = txtFiltro.value;
     containerCard.innerHTML = '';
@@ -35,43 +53,59 @@ let agregarCardLibro = function (libro, autor) {
     child2.setAttribute('class', 'child-two');
     divParrent.appendChild(child2);
 
+    let divInformationBook = document.createElement('div');
+    divInformationBook.setAttribute('class', 'informacionLibro');
+    child2.appendChild(divInformationBook);
+
     let h3 = document.createElement('h3');
     h3.innerText = libro.titulo;
-    child2.appendChild(h3);
+    divInformationBook.appendChild(h3);
 
     let img = document.createElement('img');
     img.setAttribute('src', libro.caratula);
-    child2.appendChild(img);
+    divInformationBook.appendChild(img);
 
     let p1 = document.createElement('p');
     p1.innerText = libro.autor.nombre;
-    child2.appendChild(p1);
+    divInformationBook.appendChild(p1);
+
+    let divContainerButtons = document.createElement('div');
+    divContainerButtons.setAttribute('class', 'containerButtonsCards');
+    child2.appendChild(divContainerButtons);
 
     let btnPerfil = document.createElement('a');
-    btnPerfil.setAttribute('class', 'material btnLibreria');
+    btnPerfil.setAttribute('class', 'material btnLibreria downButton');
     btnPerfil.setAttribute('id', 'btnPerfil');
     btnPerfil.href = "perfilLibro.html?id=" + libro._id;
     btnPerfil.innerText = 'Perfil';
-    child2.appendChild(btnPerfil);
+    divContainerButtons.appendChild(btnPerfil);
 
     if (sessionStorage.tipoUsuario == 'Adminitrador plataforma') {
         let btnFormato = document.createElement('a');
-        btnFormato.setAttribute('class', 'material btnLibreria');
+        btnFormato.setAttribute('class', 'material btnLibreria downButton');
         btnFormato.setAttribute('id', 'btnFormato');
         btnFormato.innerText = 'Añadir formato';
-        btnFormato.setAttribute('style','line-height:normal')
+        btnFormato.setAttribute('style', 'line-height:normal')
         btnFormato.href = "formatoLibro.html?id=" + libro._id;
-        child2.appendChild(btnFormato);
+        divContainerButtons.appendChild(btnFormato);
     }
-    else{
+    else if (sessionStorage.tipoUsuario == 'Lector') {
         let btnFormato = document.createElement('a');
-        btnFormato.setAttribute('class', 'material btnLibreria');
+        btnFormato.setAttribute('class', 'material btnLibreria downButton');
         btnFormato.setAttribute('id', 'btnFormato');
         btnFormato.innerText = 'Autor';
         btnFormato.href = "verPerfilAutor.html?_id=" + libro.autor._id;
-        child2.appendChild(btnFormato);
+        divContainerButtons.appendChild(btnFormato);
     }
-
+    else if (sessionStorage.tipoUsuario == 'Adminitrador librería') {
+        let btnComprar = document.createElement('button');
+        btnComprar.setAttribute('class', 'material btnLibreria downButton');
+        btnComprar.setAttribute('id', 'btnComprar');
+        btnComprar.setAttribute('data-libro', libro._id);
+        btnComprar.innerText = 'Comprar';
+        btnComprar.addEventListener('click', modalComprarLibroBarnesNoble);
+        divContainerButtons.appendChild(btnComprar);
+    }
 }
 
 

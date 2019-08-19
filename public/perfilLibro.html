@@ -18,12 +18,15 @@
     <link rel="stylesheet" href="css/resennas.css">
     <link rel="stylesheet" href="css/botones.css">
     <link rel="stylesheet" href="css/radio.css">
+    <link rel="stylesheet" href="css/registroFormulario.css">
+    <link rel="stylesheet" href="css/customAlertForm.css">
+    <link rel="stylesheet" href="css/radioCards.css">
 </head>
 
 <body>
     <header>
         <nav class="menuHorizontal">
-            <ul class="list-menu">
+            <ul class="list-menu" id="verticalMenuUser">
                 <li><a href="#" data-menu="mostrar-nav-izq"><i data-menu="mostrar-nav-izq" class="fas fa-bars"></i></a>
                 </li>
                 <li><a href="/"><i class="far fa-home"></i>Inicio</a></li>
@@ -73,22 +76,24 @@
                     </div>
                 </div>
                 <div class="informacion">
+
                     <div class="table-div">
                         <div class="table-cell-div">
-                            <div>
-                                <span class="container">
-                                    <span><i class="far fa-book-alt"></i><i class="otr fas fa-book-alt"></i></span>
-                                    <span><i class="far fa-book-alt"></i><i class="otr fas fa-book-alt"></i></span>
-                                    <span><i class="far fa-book-alt"></i><i class="otr fas fa-book-alt"></i></span>
-                                    <span><i class="far fa-book-alt"></i><i class="otr fas fa-book-alt"></i></span>
-                                    <span><i class="far fa-book-alt"></i><i class="otr fas fa-book-alt"></i></span>
+                            <div><span class="container">
+                                    <div class="stars-outer far fa-book-alt">
+                                        <div id="promVoto" class="stars-inner fas fa-book-alt"></div>
+                                    </div>
                                 </span>
                             </div>
                         </div>
                     </div>
-                    <div class="crear-contenedor">
-                        <button type="button" class="material-blue"><i class="far fa-plus-circle"></i>Agregar a
-                            carrito</button>
+
+                    <div class="crear-contenedor" id="contenedorBotonCompra">
+
+                    </div>
+
+                    <div class="crear-contenedor" id="contendorVoto">
+
                     </div>
                 </div>
             </div>
@@ -137,121 +142,7 @@
         <div class="site-container">
             <h2 class="subtitle">Calificaciones de los libro</h2>
             <div id="response-container">
-                <ul>
-                    <li class="article">
-                        <img src="https://res.cloudinary.com/barnesnoble/image/upload/v1563946031/d3ldkxrdj2iggc7rwb4o.png"
-                            alt="" class="fotoUsuario">
-                        <h2>
-                            <a href="https://www.nytimes.com/2019/06/11/arts/music/radiohead-ok-computer-demos.html">
-                                Fernando Solano
-                            </a>
-                        </h2>
-                        <div class="table-div">
-                            <div class="table-cell-div table-cell-resenna">
-                                <div>
-                                    <span class="container">
-                                        <div class="stars-outer far fa-book-alt">
-                                            <div class="stars-inner fas fa-book-alt" style="width: 81%;"></div>
-                                        </div>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <p>Libro pesimo no me gusto muy largo y aburrido.
-                        </p>
-                    </li>
-
-                    <li class="article">
-                        <img src="https://res.cloudinary.com/barnesnoble/image/upload/v1563946031/d3ldkxrdj2iggc7rwb4o.png"
-                            alt="" class="fotoUsuario">
-                        <h2>
-                            <a href="https://www.nytimes.com/2019/06/11/arts/music/radiohead-ok-computer-demos.html">
-                                Fernando Solano
-                            </a>
-                        </h2>
-                        <div class="table-div">
-                            <div class="table-cell-div table-cell-resenna">
-                                <div>
-                                    <span class="container">
-                                        <div class="stars-outer far fa-book-alt">
-                                            <div class="stars-inner fas fa-book-alt" style="width: 81%;"></div>
-                                        </div>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <p>Libro pesimo no me gusto muy largo y aburrido.
-                        </p>
-                    </li>
-
-                    <li class="article">
-                        <img src="https://res.cloudinary.com/barnesnoble/image/upload/v1563946031/d3ldkxrdj2iggc7rwb4o.png"
-                            alt="" class="fotoUsuario">
-                        <h2>
-                            <a href="https://www.nytimes.com/2019/06/11/arts/music/radiohead-ok-computer-demos.html">
-                                Fernando Solano
-                            </a>
-                        </h2>
-                        <div class="table-div">
-                            <div class="table-cell-div table-cell-resenna">
-                                <div>
-                                    <span class="container">
-                                        <div class="stars-outer far fa-book-alt">
-                                            <div class="stars-inner fas fa-book-alt" style="width: 81%;"></div>
-                                        </div>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <p>Libro pesimo no me gusto muy largo y aburrido.
-                        </p>
-                    </li>
-
-                    <li class="article">
-                        <img src="https://res.cloudinary.com/barnesnoble/image/upload/v1563946031/d3ldkxrdj2iggc7rwb4o.png"
-                            alt="" class="fotoUsuario">
-                        <h2>
-                            <a href="https://www.nytimes.com/2019/06/11/arts/music/radiohead-ok-computer-demos.html">
-                                Fernando Solano
-                            </a>
-                        </h2>
-                        <div class="table-div">
-                            <div class="table-cell-div table-cell-resenna">
-                                <div>
-                                    <span class="container">
-                                        <div class="stars-outer far fa-book-alt">
-                                            <div class="stars-inner fas fa-book-alt" style="width: 81%;"></div>
-                                        </div>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <p>Libro pesimo no me gusto muy largo y aburrido.
-                        </p>
-                    </li>
-
-                    <li class="article">
-                        <img src="https://res.cloudinary.com/barnesnoble/image/upload/v1563946031/d3ldkxrdj2iggc7rwb4o.png"
-                            alt="" class="fotoUsuario">
-                        <h2>
-                            <a href="https://www.nytimes.com/2019/06/11/arts/music/radiohead-ok-computer-demos.html">
-                                Fernando Solano
-                            </a>
-                        </h2>
-                        <div class="table-div">
-                            <div class="table-cell-div table-cell-resenna">
-                                <div>
-                                    <span class="container">
-                                        <div class="stars-outer far fa-book-alt">
-                                            <div class="stars-inner fas fa-book-alt" style="width: 81%;"></div>
-                                        </div>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <p>Libro pesimo no me gusto muy largo y aburrido.
-                        </p>
-                    </li>
+                <ul id="reviews">
                 </ul>
             </div>
         </div>
@@ -277,10 +168,20 @@
     <script src="js/cerrarSesion.js"></script>
     <script src="js/menu.js"></script>
     <script src="js/libros/servicioLibros.js"></script>
+    <script src="js/usuarios/servicioUsuario.js"></script>
     <script src="js/ejemplar/servicioEjemplar.js"></script>
+    <script src="js/libreria/servicioLibreria.js"></script>
+    <script src="js/sucursal/servicioSucursal.js"></script>
+    <script src="js/ofertas/servicioOfertas.js"></script>
+    <script src="js/carrito/carrito.js"></script>
     <script src="js/perfilSlider/slider.js"></script>
+    <script src="js/voto/votar.js"></script>
     <script src="js/voto/animacion.js"></script>
+    <script src="js/validaciones/validacionesGenerales.js"></script>
+    <script src="js/ventas/ventaBarnesNoble.js"></script>
+    <script src="js/ventas/ventaLibroPerfil.js"></script>
     <script src="js/libros/controladorPerfilLibro.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </body>
 
 </html>
