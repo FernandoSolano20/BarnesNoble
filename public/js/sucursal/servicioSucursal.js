@@ -82,6 +82,30 @@ let pasarLibroEntreSucursaleLibreria = async function (compra) {
     return result;
 }
 
+let suscribirUsuario = async function (data) {
+    var response = await fetch('http://localhost:4000/api/sucursal/suscribirUsuarioSucursal', {
+        method: "PATCH",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body:JSON.stringify(data)
+    });
+    var result = await response.json();
+    return result;
+}
+
+let desuscribirUsuario = async function (data) {
+    var response = await fetch('http://localhost:4000/api/sucursal/desuscribirUsuarioSucursal', {
+        method: "PATCH",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body:JSON.stringify(data)
+    });
+    var result = await response.json();
+    return result;
+}
+
 let obtenerSucursalesPorEjemplaresId = async(ejemplares) => {
     let response = await fetch('http://localhost:4000/api/sucursal/obtenerSucursalesPorEjemplaresId', {
         method: "POST",
