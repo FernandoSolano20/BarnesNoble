@@ -52,7 +52,10 @@ let cambiarPassUsuario = async function () {
     const { value: email } = await Swal.fire({
         title: 'Digite su correo eléctronico',
         input: 'email',
-        inputPlaceholder: 'Correo eléctronico'
+        inputPlaceholder: 'Correo eléctronico',
+        showCancelButton: true,
+        cancelButtonColor: '#f2a5a0',
+        cancelButtonText: 'Cancelar'
     });
 
     let usuario = {
@@ -255,7 +258,7 @@ let crearMenu = async function () {
             listMenu.appendChild(li);
             anchor = document.createElement('a');
             anchor.innerHTML = "Editar perfil";
-            anchor.href = "editarPerfilUsuarios.html?id=" + sessionStorage.id;
+            anchor.href = "modificarAdmi.html?id=" + sessionStorage.id;
             li.appendChild(anchor);
 
             li = document.createElement('li');

@@ -38,7 +38,6 @@ const distritoAlert = document.getElementById('alert-distrito');
 
 const sennasInput = document.getElementById('sennas-input');
 const sennasAlert = document.getElementById('alert-sennas');
-const favAlert = document.getElementById('alert-favorito');
 const mapaAlert = document.getElementById('alert-mapa');
 const formulario = document.getElementById('formularioDatosUsuario');
 
@@ -108,11 +107,6 @@ let cargarDatosUsuario = async function () {
                     }
                 }
             }
-
-            if(usuario.autor) autorSelect.value = usuario.autor._id;
-            if(usuario.categoria) categoriaSelect.value = usuario.categoria._id;
-            if(usuario.genero) generoSelect.value = usuario.genero._id;
-            if(usuario.libro) libroSelect.value = usuario.libro._id;
             if(usuario.sexo){
                 if(usuario.sexo == "Mujer") 
                     document.getElementById('mujer').checked = true;
@@ -135,94 +129,9 @@ let cargarDatosUsuario = async function () {
 }
 
 
-let obtenerDatosUsuarios = async function () {
-    let error = validarId() | validarNombre1() | validarNombre2() | validarApellido1() | validarApellido2() | validarCorreo() | validarTelefono() | validarNacimiento() | validarFotoPerfil() | validarSexo() | validarAlias() | validarProvincia() | validarCanton() | validarDistrito() | validarSennas() | validarFavoritos() | validarMapa();
-    if (!error) {
-
-        document.body.className = "loading";
-        let imgValue = document.getElementById('img');
-        let imgResult = await crearImagen(imgValue);
-        if (imgResult.success) {
-            let sexoValue;
-            for (let i = 0; i < sexoInput.length; i++) {
-                if (sexoInput[i].checked) {
-                    sexoValue = sexoInput[i].value;
-                    break;
-                }
-            }
-            let nacimiento = new Date(nacimientoInput.value);
-            nacimiento = nacimiento.getFullYear() + '-' + Number(nacimiento.getUTCMonth() + 1) + '-' + nacimiento.getUTCDate();
-            let textProvincia, textCanton, textDistrito;
-            textProvincia = sectionProvincia.value;
-            textProvincia = sectionProvincia.querySelector('[value="'+textProvincia+'"]').innerText;
-            textCanton = sectionCantones.value;
-            textCanton = sectionCantones.querySelector('[value="'+textCanton+'"]').innerText;
-            textDistrito = sectionDistritos.value;
-            textDistrito = sectionDistritos.querySelector('[value="'+textDistrito+'"]').innerText;
-            let usuario = {
-                id: idInput.value,
-                nombre: nombreInput1.value,
-                segundoNombre: nombreInput2.value,
-                primerApellido: apellidoInput1.value,
-                segundoApellido: apellidoInput2.value,
-                correo: correoInput.value,
-                img: imgResult.result.secure_url,
-                sexo: sexoValue,
-                telefono: telefonoInput.value,
-                tipoUsuario: 'Lector',
-                nacimiento: nacimiento,
-                sennas: sennasInput.value,
-                alias: aliasInput.value,
-                localizacionLatitud: markers[0].position.lat(),
-                localizacionLongitud: markers[0].position.lng(),
-                estado: 1,
-                provincia: textProvincia,
-                canton: textCanton,
-                distrito: textDistrito,
-                autor: autorSelect.value,
-                genero: generoSelect.value,
-                libro: libroSelect.value,
-                categoria: categoriaSelect.value,
-                libreria: ''
-            }
-            let nuevoUsuario = await crearUsuario(usuario);
-            document.body.className = "";
-            if (nuevoUsuario.success) {
-                Swal.fire({
-                    type: 'success',
-                    title: nuevoUsuario.message,
-                    showCloseButton: true,
-                    focusConfirm: false,
-                    confirmButtonText:
-                        '<a href="http://localhost:3000/inicioSesion.html" class="linkPage">Ok</a>'
-                });
-            }
-            else {
-                Swal.fire({
-                    type: 'error',
-                    title: nuevoUsuario.message
-                });
-            }
-        }
-        else {
-            document.body.className = "";
-            Swal.fire({
-                type: 'error',
-                title: imgResult.message
-            });
-        }
-    }
-    else {
-        Swal.fire({
-            type: 'warning',
-            title: 'No se ha enviado su mensaje exitosamente',
-            text: 'Revise los campos resaltados e intételo de nuevo'
-        });
-    }
-}
 
 let actualizarDatosUsuarios = async function () {
-    let error = validarId() | validarNombre1() | validarNombre2() | validarApellido1() | validarApellido2() | validarCorreo() | validarTelefono() | validarNacimiento() | validarSexo() | validarAlias() | validarProvincia() | validarCanton() | validarDistrito() | validarSennas() | validarFavoritos();
+    let error = validarId() | validarNombre1() | validarNombre2() | validarApellido1() | validarApellido2() | validarCorreo() | validarTelefono() | validarNacimiento() | validarSexo() | validarAlias() | validarProvincia() | validarCanton() | validarDistrito() | validarSennas();
     if (!error && usuarioRegistrado) {
 
         document.body.className = "loading";
@@ -265,7 +174,7 @@ let actualizarDatosUsuarios = async function () {
             correo: correoInput.value,
             sexo: sexoValue,
             telefono: telefonoInput.value,
-            tipoUsuario: 'Lector',
+            tipoUsuario: 'Administrador',
             nacimiento: nacimiento,
             sennas: sennasInput.value,
             alias: aliasInput.value,
@@ -274,12 +183,7 @@ let actualizarDatosUsuarios = async function () {
             estado: 1,
             provincia: textProvincia,
             canton: textCanton,
-            distrito: textDistrito,
-            autor: autorSelect.value,
-            genero: generoSelect.value,
-            libro: libroSelect.value,
-            categoria: categoriaSelect.value,
-            libreria: ''
+            distrito: textDistrito
         }
         if(imgResult){
             usuario.img = imgResult.result.secure_url;
@@ -516,30 +420,6 @@ let validarSennas = function () {
     return !(noVacio(elementText));
 }
 
-let validarFavoritos = function () {
-    if (autorSelect.value === '' && generoSelect.value === '' && categoriaSelect.value === '' && libroSelect.value === '') {
-        favAlert.className = favAlert.className.replace("alertHidden", "");
-        autorSelect.className = autorSelect.className.replace("selectError", "");
-        autorSelect.className = autorSelect.className + " selectError";
-        generoSelect.className = generoSelect.className.replace("selectError", "");
-        generoSelect.className = generoSelect.className + " selectError";
-        categoriaSelect.className = categoriaSelect.className.replace("selectError", "");
-        categoriaSelect.className = categoriaSelect.className + " selectError";
-        libroSelect.className = libroSelect.className.replace("selectError", "");
-        libroSelect.className = libroSelect.className + " selectError";
-        return true;
-    }
-    else {
-        autorSelect.className = autorSelect.className.replace("selectError", "");
-        generoSelect.className = generoSelect.className.replace("selectError", "");
-        categoriaSelect.className = categoriaSelect.className.replace("selectError", "");
-        libroSelect.className = libroSelect.className.replace("selectError", "");
-        favAlert.className = favAlert.className.replace("alertHidden", "");
-        favAlert.className = favAlert.className + " alertHidden";
-        return false;
-    }
-}
-
 idInput.addEventListener('blur', validarId);
 nombreInput1.addEventListener('blur', validarNombre1);
 nombreInput2.addEventListener('blur', validarNombre2);
@@ -556,15 +436,7 @@ sectionDistritos.addEventListener('change', validarDistrito);
 sennasInput.addEventListener('blur', validarSennas);
 for (let i = 0; i < sexoInput.length; i++)
     sexoInput[i].addEventListener('change', validarSexo);
-autorSelect.addEventListener('change', validarFavoritos);
-generoSelect.addEventListener('change', validarFavoritos);
-categoriaSelect.addEventListener('change', validarFavoritos);
-if(libroSelect){
-    libroSelect.addEventListener('change', validarFavoritos);
-}
-if(document.getElementById('registrar')){
-    document.getElementById('registrar').addEventListener('click', obtenerDatosUsuarios);
-}
+
 if(document.getElementById('map')){
     document.getElementById('map').addEventListener('click', validarMapa);
 }

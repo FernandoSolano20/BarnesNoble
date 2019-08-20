@@ -832,7 +832,7 @@ router.patch('/editarUsuario/:id', function (req, res) {
                         Usuario.findById(req.params.id, (err, usuario) => {
                             return res.status(200).json({
                                 success: true,
-                                message: "Los cambios han sido guardados'",
+                                message: "Los cambios han sido guardados",
                                 usuarios: usuario
                             });
                         });
