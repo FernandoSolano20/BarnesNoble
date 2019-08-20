@@ -130,4 +130,37 @@ router.patch('/aprobarSolcitud/:id', function (req, res) {
     });
 });
 
+router.get('/obtenerMisIntercambios/:idUsuario', async (req, res) => {
+    return await Intercambio.find({ aprobado: 1, "participantes.usuario": req.params.idUsuario }, function (err, intercambio) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'No se encontro ningún libro',
+                err
+            });
+        }
+        else {
+            return res.json({
+                success: true,
+                intercambio: intercambio
+            });
+        }
+    })
+        .populate('participantes.usuario', 'nombre primerApellido')
+        .populate('sucursal', 'nombre provincia canton distrito')
+        .populate({
+            path: 'participantes.ejemplarUsuario',
+            populate: {
+                path: 'libro',
+                populate: {
+                    path: 'genero categoria autor',
+                    select: '_id nombre nombreArtistico'
+                },
+                select: '_id titulo genero categoria caratula contraportada'
+            },
+            select: '_id tipo libro'
+        })
+        .select('nombre participantes terminado aprobado fechaInicio fechaFin')
+});
+
 module.exports = router;

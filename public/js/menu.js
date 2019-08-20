@@ -257,6 +257,13 @@ let crearMenu = async function () {
             li = document.createElement('li');
             listMenu.appendChild(li);
             anchor = document.createElement('a');
+            anchor.innerHTML = "Mis intercambios";
+            anchor.href = "misIntercambios.html";
+            li.appendChild(anchor);
+
+            li = document.createElement('li');
+            listMenu.appendChild(li);
+            anchor = document.createElement('a');
             anchor.innerHTML = "Eliminar cuenta";
             anchor.addEventListener('click', elimninarCuenta);
             anchor.href = "#";
