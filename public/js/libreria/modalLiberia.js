@@ -26,10 +26,6 @@ function eventosLibreria(event) {
         textoModal.innerText = '¿Está seguro que quiere editar esta libreria?';
 
         crearFomrulario(cuerpoModal, libreria);
-      } else if (accion === 'borrar') {
-        modal.setAttribute('data-action', 'borrar');
-        tituloModal.innerText = 'Elimnar Libreria ' + libreria.nombreComercial;
-        textoModal.innerText = '¿Está seguro que quiere eliminar esta libreria?';
       } else if (accion === 'estado') {
         modal.setAttribute('data-action', 'estado');
         let checkBoxEstado = document.getElementById(libreria.id);
@@ -143,6 +139,48 @@ let soloLetras = function (e) {
     return false;
 }
 
+let borrar = function (event){
+  let element = event.target;
+  if(element.getAttribute("data-action") == "borrar"){
+    parent = element.parentElement.parentElement;
+    idElemento = parent.getAttribute("data-id");
+    Swal.fire({
+      title: 'Eliminar',
+      text: "¿Está seguro que quiere eliminar esta librería?",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#f2a5a0',
+      confirmButtonText: 'Borrar',
+      cancelButtonText: 'Cancelar'
+    }).then(async (result) => {
+      if (result.value) {
+        let response = await eliminarLibreria(idElemento);
+        if(response.success){
+          Swal.fire(
+            'Eliminado',
+            response.message,
+            'success'
+          ).then((result) => {
+            if(result.value)
+              window.location.href = "listarLibrerias.html";
+          })
+          
+        }
+        else{
+          Swal.fire({
+            type: 'error',
+            title: response.message,
+            text: 'Algo salió mal!'
+          })
+        }
+
+      }
+    })
+  }
+}
+
 window.addEventListener('click', closeModal);
 tbody.addEventListener('click', eventosLibreria);
 document.getElementById('boton').addEventListener('click', eventosLibreria);
+tbody.addEventListener("click",borrar);

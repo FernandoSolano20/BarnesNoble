@@ -6,6 +6,7 @@ const express = require('express'),
     mongoose = require('mongoose'),
     Ejemplar = require('../models/ejemplar.model'),
     Libro = require('../models/libros.model');
+    clubLectura = require('../models/clubLectura.model');
 
 
 router.get('/listarLibrerias', async (req, res) => {
@@ -345,5 +346,24 @@ router.get('/listarLibreriasCompletas', async (req, res) => {
         .select('nombreComercial nombreFantasia localizacionLatitud localizacionLongitud provincia canton distrito estado sucursales ejemplares');
 });
 
+router.delete('/eliminar/:id', function (req, res) {
+
+    clubLectura.findOne({ libreria: req.params.id }).then(
+        function (libreria) {
+            if (libreria) {
+                return res.json({
+                    success: false,
+                    message: 'La librería esta asociada a un club de lectura'
+                });
+            }
+             else {
+                return res.status(200).json({
+                    success: true,
+                    message: 'La librería se eliminó',
+                    err
+        });
+     }
+    })
+});
 
 module.exports = router;
