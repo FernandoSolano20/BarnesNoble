@@ -16,8 +16,7 @@ let _id = urlParams.get('_id');
 //Hola hola
 let cargarFormulario = async() => {
     let autor = await obtenerAutorId(_id);
-    let error = validarNombre() | validarNombreArtistico() | validarFechaNacimiento() | validarFechaMuerte() | validarNacionalidad() | validarResenna();
-    if (autor && !error) {
+    if (autor) {
         inputnombre.value = autor['nombre'];
         inputNomArtistico.value = autor['nombreArtistico'];
         inputResenna.value = autor['resenna'];
@@ -44,28 +43,6 @@ let cargarFormulario = async() => {
             dia = '0' + dia;
         }
         inputMuerte.value = fechaMuerFormateada.getFullYear() + '-' + mes + '-' + dia;
-
-        let editarUsuario = await editar();
-        if (editarUsuario.success) {
-            Swal.fire({
-                title: editarUsuario.message,
-                type: 'success',
-                text: 'Se ha relizado la modificación correctamente',
-                confirmButtonText:'<a href="autor.html" style="display: inline-block; border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);color: #fff;text-decoration: none">Ok</a>'
-            })
-        } else {
-            Swal.fire({
-                title: editarUsuario.message,
-                type: 'error'
-            })
-        }
-    }
-    else {
-        Swal.fire({
-            title: 'No se ha realizado la modificación',
-            type: 'warning',
-            text: 'Revise los campos resaltados e inténtelo de nuevo'
-        })
     }
 };
 
@@ -74,7 +51,32 @@ let editar = () => {
     modificarAutor(_id, inputnombre.value, inputNomArtistico.value, inputNacionalidad.value, inputResenna.value, inputNacimiento.value, inputMuerte.value);
 };
 
-
+let validarModificacion = async () =>{
+let error = validarNombre() | validarNombreArtistico() | validarFechaNacimiento() | validarFechaMuerte() | validarNacionalidad() | validarResenna();
+if (!error) { 
+let editarUsuario = editar();
+if (editarUsuario.success) {
+    Swal.fire({
+        title: editarUsuario.message,
+        type: 'success',
+        text: 'Se ha relizado la modificación correctamente',
+        confirmButtonText:'<a href="autor.html" style="display: inline-block; border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);color: #fff;text-decoration: none">Ok</a>'
+    })
+} else {
+    Swal.fire({
+        title: editarUsuario.message,
+        type: 'error'
+    })
+}
+}
+else {
+Swal.fire({
+    title: 'No se ha realizado la modificación',
+    type: 'warning',
+    text: 'Revise los campos resaltados e inténtelo de nuevo'
+})
+}
+};
 
 let validarNombre = function () {
 
@@ -165,4 +167,4 @@ inputNacimiento.addEventListener('blur', validarFechaNacimiento);
 inputMuerte.addEventListener('blur', validarFechaMuerte);
 inputNacionalidad.addEventListener('blur', validarNacionalidad);
 inputResenna.addEventListener('blur', validarResenna);
-document.getElementById('btnModificar').addEventListener('click', cargarFormulario);
+document.getElementById('btnModificar').addEventListener('click', validarModificacion);
