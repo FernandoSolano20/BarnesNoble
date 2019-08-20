@@ -1,9 +1,7 @@
 'use strict'
-
 const express = require('express'),
     router = express.Router(),//permite crear la ruta
     Tarjeta = require('../models/tarjeta.model');
-
 //Definir la ruta para registar contactos
 //empizan con / por estandar
 //- en el medio por standar
@@ -48,9 +46,7 @@ router.post('/registrarTarjeta', function (req, res) {
                 );
             }
         })
-
 });
-
 router.get('/listarTarjetas', function (req, res) {
     Tarjeta.find(function (err, tarjetasDB) {
         if (err) {
@@ -67,9 +63,8 @@ router.get('/listarTarjetas', function (req, res) {
         }
     });
 });
-
 router.get('/listarTarjetasPorId/:id', function (req, res) {
-    Tarjeta.find({usuario:req.params.id},function (err, tarjetasDB) {
+    Tarjeta.find({ usuario: req.params.id }, function (err, tarjetasDB) {
         if (err) {
             return res.status(400).json({
                 success: false,
@@ -83,77 +78,113 @@ router.get('/listarTarjetasPorId/:id', function (req, res) {
             })
         }
     })
-    .populate('usuario', 'nombre primerApellido correo')
-    .select('nombre1 numTarjeta tipoTarjeta expiracionMM expiracionYY cvv usuario');
+        .populate('usuario', 'nombre primerApellido correo')
+        .select('nombre1 numTarjeta tipoTarjeta expiracionMM expiracionYY cvv usuario');
 });
-
-router.delete('/eliminarTarjeta/:id', function (req, res) {
-    Categoria.findByIdAndRemove(req.params.id, function (err) {
+router.get('/listarTarjetasPorIdDB/:id', function (req, res) {
+    Tarjeta.findById(req.params.id, function (err, tarjetasDB) {
         if (err) {
             return res.status(400).json({
                 success: false,
-                message: 'La tarjeta no se pudo eliminar',
+                msj: 'No se pueden listar las tarjetas',
                 err
             });
+        } else {
+            return res.json({
+                success: true,
+                listaTarjetas: tarjetasDB
+            })
         }
-        return res.status(200).json({
-            success: true,
-            message: "Tarjeta fue elimnada"
-        });
     });
 });
-
-// router.post('/actualizarTarjeta/:id', function (req, res) {
-//     Tarjeta.update({_id: req.body.id,}; {
-//         if (err) {
-//             return res.status(400).json({
-//                 success: false,
-//                 message: 'La tarjeta no se pudo actualizar',
-//                 err
-//             });
-//         }
-//         return res.status(200).json({
-//             success: true,
-//             message: "Tarjeta fue actualizada"
-//         });
-//     });
-// });
-
 router.put('/editarTarjeta/:id', function (req, res) {
-    Tarjeta.findByIdAndUpdate(req.params.id, { $set: req.body }, function (err) {
+    let body = req.body;
+    Tarjeta.findByIdAndUpdate(req.params.id, {
+        $set: {
+            tipoTarjeta: body.tipo,
+            numTarjeta: body.numero,
+            nombre1: body.nombre,
+            expiracionMM: body.mes,
+            expiracionYY: body.year,
+            cvv: body.cvv
+        }
+    }, function (err) {
         if (err) {
             return res.status(400).json({
                 success: false,
-                message: 'La tarjeta no se pudo actualizar',
+                message: 'La tarjeta no se pudo editar',
                 err
             });
         }
-        Tarjeta.findById(req.params.id, (err, tarjetaDB) => {
+        Tarjeta.findById(req.params.id, (err, tarjeta) => {
             return res.status(200).json({
                 success: true,
-                message: "Tarjeta fue actualizada",
-                listaTarjetas: tarjetasDB
+                message: "Tarjeta editada",
+                tarjeta: tarjeta
             })
         });
     });
 });
-
-router.delete('/eliminar/:id', function (req, res) {
-    Tarjeta.findByIdAndRemove(req.params.id, function (err) {
+router.get('/listarTarjetasPorIdDB/:id', function (req, res) {
+    Tarjeta.findById(req.params.id, function (err, tarjetasDB) {
         if (err) {
             return res.status(400).json({
                 success: false,
-                message: 'La tarjeta no se pudo eliminar',
+                msj: 'No se pueden listar las tarjetas',
                 err
             });
+        } else {
+            return res.json({
+                success: true,
+                listaTarjetas: tarjetasDB
+            })
         }
-        return res.status(200).json({
-            success: true,
-            message: "Tarjeta eliminada"
-        });
     });
 });
 
-
-
+router.put('/editarTarjeta/:id', function (req, res) {
+    let body = req.body;
+    Tarjeta.findByIdAndUpdate(req.params.id, {
+        $set: {
+            tipoTarjeta: body.tipo,
+            numTarjeta: body.numero,
+            nombre1: body.nombre,
+            expiracionMM: body.mes,
+            expiracionYY: body.year,
+            cvv: body.cvv
+        }
+    }, function (err) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'La tarjeta no se pudo editar',
+                err
+            });
+        }
+        Tarjeta.findById(req.params.id, (err, tarjeta) => {
+            return res.status(200).json({
+                success: true,
+                message: "Tarjeta editada",
+                tarjeta: tarjeta
+            })
+        });
+    });
+});
+router.post('/eliminarTarjeta', function (req, res) {
+    let body = req.body;
+    Tarjeta.findByIdAndRemove(body._id,
+        function (err) {
+            if (err) {
+                return res.status(400).json({
+                    success: false,
+                    message: 'La tarjeta no se pudo eliminar',
+                    err
+                });
+            }
+            return res.status(200).json({
+                success: true,
+                message: 'Tarjeta eliminada'
+            });
+        });
+});
 module.exports = router;
