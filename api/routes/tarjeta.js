@@ -46,9 +46,7 @@ router.post('/registrarTarjeta', function (req, res) {
                 );
             }
         })
-
 });
-
 router.get('/listarTarjetas', function (req, res) {
     Tarjeta.find(function (err, tarjetasDB) {
         if (err) {
@@ -65,7 +63,6 @@ router.get('/listarTarjetas', function (req, res) {
         }
     });
 });
-
 router.get('/listarTarjetasPorId/:id', function (req, res) {
     Tarjeta.find({ usuario: req.params.id }, function (err, tarjetasDB) {
         if (err) {
@@ -84,7 +81,6 @@ router.get('/listarTarjetasPorId/:id', function (req, res) {
         .populate('usuario', 'nombre primerApellido correo')
         .select('nombre1 numTarjeta tipoTarjeta expiracionMM expiracionYY cvv usuario');
 });
-
 router.get('/listarTarjetasPorIdDB/:id', function (req, res) {
     Tarjeta.findById(req.params.id, function (err, tarjetasDB) {
         if (err) {
@@ -129,8 +125,6 @@ router.put('/editarTarjeta/:id', function (req, res) {
         });
     });
 });
-
-
 router.get('/listarTarjetasPorIdDB/:id', function (req, res) {
     Tarjeta.findById(req.params.id, function (err, tarjetasDB) {
         if (err) {
@@ -147,6 +141,7 @@ router.get('/listarTarjetasPorIdDB/:id', function (req, res) {
         }
     });
 });
+
 router.put('/editarTarjeta/:id', function (req, res) {
     let body = req.body;
     Tarjeta.findByIdAndUpdate(req.params.id, {
@@ -165,14 +160,12 @@ router.put('/editarTarjeta/:id', function (req, res) {
                 message: 'La tarjeta no se pudo editar',
                 err
             });
-        }
-        Tarjeta.findById(req.params.id, (err, tarjeta) => {
-            return res.status(200).json({
+        } else {
+            return res.json({
                 success: true,
-                message: "Tarjeta editada",
-                tarjeta: tarjeta
+                listaTarjetas: tarjetasDB
             })
-        });
+        }
     });
 });
 
@@ -193,5 +186,4 @@ router.post('/eliminarTarjeta', function (req, res) {
             });
         });
 });
-
 module.exports = router;

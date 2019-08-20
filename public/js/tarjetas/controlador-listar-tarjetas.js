@@ -1,3 +1,10 @@
+/*
+* Nombre de archivo: route/tarjeta
+* Last Modified: Aug 17, 2019
+* Modified by: Fran A. Wilson
+* Modified by: Fernando Solano
+*/
+
 'use strict';
 const tbody = document.querySelector('#tbl_tarjetas tbody');
 let listaTarjetas = [];
@@ -42,6 +49,7 @@ let mostrar_tabla = async (event) => {
             boton_eliminar.setAttribute('data-action', 'boton_eliminar');
             celda_eliminar.appendChild(boton_eliminar);
             boton_eliminar.href = '#';
+
             boton_eliminar.addEventListener('click', function () {
                 Swal.fire({
                     title: '¿Está seguro de eliminar esta tarjeta?',
@@ -54,6 +62,7 @@ let mostrar_tabla = async (event) => {
                 }).then((result) => {
                     if (result.value) {
                         eliminarTarjeta(listaTarjetas[i]['_id']);
+
                         Swal.fire(
                             'Tarjeta eliminada!',
                             'success'

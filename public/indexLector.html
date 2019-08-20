@@ -17,6 +17,8 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/cardsIndexLectot.css">
     <link rel="stylesheet" href="css/searchBar.css">
+    <link rel="stylesheet" href="css/listarElementos.css">
+    <link rel="stylesheet" href="css/dashboard.css">
     <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
 
     <title>Lector</title>
@@ -76,6 +78,32 @@
         </section>
         <div class="main" id="cardElements">
         </div>
+
+        <div class="dashboard__item dashboard__item--full" id="club">
+            <div class="card">
+                <div class="card__header">
+                    Mis clubes de lectura
+                </div>
+                <div class="card__content">
+                    <div class="card__item">
+                        <div class="contenedor-tabla">
+                            <table class="tabla" id="tbl_clubesLectura">
+                                <thead>
+                                    <tr>
+                                        <th>Club de lectura</th>
+                                        <th>Tema</th>
+                                        <th>Tipo de club</th>
+                                        <th>Fecha de reunión</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
     <footer>
         <div class="blockFooter">
@@ -100,11 +128,12 @@
     <script src="js/sucursal/servicioSucursal.js"></script>
     <script src="js/libreria/servicioLibreria.js"></script>
     <script src="js/libros/servicioLibros.js"></script>
-    <script src=""></script>
+    <script src="js/clubLectura/servicioClubLectura.js"></script>
     <script src="js/libros/controladorLibrosCards.js"></script>
     <script src="js/selects/controladorSelectLibreriasSucursal.js"></script>
     <script src="js/usuarios/servicioUsuario.js"></script>
     <script src="js/usuarios/lector/controladorIndexLector.js"></script>
+    <script src="js/clubLectura/controladorMisClubes.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </body>
 
