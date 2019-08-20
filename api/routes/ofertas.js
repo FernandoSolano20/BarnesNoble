@@ -64,7 +64,7 @@ router.post('/registrarOferta', function (req, res) {
                         }
                         else {
                             let terxtoCorreo = ``;
-                            
+
                             let usuarios = sucursal.usuariosSubscritos;
                             for (let i = 0; i < usuarios.length; i++) {
                                 let mailOption = {
@@ -312,6 +312,22 @@ router.get('/listarOfertasPorSucursalesId/:id', function (req, res) {
             });
         }
     })
+});
+
+router.post('/modificarOferta', function (req, res) {
+    let body = req.body;
+    Ofertas.findByIdAndUpdate(body.id, {
+        $set: req.body
+    },
+        function (error) {
+            if (error) {
+                res.json({ success: false, msg: 'No se pudo modificar la oferta' });
+            } else {
+                res.json({ success: true, msg: 'Se modificó la oferta correctamente' });
+
+            }
+        }
+    )
 });
 
 module.exports = router;

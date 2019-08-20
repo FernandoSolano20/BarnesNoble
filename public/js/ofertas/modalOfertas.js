@@ -25,11 +25,17 @@ function eventosGenero(event) {
       cuerpoModal.setAttribute("data-genero", genero.id);
 
       if (accion === 'editar') {
-        modal.setAttribute('data-action', 'editar');
-        tituloModal.innerText = 'Editar género ' + genero.nombre;
-        textoModal.innerText = '¿Está seguro que quiere editar este género?';
+        let editar = elemento.parentElement.parentElement;
+        let idOferta = editar.getAttribute('data-id')
+        //modal.setAttribute('data-action', 'editar');
+        //tituloModal.innerText = 'Editar género ' + genero.nombre;
+        //textoModal.innerText = '¿Está seguro que quiere editar este género?';
+        //crearFomrulario(cuerpoModal, genero);
+        function redireccionar(){
+          window.location=`/editarOferta.html?id=${idOferta}`;
+        } 
+        redireccionar();
 
-        crearFomrulario(cuerpoModal, genero);
       } else if (accion === 'borrar') {
         modal.setAttribute('data-action', 'borrar');
         tituloModal.innerText = 'Eliminar oferta: ' + genero.nombre;

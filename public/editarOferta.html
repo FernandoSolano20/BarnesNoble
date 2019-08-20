@@ -22,7 +22,7 @@
     <div class="loading-bar"></div>
     <header>
         <nav class="menuHorizontal">
-            <ul class="list-menu">
+            <ul class="list-menu" id="verticalMenuUser">
                 <li><a href="#" data-menu="mostrar-nav-izq"><i data-menu="mostrar-nav-izq" class="fas fa-bars"></i></a>
                 </li>
                 <li><a href="/"><i class="far fa-home"></i>Inicio</a></li>
@@ -41,7 +41,7 @@
     </header>
 
     <main>
-        <h2>Edición de Oferta</h2>
+        <h2>Editar Oferta</h2>
         <form class="formRegistro" name="formulario_registro">
             <div class="column">
                 <div class="inputGroup">
@@ -61,20 +61,11 @@
                     <label class="label" for="descripcionInput">Descripción:</label>
                     <input type="text" id="descripcion" name="descripcion">
                 </div>
-                <label class="label" for="descripcionInput">La oferta se crea activa o inactiva:</label>
                 <div class="inputGroup box">
-
-                    <span class="left alertHidden" id="alertEstado">La oferta se crea activa o inactiva:</span>
-                    <select name="estado" id="estado">
-                        <option value="">--Seleccione una opción--</option>
-                        <option value=true>Activa</option>
-                        <option value=false>Inactiva</option>
-
-
-                    </select>
-
+                    <span class="left alertHidden" id="alertSucursal">Seleccione una opción.</span>
+                    <select name="sucursal" id="sucursal"></select>
                 </div>
-                <div class="inputGroup box">
+                <!-- <div class="inputGroup box">
                     <span class="left alertHidden" id="alertTipoOferta">Seleccione una opción.</span>
                     <select name="tipoOferta" id="tipoOferta">
                         <option value="">--Seleccione un tipo de oferta--</option>
@@ -82,14 +73,9 @@
                         <option value="2x1">Descuento 2x1</option>
                         <option value="3x2">Oferta de lleve 3x2</option>
                     </select>
-                </div>
+                </div> -->
             </div>
             <div class="column">
-                <div class="inputGroup box">
-                    <span class="left alertHidden" id="alertSucursal">Seleccione una opción.</span>
-                    <select name="sucursal" id="sucursal"></select>
-                </div>
-
                 <div class="inputGroup box">
                     <span class="left alertHidden" id="alertAutor">Seleccione una opción.</span>
                     <select name="autor" id="autor"></select>
@@ -108,7 +94,7 @@
 
         <div class="crear-contenedor">
             <button type="button" class="material-blue" id="editar"><i
-                    class="far fa-clipboard-list"></i>Guardar</button>
+                    class="far fa-clipboard-list"></i>Guardar Cambios</button>
         </div>
     </main>
 
@@ -140,11 +126,11 @@
     <script src="js/libros/servicioLibros.js"></script>
     <script src="js/genero/servicioGenero.js"></script>
     <script src="js/libreria/servicioLibreria.js"></script>
+    <script src="js/selects/controladorSelectTiendas.js"></script>
     <script src="js/selects/controladorSelectsGenero.js"></script>
     <script src="js/selects/controladorSelectsCategoria.js"></script>
     <script src="js/selects/controladorSelectsAutor.js"></script>
     <script src="js/selects/controladorSelectsLibro.js"></script>
-    <script src="js/selects/controladorSelectTiendas.js"></script>
     <!-- <script src="js/selects/controladorSelectSucursal.js"></script> -->
     <script src="js/validaciones/validacionesGenerales.js"></script>
     <script src="js/ofertas/servicioOfertas.js"></script>
