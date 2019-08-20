@@ -6,15 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Barnes & Noble</title>
-    <script src="js/validarSesionUsuario.js"></script>
+    <script src="js/validarSesionPlatafomra.js"></script>
     <link rel="stylesheet" href="css/reset.css">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/listarElementos.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/botones.css">
+    <link rel="stylesheet" href="css/searchBar.css">
     <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
-    <link rel="stylesheet" href="css/perfiles.css">
-    <link rel="stylesheet" href="css/perfilSlider.css">
-    <link rel="stylesheet" href="css/clubLecturaPerfil.css">
+
 </head>
 
 <body>
@@ -25,7 +27,7 @@
                 </li>
                 <li><a href="/"><i class="far fa-home"></i>Inicio</a></li>
                 <li id="logout">
-                    <a href="#"><i class="far fa-sign-out-alt"></i>Cerrar Sesión</a>
+                    <a href=""><i class="far fa-sign-out-alt"></i>Cerrar Sesión</a>
                 </li>
                 <li class="link-imagen"><img src="img/logo_barnes-and-noble.png" alt="Logo de Barnes&Noble"></li>
             </ul>
@@ -33,34 +35,33 @@
 
         <nav class="menuIzquierdo">
             <ul class="menu" id="menuDinamico">
-
             </ul>
         </nav>
     </header>
     <main>
-        <div class="perfil">
-
-            <div class="column">
-
-                <h1 id="titulo"></h1>
-
-                <div class="blog-slider__container">
-
-                    <div class="blogSlides fade">
-                        <img id="fotoPerfil" src="img/Club.jpg">
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="column " id="informacionClub">
-
+        <div class="subcontenedor">
+            <div class="busqueda">
+                <input type="text" id="input-filtro" name="buscar" placeholder="Buscar...." autocomplete="off"
+                    autocorrect="off">
+                <button type="button" class="buscar"><i class="fa fa-search"></i><span>search</span></button>
             </div>
         </div>
-        <div class="containerMap">
-            <div id="map"></div>
+        <div class="contenedor-tabla">
+            <h2 class="subTilte">Reporte de libros más vendidos</h2>
+            <table class="tabla" id="tabla-elementos-libro">
+                <thead>
+                    <tr>
+                        <th>Libro</th>
+                        <th>Vendidos</th>
+                        <th>Autor</th>
+                        <th>Perfil</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
         </div>
+
     </main>
     <footer>
         <div class="blockFooter">
@@ -81,14 +82,10 @@
 
     </footer>
     <script src="js/cerrarSesion.js"></script>
-    <script src="js/maps/showMap.js"></script>
     <script src="js/menu.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="js/clubLectura/servicioClubLectura.js"></script>
-    <script src="js/clubLectura/perfilClubLectura.js"></script>
-    <script src="js/clubLectura/controladorClubLectura.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKXA3_YJlVwwt1lx60eO0ljRVUKQO3fNY&callback=initMap"
-        async defer></script>
+    <script src="js/libros/servicioLibros.js"></script>
+    <script src="js/landingPage/servicioLandigPage.js"></script>
+    <script src="js/reportes/masVendidos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </body>
 

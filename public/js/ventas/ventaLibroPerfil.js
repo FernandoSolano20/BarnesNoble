@@ -92,12 +92,34 @@ let modalComprarLibroBarnesNobleLector = async () => {
                         if (result.value) {
                             let libroObtenido;
                             let cantDBEjemp;
+                            let oferta = 0;
+                            let listaOfertas = []
                             if (tienda.getAttribute("data-tienda") == "libreria") {
                                 libroObtenido = {
                                     ejemplar: ejempInput.getAttribute("data-libro"),
                                     idLibreria: tienda.getAttribute("data-idTienda")
                                 }
                                 cantDBEjemp = await obtenerCantidadEjemplarPorLibreria(libroObtenido);
+                                listaOfertas = await obtenerOfertasLibreriaId(libroObtenido.idLibreria);
+                                listaOfertas.listaOfertas.forEach((ofer) => {
+                                    if (ofer.autor == libro.listaLibro.autor._id) {
+                                        oferta = ofer.descuento;
+                                        nombreOferta = ofer.nombre;
+                                        return;
+                                    } else if (ofer.categoria == libro.listaLibro.categoria._id) {
+                                        oferta = ofer.descuento;
+                                        nombreOferta = ofer.nombre;
+                                        return;
+                                    } else if (ofer.libro == libro.listaLibro._id) {
+                                        oferta = ofer.descuento;
+                                        nombreOferta = ofer.nombre;
+                                        return;
+                                    } else if (ofer.genero == libro.listaLibro.genero._id) {
+                                        oferta = ofer.descuento;
+                                        nombreOferta = ofer.nombre;
+                                        return;
+                                    }
+                                });
                             }
                             else {
                                 libroObtenido = {
@@ -105,13 +127,35 @@ let modalComprarLibroBarnesNobleLector = async () => {
                                     idSucursal: tienda.getAttribute("data-idTienda")
                                 }
                                 cantDBEjemp = await obtenerCantidadEjemplarPorSucursal(libroObtenido);
+                                listaOfertas = await obtenerOfertasSucursalId(libroObtenido.idSucursal);
+                                listaOfertas.listaOfertas.forEach((ofer) => {
+                                    if (ofer.autor == libro.listaLibro.autor._id) {
+                                        oferta = ofer.descuento;
+                                        nombreOferta = ofer.nombre;
+                                        return;
+                                    } else if (ofer.categoria == libro.listaLibro.categoria._id) {
+                                        oferta = ofer.descuento;
+                                        nombreOferta = ofer.nombre;
+                                        return;
+                                    } else if (ofer.libro == libro.listaLibro._id) {
+                                        oferta = ofer.descuento;
+                                        nombreOferta = ofer.nombre;
+                                        return;
+                                    } else if (ofer.genero == libro.listaLibro.genero._id) {
+                                        oferta = ofer.descuento;
+                                        nombreOferta = ofer.nombre;
+                                        return;
+                                    }
+                                });
                             }
-                            
+
                             ejempInput.setAttribute("data-idTienda", tienda.getAttribute("data-idTienda"));
                             ejempInput.setAttribute("data-tienda", tienda.getAttribute("data-tienda"));
                             ejempInput.setAttribute("data-nombreTienda", tienda.getAttribute("data-nombreTienda"));
                             ejempInput.setAttribute("data-iva", cantDBEjemp.ejemplar.ejemplares[0].iva);
-                            ejempInput.setAttribute("data-precio",  Number("0."+cantDBEjemp.ejemplar.ejemplares[0].iva) * Number(ejempInput.getAttribute("data-precio")) + Number(ejempInput.getAttribute("data-precio")));
+                            let precioFinal = Number("0." + cantDBEjemp.ejemplar.ejemplares[0].iva) * Number(ejempInput.getAttribute("data-precio")) + Number(ejempInput.getAttribute("data-precio"));
+                            precioFinal -= precioFinal * Number("0." + oferta);
+                            ejempInput.setAttribute("data-precio", precioFinal);
                             var response = agregarCarritoCompras(ejempInput, cantidad.value, cantDBEjemp.ejemplar.ejemplares[0].cantidad);
                             if (response) {
                                 Swal.fire({

@@ -23,4 +23,5 @@ let mostrarUsuarioRegistrado = async () => {
 
     correo.appendChild(linkCorreo);
 }
+
  mostrarUsuarioRegistrado();

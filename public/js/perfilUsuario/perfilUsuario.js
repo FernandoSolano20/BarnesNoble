@@ -1,5 +1,10 @@
 let usuario;
 
+let formatearFech = function(date){
+    return ""+((date.getUTCDate() + 1 < 10 ? "0"+ Number(date.getUTCDate()) : Number(date.getUTCDate())) + '/' + (date.getUTCMonth() + 1 < 10 ? "0"+ Number(date.getUTCMonth() + 1) : Number(date.getUTCMonth() + 1)) + '/' + date.getFullYear())+"";
+}
+
+
 let informacionUsuario = async function () {
     let contenedor = document.getElementById('informacionUsuario');
     let url = new URL(window.location.href);
@@ -7,10 +12,11 @@ let informacionUsuario = async function () {
 
     usuario = await obtenerUsuarioPorIdFetch(id);
 
-    partialInformacionUsuario(contenedor);
+    partialInformacionUsuario(contenedor, id);
 }
 
-let partialInformacionUsuario = function (contenedor) {
+
+let partialInformacionUsuario = function (contenedor, idUser) {
     let infoContainer = document.createElement('div');
     infoContainer.setAttribute('class', 'info');
     contenedor.appendChild(infoContainer);
@@ -113,7 +119,7 @@ let partialInformacionUsuario = function (contenedor) {
     span.insertBefore(icon, label);
     text = document.createElement('p');
     var nacimiento = new Date(usuario.usuario.nacimiento);
-    text.innerText = nacimiento.getUTCDate() + '/' + Number(nacimiento.getUTCMonth() + 1) + '/' + nacimiento.getFullYear();
+    text.innerText = formatearFech(nacimiento);
     divInfo.appendChild(text);
 
     divInfo = document.createElement('div');
@@ -128,6 +134,7 @@ let partialInformacionUsuario = function (contenedor) {
     text = document.createElement('p');
     text.innerText = calcularEdad(nacimiento.getFullYear() + '-' + Number(nacimiento.getUTCMonth() + 1) + '-' + nacimiento.getUTCDate()) + " años"
     divInfo.appendChild(text);
+
 
     if (usuario.usuario.tipoUsuario === "Lector" || usuario.usuario.tipoUsuario === "Adminitrador plataforma") {
         divInfo = document.createElement('div');
@@ -254,6 +261,7 @@ let partialInformacionUsuario = function (contenedor) {
 
             let contendorPreferencia = document.createElement('div');
             contendorPreferencia.setAttribute('id', 'preferencias');
+            contendorPreferencia.setAttribute('class','crear-contenedor');
             contenedorVotoPrefe.appendChild(contendorPreferencia);
 
             infoContainer = document.createElement('div');
@@ -324,7 +332,7 @@ let partialInformacionUsuario = function (contenedor) {
                 divInfo.appendChild(text);
             }
             reviewsUsuario();
-        }else{
+        } else {
             document.getElementById('map').remove();
         }
     } else {
@@ -367,6 +375,7 @@ let partialInformacionUsuario = function (contenedor) {
             addMarker(position, message);
         }
     }
+    mostarLibros();
 }
 
 function calcularEdad(fecha) {
