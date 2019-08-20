@@ -267,20 +267,20 @@ header .fa-users {
   float: right;
 }
 
-#cd-cart-trigger {
+.cd-cart-trigger {
   position: absolute;
   top: 0;
   height: 100%;
 }
 
-#cd-cart-trigger .cd-img-replace {
+.cd-cart-trigger .cd-img-replace {
   position: relative;
   width: 100px;
   border-left: none;
   background-color: #26292f;
 }
 
-#cd-cart-trigger .cd-img-replace {
+.cd-cart-trigger .cd-img-replace {
   background: #26292f url(../img/cd-cart.svg) no-repeat center center;
 }
 
@@ -291,11 +291,15 @@ header .fa-users {
   white-space: nowrap;
 }
 
-#cd-cart-trigger {
-  right: -2px;
+.cd-cart-trigger {
+  right: 0px;
 }
 
-#cd-cart-trigger .cd-img-replace {
+#cd-bell-trigger {
+  right: 100px;
+}
+
+.cd-cart-trigger .cd-img-replace {
   width: 100px;
   height: 100%;
 }

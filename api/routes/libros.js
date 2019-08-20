@@ -84,7 +84,7 @@ router.get('/buscarLibroID/:id', async (req, res) => {
         .populate('categoria', 'nombre _id')
         .populate('autor', '_id nombre resenna fechaNacimiento fechaMuerte nombreArtistico nacionalidad foto lugarNacimiento')
         .populate('voto.usuario', '_id nombre primerApellido img')
-        .select('titulo caratula contraportada genero categoria autor voto');
+        .select('titulo caratula contraportada genero categoria autor voto resenna');
 
 });
 

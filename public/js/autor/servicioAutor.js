@@ -52,8 +52,8 @@ let agregarPremios = async (pid, pnombrePremio, pannoPremio, pDescPremio) => {
 };
 
 
-let editarAutor = async(autor,id) => {
-    let response = await fetch('http://localhost:4000/api/autor/editar/' + id, {
+let modificarAutor = async (id, autor) => {
+    let response = await fetch('http://localhost:4000/api/autor/editar/'+ id, {
         method: "PUT",
         headers: {
             'Content-Type': 'application/json;charset=UTF-8',
@@ -62,7 +62,7 @@ let editarAutor = async(autor,id) => {
     });
     let result = await response.json();
     return result;
-}
+};
 
 let eliminarAutor = async(id) => {
     let response = await fetch('http://localhost:4000/api/autor/eliminar/' + id, {
