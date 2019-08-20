@@ -13,6 +13,51 @@ let obtenerInformacionLibro = async function () {
         let votoDiv = document.getElementById('promVoto');
         votoDiv.setAttribute('style', 'width: ' + promVoto + '%');
         if (sessionStorage.tipoUsuario != 'Adminitrador plataforma') {
+            let conntainer = document.getElementById('acciones');
+            let iconEditar = document.createElement('i');
+            iconEditar.setAttribute('class', 'far fa-edit edit-libro');
+            iconEditar.addEventListener('click', function () {
+                window.location.href = "editarLibro.html?id=" + libro.listaLibro._id;
+            })
+            conntainer.appendChild(iconEditar);
+            let iconBorrar = document.createElement('i');
+            iconBorrar.setAttribute('class', 'fal fa-trash-alt');
+            iconBorrar.addEventListener('click', function () {
+                Swal.fire({
+                    title: '¿Está seguro de eliminar este libro?',
+                    text: "Ésta acción no se puede revertir",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#315c74',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, estoy seguro'
+                }).then((result) => {
+                    if (result.value) {
+                        eliminarLibro(libro.listaLibro._id);
+                        Swal.fire(
+                            'Libro eliminado!',
+                            // 'success'
+                        ).then((result) => {
+                            if (result.value) {
+                                window.location.href = 'listarLibrosCards.html';
+                            }
+                        });
+                    }
+                })
+            })
+            conntainer.appendChild(iconBorrar);
+            let iconEstado = document.createElement('input');
+            iconEstado.setAttribute('class', 'switch');
+            iconEstado.setAttribute('id', libro.listaLibro._id)
+            iconEstado.setAttribute('type', 'checkbox');
+            conntainer.appendChild(iconEstado);
+            let labelEstado = document.createElement('label');
+            labelEstado.setAttribute('for', libro.listaLibro._id)
+            labelEstado.addEventListener('click', function () {
+                alert('sweetalert estado')
+            })
+            conntainer.appendChild(labelEstado);
+
             let divButton = document.getElementById('contenedorBotonCompra');
 
             let btnCompra = document.createElement('button');
@@ -25,7 +70,7 @@ let obtenerInformacionLibro = async function () {
                 label = document.createTextNode('Comprar');
             }
             else {
-                btnCompra.addEventListener('click',modalComprarLibroBarnesNobleLector);
+                btnCompra.addEventListener('click', modalComprarLibroBarnesNobleLector);
                 label = document.createTextNode('Agregar a carrito');
             }
 
@@ -106,7 +151,7 @@ let obtenerInformacionLibro = async function () {
                     let btnVotar = document.createElement('button');
                     btnVotar.setAttribute('type', 'button');
                     btnVotar.setAttribute('class', 'material-blue');
-                    btnVotar.setAttribute('id','btnVoto')
+                    btnVotar.setAttribute('id', 'btnVoto')
                     btnVotar.setAttribute('data-libro', libro.listaLibro._id);
                     btnVotar.addEventListener('click', votar);
                     let labelVotar = document.createTextNode('Votar');
@@ -135,7 +180,7 @@ let changeText = function (event) {
 
 let filaNoDatos = function (containerReviews) {
     let liArticle = document.createElement('li');
-    liArticle.setAttribute('id','noDatos');
+    liArticle.setAttribute('id', 'noDatos');
     liArticle.setAttribute('class', 'article');
     containerReviews.appendChild(liArticle);
 
