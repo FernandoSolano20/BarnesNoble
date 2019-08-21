@@ -45,7 +45,7 @@ let agregarCardIntercambio = async (intercambio) => {
                                 
                             </figure>
                             `;
-    if (!intercambio.terminado) {
+    if (!intercambio.terminado && new Date(intercambio.fechaInicio) > new Date()) {
         interCambioHTML += `<div class="crear-contenedor">
                                 <button data-id="${intercambio._id}" type="button" class="material-blue terminarIntercambio" id="registrar">Terminar intercambio</button>
                             </div>`;
