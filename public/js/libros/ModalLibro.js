@@ -73,5 +73,4 @@ let estado = function (event){
   }
 }
 
-tbodyAutor.addEventListener("click",borrar);
 tbodyAutor.addEventListener("click",estado);
