@@ -1,89 +1,147 @@
-let arrayEjemplar = [];
-let libro = [];
-let listaEjemp = [];
-let radioEjemple = '';
-
+let arrayEjemplar = []
 let obtenerInformacionLibro = async function () {
     let url = new URL(window.location.href);
     let id = url.searchParams.get("id");
 
-    libro = await obtenerLibrosId(id);
+
+    let libro = await obtenerLibrosId(id);
     if (libro.success) {
-        let promVoto = partialReviews(libro.listaLibro.voto);
-        let votoDiv = document.getElementById('promVoto');
-        votoDiv.setAttribute('style', 'width: ' + promVoto + '%');
-        if (sessionStorage.tipoUsuario != 'Adminitrador plataforma') {
-            let conntainer = document.getElementById('acciones');
-            let iconEditar = document.createElement('i');
-            iconEditar.setAttribute('class', 'far fa-edit edit-libro');
-            iconEditar.addEventListener('click', function () {
-                window.location.href = "editarLibro.html?id=" + libro.listaLibro._id;
-            })
-            conntainer.appendChild(iconEditar);
-            let iconBorrar = document.createElement('i');
-            iconBorrar.setAttribute('class', 'fal fa-trash-alt');
-            iconBorrar.addEventListener('click', function () {
-                Swal.fire({
-                    title: '¿Está seguro de eliminar este libro?',
-                    text: "Ésta acción no se puede revertir",
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#315c74',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Sí, estoy seguro'
-                }).then((result) => {
-                    if (result.value) {
-                        eliminarLibro(libro.listaLibro._id);
-                        Swal.fire(
-                            'Libro eliminado!',
-                            // 'success'
-                        ).then((result) => {
-                            if (result.value) {
-                                window.location.href = 'listarLibrosCards.html';
-                            }
-                        });
-                    }
-                })
-            })
-            conntainer.appendChild(iconBorrar);
-            let iconEstado = document.createElement('input');
-            iconEstado.setAttribute('class', 'switch');
-            iconEstado.setAttribute('id', libro.listaLibro._id)
-            iconEstado.setAttribute('type', 'checkbox');
-            conntainer.appendChild(iconEstado);
-            let labelEstado = document.createElement('label');
-            labelEstado.setAttribute('for', libro.listaLibro._id)
-            labelEstado.addEventListener('click', function () {
-                alert('sweetalert estado')
-            })
-            conntainer.appendChild(labelEstado);
-
-            let divButton = document.getElementById('contenedorBotonCompra');
-
-            let btnCompra = document.createElement('button');
-            btnCompra.setAttribute('type', 'button');
-            btnCompra.setAttribute('class', 'material-blue');
-            btnCompra.setAttribute('data-libro', libro.listaLibro._id);
-            let label;
-            if (sessionStorage.tipoUsuario == 'Adminitrador librería') {
-                btnCompra.addEventListener('click', modalComprarLibroBarnesNoble);
-                label = document.createTextNode('Comprar');
-            }
-            else {
-                btnCompra.addEventListener('click', modalComprarLibroBarnesNobleLector);
-                label = document.createTextNode('Agregar a carrito');
-            }
-
-            divButton.appendChild(btnCompra);
-            btnCompra.appendChild(label);
-
-            let icon = document.createElement('i');
-            icon.setAttribute('class', 'far fa-plus-circle');
-            btnCompra.insertBefore(icon, label);
-        }
-
         let ejemplares = await obtenerEjemplaresPorIdLibro(id);
+        // let accion = document.getElementById("modal").getAttribute('data-action');
+
         if (ejemplares.success) {
+            if (sessionStorage.tipoUsuario == 'Adminitrador plataforma') {
+                let conntainer = document.getElementById('acciones');
+
+                let iconEditar = document.createElement('i');
+                iconEditar.setAttribute('class', 'far fa-edit editar-libro');
+                iconEditar.addEventListener('click', function () {
+                    window.location.href = "editarLibro.html?id=" + libro.listaLibro._id;
+                })
+                conntainer.appendChild(iconEditar);
+
+                let iconBorrar = document.createElement('i');
+                iconBorrar.setAttribute('class', 'fal fa-trash-alt eliminar-libro');
+                iconBorrar.addEventListener('click', function () {
+                    Swal.fire({
+                        title: '¿Está seguro de eliminar este libro?',
+                        text: "Ésta acción no se puede revertir",
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#315c74',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Sí, estoy seguro'
+                    }).then((result) => {
+                        if (result.value) {
+                            eliminarLibro(libro.listaLibro._id);
+
+                            Swal.fire(
+                                'Libro eliminado!',
+                                // 'success'
+                            ).then((result) => {
+                                if (result.value) {
+                                    window.location.href = 'listarLibrosCards.html';
+                                }
+                            });
+                        }
+                    })
+                })
+                conntainer.appendChild(iconBorrar);
+
+                let iconEstado = document.createElement('input');
+                iconEstado.setAttribute('class', 'switch estado-toggle');
+                iconEstado.setAttribute('id', libro.listaLibro._id)
+                iconEstado.setAttribute('type', 'checkbox');
+                conntainer.appendChild(iconEstado);
+                iconEstado.checked = !libro.listaLibro._id;
+
+
+                let labelEstado = document.createElement('label');
+                labelEstado.setAttribute('data-action', 'estado');
+                
+                labelEstado.setAttribute('class', 'switch estado-toggle');
+
+                labelEstado.setAttribute('for', libro.listaLibro._id)
+                labelEstado.addEventListener('click', function () {
+                    let estado = function (event){
+                        let element = event.target;
+                        if(element.getAttribute("data-action") == "estado"){
+                          parent = element.parentElement.parentElement;
+                          idElemento = parent.getAttribute("data-id");
+                          let inputRadio = document.getElementById(idElemento);
+                          if(inputRadio.checked){
+                            Swal.fire({
+                              title: 'Activar',
+                              text: "¿Está seguro que quiere activar este libro?",
+                              type: 'warning',
+                              showCancelButton: true,
+                              confirmButtonColor: '#3085d6',
+                              cancelButtonColor: '#f2a5a0',
+                              confirmButtonText: 'Activar',
+                              cancelButtonText: 'Cancelar'
+                            }).then(async (result) => {
+                              if (result.value) {
+                                let libro = {
+                                  estado: true
+                                }
+                                let response = await estadoAutor(libro,idElemento);
+                                if(response.success){
+                                  Swal.fire(
+                                    'Activado',
+                                    'El libro se activo con éxito',
+                                    'success'
+                                  )
+                                }else{
+                                  Swal.fire({
+                                    type: 'error',
+                                    title: 'No se pudo activar',
+                                  })
+                                }
+                              }else{
+                                inputRadio.checked = true;
+                              }
+                            })
+                          }
+                          else{
+                            Swal.fire({
+                              title: 'Desactivar?',
+                              text: "¿Está seguro que quiere desactivar este libro?",
+                              type: 'warning',
+                              showCancelButton: true,
+                              confirmButtonColor: '#3085d6',
+                              cancelButtonColor: '#f2a5a0',
+                              confirmButtonText: 'Desactivar',
+                              cancelButtonText: 'Cancelar'
+                            }).then(async (result) => {
+                              if (result.value) {
+                                let autor = {
+                                  estado: false
+                                }
+                                let response = await estadoAutor(autor,idElemento);
+                                if(response.success){
+                                  Swal.fire(
+                                    'Desactivado',
+                                    'El libro se desactivo con éxito',
+                                    'success'
+                                  )
+                                }else{
+                                  Swal.fire({
+                                    type: 'error',
+                                    title: 'No se pudo desactivar'
+                                  })
+                                }
+                              }else{
+                                inputRadio.checked = false;
+                              }
+                            })
+                          }
+                        }
+                      }
+                      iconEstado.addEventListener("click",estado);
+ 
+                })
+                conntainer.appendChild(labelEstado);
+            }
             document.getElementById('titulo').innerHTML = libro.listaLibro.titulo;
             document.getElementById('caratula').src = libro.listaLibro.caratula;
             document.getElementById('contraportada').src = libro.listaLibro.contraportada;
@@ -99,9 +157,6 @@ let obtenerInformacionLibro = async function () {
             let infoLibro = document.getElementById('infoLibro');
             ejemplares = ejemplares.listaLibros;
             for (let i = 0; i < ejemplares.length; i++) {
-                radioEjemple += `<input type="radio" name="ejempRadio" id="${ejemplares[i]._id}" data-libro="${ejemplares[i]._id}"  data-nombreLibro="${libro.listaLibro.titulo}" data-tipoLibro="${ejemplares[i].tipo}" data-img="${libro.listaLibro.caratula}" data-precio="${ejemplares[i].precio}">
-                                <label for="${ejemplares[i]._id}" class="labelRadio">${ejemplares[i].tipo}</label>`;
-                listaEjemp.push(ejemplares[i]._id);
                 let input = document.createElement('input');
                 input.setAttribute('type', 'radio');
                 input.setAttribute('name', 'id');
@@ -139,6 +194,7 @@ let obtenerInformacionLibro = async function () {
                 <p id="annoEdicion">${ejemplares[i].annoEdicion}</p>
             </div>`
             }
+
             if (sessionStorage.tipoUsuario == 'Lector') {
                 let usuario = {
                     idLibro: id,
@@ -177,6 +233,7 @@ let obtenerInformacionLibro = async function () {
 let changeText = function (event) {
     document.getElementById('infoLibro').innerHTML = arrayEjemplar[event.target.value];
 }
+
 
 let filaNoDatos = function (containerReviews) {
     let liArticle = document.createElement('li');
@@ -259,6 +316,5 @@ let partialReviews = function (votos) {
     }
     return (sumCalificacion / (votosLength ? votosLength : 1)) * 20;
 }
-
 
 obtenerInformacionLibro();

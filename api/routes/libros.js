@@ -229,5 +229,101 @@ router.get('/listarMejoreCalificados', function (req, res) {
         });
 
 });
+//Creado por Fran
+router.get('/listarLibrosPorIdDB/:id', function (req, res) {
+    Libros.findById( req.params.id , function (err, librosDB) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                msj: 'No se pueden listar los libros',
+                err
+            });
+        } else {
+            return res.json({
+                success: true,
+                listaLibros: librosDB
+            })
+        }
+    });
+});
+
+//Creado por Fran
+router.put('/editar/:id', function (req, res) {
+    Libros.findByIdAndUpdate(req.params.id, { $set: req.body }, function (err) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'El libro no se pudo editar',
+                err
+            });
+        }
+        Libros.findById(req.params.id, (err, libros) => {
+            return res.status(200).json({
+                success: true,
+                message: "libro editado",   
+                libros: libros
+            })
+        });
+    });
+});
+
+//Creado por Fran
+router.post('/eliminarLibro', function (req, res) {
+    let body = req.body;
+    Libros.findByIdAndRemove(body._id,
+         function (err) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'El libro no se pudo eliminar',
+                err
+            });
+        }
+        return res.status(200).json({
+            success: true,
+            message: 'Libro eliminado'
+        });
+    });
+});
+
+//Creado por Fran
+router.patch('/modificarEstado/:id', function (req, res) {
+    Libros.findById(req.params.id, (err, libros) => {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'No se pudo cambiar el estado de el libro',
+                err
+            });
+        }
+
+        libros.set(req.body);
+
+        libros.save((err, librosDB) => {
+            if (err)
+                return res.status(400).json({
+                    success: false,
+                    message: 'No se pudo cambiar el estado de el libro',
+                    err
+                });
+            let response;
+            if (req.body.estado) {
+                response = {
+                    success: true,
+                    message: "Libro activado",
+                    libros: librosDB
+                };
+            } else {
+                response = {
+                    success: true,
+                    message: "Libro desactivado",
+                    libros: librosDB
+                };
+            }
+            return res.status(200).json({ response });
+        });
+    });
+});
+
 
 module.exports = router;

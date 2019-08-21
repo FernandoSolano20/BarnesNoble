@@ -1,32 +1,32 @@
 'use strict';
-​
+
 const botonRegistrar = document.querySelector('#registrar');
-​
+
 const cardnoVisa = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
 const cardnoMasterCard = /^(?:5[1-5][0-9]{14})$/;
 const cardnoAmerican = /^(?:3[47][0-9]{13})$/;
-​
+
 const nombreInput = document.getElementById('nombre1');
 const alertNombre = document.getElementById('alert-nombre');
-​
+
 const tarjetaInput = document.getElementById('tarjeta');
 const alertTarjeta = document.getElementById('alert-tarjeta');
-​
+
 const tipoInput = document.getElementById('tipo');
 const alertTipo = document.getElementById('alert-tipo');
-​
+
 const mesInput = document.getElementById('mes');
 const alertMes = document.getElementById('alert-mes');
-​
+
 const yearInput = document.getElementById('year');
 const alertYear = document.getElementById('alert-year');
-​
+
 const cvvInput = document.getElementById('cvv');
 const alertCvv = document.getElementById('alert-cvv');
-​
+
 let url = new URL(window.location.href);
 let id = url.searchParams.get("id");
-​
+
 (async() =>{
     if(id){
         let listaTarjeta = await obtenerTarjetasPorId(id);
@@ -38,15 +38,15 @@ let id = url.searchParams.get("id");
         cvv.value = listaTarjeta.cvv;
     }
 })();
-​
-​
-​
+
+
+
 // function formReset() {
 //     document.getElementById("registrarTarjeta").reset();
 // }
-​
+
 let validarDatosTarjetas = async () => {
-​
+    
     let error = validarNombre() | validarTarjeta() | validarExpMM() | validarExpYY() | validarCVV();
     if (!error) {
         let nombre1 = nombreInput.value;
@@ -55,7 +55,7 @@ let validarDatosTarjetas = async () => {
         let expiracionMM = mesInput.value;
         let expiracionYY = yearInput.value;
         let cvv = cvvInput.value;
-​
+
         let tarjeta = {
             nombre: nombre1,
             tipo: tipoTarjeta,
@@ -72,7 +72,7 @@ let validarDatosTarjetas = async () => {
         else{
             nuevaTarjeta = await registrarTarjeta(tarjeta);
         }
-​
+
         if (nuevaTarjeta.success) {
             Swal.fire({
                 title: nuevaTarjeta.message,
@@ -80,7 +80,7 @@ let validarDatosTarjetas = async () => {
                 text: 'Se tarjeta se registró correctamente',
                 confirmButtonText:
                 '<a href="http://localhost:3000/listarTarjetas.html" class="linkPage">Ok</a>'
-​
+
             })
         } else {
             Swal.fire({
@@ -97,16 +97,16 @@ let validarDatosTarjetas = async () => {
         })
     }
 };
-​
-​
+
+
 let validarNombre = function () {
-​
+
     let validarNombre = {
         value: nombreInput.value,
         alert: alertNombre,
         input: nombreInput
     }
-​
+
     return !(noVacio(validarNombre) && validarTexto(validarNombre));
 };
 let validarTarjeta = function () {
@@ -115,9 +115,9 @@ let validarTarjeta = function () {
         alert: alertTarjeta,
         input: tarjetaInput
     }
-​
+
     let tipoTarjeta = tipoInput.value;
-​
+
     if (!validarNumeros(validarNumTarjeta)) {
         return true;
     }
@@ -163,7 +163,7 @@ let validarTarjeta = function () {
         return false;
     }
 };
-​
+
 let validarCVV = function () {
     let cvv = {
         value: cvvInput.value,
@@ -195,7 +195,7 @@ let validarCVV = function () {
         return false;
     }
 };
-​
+
 let validarExpMM = function () {
     let mes = {
         value: mesInput.value,
@@ -204,7 +204,7 @@ let validarExpMM = function () {
     }
     return !(validarSelect(mes));
 };
-​
+
 let validarExpYY = function () {
     let year = {
         value: yearInput.value,
@@ -213,8 +213,8 @@ let validarExpYY = function () {
     }
     return !(validarSelect(year));
 };
-​
-​
+
+
 function cardnumberMastercard(inputtxt) {
     var cardno = /^(?:5[1-5][0-9]{14})$/;
     if (inputtxt.value.match(cardno)) {
@@ -225,7 +225,7 @@ function cardnumberMastercard(inputtxt) {
         return false;
     }
 }
-​
+
 nombreInput.addEventListener('blur', validarNombre);
 tarjetaInput.addEventListener('blur', validarTarjeta);
 mesInput.addEventListener('change', validarExpMM);
