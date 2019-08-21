@@ -545,7 +545,8 @@ router.get('/usuarioId/:id', async (req, res) => {
             select: 'nombreComercial nombreFantasia localizacionLongitud localizacionLatitud provincia canton distrito ejemplares'
         })
         .populate('ejemplares.libro', 'titulo')
-        .select('id nombre segundoNombre primerApellido segundoApellido correo img sexo telefono tipoUsuario nacimiento sennas alias localizacionLatitud localizacionLongitud provincia canton distrito autor genero libro categoria libreria ejemplares');
+        .populate('resennas.usuario', 'nombre primerApellido img')
+        .select('id nombre segundoNombre primerApellido segundoApellido correo img sexo telefono tipoUsuario nacimiento sennas alias localizacionLatitud localizacionLongitud provincia canton distrito autor genero libro categoria libreria ejemplares resennas');
 });
 
 router.get('/usuarioIdLibreria/:id', function (req, res) {
@@ -1064,7 +1065,6 @@ router.get('/librosLector/:id', async (req, res) => {
 });
 
 router.post('/tieneElLibro/', async (req, res) => {
-    req.body.ejemplares = ["5d5131169837dc0c904cc098", "5d5131549837dc0c904cc099", "5d51318b9837dc0c904cc09a"];
     let libros = [];
     for (var i = 0; i < req.body.ejemplares.length; i++)
         libros.push(new mongoose.Types.ObjectId(req.body.ejemplares[i]));
@@ -1387,7 +1387,7 @@ router.get('/obtenerLibroIntercambio', function (req, res) {
 })
 
 router.get('/obtenerLectoresPorEjemplaresId/:idEjemplar', function (req, res) {
-    Usuario.find({ "ejemplares.libro": req.params.idEjemplar, "ejemplares.estadoIntercambio": 1 } ,{
+    Usuario.find({ "ejemplares.libro": req.params.idEjemplar, "ejemplares.estadoIntercambio": 1 }, {
         'ejemplares.$': 1
     }, function (err, usuario) {
         if (err) {
@@ -1404,6 +1404,54 @@ router.get('/obtenerLectoresPorEjemplaresId/:idEjemplar', function (req, res) {
         }
     })
         .select("nombre primerApellido provincia canton img");
+});
+
+router.patch('/votarUsuario', function (req, res) {
+    Usuario.findByIdAndUpdate(req.body.idUser, {
+        $push: {
+            'resennas': {
+                intercambio: req.body.idIntercambio,
+                usuario: req.body.usuario,
+                calificacion: req.body.voto,
+                comentario: req.body.comentario
+            }
+        }
+    }, function (err, voto) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'Ocurrio un error al votar por el usuario',
+                err
+            });
+        }
+        else {
+            return res.json({
+                success: true,
+                message: "El voto se ha guardado en el sistema"
+            });
+        }
+    });;
+})
+
+router.post('/tieneVotoUsuario', async (req, res) => {
+    Usuario.find({ _id: req.body.idUsuarioVotado, "resennas.intercambio": req.body.idIntercambio }, function (err, usuario) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                err
+            });
+        }
+        else if (usuario == "") {
+            return res.json({
+                success: true
+            });
+        }
+        else {
+            return res.json({
+                success: false
+            });
+        }
+    })
 });
 
 module.exports = router;

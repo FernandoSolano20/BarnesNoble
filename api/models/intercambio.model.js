@@ -19,8 +19,6 @@ let intercambio_schema = new mongoose.Schema({
             ref: 'Usuario',
             required: false
         },
-        comentario: { type: String, required: false, unique: false },
-        calificacion: { type: Number, required: false, unique: false },
         ejemplarUsuario: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Ejemplar',
