@@ -46,7 +46,7 @@ let id = url.searchParams.get("id");
 // }
 
 let validarDatosTarjetas = async () => {
-
+    
     let error = validarNombre() | validarTarjeta() | validarExpMM() | validarExpYY() | validarCVV();
     if (!error) {
         let nombre1 = nombreInput.value;
@@ -233,6 +233,3 @@ yearInput.addEventListener('change', validarExpYY);
 cvvInput.addEventListener('blur', validarCVV);
 document.getElementById('registrar').addEventListener('click', validarDatosTarjetas);
 botonRegistrar.addEventListener('click', validarDatosTarjetas);
-
-
-

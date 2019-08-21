@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="css/registroFormulario.css">
     <link rel="stylesheet" href="css/perfiles.css">
     <link rel="stylesheet" href="css/perfilSlider.css">
+    <link rel="stylesheet" href="css/listarTarjetas.css">
     <link rel="stylesheet" href="css/voto.css">
     <link rel="stylesheet" href="css/resennas.css">
     <link rel="stylesheet" href="css/botones.css">
@@ -54,6 +55,7 @@
     </header>
 
     <main>
+        
         <h2>Formulario de editar libro</h2>
         <form class="formRegistro" name="formulario_registro">
             
@@ -91,7 +93,7 @@
             </div>
             <div class="column">
                 <div class="inputGroup">
-                    <span class="left alertHidden" id="alerResenna"></span>
+                    <span class="left alertHidden" id="alertResenna"></span>
                     <label class="label" for="resenna">Reseña:</label>
                     <input type="text" id="resenna" name="resenna">
                 </div>
@@ -114,7 +116,7 @@
         </form>
 
         <div class="crear-contenedor">
-            <button type="button" class="material-blue" id="registrar"><i
+            <button type="button" class="material-blue" id="btnModificar"><i
                     class="far fa-clipboard-list"></i>Guardar</button>
         </div>
     </main>
@@ -151,6 +153,7 @@
     <script src="js/selects/controladorSelectsCategoria.js"></script>
     <script src="js/selects/controladorSelectsAutor.js"></script>
     <script src="js/libros/controladorEditarLibros.js"></script>
+    <script src="js/autor/ModalLibro.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </body>
 

@@ -6,18 +6,15 @@
 */
 
 'use strict';
-
 const tbody = document.querySelector('#tbl_tarjetas tbody');
 let listaTarjetas = [];
 let txtFiltro = document.querySelector('#txt-filtro');
-
 let inputTipoTarjeta;
 let inputNumTarjeta;
 let inputNombre;
 let inputExpiracionMM;
 let inputExpiracionYY;
 let inputCvv;
-
 let mostrar_tabla = async (event) => {
     if (!event) {
         if (sessionStorage.tipoUsuario == 'Adminitrador plataforma') {
@@ -27,10 +24,8 @@ let mostrar_tabla = async (event) => {
             listaTarjetas = await obtenerTarjetasUsuario(sessionStorage.id);
         }
     }
-
     let filtro = txtFiltro.value.toLowerCase();
     tbody.innerHTML = '';
-
     for (let i = 0; i < listaTarjetas.length; i++) {
         if (listaTarjetas[i]['nombre1'].toLowerCase().includes(filtro) || listaTarjetas[i]['tipoTarjeta'].toLowerCase().includes(filtro) || String(listaTarjetas[i]['numTarjeta']).includes(filtro)) {
             let fila = tbody.insertRow();
@@ -40,7 +35,6 @@ let mostrar_tabla = async (event) => {
             fila.insertCell().innerHTML = listaTarjetas[i]['expiracionMM']
             fila.insertCell().innerHTML = listaTarjetas[i]['expiracionYY']
             fila.insertCell().innerHTML = listaTarjetas[i]['cvv'];
-
             let editarCelda = fila.insertCell();
             let editar = document.createElement('i');
             editar.setAttribute('class', 'far fa-edit');
@@ -49,7 +43,6 @@ let mostrar_tabla = async (event) => {
             editar.addEventListener('click', function () {
                 window.location.href = `registrarTarjeta.html?id=${listaTarjetas[i]['_id']}`;
             });
-
             let celda_eliminar = fila.insertCell();
             let boton_eliminar = document.createElement('i');
             boton_eliminar.setAttribute('class', 'fal fa-trash-alt');
@@ -80,18 +73,12 @@ let mostrar_tabla = async (event) => {
                         });
                     }
                 })
-
             })
-
             celda_eliminar.appendChild(boton_eliminar);
-
         }
-
     } //fin del for
-
     filaNoDatos();
 }; //fin del mostrar_table
-
 let filaNoDatos = function () {
     if (listaTarjetas.length === 0 || tbody.childElementCount === 0) {
         let fila = tbody.insertRow();
@@ -102,6 +89,4 @@ let filaNoDatos = function () {
     }
 }
 mostrar_tabla();
-
 txtFiltro.addEventListener('keyup', mostrar_tabla);
-

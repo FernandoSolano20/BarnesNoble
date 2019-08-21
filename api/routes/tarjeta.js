@@ -160,16 +160,15 @@ router.put('/editarTarjeta/:id', function (req, res) {
                 message: 'La tarjeta no se pudo editar',
                 err
             });
-        }
-        Tarjeta.findById(req.params.id, (err, tarjeta) => {
-            return res.status(200).json({
+        } else {
+            return res.json({
                 success: true,
-                message: "Tarjeta editada",
-                tarjeta: tarjeta
+                listaTarjetas: tarjetasDB
             })
-        });
+        }
     });
 });
+
 router.post('/eliminarTarjeta', function (req, res) {
     let body = req.body;
     Tarjeta.findByIdAndRemove(body._id,
