@@ -232,7 +232,7 @@ autorSelect.addEventListener('change', validarAutor);
 generoSelect.addEventListener('change', validarGenero);
 categoriaSelect.addEventListener('change', validarCategoria);
 libroSelect.addEventListener('change', validarLibro);
-document.getElementById('editar').addEventListener('click', obtenerDatosUsuarios);
+document.getElementById('modificar').addEventListener('click', obtenerDatosUsuarios);
 
 
 
