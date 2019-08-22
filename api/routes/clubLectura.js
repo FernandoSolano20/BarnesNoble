@@ -2,8 +2,16 @@
 
 const express = require('express'),
     router = express.Router(),
+    nodeMailer = require("nodemailer"),
     ClubLectura = require('../models/clubLectura.model');
 
+const transporter = nodeMailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'grupovalhalla2019@gmail.com',
+        pass: 'BarnesNoblePass123'
+    }
+});
 //Definición de la ruta para registrar contactos
 
 router.post('/registrarClubLectura', function (req, res) {
@@ -99,7 +107,7 @@ router.get('/obtenerContClubAdministrador/:id', function (req, res) {
 });
 
 router.get('/listarClubLecturaPorId/:id', function (req, res) {
-    ClubLectura.findById(req.params.id,function (err, clubesLecturaBD) {
+    ClubLectura.findById(req.params.id, function (err, clubesLecturaBD) {
         if (err) {
             return res.status(400).json({
                 success: false,
@@ -117,13 +125,13 @@ router.get('/listarClubLecturaPorId/:id', function (req, res) {
         .populate('sucursal', 'nombre _id')
         .populate('genero', 'nombre _id')
         .populate('categoria', 'nombre _id')
-        .populate('participantes.usuario', '_id nombre primerApellido correo')
+        .populate('participantes.usuario', '_id nombre primerApellido correo img')
         .select('nombre tema tipoClub fechaReunion horaReunion administrador sucursal participantes chat genero categoria');
 });
 
-router.patch('/suscribirUsuarioClubLectura', function(req, res){
-    if(req.body.idUsuario && req.body.idClubLectura){
-        ClubLectura.findById(req.params.id, (err, usuarios) => {
+router.patch('/suscribirUsuarioClubLectura', function (req, res) {
+    if (req.body.idUsuario && req.body.idClubLectura) {
+        ClubLectura.findById(req.body.idClubLectura, (err, clubLectura) => {
             if (err) {
                 return res.status(400).json({
                     success: false,
@@ -133,39 +141,92 @@ router.patch('/suscribirUsuarioClubLectura', function(req, res){
             }
             ClubLectura.updateOne({ _id: req.body.idClubLectura }, {
                 $push: {
-                    'usuariosSubscritos': {
-                        usuario: req.body.idUsuario
+                    'participantes': {
+                        usuario: req.body.idUsuario,
+                        correo: req.body.correo
                     }
                 }
             },
-            function (err, usuario) {
-                if (err) {
-                    return res.status(400).json({
-                        success: false,
-                        message: 'No se pudo realizar la suscripcion',
-                        err
-                    })
-                } else {
-                    return res.json({
-                        success: true,
-                        message: 'Subscripcion exitosa'
-                    })
-                }
-            });
+                function (err, club) {
+                    if (err) {
+                        return res.status(400).json({
+                            success: false,
+                            message: 'No se pudo realizar la suscripcion',
+                            err
+                        })
+                    } else {
+                        let mailOption = {
+                            from: 'grupovalhalla2019@gmail.com',
+                            to: req.body.correo,
+                            subject: `Subcripcion a club ${clubLectura.nombre} ${clubLectura.tema}`,
+                            html: `<html>
+                                    <head>
+                                    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+                                    <style>
+                                    .wrapper{
+                                    background : #81ecec;
+                                    font-family: 'Roboto', sans-serif;
+                                    }
+                                    .container{
+                                    margin: 0 auto;
+                                    background: #fff;
+                                    width: 500px;
+                                    text-align: center;
+                                    padding: 10px;
+                                    }
+                                    .boton{
+                                    background: #ff7675;
+                                    color: #fff;
+                                    display: block;
+                                    padding: 15px;
+                                    text-decoration: none;
+                                    width: 50%;
+                                    margin: 0 auto;
+                                    }
+                                    </style>
+                                    </head>
+                                    <body class="wrapper">
+                                    <div class="container">
+                                        <h1>Subscripción al club ${clubLectura.nombre}</h1>
+
+                                    <p>Usted se ha subscripto al ${clubLectura.nombre} ${clubLectura.tema}</p>
+                                    <p>El correo electrónico asociado es: ${req.body.correo}</p>
+                                    <p>Para ingresar visite nuestra página<p>
+                                        <a href="http://localhost:3000/inicioSesion.html" class="boton">Ingresar a Barnes & Noble </a>
+                                    </div>
+
+                                    </body>
+
+                                </html>`
+                        };
+                        transporter.sendMail(mailOption, function (error, info) {
+                            if (error) {
+                                return res.json({
+                                    success: true,
+                                    message: `El usuario se subscribió con exitosa`
+                                })
+                            }
+                            return res.json({
+                                success: true,
+                                message: 'El usuario se subscribió con exitosa'
+                            })
+                        });
+                    }
+                });
         });
     }
-    else{
+    else {
         return res.json({
             success: false,
             message: 'Debe seleccionar un usuario y una libreria',
             err
-        }) 
+        })
     }
 });
 
-router.patch('/desuscribirUsuarioClubLectura', function(req, res){
-    if(req.body.idUsuario && req.body.idClubLectura){
-        ClubLectura.findOne({ _id: req.body.idClubLectura, "usuariosSubscritos.usuario": req.params.id }, (err, usuarios) => {
+router.patch('/desuscribirUsuarioClubLectura', function (req, res) {
+    if (req.body.idUsuario && req.body.idClubLectura) {
+        ClubLectura.findOne({ _id: req.body.idClubLectura, "participantes.usuario": req.body.idUsuario }, (err, usuarios) => {
             if (err) {
                 return res.status(400).json({
                     success: false,
@@ -175,33 +236,33 @@ router.patch('/desuscribirUsuarioClubLectura', function(req, res){
             }
             ClubLectura.updateOne({ _id: req.body.idClubLectura }, {
                 $pull: {
-                    'usuariosSubscritos': {
+                    'participantes': {
                         usuario: req.body.idUsuario
                     }
                 }
             },
-            function (err, usuario) {
-                if (err) {
-                    return res.status(400).json({
-                        success: false,
-                        message: 'No se pudo cancelar la suscripción',
-                        err
-                    })
-                } else {
-                    return res.json({
-                        success: true,
-                        message: 'Subscripción cancelada'
-                    })
-                }
-            });
+                function (err, usuario) {
+                    if (err) {
+                        return res.status(400).json({
+                            success: false,
+                            message: 'No se pudo cancelar la suscripción',
+                            err
+                        })
+                    } else {
+                        return res.json({
+                            success: true,
+                            message: 'Subscripción cancelada'
+                        })
+                    }
+                });
         });
     }
-    else{
+    else {
         return res.json({
             success: false,
             message: 'Debe seleccionar un usuario y una librería',
             err
-        }) 
+        })
     }
 });
 
@@ -209,13 +270,13 @@ router.patch('/desuscribirUsuarioClubLectura', function(req, res){
 module.exports = router;
 
 
-router.post('/modificarClubLectura', function(req, res) {
+router.post('/modificarClubLectura', function (req, res) {
     let body = req.body;
 
     ClubLectura.findByIdAndUpdate(body._id, {
-            $set: req.body
-        },
-        function(error) {
+        $set: req.body
+    },
+        function (error) {
             if (error) {
                 res.json({ success: false, msg: 'No se pudo modificar el club' });
             } else {
@@ -225,11 +286,11 @@ router.post('/modificarClubLectura', function(req, res) {
     )
 });
 
-router.post('/eliminarClubLectura', function(req, res) {
+router.post('/eliminarClubLectura', function (req, res) {
     let body = req.body;
 
     ClubLectura.findByIdAndRemove(body._id,
-        function(error) {
+        function (error) {
             if (error) {
                 res.json({ success: false, msg: 'No se pudo borrar el club' });
             } else {
