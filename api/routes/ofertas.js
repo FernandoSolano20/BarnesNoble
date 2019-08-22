@@ -3,6 +3,8 @@
 const express = require('express'),
     router = express.Router(),
     Ofertas = require('../models/ofertas.model'),
+    nodeMailer = require("nodemailer"),
+    Sucursal = require('../models/sucursal.model'),
     mongoose = require('mongoose');
 
 
@@ -11,13 +13,20 @@ const express = require('express'),
  next(); 
 })*/
 
+const transporter = nodeMailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'grupovalhalla2019@gmail.com',
+        pass: 'BarnesNoblePass123'
+    }
+});
+
 //Definición de la ruta para registrar ofertas
 
 router.post('/registrarOferta', function (req, res) {
     let body = req.body;
     let nuevaOferta = new Ofertas({
         nombre: body.nombre,
-        tipoOferta: body.tipoOferta,
         descuento: body.descuento,
         descripcion: body.descripcion,
         estado: body.estado
@@ -45,6 +54,80 @@ router.post('/registrarOferta', function (req, res) {
                 });
 
             } else {
+                if (body.sucursal) {
+                    Sucursal.findById(body.sucursal, function (err, sucursal) {
+                        if (err) {
+                            return res.status(400).json({
+                                success: false,
+                                msj: 'No se encontro la surcusal',
+                                err
+                            });
+                        }
+                        else {
+                            let terxtoCorreo = ``;
+                            
+                            let usuarios = sucursal.usuariosSubscritos;
+                            for (let i = 0; i < usuarios.length; i++) {
+                                let mailOption = {
+                                    from: 'grupovalhalla2019@gmail.com',
+                                    to: usuarios[i].correo,
+                                    subject: `Oferta en sucursal ${sucursal.nombre} `,
+                                    html: `<html>
+                                <head>
+                                  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+                                  <style>
+                                   .wrapper{
+                                  background : #81ecec;
+                                  font-family: 'Roboto', sans-serif;
+                                }
+                                .container{
+                                  margin: 0 auto;
+                                  background: #fff;
+                                  width: 500px;
+                                  text-align: center;
+                                  padding: 10px;
+                                }
+                                .boton{
+                                  background: #ff7675;
+                                  color: #fff;
+                                  display: block;
+                                  padding: 15px;
+                                  text-decoration: none;
+                                  width: 50%;
+                                  margin: 0 auto;
+                                }
+                                </style>
+                                </head>
+                                <body class="wrapper">
+                                  <div class="container">
+                                    <h1>Nueva oferta en ${sucursal.nombre}</h1>
+        
+                                  <p>La sucursal ${sucursal.nombre} ha creado una nueva oferta.</p>
+                                  <p>El nombre de la oferta es ${body.nombre}</p>
+                                  <p>Para más información entrar a la aplicación<p>
+                                    <a href="http://localhost:3000/inicioSesion.html" class="boton">Ingresar a Barnes & Noble </a>
+                                  </div>
+        
+                                </body>
+        
+                              </html>`
+                                };
+                                transporter.sendMail(mailOption, function (error, info) {
+                                    if (error) {
+                                        return res.json({
+                                            success: true,
+                                            message: `Ocurrio un error al envio del correo, contacte con el administrador de la plataforma`
+                                        })
+                                    }
+                                    return res.json({
+                                        success: true,
+                                        message: 'Se registró correctamente la oferta'
+                                    })
+                                });
+                            }
+                        }
+                    })
+                }
                 res.json({
                     success: true,
                     msj: 'Se registró correctamente la oferta'
@@ -75,7 +158,7 @@ router.get('/listarOfertas', function (req, res) {
         .populate('genero', 'nombre -_id')
         .populate('categoria', 'nombre -_id')
         .populate('libro', 'titulo -_id')
-        .select('nombre descripcion descuento estado tipoOferta sucursal libreria autor genero categoria libro');
+        .select('nombre descripcion descuento estado sucursal libreria autor genero categoria libro');
 });
 
 router.get('/buscarOfertaId/:id', function (req, res) {
@@ -195,7 +278,41 @@ router.patch('/listarOfertasPorTiendas', function (req, res) {
         .populate('genero', 'nombre -_id')
         .populate('categoria', 'nombre -_id')
         .populate('libro', 'titulo -_id')
-        .select('nombre descripcion descuento estado tipoOferta sucursal libreria autor genero categoria libro');
+        .select('nombre descripcion descuento estado sucursal libreria autor genero categoria libro');
+});
+
+router.get('/listarOfertasPorLibreriasId/:id', function (req, res) {
+    Ofertas.find({ libreria: req.params.id }, function (err, OfertasBD) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                msj: 'No se pueden listar las ofertas',
+                err
+            });
+        } else {
+            return res.json({
+                success: true,
+                listaOfertas: OfertasBD
+            });
+        }
+    })
+});
+
+router.get('/listarOfertasPorSucursalesId/:id', function (req, res) {
+    Ofertas.find({ sucursal: req.params.id }, function (err, OfertasBD) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                msj: 'No se pueden listar las ofertas',
+                err
+            });
+        } else {
+            return res.json({
+                success: true,
+                listaOfertas: OfertasBD
+            });
+        }
+    })
 });
 
 module.exports = router;

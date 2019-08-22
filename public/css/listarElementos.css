@@ -83,3 +83,25 @@
 .contenedor-tabla .tabla tbody .left {
     text-align: left;
 }
+
+i[data-action="aprobar"]{
+    color: green;
+    font-size: 35px !important;
+}
+
+i[data-action="rechazar"]{
+    color: #d43434;
+    font-size: 35px !important;
+}
+
+.subTilte{
+    text-align: center;
+}
+
+.edit-libro{
+    display: inline-block;
+    margin-left: 500px;
+    margin-right: 100px;
+    width: 500px;
+    height: 100px;
+}

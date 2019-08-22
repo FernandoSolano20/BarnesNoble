@@ -2,7 +2,8 @@
 'use strict'
 const express = require('express'),
     router = express.Router(),
-    Libros = require('../models/libros.model');
+    Libros = require('../models/libros.model'),
+    Autor = require('../models/autor.model');
 
 router.param('_id', function (req, res, next, _id) {
     req.body._id = _id;
@@ -79,10 +80,11 @@ router.get('/buscarLibroID/:id', async (req, res) => {
             });
         }
     })
-        .populate('genero', 'nombre -_id')
-        .populate('categoria', 'nombre -_id')
+        .populate('genero', 'nombre _id')
+        .populate('categoria', 'nombre _id')
         .populate('autor', '_id nombre resenna fechaNacimiento fechaMuerte nombreArtistico nacionalidad foto lugarNacimiento')
-        .select('titulo caratula contraportada genero categoria autor');
+        .populate('voto.usuario', '_id nombre primerApellido img')
+        .select('titulo caratula contraportada genero categoria autor voto resenna');
 
 });
 
@@ -106,7 +108,7 @@ router.get('/listarMasVendidos', function (req, res) {
         .populate('autor', 'nombre nombreArtistico -_id')
         .populate('genero', 'nombre -_id')
         .populate('categoria', 'nombre -_id')
-        .select('titulo caratula autor genero categoria');
+        .select('titulo caratula autor genero categoria voto vendidos');
 
 });
 
@@ -132,7 +134,7 @@ router.get('/titulo/:titulo', async (req, res) => {
 
 //SofiaZu-Prefrencia de libros del usuario
 router.post('/listarLibrosPorPreferencia', async (req, res) => {
-    Libros.find({genero: req.body.genero, autor: req.body.autor, categoria: req.body.categoria},function (err, librosPreferidos) {
+    Libros.find({ genero: req.body.genero, autor: req.body.autor, categoria: req.body.categoria }, function (err, librosPreferidos) {
         if (librosPreferidos != "") {
             return res.json({
                 success: true,
@@ -141,7 +143,7 @@ router.post('/listarLibrosPorPreferencia', async (req, res) => {
         }
         else {
             // el $or busca las prefrencias por separado entre los libros
-            Libros.find({$or:[{genero: req.body.genero}, {autor: req.body.autor}, {categoria: req.body.categoria}]},function (err, librosPreferidos) {
+            Libros.find({ $or: [{ genero: req.body.genero }, { autor: req.body.autor }, { categoria: req.body.categoria }] }, function (err, librosPreferidos) {
                 if (librosPreferidos != "") {
                     return res.json({
                         success: true,
@@ -167,5 +169,65 @@ router.get('/countLibros', function (req, res) {
         });
     });
 })
+
+router.patch('/votarLibro', function (req, res) {
+    Libros.findByIdAndUpdate(req.body.idLibro, {
+        $push: {
+            'voto': {
+                usuario: req.body.idUsuario,
+                calificacion: req.body.voto,
+                comentario: req.body.comentario
+            }
+        }
+    }, function (err, voto) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'Ocurrio un error al votar por el libro',
+                err
+            });
+        }
+        else {
+            return res.json({
+                success: true,
+                message: "El voto se ha guardado en el sistema"
+            });
+        }
+    });;
+})
+
+router.get('/listarMejoreCalificados', function (req, res) {
+    let criterioOrden = { "voto.calificacion": -1 };
+
+    Libros.aggregate(
+        [{
+            $unwind: "$voto"
+        }, {
+            "$group": {
+                "_id": {
+                    "_id": "$_id",
+                    "titulo": "$titulo",
+                    "autor": "$autor"
+                },
+                "average": { "$avg": "$voto.calificacion" }
+            }
+        }, {
+            "$sort":
+            {
+                "average": -1
+            }
+        }, {
+            "$limit": 25
+        }])
+        .exec(function (err, transactions) {
+            Autor.populate(transactions, { path: '_id.autor', select: '_id nombre' }, function (err, populatedTransactions) {
+                return res.json({
+                    success: true,
+                    listaLibros: populatedTransactions
+                });
+            });
+        });
+
+});
 
 module.exports = router;

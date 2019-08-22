@@ -71,3 +71,25 @@ var obtenerOfertasPorLibreria = async (tiendas) => {
     var result = await response.json();
     return result;
 }
+
+let obtenerOfertasLibreriaId = async (id) => {
+    let response = await fetch('http://localhost:4000/api/ofertas/listarOfertasPorLibreriasId/' + id, {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        }
+    });
+    let result = await response.json();
+    return result;
+}
+
+let obtenerOfertasSucursalId = async (id) => {
+    let response = await fetch('http://localhost:4000/api/ofertas/listarOfertasPorSucursalesId/' + id, {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        }
+    });
+    let result = await response.json();
+    return result;
+}

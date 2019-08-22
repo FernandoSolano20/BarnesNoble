@@ -20,7 +20,7 @@
 <body>
     <header>
         <nav class="menuHorizontal">
-            <ul class="list-menu">
+            <ul class="list-menu" id="verticalMenuUser">
                 <li><a href="#" data-menu="mostrar-nav-izq"><i data-menu="mostrar-nav-izq" class="fas fa-bars"></i></a>
                 </li>
                 <li><a href="/"><i class="far fa-home"></i>Inicio</a></li>
@@ -56,7 +56,7 @@
                             </select>
                         </div>
                         <div class="inputGroup">
-                            <span class="left alertHidden" id="alert-tarjeta">La tarjta debe tener 16 dígitos.</span>
+                            <span class="left alertHidden" id="alert-tarjeta">La tarjeta no tiene el formato adecuado.</span>
                             <label class="label" for="tarjeta-input">Número de Tarjeta:</label>
                             <input type="number" id="tarjeta" name="tarjeta">
                         </div>
@@ -99,9 +99,9 @@
                             </select>
                         </div>
                         <div class="inputGroup">
-                            <span class="left alertHidden" id="alert-cvv">CVV deber ser de 3 dígitos.</span>
+                            <span class="left alertHidden" id="alert-cvv">CVV no tiene el formato adecuado.</span>
                             <label class="label" for="cvv-input">Código CVV</label>
-                            <input placeholder="Debe tener 3 dígitos." type="number" id="cvv">
+                            <input  type="number" id="cvv">
                         </div>
                     </div>
             </div><!-- Final div column -->

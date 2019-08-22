@@ -21,13 +21,15 @@ let libreriaSchema = new mongoose.Schema({
     ejemplares: [{
         libro: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Libro',
+            ref: 'Ejemplar',
             required: false
         },
         cantidad: { type: Number, required: false, unique: false },
         estado: { type: Boolean, required: false, unique: false },
-        iva: { type: Number, required: false, unique: false }
-    }]
+        iva: { type: Number, required: false, unique: false },
+        vendidos: { type: Number, required: false, unique: false }
+    }],
+    estado: {type: Boolean, required: true, unique: false}
 });
 
 

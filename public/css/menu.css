@@ -37,8 +37,10 @@ header .menuHorizontal ul li {
 }
 
 header .menuHorizontal .list-menu .link-imagen {
-  float: right;
-  margin: 7px 40px;
+  position: absolute;
+  top: 8px;
+  height: 100%;
+  right: 120px;
 }
 
 header .menuHorizontal .list-menu .link-imagen {
@@ -130,7 +132,6 @@ header .menuHorizontal ul li .caret {
   padding-left: .8em;
   margin-bottom: 3px;
   --webkit-transition: all .5s;
-  -o-transition: all .5s;
 }
 
 .menu li:hover {
@@ -233,7 +234,6 @@ footer {
   padding: 10px;
 }
 
-
 .redesSociales {
   text-align: -webkit-center;
   align-self: center;
@@ -259,10 +259,79 @@ footer {
   margin-right: 8px;
 }
 
-.error{
+.error {
   border: 2px solid red !important;
 }
 
-header .fa-users{
+header .fa-users {
   float: right;
+}
+
+.cd-cart-trigger {
+  position: absolute;
+  top: 0;
+  height: 100%;
+}
+
+.cd-cart-trigger .cd-img-replace {
+  position: relative;
+  width: 100px;
+  border-left: none;
+  background-color: #26292f;
+}
+
+.cd-cart-trigger .cd-img-replace {
+  background: #26292f url(../img/cd-cart.svg) no-repeat center center;
+}
+
+.cd-img-replace {
+  display: inline-block !important;
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+}
+
+.cd-cart-trigger {
+  right: 0px;
+}
+
+#cd-bell-trigger {
+  right: 100px;
+}
+
+.cd-cart-trigger .cd-img-replace {
+  width: 100px;
+  height: 100%;
+}
+
+.p1[data-count]:after {
+  position: absolute;
+  right: 15%;
+  top: 8%;
+  content: attr(data-count);
+  font-size: 40%;
+  padding: .2em;
+  border-radius: 50%;
+  line-height: 1em;
+  color: white;
+  background: rgba(255, 0, 0, .85);
+  text-align: center;
+  min-width: 1em;
+  font-weight: bold;
+}
+
+#numCarrito {
+  height: 2.1em;
+  width: 100px;
+  background: #26292f;
+}
+
+#bell {
+  text-indent: 130%;
+  color: white;
+  text-decoration: none;
+}
+
+.linkGrande {
+  line-height: 25px;
 }

@@ -54,4 +54,22 @@ router.get('/listarEjemplarIdLibro/:id', async (req, res) => {
     })
 });
 
+router.get('/listaEjemplarID/:id', async (req, res) => {
+    return await Ejemplar.findById(req.params.id,function (err, EjemplarBD) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'No se encontro ningún ejemplar',
+                err
+            });
+        }
+        else {
+            return res.json({
+                success: true,
+                precio: EjemplarBD
+            });
+        }
+    })
+});
+
 module.exports = router;

@@ -3,7 +3,9 @@
 const express = require('express'),
     router = express.Router(),//permite crear la ruta
     Libreria = require('../models/libreria.model'),
-    mongoose = require('mongoose');
+    mongoose = require('mongoose'),
+    Ejemplar = require('../models/ejemplar.model'),
+    Libro = require('../models/libros.model');
 
 
 router.get('/listarLibrerias', async (req, res) => {
@@ -89,8 +91,259 @@ router.get('/obtenerTiendas', async (req, res) => {
             });
         }
     })
-        .populate('sucursales.sucursal', 'nombre correo telefono')
+        .populate('sucursales.sucursal', 'nombre correo telefono usuariosSubscritos')
         .select('nombreFantasia sucursales');
 });
+
+router.patch('/comprarLibroLibreria', function (req, res) {
+    let ejemplarId = new mongoose.Types.ObjectId(req.body.libro);
+    Ejemplar.updateOne({ _id: req.body.libro, 'cantidad': { $gte: req.body.cantidad } }, { $inc: { "cantidad": -(req.body.cantidad) } }, function (err, ejemp) {
+        if (err)
+            return res.json({
+                success: false,
+                message: 'No se agregaron los libros al catálogo de libros de la librería',
+                err
+            })
+        else {
+            if (ejemp.n) {
+                Libro.updateOne({ _id: req.body.id }, { $inc: { "vendidos": (req.body.cantidad) } }, function (err, libro) {
+                    if (err) {
+                        return res.json({
+                            success: false,
+                            message: 'No se agregaron los libros al catálogo de libros de la librería',
+                            err
+                        })
+                    }
+                    else {
+                        if (libro.n) {
+                            Libreria.updateOne({ _id: req.body.idLibreria, "ejemplares.libro": ejemplarId }, { $inc: { "ejemplares.$.cantidad": (req.body.cantidad) } }, function (err, ejemplar) {
+                                if (err) {
+                                    return res.status(400).json({
+                                        success: false,
+                                        message: 'Ocurrio un error',
+                                        err
+                                    });
+                                } else if (ejemplar.n) {
+                                    return res.json({
+                                        success: true,
+                                        message: 'Se agregaron los libros al catálogo de libros de la librería 1'
+                                    })
+                                }
+                                else {
+                                    Libreria.updateOne({ _id: req.body.idLibreria }, {
+                                        $push: {
+                                            'ejemplares': {
+                                                libro: req.body.libro,
+                                                cantidad: req.body.cantidad,
+                                                estado: 1,
+                                                iva: req.body.iva
+                                            }
+                                        }
+                                    },
+                                        function (err, ejemplar) {
+                                            if (err) {
+                                                return res.status(400).json({
+                                                    success: false,
+                                                    message: 'No se pudo comprar el libro',
+                                                    err
+                                                })
+                                            } else {
+                                                return res.json({
+                                                    success: true,
+                                                    message: 'Se agregaron los libros al catálogo de libros de la librería 1'
+                                                })
+                                            }
+                                        }
+                                    )
+
+                                }
+                            });
+                        } else {
+                            return res.json({
+                                success: false,
+                                message: 'Error al actulizar el libro',
+                                err
+                            })
+                        }
+                    }
+                });
+            }
+            else {
+                return res.json({
+                    success: false,
+                    message: 'No hay muchos libros en stock',
+                    err
+                })
+            }
+        }
+    });
+});
+
+router.get('/obtenerLibrosPorLibreriaID/:id', async (req, res) => {
+    return await Libreria.findById(req.params.id, function (err, libreria) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'No se encontro ninguna librería',
+                err
+            });
+        }
+        else {
+            return res.json({
+                success: true,
+                listaLibrerias: libreria
+            });
+        }
+    })
+        // .populate({
+        //     path: 'sucursales.sucursal',
+        //     populate: {
+        //         path: 'ejemplares.libro',
+        //     populate: {
+        //         path: 'libro',
+        //         populate: {
+        //             path: 'genero categoria autor',
+        //             select: '_id nombre nombreArtistico'
+        //         },
+        //         select: '_id titulo genero categoria caratula contraportada'
+        //     },
+        //     select: '_id tipo precio isbn10 isbn13 cantidad iva libro'
+        //     },
+        //     select: '_id nombre'
+        // })
+        .populate({
+            path: 'ejemplares.libro',
+            populate: {
+                path: 'libro',
+                populate: {
+                    path: 'genero categoria autor',
+                    select: '_id nombre nombreArtistico'
+                },
+                select: '_id titulo genero categoria caratula contraportada'
+            },
+            select: '_id tipo precio isbn10 isbn13 cantidad iva libro'
+        })
+        .select('nombreFantasia sucursales ejemplares');
+});
+
+router.get('/obtenerSucursalesPorLibreriaId/:id', function (req, res) {
+    Libreria.findById(req.params.id, function (err, libreria) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                msj: 'No se encontro libreria',
+                err
+            });
+        } else {
+            return res.json({
+                success: true,
+                libreria: libreria
+            });
+        }
+    })
+        .populate('sucursales.sucursal', 'nombre')
+        .select('nombreFantasia sucursales')
+});
+
+router.post('/deshabilitar-libreria', function (req, res) {
+    let body = req.body;
+
+    Contacto.findByIdAndUpdate(body._id, {
+        $set: {
+            estado: 'Deshabilitada'
+        }
+    },
+        function (error) {
+            if (error) {
+                console.log("error")
+                console.log(error)
+                res.json({ success: false, msg: 'No se pudo deshabilitar la libreria' });
+            } else {
+                console.log("scuccess")
+                res.json({ success: true, msg: 'La libreria se deshabilitó con éxito' });
+            }
+        }
+    )
+});
+
+router.post('/habilitar-libreria', function (req, res) {
+    let body = req.body;
+
+    Contacto.findByIdAndUpdate(body._id, {
+        $set: {
+            estado: req.body.estado
+        }
+    },
+        function (error) {
+
+            if (error) {
+                res.json({ success: false, msg: 'No se pudo habilitar la libreria' });
+            } else {
+                res.json({ success: true, msg: 'La libreria se habilitó con éxito' });
+            }
+        }
+    )
+});
+
+router.post('/obtenerLibreriasPorEjemplaresId', function (req, res) {
+    Libreria.find({ "ejemplares.libro": req.body.ejemplar }, function (err, librerias) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                msj: 'No se encontro libreria',
+                err
+            });
+        } else {
+            return res.json({
+                success: true,
+                librerias: librerias
+            });
+        }
+    })
+        .select("nombreFantasia");
+});
+
+router.post('/obtenerCantidadEjemplarPorLibreria', function (req, res) {
+    Libreria.findOne({
+        _id: req.body.idLibreria,
+        'ejemplares.libro': req.body.ejemplar
+    }, {
+            'ejemplares.$': 1
+        }, function (err, ejempl) {
+            if (err) {
+                return res.status(400).json({
+                    success: false,
+                    msj: 'No se encontro libros',
+                    err
+                });
+            } else {
+                return res.json({
+                    success: true,
+                    ejemplar: ejempl
+                });
+            }
+        });
+});
+
+router.get('/listarLibreriasCompletas', async (req, res) => {
+    return await Libreria.find(function (err, librerias) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'No se encontro ninguna librería',
+                err
+            });
+        }
+        else {
+            return res.json({
+                success: true,
+                listaLibrerias: librerias
+            });
+        }
+    })
+        .populate('sucursales.sucursal', 'nombre')
+        .select('nombreComercial nombreFantasia localizacionLatitud localizacionLongitud provincia canton distrito estado sucursales ejemplares');
+});
+
 
 module.exports = router;

@@ -208,3 +208,15 @@
 #btnPerfil{
     line-height: 44px;
 }
+
+.child-two{
+    height: 90%;
+}
+
+.informacionLibro{
+    height: 82%;
+}
+
+.masGrande{
+    max-width: 120px;
+}
