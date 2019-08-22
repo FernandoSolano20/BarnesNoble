@@ -11,9 +11,9 @@ function eventosGenero(event) {
 
     if (accion === 'crear') {
       modal.setAttribute('data-action', 'crear');
-      tituloModal.innerText = 'Crear género';
-      textoModal.innerText = '';
-      crearFomrulario(cuerpoModal);
+      //tituloModal.innerText = 'Crear género';
+      //textoModal.innerText = '';
+      //crearFomrulario(cuerpoModal);
     }
     else {
       let trGenero = elemento.parentElement.parentElement;
@@ -22,7 +22,7 @@ function eventosGenero(event) {
         nombre: trGenero.children[0].innerText,
         descripcion: trGenero.children[1].innerText
       };
-      cuerpoModal.setAttribute("data-genero", genero.id);
+      //cuerpoModal.setAttribute("data-genero", genero.id);
 
       if (accion === 'editar') {
         let editar = elemento.parentElement.parentElement;
@@ -30,7 +30,7 @@ function eventosGenero(event) {
         //modal.setAttribute('data-action', 'editar');
         //tituloModal.innerText = 'Editar género ' + genero.nombre;
         //textoModal.innerText = '¿Está seguro que quiere editar este género?';
-        //crearFomrulario(cuerpoModal, genero);
+        crearFomrulario(cuerpoModal, genero);
         function redireccionar(){
           window.location=`/editarOferta.html?id=${idOferta}`;
         } 
@@ -39,7 +39,7 @@ function eventosGenero(event) {
       } else if (accion === 'borrar') {
         modal.setAttribute('data-action', 'borrar');
         tituloModal.innerText = 'Eliminar oferta: ' + genero.nombre;
-        textoModal.innerText = '¿Está seguro que quiere elimnar esta oferta?';
+        textoModal.innerText = '¿Está seguro que quiere eliminar esta oferta?';
       } else if (accion === 'estado') {
         modal.setAttribute('data-action', 'estado');
         let checkBoxEstado = document.getElementById(genero.id);

@@ -214,7 +214,7 @@ router.delete('/eliminar/:id', function (req, res) {
 });
 
 router.patch('/modificarEstado/:id', function (req, res) {
-    Ofertas.findById(req.params.id, (err, genero) => {
+    Ofertas.findById(req.params.id, (err, ofertas) => {
         if (err) {
             return res.status(400).json({
                 success: false,
@@ -223,9 +223,9 @@ router.patch('/modificarEstado/:id', function (req, res) {
             });
         }
 
-        Ofertas.set(req.body);
+        ofertas.set(req.body);
 
-        Ofertas.save((err, OfertasBD) => {
+        ofertas.save((err, OfertasBD) => {
             if (err)
                 return res.status(400).json({
                     success: false,

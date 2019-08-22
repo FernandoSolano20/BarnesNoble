@@ -147,6 +147,7 @@ let generoFunciones = async (event) => {
         else {
             sweetAlertWarning();
         }
+        
     }
     else {
         let idGenero = document.getElementById('cuerpo-modal').getAttribute('data-genero');
@@ -174,6 +175,7 @@ let generoFunciones = async (event) => {
             else {
                 sweetAlertWarning();
             }
+            
         } else if (accion === 'borrar') {
             let trElemento = document.querySelector('[data-id="' + idGenero + '"]');
             trElemento.remove();
