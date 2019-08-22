@@ -121,25 +121,6 @@ router.get('/listarClubLecturaPorId/:id', function (req, res) {
         .select('nombre tema tipoClub fechaReunion horaReunion administrador sucursal participantes chat genero categoria');
 });
 
-router.put('/editar/:id', function (req, res) {
-    ClubLectura.findByIdAndUpdate(req.params.id, { $set: req.body }, function (err) {
-        if (err) {
-            return res.status(400).json({
-                success: false,
-                message: 'El club de lectura no se pudo editar',
-                err
-            });
-        }
-        ClubLectura.findById(req.params.id, (err, clubLectura) => {
-            return res.status(200).json({
-                success: true,
-                message: "Club de lectura editado",
-                clubLectura: clubLectura
-            })
-        });
-    });
-});
-
 router.patch('/suscribirUsuarioClubLectura', function(req, res){
     if(req.body.idUsuario && req.body.idClubLectura){
         ClubLectura.findById(req.params.id, (err, usuarios) => {
@@ -226,3 +207,34 @@ router.patch('/desuscribirUsuarioClubLectura', function(req, res){
 
 
 module.exports = router;
+
+
+router.post('/modificarClubLectura', function(req, res) {
+    let body = req.body;
+
+    ClubLectura.findByIdAndUpdate(body._id, {
+            $set: req.body
+        },
+        function(error) {
+            if (error) {
+                res.json({ success: false, msg: 'No se pudo modificar el club' });
+            } else {
+                res.json({ success: true, msg: 'El club se modificó con éxito' });
+            }
+        }
+    )
+});
+
+router.post('/eliminarClubLectura', function(req, res) {
+    let body = req.body;
+
+    ClubLectura.findByIdAndRemove(body._id,
+        function(error) {
+            if (error) {
+                res.json({ success: false, msg: 'No se pudo borrar el club' });
+            } else {
+                res.json({ success: true, msg: 'El club se borró con éxito' });
+            }
+        }
+    )
+});

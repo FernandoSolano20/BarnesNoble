@@ -76,18 +76,6 @@ let obtenerClubPorId = async (id) => {
     return result;
 }
 
-let editarClubLectura = async(clubLectura,id) => {
-    let response = await fetch('http://localhost:4000/api/clubLectura/editar/' + id, {
-        method: "PUT",
-        headers: {
-            'Content-Type': 'application/json;charset=UTF-8',
-        },
-        body:JSON.stringify(clubLectura)
-    });
-    let result = await response.json();
-    return result;
-}
-
 let suscribirUsuario = async function (data) {
     var response = await fetch('http://localhost:4000/api/clubLectura/suscribirUsuarioClubLectura', {
         method: "PATCH",
@@ -111,3 +99,32 @@ let desuscribirUsuario = async function (data) {
     var result = await response.json();
     return result;
 }
+
+let modificarClubLectura = (pid, pnombre, ptema, ptipoClub, pfechaReunion, phoraReunion) => {
+    axios({
+        method: 'post',
+        url: 'http://localhost:4000/api/clubLectura/modificarClubLectura',
+        responseType: 'json',
+        data: {
+            _id: pid,
+            nombre: pnombre,
+            tema: ptema,
+            tipoClub: ptipoClub,
+            fechaReunion: pfechaReunion,
+            horaReunion: phoraReunion
+
+        }
+    });
+};
+
+let eliminarClubLectura = (pid) => {
+    axios({
+        method: 'post',
+        url: 'http://localhost:4000/api/clubLectura/eliminarClubLectura',
+        responseType: 'json',
+        data: {
+            _id: pid
+
+        }
+    });
+};
