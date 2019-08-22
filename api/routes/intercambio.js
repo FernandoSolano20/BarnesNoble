@@ -2,7 +2,8 @@
 
 const express = require('express'),
     router = express.Router(),
-    Intercambio = require('../models/intercambio.model');
+    Intercambio = require('../models/intercambio.model'),
+    Usuario = require('../models/usuarios.model');
 
 router.post('/registrarIntercambio', function (req, res) {
     let body = req.body;
@@ -121,6 +122,19 @@ router.patch('/aprobarSolcitud/:id', function (req, res) {
                     err
                 });
             else {
+                let participantes = intercambio.participantes;
+                for(let i = 0; i < participantes.length; i++){
+                    Usuario.updateOne({ _id: participantes[i].usuario, "ejemplares.libro": participantes[i].ejemplarUsuario }, {  "ejemplares.$.estadoIntercambio": 0  }, function (err, ejemplar) {
+                        if(err){
+                            return res.status(400).json({
+                                success: false,
+                                message: 'El intercambio no se pudo aprobado',
+                                err
+                            });
+                        }
+                    });
+                }
+                
                 return res.json({
                     success: true,
                     message: 'El intercambio fue aprobado',
@@ -160,7 +174,49 @@ router.get('/obtenerMisIntercambios/:idUsuario', async (req, res) => {
             },
             select: '_id tipo libro'
         })
-        .select('nombre participantes terminado aprobado fechaInicio fechaFin')
+        .select('nombre participantes terminado aprobado fechaInicio fechaFin sucursal')
+});
+
+router.patch('/terminarIntercambio/:id', function (req, res) {
+    Intercambio.findById(req.params.id, (err, intercambio) => {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'Ocurrio un error',
+                err
+            });
+        }
+
+        intercambio.set(req.body);
+
+        intercambio.save((err, intercambioDB) => {
+            if (err)
+                return res.status(400).json({
+                    success: false,
+                    message: 'El intercambio no se pudo terminar',
+                    err
+                });
+            else {
+                let participantes = intercambio.participantes;
+                for(let i = 0; i < participantes.length; i++){
+                    Usuario.updateOne({ _id: participantes[i].usuario, "ejemplares.libro": participantes[i].ejemplarUsuario }, {  "ejemplares.$.estadoIntercambio": 1  }, function (err, ejemplar) {
+                        if(err){
+                            return res.status(400).json({
+                                success: false,
+                                message: 'El intercambio se ha terminado',
+                                err
+                            });
+                        }
+                    });
+                }
+                
+                return res.json({
+                    success: true,
+                    message: 'El intercambio se ha terminado',
+                });
+            }
+        });
+    });
 });
 
 module.exports = router;

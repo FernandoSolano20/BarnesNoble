@@ -174,19 +174,3 @@ let obtenerLibreriasCompletas  = async () => {
     var result = await response.json();
     return result.listaLibrerias;
 };
-
-var editarUsuario = async (usuario, id) => {
-    var response = await fetch('http://localhost:4000/api/editarUsuario/' + id, {
-        method: "PATCH",
-        headers: {
-            'Content-Type': 'application/json;charset=UTF-8',
-        },
-        body: JSON.stringify(usuario)
-    });
-    var result = await response.json();
-    return result;
-}
-
-var cambiarPassword = async (usuario, id) => {
-    var response = await fetch('http://localhost:4000/api/modificarPassword/' + id, {
-        method: "PATCH",

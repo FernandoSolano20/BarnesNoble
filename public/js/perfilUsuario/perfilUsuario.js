@@ -1,7 +1,7 @@
 let usuario;
 
-let formatearFech = function(date){
-    return ""+((date.getUTCDate() + 1 < 10 ? "0"+ Number(date.getUTCDate()) : Number(date.getUTCDate())) + '/' + (date.getUTCMonth() + 1 < 10 ? "0"+ Number(date.getUTCMonth() + 1) : Number(date.getUTCMonth() + 1)) + '/' + date.getFullYear())+"";
+let formatearFech = function (date) {
+    return "" + ((date.getUTCDate() + 1 < 10 ? "0" + Number(date.getUTCDate()) : Number(date.getUTCDate())) + '/' + (date.getUTCMonth() + 1 < 10 ? "0" + Number(date.getUTCMonth() + 1) : Number(date.getUTCMonth() + 1)) + '/' + date.getFullYear()) + "";
 }
 
 
@@ -245,23 +245,21 @@ let partialInformacionUsuario = function (contenedor, idUser) {
             spanBooksContainer.setAttribute('class', 'container');
             divBooks.appendChild(spanBooksContainer);
 
-            for (let i = 0; i < 5; i++) {
-                let spanBook = document.createElement('span');
-                spanBooksContainer.appendChild(spanBook);
+            // <div class="stars-outer far fa-book-alt">
+            //                             <div id="promVoto" class="stars-inner fas fa-book-alt"></div>
+            //                         </div>
+            let starsOuter = document.createElement('div');
+            starsOuter.setAttribute('class', 'stars-outer far fa-book-alt');
+            spanBooksContainer.appendChild(starsOuter);
 
-                let iconBook = document.createElement('i');
-                iconBook.setAttribute('class', 'far fa-book-alt');
-                spanBook.appendChild(iconBook);
-
-                let iconBookBold = document.createElement('i');
-                iconBookBold.setAttribute('class', 'otr fas fa-book-alt');
-                spanBook.appendChild(iconBookBold);
-            }
-            animationVotes();
+            let starsInner = document.createElement('div');
+            starsInner.setAttribute('class', 'stars-inner fas fa-book-alt');
+            starsInner.setAttribute('id', 'promVoto');
+            starsOuter.appendChild(starsInner);
 
             let contendorPreferencia = document.createElement('div');
             contendorPreferencia.setAttribute('id', 'preferencias');
-            contendorPreferencia.setAttribute('class','crear-contenedor');
+            contendorPreferencia.setAttribute('class', 'crear-contenedor');
             contenedorVotoPrefe.appendChild(contendorPreferencia);
 
             infoContainer = document.createElement('div');
@@ -331,7 +329,13 @@ let partialInformacionUsuario = function (contenedor, idUser) {
                 text.innerText = usuario.usuario.libro.titulo;
                 divInfo.appendChild(text);
             }
-            reviewsUsuario();
+            let tituloH2 = document.createElement("h2");
+            tituloH2.setAttribute('class', 'subtitle');
+            tituloH2.innerText = "Reseñas del lector";
+            document.getElementById("reviews").appendChild(tituloH2);
+            let promVoto = reviewsUsuario(usuario.usuario.resennas);
+            let votoDiv = document.getElementById('promVoto');
+            votoDiv.setAttribute('style', 'width: ' + promVoto + '%');
         } else {
             document.getElementById('map').remove();
         }
@@ -391,12 +395,34 @@ function calcularEdad(fecha) {
     return edad;
 }
 
-let reviewsUsuario = function () {
-    let reviewsContainer = document.getElementById("reviews");
-    let tituloH2 = document.createElement("h2");
-    tituloH2.setAttribute('class', 'subtitle');
-    tituloH2.innerText = "Reseñas del lector";
-    reviewsContainer.appendChild(tituloH2);
+let filaNoDatosReview = function (reviewsContainer) {
+
+    let divConatinerReview = document.createElement("div");
+    divConatinerReview.setAttribute('id', 'response-container');
+    reviewsContainer.appendChild(divConatinerReview);
+
+    let ul = document.createElement("ul");
+    divConatinerReview.appendChild(ul);
+
+    let liArticle = document.createElement('li');
+    liArticle.setAttribute('id', 'noDatos');
+    liArticle.setAttribute('class', 'article');
+    ul.appendChild(liArticle);
+
+    let h2 = document.createElement('h2');
+    liArticle.appendChild(h2);
+
+    let anchorName = document.createElement('a');
+    anchorName.setAttribute('href', '#');
+    anchorName.innerText = "No hay reseñas para este usuario";
+    h2.appendChild(anchorName);
+
+    let paragraph = document.createElement('p');
+    paragraph.innerText = "Realice intercambios";
+    liArticle.appendChild(paragraph);
+}
+
+let drawDivReview = function (voto, usuario, reviewsContainer) {
 
     let divConatinerReview = document.createElement("div");
     divConatinerReview.setAttribute('id', 'response-container');
@@ -410,7 +436,7 @@ let reviewsUsuario = function () {
     ul.appendChild(liArt);
 
     let imgUser = document.createElement('img');
-    imgUser.setAttribute('src', 'https://res.cloudinary.com/barnesnoble/image/upload/v1563946031/d3ldkxrdj2iggc7rwb4o.png');
+    imgUser.setAttribute('src', usuario.img);
     imgUser.setAttribute('alt', 'Foto perfil');
     imgUser.setAttribute('class', 'fotoUsuario');
     liArt.appendChild(imgUser);
@@ -419,8 +445,8 @@ let reviewsUsuario = function () {
     liArt.appendChild(h2Name);
 
     let anchorName = document.createElement("a");
-    anchorName.setAttribute("href", "https://www.nytimes.com/2019/06/11/arts/music/radiohead-ok-computer-demos.html");
-    anchorName.innerText = "Fernando Solano";
+    anchorName.setAttribute("href", "#");
+    anchorName.innerText = usuario.nombre + " " + usuario.primerApellido;
     h2Name.appendChild(anchorName);
 
     let tableDiv = document.createElement('div');
@@ -444,12 +470,27 @@ let reviewsUsuario = function () {
 
     let divStarInner = document.createElement('div');
     divStarInner.setAttribute('class', 'stars-inner fas fa-book-alt');
-    divStarInner.setAttribute('style', 'width: 81%');
+    divStarInner.setAttribute('style', 'width: ' + voto.calificacion * 20 + '%');
     divStarOuter.appendChild(divStarInner);
 
     var p = document.createElement('p');
-    p.innerText = "Pesimo";
+    p.innerText = voto.comentario;
     liArt.appendChild(p);
+}
+
+let reviewsUsuario = function (resenna) {
+    let reviewsContainer = document.getElementById("reviews");
+
+    let votosLength = resenna.length;
+    let sumCalificacion = 0;
+    for (let i = 0; i < votosLength; i++) {
+        drawDivReview(resenna[i], resenna[i].usuario, reviewsContainer);
+        sumCalificacion += resenna[i].calificacion;
+    }
+    if (votosLength == 0) {
+        filaNoDatosReview(reviewsContainer);
+    }
+    return (sumCalificacion / (votosLength ? votosLength : 1)) * 20;
 };
 
 informacionUsuario();
