@@ -171,13 +171,62 @@ let partialInformacionClub = function (contenedor) {
         divInfo.appendChild(btnSuscribir);
     }
 
-    if (club.clubLectura.administrador._id == sessionStorage.id) {
+    if (club.clubLectura.administrador._id == sessionStorage.id || sessionStorage.tipoUsuario == 'Adminitrador plataforma') {
+        let acciones = document.getElementById('accionesPrincipales');
+
+        let editar = document.createElement('i');
+        editar.setAttribute('class', 'far fa-edit');
+        editar.addEventListener('click', function () {
+            window.location.href = 'registroClubLectura.html?id=' + club.clubLectura._id;
+        })
+        acciones.appendChild(editar);
+
+        let eliminar = document.createElement('i');
+        eliminar.setAttribute('class', 'fal fa-trash-alt');
+        eliminar.setAttribute('data-id', club.clubLectura._id);
+        eliminar.addEventListener('click', function (event) {
+            let elemento = event.target;
+            let idElemento = elemento.getAttribute('data-id');
+            Swal.fire({
+                title: 'Eliminar',
+                text: "¿Está seguro que quiere eliminar este club de lectura?",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#f2a5a0',
+                confirmButtonText: 'Borrar',
+                cancelButtonText: 'Cancelar'
+            }).then(async (result) => {
+                if (result.value) {
+                    let response = await eliminarClubLectura(idElemento);
+                    if (response.success) {
+                        Swal.fire(
+                            'Eliminado',
+                            response.message,
+                            'success'
+                        ).then((result) => {
+                            window.location.href = "listarClubLectura.html";
+                        })
+                    }
+                    else {
+                        Swal.fire({
+                            type: 'error',
+                            title: response.message,
+                            text: 'Algo salió mal!'
+                        })
+                    }
+
+                }
+            })
+        });
+        acciones.appendChild(eliminar);
+
         let button = document.createElement('a');
         button.setAttribute("href", "http://localhost:3000/chat.html?id=" + club.clubLectura.sucursal._id);
         button.setAttribute("class", "material-blue btn-sucursal btnClub");
         button.innerText = "Chat";
         divInfo.appendChild(button);
-        
+
         let containerNames = document.getElementById('containerNames');
 
         let h2 = document.createElement('h2');

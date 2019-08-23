@@ -1,6 +1,6 @@
 'use strict';
 
-let crearClubLectura = (pnombre, ptema, ptipoClub, pfechaReunion , phoraReunion, pIdSucursal, pIdCategoria, pIdGenero, pIdUsuario,) => {
+let crearClubLectura = (pnombre, ptema, ptipoClub, pfechaReunion, phoraReunion, pIdSucursal, pIdCategoria, pIdGenero, pIdUsuario, ) => {
     axios({
         method: 'post',
         url: 'http://localhost:4000/api/clubLectura/registrarClubLectura',
@@ -12,8 +12,8 @@ let crearClubLectura = (pnombre, ptema, ptipoClub, pfechaReunion , phoraReunion,
             fechaReunion: pfechaReunion,
             horaReunion: phoraReunion,
             sucursal: pIdSucursal,
-            categoria:pIdCategoria,
-            genero:pIdGenero,
+            categoria: pIdCategoria,
+            genero: pIdGenero,
             administrador: pIdUsuario
         }
     });
@@ -25,7 +25,7 @@ let registrarClubLectura = async (clubLectura) => {
         headers: {
             'Content-Type': 'application/json;charset=UTF-8',
         },
-        body:JSON.stringify(clubLectura)
+        body: JSON.stringify(clubLectura)
     });
     let result = await response.json();
     return result;
@@ -82,7 +82,7 @@ let suscribirUsuarioClub = async function (participante) {
         headers: {
             'Content-Type': 'application/json;charset=UTF-8',
         },
-        body:JSON.stringify(participante)
+        body: JSON.stringify(participante)
     });
     var result = await response.json();
     return result;
@@ -94,37 +94,31 @@ let desuscribirUsuarioClub = async function (participante) {
         headers: {
             'Content-Type': 'application/json;charset=UTF-8',
         },
-        body:JSON.stringify(participante)
+        body: JSON.stringify(participante)
     });
     var result = await response.json();
     return result;
 }
 
-let modificarClubLectura = (pid, pnombre, ptema, ptipoClub, pfechaReunion, phoraReunion) => {
-    axios({
-        method: 'post',
-        url: 'http://localhost:4000/api/clubLectura/modificarClubLectura',
-        responseType: 'json',
-        data: {
-            _id: pid,
-            nombre: pnombre,
-            tema: ptema,
-            tipoClub: ptipoClub,
-            fechaReunion: pfechaReunion,
-            horaReunion: phoraReunion
-
-        }
+let modificarClubLectura = async (club,id) => {
+    let response = await fetch('http://localhost:4000/api/clubLectura/modificarClubLectura/' + id, {
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body:JSON.stringify(club)
     });
+    let result = await response.json();
+    return result;
 };
 
-let eliminarClubLectura = (pid) => {
-    axios({
-        method: 'post',
-        url: 'http://localhost:4000/api/clubLectura/eliminarClubLectura',
-        responseType: 'json',
-        data: {
-            _id: pid
-
-        }
+let eliminarClubLectura = async (id) => {
+    let response = await fetch('http://localhost:4000/api/clubLectura/eliminarClubLectura/' + id, {
+        method: "DELETE",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
     });
+    let result = await response.json();
+    return result;
 };

@@ -34,13 +34,13 @@ router.post('/registrarClubLectura', function (req, res) {
             if (err) {
                 return res.status(400).json({
                     success: false,
-                    msj: 'El club de lectura no se pudo guardar',
+                    message: 'El club de lectura no se pudo guardar',
                     err
                 });
             } else {
                 res.json({
                     success: true,
-                    msj: 'El club de lectura se guardó con éxito'
+                    message: 'El club de lectura se guardó con éxito'
                 });
             }
         }
@@ -270,31 +270,29 @@ router.patch('/desuscribirUsuarioClubLectura', function (req, res) {
 module.exports = router;
 
 
-router.post('/modificarClubLectura', function (req, res) {
+router.put('/modificarClubLectura/:id', function (req, res) {
     let body = req.body;
 
-    ClubLectura.findByIdAndUpdate(body._id, {
+    ClubLectura.findByIdAndUpdate(req.params.id, {
         $set: req.body
     },
         function (error) {
             if (error) {
-                res.json({ success: false, msg: 'No se pudo modificar el club' });
+                res.json({ success: false, message: 'No se pudo modificar el club' });
             } else {
-                res.json({ success: true, msg: 'El club se modificó con éxito' });
+                res.json({ success: true, message: 'El club se modificó con éxito' });
             }
         }
     )
 });
 
-router.post('/eliminarClubLectura', function (req, res) {
-    let body = req.body;
-
-    ClubLectura.findByIdAndRemove(body._id,
+router.delete('/eliminarClubLectura/:id', function (req, res) {
+    ClubLectura.findByIdAndRemove(req.params.id,
         function (error) {
             if (error) {
-                res.json({ success: false, msg: 'No se pudo borrar el club' });
+                res.json({ success: false, message: 'No se pudo borrar el club' });
             } else {
-                res.json({ success: true, msg: 'El club se borró con éxito' });
+                res.json({ success: true, message: 'El club se borró con éxito' });
             }
         }
     )
