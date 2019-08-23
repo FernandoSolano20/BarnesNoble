@@ -21,7 +21,7 @@ header .menuHorizontal {
   width: 100%;
   margin: 0px auto;
   z-index: 10000;
-  background-color: #42AB9E;
+  background-color: #ffffff;
   -webkit-box-shadow: 0px 14px 41px -10px rgba(0,0,0,0.55);
   -moz-box-shadow: 0px 14px 41px -10px rgba(0,0,0,0.55);
   box-shadow: 0px 14px 41px -10px rgba(0,0,0,0.55);
@@ -49,11 +49,11 @@ header .menuHorizontal .list-menu .link-imagen {
 }
 
 header .menuHorizontal ul li:hover {
-  background: #31635d;
+  background: #42AB9E;
 }
 
 header .menuHorizontal ul li a {
-  color: #fff;
+  color: #2d3135;
   display: block;
   text-decoration: none;
   padding: 26px;
@@ -116,7 +116,7 @@ box-shadow: 6px 14px 41px -10px rgba(0,0,0,0.55);
 }
 
 .menu a {
-  color: #fff;
+  color: #2d3135;
   text-decoration: none;
   display: block;
   width: 100%;
@@ -143,7 +143,7 @@ box-shadow: 6px 14px 41px -10px rgba(0,0,0,0.55);
 }
 
 .menu li a:hover {
-  color: #31635d;
+  color: #42AB9E;
 }
 
 .menu li:nth-child(2) a {
@@ -172,7 +172,7 @@ box-shadow: 6px 14px 41px -10px rgba(0,0,0,0.55);
 
 .menuIzquierdo {
   z-index: 10000;
-  background: #42AB9E;
+  background: #ffffff;
   position: fixed;
   left: -18em;
   top: 67px;
@@ -323,7 +323,7 @@ header .fa-users {
 #numCarrito {
   height: 2.1em;
   width: 100px;
-  background: #31635d;
+  background: #42AB9E;
 }
 
 #bell {

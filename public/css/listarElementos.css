@@ -1,12 +1,18 @@
+table{
+    max-width: 900px;
+    min-width: 900px;
+}
 .contenedor-tabla .tabla {
-    margin: 20px auto;
-    border: 2px solid #000;
+    margin: 0 auto;
+    border: 2px solid #2d3135;
     box-shadow: 3px 3px 5px 6px #ccc;
+    max-width: 900px;
+    min-width: 900px;
 }
 
 .contenedor-tabla .tabla thead {
-    background-color: #315c74;
-    border: 2px solid #000;
+    background-color: #66AB8C;
+    border: 2px solid #2d3135;
     color: #fff;
     font-family: Roboto;
 }
@@ -20,7 +26,7 @@
 }
 
 .contenedor-tabla .tabla tbody td {
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid #2d3135;
 }
 
 .contenedor-tabla .tabla thead th, .contenedor-tabla .tabla tbody td {
@@ -73,7 +79,7 @@
     right: 3px;
     background: #cecece;
     border-color: transparent;
-    box-shadow: 0 3px 3px #000;
+    box-shadow: 0 3px 3px #2d3135;
 }
 
 #tbl_sucursales .campoLibreria{

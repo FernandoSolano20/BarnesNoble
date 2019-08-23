@@ -128,7 +128,7 @@ let eliminarLibreria = async(id) => {
     return result;
 }
 
-let estadoLibreria = async(genero,id) => {
+let estadoLibreria = async(libreria,id) => {
     let response = await fetch('http://localhost:4000/api/modificarEstadoLibreria/' + id, {
         method: "PATCH",
         headers: {

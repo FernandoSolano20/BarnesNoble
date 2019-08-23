@@ -1,8 +1,9 @@
 .contenedor-tabla .tabla {
-    margin: 20px auto;
+    margin: 0 auto;
     border: 2px solid #000;
     box-shadow: 3px 3px 5px 6px #ccc;
-    width: 80%;
+    max-width: 900px;
+    min-width: 900px;
 }
 
 .contenedor-tabla .tabla thead {
@@ -134,7 +135,7 @@
     text-decoration: none;
     color: white;
     border-radius: 1px;
-    background-color: #315c74;
+    background-color: #6ec4db;
     border: none;
     -webkit-box-shadow: 0px 4px 3px 0px rgba(50, 50, 50, 0.2);
     -moz-box-shadow: 0px 4px 3px 0px rgba(50, 50, 50, 0.2);
@@ -150,7 +151,7 @@
 }
 
 .crear-contenedor .material-blue:hover{
-    background-color: #1976d2;
+    background-color: #10667e;
     box-shadow: 0px 5px 3px 0px rgba(50, 50, 50, 0.3);
     cursor: pointer;
 }

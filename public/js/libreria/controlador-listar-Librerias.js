@@ -10,7 +10,7 @@ let mostrar_tabla = async (event) => {
         if (sessionStorage.tipoUsuario != 'Lector') {
             let btn = document.createElement('a');
             btn.type = "button";
-            btn.setAttribute('class', 'material-blue-crear');
+            btn.setAttribute('class', 'material-blue');
             btn.href = "registroLibreria.html";
             document.getElementById('boton').appendChild(btn);
             listaLibrerias = await obtenerLibrerias();
@@ -56,7 +56,7 @@ let mostrar_tabla = async (event) => {
 
             btnPerfil.innerText = 'Ver Perfil'
             btnPerfil.dataset._id = listaLibrerias[i]['_id'];
-            btnPerfil.setAttribute('class', 'material-blue-perfil')
+            btnPerfil.setAttribute('class', 'material-blue')
             btnPerfil.addEventListener('click', function () {
                 window.location.href = `perfilLibreria.html?id=${this.dataset._id}`;
             });
@@ -90,7 +90,7 @@ let mostrar_tabla = async (event) => {
             estadoCelda.appendChild(estadoLabel);
         }
     }
-    filaNoDatos();
+    // filaNoDatos();
 };
 
 let libreriaFunciones = async (event) => {

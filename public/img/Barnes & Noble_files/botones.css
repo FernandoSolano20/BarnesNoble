@@ -1,6 +1,6 @@
-/* .crear-contenedor {
+.crear-contenedor {
     margin: 15px auto;
-} */
+}
 
 .crear-contenedor .material-blue {
     height: 40px;
@@ -21,8 +21,6 @@
     position: relative;
     font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
     box-sizing: border-box;
-    margin-top: 39px;
-    margin-bottom: 40px;
 }
 
 .crear-contenedor .material-blue:hover{

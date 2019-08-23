@@ -5,18 +5,19 @@
 }
 
 .crear-contenedor .material-blue {
-    height: 50px;
-    padding: 0 50px;
-    font-size: 18px;
+    height: 40px;
+    padding: 0px 28px;
+    font-size: 14px;
     text-decoration: none;
     color: white;
-    border-radius: 1px;
-    background-color: #315c74;
+    border-radius: 6px;
+    background-color: #6ec4db;
     border: none;
     -webkit-box-shadow: 0px 4px 3px 0px rgba(50, 50, 50, 0.2);
     -moz-box-shadow: 0px 4px 3px 0px rgba(50, 50, 50, 0.2);
     box-shadow: 0px 4px 3px 0px rgba(50, 50, 50, 0.2);
-    line-height: 50px;
+    display: inline-block;
+    line-height: 40px;
     text-align: center;
     overflow: hidden;
     position: relative;
@@ -25,7 +26,7 @@
 }
 
 .crear-contenedor .material-blue:hover{
-    background-color: #1976d2;
+    background-color: #10667e;
     box-shadow: 0px 5px 3px 0px rgba(50, 50, 50, 0.3);
     cursor: pointer;
 }

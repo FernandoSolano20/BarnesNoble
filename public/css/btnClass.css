@@ -1,25 +1,22 @@
 .material {
-    height: 50px;
-    padding: 0 50px;
-    font-size: 18px;
+    height: 40px;
+    padding: 0px 28px;
+    font-size: 14px;
     text-decoration: none;
-    color: #ffffff;
-    border-radius: 1px;
-    background-color: #2196f3;
+    color: white;
+    border-radius: 6px;
+    background-color: #6ec4db;
     border: none;
-    -webkit-box-shadow: 0px 3px 3px 0px rgba(50, 50, 50, 0.1);
-    -moz-box-shadow: 0px 3px 3px 0px rgba(50, 50, 50, 0.1);
-    box-shadow: 0px 3px 3px 0px rgba(50, 50, 50, 0.1);
-    margin: 25px 0;
+    -webkit-box-shadow: 0px 4px 3px 0px rgba(50, 50, 50, 0.2);
+    -moz-box-shadow: 0px 4px 3px 0px rgba(50, 50, 50, 0.2);
+    box-shadow: 0px 4px 3px 0px rgba(50, 50, 50, 0.2);
     display: inline-block;
-    line-height: 50px;
+    line-height: 40px;
     text-align: center;
     overflow: hidden;
     position: relative;
     font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
     box-sizing: border-box;
-    -webkit-transition: 0.3s ease;
-    transition: 0.3s ease;
 }
 
 .material.full {
@@ -199,9 +196,9 @@
     max-height: 102px;
     min-height: 43px;
     max-width: 90px;
-    padding: 0 4px;
+    padding: 0 10px;
     min-width: 40%;
-    font-size: 16px;
+    font-size: 14px;
     margin: 5px;
     /* line-height: normal; */
 }
@@ -215,4 +212,12 @@
 
 .informacionLibro{
     height: 82%;
+}
+
+.containerButtonsCards{
+    display: inline-flex;
+}
+
+#btnFormato{
+    padding-top: 6px;
 }
