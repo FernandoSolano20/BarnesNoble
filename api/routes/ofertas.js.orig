@@ -7,11 +7,18 @@ const express = require('express'),
     Sucursal = require('../models/sucursal.model'),
     mongoose = require('mongoose');
 
+<<<<<<< HEAD
 
 /*  router.param('id', function (req, res, next, id) {
  req.body.id = id;
  next(); 
 })*/
+=======
+router.param('id', function (req, res, next, id) {
+    req.body.id = id;
+    next();
+})
+>>>>>>> cfd660805cb7a4875c3f1346cb7a259cd08408b3
 
 const transporter = nodeMailer.createTransport({
     service: 'gmail',
