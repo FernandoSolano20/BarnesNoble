@@ -102,7 +102,8 @@
     box-sizing: border-box;
     top: 20px;
     left: 5%;
-    /* position: relative; */
+    font-size: 25px;
+
 }
 
 .crear-contenedor .material-blue-eliminar {
@@ -133,10 +134,32 @@
     padding: 0 30px;
     margin: 0px 15px;
 }
+/* Creado por Frank */
+.editar-libro{
+    font-size: 50px;
+    display: inline-block;
+    margin-left: 500px; 
+    margin-right: 100px; 
+    margin-top: 20px;
+}
+.eliminar-libro{
+    font-size: 50px;
+    display: inline-block;
+    margin-left: 100px;
+    margin-right: 150px;
+    margin-top: 20px;
+  
+}
+.estado-libro{
+    font-size: 50px;
+    display: inline-block;
+    margin-left: 100px;
+    margin-right: 100px;
+  
+}
 
-.eliminarUsuario {
-    font-size: 18px;
-    color: red;
-    font-weight: bold;
-    margin-right: 20px;
+.estado-toggle{
+
+    font-size: 100px;
+
 }

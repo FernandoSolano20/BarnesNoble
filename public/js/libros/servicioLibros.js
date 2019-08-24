@@ -66,6 +66,22 @@ let obtenerLibrosId = async (id) => {
     return result;
 }
 
+let obtenerLibrorId = async(id) => {
+    try {
+        
+        const response = await axios({
+            method: 'get',
+            url: `http://localhost:4000/api/autor/buscarLibroId/${id}`,
+            responseType: 'json'
+        });
+
+        return response.data.libro;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+
 //SofiaZu-Para listar por preferencia
 let obtenerPreferencias = async (usuario) => {
     let response = await fetch('http://localhost:4000/api/libros/listarLibrosPorPreferencia', {
@@ -102,17 +118,6 @@ let votarPorLibro = async function (voto) {
     return result;
  }
 
-let editarLibro = async (libro, id) => {
-    let response = await fetch('http://localhost:4000/api/libros/editarLibro/' + id, {
-        method: "PUT",
-        headers: {
-            'Content-Type': 'application/json;charset=UTF-8',
-        },
-        body: JSON.stringify(libro)
-    });
-    let result = await response.json();
-    return result;
-}
 
 const obtenerLibrosMejoresCalificados = async () => {
     let response = await fetch('http://localhost:4000/api/libros/listarMejoreCalificados', {
@@ -124,20 +129,6 @@ const obtenerLibrosMejoresCalificados = async () => {
     let result = await response.json();
     return result.listaLibros;
 }
-
-let eliminarLibro = (pid) => {
-    axios({
-        method: 'post',
-        url: 'http://localhost:4000/api/libros/eliminarLibro/',
-        responseType: 'json',
-        data: {
-            _id: pid
-        }
-
-    });
-
-};
-
 
 let obtenerLibroId = async(id) => {
     try {
@@ -154,22 +145,38 @@ let obtenerLibroId = async(id) => {
     }
 };
 
-let modificar = (pid, ptitulo, pimg1, pimg2, pautor,pgenero,pcategoria, presenna ) => {
+//Creado por Frank
+let modificarLibro = async (id, libro) => {
+    let response = await fetch('http://localhost:4000/api/libros/editar/'+ id, {
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body:JSON.stringify(libro)
+    });
+    let result = await response.json();
+    return result;
+};
+let eliminarLibro = (pid) => {
     axios({
         method: 'post',
-        url: 'http://localhost:4000/api/libros/modificar-libro',
+        url: 'http://localhost:4000/api/libros/eliminarLibro/',
         responseType: 'json',
         data: {
-            _id: pid,
-            titulo: ptitulo,
-            img1: pimg1,
-            img2: pimg2,
-            autor: pautor,
-            genero: pgenero,
-            categoria: pcategoria,
-            resenna: presenna,
-
-
+            _id: pid
         }
+
     });
+
 };
+let estadoLibro = async(libro,id) => {
+    let response = await fetch('http://localhost:4000/api/autor/modificarEstado/' + id, {
+        method: "PATCH",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body:JSON.stringify(libro)
+    });
+    let result = await response.json();
+    return result.response;
+}

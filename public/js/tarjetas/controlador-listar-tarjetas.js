@@ -64,7 +64,6 @@ let mostrar_tabla = async (event) => {
 
                         Swal.fire(
                             'Tarjeta eliminada!',
-                            'success'
                         ).then((result) => {
                             if (result.value) {
                                 window.location.href = 'listarTarjetas.html';
