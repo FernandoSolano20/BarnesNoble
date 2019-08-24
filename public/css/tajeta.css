@@ -278,6 +278,11 @@ input[type=file] {
   width: 30%;
 }
 
+#editar{
+  display: block;
+  margin: 20px auto;
+  width: 30%;
+
 #slt-expiracionMM{
   width: 128px;
 }

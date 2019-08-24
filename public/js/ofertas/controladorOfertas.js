@@ -35,18 +35,27 @@ let crearTabla = async (event) => {
 
     tbody.innerHTML = '';
     for (let i = 0; i < listaOfertas.listaOfertas.length; i++) {
-        if (listaOfertas.listaOfertas[i].nombre.toLowerCase().includes(filtro.toLowerCase()) || listaOfertas.listaOfertas[i].descripcion.toLowerCase().includes(filtro.toLowerCase()) || (listaOfertas.listaOfertas[i].autor?listaOfertas.listaOfertas[i].autor.nombre:"").toLowerCase().includes(filtro.toLowerCase()) || (listaOfertas.listaOfertas[i].genero?listaOfertas.listaOfertas[i].genero.nombre:"").toLowerCase().includes(filtro.toLowerCase()) || (listaOfertas.listaOfertas[i].categoria?listaOfertas.listaOfertas[i].categoria.nombre:"").toLowerCase().includes(filtro.toLowerCase())) {
-            agregarFilaGenero(listaOfertas.listaOfertas[i]);
+        if (listaOfertas.listaOfertas[i].nombre.toLowerCase().includes(filtro.toLowerCase()) || listaOfertas.listaOfertas[i].descripcion.toLowerCase().includes(filtro.toLowerCase()) || (listaOfertas.listaOfertas[i].autor ? listaOfertas.listaOfertas[i].autor.nombre : "").toLowerCase().includes(filtro.toLowerCase()) || (listaOfertas.listaOfertas[i].genero ? listaOfertas.listaOfertas[i].genero.nombre : "").toLowerCase().includes(filtro.toLowerCase()) || (listaOfertas.listaOfertas[i].categoria ? listaOfertas.listaOfertas[i].categoria.nombre : "").toLowerCase().includes(filtro.toLowerCase())) {
+            agregarFilaGenero(listaOfertas.listaOfertas[i], i);
         }
 
     }
     filaNoDatos();
 };
 
+let redireccionarEditar = function (listaOfertas) {
+    localStorage.setItem("ofertaEditar", JSON.stringify(listaOfertas));
+    window.location = "editarOferta.html";
+}
+
+/* let eliminarOferta = function (listaOfertas) {
+    console.log("oferta eliminada");
+} */
+
 
 
 //for (let i = 0; i < listaOfertas.length; i++) {
-let agregarFilaGenero = function (listaOfertas) {
+let agregarFilaGenero = function (listaOfertas, i) {
     let tbody = document.querySelector('#tabla-elementos tbody');
     let fila = tbody.insertRow();
 
@@ -67,7 +76,7 @@ let agregarFilaGenero = function (listaOfertas) {
 
     let descripcionFila = fila.insertCell();
     descripcionFila.innerHTML = descripcion;
-    descripcionFila.setAttribute('class','left');
+    descripcionFila.setAttribute('class', 'left');
     if (listaOfertas.sucursal) {
         fila.insertCell().innerHTML = listaOfertas.sucursal.nombre;
     }
@@ -78,19 +87,131 @@ let agregarFilaGenero = function (listaOfertas) {
     let editarCelda = fila.insertCell();
     let editar = document.createElement('i');
     editar.setAttribute('class', 'far fa-edit');
-    editar.setAttribute('data-action', 'editar');
+    editar.addEventListener("click", function () {
+        redireccionarEditar(listaOfertas);
+    })
     editarCelda.appendChild(editar);
 
     let eliminarCelda = fila.insertCell();
     let eliminar = document.createElement('i');
     eliminar.setAttribute('class', 'fal fa-trash-alt');
-    eliminar.setAttribute('data-action', 'borrar');
+    eliminar.addEventListener("click", function () {
+        Swal.fire({
+            title: 'Eliminar',
+            text: "¿Está seguro que quiere eliminar esta oferta?",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Borrar',
+            cancelButtonText: 'Cancelar'
+        }).then(async (result) => {
+            //llamar al servicio para borrar elemento
+            if (result.value) {
+                let response = await eliminarOferta(listaOfertas._id);
+                if (response.success) {
+                    Swal.fire(
+                        'Eliminado',
+                        response.message,
+                        'success'
+                    ).then((result) => {
+                        window.location.href = 'listarOfertas.html';
+                    });
+                }
+                else {
+                    Swal.fire({
+                        type: 'error',
+                        title: response.message,
+                        text: 'Algo salió mal!'
+                    })
+                }
+
+            }
+        })
+    })
     eliminarCelda.appendChild(eliminar);
 
     let estadoCelda = fila.insertCell();
 
     let estadoInput = document.createElement('input');
     estadoInput.setAttribute('class', 'switch');
+    estadoInput.setAttribute('data-id', listaOfertas._id);
+    estadoInput.addEventListener('click', function (event) {
+        let inputRadio = event.target;
+        let idElemento = inputRadio.getAttribute('data-id');
+        if (!inputRadio.checked) {
+            Swal.fire({
+                title: 'Activar',
+                text: "¿Está seguro que quiere activar esta oferta?",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Activar'
+            }).then(async (result) => {
+                if (result.value) {
+                    let oferta = {
+                        estado: true
+                    }
+                    let response = await estadoOferta(oferta, idElemento)
+                    if (response.success) {
+                        Swal.fire(
+                            'Activar',
+                            'La oferta se activó con éxito',
+                            'success'
+                        )
+                    }
+                    else {
+                        Swal.fire(
+                            'Ocurrio un error',
+                            'La oferta no se activó con éxito',
+                            'error'
+                        ).then((result) => {
+                            window.location.href = 'listarOfertas.html';
+                        })
+                    }
+                } else {
+                    inputRadio.checked = true;
+                }
+            })
+        }
+        else {
+            Swal.fire({
+                title: 'Desactivar?',
+                text: "¿Está seguro que quiere desactivar esta oferta?",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Desactivar'
+            }).then(async (result) => {
+                if (result.value) {
+                    let oferta = {
+                        estado: false
+                    }
+                    let response = await estadoOferta(oferta, idElemento);
+                    if (response.success) {
+                        Swal.fire(
+                            'Desactivado',
+                            'La oferta se desactivo con éxito',
+                            'success'
+                        )
+                    }
+                    else {
+                        Swal.fire(
+                            'Ocurrio un error',
+                            'La oferta no se desactivo con éxito',
+                            'error'
+                        ).then((result) => {
+                            window.location.href = 'listarOfertas.html';
+                        })
+                    }
+                } else {
+                    inputRadio.checked = false;
+                }
+            })
+        }
+    })
 
     estadoInput.setAttribute('id', listaOfertas._id);
     estadoInput.setAttribute('type', 'checkbox');
@@ -103,7 +224,7 @@ let agregarFilaGenero = function (listaOfertas) {
     estadoCelda.appendChild(estadoLabel);
 
 }
-    ;
+
 
 let filaNoDatos = function () {
     if (listaOfertas.length === 0 || tbody.childElementCount === 0) {
@@ -134,7 +255,7 @@ let generoFunciones = async (event) => {
                 removerForm();
                 agregarListaGenero(nuevoGenero.genero);
                 let noData = document.getElementById("no-data");
-                if(noData){
+                if (noData) {
                     noData.remove();
                 }
             }
