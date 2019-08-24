@@ -164,4 +164,4 @@ inputMuerte.addEventListener('blur', validarFechaMuerte);
 inputNacionalidad.addEventListener('blur', validarNacionalidad);
 inputResenna.addEventListener('blur', validarResenna);
 imgInput.addEventListener("change", validarFotoPerfil);
-document.getElementById('btnModificar').addEventListener('click', validarDatosAutor);
+document.getElementById('registrar').addEventListener('click', validarDatosAutor);
