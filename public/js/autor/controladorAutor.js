@@ -43,7 +43,11 @@ let agregarFilaAutores = function (autor) {
     let editar = document.createElement('i');
     editar.setAttribute('class', 'far fa-edit');
     editar.setAttribute('data-id', autor._id);
+    editar.addEventListener('click', function () {
+        window.location.href = `modificarAutor.html?_id=${autor._id}`
+    });
     editarCelda.appendChild(editar);
+
 
     let eliminarCelda = fila.insertCell();
     let eliminar = document.createElement('i');

@@ -38,7 +38,7 @@ let editarOferta = async(oferta,id) => {
 }
 
 let eliminarOferta = async(id) => {
-    let response = await fetch('http://localhost:4000/api/oferta/eliminar/' + id, {
+    let response = await fetch('http://localhost:4000/api/ofertas/eliminar/' + id, {
         method: "DELETE",
         headers: {
             'Content-Type': 'application/json;charset=UTF-8',
@@ -49,7 +49,7 @@ let eliminarOferta = async(id) => {
 }
 
 let estadoOferta = async(oferta,id) => {
-    let response = await fetch('http://localhost:4000/api/oferta/modificarEstado/' + id, {
+    let response = await fetch('http://localhost:4000/api/ofertas/modificarEstado/' + id, {
         method: "PATCH",
         headers: {
             'Content-Type': 'application/json;charset=UTF-8',

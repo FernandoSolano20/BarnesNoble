@@ -15,10 +15,12 @@ body {
 
 header {
   width: 100%;
+  height: 71.2px;
 }
 
 header .menuHorizontal {
   width: 100%;
+  position: fixed;
   margin: 0px auto;
   z-index: 10000;
   background-color: #42AB9E;
@@ -110,9 +112,6 @@ header .menuHorizontal ul li .caret {
   overflow-x: hidden;
   overflow-y: auto;
   font-family: 'Roboto';
-  -webkit-box-shadow: 6px 14px 41px -10px rgba(0,0,0,0.55);
--moz-box-shadow: 6px 14px 41px -10px rgba(0,0,0,0.55);
-box-shadow: 6px 14px 41px -10px rgba(0,0,0,0.55);
 }
 
 .menu a {
@@ -271,21 +270,21 @@ header .fa-users {
   float: right;
 }
 
-#cd-cart-trigger {
+.cd-cart-trigger {
   position: absolute;
   top: 0;
   height: 100%;
 }
 
-#cd-cart-trigger .cd-img-replace {
+.cd-cart-trigger .cd-img-replace {
   position: relative;
   width: 100px;
   border-left: none;
   background-color: #26292f;
 }
 
-#cd-cart-trigger .cd-img-replace {
-  background: #26292f url(../img/cd-cart.svg) no-repeat center center;
+.cd-cart-trigger .cd-img-replace {
+  background: #31635d url(../img/cd-cart.svg) no-repeat center center;
 }
 
 .cd-img-replace {
@@ -295,11 +294,15 @@ header .fa-users {
   white-space: nowrap;
 }
 
-#cd-cart-trigger {
-  right: -2px;
+.cd-cart-trigger {
+  right: 0px;
 }
 
-#cd-cart-trigger .cd-img-replace {
+#cd-bell-trigger {
+  right: 100px;
+}
+
+.cd-cart-trigger .cd-img-replace {
   width: 100px;
   height: 100%;
 }

@@ -2,7 +2,10 @@
 
 const express = require('express'),
     router = express.Router(),
-    Autor = require('../models/autor.model');
+    Autor = require('../models/autor.model'),
+    Libro = require('../models/libros.model'),
+    Lectores = require('../models/usuarios.model'),
+    Oferta = require('../models/ofertas.model');
 
 router.post('/registrarAutor', function (req, res) {
     let body = req.body;
@@ -96,78 +99,117 @@ router.post('/agregarPremios', function (req, res) {
     )
 });
 
-    router.put('/editar/:id', function (req, res) {
-        Autor.findByIdAndUpdate(req.params.id, { $set: req.body }, function (err) {
-            if (err) {
-                return res.status(400).json({
-                    success: false,
-                    message: 'El autor no se pudo editar',
-                    err
-                });
-            }
-            Categoria.findById(req.params.id, (err, autor) => {
-                return res.status(200).json({
-                    success: true,
-                    message: "Autor editado",
-                    autor: autor
-                })
+router.put('/editar/:id', function (req, res) {
+    console.log(req.body);
+    console.log(req.params)
+    Autor.findByIdAndUpdate(req.params.id, { $set: req.body }, function (err) {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'El autor no se pudo editar',
+                err
             });
-        });
-    });
-    
-    router.delete('/eliminar/:id', function (req, res) {
-        Categoria.findByIdAndRemove(req.params.id, function (err) {
-            if (err) {
-                return res.status(400).json({
-                    success: false,
-                    message: 'El autor no se pudo eliminar',
-                    err
-                });
-            }
+        }
+        Autor.findById(req.params.id, (err, autor) => {
             return res.status(200).json({
                 success: true,
-                message: "Autor elimnado"
-            });
+                message: "Autor editado",
+                autor: autor
+            })
         });
     });
-    
-    router.patch('/modificarEstado/:id', function (req, res) {
-        Autor.findById(req.params.id, (err, autor) => {
-            if (err) {
+});
+
+router.delete('/eliminar/:id', function (req, res) {
+
+    Libro.findOne({ autor: req.params.id }).then(
+        function (autor) {
+            if (autor) {
+                return res.json({
+                    success: false,
+                    message: 'El autor esta asociado a un libro'
+                });
+            }
+            else {
+                Lectores.findOne({ autor: req.params.id }).then(
+                    function (autor) {
+                        if (autor) {
+                            return res.json({
+                                success: false,
+                                message: 'El autor esta asociado a un lector'
+                            });
+                        }
+                        else {
+                            Oferta.findOne({ autor: req.params.id }).then(
+                                function (autor) {
+                                    if (autor) {
+                                        return res.json({
+                                            success: false,
+                                            message: 'El autor esta asociado a una oferta'
+                                        });
+                                    }
+                                    else {
+                                        Autor.findByIdAndRemove(req.params.id, function (err, autor4) {
+                                            if (err) {
+                                                return res.status(400).json({
+                                                    success: false,
+                                                    message: 'El autor no se pudo eliminar',
+                                                    err
+                                                });
+                                            }
+                                            else {
+                                                return res.status(200).json({
+                                                    success: true,
+                                                    message: 'El autor se eliminó',
+                                                    err
+                                                });
+                                            }
+                                        })
+                                    }
+                                })
+                        }
+                    })
+            }
+        });
+});
+
+router.patch('/modificarEstado/:id', function (req, res) {
+    Autor.findById(req.params.id, (err, autor) => {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'No se pudo cambiar el estado del autor',
+                err
+            });
+        }
+
+        autor.set(req.body);
+
+        autor.save((err, autorDB) => {
+            if (err)
                 return res.status(400).json({
                     success: false,
                     message: 'No se pudo cambiar el estado del autor',
                     err
                 });
+            let response;
+            if (req.body.estado) {
+                response = {
+                    success: true,
+                    message: "Autor activado",
+                    autor: autorDB
+                };
+            } else {
+                response = {
+                    success: true,
+                    message: "Autor desactivado",
+                    autor: autorDB
+                };
             }
-    
-            autor.set(req.body);
-    
-            autor.save((err, autorDB) => {
-                if (err)
-                    return res.status(400).json({
-                        success: false,
-                        message: 'No se pudo cambiar el estado del autor',
-                        err
-                    });
-                let response;
-                if (req.body.estado) {
-                    response = {
-                        success: true,
-                        message: "Autor activado",
-                        autor: autorDB
-                    };
-                } else {
-                    response = {
-                        success: true,
-                        message: "Autor desactivado",
-                        autor: autorDB
-                    };
-                }
-                return res.status(200).json({ response });
-            });
+            return res.status(200).json({ response });
         });
     });
-    
+});
+
 
 module.exports = router;

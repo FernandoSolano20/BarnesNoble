@@ -24,10 +24,26 @@ const alertYear = document.getElementById('alert-year');
 const cvvInput = document.getElementById('cvv');
 const alertCvv = document.getElementById('alert-cvv');
 
+let url = new URL(window.location.href);
+let id = url.searchParams.get("id");
 
-function formReset() {
-    document.getElementById("registrarTarjeta").reset();
-}
+(async() =>{
+    if(id){
+        let listaTarjeta = await obtenerTarjetasPorId(id);
+        tipoInput.value = listaTarjeta.tipoTarjeta;
+        nombreInput.value = listaTarjeta.nombre1;
+        tarjetaInput.value = listaTarjeta.numTarjeta;
+        mesInput.value = listaTarjeta.expiracionMM;
+        yearInput.value = listaTarjeta.expiracionYY;
+        cvv.value = listaTarjeta.cvv;
+    }
+})();
+
+
+
+// function formReset() {
+//     document.getElementById("registrarTarjeta").reset();
+// }
 
 let validarDatosTarjetas = async () => {
 
@@ -49,8 +65,13 @@ let validarDatosTarjetas = async () => {
             cvv: cvv,
             usuario: sessionStorage.id
         }
-
-        let nuevaTarjeta = await registrarTarjeta(tarjeta);
+        let nuevaTarjeta;
+        if(id){
+            nuevaTarjeta = await editarTarjeta(tarjeta,id);
+        }
+        else{
+            nuevaTarjeta = await registrarTarjeta(tarjeta);
+        }
 
         if (nuevaTarjeta.success) {
             Swal.fire({
@@ -149,10 +170,18 @@ let validarCVV = function () {
         alert: alertCvv,
         input: cvvInput
     }
+    let tipoTarjeta = tipoInput.value;
     if (!validarNumeros(cvv)) {
         return true;
     }
-    else if (cvv.value.length != 3) {
+    else if (tipoTarjeta == 'AmericanExpress' && cvv.value.length != 4){
+        alertCvv.innerText = "Debe tener 4 dígitos."
+        alertCvv.className = alertCvv.className.replace("alertHidden", "");
+        cvvInput.className = cvvInput.className.replace("inputError", "");
+        cvvInput.className = cvvInput.className + " inputError";
+        return true;
+    }
+    else if ((tipoTarjeta == 'Visa' || tipoTarjeta == 'MasterCard') && cvv.value.length != 3) {
         alertCvv.innerText = "Debe tener 3 dígitos."
         alertCvv.className = alertCvv.className.replace("alertHidden", "");
         cvvInput.className = cvvInput.className.replace("inputError", "");
@@ -203,5 +232,4 @@ mesInput.addEventListener('change', validarExpMM);
 yearInput.addEventListener('change', validarExpYY);
 cvvInput.addEventListener('blur', validarCVV);
 document.getElementById('registrar').addEventListener('click', validarDatosTarjetas);
-// botonRegistrar.addEventListener('click', registrar);
-
+botonRegistrar.addEventListener('click', validarDatosTarjetas);

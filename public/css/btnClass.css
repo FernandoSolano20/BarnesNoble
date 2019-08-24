@@ -197,7 +197,7 @@
     min-height: 43px;
     max-width: 90px;
     padding: 0 10px;
-    min-width: 40%;
+    min-width: 30%;
     font-size: 14px;
     margin: 5px;
     /* line-height: normal; */
@@ -220,4 +220,7 @@
 
 #btnFormato{
     padding-top: 6px;
+}
+.masGrande{
+    max-width: 120px;
 }

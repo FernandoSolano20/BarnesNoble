@@ -103,3 +103,11 @@ i[data-action="rechazar"]{
 .subTilte{
     text-align: center;
 }
+
+.edit-libro{
+    display: inline-block;
+    margin-left: 500px;
+    margin-right: 100px;
+    width: 500px;
+    height: 100px;
+}

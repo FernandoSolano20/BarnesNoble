@@ -16,7 +16,8 @@
     <link rel="stylesheet" href="css/btnClass.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/cardsIndexLectot.css">
-    <!-- <link rel="stylesheet" href="css/searchBar.css"> -->
+    <link rel="stylesheet" href="css/listarElementos.css">
+    <link rel="stylesheet" href="css/dashboard.css">
     <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
 
     <title>Lector</title>
@@ -24,7 +25,7 @@
 
 <body>
     <header>
-        <nav class="menuHorizontal" id="verticalMenuUser">
+        <nav class="menuHorizontal">
             <ul class="list-menu" id="verticalMenuUser">
                 <li><a href="#" data-menu="mostrar-nav-izq"><i data-menu="mostrar-nav-izq" class="fas fa-bars"></i></a>
                 </li>
@@ -59,7 +60,7 @@
         </section>
         <div class="admin">
                 <div class="admin__main">
-                    <div class="dashboard">
+                    <div class="dashboard" id="dashboardFront">
                         <a href="">
                             <div class="dashboard__item dashboard__item--col">
                                 <div class="card littleCards">
@@ -69,7 +70,7 @@
                                     <div class="card__content">
                                         <div class="card__item">
                                             <div class="textContent">
-                                                <h2 id="users">-</h2>
+                                                <h2 id="intercambio">-</h2>
                                                 <p>Intercambios</p>
                                             </div>
                                         </div>
@@ -169,12 +170,6 @@
             </div>
 
         <section class="stcBusqueda">
-            <div class="inputGroup box">
-                <label for="libreria">Libreria: </label> <select name="libreria" id="libreria"></select>
-            </div>
-            <div class="inputGroup box" id="contenedorSucursal">
-
-            </div>
 
             <div class="subcontenedor buscadorLanding">
                 <div class="busqueda">
@@ -185,6 +180,32 @@
             </div>
         </section>
         <div class="main" id="cardElements">
+        </div>
+
+        <div class="dashboard__item dashboard__item--full" id="club">
+            <div class="card">
+                <div class="card__header">
+                    Mis clubes de lectura
+                </div>
+                <div class="card__content">
+                    <div class="card__item">
+                        <div class="contenedor-tabla">
+                            <table class="tabla" id="tbl_clubesLectura">
+                                <thead>
+                                    <tr>
+                                        <th>Club de lectura</th>
+                                        <th>Tema</th>
+                                        <th>Tipo de club</th>
+                                        <th>Fecha de reunión</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
     <footer>
@@ -208,13 +229,14 @@
     <script src="js/cerrarSesion.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="js/sucursal/servicioSucursal.js"></script>
+    <script src="js/intercambio/servicioIntercambio.js"></script>
     <script src="js/libreria/servicioLibreria.js"></script>
     <script src="js/libros/servicioLibros.js"></script>
-    <script src=""></script>
+    <script src="js/clubLectura/servicioClubLectura.js"></script>
     <script src="js/libros/controladorLibrosCards.js"></script>
-    <script src="js/selects/controladorSelectLibreriasSucursal.js"></script>
     <script src="js/usuarios/servicioUsuario.js"></script>
     <script src="js/usuarios/lector/controladorIndexLector.js"></script>
+    <script src="js/clubLectura/controladorMisClubes.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </body>
 

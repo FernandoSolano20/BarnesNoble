@@ -5,7 +5,7 @@ let listaLibroUsuario;
 let mostarLibros = async (event) => {
     if (usuario.usuario.tipoUsuario == 'Lector') {
         var search = document.getElementById('searchBarUser');
-        search.removeAttribute('id');
+        search?search.removeAttribute('id'):"";
         let url = new URL(window.location.href);
         let id = url.searchParams.get("id");
         listaLibroUsuario = await verLibrosCompradosLector(id);

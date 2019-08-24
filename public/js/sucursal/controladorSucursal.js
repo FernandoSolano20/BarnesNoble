@@ -137,6 +137,56 @@ let agregarFilaSucursal = function (sucursal, libreria) {
             window.location.href = "perfilSucursal.html?id=" + sucursal._id;
         });
         divContendor.appendChild(btnPerfil);
+
+        if(usuarioSuscito(sucursal.usuariosSubscritos, sessionStorage.id)){
+            btnSuscribir.innerText = 'Cancelar subscripción';
+            btnSuscribir.addEventListener('click', async function () {
+                let response = await desuscribirUsuario({
+                    idUsuario : sessionStorage.id,
+                    idSucursal : sucursal['_id']
+                });
+                if (response.success) {
+                    btnSuscribir.innerText = 'Subscribir';
+                    Swal.fire({
+                        type: 'success',
+                        title: response.message
+                    })
+                }
+                else {
+                    Swal.fire({
+                        type: 'error',
+                        title: response.message
+                    })
+                }
+            });
+        }
+        else{
+            btnSuscribir.innerText = 'Subscribir';
+            btnSuscribir.addEventListener('click', async function () {
+                let response = await suscribirUsuario({
+                    idUsuario : sessionStorage.id,
+                    idSucursal : sucursal['_id']
+                });
+                if (response.success) {
+                    btnSuscribir.innerText = 'Cancelar';
+                    Swal.fire({
+                        type: 'success',
+                        title: response.message
+                    })
+                }
+                else {
+                    Swal.fire({
+                        type: 'error',
+                        title: response.message
+                    })
+                }
+            });
+        }
+
+        btnSuscribir.setAttribute('class', 'material-blue');
+        separator.innerHTML = '&nbsp;';
+        divContendor.appendChild(separator);
+        divContendor.appendChild(btnSuscribir);
         
     }
 }

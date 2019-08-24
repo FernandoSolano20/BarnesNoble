@@ -7,10 +7,11 @@ const express = require('express'),
     Sucursal = require('../models/sucursal.model'),
     mongoose = require('mongoose');
 
-router.param('id', function (req, res, next, id) {
-    req.body.id = id;
-    next();
-})
+
+/*  router.param('id', function (req, res, next, id) {
+ req.body.id = id;
+ next(); 
+})*/
 
 const transporter = nodeMailer.createTransport({
     service: 'gmail',
@@ -208,24 +209,24 @@ router.delete('/eliminar/:id', function (req, res) {
         }
         return res.status(200).json({
             success: true,
-            message: "Oferta elimnada"
+            message: "Oferta eliminada"
         });
     });
 });
 
 router.patch('/modificarEstado/:id', function (req, res) {
-    Ofertas.findById(req.params.id, (err, genero) => {
+    Ofertas.findById(req.params.id, (err, ofertas) => {
         if (err) {
             return res.status(400).json({
                 success: false,
-                message: 'No se pudo cambiar el estado del género',
+                message: 'No se pudo cambiar el estado de la oferta',
                 err
             });
         }
 
-        Ofertas.set(req.body);
+        ofertas.set(req.body);
 
-        Ofertas.save((err, OfertasBD) => {
+        ofertas.save((err, OfertasBD) => {
             if (err)
                 return res.status(400).json({
                     success: false,
