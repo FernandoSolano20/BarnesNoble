@@ -219,4 +219,13 @@ router.patch('/terminarIntercambio/:id', function (req, res) {
     });
 });
 
+router.get('/countIntercambioUser/:id', function (req, res) {
+    Intercambio.countDocuments({"participantes.usuario":req.params.id},function (err, count) {
+        return res.json({
+            success: true,
+            count: count
+        });
+    });
+})
+
 module.exports = router;

@@ -9,8 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
     <script src="js/validarSesionUsuario.js"></script>
     <link rel="stylesheet" href="css/menu.css">
-    <link rel="stylesheet" href="css/listarTarjetas.css">
-    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/listarUsuario.css">
     <link rel="stylesheet" href="css/searchBar.css">
     <link rel="stylesheet" href="css/botones.css">
     <link href="https://kit-pro.fontawesome.com/releases/v5.9.0/css/pro.min.css" data-prerender="keep" rel="stylesheet">
@@ -45,47 +44,29 @@
                 <button type="button" class="buscar"><i class="fa fa-search"></i><span>search</span></button>
             </div>
 
-            <div class="crear-contenedor">
-                <button type="button" class="material-blue-crear" data-action="crear" id="crear-elemento"
-                    onclick="window.location.href = ('registrarTarjeta.html');"><i class="far fa-plus-circle"></i>Nueva
-                    Tarjeta</button>
-            </div>
-        </div>
+        <div class="crear-contenedor">
+            <button type="button" class="material-blue" data-action="crear" id="crear-elemento" onclick="window.location.href = ('registrarTarjeta.html');" ><i
+                    class="far fa-plus-circle"></i>Nueva Tarjeta</button> 
         </div>
 
-        <div class="contenedor-tabla">
-            <!-- id="tabla-elementos" -->
-            <table class="tabla" Id='tbl_tarjetas'>
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Número de tarjeta</th>
-                        <th>Tipo de tarjeta</th>
-                        <th>Mes de Expiración</th>
-                        <th>Año de Expiración</th>
-                        <th>Código CVV</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
-        <div id="modal" class="modal alert">
-            <div class="modal-content">
-                <div class="close" data-close="closeModal">&times;</div>
-                <p id="titulo-modal">Título</p>
-                <div class="alert-img-box" id="cuerpo-modal">
-                    <p class="alert-text" id="texto-modal">Hola.</p>
-                </div>
-                <div class="alert-btn-wrapper">
-                    <button class="alert-btn" id="cancel" data-close="closeModal">Cancelar</button>
-                    <button class="alert-btn primary" id="confirm">Confirmar</button>
-                </div>
-            </div>
-        </div>
-
+    <div class="contenedor-tabla">
+        <!-- id="tabla-elementos" -->
+        <table class="tabla" Id='tbl_tarjetas'>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Número de tarjeta</th>
+                    <th>Tipo de tarjeta</th>
+                    <th>Código CVV</th>
+                    <th>Expiración</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
     </main>
 
     <footer>

@@ -11,29 +11,28 @@
 }
 
 .btnVerPerfil {
-    height: 50px;
-    padding: 0 50px;
-    font-size: 18px;
+    height: 40px;
+    padding: 0px 28px;
+    font-size: 14px;
     text-decoration: none;
     color: white;
-    border-radius: 1px;
-    background-color: #315c74;
+    border-radius: 6px;
+    background-color: #6ec4db;
     border: none;
     -webkit-box-shadow: 0px 4px 3px 0px rgba(50, 50, 50, 0.2);
     -moz-box-shadow: 0px 4px 3px 0px rgba(50, 50, 50, 0.2);
     box-shadow: 0px 4px 3px 0px rgba(50, 50, 50, 0.2);
     display: inline-block;
-    line-height: 50px;
+    line-height: 40px;
     text-align: center;
     overflow: hidden;
     position: relative;
     font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
     box-sizing: border-box;
-    margin-left: 1.7rem;
 }
 
 .btnVerPerfil:hover {
-    background-color: #d27c19;
+    background-color: #10667e;
     box-shadow: 0px 5px 3px 0px rgba(50, 50, 50, 0.3);
     cursor: pointer;
 }
@@ -50,7 +49,7 @@
 }
 
 .valorDato {
-    color: #000000;
+    color: #2d3135;
     font-size: 1rem;
     padding: 4% 0 2% 0;
     font-weight: bold;

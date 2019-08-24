@@ -6,18 +6,22 @@
   width: 100%;
 }
 
+#containerIntercambio {
+    margin-left: 300px;
+}
+
 .snip1473 {
   font-family: 'Roboto', Arial, sans-serif;
   position: relative;
   overflow: hidden;
   margin: 10px;
-  min-width: 230px;
-  width: 48%;
+  min-width: 220px;
+  width: 35%;
   color: #141414;
   text-align: left;
   line-height: 1.4em;
   background-color: #e6e6e6;
-  padding-top: 88px;
+  padding-top: 120px;
   display: inline-block;
 }
 
@@ -34,10 +38,10 @@
 
 .snip1473 figcaption {
   width: 100%;
-  background-color: #315c74;
+  background-color: #6ec4db69;
   padding: 25px;
   position: relative;
-  color: #ffffff;
+  color: #2d3135
 }
 
 .snip1473 .profile {
@@ -45,8 +49,9 @@
   top: 0px;
   left: 0px;
   z-index: 1;
-  max-height: 88px;
+  max-height: 120px;
   opacity: 1;
+  width: 85px;
 }
 
 .snip1473 h3 {
@@ -68,7 +73,6 @@
 
 .snip1473 blockquote {
   margin: 0 0 10px;
-  padding: 0 0 30px;
   letter-spacing: 1px;
   opacity: 0.8;
   font-weight: 400;

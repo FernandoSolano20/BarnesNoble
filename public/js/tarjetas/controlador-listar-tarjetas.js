@@ -32,8 +32,7 @@ let mostrar_tabla = async (event) => {
             fila.insertCell().innerHTML = listaTarjetas[i]['nombre1'];
             fila.insertCell().innerHTML = listaTarjetas[i]['numTarjeta'];
             fila.insertCell().innerHTML = listaTarjetas[i]['tipoTarjeta'];
-            fila.insertCell().innerHTML = listaTarjetas[i]['expiracionMM']
-            fila.insertCell().innerHTML = listaTarjetas[i]['expiracionYY']
+            fila.insertCell().innerHTML = listaTarjetas[i]['expiracionMM'] + "/" + listaTarjetas[i]['expiracionYY'];
             fila.insertCell().innerHTML = listaTarjetas[i]['cvv'];
             let editarCelda = fila.insertCell();
             let editar = document.createElement('i');

@@ -399,4 +399,44 @@ router.delete('/eliminarLibreria/:id', function (req, res) {
         })
 });
 
+router.patch('/modificarEstadoLibreria/:id', function (req, res) {
+    Libreria.findById(req.params.id, (err, libreria) => {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'No se pudo cambiar el estado de la librería',
+                err
+            });
+        }
+
+        libreria.set(req.body);
+
+        libreria.save((err, libreriaDB) => {
+            if (err)
+                return res.status(400).json({
+                    success: false,
+                    message: 'No se pudo cambiar el estado de la librería',
+                    err
+                });
+            let response;
+            if (req.body.estado) {
+                response = {
+                    success: true,
+                    message: "Librería activada",
+                    autor: libreriaDB
+                };
+            } else {
+                response = {
+                    success: true,
+                    message: "Librería desactivada",
+                    autor: libreriaDB
+                };
+            }
+            return res.status(200).json({ response });
+        });
+    });
+});
+
+
+
 module.exports = router;

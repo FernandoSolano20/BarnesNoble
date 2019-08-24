@@ -1,5 +1,9 @@
 /* Estlos SearchBar */
 
+.busqueda{
+  margin-top: 122px;
+}
+
 .subcontenedor {
   width: 80%;
   margin: 0 auto;
@@ -8,8 +12,8 @@
 
 .subcontenedor .busqueda {
   position: relative;
-  width: 50%;
-  margin: 0px auto;
+  background-color: #ffff;
+  border-radius: 50px;
 }
 
 .subcontenedor .busqueda input[type="text"] {
@@ -42,7 +46,7 @@
 
 .subcontenedor .busqueda .buscar:hover {
   color: #888;
-  text-shadow: 1px 2px 1px #000;
+  text-shadow: 1px 2px 1px #2d3135;
 }
 
 .subcontenedor .busqueda .buscar span {
@@ -57,13 +61,14 @@ h2 {
   font-size: 1.8rem;
   font-weight: 800;
   margin: 26px;
-  color: #315c74;
+  color: #ffffff;
   padding-top: 26px;
   text-align: center;
 }
 
 .masVendidos {
-  background-color: #80d1d3;
+  background-color: #66AB8C;
+  position: relative;
 }
 
 .wrapper {
@@ -139,6 +144,7 @@ h2 {
   box-shadow: 0px 0px 10px rgba(34, 34, 34, 0.438);
   text-align: center;
   overflow: hidden;
+  border-radius: 6px;
 }
 
 /* Fin Estilos  Slider */
@@ -169,7 +175,7 @@ h2 {
 /* Estilos Mejor Calificados */
 
 .mejorCalificados {
-  background-color: #80d1d3;
+  background-color: #66AB8C;
 }
 
 input[type="radio"] {
@@ -222,25 +228,36 @@ input[type="radio"] {
 }
 
 .btn_usuarios button {
-  background: #f6c249;
-  font-size: 12px;
-  margin-left: 55px;
-  border-radius: 50px;
-  border: none;
-  margin-top: 12px;
-  padding: 14px;
-  width: 40%;
-  box-shadow: 0 0 5px;
+    margin-top: 12px;
+    height: 40px;
+    padding: 0px 28px;
+    font-size: 14px;
+    text-decoration: none;
+    color: #2d3135;
+    border-radius: 6px;
+    background-color:  #6ec4db;
+    border: none;
+    -webkit-box-shadow: 0px 4px 3px 0px rgba(50, 50, 50, 0.2);
+    -moz-box-shadow: 0px 4px 3px 0px rgba(50, 50, 50, 0.2);
+    box-shadow: 0px 4px 3px 0px rgba(50, 50, 50, 0.2);
+    display: inline-block;
+    line-height: 40px;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
+    box-sizing: border-box;
 }
 
 .menuLP button a {
   text-decoration: none;
   font-family: 'Roboto' sans-serif;
-  color: #ffffff;
+  color: #2d3135;
+  
 }
 
 .menuLP button:hover {
-  background: #e9ab1bea;
+  background: #10667e;
   --webkit-transition: all .5s;
   transition: all .5s;
 }

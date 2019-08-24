@@ -66,3 +66,14 @@ let terminarIntercambio = async (intercambio, id) => {
     let result = await response.json();
     return result;
 }
+
+let obtenerCountIntercambio = async (id) =>{
+    var response = await fetch('http://localhost:4000/api/intercambio/countIntercambioUser/' + id, {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        }
+    });
+    var result = await response.json();
+    return result.count;
+}
