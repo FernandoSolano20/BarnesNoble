@@ -4,8 +4,9 @@ const mongoose = require('mongoose');
 
 //Esquema del intercambio
 let intercambio_schema = new mongoose.Schema({
-    nombre: { type: String, required: true, unique: false },
-    fechaFin: { type: Date, required: true, unique: false },
+    nombre: { type: String, required: false, unique: false },
+    fechaInicio: { type: Date, required: false, unique: false },
+    fechaFin: { type: Date, required: false, unique: false },
     sucursal: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Sucursal',
@@ -18,14 +19,15 @@ let intercambio_schema = new mongoose.Schema({
             ref: 'Usuario',
             required: false
         },
-        comentario: { type: String, required: false, unique: false },
-        calificacion: { type: Number, required: false, unique: false },
         ejemplarUsuario: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Libro',
+            ref: 'Ejemplar',
             required: false
-        }
-    }]
+        },
+        tipoUsuario: { type: String, required: false, unique: false }
+    }],
+    aprobado: { type: Boolean, required: false, unique: false},
+    terminado: { type: Boolean, required: false, unique: false}
 });
 
-module.exports = mongoose.model('intercambio', intercambio_schema);
+module.exports = mongoose.model('Intercambio', intercambio_schema);

@@ -7,10 +7,11 @@ const express = require('express'),
     Sucursal = require('../models/sucursal.model'),
     mongoose = require('mongoose');
 
-router.param('id', function (req, res, next, id) {
-    req.body.id = id;
-    next();
-})
+
+/*  router.param('id', function (req, res, next, id) {
+ req.body.id = id;
+ next(); 
+})*/
 
 const transporter = nodeMailer.createTransport({
     service: 'gmail',
@@ -64,7 +65,7 @@ router.post('/registrarOferta', function (req, res) {
                         }
                         else {
                             let terxtoCorreo = ``;
-                            
+
                             let usuarios = sucursal.usuariosSubscritos;
                             for (let i = 0; i < usuarios.length; i++) {
                                 let mailOption = {
@@ -151,8 +152,8 @@ router.get('/listarOfertas', function (req, res) {
             });
         }
     })
-        .populate('sucursal', 'nombre -_id')
-        .populate('libreria', 'nombreFantasia -_id')
+        .populate('sucursal', 'nombre _id')
+        .populate('libreria', 'nombreFantasia _id')
         .populate('autor', 'nombre -_id')
         .populate('genero', 'nombre -_id')
         .populate('categoria', 'nombre -_id')
@@ -208,24 +209,24 @@ router.delete('/eliminar/:id', function (req, res) {
         }
         return res.status(200).json({
             success: true,
-            message: "Oferta elimnada"
+            message: "Oferta eliminada"
         });
     });
 });
 
 router.patch('/modificarEstado/:id', function (req, res) {
-    Ofertas.findById(req.params.id, (err, genero) => {
+    Ofertas.findById(req.params.id, (err, ofertas) => {
         if (err) {
             return res.status(400).json({
                 success: false,
-                message: 'No se pudo cambiar el estado del género',
+                message: 'No se pudo cambiar el estado de la oferta',
                 err
             });
         }
 
-        Ofertas.set(req.body);
+        ofertas.set(req.body);
 
-        Ofertas.save((err, OfertasBD) => {
+        ofertas.save((err, OfertasBD) => {
             if (err)
                 return res.status(400).json({
                     success: false,
@@ -312,6 +313,22 @@ router.get('/listarOfertasPorSucursalesId/:id', function (req, res) {
             });
         }
     })
+});
+
+router.post('/modificarOferta/:id', function (req, res) {
+    let body = req.body;
+    Ofertas.findByIdAndUpdate(req.params.id, {
+        $set: req.body
+    },
+        function (error) {
+            if (error) {
+                res.json({ success: false, msg: 'No se pudo modificar la oferta' });
+            } else {
+                res.json({ success: true, msg: 'Se modificó la oferta correctamente' });
+
+            }
+        }
+    )
 });
 
 module.exports = router;

@@ -23,7 +23,7 @@
     box-sizing: border-box;
 }
 
-.crear-contenedor .material-blue:hover{
+.crear-contenedor .material-blue:hover {
     background-color: #1976d2;
     box-shadow: 0px 5px 3px 0px rgba(50, 50, 50, 0.3);
     cursor: pointer;
@@ -65,16 +65,76 @@
     box-sizing: border-box;
 }
 
-.orange{
+.orange {
     background-color: #745131;
 }
 
-.orange:hover{
+.orange:hover {
     background-color: #d27c19;
     box-shadow: 0px 5px 3px 0px rgba(50, 50, 50, 0.3);
     cursor: pointer;
 }
 
-.crear-contenedor .btn-sucursal{
+.crear-contenedor .btn-sucursal {
     margin: 0px 50px;
+}
+
+.crear-contenedor .material-blue-editar {
+    height: 50px;
+    padding: 0 50px;
+    font-size: 18px;
+    text-decoration: none;
+    color: white;
+    border-radius: 1px;
+    background-color: #315c74;
+    border: none;
+    -webkit-box-shadow: 0px 4px 3px 0px rgba(50, 50, 50, 0.2);
+    -moz-box-shadow: 0px 4px 3px 0px rgba(50, 50, 50, 0.2);
+    box-shadow: 0px 4px 3px 0px rgba(50, 50, 50, 0.2);
+    display: inline-block;
+    line-height: 50px;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
+    box-sizing: border-box;
+    top: 20px;
+    left: 5%;
+    /* position: relative; */
+}
+
+.crear-contenedor .material-blue-eliminar {
+    height: 50px;
+    padding: 0 50px;
+    font-size: 18px;
+    text-decoration: none;
+    color: white;
+    border-radius: 1px;
+    background-color: #315c74;
+    border: none;
+    -webkit-box-shadow: 0px 4px 3px 0px rgba(50, 50, 50, 0.2);
+    -moz-box-shadow: 0px 4px 3px 0px rgba(50, 50, 50, 0.2);
+    box-shadow: 0px 4px 3px 0px rgba(50, 50, 50, 0.2);
+    display: inline-block;
+    line-height: 50px;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    font-family: 'Roboto', 'Helvetica', 'Arial', 'Sans Serif';
+    box-sizing: border-box;
+    top: 20px;
+    left: 65%;
+    /* position: relative; */
+}
+
+.crear-contenedor .btnClub {
+    padding: 0 30px;
+    margin: 0px 15px;
+}
+
+.eliminarUsuario {
+    font-size: 18px;
+    color: red;
+    font-weight: bold;
+    margin-right: 20px;
 }
