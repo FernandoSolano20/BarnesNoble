@@ -46,7 +46,8 @@ let validarDatosAutor = async () => {
             Swal.fire({
                 title: nuevoUsuario.message,
                 type: 'success',
-                text: 'Se ha relizado su registro correctamente'
+                text: 'Se ha relizado su registro correctamente',
+                confirmButtonText:'<a href="autor.html" style="display: inline-block; border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);color: #fff;text-decoration: none">Ok</a>'
             })
         } else {
             Swal.fire({
@@ -163,4 +164,4 @@ inputMuerte.addEventListener('blur', validarFechaMuerte);
 inputNacionalidad.addEventListener('blur', validarNacionalidad);
 inputResenna.addEventListener('blur', validarResenna);
 imgInput.addEventListener("change", validarFotoPerfil);
-document.getElementById('registrar').addEventListener('click', validarDatosAutor);
+document.getElementById('btnModificar').addEventListener('click', validarDatosAutor);

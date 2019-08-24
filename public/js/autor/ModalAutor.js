@@ -10,10 +10,10 @@ let borrar = function (event){
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Borrar'
+      cancelButtonColor: '#f2a5a0',
+      confirmButtonText: 'Borrar',
+      cancelButtonText: 'Cancelar'
     }).then(async (result) => {
-      //llamar al servicio para borrar elemento
       if (result.value) {
         let response = await eliminarAutor(idElemento);
         if(response.success){
@@ -21,8 +21,11 @@ let borrar = function (event){
             'Eliminado',
             response.message,
             'success'
-          )
-          window.location.href = "autor.html";
+          ).then((result) => {
+            if(result.value)
+              window.location.href = "autor.html";
+          })
+          
         }
         else{
           Swal.fire({
@@ -50,15 +53,27 @@ let estado = function (event){
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Activar'
-      }).then((result) => {
+        cancelButtonColor: '#f2a5a0',
+        confirmButtonText: 'Activar',
+        cancelButtonText: 'Cancelar'
+      }).then(async (result) => {
         if (result.value) {
-          Swal.fire(
-            'Activado!',
-            'El autor se activó con éxito',
-            'success'
-          )
+          let autor = {
+            estado: true
+          }
+          let response = await estadoAutor(autor,idElemento);
+          if(response.success){
+            Swal.fire(
+              'Activado',
+              'El autor se activo con éxito',
+              'success'
+            )
+          }else{
+            Swal.fire({
+              type: 'error',
+              title: 'No se pudo activar',
+            })
+          }
         }else{
           inputRadio.checked = true;
         }
@@ -71,15 +86,27 @@ let estado = function (event){
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Desactivar'
-      }).then((result) => {
+        cancelButtonColor: '#f2a5a0',
+        confirmButtonText: 'Desactivar',
+        cancelButtonText: 'Cancelar'
+      }).then(async (result) => {
         if (result.value) {
-          Swal.fire(
-            'Desactivado',
-            'El autor se desactivo con éxito',
-            'success'
-          )
+          let autor = {
+            estado: false
+          }
+          let response = await estadoAutor(autor,idElemento);
+          if(response.success){
+            Swal.fire(
+              'Desactivado',
+              'El autor se desactivo con éxito',
+              'success'
+            )
+          }else{
+            Swal.fire({
+              type: 'error',
+              title: 'No se pudo desactivar'
+            })
+          }
         }else{
           inputRadio.checked = false;
         }

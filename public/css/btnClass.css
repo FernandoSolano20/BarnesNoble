@@ -216,3 +216,7 @@
 .informacionLibro{
     height: 82%;
 }
+
+.masGrande{
+    max-width: 120px;
+}

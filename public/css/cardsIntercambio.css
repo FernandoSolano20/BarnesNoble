@@ -1,0 +1,76 @@
+.tituloIntercambio {
+  text-align: center;
+}
+
+.containerIntercambio {
+  width: 100%;
+}
+
+.snip1473 {
+  font-family: 'Roboto', Arial, sans-serif;
+  position: relative;
+  overflow: hidden;
+  margin: 10px;
+  min-width: 230px;
+  width: 48%;
+  color: #141414;
+  text-align: left;
+  line-height: 1.4em;
+  background-color: #e6e6e6;
+  padding-top: 88px;
+  display: inline-block;
+}
+
+.snip1473 * {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.snip1473 img {
+  max-width: 100%;
+  vertical-align: top;
+  opacity: 0.85;
+}
+
+.snip1473 figcaption {
+  width: 100%;
+  background-color: #315c74;
+  padding: 25px;
+  position: relative;
+  color: #ffffff;
+}
+
+.snip1473 .profile {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
+  max-height: 88px;
+  opacity: 1;
+}
+
+.snip1473 h3 {
+  font-size: 1.3em;
+  margin: 25px;
+  font-weight: 300;
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-align: right;
+}
+
+.snip1473 h3 span {
+  display: block;
+  font-size: 0.65em;
+  font-size: 0.75em;
+  font-weight: 600;
+}
+
+.snip1473 blockquote {
+  margin: 0 0 10px;
+  padding: 0 0 30px;
+  letter-spacing: 1px;
+  opacity: 0.8;
+  font-weight: 400;
+  font-size: 30px;
+}
