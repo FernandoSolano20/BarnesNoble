@@ -42,20 +42,22 @@ const mapaAlert = document.getElementById('alert-mapa');
 const formulario = document.getElementById('formularioDatosUsuario');
 
 let usuarioRegistrado = false;
-
+let url = new URL(window.location.href);
+let id = url.searchParams.get("id");
 let cargarDatosUsuario = async function () {
-    let url = new URL(window.location.href);
-    let id = url.searchParams.get("id");
-    if (id){
-        let data = await obtenerUsuarioPorIdFetch(id);  
-        if (data.success){
+
+    if (id) {
+        let data = await obtenerUsuarioPorIdFetch(id);
+        if (data.success) {
             let usuario = data.usuario;
             usuarioRegistrado = usuario;
+            idInput.disabled = true;
             idInput.value = usuario.id;
             nombreInput1.value = usuario.nombre;
-            nombreInput2.value = usuario.segundoNombre;
+            nombreInput2.value = usuario.segundoNombre ? usuario.segundoNombre : "";
             apellidoInput1.value = usuario.primerApellido;
-            apellidoInput2.value = usuario.segundoApellido;
+            apellidoInput2.value = usuario.segundoApellido ? usuario.segundoApellido : "";
+            correoInput.disabled = true
             correoInput.value = usuario.correo;
             telefonoInput.value = usuario.telefono;
             sexoInput.value = usuario.sexo;
@@ -63,62 +65,62 @@ let cargarDatosUsuario = async function () {
             sennasInput.value = usuario.sennas;
             let fechaTS = Date.parse(usuario.nacimiento);
             let fecha = new Date(fechaTS);
-            let dia = fecha.getDay() < 10 ? '0' + fecha.getDay() : fecha.getDay();
-            let mes = fecha.getMonth() <  10 ? '0' + fecha.getMonth() : fecha.getMonth();
-            nacimientoInput.value =  fecha.getFullYear()  + '-' + mes + '-' + dia;
+            let dia = fecha.getUTCDate() < 10 ? '0' + fecha.getUTCDate() : fecha.getUTCDate();
+            let mes =  Number(fecha.getMonth() + 1) <  10 ? '0' + Number(fecha.getMonth() + 1) : Number(fecha.getMonth() + 1);
+            nacimientoInput.value = fecha.getFullYear() + '-' + mes + '-' + dia;
 
 
-            let  selectSectionProvincia = document.getElementById('provincias');
+            let selectSectionProvincia = document.getElementById('provincias');
             let listaProvincias = selectSectionProvincia.children;
 
-            for (let i = 0; i < listaProvincias.length; i++){
+            for (let i = 0; i < listaProvincias.length; i++) {
 
                 let provincia = listaProvincias[i];
 
-                if (provincia.innerHTML == usuario.provincia){
+                if (provincia.innerHTML == usuario.provincia) {
                     selectSectionProvincia.value = provincia.value;
 
                     await crearSectionCantones();
 
                     let selectSectionCantones = document.getElementById('cantones');
                     let listaCantones = selectSectionCantones.children;
-                    
-                    for (let i = 0; i < listaCantones.length; i++){
+
+                    for (let i = 0; i < listaCantones.length; i++) {
 
                         let canton = listaCantones[i];
 
-                        if (canton.innerHTML == usuario.canton){
+                        if (canton.innerHTML == usuario.canton) {
                             selectSectionCantones.value = canton.value;
 
                             await crearSectionDistritos();
 
                             let selectSectionDistritos = document.getElementById('distritos');
                             let listaDistritos = selectSectionDistritos.children;
-                    
-                            for (let i = 0; i < listaDistritos.length; i++){
+
+                            for (let i = 0; i < listaDistritos.length; i++) {
 
                                 let distrito = listaDistritos[i];
 
-                                if (distrito.innerHTML == usuario.distrito){
-                                    selectSectionDistritos.value = distrito.value;   
+                                if (distrito.innerHTML == usuario.distrito) {
+                                    selectSectionDistritos.value = distrito.value;
                                 }
                             }
                         }
                     }
                 }
             }
-            if(usuario.sexo){
-                if(usuario.sexo == "Mujer") 
+            if (usuario.sexo) {
+                if (usuario.sexo == "Mujer")
                     document.getElementById('mujer').checked = true;
-                else if(usuario.sexo == "Hombre") 
+                else if (usuario.sexo == "Hombre")
                     document.getElementById('hombre').checked = true;
                 else
                     document.getElementById('otro').checked = true;
             }
-            if(usuario.localizacionLatitud && usuario.localizacionLongitud){
-                addMarker({lat: parseFloat(usuario.localizacionLatitud), lng: parseFloat(usuario.localizacionLongitud)});
+            if (usuario.localizacionLatitud && usuario.localizacionLongitud) {
+                addMarker({ lat: parseFloat(usuario.localizacionLatitud), lng: parseFloat(usuario.localizacionLongitud) });
             }
-        }else{
+        } else {
             Swal.fire({
                 type: 'error',
                 title: 'El usuario no existe'
@@ -137,7 +139,7 @@ let actualizarDatosUsuarios = async function () {
         document.body.className = "loading";
         let imgResult = false;
         let imgValue = document.getElementById('img');
-        if(imgValue.value){
+        if (imgValue.value) {
             imgResult = await crearImagen(imgValue);
             if (!imgResult.success) {
                 document.body.className = "";
@@ -160,11 +162,11 @@ let actualizarDatosUsuarios = async function () {
         nacimiento = nacimiento.getFullYear() + '-' + Number(nacimiento.getUTCMonth() + 1) + '-' + nacimiento.getUTCDate();
         let textProvincia, textCanton, textDistrito;
         textProvincia = sectionProvincia.value;
-        textProvincia = sectionProvincia.querySelector('[value="'+textProvincia+'"]').innerText;
+        textProvincia = sectionProvincia.querySelector('[value="' + textProvincia + '"]').innerText;
         textCanton = sectionCantones.value;
-        textCanton = sectionCantones.querySelector('[value="'+textCanton+'"]').innerText;
+        textCanton = sectionCantones.querySelector('[value="' + textCanton + '"]').innerText;
         textDistrito = sectionDistritos.value;
-        textDistrito = sectionDistritos.querySelector('[value="'+textDistrito+'"]').innerText;
+        textDistrito = sectionDistritos.querySelector('[value="' + textDistrito + '"]').innerText;
         let usuario = {
             id: idInput.value,
             nombre: nombreInput1.value,
@@ -185,7 +187,7 @@ let actualizarDatosUsuarios = async function () {
             canton: textCanton,
             distrito: textDistrito
         }
-        if(imgResult){
+        if (imgResult) {
             usuario.img = imgResult.result.secure_url;
         }
         let updateUsuario = await editarUsuario(usuario, usuarioRegistrado._id);
@@ -194,6 +196,8 @@ let actualizarDatosUsuarios = async function () {
             Swal.fire({
                 type: 'success',
                 title: updateUsuario.message
+            }).then(() => {
+                window.location.href = 'perfilUsuario.html?id=' + id;
             });
         }
         else {
@@ -202,7 +206,7 @@ let actualizarDatosUsuarios = async function () {
                 title: updateUsuario.message
             });
         }
-        
+
     }
     else {
         Swal.fire({
@@ -437,13 +441,13 @@ sennasInput.addEventListener('blur', validarSennas);
 for (let i = 0; i < sexoInput.length; i++)
     sexoInput[i].addEventListener('change', validarSexo);
 
-if(document.getElementById('map')){
+if (document.getElementById('map')) {
     document.getElementById('map').addEventListener('click', validarMapa);
 }
 for (let i = 0; i < idRadios.length; i++)
     idRadios[i].addEventListener('change', cambiarIdentificacion);
 
-if(document.getElementById('modificar')){
+if (document.getElementById('modificar')) {
     document.getElementById('modificar').addEventListener('click', actualizarDatosUsuarios);
 }
 

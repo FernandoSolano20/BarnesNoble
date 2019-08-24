@@ -118,7 +118,7 @@ let editarLibreria = async(libreria,id) => {
 }
 
 let eliminarLibreria = async(id) => {
-    let response = await fetch('http://localhost:4000/api/libreria/eliminarLibreria/' + id, {
+    let response = await fetch('http://localhost:4000/api/eliminarLibreria/' + id, {
         method: "DELETE",
         headers: {
             'Content-Type': 'application/json;charset=UTF-8',
@@ -128,7 +128,7 @@ let eliminarLibreria = async(id) => {
     return result;
 }
 
-let estadoLibreria = async(genero,id) => {
+let estadoLibreria = async(libreria,id) => {
     let response = await fetch('http://localhost:4000/api/modificarEstadoLibreria/' + id, {
         method: "PATCH",
         headers: {

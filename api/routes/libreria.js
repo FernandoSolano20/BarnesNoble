@@ -1,12 +1,14 @@
 'use strict'
 
 const express = require('express'),
-    router = express.Router(),//permite crear la ruta
+    router = express.Router(),
     Libreria = require('../models/libreria.model'),
     mongoose = require('mongoose'),
     Ejemplar = require('../models/ejemplar.model'),
-    Libro = require('../models/libros.model');
-    clubLectura = require('../models/clubLectura.model');
+    Libro = require('../models/libros.model'),
+    Usuario = require('../models/usuarios.model'),
+    Sucursal = require('../models/sucursal.model'),
+    ClubLectura = require('../models/clubLectura.model');
 
 
 router.get('/listarLibrerias', async (req, res) => {
@@ -246,45 +248,44 @@ router.get('/obtenerSucursalesPorLibreriaId/:id', function (req, res) {
         .select('nombreFantasia sucursales')
 });
 
-router.post('/deshabilitar-libreria', function (req, res) {
-    let body = req.body;
+router.patch('/modificarEstadoLibreria/:id', function (req, res) {
+    Libreria.findById(req.params.id, (err, libreria) => {
+        if (err) {
+            return res.status(400).json({
+                success: false,
+                message: 'No se pudo cambiar el estado de la librería',
+                err
+            });
+        }
 
-    Contacto.findByIdAndUpdate(body._id, {
-        $set: {
-            estado: 'Deshabilitada'
-        }
-    },
-        function (error) {
-            if (error) {
-                console.log("error")
-                console.log(error)
-                res.json({ success: false, msg: 'No se pudo deshabilitar la libreria' });
+        libreria.set(req.body);
+
+        libreria.save((err, libreriaDB) => {
+            if (err)
+                return res.status(400).json({
+                    success: false,
+                    message: 'No se pudo cambiar el estado de la librería',
+                    err
+                });
+            let response;
+            if (req.body.estado) {
+                response = {
+                    success: true,
+                    message: "Librería activada",
+                    libreria: libreriaDB
+                };
             } else {
-                console.log("scuccess")
-                res.json({ success: true, msg: 'La libreria se deshabilitó con éxito' });
+                response = {
+                    success: true,
+                    message: "Librería desactivada",
+                    libreria: libreriaDB
+                };
             }
-        }
-    )
+            return res.status(200).json({ response });
+        });
+    });
 });
 
-router.post('/habilitar-libreria', function (req, res) {
-    let body = req.body;
-
-    Contacto.findByIdAndUpdate(body._id, {
-        $set: {
-            estado: req.body.estado
-        }
-    },
-        function (error) {
-
-            if (error) {
-                res.json({ success: false, msg: 'No se pudo habilitar la libreria' });
-            } else {
-                res.json({ success: true, msg: 'La libreria se habilitó con éxito' });
-            }
-        }
-    )
-});
 
 router.post('/obtenerLibreriasPorEjemplaresId', function (req, res) {
     Libreria.find({ "ejemplares.libro": req.body.ejemplar }, function (err, librerias) {
@@ -346,9 +347,9 @@ router.get('/listarLibreriasCompletas', async (req, res) => {
         .select('nombreComercial nombreFantasia localizacionLatitud localizacionLongitud provincia canton distrito estado sucursales ejemplares');
 });
 
-router.delete('/eliminar/:id', function (req, res) {
+router.delete('/eliminarLibreria/:id', function (req, res) {
 
-    clubLectura.findOne({ libreria: req.params.id }).then(
+    ClubLectura.findOne({ libreria: req.params.id }).then(
         function (libreria) {
             if (libreria) {
                 return res.json({
@@ -356,14 +357,46 @@ router.delete('/eliminar/:id', function (req, res) {
                     message: 'La librería esta asociada a un club de lectura'
                 });
             }
-             else {
-                return res.status(200).json({
-                    success: true,
-                    message: 'La librería se eliminó',
-                    err
-        });
-     }
-    })
+            else {
+                Libreria.findByIdAndDelete(req.params.id, function (err, libreria) {
+                    if (err) {
+                        return res.json({
+                            success: false,
+                            message: 'Ocurrio un error'
+                        });
+                    }
+                    else {
+                        Usuario.deleteOne({ libreria: req.params.id }, function (err, user) {
+                            if (err) {
+                                return res.json({
+                                    success: false,
+                                    message: 'Ocurrio un error'
+                                });
+                            }
+                            else {
+                                let sucursales = [];
+                                for (var i = 0; i < libreria.sucursales.length; i++)
+                                    sucursales.push(new mongoose.Types.ObjectId(libreria.sucursales[i].sucursal));
+
+                                Sucursal.remove({ _id: { $in: sucursales } }, function (err, sucursal) {
+                                    if (err) {
+                                        return res.status(400).json({
+                                            success: false,
+                                            message: 'El usuario no se pudo eliminar',
+                                            err
+                                        });
+                                    }
+                                    return res.status(200).json({
+                                        success: true,
+                                        message: "Libreria elimnada"
+                                    });
+                                })
+                            }
+                        })
+                    }
+                });
+            }
+        })
 });
 
 module.exports = router;

@@ -26,7 +26,7 @@ let filaNoDatos = function () {
         fila.setAttribute('id', 'no-data');
         let celda = fila.insertCell()
         celda.innerHTML = 'No se encontró datos';
-        celda.setAttribute('colspan', '6');
+        celda.setAttribute('colspan', '7');
     }
 }
 
