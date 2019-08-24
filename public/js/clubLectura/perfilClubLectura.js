@@ -361,6 +361,7 @@ let subscribir = async (btnSuscribir) => {
 }
 
 let removerUsuarioLista = function () {
+    window.location.href = 'perfilClubLectura.html?id='+club.clubLectura._id;
     for (let i = 0; i < club.clubLectura.participantes.length; i++) {
         if (club.clubLectura.participantes[i].usuario._id === sessionStorage.id) {
             club.clubLectura.participantes.splice(i, 1);
@@ -370,6 +371,7 @@ let removerUsuarioLista = function () {
 }
 
 let agregarUsuarioLista = function () {
+    window.location.href = 'perfilClubLectura.html?id='+club.clubLectura._id;
     club.clubLectura.participantes.push({ usuario: { _id: sessionStorage.id } });
 }
 

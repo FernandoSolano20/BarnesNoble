@@ -2,7 +2,7 @@ let terminarIntercambioFunction = function (event) {
     let element = event.target;
     let idElemento = element.getAttribute('data-id');
     Swal.fire({
-        title: 'Activar',
+        title: 'Terminar',
         text: "¿Está seguro que quiere terminar el intercambio?",
         type: 'warning',
         showCancelButton: true,

@@ -6,7 +6,7 @@ const regexText = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+(\s*[a-zA-ZñÑáéíóú
 
 let mostrar_tabla = async (event) => {
     let tbody = document.querySelector('#tbl_librerias tbody');
-       if (!event) {
+    if (!event) {
         if (sessionStorage.tipoUsuario != 'Lector') {
             let btn = document.createElement('a');
             btn.type = "button";
@@ -21,7 +21,8 @@ let mostrar_tabla = async (event) => {
             let icon = document.createElement('i');
             icon.setAttribute('class', 'far fa-plus-circle');
             btn.insertBefore(icon, label);
-          }
+            document.getElementById('lib').innerHTML += '<th>Eliminar</th><th>Activar/Desactivar</th>';
+        }
 
         if (sessionStorage.tipoUsuario != 'Adminitrador librería') {
             listaLibrerias = await obtenerLibrerias();
@@ -42,14 +43,14 @@ let mostrar_tabla = async (event) => {
             || listaLibrerias[i]['distrito'].toLowerCase().includes(filtro)) {
 
             let fila = tbody.insertRow();
-            fila.setAttribute("data-id",listaLibrerias[i]._id)
+            fila.setAttribute("data-id", listaLibrerias[i]._id)
             fila.insertCell().innerHTML = listaLibrerias[i]['nombreComercial'];
             fila.insertCell().innerHTML = listaLibrerias[i]['nombreFantasia'];
             fila.insertCell().innerHTML = listaLibrerias[i]['provincia'];
             fila.insertCell().innerHTML = listaLibrerias[i]['canton'];
             fila.insertCell().innerHTML = listaLibrerias[i]['distrito'];
 
-           let celda_perfil = fila.insertCell();
+            let celda_perfil = fila.insertCell();
             let divContendor = document.createElement("div");
             divContendor.setAttribute('class', 'crear-contenedor');
 
@@ -64,25 +65,29 @@ let mostrar_tabla = async (event) => {
             celda_perfil.appendChild(divContendor);
             divContendor.appendChild(btnPerfil);
 
-            let eliminarCelda = fila.insertCell();
-            let eliminar = document.createElement('i');
-            eliminar.setAttribute('class', 'fal fa-trash-alt');
-            eliminar.setAttribute('data-action', 'borrar');
-            eliminarCelda.appendChild(eliminar);
+            if (sessionStorage.tipoUsuario == 'Adminitrador plataforma') {
 
-            let estadoCelda = fila.insertCell();
 
-            let estadoInput = document.createElement('input');
-            estadoInput.setAttribute('class', 'switch');
-            estadoInput.setAttribute('id', listaLibrerias[i]._id);
-            estadoInput.setAttribute('type', 'checkbox');
-            estadoCelda.appendChild(estadoInput);
-            estadoInput.checked = !listaLibrerias[i].estado;
+                let eliminarCelda = fila.insertCell();
+                let eliminar = document.createElement('i');
+                eliminar.setAttribute('class', 'fal fa-trash-alt');
+                eliminar.setAttribute('data-action', 'borrar');
+                eliminarCelda.appendChild(eliminar);
 
-            let estadoLabel = document.createElement('label');
-            estadoLabel.setAttribute('data-action', 'estado');
-            estadoLabel.setAttribute('for', listaLibrerias[i]._id);
-            estadoCelda.appendChild(estadoLabel);
+                let estadoCelda = fila.insertCell();
+
+                let estadoInput = document.createElement('input');
+                estadoInput.setAttribute('class', 'switch');
+                estadoInput.setAttribute('id', listaLibrerias[i]._id);
+                estadoInput.setAttribute('type', 'checkbox');
+                estadoCelda.appendChild(estadoInput);
+                estadoInput.checked = !listaLibrerias[i].estado;
+
+                let estadoLabel = document.createElement('label');
+                estadoLabel.setAttribute('data-action', 'estado');
+                estadoLabel.setAttribute('for', listaLibrerias[i]._id);
+                estadoCelda.appendChild(estadoLabel);
+            }
         }
     }
     // filaNoDatos();
