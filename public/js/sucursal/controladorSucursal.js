@@ -5,7 +5,7 @@ let lista_sucursales = [];
 let txt_filtro = document.querySelector('#txt_filtro');
 const thead = document.querySelector('#tbl_sucursales thead');
 let listaLibreria;
-
+let sucursales = [];
 
 let mostrar_tabla = async (event) => {
     if (!event) {
@@ -86,6 +86,7 @@ let mostrar_tabla = async (event) => {
 
 let agregarFilaSucursal = function (sucursal, libreria) {
     let filtro = txt_filtro.value.toLowerCase();
+    
     if (sucursal['nombre'].toLowerCase().includes(filtro) || sucursal['correo'].toLowerCase().includes(filtro) || sucursal['telefono'].toLowerCase().includes(filtro) || (libreria ? libreria : "").toLowerCase().includes(filtro)) {
         let fila = tbody.insertRow();
         fila.insertCell().innerHTML = sucursal['nombre'];
@@ -100,12 +101,41 @@ let agregarFilaSucursal = function (sucursal, libreria) {
             let editar = document.createElement('i');
             editar.setAttribute('class', 'far fa-edit');
             editar.setAttribute('data-action', 'editar');
+            editar.addEventListener('click', function () {
+                window.location.href = "editarSucursal.html?id="  + sucursal._id;
+            })
+
             editarCelda.appendChild(editar);
 
             let eliminarCelda = fila.insertCell();
             let eliminar = document.createElement('i');
             eliminar.setAttribute('class', 'fal fa-trash-alt');
-            eliminar.setAttribute('data-action', 'borrar');
+            // eliminar.setAttribute('data-action', 'borrar');
+            eliminar.addEventListener('click', function () {
+                Swal.fire({
+                    title: '¿Está seguro de eliminar esta sucursal?',
+                    text: "Ésta acción no se puede revertir",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#315c74',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, estoy seguro'
+                }).then((result) => {
+                    if (result.value) {
+                        eliminarSucursal(sucursal._id);
+                       
+                        Swal.fire(
+                            '¡Sucursal eliminada!',
+                            // 'success'
+                        ).then((result) => {
+                            if (result.value) {
+                                window.location.href = 'sucursales.html';
+                            }
+                        });
+                    }
+                })
+            });
+
             eliminarCelda.appendChild(eliminar);
 
             let estadoCelda = fila.insertCell();
@@ -115,10 +145,90 @@ let agregarFilaSucursal = function (sucursal, libreria) {
             estadoInput.setAttribute('id', sucursal._id);
             estadoInput.setAttribute('type', 'checkbox');
             estadoCelda.appendChild(estadoInput);
+            estadoInput.checked = !sucursal.estado;
 
             let estadoLabel = document.createElement('label');
-            estadoLabel.setAttribute('data-action', 'estado');
+            // estadoLabel.setAttribute('data-action', 'estado');
             estadoLabel.setAttribute('for', sucursal._id);
+            estadoLabel.addEventListener('click', function () {
+                let estado = function (event){
+                    let element = event.target;
+                    if(element.getAttribute("data-action") == "estado"){
+                      parent = element.parentElement.parentElement;
+                      idElemento = parent.getAttribute("data-id");
+                      let inputRadio = document.getElementById(idElemento);
+                      if(inputRadio.checked){
+                        Swal.fire({
+                          title: 'Activar',
+                          text: "¿Está seguro que quiere activar este libro?",
+                          type: 'warning',
+                          showCancelButton: true,
+                          confirmButtonColor: '#3085d6',
+                          cancelButtonColor: '#f2a5a0',
+                          confirmButtonText: 'Activar',
+                          cancelButtonText: 'Cancelar'
+                        }).then(async (result) => {
+                          if (result.value) {
+                            let sucursal = {
+                              estado: true
+                            }
+                            let response = await estadoAutor(sucursal,idElemento);
+                            if(response.success){
+                              Swal.fire(
+                                'Activado',
+                                'La sucursal se activo con éxito',
+                                'success'
+                              )
+                            }else{
+                              Swal.fire({
+                                type: 'error',
+                                title: 'La sucursal no se pudo activar',
+                              })
+                            }
+                          }else{
+                            inputRadio.checked = true;
+                          }
+                        })
+                      }
+                      else{
+                        Swal.fire({
+                          title: 'Desactivar?',
+                          text: "¿Está seguro que quiere desactivar esta surcursal?",
+                          type: 'warning',
+                          showCancelButton: true,
+                          confirmButtonColor: '#3085d6',
+                          cancelButtonColor: '#f2a5a0',
+                          confirmButtonText: 'Desactivar',
+                          cancelButtonText: 'Cancelar'
+                        }).then(async (result) => {
+                          if (result.value) {
+                            let autor = {
+                              estado: false
+                            }
+                            let response = await estadoAutor(autor,idElemento);
+                            if(response.success){
+                              Swal.fire(
+                                'Desactivado',
+                                'La sucursal se activo con éxito',
+                                'success'
+                              )
+                            }else{
+                              Swal.fire({
+                                type: 'error',
+                                title: 'La sucursal No se pudo desactivar'
+                              })
+                            }
+                          }else{
+                            inputRadio.checked = false;
+                          }
+                        })
+                      }
+                    }
+                  }
+                  estadoLabel.addEventListener("click",estado);
+
+            })
+
             estadoCelda.appendChild(estadoLabel);
         }
 
@@ -127,6 +237,7 @@ let agregarFilaSucursal = function (sucursal, libreria) {
         let btnPerfil = document.createElement('button');
 
         divContendor.setAttribute('class', 'crear-contenedor')
+        
         celda_perfil.appendChild(divContendor);
         
 

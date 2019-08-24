@@ -1,7 +1,7 @@
 
 /*
  * Nombre de archivo: js/libros/controladorEditarLibros
- * Last Modified: Aug 20, 2019
+ * Last Modified: Aug 23, 2019
  * Modified by: Fran A. Wilson
  */
 'use strict' //archivo controlador para registarlibros

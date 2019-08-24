@@ -1,72 +1,93 @@
+/*
+ * Nombre de archivo: js/libros/controladorEditarLibros
+ * Last Modified: Aug 23, 2019
+ * Modified by: Fran A. Wilson
+ */
+'use strict' //archivo controlador para editar Sucursal
 
+const botonModificar = document.querySelector('#btnModificar');
 
-const nombreInput1 = document.getElementById('nombre-input');
+const nombreInput1 = document.getElementById('#nombre-input');
 const nombreAlert1 = document.getElementById('alert-nombre1');
 
-const correoInput = document.getElementById('correo-input');
+const correoInput = document.getElementById('#correo-input');
 const correoAlert = document.getElementById('alert-correo');
 
-const telefonoInput = document.getElementById('telefono-input');
+const telefonoInput = document.getElementById('#telefono-input');
 const telefonoAlert = document.getElementById('alert-telefono');
 
 const provinciaAlert = document.getElementById('alert-provincia');
+const provinciaInput = document.querySelector('#provincias');
+
 const cantonAlert = document.getElementById('alert-canton');
+const cantonInput = document.querySelector('#canton');
+
 const distritoAlert = document.getElementById('alert-distrito');
+const distritoInput = document.querySelector('#distrito');
 
 const favAlert = document.getElementById('alert-favorito');
 const mapaAlert = document.getElementById('alert-mapa');
 
 const alertLibreria = document.getElementById('alertLibreria');
 
-const successMessage = 'Se ha registrado la sucusal exitosamente';
-const errorMessage = 'No se ha registrado la sucusal.';
+const successMessage = 'Se ha modificado la sucusal exitosamente';
+const errorMessage = 'No se ha moficado la sucusal.';
 
+let url = new URL(window.location.href);
+let id = url.searchParams.get("id");
+let lista_sucursales = [];
+// sucursal = await obtenerSucursalPorId(id);
+// libreria = await obtenerLibreriaPorIdSucursal(id);
 
-let obtenerDatosSucursales = async function () {
+let cargar_formulario = async () => {
+    let sucursal = await obtenerSucursalPorId(id);
+    if (sucursal.success) {
+        sucursal = lista_sucursales;
+        nombreInput1.value = sucursal.sucursal['nombre-input'];
+        telefonoInput.value = sucursal['telefono-input'];
+        correoInput.value = sucursal['correo-input'];
+        await crearSectionProvincia();
+        provinciaInput.value = sucursal['provincias']._id;
+        await crearSectionCanton();
+        cantonInput.value = sucursal['cantones']._id;
+        await crearSectionDistrito();
+        distritoInput.value = sucursal['distritos']._id;
+    
+    }
+};
+
+let editarSucursal = async () => {
+    let sucursal = {
+        nombre: nombreInput1.value,
+        telefono: telefonoInput.value,
+        correo: correoInput.value,
+        provincia: provinciaInput.value,
+        genero: generoInput.value,
+        canton: cantonInput.value,
+        distrito: distritoInput.value
+
+    }
+    return await modificarSucursal(_id, sucursal);
+};
+
+let validarModificacion = async function () {
     let error = validarNombre1() | validarCorreo() | validarTelefono() | validarProvincia() | validarCanton() | validarDistrito() | validarMapa() | validarSelectLibreria();
     if (!error) {
-
-        document.body.className = "loading";
-        let textProvincia, textCanton, textDistrito;
-        textProvincia = sectionProvincia.value;
-        textProvincia = sectionProvincia.querySelector('[value="' + textProvincia + '"]').innerText;
-        textCanton = sectionCantones.value;
-        textCanton = sectionCantones.querySelector('[value="' + textCanton + '"]').innerText;
-        textDistrito = sectionDistritos.value;
-        textDistrito = sectionDistritos.querySelector('[value="' + textDistrito + '"]').innerText;
-        let sucursal = {
-            nombre: nombreInput1.value,
-            correo: correoInput.value,
-            telefono: telefonoInput.value,
-            localizacionLatitud: markers[0].position.lat(),
-            localizacionLongitud: markers[0].position.lng(),
-            estado: 1,
-            provincia: textProvincia,
-            canton: textCanton,
-            distrito: textDistrito,
-        }
-        if(sessionStorage.tipoUsuario == "Adminitrador plataforma"){
-            sucursal.idLibreria = libreriaSelect.value;
-        }
-        else{
-            sucursal.idLibreria = adminLib.usuario.libreria;
-        }
-        let nuevaSucursal = await crearSucursal(sucursal);
-        document.body.className = "";
-        if (nuevaSucursal.success) {
+        let editarSucural = await editarSucural();
+        if (editarSucural.success) {
             Swal.fire({
                 type: 'success',
                 title: successMessage,
-                showCloseButton: true,
-                focusConfirm: false,
+                text: 'Se ha relizado la modificación correctamente',
                 confirmButtonText:
-                    '<a href="http://localhost:3000/sucursales.html" class="linkPage">Ok</a>'
+             '<a href="http://localhost:3000/sucursales.html" class="linkPage">Ok</a>'
             });
         }
         else {
             Swal.fire({
-                type: 'error',
-                title: successMessage
+                title: errorMessage,
+                type: 'error'
+
             });
         }
     }
@@ -77,7 +98,7 @@ let obtenerDatosSucursales = async function () {
             text: 'Revise los campos resaltados e intételo de nuevo'
         });
     }
-}
+};
 
 let validarNombre1 = function () {
     let elementText = {
@@ -87,9 +108,6 @@ let validarNombre1 = function () {
     }
     return !(noVacio(elementText) && validarTextoNumero(elementText));
 }
-
-
-
 
 let validarTelefono = function () {
     let elementNumber = {
@@ -115,8 +133,6 @@ let validarTelefono = function () {
     }
 }
 
-
-
 let validarProvincia = function () {
     let elementSelect = {
         value: sectionProvincia.value,
@@ -134,8 +150,6 @@ let validarCanton = function () {
     }
     return !(validarSelect(elementSelect));
 }
-
-
 
 let validarDistrito = function () {
     let elementSelect = {
@@ -168,12 +182,12 @@ let validarSennas = function () {
 
 
 nombreInput1.addEventListener('blur', validarNombre1);
-
 correoInput.addEventListener('blur', validarCorreo);
 telefonoInput.addEventListener('blur', validarTelefono);
 sectionProvincia.addEventListener('change', validarProvincia);
 sectionCantones.addEventListener('change', validarCanton);
 sectionDistritos.addEventListener('change', validarDistrito);
 libreriaSelect.addEventListener('change', validarSelectLibreria);
-document.getElementById('registrar').addEventListener('click', obtenerDatosSucursales);
+document.getElementById('btnModificar').addEventListener('click', validarModificacion);
 document.getElementById('map').addEventListener('click', validarMapa);
+cargar_formulario();

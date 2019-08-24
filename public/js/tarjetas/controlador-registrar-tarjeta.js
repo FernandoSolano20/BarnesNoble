@@ -92,7 +92,7 @@ let registrar = () => {
            Swal.fire({
             type: 'success',
             title: successMessage,
-            text: 'Todo esta trabajando perfectamente.',
+            
             
        })
         formReset();            

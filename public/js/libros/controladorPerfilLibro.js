@@ -117,7 +117,7 @@ let obtenerInformacionLibro = async function () {
                                 let autor = {
                                   estado: false
                                 }
-                                let response = await estadoAutor(autor,idElemento);
+                                let response = await estadoLibro(libro,idElemento);
                                 if(response.success){
                                   Swal.fire(
                                     'Desactivado',

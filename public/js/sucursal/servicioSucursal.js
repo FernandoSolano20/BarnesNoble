@@ -129,3 +129,58 @@ let obtenerCantidadEjemplarPorSucursal = async(ejemplares) => {
     let result = await response.json();
     return result;
 }
+
+
+//Creado por Frank
+
+let obtenerSucursalId = async(id) => {
+    try {
+        //Fetch data from an url endpoint:
+        const response = await axios({
+            method: 'get',
+            url: 'http://localhost:4000/api/libros/listarLibrosPorIdDB/' + id,
+            responseType: 'json'
+        });
+        const result = await response;
+        return result.data.sucursal;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+
+
+let modificarSucursal = async (id, sucursal) => {
+    let response = await fetch('http://localhost:4000/api/sucursal/modificarSucursal/'+ id, {
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body:JSON.stringify(sucursal)
+    });
+    let result = await response.json();
+    return result;
+};
+let eliminarSucursal = (pid) => {
+    axios({
+        method: 'post',
+        url: 'http://localhost:4000/api/sucursal/eliminarSucursal/' + id,
+        responseType: 'json',
+        data: {
+            _id: pid
+        }
+
+    });
+
+};
+let estadoSucursal = async(sucursal,id) => {
+    let response = await fetch('http://localhost:4000/api/sucursal/modificarEstado/' + id, {
+        method: "PATCH",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body:JSON.stringify(sucursal)
+    });
+    let result = await response.json();
+    return result.response;
+}

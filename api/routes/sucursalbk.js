@@ -83,7 +83,7 @@ router.get('/listarSucursales', function (req, res) {
 });
 
 router.get('/sucursalId/:id', function (req, res) {
-    Sucursal.findById(req.params.id, function (err, sucursaleBD) {
+    Sucursal.findById(req.params.id, function (err, sucursalBD) {
         if (err) {
             return res.status(400).json({
                 success: false,
@@ -93,7 +93,7 @@ router.get('/sucursalId/:id', function (req, res) {
         } else {
             return res.json({
                 success: true,
-                sucursal: sucursaleBD
+                listasucursal: sucursalBD
             });
         }
     })
@@ -586,7 +586,26 @@ router.post('/obtenerCantidadEjemplarPorSucursal', function (req, res) {
         });
 });
 
-router.post('/eliminar', function (req, res) {
+
+
+router.post('/modificarSucursal', function(req, res) {
+    let body = req.body;
+
+    Sucursal.findByIdAndUpdate(body._id, {
+            $set: req.body
+        },
+        function(error) {
+            if (error) {
+                res.json({ success: false, msg: 'La sucursal no se pudo editar' });
+            } else {
+                res.json({ success: true, msg: 'El contacto se modificó con éxito' });
+            }
+        }
+    )
+});
+
+//Creado por Fran
+router.post('/eliminarSucursal', function (req, res) {
     let body = req.body;
     Sucursal.findByIdAndRemove(body._id,
          function (err) {
@@ -596,8 +615,8 @@ router.post('/eliminar', function (req, res) {
                 message: 'La surcursal no se pudo eliminar',
                 err
             });
-        }
-        return res.status(200).json({
+        }     
+       return res.status(200).json({
             success: true,
             message: 'Sucursal eliminada'
         });
@@ -614,7 +633,6 @@ router.patch('/modificarEstado/:id', function (req, res) {
                 err
             });
         }
-
         sucursal.set(req.body);
 
         sucursal.save((err, sucursalDB) => {
@@ -628,13 +646,13 @@ router.patch('/modificarEstado/:id', function (req, res) {
             if (req.body.estado) {
                 response = {
                     success: true,
-                    message: "Libro activado",
-                    libros: librosDB
+                    message: "Sucusal activada",
+                    sucursal: sucursalDB
                 };
             } else {
                 response = {
                     success: true,
-                    message: "Libro desactivado",
+                    message: "Sucursal desactivada",
                     sucursal: sucursalDB
                 };
             }
@@ -642,8 +660,6 @@ router.patch('/modificarEstado/:id', function (req, res) {
         });
     });
 });
-
-
 
 
 module.exports = router;
