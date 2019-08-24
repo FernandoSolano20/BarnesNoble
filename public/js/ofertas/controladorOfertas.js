@@ -35,18 +35,27 @@ let crearTabla = async (event) => {
 
     tbody.innerHTML = '';
     for (let i = 0; i < listaOfertas.listaOfertas.length; i++) {
-        if (listaOfertas.listaOfertas[i].nombre.toLowerCase().includes(filtro.toLowerCase()) || listaOfertas.listaOfertas[i].descripcion.toLowerCase().includes(filtro.toLowerCase()) || (listaOfertas.listaOfertas[i].autor?listaOfertas.listaOfertas[i].autor.nombre:"").toLowerCase().includes(filtro.toLowerCase()) || (listaOfertas.listaOfertas[i].genero?listaOfertas.listaOfertas[i].genero.nombre:"").toLowerCase().includes(filtro.toLowerCase()) || (listaOfertas.listaOfertas[i].categoria?listaOfertas.listaOfertas[i].categoria.nombre:"").toLowerCase().includes(filtro.toLowerCase())) {
-            agregarFilaGenero(listaOfertas.listaOfertas[i],i);
+        if (listaOfertas.listaOfertas[i].nombre.toLowerCase().includes(filtro.toLowerCase()) || listaOfertas.listaOfertas[i].descripcion.toLowerCase().includes(filtro.toLowerCase()) || (listaOfertas.listaOfertas[i].autor ? listaOfertas.listaOfertas[i].autor.nombre : "").toLowerCase().includes(filtro.toLowerCase()) || (listaOfertas.listaOfertas[i].genero ? listaOfertas.listaOfertas[i].genero.nombre : "").toLowerCase().includes(filtro.toLowerCase()) || (listaOfertas.listaOfertas[i].categoria ? listaOfertas.listaOfertas[i].categoria.nombre : "").toLowerCase().includes(filtro.toLowerCase())) {
+            agregarFilaGenero(listaOfertas.listaOfertas[i], i);
         }
 
     }
     filaNoDatos();
 };
 
+let redireccionarEditar = function (listaOfertas) {
+    localStorage.setItem("ofertaEditar", JSON.stringify(listaOfertas));
+    window.location = "editarOferta.html";
+}
+
+let eliminarOferta = function (listaOfertas) {
+    console.log("oferta eliminada");
+}
+
 
 
 //for (let i = 0; i < listaOfertas.length; i++) {
-let agregarFilaGenero = function (listaOfertas,i) {
+let agregarFilaGenero = function (listaOfertas, i) {
     let tbody = document.querySelector('#tabla-elementos tbody');
     let fila = tbody.insertRow();
 
@@ -67,7 +76,7 @@ let agregarFilaGenero = function (listaOfertas,i) {
 
     let descripcionFila = fila.insertCell();
     descripcionFila.innerHTML = descripcion;
-    descripcionFila.setAttribute('class','left');
+    descripcionFila.setAttribute('class', 'left');
     if (listaOfertas.sucursal) {
         fila.insertCell().innerHTML = listaOfertas.sucursal.nombre;
     }
@@ -78,15 +87,17 @@ let agregarFilaGenero = function (listaOfertas,i) {
     let editarCelda = fila.insertCell();
     let editar = document.createElement('i');
     editar.setAttribute('class', 'far fa-edit');
-    editar.setAttribute('data-action', 'editar');
-    editar.setAttribute('data-id', listaOfertas._id);
-    editar.setAttribute('numOferta', i);
+    editar.addEventListener("click", function () {
+        redireccionarEditar(listaOfertas);
+    })
     editarCelda.appendChild(editar);
 
     let eliminarCelda = fila.insertCell();
     let eliminar = document.createElement('i');
     eliminar.setAttribute('class', 'fal fa-trash-alt');
-    eliminar.setAttribute('data-action', 'borrar');
+    eliminar.addEventListener("click", function () {
+        eliminarOferta(listaOfertas);
+    })
     eliminarCelda.appendChild(eliminar);
 
     let estadoCelda = fila.insertCell();
@@ -105,7 +116,7 @@ let agregarFilaGenero = function (listaOfertas,i) {
     estadoCelda.appendChild(estadoLabel);
 
 }
-    ;
+
 
 let filaNoDatos = function () {
     if (listaOfertas.length === 0 || tbody.childElementCount === 0) {
@@ -136,7 +147,7 @@ let generoFunciones = async (event) => {
                 removerForm();
                 agregarListaGenero(nuevoGenero.genero);
                 let noData = document.getElementById("no-data");
-                if(noData){
+                if (noData) {
                     noData.remove();
                 }
             }
@@ -147,7 +158,7 @@ let generoFunciones = async (event) => {
         else {
             sweetAlertWarning();
         }
-        
+
     }
     else {
         let idGenero = document.getElementById('cuerpo-modal').getAttribute('data-genero');
@@ -175,7 +186,7 @@ let generoFunciones = async (event) => {
             else {
                 sweetAlertWarning();
             }
-            
+
         } else if (accion === 'borrar') {
             let trElemento = document.querySelector('[data-id="' + idGenero + '"]');
             trElemento.remove();

@@ -17,20 +17,40 @@ const urlParams = new URLSearchParams(window.location.search);
 let id = urlParams.get('id');
 console.log(id);
 
-let cargarFormulario = async () => {
-    let ofertaAEditar = await obtenerOferta(id);
+let cargarFormulario = async  () => {
+    let ofertaAEditar = JSON.parse(localStorage.getItem("ofertaEditar"));
     console.log(ofertaAEditar);
     if (ofertaAEditar) {
-        nombreInput.value = ofertaAEditar.listaOfertas.nombre;
-        descuentoInput.value = ofertaAEditar.listaOfertas.descuento;
-        descripcionInput.value = ofertaAEditar.listaOfertas.descripcion;
-        document.getElementById("genero").value = ofertaAEditar.listaOfertas.genero;
-        document.getElementById("autor").value = ofertaAEditar.listaOfertas.autor;
-        document.getElementById("categoria").value = ofertaAEditar.listaOfertas.categoria;
-        document.getElementById("libro").value = ofertaAEditar.listaOfertas.libro;
-        document.getElementById("sucursal").value = ofertaAEditar.listaOfertas.sucursal;
+
+            nombreInput.value = ofertaAEditar.nombre;
+            descuentoInput.value = ofertaAEditar.descuento;
+            descripcionInput.value = ofertaAEditar.descripcion;
+            
+            let listaObtenerLibro = await obtenerLibrosFetch();
+            let libro = listaObtenerLibro.find( obj => obj.titulo === ofertaAEditar.libro.titulo );
+
+            let listaObtenerGenero= await obtenerGenero();
+            let genero = listaObtenerGenero.find( obj => obj.genero === ofertaAEditar.libro.genero );
+
+            let listaObtenerAutor= await obtenerAutores();
+            let autor = listaObtenerAutor.find( obj => obj.autor === ofertaAEditar.libro.autor );
+
+            let listaObtenerSucursal= await obtenerLibrerias();
+            let sucursal = listaObtenerSucursal.find( obj => obj.sucursal === ofertaAEditar.sucursal.nombre);
+
+            let listaObtenerCategoria= await obtenerCategoria();
+            let categoria = listaObtenerCategoria.find( obj => obj.categoria === ofertaAEditar.libro.categoria );
+ 
+            document.getElementById("libro").value = libro._id;
+            document.getElementById("genero").value = genero._id;
+            document.getElementById("autor").value = autor._id;
+            document.getElementById("categoria").value = categoria._id;
+            document.getElementById("sucursal").value = sucursal._id;
+
+    
     }
-};
+}
+
 
 
 //const autorInput = document.getElementById('alertAutor');
@@ -51,7 +71,7 @@ let obtenerDatosUsuarios = async function () {
             nombre: nombreInput.value,
             descuento: descuentoInput.value,
             descripcion: descripcionInput.value,
-                   }
+        }
         if (autorSelect.value)
             oferta.autor = autorSelect.value;
         if (generoSelect.value)
@@ -233,68 +253,4 @@ generoSelect.addEventListener('change', validarGenero);
 categoriaSelect.addEventListener('change', validarCategoria);
 libroSelect.addEventListener('change', validarLibro);
 document.getElementById('modificar').addEventListener('click', obtenerDatosUsuarios);
-
-
-
-let llenarDatosOferta = async (ofertaAEditar) => {
-
-    console.log(`hola ${ofertaAEditar}`);
-    console.log(JSON.parse(localStorage.getItem("ofertaEditar")));
-    let oferta = JSON.parse(localStorage.getItem("ofertaEditar"));
-    console.log(oferta);
-    //llena el select de genero
-    let listaObtenerGenero = await obtenerGenero();
-    let OfertaEncontrada = listaObtenerGenero.find(obj => obj.nombre == oferta.genero.nombre);
-    console.log(OfertaEncontrada);
-    document.getElementById("genero").value = OfertaEncontrada._id;
-
-    //llena el select de libro
-    let listaObtenerLibro = await obtenerLibrosFetch();
-    let libroEncontrado = listaObtenerLibro.find(obj => obj.titulo == oferta.libro.titulo);
-    console.log(libroEncontrado);
-    document.getElementById("libro").value = libroEncontrado._id;
-
-    //llena el select de categoria
-    let listaObtenerCategoria = await obtenerCategoria();
-    let categoriaEncontrada = listaObtenerCategoria.find(obj => obj.nombre == oferta.categoria.nombre);
-    console.log(categoriaEncontrada);
-    document.getElementById("categoria").value = categoriaEncontrada._id;
-
-    //llena el select de autor
-    let listaObtenerAutor = await obtenerAutores();
-    let autorEncontrado = listaObtenerAutor.find(obj => obj.nombre == oferta.autor.nombre);
-    console.log(autorEncontrado);
-    document.getElementById("autor").value = autorEncontrado._id;
-
-    //llena el select de estado
-    let estadoOferta = oferta.estado;
-    document.getElementById("estado").value = estadoOferta;
-
-    //llena el select de tipo de oferta
-    let tipoOfertaOferta = oferta.tipoOferta;
-    document.getElementById("tipoOferta").value = tipoOfertaOferta;
-
-    //llena el campo de nombreInput
-    let nombreInputOferta = oferta.nombre;
-    document.getElementById("nombre").value = nombreInputOferta;
-
-    //llena el campo de descuento
-    let descuentoOferta = oferta.descuento;
-    document.getElementById("descuento").value = descuentoOferta;
-
-    //llena el campo de descuento
-    let descripcionOferta = oferta.descripcion;
-    document.getElementById("descripcion").value = descripcionOferta;
-
-
-    //llena el select de sucursal
-    let listaObtenerSucursal = await obtenerUsuarioPorIdFetchTiendas(sessionStorage.id);
-    //let sucursalEncontrada = listaObtenerSucursal.find( obj => obj.nombre == oferta.sucursal.nombre );
-    let sucursalEncontrada = listaObtenerSucursal.usuario.libreria.sucursales
-    console.log(sucursalEncontrada);
-    document.getElementById("sucursal").value = sucursalEncontrada._id;
-}
-
-//llenarDatosOferta();
-
-cargarFormulario();
+window.addEventListener('load', cargarFormulario);
