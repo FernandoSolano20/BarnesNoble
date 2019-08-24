@@ -54,7 +54,7 @@ let mostrar_tabla = async (event) => {
 
                 let boton_perfil = document.createElement('button');
                 boton_perfil.type = 'button';
-                boton_perfil.innerText = 'Unirme';
+                boton_perfil.innerText = 'Perfil';
                 boton_perfil.dataset._id = lista_clubesLectura[i]['_id'];
                 boton_perfil.setAttribute('class', 'material-blue');
                 divContenedor.appendChild(boton_perfil);
