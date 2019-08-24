@@ -1,3 +1,4 @@
+
 'use strict';
 
 const express = require('express'),
@@ -83,7 +84,7 @@ router.get('/listarSucursales', function (req, res) {
 });
 
 router.get('/sucursalId/:id', function (req, res) {
-    Sucursal.findById(req.params.id, function (err, sucursaleBD) {
+    Sucursal.findById(req.params.id, function (err, sucursalBD) {
         if (err) {
             return res.status(400).json({
                 success: false,
@@ -93,7 +94,7 @@ router.get('/sucursalId/:id', function (req, res) {
         } else {
             return res.json({
                 success: true,
-                sucursal: sucursaleBD
+                sucursal: sucursalBD
             });
         }
     })
@@ -198,16 +199,13 @@ router.patch('/suscribirUsuarioSucursal', function (req, res) {
                         <body class="wrapper">
                           <div class="container">
                             <h1>Subscripción a sucursal ${sucursal.nombre}</h1>
-
                           <p>Usted se ha subscripto a una sucursal ${sucursal.nombre}</p>
                           <p>El correo electrónico asociado es: ${req.body.correo}</p>
                           <p>Recibirá información acerca de las ofertas de la sucursal</p>
                           <p>Para ingresar visite nuestra página<p>
                             <a href="http://localhost:3000/inicioSesion.html" class="boton">Ingresar a Barnes & Noble </a>
                           </div>
-
                         </body>
-
                       </html>`
                         };
                         transporter.sendMail(mailOption, function (error, info) {
@@ -586,22 +584,57 @@ router.post('/obtenerCantidadEjemplarPorSucursal', function (req, res) {
         });
 });
 
+//Creado por Fran
+router.put('/modificarSucursal/:id', function (req, res) {
+    let body = req.body;
+
+    Sucursal.findByIdAndUpdate(req.params.id, {
+        $set: req.body
+    },
+        function (error) {
+            if (error) {
+                res.json({ success: false, msg: 'La sucursal no se pudo editar' });
+            } else {
+                res.json({ success: true, msg: 'La sucursal modificó con éxito' });
+            }
+        }
+    )
+});
+
+//Creado por Fran
 router.post('/eliminar', function (req, res) {
     let body = req.body;
-    Sucursal.findByIdAndRemove(body._id,
-         function (err) {
-        if (err) {
-            return res.status(400).json({
-                success: false,
-                message: 'La surcursal no se pudo eliminar',
-                err
-            });
-        }
-        return res.status(200).json({
-            success: true,
-            message: 'Sucursal eliminada'
+    Sucursal.findByIdAndRemove(req.body.sucursal,
+        function (err) {
+            if (err) {
+                return res.status(400).json({
+                    success: false,
+                    message: 'La surcursal no se pudo eliminar',
+                    err
+                });
+            }
+            Libreria.updateOne({ _id: req.body.libreria }, {
+                $pull: {
+                    'sucursales': {
+                        sucursal: req.body.sucursal
+                    }
+                }
+            },
+                function (err, usuario) {
+                    if (err) {
+                        return res.status(400).json({
+                            success: false,
+                            message: 'No se eliminar',
+                            err
+                        })
+                    } else {
+                        return res.json({
+                            success: true,
+                            message: 'Sucursal eliminada'
+                        })
+                    }
+                });
         });
-    });
 });
 
 //Creado por Fran
@@ -628,14 +661,12 @@ router.patch('/modificarEstado/:id', function (req, res) {
             if (req.body.estado) {
                 response = {
                     success: true,
-                    message: "Libro activado",
-                    libros: librosDB
+                    message: "Sucrsal activado",
                 };
             } else {
                 response = {
                     success: true,
                     message: "Libro desactivado",
-                    sucursal: sucursalDB
                 };
             }
             return res.status(200).json({ response });

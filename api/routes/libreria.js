@@ -91,7 +91,7 @@ router.get('/obtenerTiendas', async (req, res) => {
             });
         }
     })
-        .populate('sucursales.sucursal', 'nombre correo telefono usuariosSubscritos')
+        .populate('sucursales.sucursal', 'nombre correo telefono usuariosSubscritos estado')
         .select('nombreFantasia sucursales');
 });
 

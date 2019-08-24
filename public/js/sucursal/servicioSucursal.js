@@ -138,7 +138,7 @@ let obtenerSucursalId = async(id) => {
         //Fetch data from an url endpoint:
         const response = await axios({
             method: 'get',
-            url: 'http://localhost:4000/api/libros/listarLibrosPorIdDB/' + id,
+            url: `http://localhost:4000/api/sucursal/buscar-sucursal-id/${id}`,
             responseType: 'json'
         });
         const result = await response;
@@ -149,6 +149,7 @@ let obtenerSucursalId = async(id) => {
 };
 
 
+//Creado por Fran
 
 let modificarSucursal = async (id, sucursal) => {
     let response = await fetch('http://localhost:4000/api/sucursal/modificarSucursal/'+ id, {
@@ -161,16 +162,17 @@ let modificarSucursal = async (id, sucursal) => {
     let result = await response.json();
     return result;
 };
-let eliminarSucursal = (pid) => {
-    axios({
-        method: 'post',
-        url: 'http://localhost:4000/api/sucursal/eliminarSucursal/' + id,
-        responseType: 'json',
-        data: {
-            _id: pid
-        }
 
+let eliminarSucursal = async (sucursal) => {
+    let response = await fetch('http://localhost:4000/api/sucursal/eliminar', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body:JSON.stringify(sucursal)
     });
+    let result = await response.json();
+    return result;
 
 };
 let estadoSucursal = async(sucursal,id) => {

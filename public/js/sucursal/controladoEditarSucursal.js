@@ -5,25 +5,25 @@
  */
 'use strict' //archivo controlador para editar Sucursal
 
-const botonModificar = document.querySelector('#btnModificar');
+const botonModificar = document.querySelector('btnModificar');
 
-const nombreInput1 = document.getElementById('#nombre-input');
+const nombreInput1 = document.getElementById('nombre-input');
 const nombreAlert1 = document.getElementById('alert-nombre1');
 
-const correoInput = document.getElementById('#correo-input');
+const correoInput = document.getElementById('correo-input');
 const correoAlert = document.getElementById('alert-correo');
 
-const telefonoInput = document.getElementById('#telefono-input');
+const telefonoInput = document.getElementById('telefono-input');
 const telefonoAlert = document.getElementById('alert-telefono');
 
 const provinciaAlert = document.getElementById('alert-provincia');
-const provinciaInput = document.querySelector('#provincias');
+const provinciaInput = document.querySelector('provincias');
 
 const cantonAlert = document.getElementById('alert-canton');
-const cantonInput = document.querySelector('#canton');
+const cantonInput = document.querySelector('canton');
 
 const distritoAlert = document.getElementById('alert-distrito');
-const distritoInput = document.querySelector('#distrito');
+const distritoInput = document.querySelector('distrito');
 
 const favAlert = document.getElementById('alert-favorito');
 const mapaAlert = document.getElementById('alert-mapa');
@@ -42,45 +42,78 @@ let lista_sucursales = [];
 let cargar_formulario = async () => {
     let sucursal = await obtenerSucursalPorId(id);
     if (sucursal.success) {
-        sucursal = lista_sucursales;
-        nombreInput1.value = sucursal.sucursal['nombre-input'];
-        telefonoInput.value = sucursal['telefono-input'];
-        correoInput.value = sucursal['correo-input'];
-        await crearSectionProvincia();
-        provinciaInput.value = sucursal['provincias']._id;
-        await crearSectionCanton();
-        cantonInput.value = sucursal['cantones']._id;
-        await crearSectionDistrito();
-        distritoInput.value = sucursal['distritos']._id;
-    
+        sucursal = sucursal.sucursal;
+        nombreInput1.value = sucursal['nombre'];
+        telefonoInput.value = sucursal['telefono'];
+        correoInput.value = sucursal['correo'];
+        let selectSectionProvincia = document.getElementById('provincias');
+        let listaProvincias = selectSectionProvincia.children;
+
+        for (let i = 0; i < listaProvincias.length; i++) {
+
+            let provincia = listaProvincias[i];
+
+            if (provincia.innerHTML == sucursal.provincia) {
+                selectSectionProvincia.value = provincia.value;
+
+                await crearSectionCantones();
+
+                let selectSectionCantones = document.getElementById('cantones');
+                let listaCantones = selectSectionCantones.children;
+
+                for (let i = 0; i < listaCantones.length; i++) {
+
+                    let canton = listaCantones[i];
+
+                    if (canton.innerHTML == sucursal.canton) {
+                        selectSectionCantones.value = canton.value;
+
+                        await crearSectionDistritos();
+
+                        let selectSectionDistritos = document.getElementById('distritos');
+                        let listaDistritos = selectSectionDistritos.children;
+
+                        for (let i = 0; i < listaDistritos.length; i++) {
+
+                            let distrito = listaDistritos[i];
+
+                            if (distrito.innerHTML == sucursal.distrito) {
+                                selectSectionDistritos.value = distrito.value;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if(sucursal.localizacionLatitud && sucursal.localizacionLongitud){
+            let position = {lat: parseFloat(sucursal.localizacionLatitud), lng: parseFloat(sucursal.localizacionLongitud)};
+            addMarker(position);
+        }
     }
 };
 
-let editarSucursal = async () => {
-    let sucursal = {
-        nombre: nombreInput1.value,
-        telefono: telefonoInput.value,
-        correo: correoInput.value,
-        provincia: provinciaInput.value,
-        genero: generoInput.value,
-        canton: cantonInput.value,
-        distrito: distritoInput.value
-
-    }
-    return await modificarSucursal(_id, sucursal);
-};
 
 let validarModificacion = async function () {
-    let error = validarNombre1() | validarCorreo() | validarTelefono() | validarProvincia() | validarCanton() | validarDistrito() | validarMapa() | validarSelectLibreria();
+    let error = validarNombre1() | validarCorreo() | validarTelefono() | validarProvincia() | validarCanton() | validarDistrito() | validarMapa();
     if (!error) {
-        let editarSucural = await editarSucural();
+        let sucursal = {
+            nombre: nombreInput1.value,
+            telefono: telefonoInput.value,
+            correo: correoInput.value,
+            provincia: sectionProvincia.value,
+            canton: sectionCantones.value,
+            distrito: sectionDistritos.value
+    
+        }
+        let editarSucural = await modificarSucursal(id,sucursal);
         if (editarSucural.success) {
             Swal.fire({
                 type: 'success',
                 title: successMessage,
                 text: 'Se ha relizado la modificación correctamente',
                 confirmButtonText:
-             '<a href="http://localhost:3000/sucursales.html" class="linkPage">Ok</a>'
+                    '<a href="http://localhost:3000/sucursales.html" class="linkPage">Ok</a>'
             });
         }
         else {
@@ -99,7 +132,7 @@ let validarModificacion = async function () {
         });
     }
 };
-
+cargar_formulario();
 let validarNombre1 = function () {
     let elementText = {
         value: nombreInput1.value,
@@ -160,16 +193,6 @@ let validarDistrito = function () {
     return !(validarSelect(elementSelect));
 }
 
-let validarSelectLibreria = function () {
-    let elementSelect = {
-        value: libreriaSelect.value,
-        alert: alertLibreria,
-        input: libreriaSelect
-    }
-    if(sessionStorage.tipoUsuario == "Adminitrador plataforma"){
-        return !(validarSelect(elementSelect));
-    }   
-}
 
 let validarSennas = function () {
     let elementText = {
@@ -187,7 +210,6 @@ telefonoInput.addEventListener('blur', validarTelefono);
 sectionProvincia.addEventListener('change', validarProvincia);
 sectionCantones.addEventListener('change', validarCanton);
 sectionDistritos.addEventListener('change', validarDistrito);
-libreriaSelect.addEventListener('change', validarSelectLibreria);
-document.getElementById('btnModificar').addEventListener('click', validarModificacion);
+document.getElementById('registrar').addEventListener('click', validarModificacion);
 document.getElementById('map').addEventListener('click', validarMapa);
 cargar_formulario();
