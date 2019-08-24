@@ -16,7 +16,7 @@ let crearSectionSucursal = async () => {
 
     let optionElemento = document.createElement('option');
     optionElemento.setAttribute('value', '');
-    optionElemento.innerHTML = '--Seleccione una tienda--';
+    optionElemento.innerHTML = '--Seleccione una sucursal--';
     sucursalSelect.appendChild(optionElemento);
 
     // optionElemento = document.createElement('option');

@@ -65,7 +65,7 @@ router.post('/registrarOferta', function (req, res) {
                         }
                         else {
                             let terxtoCorreo = ``;
-                            
+
                             let usuarios = sucursal.usuariosSubscritos;
                             for (let i = 0; i < usuarios.length; i++) {
                                 let mailOption = {
@@ -152,8 +152,8 @@ router.get('/listarOfertas', function (req, res) {
             });
         }
     })
-        .populate('sucursal', 'nombre -_id')
-        .populate('libreria', 'nombreFantasia -_id')
+        .populate('sucursal', 'nombre _id')
+        .populate('libreria', 'nombreFantasia _id')
         .populate('autor', 'nombre -_id')
         .populate('genero', 'nombre -_id')
         .populate('categoria', 'nombre -_id')
@@ -313,6 +313,22 @@ router.get('/listarOfertasPorSucursalesId/:id', function (req, res) {
             });
         }
     })
+});
+
+router.post('/modificarOferta/:id', function (req, res) {
+    let body = req.body;
+    Ofertas.findByIdAndUpdate(req.params.id, {
+        $set: req.body
+    },
+        function (error) {
+            if (error) {
+                res.json({ success: false, msg: 'No se pudo modificar la oferta' });
+            } else {
+                res.json({ success: true, msg: 'Se modificó la oferta correctamente' });
+
+            }
+        }
+    )
 });
 
 module.exports = router;
