@@ -1,6 +1,6 @@
 'use strict';
 
-let crearClubLectura = (pnombre, ptema, ptipoClub, pfechaReunion , phoraReunion, pIdSucursal, pIdCategoria, pIdGenero, pIdUsuario,) => {
+let crearClubLectura = (pnombre, ptema, ptipoClub, pfechaReunion, phoraReunion, pIdSucursal, pIdCategoria, pIdGenero, pIdUsuario, ) => {
     axios({
         method: 'post',
         url: 'http://localhost:4000/api/clubLectura/registrarClubLectura',
@@ -12,8 +12,8 @@ let crearClubLectura = (pnombre, ptema, ptipoClub, pfechaReunion , phoraReunion,
             fechaReunion: pfechaReunion,
             horaReunion: phoraReunion,
             sucursal: pIdSucursal,
-            categoria:pIdCategoria,
-            genero:pIdGenero,
+            categoria: pIdCategoria,
+            genero: pIdGenero,
             administrador: pIdUsuario
         }
     });
@@ -25,7 +25,7 @@ let registrarClubLectura = async (clubLectura) => {
         headers: {
             'Content-Type': 'application/json;charset=UTF-8',
         },
-        body:JSON.stringify(clubLectura)
+        body: JSON.stringify(clubLectura)
     });
     let result = await response.json();
     return result;
@@ -75,3 +75,50 @@ let obtenerClubPorId = async (id) => {
     let result = await response.json();
     return result;
 }
+
+let suscribirUsuarioClub = async function (participante) {
+    var response = await fetch('http://localhost:4000/api/clubLectura/suscribirUsuarioClubLectura', {
+        method: "PATCH",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body: JSON.stringify(participante)
+    });
+    var result = await response.json();
+    return result;
+}
+
+let desuscribirUsuarioClub = async function (participante) {
+    var response = await fetch('http://localhost:4000/api/clubLectura/desuscribirUsuarioClubLectura', {
+        method: "PATCH",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body: JSON.stringify(participante)
+    });
+    var result = await response.json();
+    return result;
+}
+
+let modificarClubLectura = async (club,id) => {
+    let response = await fetch('http://localhost:4000/api/clubLectura/modificarClubLectura/' + id, {
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body:JSON.stringify(club)
+    });
+    let result = await response.json();
+    return result;
+};
+
+let eliminarClubLectura = async (id) => {
+    let response = await fetch('http://localhost:4000/api/clubLectura/eliminarClubLectura/' + id, {
+        method: "DELETE",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+    });
+    let result = await response.json();
+    return result;
+};
