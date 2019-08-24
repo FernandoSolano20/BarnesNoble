@@ -129,7 +129,7 @@ router.patch('/comprarLibroLibreria', function (req, res) {
                                 } else if (ejemplar.n) {
                                     return res.json({
                                         success: true,
-                                        message: 'Se agregaron los libros al catálogo de libros de la librería 1'
+                                        message: 'Se agregaron los libros al catálogo de libros de la librería'
                                     })
                                 }
                                 else {
@@ -153,7 +153,7 @@ router.patch('/comprarLibroLibreria', function (req, res) {
                                             } else {
                                                 return res.json({
                                                     success: true,
-                                                    message: 'Se agregaron los libros al catálogo de libros de la librería 1'
+                                                    message: 'Se agregaron los libros al catálogo de libros de la librería'
                                                 })
                                             }
                                         }

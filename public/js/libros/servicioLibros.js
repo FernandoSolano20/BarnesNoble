@@ -170,7 +170,7 @@ let eliminarLibro = (pid) => {
 
 };
 let estadoLibro = async(libro,id) => {
-    let response = await fetch('http://localhost:4000/api/autor/modificarEstado/' + id, {
+    let response = await fetch('http://localhost:4000/api/libros/modificarEstado/' + id, {
         method: "PATCH",
         headers: {
             'Content-Type': 'application/json;charset=UTF-8',
