@@ -1,7 +1,7 @@
 h2{
     font-family: 3em;
-    text-align: center;
-    margin: 25px auto 15px auto;
+    margin-top: 60px;
+    margin-bottom: 30px;
 }
 
 input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner-spin-button {
@@ -262,7 +262,6 @@ input[type=file] {
 
 #registrar, #modificar,  #btnModificar{
     display: block;
-    margin: 20px auto;
     width: 30%;
 }
 

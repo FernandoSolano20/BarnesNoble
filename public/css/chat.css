@@ -20,7 +20,7 @@ body {
 }
 
 .top_menu {
-  background-color: #fff;
+  background-color: #6ec4db69;
   width: 100%;
   padding: 20px 0 15px;
   box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
@@ -54,7 +54,7 @@ body {
 
 .top_menu .title {
   text-align: center;
-  color: #bcbdc0;
+  color: #555;
   font-size: 20px;
 }
 
@@ -171,7 +171,7 @@ body {
 .bottom_wrapper .message_input_wrapper {
   display: inline-block;
   height: 50px;
-  border-radius: 25px;
+  border-radius: 6px;
   border: 1px solid #bcbdc0;
   width: calc(100% - 160px);
   position: relative;
@@ -192,9 +192,11 @@ body {
   width: 140px;
   height: 50px;
   display: inline-block;
-  border-radius: 50px;
+  /* border-radius: 50px;
   background-color: #a3d063;
-  border: 2px solid #a3d063;
+  border: 2px solid #a3d063; */
+  border-radius: 6px;
+  background-color: #6ec4db;
   color: #fff;
   cursor: pointer;
   transition: all 0.2s linear;
@@ -203,8 +205,8 @@ body {
 }
 
 .bottom_wrapper .send_message:hover {
-  color: #a3d063;
-  background-color: #fff;
+  color: #fff;
+  background-color: #10667e;
 }
 
 .bottom_wrapper .send_message .text {
@@ -245,7 +247,7 @@ body {
 
 aside {
   width: 25%;
-  background-color: #511F79;
+  background-color: #6ec4db;
   display: flex;
   flex-direction: column;
 }
@@ -329,7 +331,7 @@ aside .friends_list .friend .avatarbox::before {
   background-color: #3EC649;
   display: block;
   position: absolute;
-  z-index: 99;
+  z-index: 99; 
   border-radius: 50%;
   top: 5px;
   left: 10px;
@@ -472,7 +474,7 @@ aside .friends_list .friend .timeago {
 }
 
 .midcont .messagescont .user.friend .text {
-  background-color: #714B94;
+  background-color:  #66AB8C;
   color: white;
 }
 
@@ -481,7 +483,7 @@ aside .friends_list .friend .timeago {
   display: block;
   border-style: solid;
   border-width: 7.5px 0 7.5px 12px;
-  border-color: transparent transparent transparent #714B94;
+  border-color: transparent transparent transparent  #66AB8C;
   position: absolute;
   right: -11px;
 }
