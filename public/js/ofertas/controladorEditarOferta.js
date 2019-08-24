@@ -13,41 +13,42 @@ const categoriaAlert = document.getElementById('alertCategoria');
 const autorAlert = document.getElementById('alertAutor');
 const favAlert = document.getElementById('alertAutor');
 const urlParams = new URLSearchParams(window.location.search);
+let ofertaAEditar;
 
-let id = urlParams.get('id');
-console.log(id);
-
-let cargarFormulario = async  () => {
-    let ofertaAEditar = JSON.parse(localStorage.getItem("ofertaEditar"));
+let cargarFormulario = async () => {
+    ofertaAEditar = JSON.parse(localStorage.getItem("ofertaEditar"));
     console.log(ofertaAEditar);
     if (ofertaAEditar) {
 
-            nombreInput.value = ofertaAEditar.nombre;
-            descuentoInput.value = ofertaAEditar.descuento;
-            descripcionInput.value = ofertaAEditar.descripcion;
-            
-            let listaObtenerLibro = await obtenerLibrosFetch();
-            let libro = listaObtenerLibro.find( obj => obj.titulo === ofertaAEditar.libro.titulo );
+        nombreInput.value = ofertaAEditar.nombre;
+        descuentoInput.value = ofertaAEditar.descuento;
+        descripcionInput.value = ofertaAEditar.descripcion;
 
-            let listaObtenerGenero= await obtenerGenero();
-            let genero = listaObtenerGenero.find( obj => obj.genero === ofertaAEditar.libro.genero );
+        let listaObtenerLibro = await obtenerLibrosFetch();
+        let libro = listaObtenerLibro.find(obj => obj.titulo === ofertaAEditar.libro.titulo);
 
-            let listaObtenerAutor= await obtenerAutores();
-            let autor = listaObtenerAutor.find( obj => obj.autor === ofertaAEditar.libro.autor );
+        let listaObtenerGenero = await obtenerGenero();
+        let genero = listaObtenerGenero.find(obj => obj.genero === ofertaAEditar.libro.genero);
 
-            let listaObtenerSucursal= await obtenerLibrerias();
-            let sucursal = listaObtenerSucursal.find( obj => obj.sucursal === ofertaAEditar.sucursal.nombre);
+        let listaObtenerAutor = await obtenerAutores();
+        let autor = listaObtenerAutor.find(obj => obj.autor === ofertaAEditar.libro.autor);
+        let sucursal;
+        await crearSectionSucursal();
+        if (ofertaAEditar.sucursal)
+            document.getElementById("sucursal").value = ofertaAEditar.sucursal._id;
+        else
+            document.getElementById("sucursal").value = ofertaAEditar.libreria._id;
 
-            let listaObtenerCategoria= await obtenerCategoria();
-            let categoria = listaObtenerCategoria.find( obj => obj.categoria === ofertaAEditar.libro.categoria );
- 
-            document.getElementById("libro").value = libro._id;
-            document.getElementById("genero").value = genero._id;
-            document.getElementById("autor").value = autor._id;
-            document.getElementById("categoria").value = categoria._id;
-            document.getElementById("sucursal").value = sucursal._id;
+        let listaObtenerCategoria = await obtenerCategoria();
+        let categoria = listaObtenerCategoria.find(obj => obj.categoria === ofertaAEditar.libro.categoria);
 
-    
+        document.getElementById("libro").value = libro._id;
+        document.getElementById("genero").value = genero._id;
+        document.getElementById("autor").value = autor._id;
+        document.getElementById("categoria").value = categoria._id;
+        
+
+
     }
 }
 
@@ -67,7 +68,6 @@ let obtenerDatosUsuarios = async function () {
         txtTienda = sucursalSelect.value;
         txtTienda = sucursalSelect.querySelector('[value="' + txtTienda + '"]').getAttribute('data-tienda');
         let oferta = {
-            id: id,
             nombre: nombreInput.value,
             descuento: descuentoInput.value,
             descripcion: descripcionInput.value,
@@ -85,7 +85,7 @@ let obtenerDatosUsuarios = async function () {
         else
             oferta.sucursal = sucursalSelect.value;
 
-        let nuevaOferta = await modificarOferta(oferta);
+        let nuevaOferta = await modificarOferta(oferta,ofertaAEditar._id);
         document.body.className = "";
         if (nuevaOferta.success) {
             Swal.fire({

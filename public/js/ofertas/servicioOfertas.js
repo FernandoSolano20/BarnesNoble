@@ -83,8 +83,8 @@ var obtenerOfertasPorLibreria = async (tiendas) => {
     return result;
 }
 
-let modificarOferta = async (oferta) => {
-    let response = await fetch('http://localhost:4000/api/ofertas/modificarOferta', {
+let modificarOferta = async (oferta, id) => {
+    let response = await fetch('http://localhost:4000/api/ofertas/modificarOferta/' + id, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json;charset=UTF-8',

@@ -151,8 +151,8 @@ router.get('/listarOfertas', function (req, res) {
             });
         }
     })
-        .populate('sucursal', 'nombre -_id')
-        .populate('libreria', 'nombreFantasia -_id')
+        .populate('sucursal', 'nombre _id')
+        .populate('libreria', 'nombreFantasia _id')
         .populate('autor', 'nombre -_id')
         .populate('genero', 'nombre -_id')
         .populate('categoria', 'nombre -_id')
@@ -314,9 +314,9 @@ router.get('/listarOfertasPorSucursalesId/:id', function (req, res) {
     })
 });
 
-router.post('/modificarOferta', function (req, res) {
+router.post('/modificarOferta/:id', function (req, res) {
     let body = req.body;
-    Ofertas.findByIdAndUpdate(body.id, {
+    Ofertas.findByIdAndUpdate(req.params.id, {
         $set: req.body
     },
         function (error) {

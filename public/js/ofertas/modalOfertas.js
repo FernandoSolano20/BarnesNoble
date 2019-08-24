@@ -121,5 +121,5 @@ let soloLetras = function (e) {
 }
 
 window.addEventListener('click', closeModal);
-tbody.addEventListener('click', eventosGenero);
+//tbody.addEventListener('click', eventosGenero);
 document.getElementById('crear-elemento').addEventListener('click', eventosGenero);

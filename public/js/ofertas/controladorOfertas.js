@@ -48,9 +48,9 @@ let redireccionarEditar = function (listaOfertas) {
     window.location = "editarOferta.html";
 }
 
-let eliminarOferta = function (listaOfertas) {
+/* let eliminarOferta = function (listaOfertas) {
     console.log("oferta eliminada");
-}
+} */
 
 
 
@@ -96,7 +96,38 @@ let agregarFilaGenero = function (listaOfertas, i) {
     let eliminar = document.createElement('i');
     eliminar.setAttribute('class', 'fal fa-trash-alt');
     eliminar.addEventListener("click", function () {
-        eliminarOferta(listaOfertas);
+        Swal.fire({
+            title: 'Eliminar',
+            text: "¿Está seguro que quiere eliminar esta oferta?",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Borrar',
+            cancelButtonText: 'Cancelar'
+        }).then(async (result) => {
+            //llamar al servicio para borrar elemento
+            if (result.value) {
+                let response = await eliminarOferta(listaOfertas._id);
+                if (response.success) {
+                    Swal.fire(
+                        'Eliminado',
+                        response.message,
+                        'success'
+                    ).then((result) => {
+                        window.location.href = 'listarOfertas.html';
+                    });
+                }
+                else {
+                    Swal.fire({
+                        type: 'error',
+                        title: response.message,
+                        text: 'Algo salió mal!'
+                    })
+                }
+
+            }
+        })
     })
     eliminarCelda.appendChild(eliminar);
 
@@ -104,6 +135,83 @@ let agregarFilaGenero = function (listaOfertas, i) {
 
     let estadoInput = document.createElement('input');
     estadoInput.setAttribute('class', 'switch');
+    estadoInput.setAttribute('data-id', listaOfertas._id);
+    estadoInput.addEventListener('click', function (event) {
+        let inputRadio = event.target;
+        let idElemento = inputRadio.getAttribute('data-id');
+        if (!inputRadio.checked) {
+            Swal.fire({
+                title: 'Activar',
+                text: "¿Está seguro que quiere activar esta oferta?",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Activar'
+            }).then(async (result) => {
+                if (result.value) {
+                    let oferta = {
+                        estado: true
+                    }
+                    let response = await estadoOferta(oferta, idElemento)
+                    if (response.success) {
+                        Swal.fire(
+                            'Activar',
+                            'La oferta se activó con éxito',
+                            'success'
+                        )
+                    }
+                    else {
+                        Swal.fire(
+                            'Ocurrio un error',
+                            'La oferta no se activó con éxito',
+                            'error'
+                        ).then((result) => {
+                            window.location.href = 'listarOfertas.html';
+                        })
+                    }
+                } else {
+                    inputRadio.checked = true;
+                }
+            })
+        }
+        else {
+            Swal.fire({
+                title: 'Desactivar?',
+                text: "¿Está seguro que quiere desactivar esta oferta?",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Desactivar'
+            }).then(async (result) => {
+                if (result.value) {
+                    let oferta = {
+                        estado: false
+                    }
+                    let response = await estadoOferta(oferta, idElemento);
+                    if (response.success) {
+                        Swal.fire(
+                            'Desactivado',
+                            'La oferta se desactivo con éxito',
+                            'success'
+                        )
+                    }
+                    else {
+                        Swal.fire(
+                            'Ocurrio un error',
+                            'La oferta no se desactivo con éxito',
+                            'error'
+                        ).then((result) => {
+                            window.location.href = 'listarOfertas.html';
+                        })
+                    }
+                } else {
+                    inputRadio.checked = false;
+                }
+            })
+        }
+    })
 
     estadoInput.setAttribute('id', listaOfertas._id);
     estadoInput.setAttribute('type', 'checkbox');
