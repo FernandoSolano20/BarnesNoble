@@ -295,3 +295,27 @@ let obtenerLectoresPorEjemplaresId = async (id) => {
     var result = await response.json();
     return result;
 };
+
+let votarPorUsuario = async function (voto) {
+    var response = await fetch('http://localhost:4000/api/votarUsuario', {
+        method: "PATCH",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body:JSON.stringify(voto)
+    });
+    var result = await response.json();
+    return result;
+ }
+
+ let tieneElVotoUsuario = async function (usuario) {
+    var response = await fetch('http://localhost:4000/api/tieneVotoUsuario', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
+        body: JSON.stringify(usuario)
+    });
+    var result = await response.json();
+    return result;
+}

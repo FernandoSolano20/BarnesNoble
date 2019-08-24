@@ -60,6 +60,20 @@ let usuarios_schema = new mongoose.Schema({
         },
         cantidad: { type: Number, required: false, unique: false },
         estadoIntercambio: { type: Boolean, required: false, unique: false, default: true }
+    }],
+    resennas:[{
+        usuario: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Usuario',
+            required: false
+        },
+        intercambio: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Intercambio',
+            required: false
+        },
+        comentario: { type: String, required: false, unique: false },
+        calificacion: { type: Number, required: false, unique: false }
     }]
 });
 

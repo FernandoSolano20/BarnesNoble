@@ -1,6 +1,6 @@
 let votar = function () {
     Swal.fire({
-        title: 'Ingrese la información del premio',
+        title: 'Ingrese califique al libro',
         html: `<div class="table-div">
                     <div class="table-cell-div">
                         <div>

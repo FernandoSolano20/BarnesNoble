@@ -23,7 +23,7 @@
     box-sizing: border-box;
 }
 
-.crear-contenedor .material-blue:hover{
+.crear-contenedor .material-blue:hover {
     background-color: #1976d2;
     box-shadow: 0px 5px 3px 0px rgba(50, 50, 50, 0.3);
     cursor: pointer;
@@ -65,19 +65,19 @@
     box-sizing: border-box;
 }
 
-.orange{
+.orange {
     background-color: #745131;
 }
 
-.orange:hover{
+.orange:hover {
     background-color: #d27c19;
     box-shadow: 0px 5px 3px 0px rgba(50, 50, 50, 0.3);
     cursor: pointer;
 }
 
-.crear-contenedor .btn-sucursal{
+.crear-contenedor .btn-sucursal {
     margin: 0px 50px;
- }
+}
 
 .crear-contenedor .material-blue-editar {
     height: 50px;
@@ -126,7 +126,11 @@
     top: 20px;
     left: 65%;
     /* position: relative; */
+}
 
+.crear-contenedor .btnClub {
+    padding: 0 30px;
+    margin: 0px 15px;
 }
 /* Creado por Frank */
 .editar-libro{

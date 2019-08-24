@@ -18,6 +18,30 @@ const sucursalAlert = document.getElementById('alertSucursal');
 
 const favAlert = document.getElementById('alertTipo');
 
+const tipoClubCont = document.getElementById('tipo-club-input');
+
+let url = new URL(window.location.href);
+let id = url.searchParams.get("id");
+
+(async () => {
+    let club = await obtenerClubPorId(id);
+    club = club.clubLectura;
+    nombreInput.value = club.nombre;
+    temaInput.value = club.tema;
+    fechaReunionInput.value = club.fechaReunion;
+    horaReunionInput.value = club.horaReunion;
+    await crearSectionGeneros();
+    generoSelect.value = club.genero ? club.genero._id : '';
+    await crearSectionCategorias();
+    categoriaSelect.value = club.categoria ? club.categoria._id : '';
+    tipoClubCont.querySelector("[value='" + club.tipoClub + "']").checked = true;
+    let tiendas = document.getElementById('tiendas');
+    if (club.tipoClub == 'Presencial') {
+        tiendas.className = tiendas.className.replace("alertHidden", "");
+        await crearSectionSucursal();
+        sucursalSelect.value = club.sucursal._id;
+    }
+})();
 
 let validarDatosClubLectura = async function () {
     let error = validarNombre() | validarTema() | validarTipoClub() | validarFechaReunion() | validarHoraReunion() | validarSelectSucursal() | validarTipos();
@@ -51,27 +75,37 @@ let validarDatosClubLectura = async function () {
         if (categoriaSelect.value)
             clubLectura.categoria = categoriaSelect.value;
 
-        let nuevoClubLectura = await registrarClubLectura(clubLectura);
-
+        let nuevoClubLectura;
+        if (id) {
+            nuevoClubLectura = await modificarClubLectura(clubLectura, id);
+        }
+        else {
+            nuevoClubLectura = await registrarClubLectura(clubLectura);
+        }
         if (nuevoClubLectura.success) {
             Swal.fire({
-                title: nuevoClubLectura.message,
+                title: 'Se guardó correctamente',
                 type: 'success',
-                text: 'Se registró correctamente',
-                confirmButtonText:
-                    '<a href="http://localhost:3000/listarClubLectura.html" class="linkPage">Ok</a>'
-
-            })
+                text: nuevoClubLectura.message,
+            }).then((result) => {
+                if (id) {
+                    window.location.href = "perfilClubLectura.html?id=" + id
+                }
+                else {
+                    window.location.href = 'listarClubLectura.html';
+                }
+            });
         } else {
             Swal.fire({
-                title: nuevoClubLectura.message,
+                title: 'No se pudo almacenar correctamente',
+                text: nuevoClubLectura.message,
                 type: 'error'
             })
         }
     }
     else {
         Swal.fire({
-            title: 'No se ha realizado el registro',
+            title: 'No se pudo guardar el club de lectura',
             type: 'warning',
             text: 'Revise los campos resaltados e inténtelo de nuevo'
         })
