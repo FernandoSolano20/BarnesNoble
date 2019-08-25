@@ -263,7 +263,8 @@ input[type=file] {
 #registrar, #modificar,  #btnModificar{
     display: block;
     width: 30%;
-    margin: 10px auto;
+    margin: 0 auto;
+
 }
 
 #fotosLibro{
