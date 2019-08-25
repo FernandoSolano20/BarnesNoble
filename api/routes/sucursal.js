@@ -212,7 +212,7 @@ router.patch('/suscribirUsuarioSucursal', function (req, res) {
                             if (error) {
                                 return res.json({
                                     success: true,
-                                    message: `Ocurrio un error al envio del correo, contacte con el administrador de la plataforma`
+                                    message: `Subscripcion exitosa`
                                 })
                             }
                             return res.json({
