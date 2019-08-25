@@ -86,7 +86,7 @@ let mostrar_tabla = async (event) => {
 let agregarFilaSucursal = function (sucursal, libreria) {
   let filtro = txt_filtro.value.toLowerCase();
 
-  if (sucursal['nombre'].toLowerCase().includes(filtro) || sucursal['correo'].toLowerCase().includes(filtro) || sucursal['telefono'].toLowerCase().includes(filtro) || (libreria ? libreria : "").toLowerCase().includes(filtro)) {
+  if (sucursal['nombre'].toLowerCase().includes(filtro) || sucursal['correo'].toLowerCase().includes(filtro) || sucursal['telefono'].toLowerCase().includes(filtro) || (libreria ? libreria.nombreFantasia : "").toLowerCase().includes(filtro)) {
     let fila = tbody.insertRow();
     fila.insertCell().innerHTML = sucursal['nombre'];
     fila.insertCell().innerHTML = sucursal['telefono'];

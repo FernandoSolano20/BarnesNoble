@@ -218,13 +218,6 @@ let crearMenu = async function () {
             li = document.createElement('li');
             listMenu.appendChild(li);
             anchor = document.createElement('a');
-            anchor.innerHTML = "Catálogo de libros";
-            anchor.href = "#";
-            li.appendChild(anchor);
-
-            li = document.createElement('li');
-            listMenu.appendChild(li);
-            anchor = document.createElement('a');
             anchor.innerHTML = "Mis libros";
             anchor.href = "misLibrosUsuario.html";
             li.appendChild(anchor);
